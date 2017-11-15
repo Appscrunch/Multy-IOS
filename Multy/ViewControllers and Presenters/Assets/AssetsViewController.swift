@@ -57,7 +57,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return newWalletCell
         } else {
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-            
+            walletCell.makeshadow()
             return walletCell
         }
     }
