@@ -17,6 +17,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.registerCells()
     }
     
+    //MARK: Setup functions
+    
     func checkOSForConstraints() {
         if #available(iOS 11.0, *) {
             //OK: Storyboard was made for iOS 11
@@ -31,8 +33,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let portfolioCell = UINib.init(nibName: "PortfolioTableViewCell", bundle: nil)
         self.tableView.register(portfolioCell, forCellReuseIdentifier: "portfolioCell")
+        
+        let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
+        self.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
 
+    //MARK: Table view delegates
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -45,6 +52,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath == [0, 0] {
             let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             return portfolioCell
+        } else if indexPath == [0, 1] {
+            let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
+            return newWalletCell
         } else {
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
             
@@ -55,6 +65,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
             return 283
+        }else if indexPath == [0, 1] {
+            return 75
         } else {
             return 104
         }
