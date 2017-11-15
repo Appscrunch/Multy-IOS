@@ -13,6 +13,8 @@
 		4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */; };
 		4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC901FBC7122001991AA /* PortfolioTableViewCell.swift */; };
 		4583AC931FBC7122001991AA /* PortfolioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC911FBC7122001991AA /* PortfolioTableViewCell.xib */; };
+		4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC961FBC8596001991AA /* PortfolioCollectionViewCell.swift */; };
+		4583AC991FBC8596001991AA /* PortfolioCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC971FBC8596001991AA /* PortfolioCollectionViewCell.xib */; };
 		45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */; };
 		45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */; };
 		45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */; };
@@ -31,6 +33,8 @@
 		452290601FBB18D30024B550 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4583AC901FBC7122001991AA /* PortfolioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTableViewCell.swift; sourceTree = "<group>"; };
 		4583AC911FBC7122001991AA /* PortfolioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioTableViewCell.xib; sourceTree = "<group>"; };
+		4583AC961FBC8596001991AA /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
+		4583AC971FBC8596001991AA /* PortfolioCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCollectionViewCell.xib; sourceTree = "<group>"; };
 		45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewController.swift; sourceTree = "<group>"; };
 		45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPresenter.swift; sourceTree = "<group>"; };
 		45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 			children = (
 				4583AC901FBC7122001991AA /* PortfolioTableViewCell.swift */,
 				4583AC911FBC7122001991AA /* PortfolioTableViewCell.xib */,
+				4583AC961FBC8596001991AA /* PortfolioCollectionViewCell.swift */,
+				4583AC971FBC8596001991AA /* PortfolioCollectionViewCell.xib */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -218,6 +224,7 @@
 				4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */,
 				4522905A1FBB18D30024B550 /* Main.storyboard in Resources */,
 				4583AC931FBC7122001991AA /* PortfolioTableViewCell.xib in Resources */,
+				4583AC991FBC8596001991AA /* PortfolioCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +298,7 @@
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
 				45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */,
+				4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
