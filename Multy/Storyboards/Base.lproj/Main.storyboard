@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,11 +14,14 @@
         <scene sceneID="VPd-c9-EvE">
             <objects>
                 <viewController id="dmP-I8-1Pw" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1De-4d-wjN"/>
+                        <viewControllerLayoutGuide type="bottom" id="u8k-fD-1Dr"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6tf-nj-MVi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="q2f-vp-1DS"/>
                     </view>
                     <navigationItem key="navigationItem" id="mgy-Do-dmy"/>
                 </viewController>
@@ -30,11 +33,14 @@
         <scene sceneID="xvQ-Gz-As9">
             <objects>
                 <viewController id="McY-lO-qtl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5qP-jR-qRu"/>
+                        <viewControllerLayoutGuide type="bottom" id="cgJ-WC-NWQ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Epi-9a-LkW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="6HS-6o-oHS"/>
                     </view>
                     <navigationItem key="navigationItem" id="AbK-jj-EaT"/>
                 </viewController>
@@ -46,11 +52,14 @@
         <scene sceneID="htg-2c-S9y">
             <objects>
                 <viewController id="mgl-nb-TC2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rpk-wf-apb"/>
+                        <viewControllerLayoutGuide type="bottom" id="ivD-82-abP"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FqR-yZ-vN6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="SKb-8R-J0Y"/>
                     </view>
                     <navigationItem key="navigationItem" id="u4f-01-75E"/>
                 </viewController>
@@ -58,17 +67,21 @@
             </objects>
             <point key="canvasLocation" x="497" y="1558"/>
         </scene>
-        <!--View Controller-->
+        <!--Assets View Controller-->
         <scene sceneID="nuC-K4-qjE">
             <objects>
-                <viewController id="alz-wi-MXP" sceneMemberID="viewController">
+                <viewController id="alz-wi-MXP" customClass="AssetsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zZi-rf-sBU"/>
+                        <viewControllerLayoutGuide type="bottom" id="TCg-eh-Ffb"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4SF-8o-5uQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gnZ-8i-54O">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gnZ-8i-54O">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.92515683174133301" green="0.93285363912582397" blue="0.96979457139968872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="alz-wi-MXP" id="aVu-g9-vM6"/>
                                     <outlet property="delegate" destination="alz-wi-MXP" id="m0m-rO-rAD"/>
@@ -77,15 +90,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zt0-GL-3tD" firstAttribute="trailing" secondItem="gnZ-8i-54O" secondAttribute="trailing" id="4x3-Vu-xkO"/>
-                            <constraint firstItem="zt0-GL-3tD" firstAttribute="bottom" secondItem="gnZ-8i-54O" secondAttribute="bottom" id="B0q-2T-Uiy"/>
-                            <constraint firstItem="gnZ-8i-54O" firstAttribute="leading" secondItem="zt0-GL-3tD" secondAttribute="leading" id="bTb-3D-Fba"/>
-                            <constraint firstItem="gnZ-8i-54O" firstAttribute="top" secondItem="zt0-GL-3tD" secondAttribute="top" id="rOM-lX-n5b"/>
+                            <constraint firstAttribute="trailing" secondItem="gnZ-8i-54O" secondAttribute="trailing" id="4x3-Vu-xkO"/>
+                            <constraint firstItem="TCg-eh-Ffb" firstAttribute="top" secondItem="gnZ-8i-54O" secondAttribute="bottom" id="B0q-2T-Uiy"/>
+                            <constraint firstItem="gnZ-8i-54O" firstAttribute="leading" secondItem="4SF-8o-5uQ" secondAttribute="leading" id="bTb-3D-Fba"/>
+                            <constraint firstItem="gnZ-8i-54O" firstAttribute="top" secondItem="4SF-8o-5uQ" secondAttribute="top" constant="20" id="rOM-lX-n5b"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="zt0-GL-3tD"/>
                     </view>
                     <navigationItem key="navigationItem" id="kix-Tq-nzo"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="gnZ-8i-54O" id="PgN-7a-soH"/>
+                        <outlet property="tableViewTopConstraint" destination="rOM-lX-n5b" id="Rdw-dn-3we"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dr-dB-Viy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,11 +208,14 @@
         <scene sceneID="Ds3-39-44j">
             <objects>
                 <viewController id="iYV-U9-fj0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ydE-vw-AGj"/>
+                        <viewControllerLayoutGuide type="bottom" id="WU9-9d-Ces"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oAY-1d-N0f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="iyh-lo-MmX"/>
                     </view>
                     <navigationItem key="navigationItem" id="wOA-Hu-U4A"/>
                 </viewController>
