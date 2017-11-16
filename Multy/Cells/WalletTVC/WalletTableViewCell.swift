@@ -13,6 +13,8 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var cryptoNameLbl: UILabel!
     @IBOutlet weak var fiatSumLbl: UILabel!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none

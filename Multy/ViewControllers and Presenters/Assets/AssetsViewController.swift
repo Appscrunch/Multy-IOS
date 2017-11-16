@@ -62,6 +62,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath == [0, 1] {
+            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
             return 283

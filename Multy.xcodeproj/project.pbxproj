@@ -12,6 +12,18 @@
 		4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4522905B1FBB18D30024B550 /* Assets.xcassets */; };
 		4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */; };
 		457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457486141FBD7ED8002D1925 /* SMPageControl.swift */; };
+		4575692D1FBDAA0C00FDEE20 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */; };
+		457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */; };
+		457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */; };
+		457569361FBDC23300FDEE20 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569351FBDC23300FDEE20 /* Colors.swift */; };
+		4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */; };
+		4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4575693B1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift */; };
+		4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4575693E1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift */; };
+		457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569401FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift */; };
+		457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569431FBDDCFF00FDEE20 /* CheckWordsViewController.swift */; };
+		457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569451FBDDD0F00FDEE20 /* CheckWordsPresenter.swift */; };
+		457569491FBDEDB900FDEE20 /* BackupFinishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569481FBDEDB900FDEE20 /* BackupFinishPresenter.swift */; };
+		4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4575694A1FBDEDE300FDEE20 /* BackupFinishViewController.swift */; };
 		4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC901FBC7122001991AA /* PortfolioTableViewCell.swift */; };
 		4583AC931FBC7122001991AA /* PortfolioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC911FBC7122001991AA /* PortfolioTableViewCell.xib */; };
 		4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC961FBC8596001991AA /* PortfolioCollectionViewCell.swift */; };
@@ -36,6 +48,18 @@
 		4522905E1FBB18D30024B550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		452290601FBB18D30024B550 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		457486141FBD7ED8002D1925 /* SMPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMPageControl.swift; sourceTree = "<group>"; };
+		4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeedPhrase.storyboard; sourceTree = "<group>"; };
+		457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutViewController.swift; sourceTree = "<group>"; };
+		457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutPresenter.swift; sourceTree = "<group>"; };
+		457569351FBDC23300FDEE20 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseWordPresenter.swift; sourceTree = "<group>"; };
+		4575693B1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseWordViewController.swift; sourceTree = "<group>"; };
+		4575693E1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSeedPhraseViewController.swift; sourceTree = "<group>"; };
+		457569401FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSeedPhrasePresenter.swift; sourceTree = "<group>"; };
+		457569431FBDDCFF00FDEE20 /* CheckWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckWordsViewController.swift; sourceTree = "<group>"; };
+		457569451FBDDD0F00FDEE20 /* CheckWordsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckWordsPresenter.swift; sourceTree = "<group>"; };
+		457569481FBDEDB900FDEE20 /* BackupFinishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFinishPresenter.swift; sourceTree = "<group>"; };
+		4575694A1FBDEDE300FDEE20 /* BackupFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFinishViewController.swift; sourceTree = "<group>"; };
 		4583AC901FBC7122001991AA /* PortfolioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTableViewCell.swift; sourceTree = "<group>"; };
 		4583AC911FBC7122001991AA /* PortfolioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioTableViewCell.xib; sourceTree = "<group>"; };
 		4583AC961FBC8596001991AA /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +135,63 @@
 			path = "Additional Libraries";
 			sourceTree = "<group>";
 		};
+		457569301FBDBB7500FDEE20 /* Seed Phrase */ = {
+			isa = PBXGroup;
+			children = (
+				457569371FBDC2FE00FDEE20 /* SeedPhraseAbout */,
+				457569381FBDC34700FDEE20 /* Phrase Word */,
+				4575693D1FBDD65500FDEE20 /* Backup Phrase */,
+				457569421FBDDCBB00FDEE20 /* Check Phrase */,
+				457569471FBDED7B00FDEE20 /* Congratulations */,
+			);
+			path = "Seed Phrase";
+			sourceTree = "<group>";
+		};
+		457569371FBDC2FE00FDEE20 /* SeedPhraseAbout */ = {
+			isa = PBXGroup;
+			children = (
+				457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */,
+				457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */,
+			);
+			path = SeedPhraseAbout;
+			sourceTree = "<group>";
+		};
+		457569381FBDC34700FDEE20 /* Phrase Word */ = {
+			isa = PBXGroup;
+			children = (
+				4575693B1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift */,
+				457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */,
+			);
+			path = "Phrase Word";
+			sourceTree = "<group>";
+		};
+		4575693D1FBDD65500FDEE20 /* Backup Phrase */ = {
+			isa = PBXGroup;
+			children = (
+				4575693E1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift */,
+				457569401FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift */,
+			);
+			path = "Backup Phrase";
+			sourceTree = "<group>";
+		};
+		457569421FBDDCBB00FDEE20 /* Check Phrase */ = {
+			isa = PBXGroup;
+			children = (
+				457569431FBDDCFF00FDEE20 /* CheckWordsViewController.swift */,
+				457569451FBDDD0F00FDEE20 /* CheckWordsPresenter.swift */,
+			);
+			path = "Check Phrase";
+			sourceTree = "<group>";
+		};
+		457569471FBDED7B00FDEE20 /* Congratulations */ = {
+			isa = PBXGroup;
+			children = (
+				4575694A1FBDEDE300FDEE20 /* BackupFinishViewController.swift */,
+				457569481FBDEDB900FDEE20 /* BackupFinishPresenter.swift */,
+			);
+			path = Congratulations;
+			sourceTree = "<group>";
+		};
 		4583AC8D1FBC70D6001991AA /* WalletTVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				4583ACA21FBCAC60001991AA /* ExtensionsUIView.swift */,
+				457569351FBDC23300FDEE20 /* Colors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -162,6 +244,7 @@
 			children = (
 				452290581FBB18D30024B550 /* Main.storyboard */,
 				4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */,
+				4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -170,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				45B9CB011FBB4AC200AA2A31 /* Assets */,
+				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 			);
 			path = "ViewControllers and Presenters";
 			sourceTree = "<group>";
@@ -255,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4575692D1FBDAA0C00FDEE20 /* SeedPhrase.storyboard in Resources */,
 				45B9CB081FBB51AE00AA2A31 /* WalletTableViewCell.xib in Resources */,
 				4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */,
 				4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */,
@@ -330,12 +415,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
+				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
+				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
+				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
+				457569361FBDC23300FDEE20 /* Colors.swift in Sources */,
+				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
 				457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */,
 				45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */,
 				4583ACA31FBCAC60001991AA /* ExtensionsUIView.swift in Sources */,
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
+				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
+				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
+				4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */,
+				457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */,
+				457569491FBDEDB900FDEE20 /* BackupFinishPresenter.swift in Sources */,
 				45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */,
 				4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */,
 				4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */,
