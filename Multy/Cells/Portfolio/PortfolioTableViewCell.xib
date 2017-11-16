@@ -49,6 +49,11 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="2o9-vp-84J"/>
                         </connections>
                     </collectionView>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRd-oZ-cTy" customClass="SMPageControl" customModule="Multy" customModuleProvider="target">
+                        <rect key="frame" x="251" y="250" width="73" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
@@ -65,7 +70,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="collectionView" destination="TeY-lp-B8s" id="yHf-PE-X40"/>
+                <outlet property="smPageControll" destination="PRd-oZ-cTy" id="a9r-SM-Ewf"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
         </tableViewCell>
     </objects>
 </document>
