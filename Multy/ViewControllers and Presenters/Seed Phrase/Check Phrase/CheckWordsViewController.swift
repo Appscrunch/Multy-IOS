@@ -25,6 +25,10 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.wordTF.text = ""
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         self.nextWordOrContinue.applyGradient(
             withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),

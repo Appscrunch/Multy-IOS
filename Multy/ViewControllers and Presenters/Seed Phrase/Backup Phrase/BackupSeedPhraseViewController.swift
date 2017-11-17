@@ -10,6 +10,10 @@ class BackupSeedPhraseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         self.continueBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                      UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],

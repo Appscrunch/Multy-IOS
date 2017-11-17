@@ -10,6 +10,10 @@ class BackupFinishViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         self.greatBtn.applyGradient(
             withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),

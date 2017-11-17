@@ -26,6 +26,10 @@ class SeedPhraseWordViewController: UIViewController {
         bottomWord.morphingEffect = effect
         
         nextWordAndContinueAction(UIButton());
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         self.nextWordBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)), UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))], gradientOrientation: .horizontal)
     }
