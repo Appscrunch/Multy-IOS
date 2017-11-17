@@ -4,10 +4,11 @@
 
 import UIKit
 import LTMorphingLabel
+import ZFRippleButton
 
 class SeedPhraseWordViewController: UIViewController {
 
-    @IBOutlet weak var nextWordBtn: UIButton!
+    @IBOutlet weak var nextWordBtn: ZFRippleButton!
     
     @IBOutlet weak var topWordLbl: LTMorphingLabel!
     @IBOutlet weak var mediumWordLbl: LTMorphingLabel!

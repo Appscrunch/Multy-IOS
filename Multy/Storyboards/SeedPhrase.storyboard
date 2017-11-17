@@ -82,25 +82,6 @@
                                 <state key="normal" title="Continue">
                                     <color key="titleColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="pulseEnable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="touchLocationEnable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="continueAction:" destination="wqv-j7-zb4" eventType="touchUpInside" id="YiP-1m-dMm"/>
                                 </connections>
@@ -141,7 +122,7 @@
                     <navigationItem key="navigationItem" id="pmM-m8-eq7"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="continueBtn" destination="Wey-AO-45o" id="6sq-DC-kxN"/>
+                        <outlet property="continueBtn" destination="Wey-AO-45o" id="PJI-ac-4fF"/>
                         <segue destination="6Mb-pe-tcp" kind="show" identifier="seedWordsVC" id="d3A-8P-xX5"/>
                     </connections>
                 </viewController>
@@ -204,25 +185,6 @@
                                 <state key="normal" title="Next Word">
                                     <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="pulseEnable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="touchLocationEnable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextWordAndContinueAction:" destination="6Mb-pe-tcp" eventType="touchUpInside" id="2BA-LA-jJx"/>
                                 </connections>
@@ -246,7 +208,7 @@
                     <connections>
                         <outlet property="bottomWord" destination="rvu-Av-A9m" id="SvZ-XR-AN2"/>
                         <outlet property="mediumWordLbl" destination="lZP-BZ-7Xv" id="LQN-Xj-cJe"/>
-                        <outlet property="nextWordBtn" destination="wpE-FL-wp8" id="lIg-ov-IsR"/>
+                        <outlet property="nextWordBtn" destination="wpE-FL-wp8" id="ZF0-hF-00L"/>
                         <outlet property="topWordLbl" destination="PTy-g3-ygX" id="vJ4-ET-kxD"/>
                         <segue destination="4yB-0X-SWo" kind="show" identifier="backupSeedPhraseVC" id="0os-3A-aYp"/>
                     </connections>
@@ -311,25 +273,6 @@
                                 <state key="normal" title="Continue">
                                     <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="pulseEnable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="touchLocationEnable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="continueAction:" destination="4yB-0X-SWo" eventType="touchUpInside" id="i7e-7f-vk2"/>
                                 </connections>
@@ -360,7 +303,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="continueBtn" destination="J88-uo-8qz" id="2jI-Ly-HBE"/>
+                        <outlet property="continueBtn" destination="J88-uo-8qz" id="PNq-Q0-SCE"/>
                         <segue destination="Uyg-Ci-oxp" kind="show" identifier="checkPhraseVC" id="f8q-8y-D6S"/>
                     </connections>
                 </viewController>
@@ -402,25 +345,6 @@
                                 <state key="normal" title="Next Word">
                                     <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="pulseEnable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="touchLocationEnable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextWordAndContinueAction:" destination="Uyg-Ci-oxp" eventType="touchUpInside" id="3pZ-Zc-gWG"/>
                                 </connections>
@@ -454,7 +378,7 @@
                     </view>
                     <connections>
                         <outlet property="constraintBtnBottom" destination="rWO-DS-6N4" id="mom-em-0LT"/>
-                        <outlet property="nextWordOrContinue" destination="wV8-0l-POJ" id="ZDG-5T-Yx1"/>
+                        <outlet property="nextWordOrContinue" destination="wV8-0l-POJ" id="Fo8-Cg-dJX"/>
                         <outlet property="wordCounterLbl" destination="K1E-dc-1Bn" id="CYN-Ln-LSf"/>
                         <outlet property="wordTF" destination="827-G2-PrD" id="dY6-9v-8c7"/>
                         <segue destination="6EH-xy-Qwn" kind="show" identifier="greatVC" id="RUV-XK-j11"/>
@@ -501,25 +425,6 @@ Your wallet is protected!</string>
                                 <state key="normal" title="Great!">
                                     <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowX">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="pulseEnable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="touchLocationEnable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="greatAction:" destination="6EH-xy-Qwn" eventType="touchUpInside" id="Z09-Lb-WH9"/>
                                 </connections>
@@ -537,7 +442,7 @@ Your wallet is protected!</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="greatBtn" destination="rQ5-TK-TFt" id="9gg-e3-kKd"/>
+                        <outlet property="greatBtn" destination="rQ5-TK-TFt" id="AGy-k6-Qhy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cht-vI-WdS" userLabel="First Responder" sceneMemberID="firstResponder"/>

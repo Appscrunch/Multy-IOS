@@ -3,10 +3,11 @@
 //See LICENSE for details
 
 import UIKit
+import ZFRippleButton
 
 class SeedPhraseAboutViewController: UIViewController {
 
-    @IBOutlet weak var continueBtn: UIButton!
+    @IBOutlet weak var continueBtn: ZFRippleButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

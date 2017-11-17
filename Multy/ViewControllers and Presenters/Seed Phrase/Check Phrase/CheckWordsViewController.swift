@@ -3,12 +3,13 @@
 //See LICENSE for details
 
 import UIKit
+import ZFRippleButton
 
 class CheckWordsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var wordTF: UITextField!
     @IBOutlet weak var wordCounterLbl: UILabel!
-    @IBOutlet weak var nextWordOrContinue: UIButton!
+    @IBOutlet weak var nextWordOrContinue: ZFRippleButton!
 
     @IBOutlet weak var constraintBtnBottom: NSLayoutConstraint!
     

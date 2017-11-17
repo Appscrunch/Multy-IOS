@@ -3,10 +3,11 @@
 //See LICENSE for details
 
 import UIKit
+import ZFRippleButton
 
 class BackupFinishViewController: UIViewController {
     
-    @IBOutlet weak var greatBtn: UIButton!
+    @IBOutlet weak var greatBtn: ZFRippleButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
