@@ -14,8 +14,11 @@ class SeedPhraseAboutViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
-        
-        self.continueBtn.applyGradient(withColours: [UIColor.black, UIColor.red], gradientOrientation: GradientOrientation.horizontal)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.continueBtn.applyGradient(withColours: [UIColor(red: 0, green: 178, blue: 255, alpha: 1), UIColor.red], gradientOrientation: GradientOrientation.horizontal)
     }
     
     @IBAction func continueAction(_ sender: Any) {
