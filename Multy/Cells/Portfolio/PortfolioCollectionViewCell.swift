@@ -12,7 +12,6 @@ class PortfolioCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    
     func makeCornerRadius() {
         let maskPath = UIBezierPath.init(roundedRect: self.prFirstView.bounds, byRoundingCorners:[.bottomRight, .bottomLeft], cornerRadii: CGSize.init(width: 10.0, height: 10.0))
         let maskLayer = CAShapeLayer()
