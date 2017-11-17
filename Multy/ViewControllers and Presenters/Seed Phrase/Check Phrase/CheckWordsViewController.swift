@@ -25,6 +25,11 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.wordTF.text = ""
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        self.nextWordOrContinue.applyGradient(
+            withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                          UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+            gradientOrientation: .horizontal)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
