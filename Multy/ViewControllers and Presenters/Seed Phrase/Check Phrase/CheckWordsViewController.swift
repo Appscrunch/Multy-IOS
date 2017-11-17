@@ -9,12 +9,17 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var wordTF: UITextField!
     @IBOutlet weak var wordCounterLbl: UILabel!
     @IBOutlet weak var nextWordOrContinue: UIButton!
+
+    @IBOutlet weak var constraintBtnBottom: NSLayoutConstraint!
+    
     var currentWordNumber = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.wordTF.becomeFirstResponder()
         self.wordTF.text = ""
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -35,4 +40,16 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             self.performSegue(withIdentifier: "greatVC", sender: UIButton.self)
         }
     }
+    
+    @objc func keyboardWillShow(_ notification : Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
+            self.constraintBtnBottom.constant = inset.bottom
+        }
+    }
+    
+    @objc func someFunc() {
+        
+    }
 }
+
