@@ -5,7 +5,6 @@
 import UIKit
 
 class PortfolioTableViewCell: UITableViewCell {
-
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
