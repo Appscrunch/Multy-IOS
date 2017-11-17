@@ -234,7 +234,7 @@
                         <outlet property="bottomWord" destination="rvu-Av-A9m" id="aCe-S7-dgG"/>
                         <outlet property="mediumWordLbl" destination="lZP-BZ-7Xv" id="fUQ-j9-ahQ"/>
                         <outlet property="nextWordBtn" destination="wpE-FL-wp8" id="lIg-ov-IsR"/>
-                        <outlet property="topWordLbl" destination="lZP-BZ-7Xv" id="TUW-pS-N0N"/>
+                        <outlet property="topWordLbl" destination="PTy-g3-ygX" id="9bl-fr-odJ"/>
                         <segue destination="4yB-0X-SWo" kind="show" identifier="backupSeedPhraseVC" id="0os-3A-aYp"/>
                     </connections>
                 </viewController>
