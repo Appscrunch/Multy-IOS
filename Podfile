@@ -9,5 +9,7 @@ target 'Multy' do
 
   pod 'RealmSwift'
   pod 'R.swift'
+  pod 'LTMorphingLabel'
+  pod 'WYMaterialButton'
 
 end

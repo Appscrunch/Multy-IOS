@@ -3,20 +3,27 @@
 //See LICENSE for details
 
 import UIKit
+import LTMorphingLabel
 
 class SeedPhraseWordViewController: UIViewController {
 
     @IBOutlet weak var nextWordBtn: UIButton!
     
-    @IBOutlet weak var topWordLbl: UILabel!
-    @IBOutlet weak var mediumWordLbl: UILabel!
-    @IBOutlet weak var bottomWord: UILabel!
+    @IBOutlet weak var topWordLbl: LTMorphingLabel!
+    @IBOutlet weak var mediumWordLbl: LTMorphingLabel!
+    @IBOutlet weak var bottomWord: LTMorphingLabel!
     
     var countOfTaps = -1
     let seedPhraseArray = ["soda", "siren", "victory", "ozone", "document", "attract", "dragon", "innocent", "aisle", "shallow", "elbow", "make", "organ", "version", "equip"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let effect: LTMorphingEffect = .fall
+        
+        topWordLbl.morphingEffect = effect
+        mediumWordLbl.morphingEffect = effect
+        bottomWord.morphingEffect = effect
         
         nextWordAndContinueAction(UIButton());
     }
