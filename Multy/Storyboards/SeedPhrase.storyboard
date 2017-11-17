@@ -562,8 +562,8 @@ Your wallet is protected!</string>
         </scene>
     </scenes>
     <resources>
-        <image name="SPY_icon" width="51" height="51"/>
-        <image name="Screenshot_icon" width="33" height="60"/>
-        <image name="Spy_cam__icon" width="48" height="43"/>
+        <image name="SPY_icon" width="34" height="34"/>
+        <image name="Screenshot_icon" width="22" height="40"/>
+        <image name="Spy_cam__icon" width="32" height="29"/>
     </resources>
 </document>

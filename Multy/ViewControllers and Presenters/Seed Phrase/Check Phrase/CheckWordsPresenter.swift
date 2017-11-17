@@ -5,5 +5,7 @@
 import UIKit
 
 class CheckWordsPresenter: NSObject {
-
+    
+    var checkWordsVC: CheckWordsViewController?
+    var phraseArr = [String]()
 }
