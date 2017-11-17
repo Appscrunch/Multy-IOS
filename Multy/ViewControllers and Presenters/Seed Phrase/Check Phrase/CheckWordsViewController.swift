@@ -14,8 +14,13 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     var currentWordNumber = 1
     
+    let presenter = CheckWordsPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.presenter.checkWordsVC = self
+        
         self.wordTF.becomeFirstResponder()
         self.wordTF.text = ""
         
@@ -29,7 +34,12 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
         //saving word
-        self.wordTF.text = ""
+        if !(self.wordTF.text?.isEmpty)! {
+            self.presenter.phraseArr.append((self.wordTF.text?.lowercased())!)
+            self.wordTF.text = ""
+        } else {
+            return
+        }
         if self.currentWordNumber == 14 {
             self.nextWordOrContinue.setTitle("Continue", for: .normal)
         }

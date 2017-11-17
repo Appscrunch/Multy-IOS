@@ -7,12 +7,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Screenshot_icon-1.png",
+      "filename" : "Screenshot_icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Screenshot_icon-2.png",
+      "filename" : "Screenshot_icon@3x.png",
       "scale" : "3x"
     }
   ],
