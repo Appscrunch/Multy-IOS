@@ -19,10 +19,13 @@ class SeedPhraseWordViewController: UIViewController {
     }
 
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
-        self.countOfTaps += 1
-        //getNextWords
-        if self.countOfTaps == 4 {
+        if self.countOfTaps == 3 {
             self.nextWordBtn.setTitle("Continue", for: .normal)
+        }
+        //getNextWords
+        if self.countOfTaps < 4 {
+            self.countOfTaps += 1
+        }  else {
             self.performSegue(withIdentifier: "backupSeedPhraseVC", sender: UIButton.self)
         }
     }
