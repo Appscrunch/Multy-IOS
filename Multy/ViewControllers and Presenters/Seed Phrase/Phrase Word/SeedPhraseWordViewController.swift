@@ -14,11 +14,12 @@ class SeedPhraseWordViewController: UIViewController {
     @IBOutlet weak var mediumWordLbl: LTMorphingLabel!
     @IBOutlet weak var bottomWord: LTMorphingLabel!
     
-    var countOfTaps = -1
-    let seedPhraseArray = ["soda", "siren", "victory", "ozone", "document", "attract", "dragon", "innocent", "aisle", "shallow", "elbow", "make", "organ", "version", "equip"]
+    let presenter =  SeedPhraseWordPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.mainVC = self
         
         let effect: LTMorphingEffect = .fall
         
@@ -26,7 +27,8 @@ class SeedPhraseWordViewController: UIViewController {
         mediumWordLbl.morphingEffect = effect
         bottomWord.morphingEffect = effect
         
-        nextWordAndContinueAction(UIButton());
+        presenter.generateMnemonic()
+        presenter.presentNextTripleOrContinue()
     }
     
     override func viewDidLayoutSubviews() {
@@ -36,19 +38,6 @@ class SeedPhraseWordViewController: UIViewController {
     }
 
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
-        if self.countOfTaps == 3 {
-            self.nextWordBtn.setTitle("Continue", for: .normal)
-        }
-        
-        //getNextWords
-        if self.countOfTaps < 4 {
-            self.countOfTaps += 1
-            
-            self.topWordLbl.text = seedPhraseArray[3 * countOfTaps]
-            self.mediumWordLbl.text = seedPhraseArray[3 * countOfTaps + 1]
-            self.bottomWord.text = seedPhraseArray[3 * countOfTaps + 2]
-        }  else {
-            self.performSegue(withIdentifier: "backupSeedPhraseVC", sender: UIButton.self)
-        }
+        presenter.presentNextTripleOrContinue()
     }
 }

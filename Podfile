@@ -12,5 +12,8 @@ target 'Multy' do
   pod 'LTMorphingLabel'
   pod 'ZFRippleButton'
   pod 'ButtonProgressBar-iOS'
+  pod 'CryptoSwift'
+  pod 'SecurityExtensions'
+  pod 'GGLInstanceID'
 
 end
