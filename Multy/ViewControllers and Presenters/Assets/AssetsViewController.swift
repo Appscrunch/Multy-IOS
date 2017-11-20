@@ -17,6 +17,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.registerCells()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    //MARK: Setup functions
+    
     func checkOSForConstraints() {
         if #available(iOS 11.0, *) {
             //OK: Storyboard was made for iOS 11
@@ -31,30 +38,48 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let portfolioCell = UINib.init(nibName: "PortfolioTableViewCell", bundle: nil)
         self.tableView.register(portfolioCell, forCellReuseIdentifier: "portfolioCell")
+        
+        let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
+        self.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
 
+    //MARK: Table view delegates
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {
             let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             return portfolioCell
+        } else if indexPath == [0, 1] {
+            let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
+            return newWalletCell
         } else {
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-            
+            walletCell.makeshadow()
             return walletCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath == [0, 1] {
+            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
             return 283
+        }else if indexPath == [0, 1] {
+            return 75
         } else {
             return 104
         }

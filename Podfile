@@ -9,5 +9,11 @@ target 'Multy' do
 
   pod 'RealmSwift'
   pod 'R.swift'
+  pod 'LTMorphingLabel'
+  pod 'ZFRippleButton'
+  pod 'ButtonProgressBar-iOS'
+  pod 'CryptoSwift'
+  pod 'SecurityExtensions'
+  pod 'GGLInstanceID'
 
 end
