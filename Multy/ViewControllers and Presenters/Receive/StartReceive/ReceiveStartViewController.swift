@@ -51,7 +51,19 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+        walletCell.arrowImage.image = nil
         return walletCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let wallCell = self.tableView.cellForRow(at: indexPath) as! WalletTableViewCell
+        if !wallCell.isBorderOn {
+            wallCell.makeBlueBorderAndArrow()
+            // save selected wallet
+        } else {
+            wallCell.clearBorderAndArrow()
+            // delete selected wallet
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

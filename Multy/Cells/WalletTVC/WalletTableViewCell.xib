@@ -112,6 +112,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="arrowImage" destination="Vd1-0D-jGB" id="RYb-7g-dGS"/>
                 <outlet property="backView" destination="srv-bR-zld" id="GGo-Cl-nqM"/>
                 <outlet property="cryptoNameLbl" destination="d4q-xh-0f4" id="9vi-lM-CFw"/>
                 <outlet property="cryptoSumLbl" destination="Msb-b9-SS7" id="bxP-YK-Yum"/>
