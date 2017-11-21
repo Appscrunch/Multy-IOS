@@ -24,6 +24,8 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     var fiatName = "USD"
     var cryptoName = "BTC"
     
+    var delegate: ReceiveSumTransferProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,9 +69,13 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneAction(_ sender: Any) {
-        
+        if self.isCrypto {
+            self.delegate?.transferSum(amount: self.sumInCrypto, currency: self.cryptoName, additionalInfo: self.bottomSumCurrencyLbl.text!)
+        } else {
+            self.delegate?.transferSum(amount: self.sumInFiat, currency: self.fiatName, additionalInfo: self.bottomSumCurrencyLbl.text!)
+        }
+        self.navigationController?.popViewController(animated: true)
     }
-    
    
     @objc func keyboardWillShow(_ notification : Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
