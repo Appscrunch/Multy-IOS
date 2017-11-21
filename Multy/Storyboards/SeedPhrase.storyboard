@@ -430,7 +430,7 @@ Your wallet is protected!</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.9762609601020813" green="0.98015815019607544" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="t9x-FX-ph5" firstAttribute="centerX" secondItem="J9H-T2-f7l" secondAttribute="centerX" id="ZOq-BE-mbJ"/>
                             <constraint firstItem="t9x-FX-ph5" firstAttribute="top" secondItem="Qnt-XF-2lR" secondAttribute="bottom" constant="51" id="a8e-A7-Q9L"/>
