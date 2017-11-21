@@ -189,6 +189,13 @@
                                     <action selector="nextWordAndContinueAction:" destination="6Mb-pe-tcp" eventType="touchUpInside" id="2BA-LA-jJx"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01" translatesAutoresizingMaskIntoConstraints="NO" id="pgs-ef-H1K">
+                                <rect key="frame" x="52" y="115" width="270" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="EI3-3A-XA9"/>
+                                    <constraint firstAttribute="width" constant="270" id="pCR-Dj-EXK"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.9762609601020813" green="0.98015815019607544" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -199,6 +206,8 @@
                             <constraint firstItem="PTy-g3-ygX" firstAttribute="centerX" secondItem="aAL-4L-Z3p" secondAttribute="centerX" id="F8w-Tu-eA1"/>
                             <constraint firstItem="rvu-Av-A9m" firstAttribute="top" secondItem="lZP-BZ-7Xv" secondAttribute="bottom" constant="20" id="Ggw-6r-6L5"/>
                             <constraint firstItem="aAL-4L-Z3p" firstAttribute="top" secondItem="cV0-jC-Rin" secondAttribute="bottom" constant="51" id="Klw-0y-N0p"/>
+                            <constraint firstItem="pgs-ef-H1K" firstAttribute="centerX" secondItem="Jdv-JE-OjU" secondAttribute="centerX" id="T82-Sk-BWV"/>
+                            <constraint firstItem="pgs-ef-H1K" firstAttribute="top" secondItem="aAL-4L-Z3p" secondAttribute="bottom" constant="8" id="ghp-ip-1SF"/>
                             <constraint firstItem="aAL-4L-Z3p" firstAttribute="centerX" secondItem="Jdv-JE-OjU" secondAttribute="centerX" id="jlg-9u-YcP"/>
                             <constraint firstAttribute="trailing" secondItem="wpE-FL-wp8" secondAttribute="trailing" id="lyY-gE-vT6"/>
                             <constraint firstItem="wpE-FL-wp8" firstAttribute="leading" secondItem="Jdv-JE-OjU" secondAttribute="leading" id="sDF-xb-wXC"/>
@@ -206,6 +215,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blocksImage" destination="pgs-ef-H1K" id="P0X-cj-u6C"/>
                         <outlet property="bottomWord" destination="rvu-Av-A9m" id="SvZ-XR-AN2"/>
                         <outlet property="mediumWordLbl" destination="lZP-BZ-7Xv" id="LQN-Xj-cJe"/>
                         <outlet property="nextWordBtn" destination="wpE-FL-wp8" id="ZF0-hF-00L"/>
@@ -358,13 +368,22 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="66"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0101" translatesAutoresizingMaskIntoConstraints="NO" id="h8P-7x-V0G">
+                                <rect key="frame" x="52.5" y="151" width="270" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="vXc-MG-4sj"/>
+                                    <constraint firstAttribute="height" constant="40" id="xuu-wk-haN"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.9762609601020813" green="0.98015815019607544" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="827-G2-PrD" firstAttribute="centerX" secondItem="YXe-ZO-gQe" secondAttribute="centerX" id="AG0-l6-GxU"/>
                             <constraint firstItem="K1E-dc-1Bn" firstAttribute="top" secondItem="827-G2-PrD" secondAttribute="bottom" constant="10" id="BnS-zm-cG8"/>
+                            <constraint firstItem="h8P-7x-V0G" firstAttribute="top" secondItem="YXe-ZO-gQe" secondAttribute="bottom" constant="8.5" id="HfU-jK-Vpv"/>
                             <constraint firstItem="827-G2-PrD" firstAttribute="leading" secondItem="xhy-qM-EFF" secondAttribute="leading" constant="20" id="PmD-LV-QY9"/>
                             <constraint firstItem="YXe-ZO-gQe" firstAttribute="centerX" secondItem="xhy-qM-EFF" secondAttribute="centerX" id="Qmu-9S-WLH"/>
+                            <constraint firstItem="h8P-7x-V0G" firstAttribute="centerX" secondItem="xhy-qM-EFF" secondAttribute="centerX" id="U1e-Pm-gdi"/>
                             <constraint firstItem="wV8-0l-POJ" firstAttribute="top" secondItem="K1E-dc-1Bn" secondAttribute="bottom" constant="10" id="dCz-9q-LlM"/>
                             <constraint firstItem="YXe-ZO-gQe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xhy-qM-EFF" secondAttribute="leading" constant="105" id="iEX-pD-YcI"/>
                             <constraint firstAttribute="trailing" secondItem="wV8-0l-POJ" secondAttribute="trailing" id="jMj-9Q-gm6"/>
@@ -377,6 +396,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blockImage" destination="h8P-7x-V0G" id="rp8-5l-Mh4"/>
                         <outlet property="constraintBtnBottom" destination="rWO-DS-6N4" id="mom-em-0LT"/>
                         <outlet property="nextWordOrContinue" destination="wV8-0l-POJ" id="Fo8-Cg-dJX"/>
                         <outlet property="wordCounterLbl" destination="K1E-dc-1Bn" id="CYN-Ln-LSf"/>
@@ -469,6 +489,8 @@ Your wallet is protected!</string>
         </scene>
     </scenes>
     <resources>
+        <image name="01" width="271" height="31"/>
+        <image name="0101" width="271" height="31"/>
         <image name="SPY_icon" width="34" height="34"/>
         <image name="Screenshot_icon" width="22" height="40"/>
         <image name="Spy_cam__icon" width="32" height="29"/>
