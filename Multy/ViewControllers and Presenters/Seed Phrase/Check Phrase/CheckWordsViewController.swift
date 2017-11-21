@@ -67,9 +67,6 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             self.constraintBtnBottom.constant = inset.bottom
         }
     }
-    
-    @objc func someFunc() {
-        
-    }
+
 }
 

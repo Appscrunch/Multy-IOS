@@ -31,7 +31,7 @@ class ReceiveStartViewController: UIViewController {
     }
     
     @IBAction func continueAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "receiveAmountVC", sender: UIButton.self)
+        self.performSegue(withIdentifier: "receiveDetails", sender: UIButton.self)
     }
     
     @IBAction func cancelAction(_ sender: Any) {

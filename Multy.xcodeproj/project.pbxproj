@@ -36,6 +36,8 @@
 		45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949201FC2DFF9003C3A23 /* ReceiveStartPresenter.swift */; };
 		45A949251FC2EE55003C3A23 /* ReceiveAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949241FC2EE55003C3A23 /* ReceiveAmountPresenter.swift */; };
 		45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949261FC2EE68003C3A23 /* ReceiveAmountViewController.swift */; };
+		45A9492A1FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949291FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift */; };
+		45A9492C1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9492B1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift */; };
 		45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */; };
 		45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */; };
 		45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */; };
@@ -77,6 +79,8 @@
 		45A949201FC2DFF9003C3A23 /* ReceiveStartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartPresenter.swift; sourceTree = "<group>"; };
 		45A949241FC2EE55003C3A23 /* ReceiveAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAmountPresenter.swift; sourceTree = "<group>"; };
 		45A949261FC2EE68003C3A23 /* ReceiveAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAmountViewController.swift; sourceTree = "<group>"; };
+		45A949291FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAllDetailsViewController.swift; sourceTree = "<group>"; };
+		45A9492B1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveAllDetailsPresenter.swift; sourceTree = "<group>"; };
 		45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewController.swift; sourceTree = "<group>"; };
 		45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPresenter.swift; sourceTree = "<group>"; };
 		45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				45A949221FC2E98B003C3A23 /* StartReceive */,
+				45A949281FC4268E003C3A23 /* ReceiveAllDetails */,
 				45A949231FC2EE25003C3A23 /* ReceiveAmount */,
 			);
 			path = Receive;
@@ -265,6 +270,15 @@
 				45A949241FC2EE55003C3A23 /* ReceiveAmountPresenter.swift */,
 			);
 			path = ReceiveAmount;
+			sourceTree = "<group>";
+		};
+		45A949281FC4268E003C3A23 /* ReceiveAllDetails */ = {
+			isa = PBXGroup;
+			children = (
+				45A949291FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift */,
+				45A9492B1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift */,
+			);
+			path = ReceiveAllDetails;
 			sourceTree = "<group>";
 		};
 		45B9CB011FBB4AC200AA2A31 /* Assets */ = {
@@ -467,6 +481,7 @@
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
 				457569361FBDC23300FDEE20 /* Colors.swift in Sources */,
+				45A9492A1FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift in Sources */,
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
 				457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */,
@@ -484,6 +499,7 @@
 				45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */,
 				4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */,
 				4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */,
+				45A9492C1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift in Sources */,
 				45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
