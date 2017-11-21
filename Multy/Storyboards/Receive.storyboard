@@ -521,7 +521,7 @@ Options</string>
                                     <constraint firstAttribute="height" constant="2" id="C7i-RU-5yO"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VeI-na-O7A">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swap" translatesAutoresizingMaskIntoConstraints="NO" id="VeI-na-O7A">
                                 <rect key="frame" x="167" y="450" width="41" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="4Ec-yE-bl7"/>
@@ -657,5 +657,6 @@ Options</string>
     </scenes>
     <resources>
         <image name="chevron" width="15" height="22"/>
+        <image name="swap" width="25" height="24"/>
     </resources>
 </document>
