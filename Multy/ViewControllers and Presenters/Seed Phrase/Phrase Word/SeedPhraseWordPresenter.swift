@@ -19,6 +19,18 @@ class SeedPhraseWordPresenter: NSObject {
             self.mainVC?.nextWordBtn.setTitle("Continue", for: .normal)
         }
         
+        if self.countOfTaps == 0 {
+            self.mainVC?.blocksImage.image = #imageLiteral(resourceName: "02")
+        } else if self.countOfTaps == 1 {
+            self.mainVC?.blocksImage.image = #imageLiteral(resourceName: "03")
+        } else if self.countOfTaps == 2 {
+            self.mainVC?.blocksImage.image = #imageLiteral(resourceName: "04")
+        } else
+            if self.countOfTaps == 3 {
+                self.mainVC?.nextWordBtn.setTitle("Continue", for: .normal)
+                self.mainVC?.blocksImage.image = #imageLiteral(resourceName: "05")
+        }
+        
         //getNextWords
         if self.countOfTaps < 4 {
             self.countOfTaps += 1

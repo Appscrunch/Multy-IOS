@@ -42,28 +42,5 @@ class SeedPhraseWordViewController: UIViewController {
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
         
         presenter.presentNextTripleOrContinue()
-
-        if self.countOfTaps == 0 {
-            self.blocksImage.image = #imageLiteral(resourceName: "02")
-        } else if self.countOfTaps == 1 {
-            self.blocksImage.image = #imageLiteral(resourceName: "03")
-        } else if self.countOfTaps == 2 {
-            self.blocksImage.image = #imageLiteral(resourceName: "04")
-        } else
-        if self.countOfTaps == 3 {
-            self.nextWordBtn.setTitle("Continue", for: .normal)
-            self.blocksImage.image = #imageLiteral(resourceName: "05")
-        }
-        
-        //getNextWords
-        if self.countOfTaps < 4 {
-            self.countOfTaps += 1
-            
-            self.topWordLbl.text = seedPhraseArray[3 * countOfTaps]
-            self.mediumWordLbl.text = seedPhraseArray[3 * countOfTaps + 1]
-            self.bottomWord.text = seedPhraseArray[3 * countOfTaps + 2]
-        }  else {
-            self.performSegue(withIdentifier: "backupSeedPhraseVC", sender: UIButton.self)
-        }
     }
 }
