@@ -4,34 +4,66 @@ import UIKit
 import CryptoSwift
 
 class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
-    static let sharedGenerator = MasterKeyGenerator()
+    static let shared = MasterKeyGenerator()
     
+    fileprivate var localPasswordString : String = ""
     fileprivate var instanceIDToken : String = ""
-    fileprivate var devicePushToken : String = ""
     fileprivate var deviceUUIDToken : String = ""
     
-    fileprivate var executedFunction : ((String?, Error?, String?) -> Void)?
+    fileprivate var executedFunction : ((Data?, Error?, String?) -> Void)?
     
-    public func generateTokens(completion: @escaping (_ masterKey: String?, _ error: Error?, String?) -> ()) {
+    //synch version
+    public func generateMasterKey() -> Data? {
+        generateGGInstanceID()
+        
+        deviceUUIDToken = UIDevice.current.identifierForVendor!.uuidString
+        generateLocalPasswordString()
+        
+        print("\(self.deviceUUIDToken) -- \(self.instanceIDToken)")
+        
+        return self.generateMasterKeyFromTokens()
+    }
+    
+    //asynch version
+    public func generateMasterKey(completion: @escaping (_ masterKey: Data?, _ error: Error?, String?) -> ()) {
         executedFunction = completion
         
         deviceUUIDToken = UIDevice.current.identifierForVendor!.uuidString
-        fetchDeviceToken()
         generateInstanceID()
-    }
-    
-    fileprivate func fetchDeviceToken() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.getDevicePushToken),
-                                               name: NSNotification.Name(rawValue: "deviceTokenNotification"),
-                                               object: nil)
+        generateLocalPasswordString()
         
-        DispatchQueue.main.async {
-            let settings = UIUserNotificationSettings(types: [/*.badge, .sound, .alert*/], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
-        }
+        print("\(deviceUUIDToken) -- \(instanceIDToken)")
     }
     
+    fileprivate func generateLocalPasswordString() {
+        // Future feature
+        // get additional protection from local password/fingerprint
+        
+        localPasswordString = ""
+    }
+    
+    //version without calling generateMasterKeyFromTokens
+    fileprivate func generateGGInstanceID() {
+        let instanceIDConfig = GGLInstanceIDConfig.default()
+        instanceIDConfig?.delegate = self
+        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
+        
+        let iidInstance = GGLInstanceID.sharedInstance()
+        
+        let handler : (String?, Error?) -> Void = { (identity, error) in
+            if let iid = identity {
+                DispatchQueue.main.async {
+                    self.instanceIDToken = iid
+                }
+            } else {
+                print(error ?? "empty error")
+            }
+        }
+        
+        iidInstance?.getWithHandler(handler)
+    }
+    
+    //asynch version
     fileprivate func generateInstanceID() {
         let instanceIDConfig = GGLInstanceIDConfig.default()
         instanceIDConfig?.delegate = self
@@ -45,9 +77,9 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
                 print("instanceIDToken: \(self.instanceIDToken)")
                 
                 DispatchQueue.main.async {
-                    if !self.devicePushToken.isEmpty {
-                        self.generateMasterKey()
-                    }
+                    //                    if !self.devicePushToken.isEmpty {
+                    self.asyncGenerateMasterKeyFromTokens()
+                    //                    }
                 }
             } else {
                 print(error ?? "empty error")
@@ -57,20 +89,31 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
         iidInstance?.getWithHandler(handler)
     }
     
-    @objc func getDevicePushToken(notification: NSNotification) {
-        devicePushToken = notification.object! as! String
-        
-        if !instanceIDToken.isEmpty {
-            generateMasterKey()
+    //synch version
+    fileprivate func generateMasterKeyFromTokens() -> Data? {
+        let key = sha512(instanceIDToken + deviceUUIDToken + localPasswordString)
+
+        //clear secure info
+        //MARK: clean
+        cleanTokens()
+
+        guard let masterKey = key else {
+            print("Error generating master key")
+
+            return nil
         }
+        print(masterKey.map{ String(format: "%02hhx", $0) }.joined())
+
+        return masterKey
     }
     
-    fileprivate func generateMasterKey() {
-        let key = sha256(instanceIDToken + devicePushToken + deviceUUIDToken)
+    //asynch version
+    fileprivate func asyncGenerateMasterKeyFromTokens() {
+        let key = sha512(instanceIDToken + deviceUUIDToken + localPasswordString)
         
         //clear secure info
         //MARK: clean
-//        cleanTokens()
+        cleanTokens()
         
         guard let masterKey = key else {
             print("Error generating master key")
@@ -80,29 +123,30 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
         
         //send
         if let function = executedFunction {
-            function(masterKey, nil, "\(instanceIDToken)\n\n\(devicePushToken)\n\n\(deviceUUIDToken)")
+            function(Data(base64Encoded: masterKey, options: []), nil, nil)
         }
     }
     
     fileprivate func cleanTokens() {
         instanceIDToken = ""
-        devicePushToken = ""
+        //        devicePushToken = ""
         deviceUUIDToken = ""
     }
     
-    fileprivate func sha256(_ str: String) -> String? {
+    fileprivate func sha512(_ str: String) -> Data? {
         guard let data = str.data(using: String.Encoding.utf8) else {
             return nil
         }
-
-        let sha256Data = data.sha256
-        let sha256String = sha256Data().base64EncodedString(options: [])
         
-        return sha256String
+        let sha512Data = data.sha3(.sha512)
+//        let sha512String = sha512Data.base64EncodedString(options: [])
+        
+        return sha512Data
     }
     
     //MARK: GGLInstanceIDDelegate
     internal func onTokenRefresh() {
-//        print("onTokenRefresh")
+        print("onTokenRefresh")
     }
 }
+
