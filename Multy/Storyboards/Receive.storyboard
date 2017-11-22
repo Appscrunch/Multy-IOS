@@ -63,31 +63,15 @@
                                     <action selector="cancelAction:" destination="x6R-t5-dzo" eventType="touchUpInside" id="4pT-7S-oCE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfj-UX-TR9" customClass="ZFRippleButton" customModule="ZFRippleButton">
-                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="uWv-AF-cMr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                <state key="normal" title="Continue">
-                                    <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="continueAction:" destination="x6R-t5-dzo" eventType="touchUpInside" id="x0m-EC-Dq8"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="K4L-VM-xBr" firstAttribute="top" secondItem="tfj-UX-TR9" secondAttribute="bottom" id="4DV-6w-JqR"/>
                             <constraint firstItem="RHs-Mt-eGo" firstAttribute="top" secondItem="Jb6-69-oN9" secondAttribute="bottom" constant="15.5" id="E4E-Qk-1yo"/>
                             <constraint firstItem="Jb6-69-oN9" firstAttribute="top" secondItem="CaU-QW-SxE" secondAttribute="bottom" constant="13" id="U3j-Iw-Rsg"/>
                             <constraint firstItem="39R-Mj-hYl" firstAttribute="top" secondItem="RHs-Mt-eGo" secondAttribute="bottom" id="V5K-gc-Ns2"/>
                             <constraint firstItem="Jb6-69-oN9" firstAttribute="leading" secondItem="LGI-Wi-zI2" secondAttribute="leading" constant="17" id="VJr-w3-cH0"/>
                             <constraint firstItem="RHs-Mt-eGo" firstAttribute="leading" secondItem="LGI-Wi-zI2" secondAttribute="leading" constant="36" id="Wgx-uX-Hon"/>
                             <constraint firstItem="lpd-w8-Ylh" firstAttribute="centerX" secondItem="LGI-Wi-zI2" secondAttribute="centerX" id="b9n-iC-KN5"/>
-                            <constraint firstAttribute="trailing" secondItem="tfj-UX-TR9" secondAttribute="trailing" id="cVE-6k-7tv"/>
                             <constraint firstItem="EY0-Gq-gbn" firstAttribute="top" secondItem="CaU-QW-SxE" secondAttribute="bottom" constant="9" id="cki-4A-miH"/>
                             <constraint firstItem="K4L-VM-xBr" firstAttribute="top" secondItem="39R-Mj-hYl" secondAttribute="bottom" id="dnx-Ln-dnH"/>
                             <constraint firstItem="EY0-Gq-gbn" firstAttribute="trailing" secondItem="Jb6-69-oN9" secondAttribute="trailing" constant="20" id="f3M-JF-MEp"/>
@@ -95,13 +79,11 @@
                             <constraint firstAttribute="trailing" secondItem="39R-Mj-hYl" secondAttribute="trailing" id="ifa-mN-C8h"/>
                             <constraint firstItem="lpd-w8-Ylh" firstAttribute="top" secondItem="CaU-QW-SxE" secondAttribute="bottom" constant="13" id="jw2-8X-WrL"/>
                             <constraint firstItem="39R-Mj-hYl" firstAttribute="leading" secondItem="LGI-Wi-zI2" secondAttribute="leading" id="n3o-4N-Yun"/>
-                            <constraint firstItem="tfj-UX-TR9" firstAttribute="leading" secondItem="LGI-Wi-zI2" secondAttribute="leading" id="wht-nb-nBr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3AY-Ic-L6s"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="continueBtn" destination="tfj-UX-TR9" id="gsB-fa-6Wv"/>
                         <outlet property="tableView" destination="39R-Mj-hYl" id="ghC-NS-aIo"/>
                         <segue destination="Ci5-VC-rpK" kind="show" identifier="receiveDetails" id="N0a-eV-HdN"/>
                     </connections>

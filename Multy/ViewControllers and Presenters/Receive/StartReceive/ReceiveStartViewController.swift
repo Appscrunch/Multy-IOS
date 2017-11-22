@@ -8,7 +8,6 @@ import ZFRippleButton
 class ReceiveStartViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var continueBtn: ZFRippleButton!
     
     let presenter = ReceiveStartPresenter()
     
@@ -17,12 +16,15 @@ class ReceiveStartViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
         
-        self.continueBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                     UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                       gradientOrientation: .horizontal)
-        
         self.presenter.receiveStartVC = self
         self.registerCells()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+//            self.deselectCell()
+//        })
     }
     
     func registerCells() {
@@ -30,13 +32,18 @@ class ReceiveStartViewController: UIViewController {
         self.tableView.register(walletCell, forCellReuseIdentifier: "walletCell")
     }
     
-    @IBAction func continueAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "receiveDetails", sender: UIButton.self)
-    }
-    
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+
+//    Deselecting
+//    
+//    func deselectCell() {
+//        if self.presenter.selectedIndexPath != nil {
+//            let walletCell = self.tableView.cellForRow(at: self.presenter.selectedIndexPath!) as! WalletTableViewCell
+//            walletCell.clearBorderAndArrow()
+//        }
+//    }
     
 }
 
@@ -56,14 +63,16 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let wallCell = self.tableView.cellForRow(at: indexPath) as! WalletTableViewCell
-        if !wallCell.isBorderOn {
-            wallCell.makeBlueBorderAndArrow()
-            // save selected wallet
-        } else {
-            wallCell.clearBorderAndArrow()
-            // delete selected wallet
-        }
+//        let wallCell = self.tableView.cellForRow(at: indexPath) as! WalletTableViewCell
+//        if !wallCell.isBorderOn {
+//            wallCell.makeBlueBorderAndArrow()
+//            // save selected wallet
+            self.performSegue(withIdentifier: "receiveDetails", sender: Any.self)
+//            self.presenter.selectedIndexPath = indexPath
+//        } else {
+//            wallCell.clearBorderAndArrow()
+//            // delete selected wallet
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

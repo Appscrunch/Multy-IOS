@@ -38,8 +38,11 @@ class WalletTableViewCell: UITableViewCell {
     }
     
     func clearBorderAndArrow() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options:[.repeat, .autoreverse], animations: {
+            self.backView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        }, completion:nil)
+        
         self.backView.layer.borderWidth = 0
-        self.backView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         self.arrowImage.image = nil
         self.isBorderOn = false
     }

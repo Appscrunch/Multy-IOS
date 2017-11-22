@@ -7,4 +7,6 @@ import UIKit
 class ReceiveStartPresenter: NSObject {
     
     var receiveStartVC: ReceiveStartViewController?
+    
+    var selectedIndexPath: IndexPath? = nil
 }
