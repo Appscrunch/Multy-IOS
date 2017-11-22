@@ -12,6 +12,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //FOR TEST NOT MAIN STRORYBOARD
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+//        let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
+//        self.window?.rootViewController = initialViewController
+//        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

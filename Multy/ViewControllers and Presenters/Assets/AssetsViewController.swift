@@ -54,13 +54,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath == [0, 0] {
+        if indexPath == [0, 0] {         // PORTFOLIO CELL
             let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             return portfolioCell
-        } else if indexPath == [0, 1] {
+        } else if indexPath == [0, 1] {   // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
             return newWalletCell
-        } else {
+        } else {                           //  Wallet Cell
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
             walletCell.makeshadow()
             return walletCell
@@ -72,6 +72,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
             let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
             self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath == [0, 2] {
+            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
+            self.navigationController?.pushViewController(initialViewController, animated: true) 
         }
     }
     

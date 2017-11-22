@@ -7,6 +7,7 @@ import ZFRippleButton
 
 class CheckWordsViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var blockImage: UIImageView!
     @IBOutlet weak var wordTF: UITextField!
     @IBOutlet weak var wordCounterLbl: UILabel!
     @IBOutlet weak var nextWordOrContinue: ZFRippleButton!
@@ -44,6 +45,16 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
         //saving word
+        if self.currentWordNumber == 3 {
+            self.blockImage.image = #imageLiteral(resourceName: "0202")
+        } else if self.currentWordNumber == 6 {
+            self.blockImage.image = #imageLiteral(resourceName: "0303")
+        } else if self.currentWordNumber == 9 {
+            self.blockImage.image = #imageLiteral(resourceName: "0404")
+        } else if self.currentWordNumber == 12 {
+            self.blockImage.image = #imageLiteral(resourceName: "0505")
+        }
+        
         if !(self.wordTF.text?.isEmpty)! {
             self.presenter.phraseArr.append((self.wordTF.text?.lowercased())!)
             self.wordTF.text = ""
@@ -67,9 +78,6 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             self.constraintBtnBottom.constant = inset.bottom
         }
     }
-    
-    @objc func someFunc() {
-        
-    }
+
 }
 
