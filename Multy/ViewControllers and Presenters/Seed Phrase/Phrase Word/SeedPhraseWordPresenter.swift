@@ -11,7 +11,7 @@ class SeedPhraseWordPresenter: NSObject {
     var mnemonicPhraseArray = Array<String>()
     
     func generateMnemonic() {
-        mnemonicPhraseArray = createMnemonicPhraseArray()
+        mnemonicPhraseArray = DataManager.shared.getMnenonicArray()
     }
     
     func presentNextTripleOrContinue() {

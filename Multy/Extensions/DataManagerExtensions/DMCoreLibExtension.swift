@@ -10,4 +10,12 @@ extension DataManager {
     func getMnenonicArray() -> Array<String> {
         return coreLibManager.createMnemonicPhraseArray()
     }
+    
+    func startCoreTest() {
+        coreLibManager.startTests()
+    }
+    
+    func getRootID(from seedPhase: String) -> String {
+        return coreLibManager.restoreSeed(from: seedPhase)
+    }
 }

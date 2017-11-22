@@ -29,7 +29,7 @@
 		4583AC991FBC8596001991AA /* PortfolioCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC971FBC8596001991AA /* PortfolioCollectionViewCell.xib */; };
 		4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC9D1FBC991E001991AA /* NewWalletTableViewCell.swift */; };
 		4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC9E1FBC991E001991AA /* NewWalletTableViewCell.xib */; };
-		4583ACA31FBCAC60001991AA /* ExtensionsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583ACA21FBCAC60001991AA /* ExtensionsUIView.swift */; };
+		4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583ACA21FBCAC60001991AA /* UIView+Extension.swift */; };
 		45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */; };
 		45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */; };
 		45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949201FC2DFF9003C3A23 /* ReceiveStartPresenter.swift */; };
@@ -45,6 +45,11 @@
 		D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
+		FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */; };
+		FA4D43DD1FC581CF003C7117 /* DMSocketExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43DC1FC581CF003C7117 /* DMSocketExtension.swift */; };
+		FA4D43DF1FC58730003C7117 /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43DE1FC58730003C7117 /* TouchIDAuthentication.swift */; };
+		FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43E01FC5895D003C7117 /* String+Extension.swift */; };
+		FA4D43E51FC590F6003C7117 /* SeedPhraseRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
 		FA86A7451FC2C748002826EC /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7421FC2C748002826EC /* libmulty_testd.dylib */; };
 		FA86A7461FC2C748002826EC /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7431FC2C748002826EC /* liblibwally-core.dylib */; };
@@ -52,7 +57,6 @@
 		FA86A7521FC2C9D7002826EC /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7431FC2C748002826EC /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA86A7531FC2C9D7002826EC /* libmulty_core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7441FC2C748002826EC /* libmulty_core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA86A7541FC2C9D7002826EC /* libmulty_testd.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7421FC2C748002826EC /* libmulty_testd.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FA88FA5B1FC2DD8E00B63476 /* CoreLibraryFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88FA5A1FC2DD8E00B63476 /* CoreLibraryFunctions.swift */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
@@ -103,7 +107,7 @@
 		4583AC971FBC8596001991AA /* PortfolioCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PortfolioCollectionViewCell.xib; sourceTree = "<group>"; };
 		4583AC9D1FBC991E001991AA /* NewWalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletTableViewCell.swift; sourceTree = "<group>"; };
 		4583AC9E1FBC991E001991AA /* NewWalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewWalletTableViewCell.xib; sourceTree = "<group>"; };
-		4583ACA21FBCAC60001991AA /* ExtensionsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIView.swift; sourceTree = "<group>"; };
+		4583ACA21FBCAC60001991AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receive.storyboard; sourceTree = "<group>"; };
 		45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartViewController.swift; sourceTree = "<group>"; };
 		45A949201FC2DFF9003C3A23 /* ReceiveStartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartPresenter.swift; sourceTree = "<group>"; };
@@ -118,6 +122,11 @@
 		45B9CB061FBB51AE00AA2A31 /* WalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableViewCell.xib; sourceTree = "<group>"; };
 		FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMApiExtension.swift; sourceTree = "<group>"; };
 		FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCoreLibExtension.swift; sourceTree = "<group>"; };
+		FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRealmExtension.swift; sourceTree = "<group>"; };
+		FA4D43DC1FC581CF003C7117 /* DMSocketExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSocketExtension.swift; sourceTree = "<group>"; };
+		FA4D43DE1FC58730003C7117 /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
+		FA4D43E01FC5895D003C7117 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseRLM.swift; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
 		FA86A7421FC2C748002826EC /* libmulty_testd.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_testd.dylib; sourceTree = "<group>"; };
 		FA86A7431FC2C748002826EC /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
@@ -128,7 +137,6 @@
 		FA86A74B1FC2C758002826EC /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		FA86A74C1FC2C758002826EC /* mnemonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mnemonic.h; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
-		FA88FA5A1FC2DD8E00B63476 /* CoreLibraryFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLibraryFunctions.swift; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -191,6 +199,7 @@
 				457486131FBD7DAF002D1925 /* Additional Libraries */,
 				FA86A74D1FC2C7E8002826EC /* Security */,
 				FADC00441FC322F400182E45 /* DataMangers */,
+				FA4D43E21FC590CC003C7117 /* Model */,
 				4522905B1FBB18D30024B550 /* Assets.xcassets */,
 				FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */,
 			);
@@ -296,7 +305,8 @@
 			isa = PBXGroup;
 			children = (
 				FA4D43D51FC5745E003C7117 /* DataManagerExtensions */,
-				4583ACA21FBCAC60001991AA /* ExtensionsUIView.swift */,
+				4583ACA21FBCAC60001991AA /* UIView+Extension.swift */,
+				FA4D43E01FC5895D003C7117 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -399,9 +409,27 @@
 			isa = PBXGroup;
 			children = (
 				FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */,
+				FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */,
+				FA4D43DC1FC581CF003C7117 /* DMSocketExtension.swift */,
 				FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */,
 			);
 			path = DataManagerExtensions;
+			sourceTree = "<group>";
+		};
+		FA4D43E21FC590CC003C7117 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA4D43E31FC590DC003C7117 /* Realm */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA4D43E31FC590DC003C7117 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		FA86A73F1FC2C6DB002826EC /* Core Libs */ = {
@@ -422,8 +450,8 @@
 		FA86A74D1FC2C7E8002826EC /* Security */ = {
 			isa = PBXGroup;
 			children = (
+				FA4D43DE1FC58730003C7117 /* TouchIDAuthentication.swift */,
 				FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */,
-				FA88FA5A1FC2DD8E00B63476 /* CoreLibraryFunctions.swift */,
 			);
 			path = Security;
 			sourceTree = "<group>";
@@ -598,22 +626,25 @@
 				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
+				FA4D43DD1FC581CF003C7117 /* DMSocketExtension.swift in Sources */,
+				FA4D43DF1FC58730003C7117 /* TouchIDAuthentication.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
 				FADC004C1FC323A900182E45 /* SocketManager.swift in Sources */,
-				457569361FBDC23300FDEE20 /* Colors.swift in Sources */,
 				45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */,
+				FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */,
 				45A9492A1FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift in Sources */,
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
 				457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */,
 				45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */,
-				FA88FA5B1FC2DD8E00B63476 /* CoreLibraryFunctions.swift in Sources */,
-				4583ACA31FBCAC60001991AA /* ExtensionsUIView.swift in Sources */,
+				4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */,
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
+				FA4D43E51FC590F6003C7117 /* SeedPhraseRLM.swift in Sources */,
 				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
 				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
+				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
 				4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */,
@@ -784,9 +815,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Multy/Multy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				PRODUCT_BUNDLE_IDENTIFIER = com.devmulty;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -814,9 +842,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Multy/Multy-Bridging-Header.h";
-				PRODUCT_BUNDLE_IDENTIFIER = com.devmulty;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -96,10 +96,41 @@ class CoreLibManager: NSObject {
         
         //MAKE: check nil
         print(mm ?? "-11")
-        
+
         let phrase = String(cString: mnemo.pointee!)
-        //    print(phrase)
         
         return phrase.components(separatedBy: " ")
+    }
+    
+    func startTests() {
+        run_tests(1, UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1))
+    }
+    
+    func restoreSeed(from phrase: String) -> String {
+        
+        print("seed phrase: \(phrase)")
+        
+        let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let extendedKeyPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let stringPointer = phrase.UTF8CString
+        
+        let ms = make_seed(stringPointer, nil, binaryDataPointer)
+        print("ms: \(String(describing: ms))")
+        
+        let binaryData = binaryDataPointer.pointee
+        let mmk = make_master_key(binaryData, masterKeyPointer)
+        print("mmk: \(String(describing: mmk))")
+        
+        let mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
+        print("mki: \(String(describing: mki))")
+        print("extended key: \(String(cString: extendedKeyPointer.pointee!))")
+        
+        let rootID = String(cString: extendedKeyPointer.pointee!)
+        
+        print("rootID: \(rootID)")
+        
+        return rootID
     }
 }

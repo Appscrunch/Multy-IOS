@@ -15,6 +15,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.checkOSForConstraints()
         self.registerCells()
+        
+        let _ = DataManager.shared
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -12,15 +12,15 @@ class DataManager: NSObject {
     let socketManager = SocketManager.shared
     let coreLibManager = CoreLibManager.shared
     
-    //MARK: ApiManager
+    //MARK: ApiManager Functions
     //DMApiExtension
     
     //MARK: RealmManager
-    
+    //DMRealmExtension Functions
     
     //MARK: SocketManager
-    
+    //DMSocketExtension Functions
     
     //MARK: CoreLibManager
-    //DMCoreLibExtension
+    //DMCoreLibExtension Functions
 }
