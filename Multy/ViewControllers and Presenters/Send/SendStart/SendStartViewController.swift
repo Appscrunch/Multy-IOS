@@ -78,4 +78,14 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
             return 60
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row > 1 {
+            let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
+            let selectedCell = self.tableView.cellForRow(at: indexPath) as! RecentAddressTableViewCell
+            searchCell.addressTF.text = selectedCell.addressLbl.text
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            self.makeAvailableNextBtn()
+        }
+    }
 }
