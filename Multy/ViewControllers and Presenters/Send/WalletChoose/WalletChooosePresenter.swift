@@ -4,9 +4,6 @@
 
 import UIKit
 
-class AssetsPresenter: NSObject {
+class WalletChooosePresenter: NSObject {
 
-    var assetsVC: AssetsViewController?
-    
-    var tabBarFrame: CGRect?
 }

@@ -94,7 +94,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.92515683174133301" green="0.93285363912582397" blue="0.96979457139968872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="srv-bR-zld" firstAttribute="top" secondItem="N4e-sp-CyH" secondAttribute="top" constant="6" id="G10-OS-B7q"/>
                             <constraint firstItem="srv-bR-zld" firstAttribute="leading" secondItem="N4e-sp-CyH" secondAttribute="leading" constant="16" id="Gtk-5N-ZGx"/>

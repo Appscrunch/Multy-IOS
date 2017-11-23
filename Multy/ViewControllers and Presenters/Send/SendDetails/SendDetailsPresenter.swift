@@ -4,9 +4,7 @@
 
 import UIKit
 
-class AssetsPresenter: NSObject {
+class SendDetailsPresenter: NSObject {
 
-    var assetsVC: AssetsViewController?
-    
-    var tabBarFrame: CGRect?
+    var sendDetailsVC: SendDetailsViewController?
 }

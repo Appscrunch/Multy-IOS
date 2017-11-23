@@ -39,6 +39,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         self.amountTF.becomeFirstResponder()
         
         self.currencyNameLbl.text = self.cryptoName
+        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
     @IBAction func cancelAction(_ sender: Any) {

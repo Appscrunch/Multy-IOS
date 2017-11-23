@@ -9,10 +9,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
+    let presenter = AssetsPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.presenter.assetsVC = self
+        self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         self.registerCells()
     }
@@ -20,6 +24,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
     }
     
     //MARK: Setup functions
@@ -76,6 +81,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let storyboard = UIStoryboard(name: "Receive", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
             self.navigationController?.pushViewController(initialViewController, animated: true) 
+        } else {
+            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
+            self.navigationController?.pushViewController(destVC, animated: true)
         }
     }
     

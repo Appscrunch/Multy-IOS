@@ -104,7 +104,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dWs-Iy-4aG">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWs-Iy-4aG">
                                 <rect key="frame" x="0.0" y="20" width="375" height="680"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSx-Am-TJ1">
@@ -185,27 +185,6 @@ Scan</string>
                                             <action selector="wirelessScanAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="x3H-5W-NJc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bas-Gp-USp">
-                                        <rect key="frame" x="264" y="549" width="69" height="71"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment>
-                                                    <string key="content">More
-Options</string>
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <action selector="moreOptionsAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="Fd4-mz-fUF"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hWA-dA-sb2">
                                         <rect key="frame" x="64" y="554" width="25" height="25"/>
                                         <constraints>
@@ -220,7 +199,7 @@ Options</string>
                                             <constraint firstAttribute="height" constant="25" id="r5i-d7-pje"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="889-1Y-mzt">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="889-1Y-mzt">
                                         <rect key="frame" x="286" y="554" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="iXY-j3-v8J"/>
@@ -397,10 +376,30 @@ Options</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="crd-cd-YE9">
+                                        <rect key="frame" x="264" y="549" width="69" height="71"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment>
+                                                    <string key="content">More
+Options</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="wirelessScanAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="JrE-i2-L1d"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cgA-2c-kCm" firstAttribute="leading" secondItem="4Kh-WG-DoX" secondAttribute="trailing" constant="42" id="0BH-eP-mAj"/>
-                                    <constraint firstItem="889-1Y-mzt" firstAttribute="centerX" secondItem="Bas-Gp-USp" secondAttribute="centerX" id="0vB-p5-y8F"/>
                                     <constraint firstItem="cgA-2c-kCm" firstAttribute="centerX" secondItem="D4k-Y4-FOn" secondAttribute="centerX" id="3mo-wE-IiJ"/>
                                     <constraint firstItem="UQf-gq-ib1" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" constant="-16" id="9ep-9n-Fma"/>
                                     <constraint firstItem="cPZ-hw-b9v" firstAttribute="top" secondItem="cgA-2c-kCm" secondAttribute="top" constant="5" id="Bg3-oZ-Vw8"/>
@@ -410,12 +409,9 @@ Options</string>
                                     <constraint firstItem="hSx-Am-TJ1" firstAttribute="top" secondItem="dWs-Iy-4aG" secondAttribute="top" constant="13" id="CeC-ol-EWh"/>
                                     <constraint firstItem="hSx-Am-TJ1" firstAttribute="centerX" secondItem="dWs-Iy-4aG" secondAttribute="centerX" id="D2k-QX-ed7"/>
                                     <constraint firstItem="4Kh-WG-DoX" firstAttribute="centerY" secondItem="cgA-2c-kCm" secondAttribute="centerY" id="Ggk-c3-QhN"/>
-                                    <constraint firstItem="Bas-Gp-USp" firstAttribute="width" secondItem="cgA-2c-kCm" secondAttribute="width" id="IR9-LC-eY2"/>
-                                    <constraint firstItem="889-1Y-mzt" firstAttribute="top" secondItem="Bas-Gp-USp" secondAttribute="top" constant="5" id="Mu0-DD-VKw"/>
+                                    <constraint firstItem="crd-cd-YE9" firstAttribute="height" secondItem="cgA-2c-kCm" secondAttribute="height" id="Kd4-QC-g7E"/>
                                     <constraint firstItem="4Kh-WG-DoX" firstAttribute="width" secondItem="cgA-2c-kCm" secondAttribute="width" id="NkP-4e-qYK"/>
                                     <constraint firstItem="Zft-HZ-XFT" firstAttribute="centerY" secondItem="D4k-Y4-FOn" secondAttribute="centerY" id="O7k-OX-OXR"/>
-                                    <constraint firstItem="Bas-Gp-USp" firstAttribute="centerY" secondItem="cgA-2c-kCm" secondAttribute="centerY" id="Onb-6c-eQU"/>
-                                    <constraint firstItem="Bas-Gp-USp" firstAttribute="leading" secondItem="cgA-2c-kCm" secondAttribute="trailing" constant="42" id="Qfi-c3-YBN"/>
                                     <constraint firstItem="8FY-Jj-sbG" firstAttribute="top" secondItem="dWs-Iy-4aG" secondAttribute="top" constant="13" id="Tdg-xj-zQl"/>
                                     <constraint firstItem="cPZ-hw-b9v" firstAttribute="centerX" secondItem="cgA-2c-kCm" secondAttribute="centerX" id="TnB-qo-Lo6"/>
                                     <constraint firstItem="hWA-dA-sb2" firstAttribute="centerX" secondItem="4Kh-WG-DoX" secondAttribute="centerX" id="UBg-s6-EUF"/>
@@ -425,13 +421,15 @@ Options</string>
                                     <constraint firstItem="D4k-Y4-FOn" firstAttribute="top" secondItem="WdU-vV-Cb8" secondAttribute="bottom" constant="26" id="gRH-ME-AQQ"/>
                                     <constraint firstItem="Bi9-Qs-MIE" firstAttribute="centerY" secondItem="D4k-Y4-FOn" secondAttribute="centerY" id="jHo-yJ-Vsa"/>
                                     <constraint firstAttribute="bottom" secondItem="cgA-2c-kCm" secondAttribute="bottom" constant="10" id="jXM-qi-fba"/>
+                                    <constraint firstItem="crd-cd-YE9" firstAttribute="centerY" secondItem="cgA-2c-kCm" secondAttribute="centerY" id="mc8-aq-uWv"/>
                                     <constraint firstItem="Bi9-Qs-MIE" firstAttribute="trailing" secondItem="WdU-vV-Cb8" secondAttribute="trailing" constant="-6" id="nyR-5T-KCX"/>
                                     <constraint firstItem="4Kh-WG-DoX" firstAttribute="height" secondItem="cgA-2c-kCm" secondAttribute="height" id="phX-LR-5aQ"/>
+                                    <constraint firstItem="crd-cd-YE9" firstAttribute="width" secondItem="cgA-2c-kCm" secondAttribute="width" id="qeP-vh-Zzr"/>
                                     <constraint firstItem="D4k-Y4-FOn" firstAttribute="centerX" secondItem="dWs-Iy-4aG" secondAttribute="centerX" id="qfa-3b-laZ"/>
                                     <constraint firstItem="8FY-Jj-sbG" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" id="tHd-an-jRy"/>
                                     <constraint firstItem="WdU-vV-Cb8" firstAttribute="top" secondItem="hSx-Am-TJ1" secondAttribute="bottom" constant="13" id="vOZ-z9-OSd"/>
-                                    <constraint firstItem="Bas-Gp-USp" firstAttribute="height" secondItem="cgA-2c-kCm" secondAttribute="height" id="vgU-3m-T5l"/>
                                     <constraint firstItem="cgA-2c-kCm" firstAttribute="top" secondItem="D4k-Y4-FOn" secondAttribute="bottom" constant="15" id="yC3-sL-3cK"/>
+                                    <constraint firstItem="crd-cd-YE9" firstAttribute="leading" secondItem="cgA-2c-kCm" secondAttribute="trailing" constant="42" id="zLj-Ij-QGN"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
