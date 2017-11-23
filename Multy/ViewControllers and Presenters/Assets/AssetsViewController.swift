@@ -75,8 +75,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
             self.navigationController?.pushViewController(vc, animated: true)
         } else if indexPath == [0, 2] {
-            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
+            let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
             self.navigationController?.pushViewController(initialViewController, animated: true) 
         }
     }
@@ -84,7 +84,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
             return 283
-        }else if indexPath == [0, 1] {
+        } else if indexPath == [0, 1] {
             return 75
         } else {
             return 104
