@@ -28,12 +28,11 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.hideKeyboardWhenTappedAround()
         self.presenter.sendDetailsVC = self
         self.registerCells()
+        self.registerNotificationFromKeyboard()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SendDetailsViewController.keyboardWillShow),
-                                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SendDetailsViewController.keyboardWillHide),
-                                               name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
+        self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                 UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                   gradientOrientation: .horizontal)
     }
     
     func registerCells() {
@@ -42,6 +41,22 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         
         let customFeeCell = UINib(nibName: "CustomTrasanctionFeeTableViewCell", bundle: nil)
         self.tableView.register(customFeeCell, forCellReuseIdentifier: "customFeeCell")
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func nextAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "sendAmountVC", sender: sender)
+    }
+    
+    //MARK: Keyboard to scrollview
+    func registerNotificationFromKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(SendDetailsViewController.keyboardWillShow),
+                                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SendDetailsViewController.keyboardWillHide),
+                                               name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -59,12 +74,9 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    //end
     
-    
-    @IBAction func cancelAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
+    //MARK: donationSwitch actions
     @IBAction func switchDonationAction(_ sender: Any) {
         if self.isDonateAvailableSW.isOn == false {
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant / 2
@@ -85,8 +97,9 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.donationCryptoNameLbl.isHidden = !self.isDonateAvailableSW.isOn
         self.donationTitleLbl.isHidden = !self.isDonateAvailableSW.isOn
     }
+    //end
     
-    
+    //MARK: TextField delegates
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.donationTF.resignFirstResponder()
         return true
@@ -100,7 +113,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.scrollView.isScrollEnabled = true
     }
-    
+    //end
 }
 
 extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource {

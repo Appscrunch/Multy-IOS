@@ -56,6 +56,8 @@
 		45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949551FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift */; };
 		45A949581FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A949561FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib */; };
 		45A9495A1FC6E785003C3A23 /* ExtensionsUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */; };
+		45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495C1FC70F2F003C3A23 /* SendAmountViewController.swift */; };
+		45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */; };
 		45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */; };
 		45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */; };
 		45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */; };
@@ -148,6 +150,8 @@
 		45A949551FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTrasanctionFeeTableViewCell.swift; sourceTree = "<group>"; };
 		45A949561FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTrasanctionFeeTableViewCell.xib; sourceTree = "<group>"; };
 		45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIViewController.swift; sourceTree = "<group>"; };
+		45A9495C1FC70F2F003C3A23 /* SendAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountViewController.swift; sourceTree = "<group>"; };
+		45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountPresenter.swift; sourceTree = "<group>"; };
 		45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewController.swift; sourceTree = "<group>"; };
 		45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPresenter.swift; sourceTree = "<group>"; };
 		45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 				45A949451FC5C513003C3A23 /* SendStart */,
 				45A949461FC5C53B003C3A23 /* WalletChoose */,
 				45A9494B1FC5D94F003C3A23 /* SendDetails */,
+				45A9495B1FC70EFB003C3A23 /* SendAmount */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -449,6 +454,15 @@
 				45A949561FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib */,
 			);
 			path = "Trasaction fee cell";
+			sourceTree = "<group>";
+		};
+		45A9495B1FC70EFB003C3A23 /* SendAmount */ = {
+			isa = PBXGroup;
+			children = (
+				45A9495C1FC70F2F003C3A23 /* SendAmountViewController.swift */,
+				45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */,
+			);
+			path = SendAmount;
 			sourceTree = "<group>";
 		};
 		45B9CB011FBB4AC200AA2A31 /* Assets */ = {
@@ -732,9 +746,11 @@
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
 				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
+				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,
 				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
+				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
