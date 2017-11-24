@@ -109,7 +109,7 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
     fileprivate func asyncGenerateMasterKeyFromTokens() {
         print("\(#function): \(deviceUUIDToken) -- \(instanceIDToken)")
         
-        let key = sha512(instanceIDToken + deviceUUIDToken + localPasswordString)
+        let key = sha512(instanceIDToken + UIDevice.current.identifierForVendor!.uuidString + localPasswordString)
         
         //clear secure info
         //MARK: clean

@@ -15,5 +15,6 @@ target 'Multy' do
   pod 'CryptoSwift'
   pod 'SecurityExtensions'
   pod 'GGLInstanceID'
+  pod 'Alamofire'
 
 end

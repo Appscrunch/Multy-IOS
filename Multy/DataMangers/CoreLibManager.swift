@@ -108,13 +108,16 @@ class CoreLibManager: NSObject {
     
     func restoreSeed(from phrase: String) -> String {
         
+        //MAKE: free data
+        //use defer function!!!
+        
         print("seed phrase: \(phrase)")
         
         let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let extendedKeyPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let stringPointer = phrase.UTF8CString
+        let stringPointer = phrase.UTF8CStringPointer
         
         let ms = make_seed(stringPointer, nil, binaryDataPointer)
         print("ms: \(String(describing: ms))")
@@ -131,6 +134,59 @@ class CoreLibManager: NSObject {
         
         print("rootID: \(rootID)")
         
+        //HD Account
+        createHDAccount(from: rootID)
+        
         return rootID
+    }
+    
+    func createHDAccount(from rootID : String)  {
+        let rootIDPointer = OpaquePointer(rootID)
+        let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        //New address
+        let newAddress = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let newAddressStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        //Private
+        let addressPrivateKey = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        //Public
+        let addressPublicKey = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let mHDa = make_hd_account(rootIDPointer, CURRENCY_BITCOIN, 0, newAccountPointer)
+        print("mHDa: \(String(describing: mHDa))")
+        
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddress)
+        print("mHDla: \(String(describing: mHDla))")
+        
+        let gaas = get_account_address_string(newAddress.pointee, newAddressStringPointer)
+        print("gaas: \(String(describing: gaas))")
+        let addressString = String(cString: newAddressStringPointer.pointee!)
+        
+        print("addressString: \(addressString)")
+        
+        let gakPRIV = get_account_key(newAddress.pointee, KEY_TYPE_PRIVATE, addressPrivateKey)
+        let gakPUBL = get_account_key(newAddress.pointee, KEY_TYPE_PUBLIC, addressPublicKey)
+        
+        let ktsPRIV = key_to_string(addressPrivateKey.pointee, privateKeyStringPointer)
+        let ktsPUBL = key_to_string(addressPublicKey.pointee, publicKeyStringPointer)
+        
+        print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
+        
+        let privateKeyString = String(cString: privateKeyStringPointer.pointee!)
+        let publicKeyString = String(cString: publicKeyStringPointer.pointee!)
+        
+        print("privateKeyString: \(privateKeyString)")
+        print("publicKeyString: \(publicKeyString)")
+        
+        let currencyPointer = UnsafeMutablePointer<Currency>.allocate(capacity: 1)
+        let gac = get_account_currency(newAddress.pointee, currencyPointer)
+        print("gac: \(gac)")
+        
+        let currency : Currency = currencyPointer.pointee
+        print("currency: \(currency)")
     }
 }

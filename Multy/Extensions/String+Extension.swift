@@ -5,7 +5,7 @@
 import Foundation
 
 extension String {
-    var UTF8CString: UnsafeMutablePointer<Int8> {
+    var UTF8CStringPointer: UnsafeMutablePointer<Int8> {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
 }

@@ -82,4 +82,29 @@ class RealmManager: NSObject {
             }
         }
     }
+    
+    public func writeAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let account = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
+                
+                try! realm.write {
+                    //replace old value if exists
+                    let accountRLM = account == nil ? AccountRLM() : account!
+                    accountRLM.expireDateString = accountDict["expire"] as! String
+                    accountRLM.token = accountDict["token"] as! String
+                    
+                    realm.add(accountRLM, update: true)
+                    
+                    completion(accountRLM, nil)
+                    
+                    print("Successful writing account")
+                }
+            } else {
+                print("Error fetching realm:\(#function)")
+                completion(nil, nil)
+            }
+        }
+        
+    }
 }

@@ -9,6 +9,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
+    var account : AccountRLM? {
+        didSet {
+//            fetchAssets()
+//            fetchTickets()
+//            getExchange()
+//            getTransInfo()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,8 +25,78 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.checkOSForConstraints()
         self.registerCells()
         
-        let _ = DataManager.shared
+        let mnemoString = DataManager.shared.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
+        print("mnemoString: \(mnemoString)")
+        let rootID = DataManager.shared.coreLibManager.restoreSeed(from: mnemoString)
+        print("rootID: \(rootID)")
+        
+        //MAKE: first launch
+//        let _ = DataManager.shared
+        
+        DataManager.shared.apiManager.auth { (dict, error) in
+            guard dict != nil else {
+                return
+            }
+            
+            DataManager.shared.realmManager.writeAccount(dict!, completion: { (account, error) in
+                guard account != nil else {
+                    return
+                }
+                
+                print(account!)
+                
+                DispatchQueue.main.async {
+                    self.account = account
+                }
+            })
+        }
     }
+    
+    //////////////////////////////////////////////////////////////////////
+    //test
+    
+    func fetchAssets() {
+        guard account?.token != nil else {
+            return
+        }
+        
+        DataManager.shared.apiManager.getAssets(account!.token, completion: { (assetsDict, error) in
+            print(assetsDict)
+        })
+    }
+    
+    func fetchTickets() {
+        DataManager.shared.apiManager.getTickets(account!.token, direction: "") { (dict, error) in
+            guard dict != nil  else {
+                return
+            }
+            
+            print(dict!)
+        }
+    }
+    
+    func getExchange() {
+        DataManager.shared.apiManager.getExchangePrice(account!.token, direction: "") { (dict, error) in
+            guard dict != nil  else {
+                return
+            }
+            
+            print(dict!)
+        }
+    }
+    
+    func getTransInfo() {
+        DataManager.shared.apiManager.getTransactionInfo(account!.token,
+                                                         transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
+                                                            guard transDict != nil else {
+                                                                return
+                                                            }
+                                                            
+                                                            print(transDict)
+        }
+    }
+    //////////////////////////////////////////////////////////////////////
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
