@@ -37,10 +37,9 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendAmountVC = self
-//        self.checkDeviceForBtnHeight()
-        self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                 UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                   gradientOrientation: .horizontal)
+        self.nextBtn.isEnabled = false
+        self.nextBtn.backgroundColor = .gray
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.amountTF.becomeFirstResponder()
         self.spendableSumAndCurrencyLbl.text = "\(self.cryptoSumInWallet) BTC"
@@ -56,12 +55,12 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "text" {
             self.btnSumLbl.text = (change?[.newKey] as! String)
-        }
-    }
-    
-    func checkDeviceForBtnHeight() {
-        if UIScreen.main.bounds.width < 375 {
-            self.constratintNextBtnHeight.constant = 50
+            if self.btnSumLbl.text != "0.0" {
+                self.nextBtn.isEnabled = true
+                self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                         UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                           gradientOrientation: .horizontal)
+            }
         }
     }
     
