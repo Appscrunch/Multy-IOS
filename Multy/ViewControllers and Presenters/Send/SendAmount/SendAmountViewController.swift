@@ -16,9 +16,11 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nextBtn: ZFRippleButton!
     @IBOutlet weak var maxBtn: UIButton!
     @IBOutlet weak var maxLbl: UILabel!
+    @IBOutlet weak var btnSumLbl: UILabel!
     
     
     @IBOutlet weak var constraintNextBtnBottom: NSLayoutConstraint!
+    @IBOutlet weak var constratintNextBtnHeight: NSLayoutConstraint!
     
     let presenter = SendAmountPresenter()
     
@@ -35,18 +37,33 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendAmountVC = self
+//        self.checkDeviceForBtnHeight()
         self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                    gradientOrientation: .horizontal)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.amountTF.becomeFirstResponder()
         self.spendableSumAndCurrencyLbl.text = "\(self.cryptoSumInWallet) BTC"
+        
+        self.topSumLbl.addObserver(self, forKeyPath: "text", options: [.old, .new], context: nil)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    //MARK: change sum in button
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "text" {
+            self.btnSumLbl.text = (change?[.newKey] as! String)
+        }
+    }
+    
+    func checkDeviceForBtnHeight() {
+        if UIScreen.main.bounds.width < 375 {
+            self.constratintNextBtnHeight.constant = 50
+        }
+    }
     
     @IBAction func changeAction(_ sender: Any) {
         if self.isCrypto {
@@ -73,7 +90,9 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     @objc func keyboardWillShow(_ notification : Notification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//        UIKeyboardFrameEndUserInfoKey
+//        UIKeyboardFrameBeginUserInfoKey
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             self.constraintNextBtnBottom.constant = inset.bottom
         }
@@ -93,6 +112,9 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func nextAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         self.amountTF.text = self.amountTF.text?.replacingOccurrences(of: ",", with: ".")

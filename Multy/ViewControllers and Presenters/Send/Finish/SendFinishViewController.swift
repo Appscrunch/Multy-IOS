@@ -30,6 +30,9 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.presenter.sendFinishVC = self
     }
     
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 
 }
