@@ -672,7 +672,7 @@
                         <outlet property="nextBtn" destination="mBT-4B-B5P" id="A91-51-b51"/>
                         <outlet property="spendableSumAndCurrencyLbl" destination="git-q0-VGX" id="g9U-So-1xV"/>
                         <outlet property="titleLbl" destination="VhT-01-bTB" id="KgT-hI-6Mc"/>
-                        <outlet property="topCurrencyNameLbl" destination="gfE-Vc-rTR" id="C6n-c7-3N7"/>
+                        <outlet property="topCurrencyNameLbl" destination="fOo-l7-Vq8" id="dEs-xG-7K4"/>
                         <outlet property="topSumLbl" destination="gfE-Vc-rTR" id="9cz-gU-dPu"/>
                         <segue destination="0GY-ag-sLU" kind="show" identifier="sendFinishVC" id="kCF-Tq-Brv"/>
                     </connections>
