@@ -17,11 +17,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            getTransInfo()
         }
     }
+    let presenter = AssetsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.presenter.assetsVC = self
+        self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         self.registerCells()
         
@@ -101,6 +104,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
     }
     
     //MARK: Setup functions
@@ -150,13 +154,35 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [0, 1] {
+            let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
+                self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
+                //go to import wallet
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(actionSheet, animated: true, completion: {
+                //doint something
+            })
+        
+        }  else if indexPath == [0, 2] {
+            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
+            self.navigationController?.pushViewController(initialViewController, animated: true)
+        } else if indexPath == [0, 3] {
             let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
             let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
             self.navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath == [0, 2] {
+        } else if indexPath == [0, 4] {
             let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
             self.navigationController?.pushViewController(initialViewController, animated: true) 
+        } else {
+            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
+            self.navigationController?.pushViewController(destVC, animated: true)
         }
     }
     

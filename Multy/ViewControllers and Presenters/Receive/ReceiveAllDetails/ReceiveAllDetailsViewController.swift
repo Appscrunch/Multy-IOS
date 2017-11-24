@@ -29,6 +29,7 @@ class ReceiveAllDetailsViewController: UIViewController {
         super.viewDidLoad()
         self.presenter.receiveAllDetailsVC = self
         self.makeQRCode()
+        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
     @IBAction func cancelAction(_ sender: Any) {

@@ -23,6 +23,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eto-Bg-oI7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qOB-ii-daI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                         <color key="backgroundColor" red="0.76659345626831055" green="0.81476038694381714" blue="0.89296001195907593" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,15 +50,26 @@
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Eto-Bg-oI7" secondAttribute="bottom" constant="-20" id="8Rr-ej-51f"/>
+                    <constraint firstAttribute="trailing" secondItem="Eto-Bg-oI7" secondAttribute="trailing" id="N5G-Wf-4ve"/>
                     <constraint firstItem="4Tz-BM-Mnj" firstAttribute="centerY" secondItem="qfm-lh-ZwC" secondAttribute="centerY" id="RSI-tj-qCs"/>
                     <constraint firstItem="qfm-lh-ZwC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="TbW-lU-Qdx"/>
+                    <constraint firstItem="Eto-Bg-oI7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Td9-bD-azg"/>
                     <constraint firstAttribute="bottom" secondItem="qfm-lh-ZwC" secondAttribute="bottom" constant="6" id="eaA-ft-pyf"/>
                     <constraint firstItem="qOB-ii-daI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jiN-V1-rOQ"/>
                     <constraint firstAttribute="trailing" secondItem="4Tz-BM-Mnj" secondAttribute="trailing" constant="20" id="qHV-Fj-iag"/>
                     <constraint firstItem="qOB-ii-daI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qnm-jS-AQr"/>
                     <constraint firstAttribute="trailing" secondItem="qOB-ii-daI" secondAttribute="trailing" id="r4Y-xC-uWD"/>
+                    <constraint firstItem="Eto-Bg-oI7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="tjf-Tn-XcS"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="backView" destination="Eto-Bg-oI7" id="LhZ-2P-BWD"/>
+                <outlet property="cellNameLbl" destination="qfm-lh-ZwC" id="dfJ-2c-u4F"/>
+                <outlet property="content" destination="H2p-sc-9uM" id="Qhj-xT-OIL"/>
+                <outlet property="rigthSmallImage" destination="4Tz-BM-Mnj" id="Pte-Xg-4zf"/>
+                <outlet property="topLineView" destination="qOB-ii-daI" id="kHL-ol-LuR"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="100.5"/>
         </tableViewCell>
     </objects>

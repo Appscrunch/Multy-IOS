@@ -39,6 +39,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         self.amountTF.becomeFirstResponder()
         
         self.currencyNameLbl.text = self.cryptoName
+        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -78,7 +79,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     }
    
     @objc func keyboardWillShow(_ notification : Notification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             self.constraintBtnBottom.constant = inset.bottom
         }

@@ -6,4 +6,7 @@ import UIKit
 
 class AssetsPresenter: NSObject {
 
+    var assetsVC: AssetsViewController?
+    
+    var tabBarFrame: CGRect?
 }
