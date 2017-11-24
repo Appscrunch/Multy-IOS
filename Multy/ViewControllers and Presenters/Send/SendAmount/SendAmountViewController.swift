@@ -89,8 +89,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     @objc func keyboardWillShow(_ notification : Notification) {
-//        UIKeyboardFrameEndUserInfoKey
-//        UIKeyboardFrameBeginUserInfoKey
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             self.constraintNextBtnBottom.constant = inset.bottom
