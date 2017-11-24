@@ -87,8 +87,6 @@
 		FA4D43FE1FC6D058003C7117 /* MainWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */; };
 		FA4D43FF1FC6D058003C7117 /* MainWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
-		FA4D44031FC84800003C7117 /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4D44021FC847FF003C7117 /* libmulty_transaction.dylib */; };
-		FA4D44041FC84807003C7117 /* libmulty_transaction.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA4D44021FC847FF003C7117 /* libmulty_transaction.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
 		FA86A7451FC2C748002826EC /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7421FC2C748002826EC /* libmulty_testd.dylib */; };
 		FA86A7461FC2C748002826EC /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7431FC2C748002826EC /* liblibwally-core.dylib */; };
@@ -96,6 +94,7 @@
 		FA86A7521FC2C9D7002826EC /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7431FC2C748002826EC /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA86A7531FC2C9D7002826EC /* libmulty_core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7441FC2C748002826EC /* libmulty_core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA86A7541FC2C9D7002826EC /* libmulty_testd.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7421FC2C748002826EC /* libmulty_testd.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FABA34DE1FC86B5C003636F9 /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FABA34DD1FC86B5C003636F9 /* libmulty_transaction.dylib */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
@@ -113,7 +112,6 @@
 				FA86A7521FC2C9D7002826EC /* liblibwally-core.dylib in Embed Libraries */,
 				FA86A7541FC2C9D7002826EC /* libmulty_testd.dylib in Embed Libraries */,
 				FA86A7531FC2C9D7002826EC /* libmulty_core.dylib in Embed Libraries */,
-				FA4D44041FC84807003C7117 /* libmulty_transaction.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,7 +202,6 @@
 		FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
-		FA4D44021FC847FF003C7117 /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmulty_transaction.dylib; path = ../../../../Lib5v/libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FA4D44051FC84BB2003C7117 /* transaction_fee.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
 		FA4D44061FC84BB2003C7117 /* transaction_change.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
 		FA4D44071FC84BB3003C7117 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
@@ -222,6 +219,7 @@
 		FA86A74B1FC2C758002826EC /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		FA86A74C1FC2C758002826EC /* mnemonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mnemonic.h; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
+		FABA34DD1FC86B5C003636F9 /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -236,7 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */,
-				FA4D44031FC84800003C7117 /* libmulty_transaction.dylib in Frameworks */,
+				FABA34DE1FC86B5C003636F9 /* libmulty_transaction.dylib in Frameworks */,
 				FA86A7451FC2C748002826EC /* libmulty_testd.dylib in Frameworks */,
 				FA86A7461FC2C748002826EC /* liblibwally-core.dylib in Frameworks */,
 				FA86A7471FC2C748002826EC /* libmulty_core.dylib in Frameworks */,
@@ -725,7 +723,7 @@
 				FA86A7431FC2C748002826EC /* liblibwally-core.dylib */,
 				FA86A7441FC2C748002826EC /* libmulty_core.dylib */,
 				FA86A7421FC2C748002826EC /* libmulty_testd.dylib */,
-				FA4D44021FC847FF003C7117 /* libmulty_transaction.dylib */,
+				FABA34DD1FC86B5C003636F9 /* libmulty_transaction.dylib */,
 			);
 			path = "Core Libs";
 			sourceTree = "<group>";
@@ -941,7 +939,6 @@
 				45A949441FC5C0F4003C3A23 /* SendAddressProtocol.swift in Sources */,
 				45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */,
 				4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */,
-				FA88FA5B1FC2DD8E00B63476 /* CoreLibraryFunctions.swift in Sources */,
 				455CDCFB1FC8537200EA5ACE /* CreateWalletViewController.swift in Sources */,
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,
 				455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */,
@@ -1132,6 +1129,7 @@
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
+					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmulty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1157,6 +1155,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
