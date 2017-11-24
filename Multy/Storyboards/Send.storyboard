@@ -47,6 +47,14 @@
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                                        <color key="value" red="0.0" green="0.69813299179999999" blue="0.99816983940000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rippleBackgroundColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextAction:" destination="kRf-Ct-SnX" eventType="touchUpInside" id="cxf-xh-vOF"/>
                                 </connections>
@@ -313,6 +321,14 @@
                                         <state key="normal" title="Next">
                                             <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="rippleBackgroundColor">
+                                                <color key="value" red="0.0" green="0.69813299179999999" blue="0.99816983940000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="nextAction:" destination="Can-YJ-fx8" eventType="touchUpInside" id="VyL-nm-9Tq"/>
                                         </connections>
@@ -437,6 +453,14 @@
                                     <constraint firstAttribute="height" constant="64" id="RGo-sn-svA"/>
                                 </constraints>
                                 <state key="normal" title=""/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rippleBackgroundColor">
+                                        <color key="value" red="0.0" green="0.69813299179999999" blue="0.99816983940000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextAction:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="7lS-Zk-mLF"/>
                                 </connections>
@@ -565,13 +589,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cg1-VD-fBS">
-                                <rect key="frame" x="168.5" y="608" width="39.5" height="25"/>
+                                <rect key="frame" x="168.5" y="613" width="39.5" height="25"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaC-Rz-vgT">
-                                <rect key="frame" x="174.5" y="633" width="26.5" height="25"/>
+                                <rect key="frame" x="174.5" y="638" width="26.5" height="25"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -603,7 +627,7 @@
                             <constraint firstAttribute="bottom" secondItem="mBT-4B-B5P" secondAttribute="bottom" id="Bq3-lI-q8R"/>
                             <constraint firstItem="5Ie-5f-uXv" firstAttribute="top" secondItem="iP4-gf-E0A" secondAttribute="bottom" constant="15" id="Bz6-td-XN5"/>
                             <constraint firstItem="D9i-dd-7eI" firstAttribute="trailing" secondItem="Lm1-SW-8dk" secondAttribute="trailing" constant="50" id="ClO-uj-7t2"/>
-                            <constraint firstItem="Cg1-VD-fBS" firstAttribute="top" secondItem="Rnf-u0-7bX" secondAttribute="bottom" constant="5" id="EFc-84-5CY"/>
+                            <constraint firstItem="Cg1-VD-fBS" firstAttribute="top" secondItem="Rnf-u0-7bX" secondAttribute="bottom" constant="10" id="EFc-84-5CY"/>
                             <constraint firstItem="1r8-E7-NF8" firstAttribute="centerX" secondItem="BEz-bp-WkK" secondAttribute="centerX" id="Esp-bX-LUU"/>
                             <constraint firstItem="fOo-l7-Vq8" firstAttribute="bottom" secondItem="gfE-Vc-rTR" secondAttribute="bottom" constant="-10" id="FcJ-FX-Qtj"/>
                             <constraint firstItem="mBT-4B-B5P" firstAttribute="leading" secondItem="BEz-bp-WkK" secondAttribute="leading" id="Fr7-gc-XwG"/>
@@ -894,6 +918,9 @@
                                         <state key="normal" title="Done">
                                             <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextAction:" destination="0GY-ag-sLU" eventType="touchUpInside" id="vZB-3U-nnJ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.91339319944381714" green="0.92108803987503052" blue="0.95803099870681763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -949,15 +976,87 @@
                         <outlet property="walletCryptoSumAndCurrencyLbl" destination="ccP-jD-nTp" id="l0n-Pr-fQU"/>
                         <outlet property="walletFiatSumAndCurrencyLbl" destination="31h-f9-3fx" id="dey-eL-aL8"/>
                         <outlet property="walletNameLbl" destination="y3A-JK-Mp2" id="ksq-hq-A7p"/>
+                        <segue destination="UPV-t8-x0n" kind="show" identifier="sendingAnimationVC" id="Do7-LN-7I0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmy-Xf-KB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3420" y="-36.431784107946029"/>
         </scene>
+        <!--Sending Animation View Controller-->
+        <scene sceneID="pQ1-vc-SFR">
+            <objects>
+                <viewController id="UPV-t8-x0n" customClass="SendingAnimationViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bv6-DH-6uG"/>
+                        <viewControllerLayoutGuide type="bottom" id="eBC-rP-NLv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Nih-cX-8L4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="P2z-Fa-KbC">
+                                <rect key="frame" x="128.5" y="274.5" width="117" height="117"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="117" id="bTI-zm-OW7"/>
+                                    <constraint firstAttribute="width" constant="117" id="fA0-R2-OVf"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jg-ab-E9W">
+                                <rect key="frame" x="147.5" y="411.5" width="79" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSj-73-kB0" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="LFP-LW-HAo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="rippleBackgroundColor">
+                                        <color key="value" red="0.0" green="0.69813299179077148" blue="0.99816983938217163" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="closeAction:" destination="UPV-t8-x0n" eventType="touchUpInside" id="gjD-qv-nTq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P2z-Fa-KbC" firstAttribute="centerY" secondItem="Nih-cX-8L4" secondAttribute="centerY" id="EvQ-ua-QLr"/>
+                            <constraint firstItem="dSj-73-kB0" firstAttribute="leading" secondItem="Nih-cX-8L4" secondAttribute="leading" id="Gmo-1I-GQr"/>
+                            <constraint firstItem="9Jg-ab-E9W" firstAttribute="centerX" secondItem="Nih-cX-8L4" secondAttribute="centerX" id="Lb7-7F-9Jp"/>
+                            <constraint firstAttribute="trailing" secondItem="dSj-73-kB0" secondAttribute="trailing" id="Ros-2y-PqA"/>
+                            <constraint firstItem="9Jg-ab-E9W" firstAttribute="top" secondItem="P2z-Fa-KbC" secondAttribute="bottom" constant="20" id="S8R-Qo-GJX"/>
+                            <constraint firstItem="P2z-Fa-KbC" firstAttribute="centerX" secondItem="Nih-cX-8L4" secondAttribute="centerX" id="VxD-R6-Z9w"/>
+                            <constraint firstItem="eBC-rP-NLv" firstAttribute="top" secondItem="dSj-73-kB0" secondAttribute="bottom" id="nqi-Hu-jOO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="Nih-cX-8L4" id="cIQ-gC-uYn"/>
+                        <outlet property="closeBtn" destination="dSj-73-kB0" id="ELG-wP-h5K"/>
+                        <outlet property="sendingImage" destination="P2z-Fa-KbC" id="NOu-rj-LwA"/>
+                        <outlet property="sendingLbl" destination="9Jg-ab-E9W" id="RSE-0X-GmQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NSG-mW-PMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4324" y="-36"/>
+        </scene>
     </scenes>
     <resources>
         <image name="btcIconBig" width="58" height="58"/>
+        <image name="loading" width="117" height="117"/>
         <image name="swap" width="25" height="24"/>
     </resources>
 </document>

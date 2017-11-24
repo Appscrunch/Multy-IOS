@@ -34,5 +34,8 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func nextAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
+    }
 
 }
