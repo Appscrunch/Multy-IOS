@@ -87,14 +87,15 @@
 		FA4D43FE1FC6D058003C7117 /* MainWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */; };
 		FA4D43FF1FC6D058003C7117 /* MainWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
+		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
+		FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; };
+		FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; };
+		FA7406241FCC4855003C538C /* libmulty_core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FA7406251FCC4855003C538C /* libmulty_testd.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; };
+		FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
-		FA86A7451FC2C748002826EC /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7421FC2C748002826EC /* libmulty_testd.dylib */; };
-		FA86A7461FC2C748002826EC /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7431FC2C748002826EC /* liblibwally-core.dylib */; };
-		FA86A7471FC2C748002826EC /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA86A7441FC2C748002826EC /* libmulty_core.dylib */; };
-		FA86A7521FC2C9D7002826EC /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7431FC2C748002826EC /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FA86A7531FC2C9D7002826EC /* libmulty_core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7441FC2C748002826EC /* libmulty_core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FA86A7541FC2C9D7002826EC /* libmulty_testd.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA86A7421FC2C748002826EC /* libmulty_testd.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FABA34DE1FC86B5C003636F9 /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FABA34DD1FC86B5C003636F9 /* libmulty_transaction.dylib */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
@@ -109,9 +110,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FA86A7521FC2C9D7002826EC /* liblibwally-core.dylib in Embed Libraries */,
-				FA86A7541FC2C9D7002826EC /* libmulty_testd.dylib in Embed Libraries */,
-				FA86A7531FC2C9D7002826EC /* libmulty_core.dylib in Embed Libraries */,
+				FA7406241FCC4855003C538C /* libmulty_core.dylib in Embed Libraries */,
+				FA7406251FCC4855003C538C /* libmulty_testd.dylib in Embed Libraries */,
+				FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */,
+				FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,24 +204,24 @@
 		FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
-		FA4D44051FC84BB2003C7117 /* transaction_fee.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
-		FA4D44061FC84BB2003C7117 /* transaction_change.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
-		FA4D44071FC84BB3003C7117 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
-		FA4D44081FC84BB3003C7117 /* amount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
-		FA4D44091FC84BB3003C7117 /* properties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
-		FA4D440A1FC84C58003C7117 /* api_transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
-		FA4D440B1FC84DAF003C7117 /* account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
+		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
+		FA7406121FCC14C4003C538C /* transaction_fee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
+		FA7406131FCC14C4003C538C /* transaction_change.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
+		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
+		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
+		FA7406161FCC14C4003C538C /* properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
+		FA7406181FCC14C4003C538C /* keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
+		FA7406191FCC14C4003C538C /* account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
+		FA74061A1FCC14C4003C538C /* mnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mnemonic.h; sourceTree = "<group>"; };
+		FA74061B1FCC14C4003C538C /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
+		FA74061C1FCC14C4003C538C /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		FA74061D1FCC14C4003C538C /* run_tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_tests.h; sourceTree = "<group>"; };
+		FA74061E1FCC14C4003C538C /* libmulty_core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_core.dylib; sourceTree = "<group>"; };
+		FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_testd.dylib; sourceTree = "<group>"; };
+		FA7406201FCC14C4003C538C /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
+		FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
-		FA86A7421FC2C748002826EC /* libmulty_testd.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_testd.dylib; sourceTree = "<group>"; };
-		FA86A7431FC2C748002826EC /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
-		FA86A7441FC2C748002826EC /* libmulty_core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_core.dylib; sourceTree = "<group>"; };
-		FA86A7481FC2C757002826EC /* run_tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = run_tests.h; sourceTree = "<group>"; };
-		FA86A7491FC2C757002826EC /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
-		FA86A74A1FC2C757002826EC /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		FA86A74B1FC2C758002826EC /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
-		FA86A74C1FC2C758002826EC /* mnemonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mnemonic.h; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
-		FABA34DD1FC86B5C003636F9 /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -234,10 +236,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */,
-				FABA34DE1FC86B5C003636F9 /* libmulty_transaction.dylib in Frameworks */,
-				FA86A7451FC2C748002826EC /* libmulty_testd.dylib in Frameworks */,
-				FA86A7461FC2C748002826EC /* liblibwally-core.dylib in Frameworks */,
-				FA86A7471FC2C748002826EC /* libmulty_core.dylib in Frameworks */,
+				FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */,
+				FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */,
+				FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */,
+				FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +345,7 @@
 		457486131FBD7DAF002D1925 /* Additional Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				FA86A73F1FC2C6DB002826EC /* Core Libs */,
+				FA74060F1FCC14C4003C538C /* Core Libs */,
 				457486141FBD7ED8002D1925 /* SMPageControl.swift */,
 			);
 			path = "Additional Libraries";
@@ -689,43 +691,43 @@
 			path = MainWallet;
 			sourceTree = "<group>";
 		};
-		FA4D440C1FC84DCC003C7117 /* Core */ = {
+		FA74060F1FCC14C4003C538C /* Core Libs */ = {
 			isa = PBXGroup;
 			children = (
-				FA86A7481FC2C757002826EC /* run_tests.h */,
-				FA86A74C1FC2C758002826EC /* mnemonic.h */,
-				FA86A74B1FC2C758002826EC /* api.h */,
-				FA86A74A1FC2C757002826EC /* common.h */,
-				FA86A7491FC2C757002826EC /* keys.h */,
-				FA4D440B1FC84DAF003C7117 /* account.h */,
+				FA7406101FCC14C4003C538C /* Transaction */,
+				FA7406171FCC14C4003C538C /* Core */,
+				FA74061E1FCC14C4003C538C /* libmulty_core.dylib */,
+				FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */,
+				FA7406201FCC14C4003C538C /* liblibwally-core.dylib */,
+				FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */,
 			);
-			path = Core;
+			path = "Core Libs";
 			sourceTree = "<group>";
 		};
-		FA4D440E1FC84E1D003C7117 /* Transaction */ = {
+		FA7406101FCC14C4003C538C /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				FA4D44081FC84BB3003C7117 /* amount.h */,
-				FA4D44091FC84BB3003C7117 /* properties.h */,
-				FA4D44061FC84BB2003C7117 /* transaction_change.h */,
-				FA4D44051FC84BB2003C7117 /* transaction_fee.h */,
-				FA4D44071FC84BB3003C7117 /* transaction.h */,
-				FA4D440A1FC84C58003C7117 /* api_transaction.h */,
+				FA7406111FCC14C4003C538C /* amount.h */,
+				FA7406121FCC14C4003C538C /* transaction_fee.h */,
+				FA7406131FCC14C4003C538C /* transaction_change.h */,
+				FA7406141FCC14C4003C538C /* api_transaction.h */,
+				FA7406151FCC14C4003C538C /* transaction.h */,
+				FA7406161FCC14C4003C538C /* properties.h */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
 		};
-		FA86A73F1FC2C6DB002826EC /* Core Libs */ = {
+		FA7406171FCC14C4003C538C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				FA4D440E1FC84E1D003C7117 /* Transaction */,
-				FA4D440C1FC84DCC003C7117 /* Core */,
-				FA86A7431FC2C748002826EC /* liblibwally-core.dylib */,
-				FA86A7441FC2C748002826EC /* libmulty_core.dylib */,
-				FA86A7421FC2C748002826EC /* libmulty_testd.dylib */,
-				FABA34DD1FC86B5C003636F9 /* libmulty_transaction.dylib */,
+				FA7406181FCC14C4003C538C /* keys.h */,
+				FA7406191FCC14C4003C538C /* account.h */,
+				FA74061A1FCC14C4003C538C /* mnemonic.h */,
+				FA74061B1FCC14C4003C538C /* api.h */,
+				FA74061C1FCC14C4003C538C /* common.h */,
+				FA74061D1FCC14C4003C538C /* run_tests.h */,
 			);
-			path = "Core Libs";
+			path = Core;
 			sourceTree = "<group>";
 		};
 		FA86A74D1FC2C7E8002826EC /* Security */ = {
@@ -1125,12 +1127,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
-					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
-					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
+					"$(PROJECT_DIR)/**",
+					"\"$(SRCROOT)/Pods/GGLInstanceID\"/**",
+					"\"$(SRCROOT)/Multy/Additional Libraries/Core Libs\"",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmulty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1154,12 +1156,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
-					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
-					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
+					"$(PROJECT_DIR)/**",
+					"\"$(SRCROOT)/Pods/GGLInstanceID\"/**",
+					"\"$(SRCROOT)/Multy/Additional Libraries/Core Libs\"",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmulty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
