@@ -63,6 +63,13 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath == [0,0] ? 300 * (screenWidth / 375.0) : 80
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "transactionVC" {
+            let vc = segue.destination as! TransactionViewController
+            vc.isForReceive = false
+        }
+    }
 }
 
 extension WalletViewController : UICollectionViewDelegateFlowLayout {

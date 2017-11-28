@@ -241,12 +241,6 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 174.23 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qh1-1f-JrE">
-                                                <rect key="frame" x="114.5" y="193" width="114.5" height="22"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From SuperHero with Best wishes!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbf-Dw-blV">
                                                 <rect key="frame" x="61.5" y="235" width="220" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
@@ -305,6 +299,12 @@
                                                     <color key="titleColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 174.23 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qh1-1f-JrE">
+                                                <rect key="frame" x="115" y="193" width="114.5" height="22"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -316,13 +316,13 @@
                                             <constraint firstItem="gD8-96-tqJ" firstAttribute="leading" secondItem="IJm-Zq-RUr" secondAttribute="leading" id="95F-tP-aiE"/>
                                             <constraint firstItem="sT9-uh-D9q" firstAttribute="centerY" secondItem="FwO-hi-BCf" secondAttribute="centerY" id="9gH-aE-GSc"/>
                                             <constraint firstItem="FwO-hi-BCf" firstAttribute="top" secondItem="hp0-QC-1aO" secondAttribute="bottom" constant="10" id="9le-Om-4VZ"/>
-                                            <constraint firstItem="hp0-QC-1aO" firstAttribute="top" secondItem="Rbf-Dw-blV" secondAttribute="bottom" constant="12" id="DgW-DD-2qC"/>
                                             <constraint firstItem="Qh1-1f-JrE" firstAttribute="centerX" secondItem="IJm-Zq-RUr" secondAttribute="centerX" id="F5d-bN-IKA"/>
                                             <constraint firstItem="rfk-4F-99R" firstAttribute="centerX" secondItem="IJm-Zq-RUr" secondAttribute="centerX" id="JJB-0I-TgL"/>
                                             <constraint firstItem="Qh1-1f-JrE" firstAttribute="top" secondItem="UbC-Ss-oxD" secondAttribute="bottom" id="KK7-4Q-8vX"/>
                                             <constraint firstItem="MEE-0Q-sGQ" firstAttribute="centerX" secondItem="IJm-Zq-RUr" secondAttribute="centerX" id="LHk-tx-fqk"/>
                                             <constraint firstItem="9hc-Ew-5Gb" firstAttribute="top" secondItem="gD8-96-tqJ" secondAttribute="bottom" id="RHq-NU-Q5L"/>
                                             <constraint firstItem="sT9-uh-D9q" firstAttribute="centerX" secondItem="FwO-hi-BCf" secondAttribute="centerX" id="Rxm-Cf-oGZ"/>
+                                            <constraint firstItem="hp0-QC-1aO" firstAttribute="top" secondItem="Qh1-1f-JrE" secondAttribute="bottom" constant="51.5" id="UH7-bo-PC2"/>
                                             <constraint firstAttribute="bottom" secondItem="9hc-Ew-5Gb" secondAttribute="bottom" id="Uez-t2-V9t"/>
                                             <constraint firstItem="rfk-4F-99R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IJm-Zq-RUr" secondAttribute="leading" constant="10" id="VzE-Ut-2ER"/>
                                             <constraint firstItem="rfk-4F-99R" firstAttribute="top" secondItem="Dgq-hX-nSS" secondAttribute="bottom" constant="10" id="Wnh-QX-u2Y"/>
@@ -330,7 +330,7 @@
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rfk-4F-99R" secondAttribute="trailing" constant="10" id="YeK-6U-ec5"/>
                                             <constraint firstItem="Dgq-hX-nSS" firstAttribute="centerX" secondItem="IJm-Zq-RUr" secondAttribute="centerX" id="Zar-Mj-vJ5"/>
                                             <constraint firstItem="MEE-0Q-sGQ" firstAttribute="top" secondItem="at1-D3-zOM" secondAttribute="bottom" constant="30" id="aYM-Sx-HuJ"/>
-                                            <constraint firstItem="gD8-96-tqJ" firstAttribute="top" secondItem="6Xm-oq-X8u" secondAttribute="bottom" constant="20" id="d4E-Et-2bF"/>
+                                            <constraint firstAttribute="bottom" secondItem="gD8-96-tqJ" secondAttribute="bottom" constant="60" id="c2j-jl-d0Y"/>
                                             <constraint firstItem="6Xm-oq-X8u" firstAttribute="top" secondItem="rfk-4F-99R" secondAttribute="bottom" constant="10" id="dBI-fZ-GyQ"/>
                                             <constraint firstItem="Rbf-Dw-blV" firstAttribute="centerX" secondItem="IJm-Zq-RUr" secondAttribute="centerX" id="eF1-kN-1ms"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ewV-6V-pAK" secondAttribute="trailing" constant="10" id="g6I-vq-Jel"/>
@@ -380,7 +380,23 @@
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="arrowImg" destination="FwO-hi-BCf" id="LVG-NK-ccR"/>
+                        <outlet property="backView" destination="CHj-pJ-c9i" id="pMB-NL-Jac"/>
+                        <outlet property="blockchainImg" destination="sT9-uh-D9q" id="ufj-ax-oOb"/>
+                        <outlet property="constraintNoteFiatSum" destination="UH7-bo-PC2" id="zi0-De-c9M"/>
+                        <outlet property="dateLbl" destination="ewV-6V-pAK" id="1OL-Va-Qfb"/>
+                        <outlet property="noteLbl" destination="Rbf-Dw-blV" id="Wd6-hm-ELT"/>
+                        <outlet property="numberOfConfirmationLbl" destination="6Xm-oq-X8u" id="Zca-Ph-czt"/>
+                        <outlet property="personNameLbl" destination="Dgq-hX-nSS" id="GVJ-NF-6qn"/>
                         <outlet property="scrollView" destination="2bc-PL-C8n" id="mKe-nl-g81"/>
+                        <outlet property="sumInFiatLbl" destination="Qh1-1f-JrE" id="Fht-Ii-JZf"/>
+                        <outlet property="titleLbl" destination="I4U-wc-DLI" id="eUe-tY-tg2"/>
+                        <outlet property="transactionCurencyLbl" destination="aX4-lc-W97" id="Jat-G0-cRC"/>
+                        <outlet property="transactionImg" destination="at1-D3-zOM" id="iSM-Wr-PCQ"/>
+                        <outlet property="transctionSumLbl" destination="UbC-Ss-oxD" id="bvx-l2-4jm"/>
+                        <outlet property="viewInBlockchainBtn" destination="9hc-Ew-5Gb" id="Xfo-iY-cpV"/>
+                        <outlet property="walletFromAddressLbl" destination="hp0-QC-1aO" id="R8r-MI-Hrm"/>
+                        <outlet property="walletToAddressLbl" destination="rfk-4F-99R" id="QV9-NW-zwh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kP-nK-IcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
