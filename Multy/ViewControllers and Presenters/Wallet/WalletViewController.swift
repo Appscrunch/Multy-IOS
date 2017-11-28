@@ -53,10 +53,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0, 1] {
+        if indexPath == [0, 0] {
             
         } else {
-            
+            self.performSegue(withIdentifier: "transactionVC", sender: Any.self)
         }
     }
     
@@ -67,6 +67,13 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath == [0, 1] {
             (cell as! MainWalletCell).setCorners()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "transactionVC" {
+            let vc = segue.destination as! TransactionViewController
+            vc.isForReceive = false
         }
     }
 }
