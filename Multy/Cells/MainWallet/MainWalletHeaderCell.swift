@@ -4,10 +4,14 @@
 
 import UIKit
 
-class MainWalletHeaderCell: UITableViewCell {
+class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    weak var delegate : UICollectionViewDelegate?
+    weak var delegate : UICollectionViewDelegate? {
+        didSet {
+            self.collectionView.delegate = delegate
+        }
+    }
 //    @IBOutlet weak var pageControll: SMPageControl!
     
     override func awakeFromNib() {
@@ -17,8 +21,6 @@ class MainWalletHeaderCell: UITableViewCell {
         
         let headerCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
         self.collectionView.register(headerCollectionCell, forCellWithReuseIdentifier: "MainWalletCollectionViewCellID")
-        
-        self.collectionView.delegate = delegate
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,7 +35,7 @@ class MainWalletHeaderCell: UITableViewCell {
     }
 }
 
-extension MainWalletHeaderCell: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MainWalletHeaderCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

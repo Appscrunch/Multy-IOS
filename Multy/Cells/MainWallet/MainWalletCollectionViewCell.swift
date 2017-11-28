@@ -7,6 +7,11 @@ import UIKit
 class MainWalletCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var showAddressesButton : UIButton!
+    @IBOutlet weak var cryptoAmountLabel : UILabel!
+    @IBOutlet weak var cryptoNameLabel : UILabel!
+    @IBOutlet weak var fiatAmountLabel : UILabel!
+    @IBOutlet weak var fiatNameLabel : UILabel!
+    @IBOutlet weak var addressLabel : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletViewController: UIViewController, UICollectionViewDelegate {
+class WalletViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -63,17 +63,19 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath == [0,0] ? 300 * (screenWidth / 375.0) : 80
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == [0, 1] {
+            (cell as! MainWalletCell).setCorners()
+        }
+    }
 }
 
 extension WalletViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let availableWidth = view.frame.width
-        let widthPerItem = availableWidth
-        
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        return CGSize(width: screenWidth, height: 210.0 * (screenWidth / 375.0))
     }
     
     func collectionView(_ collectionView: UICollectionView,
