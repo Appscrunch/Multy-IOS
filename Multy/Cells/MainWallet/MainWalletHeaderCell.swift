@@ -7,6 +7,7 @@ import UIKit
 class MainWalletHeaderCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    weak var delegate : UICollectionViewDelegate?
 //    @IBOutlet weak var pageControll: SMPageControl!
     
     override func awakeFromNib() {
@@ -16,6 +17,8 @@ class MainWalletHeaderCell: UITableViewCell {
         
         let headerCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
         self.collectionView.register(headerCollectionCell, forCellWithReuseIdentifier: "MainWalletCollectionViewCellID")
+        
+        self.collectionView.delegate = delegate
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -44,6 +47,4 @@ extension MainWalletHeaderCell: UICollectionViewDataSource, UICollectionViewDele
 
         return cell
     }
-    
-    
 }

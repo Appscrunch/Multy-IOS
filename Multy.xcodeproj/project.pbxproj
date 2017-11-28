@@ -95,6 +95,7 @@
 		FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; };
 		FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74062A1FCC5D6A003C538C /* Constants.swift */; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
@@ -220,6 +221,7 @@
 		FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_testd.dylib; sourceTree = "<group>"; };
 		FA7406201FCC14C4003C538C /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
 		FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
+		FA74062A1FCC5D6A003C538C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				4583ACA21FBCAC60001991AA /* UIView+Extension.swift */,
 				FA4D43E01FC5895D003C7117 /* String+Extension.swift */,
 				45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */,
+				FA74062A1FCC5D6A003C538C /* Constants.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -950,6 +953,7 @@
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
+				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,
 				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
