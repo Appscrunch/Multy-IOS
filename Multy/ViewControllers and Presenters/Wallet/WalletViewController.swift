@@ -53,10 +53,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0, 1] {
+        if indexPath == [0, 0] {
             
         } else {
-            
+            self.performSegue(withIdentifier: "transactionVC", sender: Any.self)
         }
     }
     
