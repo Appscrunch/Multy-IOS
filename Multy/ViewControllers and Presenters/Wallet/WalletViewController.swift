@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletViewController: UIViewController {
+class WalletViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -41,6 +41,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath == [0, 0] {         // Main Wallet Header Cell
             let headerCell = self.tableView.dequeueReusableCell(withIdentifier: "MainWalletHeaderCellID") as! MainWalletHeaderCell
             headerCell.selectionStyle = .none
+            headerCell.delegate = self
             
             return headerCell
         } else {                           //  Wallet Cell
@@ -60,6 +61,30 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath == [0,0] ? 260 : 80
+        return indexPath == [0,0] ? 300 * (screenWidth / 375.0) : 80
+    }
+}
+
+extension WalletViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let availableWidth = view.frame.width
+        let widthPerItem = availableWidth
+        
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
