@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -95,16 +94,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mZy-c1-hSJ">
-                                <rect key="frame" x="16" y="33" width="20" height="20"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="mZy-c1-hSJ">
+                                <rect key="frame" x="16" y="33" width="13" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Bd3-lF-g5q"/>
-                                    <constraint firstAttribute="width" constant="20" id="fBw-Ye-LOB"/>
+                                    <constraint firstAttribute="height" constant="21" id="Bd3-lF-g5q"/>
+                                    <constraint firstAttribute="width" constant="13" id="fBw-Ye-LOB"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-pi-5tj">
-                                <rect key="frame" x="0.0" y="33" width="76" height="30"/>
-                                <state key="normal" title="back arrow"/>
+                                <rect key="frame" x="0.0" y="33" width="59" height="30"/>
                                 <connections>
                                     <action selector="cancelAction:" destination="3gL-lZ-1hN" eventType="touchUpInside" id="ere-lP-gZ7"/>
                                 </connections>
@@ -134,6 +132,7 @@
                         <constraints>
                             <constraint firstItem="Rcp-zA-Ubf" firstAttribute="top" secondItem="PrT-By-RHO" secondAttribute="bottom" constant="17" id="3zQ-ac-5Zs"/>
                             <constraint firstAttribute="trailing" secondItem="JAJ-uD-tG4" secondAttribute="trailing" id="6MM-Wo-Dro"/>
+                            <constraint firstItem="Ghi-pi-5tj" firstAttribute="trailing" secondItem="mZy-c1-hSJ" secondAttribute="trailing" constant="30" id="PUg-GD-dFJ"/>
                             <constraint firstItem="JAJ-uD-tG4" firstAttribute="leading" secondItem="49k-5Z-Dpw" secondAttribute="leading" id="QOM-rU-H3C"/>
                             <constraint firstItem="mZy-c1-hSJ" firstAttribute="top" secondItem="9BJ-vZ-ZUf" secondAttribute="bottom" constant="13" id="Xf9-ZK-4t3"/>
                             <constraint firstItem="qXe-wl-HWf" firstAttribute="top" secondItem="JAJ-uD-tG4" secondAttribute="bottom" id="iHw-V2-VN1"/>
@@ -333,16 +332,15 @@
                                             <action selector="nextAction:" destination="Can-YJ-fx8" eventType="touchUpInside" id="VyL-nm-9Tq"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nWE-FX-lmx">
-                                        <rect key="frame" x="16" y="13" width="20" height="20"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="nWE-FX-lmx">
+                                        <rect key="frame" x="16" y="13" width="13" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="nWE-FX-lmx" secondAttribute="height" multiplier="1:1" id="2jc-mY-xZb"/>
-                                            <constraint firstAttribute="width" constant="20" id="KEE-OU-gz4"/>
+                                            <constraint firstAttribute="width" constant="13" id="KEE-OU-gz4"/>
+                                            <constraint firstAttribute="height" constant="21" id="TLe-Vj-3lG"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYh-0x-L80">
-                                        <rect key="frame" x="0.0" y="13" width="76" height="30"/>
-                                        <state key="normal" title="back arrow"/>
+                                        <rect key="frame" x="0.0" y="13" width="59" height="30"/>
                                         <connections>
                                             <action selector="cancelAction:" destination="Can-YJ-fx8" eventType="touchUpInside" id="RCi-3f-DKg"/>
                                         </connections>
@@ -381,6 +379,7 @@
                                     <constraint firstItem="X1U-ne-MsG" firstAttribute="width" secondItem="x0U-60-o5z" secondAttribute="width" id="gSv-Vw-3Hc"/>
                                     <constraint firstItem="lXZ-a8-UvA" firstAttribute="top" secondItem="X1U-ne-MsG" secondAttribute="bottom" constant="20" id="jUG-PC-6Fg"/>
                                     <constraint firstAttribute="bottom" secondItem="jNT-j7-dlk" secondAttribute="bottom" id="oxO-oN-TlI"/>
+                                    <constraint firstItem="fYh-0x-L80" firstAttribute="trailing" secondItem="nWE-FX-lmx" secondAttribute="trailing" constant="30" id="pdE-sa-4nN"/>
                                     <constraint firstAttribute="trailing" secondItem="X1U-ne-MsG" secondAttribute="trailing" constant="16" id="q1Z-vN-XjH"/>
                                     <constraint firstItem="9nM-mt-kya" firstAttribute="leading" secondItem="zLs-gO-YLW" secondAttribute="leading" id="q3T-qv-i6F"/>
                                     <constraint firstAttribute="trailing" secondItem="jNT-j7-dlk" secondAttribute="trailing" id="wDV-zN-80F"/>
@@ -414,7 +413,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b0-WR-NmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="119"/>
+            <point key="canvasLocation" x="1696.8" y="118.74062968515743"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Wn-fo-Rxe">
@@ -505,16 +504,15 @@
                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lm1-SW-8dk">
-                                <rect key="frame" x="16" y="33" width="25" height="25"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="Lm1-SW-8dk">
+                                <rect key="frame" x="16" y="33" width="13" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="AQA-gx-oJL"/>
-                                    <constraint firstAttribute="height" constant="25" id="XaL-VO-3Mc"/>
+                                    <constraint firstAttribute="width" constant="13" id="AQA-gx-oJL"/>
+                                    <constraint firstAttribute="height" constant="21" id="XaL-VO-3Mc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9i-dd-7eI">
-                                <rect key="frame" x="0.0" y="33" width="91" height="30"/>
-                                <state key="normal" title="Back arrow"/>
+                                <rect key="frame" x="0.0" y="33" width="79" height="30"/>
                                 <connections>
                                     <action selector="cancelAction:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="xFP-SO-Box"/>
                                 </connections>
@@ -696,21 +694,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzU-CV-d25">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="idk-lO-290">
-                                        <rect key="frame" x="16" y="13" width="25" height="25"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="idk-lO-290">
+                                        <rect key="frame" x="16" y="13" width="13" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="KRq-9o-Iyx"/>
-                                            <constraint firstAttribute="width" constant="25" id="u0W-Dw-xhm"/>
+                                            <constraint firstAttribute="height" constant="21" id="KRq-9o-Iyx"/>
+                                            <constraint firstAttribute="width" constant="13" id="u0W-Dw-xhm"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-xs-M2D">
-                                        <rect key="frame" x="0.0" y="13" width="77" height="30"/>
-                                        <state key="normal" title="Back arrow"/>
-                                        <connections>
-                                            <action selector="cancelAction:" destination="0GY-ag-sLU" eventType="touchUpInside" id="9Sk-8D-4K1"/>
-                                            <action selector="cancelAction:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="m2w-5B-CnH"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready to Send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk1-tu-7rf">
                                         <rect key="frame" x="131" y="13" width="113.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
@@ -922,6 +912,13 @@
                                             <action selector="nextAction:" destination="0GY-ag-sLU" eventType="touchUpInside" id="vZB-3U-nnJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-xs-M2D">
+                                        <rect key="frame" x="0.0" y="13" width="59" height="30"/>
+                                        <connections>
+                                            <action selector="cancelAction:" destination="0GY-ag-sLU" eventType="touchUpInside" id="9Sk-8D-4K1"/>
+                                            <action selector="cancelAction:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="m2w-5B-CnH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.91339319944381714" green="0.92108803987503052" blue="0.95803099870681763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -931,6 +928,7 @@
                                     <constraint firstItem="wl0-kD-24J" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" id="Bdz-6U-aV1"/>
                                     <constraint firstItem="b8x-RC-TUx" firstAttribute="top" secondItem="MIf-xQ-WjZ" secondAttribute="bottom" constant="16" id="CPo-BS-cu0"/>
                                     <constraint firstAttribute="trailing" secondItem="wl0-kD-24J" secondAttribute="trailing" id="EZa-iX-C5z"/>
+                                    <constraint firstItem="UF8-xs-M2D" firstAttribute="trailing" secondItem="idk-lO-290" secondAttribute="trailing" constant="30" id="FX0-Ui-h1j"/>
                                     <constraint firstItem="idk-lO-290" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" constant="16" id="JC1-Dj-fld"/>
                                     <constraint firstItem="b8x-RC-TUx" firstAttribute="leading" secondItem="MIf-xQ-WjZ" secondAttribute="leading" id="OUu-YV-D1V"/>
                                     <constraint firstItem="RI9-ER-ncF" firstAttribute="top" secondItem="M7S-64-Prv" secondAttribute="bottom" constant="9" id="R4U-ld-eCg"/>
@@ -1055,6 +1053,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backGrey" width="13" height="21"/>
         <image name="btcIconBig" width="58" height="58"/>
         <image name="loading" width="117" height="117"/>
         <image name="swap" width="25" height="24"/>

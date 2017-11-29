@@ -86,6 +86,10 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
         return 104
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let walletCell = cell as! WalletTableViewCell
+        walletCell.makeshadow()
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
