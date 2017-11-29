@@ -16,6 +16,8 @@ class WalletTableViewCell: UITableViewCell {
     
     var isBorderOn = false
     
+    var wallet: WalletRLM?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -45,6 +47,16 @@ class WalletTableViewCell: UITableViewCell {
         self.backView.layer.borderWidth = 0
         self.arrowImage.image = nil
         self.isBorderOn = false
+    }
+    
+    func fillInCell() {
+        if self.wallet?.cryptoName == "BTC" {
+            self.tokenImage.image = #imageLiteral(resourceName: "btcIconBig")
+        }
+        self.walletNameLbl.text = self.wallet?.name
+        self.cryptoSumLbl.text  = "\(self.wallet?.sumInCrypto ?? 0.0)"
+        self.cryptoNameLbl.text = self.wallet?.cryptoName
+        self.fiatSumLbl.text = "\(self.wallet?.sumInFiat ?? 0.0) \(self.wallet?.fiatSymbol ?? "$")"
     }
     
 }

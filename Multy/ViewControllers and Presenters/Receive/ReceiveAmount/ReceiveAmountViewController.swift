@@ -11,7 +11,8 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneBtn: ZFRippleButton!
     @IBOutlet weak var sumLbl: UILabel!
     @IBOutlet weak var currencyNameLbl: UILabel!
-    @IBOutlet weak var bottomSumCurrencyLbl: UILabel!
+    @IBOutlet weak var bottomSumLbl: UILabel!
+    @IBOutlet weak var bottomCurrencyNameLbl: UILabel!
     @IBOutlet weak var constraintBtnBottom: NSLayoutConstraint!
     
     let presenter = ReceiveAmountPresenter()
@@ -45,6 +46,17 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.sumInCrypto != 0.0 {
+            self.amountTF.text = "\(self.sumInCrypto)"
+        }
+        self.sumLbl.text = "\(self.sumInCrypto)"
+        self.currencyNameLbl.text = self.cryptoName
+        self.bottomSumLbl.text = "\(self.sumInFiat)"
+        self.bottomCurrencyNameLbl.text = "\(self.fiatName)"
+    }
+    
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -56,7 +68,8 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             } else {
                 self.amountTF.text = ""
             }
-            self.bottomSumCurrencyLbl.text = "\(self.sumInCrypto) \(self.currencyNameLbl.text?.uppercased() ?? "")"
+            self.bottomSumLbl.text = "\(self.sumInCrypto) "
+            self.bottomCurrencyNameLbl.text = self.currencyNameLbl.text?.uppercased()
             self.sumLbl.text = "\(self.sumInFiat)"
             self.currencyNameLbl.text = self.fiatName
         } else {
@@ -67,17 +80,14 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             }
             self.sumLbl.text = "\(self.sumInCrypto)"
             self.currencyNameLbl.text = self.cryptoName
-            self.bottomSumCurrencyLbl.text = "\(sumInFiat) \(self.fiatName)"
+            self.bottomSumLbl.text = "\(sumInFiat) "
+            self.bottomCurrencyNameLbl.text = self.fiatName
         }
         self.isCrypto = !self.isCrypto
     }
     
     @IBAction func doneAction(_ sender: Any) {
-        if self.isCrypto {
-            self.delegate?.transferSum(amount: self.sumInCrypto, currency: self.cryptoName, additionalInfo: self.bottomSumCurrencyLbl.text!)
-        } else {
-            self.delegate?.transferSum(amount: self.sumInFiat, currency: self.fiatName, additionalInfo: self.bottomSumCurrencyLbl.text!)
-        }
+        self.delegate?.transferSum(cryptoAmount: self.sumInCrypto, cryptoCurrency: self.cryptoName, fiatAmount: self.sumInFiat, fiatName: self.fiatName)
         self.navigationController?.popViewController(animated: true)
     }
    
@@ -88,18 +98,9 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func tfValueChanged(_ sender: Any) {
-        print("cicki")
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
-        
-        
-//        let str = "Hello, I must be going."
-//        let str2 = str.components(separatedBy: "I")
-        
         
         if newLength <= self.maxLengthForSum {
             self.amountTF.text = self.amountTF.text?.replacingOccurrences(of: ",", with: ".")
@@ -146,12 +147,14 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             self.sumInCrypto = (self.sumLbl.text! as NSString).doubleValue
             self.sumInFiat = self.sumInCrypto * self.presenter.exchangeCourse
             self.sumInFiat = Double(round(100*self.sumInFiat)/100)
-            self.bottomSumCurrencyLbl.text = "\(self.sumInFiat) \(self.fiatName)"
+            self.bottomSumLbl.text = "\(self.sumInFiat) "
+            self.bottomCurrencyNameLbl.text = self.fiatName
         } else {
             self.sumInFiat = (self.sumLbl.text! as NSString).doubleValue
             self.sumInCrypto = self.sumInFiat / self.presenter.exchangeCourse
             self.sumInCrypto = Double(round(100000000*self.sumInCrypto)/100000000 )
-            self.bottomSumCurrencyLbl.text = "\(self.sumInCrypto) \(self.cryptoName)"
+            self.bottomSumLbl.text = "\(self.sumInCrypto) "
+            self.bottomCurrencyNameLbl.text = self.cryptoName
         }
     }
 }

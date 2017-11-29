@@ -13,7 +13,8 @@ class ReceiveAllDetailsViewController: UIViewController {
     @IBOutlet weak var requestSumBtn: UIButton! // hide title when sum was requested
     @IBOutlet weak var sumValueLbl: UILabel!
     @IBOutlet weak var cryptoNameLbl: UILabel!
-    @IBOutlet weak var fiatSumAndNameLbl: UILabel!
+    @IBOutlet weak var fiatSumLbl: UILabel!
+    @IBOutlet weak var fiatNameLbl: UILabel!
     
     @IBOutlet weak var walletNameLbl: UILabel!
     @IBOutlet weak var walletCryptoSumBtn: UIButton! //set title with sum here
@@ -22,7 +23,8 @@ class ReceiveAllDetailsViewController: UIViewController {
     
     let presenter = ReceiveAllDetailsPresenter()
     
-    var testWallet = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K"
+//    var testWallet = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K"
+//    var testWallet = "bitcoin:3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K?amount=0.005"
     var qrcodeImage: CIImage!
     
     override func viewDidLoad() {
@@ -30,6 +32,12 @@ class ReceiveAllDetailsViewController: UIViewController {
         self.presenter.receiveAllDetailsVC = self
         self.makeQRCode()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.checkValuesAndSetupUI()
+        self.updateUIWithWallet()
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -49,12 +57,45 @@ class ReceiveAllDetailsViewController: UIViewController {
     @IBAction func moreOptionsAction(_ sender: Any) {
     }
     
+    @IBAction func chooseAnotherWalletAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+        let walletsVC = storyboard.instantiateViewController(withIdentifier: "ReceiveStart") as! ReceiveStartViewController
+        walletsVC.presenter.isNeedToPop = true
+        walletsVC.sendWalletDelegate = self.presenter
+        self.navigationController?.pushViewController(walletsVC, animated: true)
+    }
+    
+    
+    func updateUIWithWallet() {
+        self.walletNameLbl.text = self.presenter.wallet?.name
+        self.walletCryptoSumBtn.setTitle("\(self.presenter.wallet?.sumInCrypto ?? 0.0) \(self.presenter.wallet?.cryptoName ?? "")", for: .normal)
+        self.walletFiatSumLbl.text = "\(self.presenter.wallet?.sumInFiat ?? 0.0) \(self.presenter.wallet?.fiatSymbol ?? "")"
+        self.presenter.walletAddress = (self.presenter.wallet?.address)!
+        self.addressLbl.text = self.presenter.walletAddress
+    }
+    
+    
+    func makeStringForQRWithSumAndAdress(cryptoName: String) -> String { // cryptoName = bitcoin
+        return "\(cryptoName):\(self.presenter.walletAddress)?amount=\(self.presenter.cryptoSum ?? 0.0)"
+    }
+    
 // MARK: QRCode Activity
     func makeQRCode() {
-        let data = self.testWallet.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let data = self.presenter.walletAddress.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(data, forKey: "inputMessage")
         filter?.setValue("Q", forKey: "inputCorrectionLevel")
+        
+        qrcodeImage = filter?.outputImage
+        displayQRCodeImage()
+    }
+    
+    func makeQrWithSum() {
+        let walletData = self.makeStringForQRWithSumAndAdress(cryptoName: "bitcoin").data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let filter = CIFilter(name: "CIQRCodeGenerator")
+        filter?.setValue(walletData, forKey: "inputMessage")
+        filter?.setValue("Q", forKey: "inputCorrectionLevel")
+        
         qrcodeImage = filter?.outputImage
         displayQRCodeImage()
     }
@@ -74,10 +115,37 @@ class ReceiveAllDetailsViewController: UIViewController {
     }
     //
     
+    func setupUIWithAmounts() {
+        self.requestSumBtn.titleLabel?.isHidden = true
+        self.sumValueLbl.isHidden = false
+        self.cryptoNameLbl.isHidden = false
+        self.fiatSumLbl.isHidden = false
+        self.fiatNameLbl.isHidden = false
+        
+        self.sumValueLbl.text = "\(self.presenter.cryptoSum ?? 0.0)"
+        self.cryptoNameLbl.text = self.presenter.cryptoName
+        self.fiatSumLbl.text = "\(self.presenter.fiatSum ?? 0.0)"
+        self.fiatNameLbl.text = self.presenter.fiatName
+        
+        self.makeQrWithSum()
+    }
+    
+    func checkValuesAndSetupUI() {
+        if self.presenter.cryptoSum != nil {
+            self.requestSumBtn.titleLabel?.isHidden = true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "receiveAmount" {
             let destVC = segue.destination as! ReceiveAmountViewController
             destVC.delegate = self.presenter
+            if self.presenter.cryptoSum != nil {
+                destVC.sumInCrypto = self.presenter.cryptoSum!
+                destVC.cryptoName = self.presenter.cryptoName!
+                destVC.fiatName = self.presenter.fiatName!
+                destVC.sumInFiat = self.presenter.fiatSum!
+            }
         }
     }
 }
