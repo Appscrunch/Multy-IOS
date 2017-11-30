@@ -14,4 +14,8 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func isOperationSystemAtLeast11() -> Bool {
+        return ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 11, minorVersion: 0, patchVersion: 0))
+    }
 }

@@ -31,15 +31,25 @@ class BricksView: UIView {
             let widthDown = CGFloat((rect.size.width - 7 * 2) / 249.0)
             
             let xCoord = index < segmentsCountUp ?
-                upperSizes[index] * widthUp + CGFloat(index * 2) : downSizes[index - segmentsCountUp] * widthDown + CGFloat((index - segmentsCountUp) * 2)
+                upperSizes[index] * widthUp + CGFloat(index * 2) :
+                downSizes[index - segmentsCountUp] * widthDown + CGFloat((index - segmentsCountUp) * 2)
             
             let yCoord = CGFloat(index < segmentsCountUp ? 0 : 22)
             
-            let width = index < segmentsCountUp ? (upperSizes[index + 1] - upperSizes[index]) * widthUp : (downSizes[index + 1 - segmentsCountUp] - downSizes[index - segmentsCountUp]) * widthDown
+            let width = index < segmentsCountUp ?
+                (upperSizes[index + 1] - upperSizes[index]) * widthUp :
+                (downSizes[index + 1 - segmentsCountUp] - downSizes[index - segmentsCountUp]) * widthDown
             
             let newRect = UIView(frame: CGRect(x: xCoord, y: yCoord, width: width, height: 20))
             
-            newRect.backgroundColor = UIColor.green
+            newRect.backgroundColor = index < currentCheckedWordCounter ?
+                UIColor(redInt: 95, greenInt: 204, blueInt: 125, alpha: 1.0) :
+                UIColor(redInt: 239, greenInt: 239, blueInt: 244, alpha: 1.0)
+            
+            if index == currentCheckedWordCounter {
+                newRect.layer.borderColor = UIColor(redInt: 95, greenInt: 204, blueInt: 125, alpha: 1.0).cgColor
+                newRect.layer.borderWidth = 1.0;
+            }
             newRect.setRounded(radius: 5)
             self.addSubview(newRect)
         }

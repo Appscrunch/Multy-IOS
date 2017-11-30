@@ -7,13 +7,14 @@ import ZFRippleButton
 
 class CheckWordsViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var blockImage: UIImageView!
     @IBOutlet weak var wordTF: UITextField!
     @IBOutlet weak var wordCounterLbl: UILabel!
     @IBOutlet weak var nextWordOrContinue: ZFRippleButton!
     @IBOutlet weak var bricksView: UIView!
     
     @IBOutlet weak var constraintBtnBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintTop: NSLayoutConstraint!
+    @IBOutlet weak var constraintAfterTopLabel: NSLayoutConstraint!
     
     var currentWordNumber = 1
     
@@ -21,6 +22,13 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if screenWidth < 325 {
+            constraintTop.constant = 25
+            constraintAfterTopLabel.constant = 10
+        }
+        
+        bricksView.addSubview(BricksView(with: bricksView.bounds, and: 0))
         
         self.presenter.checkWordsVC = self
         self.presenter.getSeedPhrase()
@@ -45,26 +53,15 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
-        bricksView.subviews.forEach({ $0.removeFromSuperview() })
-        bricksView.addSubview(BricksView(with: bricksView.bounds, and: 5))
-        
-        //saving word
-        if self.currentWordNumber == 3 {
-            self.blockImage.image = #imageLiteral(resourceName: "0202")
-        } else if self.currentWordNumber == 6 {
-            self.blockImage.image = #imageLiteral(resourceName: "0303")
-        } else if self.currentWordNumber == 9 {
-            self.blockImage.image = #imageLiteral(resourceName: "0404")
-        } else if self.currentWordNumber == 12 {
-            self.blockImage.image = #imageLiteral(resourceName: "0505")
-        }
-        
         if !(self.wordTF.text?.isEmpty)! {
             self.presenter.phraseArr.append((self.wordTF.text?.lowercased())!)
             self.wordTF.text = ""
         } else {
             return
         }
+        
+        bricksView.subviews.forEach({ $0.removeFromSuperview() })
+        bricksView.addSubview(BricksView(with: bricksView.bounds, and: currentWordNumber))
         
         if self.currentWordNumber == 14 {
             self.nextWordOrContinue.setTitle("Continue", for: .normal)
@@ -86,9 +83,15 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillShow(_ notification : Notification) {
+        //just check existing notification
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
-            self.constraintBtnBottom.constant = inset.bottom
+            
+            let offset = isOperationSystemAtLeast11() ?
+                (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height :
+                (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height
+            
+
+            self.constraintBtnBottom.constant = offset!
         }
     }
 

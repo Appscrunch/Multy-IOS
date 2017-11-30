@@ -92,6 +92,7 @@
 		FA4FDB0E1FCDAFA9008AEA2B /* BricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4FDB0D1FCDAFA9008AEA2B /* BricksView.swift */; };
 		FA4FDB111FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4FDB101FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift */; };
 		FA4FDB131FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4FDB121FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift */; };
+		FA4FDB151FCFF85C008AEA2B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */; };
 		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
 		FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; };
 		FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; };
@@ -215,6 +216,7 @@
 		FA4FDB0D1FCDAFA9008AEA2B /* BricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
 		FA4FDB101FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhraseViewController.swift; sourceTree = "<group>"; };
 		FA4FDB121FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
+		FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FA7406121FCC14C4003C538C /* transaction_fee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
 		FA7406131FCC14C4003C538C /* transaction_change.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				4583ACA21FBCAC60001991AA /* UIView+Extension.swift */,
 				FA4D43E01FC5895D003C7117 /* String+Extension.swift */,
 				45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */,
+				FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */,
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
 			);
 			path = Extensions;
@@ -1018,6 +1021,7 @@
 				FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */,
 				4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */,
 				45A949481FC5C55C003C3A23 /* WalletChooosePresenter.swift in Sources */,
+				FA4FDB151FCFF85C008AEA2B /* UIColor+Extension.swift in Sources */,
 				4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */,
 				45A9492C1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift in Sources */,
 				FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */,
