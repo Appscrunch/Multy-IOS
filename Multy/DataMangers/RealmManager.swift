@@ -40,6 +40,22 @@ class RealmManager: NSObject {
         }
     }
     
+    public func getSeedPhrase(completion: @escaping (_ seedPhrase: String?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let seedPhraseOpt = realm.object(ofType: SeedPhraseRLM.self, forPrimaryKey: 1)
+                
+                if let seedPhrase = seedPhraseOpt {
+                    completion(seedPhrase.seedString, nil)
+                } else {
+                    completion(nil, nil)
+                }
+            } else {
+                print("Error fetching realm:\(#function)")
+            }
+        }
+    }
+    
     public func writeSeedPhrase(_ seedPhrase: String, completion: @escaping (_ error: NSError?) -> ()) {
         getRealm { (realmOpt, error) in
             if let realm = realmOpt {
@@ -57,7 +73,6 @@ class RealmManager: NSObject {
                 print("Error fetching realm:\(#function)")
             }
         }
-        
     }
     
     public func deleteSeedPhrase(completion: @escaping (_ error: NSError?) -> ()) {

@@ -6,18 +6,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "errorSeed@2x.png",
+      "filename" : "rectangle12.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "rectangle12@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "errorSeed@3x.png",
+      "filename" : "rectangle12@3x.png",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "errorSeed.png",
-      "scale" : "1x"
     }
   ]
 }

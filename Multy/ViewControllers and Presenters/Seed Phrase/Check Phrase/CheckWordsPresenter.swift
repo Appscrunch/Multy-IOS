@@ -6,6 +6,19 @@ import UIKit
 
 class CheckWordsPresenter: NSObject {
     
-    var checkWordsVC: CheckWordsViewController?
+    weak var checkWordsVC: CheckWordsViewController?
     var phraseArr = [String]()
+    var originalSeedPhrase = String()
+    
+    func isSeedPhraseCorrect() -> Bool {
+        return originalSeedPhrase.utf8CString == phraseArr.joined(separator: " ").utf8CString
+    }
+    
+    func getSeedPhrase() {
+        DataManager.shared.getSeedPhrase { (seedPhrase, error) in
+            if let phrase = seedPhrase {
+                self.originalSeedPhrase = phrase
+            }
+        }
+    }
 }

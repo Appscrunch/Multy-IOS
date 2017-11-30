@@ -16,4 +16,10 @@ extension DataManager {
             completion(error)
         }
     }
+    
+    func getSeedPhrase(completion: @escaping (_ seedPhrase: String?, _ error: NSError?) -> ()) {
+        realmManager.getSeedPhrase { (seedPhrase, error) in
+            completion(seedPhrase, error)
+        }
+    }
 }
