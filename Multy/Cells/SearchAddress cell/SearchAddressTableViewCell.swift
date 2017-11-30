@@ -7,6 +7,7 @@ import UIKit
 class SearchAddressTableViewCell: UITableViewCell {
 
     @IBOutlet weak var addressTF: UITextField!
+    @IBOutlet weak var addressInTfLlb: UILabel!
     
     var cancelDelegate: CancelProtocol?
     var sendAddressDelegate: SendAddressProtocol?
@@ -19,6 +20,7 @@ class SearchAddressTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
     
     @IBAction func cancelAction(_ sender: Any) {
         self.cancelDelegate?.cancelAction()
@@ -40,4 +42,20 @@ extension SearchAddressTableViewCell: UITextFieldDelegate {
         self.sendAddressDelegate?.sendAddress(address: textField.text!)
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if string == "" {
+            self.addressInTfLlb.text?.removeLast()
+        } else {
+            self.addressTF.isHidden = true
+            self.addressInTfLlb.text = self.addressTF.text! + string
+        }
+        if self.addressInTfLlb.text == "" {
+            self.addressTF.isHidden = false
+        }
+        
+        return true
+    }
+    
 }

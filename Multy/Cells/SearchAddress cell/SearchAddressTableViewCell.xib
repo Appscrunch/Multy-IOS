@@ -28,7 +28,7 @@
                         <rect key="frame" x="36" y="127" width="303" height="126"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-Ez-HYz">
-                                <rect key="frame" x="0.0" y="31" width="100.5" height="95"/>
+                                <rect key="frame" x="0.0" y="31" width="100.5" height="85"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment>
@@ -47,7 +47,7 @@ Book</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xx2-LV-Ws9">
-                                <rect key="frame" x="202.5" y="31" width="100.5" height="95"/>
+                                <rect key="frame" x="202.5" y="31" width="100.5" height="85"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment>
@@ -65,6 +65,13 @@ Book</string>
                                     <action selector="scanQrAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OEY-iI-2vR"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrIconGray" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-Zq-zuj">
+                                <rect key="frame" x="241.5" y="51" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="MLB-Hp-TXN"/>
+                                    <constraint firstAttribute="height" constant="22" id="Tnd-gj-Ehs"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmw-l9-T1m">
                                 <rect key="frame" x="100.5" y="49" width="1" height="59"/>
                                 <color key="backgroundColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,7 +87,7 @@ Book</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qrm-4B-BZS">
-                                <rect key="frame" x="101" y="31" width="100" height="95"/>
+                                <rect key="frame" x="101" y="31" width="100" height="85"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment>
@@ -98,18 +105,37 @@ Scan</string>
                                     <action selector="wirelessScanAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mmn-fl-29r"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Address_Book_Tab" translatesAutoresizingMaskIntoConstraints="NO" id="2Yk-X6-nsl">
+                                <rect key="frame" x="38" y="51" width="25" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="saZ-1X-J2n"/>
+                                    <constraint firstAttribute="width" constant="25" id="t2p-Pk-Knv"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8NfcSign" translatesAutoresizingMaskIntoConstraints="NO" id="jjT-YK-w8c">
+                                <rect key="frame" x="139" y="49" width="25" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="3z5-Cb-cTE"/>
+                                    <constraint firstAttribute="width" constant="25" id="Hzs-YZ-x1z"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.65098039220000004" green="0.69411764710000001" blue="0.77647058820000003" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="height" secondItem="RM9-Ez-HYz" secondAttribute="height" id="2OF-GZ-SNR"/>
+                            <constraint firstItem="YjI-Zq-zuj" firstAttribute="top" secondItem="Xx2-LV-Ws9" secondAttribute="top" constant="20" id="5a6-KK-JTJ"/>
+                            <constraint firstItem="2Yk-X6-nsl" firstAttribute="top" secondItem="RM9-Ez-HYz" secondAttribute="top" constant="20" id="5dh-Z9-3Se"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="leading" secondItem="RM9-Ez-HYz" secondAttribute="trailing" constant="1" id="6bW-6N-i2s"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="width" secondItem="RM9-Ez-HYz" secondAttribute="width" id="8vv-rq-cIF"/>
-                            <constraint firstAttribute="bottom" secondItem="RM9-Ez-HYz" secondAttribute="bottom" id="D3b-lo-GRV"/>
+                            <constraint firstAttribute="bottom" secondItem="RM9-Ez-HYz" secondAttribute="bottom" constant="10" id="D3b-lo-GRV"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="leading" secondItem="mmw-l9-T1m" secondAttribute="trailing" constant="-0.5" id="H2s-hx-KHD"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="centerY" secondItem="RM9-Ez-HYz" secondAttribute="centerY" id="JOj-2c-xu0"/>
+                            <constraint firstItem="YjI-Zq-zuj" firstAttribute="centerX" secondItem="Xx2-LV-Ws9" secondAttribute="centerX" id="O2N-af-tAv"/>
+                            <constraint firstItem="jjT-YK-w8c" firstAttribute="centerX" secondItem="qrm-4B-BZS" secondAttribute="centerX" id="RXz-qc-pIG"/>
                             <constraint firstItem="RM9-Ez-HYz" firstAttribute="leading" secondItem="C8a-FN-qsG" secondAttribute="leading" id="SMj-gB-lTD"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="leading" secondItem="qrm-4B-BZS" secondAttribute="trailing" constant="1" id="UPL-Tu-PZJ"/>
-                            <constraint firstAttribute="bottom" secondItem="Xx2-LV-Ws9" secondAttribute="bottom" id="adR-7T-c5y"/>
+                            <constraint firstItem="jjT-YK-w8c" firstAttribute="top" secondItem="qrm-4B-BZS" secondAttribute="top" constant="18" id="c2N-cz-drE"/>
+                            <constraint firstItem="2Yk-X6-nsl" firstAttribute="centerX" secondItem="RM9-Ez-HYz" secondAttribute="centerX" id="dRU-uH-2UF"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="centerY" secondItem="RM9-Ez-HYz" secondAttribute="centerY" id="dcB-gc-LaC"/>
                             <constraint firstItem="mmw-l9-T1m" firstAttribute="leading" secondItem="RM9-Ez-HYz" secondAttribute="trailing" constant="0.5" id="fWt-2I-L6I"/>
                             <constraint firstAttribute="bottom" secondItem="i2K-a1-cdT" secondAttribute="bottom" constant="18" id="jYr-Dy-tZw"/>
@@ -135,15 +161,26 @@ Scan</string>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
+                                    <action selector="textChangeAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="oki-uK-2HP"/>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="5oJ-Y9-En4"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOw-KZ-LML">
+                                <rect key="frame" x="172" y="35" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="fOw-KZ-LML" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T7v-9n-7zd" secondAttribute="leading" constant="10" id="PTS-9M-dri"/>
                             <constraint firstAttribute="height" constant="70" id="RCE-ox-Yxy"/>
+                            <constraint firstItem="fOw-KZ-LML" firstAttribute="centerX" secondItem="cr8-Jx-Rfq" secondAttribute="centerX" id="ZFH-4a-ayC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fOw-KZ-LML" secondAttribute="trailing" constant="10" id="ghf-Zr-hWk"/>
                             <constraint firstItem="cr8-Jx-Rfq" firstAttribute="leading" secondItem="T7v-9n-7zd" secondAttribute="leading" constant="10" id="ith-eV-6nN"/>
                             <constraint firstItem="cr8-Jx-Rfq" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="top" constant="10" id="k8X-da-3LM"/>
+                            <constraint firstItem="fOw-KZ-LML" firstAttribute="centerY" secondItem="cr8-Jx-Rfq" secondAttribute="centerY" id="u4z-Zp-3Th"/>
                             <constraint firstAttribute="bottom" secondItem="cr8-Jx-Rfq" secondAttribute="bottom" constant="10" id="vyR-5N-SWY"/>
                             <constraint firstAttribute="trailing" secondItem="cr8-Jx-Rfq" secondAttribute="trailing" constant="10" id="zj5-NP-U9m"/>
                         </constraints>
@@ -195,9 +232,15 @@ Scan</string>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addressInTfLlb" destination="fOw-KZ-LML" id="fha-UB-PmJ"/>
                 <outlet property="addressTF" destination="cr8-Jx-Rfq" id="VtB-jk-Zfs"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="32"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Address_Book_Tab" width="25" height="18"/>
+        <image name="icons8NfcSign" width="26" height="24"/>
+        <image name="qrIconGray" width="22" height="22"/>
+    </resources>
 </document>

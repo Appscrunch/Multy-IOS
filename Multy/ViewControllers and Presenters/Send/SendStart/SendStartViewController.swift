@@ -18,7 +18,7 @@ class SendStartViewController: UIViewController {
         self.registerCells()
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        
+        self.hideKeyboardWhenTappedAround()
         self.nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
     }
     

@@ -7,3 +7,5 @@ import UIKit
 let screenSize = UIScreen.main.bounds
 let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
+
+let exchangeCourse: Double = 10239.0

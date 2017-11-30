@@ -7,4 +7,11 @@ import UIKit
 class SendDetailsPresenter: NSObject {
 
     var sendDetailsVC: SendDetailsViewController?
+    
+    var choosenWallet: WalletRLM?
+    
+    var selectedIndexOfSpeed: Int?
+    
+    var donationInCrypto: Double? = 0.0001
+    var donationInFiat: Double?
 }

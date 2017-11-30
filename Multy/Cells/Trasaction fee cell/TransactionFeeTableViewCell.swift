@@ -28,7 +28,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
             self.setCornersForFirstCell()
             self.speedImage.image = #imageLiteral(resourceName: "veryFast")
             self.speedLbl.text = "Very Fast"
-            self.timeLbl.text = "∙ 1 hour"
+            self.timeLbl.text = "∙ 10 minutes"
 //            self.sumLbl.text = "" //example: 0.0001 BTC / 0.77 USD
             self.numberOfBlocksLbl.text = "6 blocks"
         case [0,1]:
