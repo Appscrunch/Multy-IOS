@@ -10,6 +10,7 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
     var presenter = WalletPresenter()
+    var even = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,11 +65,12 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0, 0] {
-            
+        if indexPath.row % 2 == 0 {
+            self.even = true
         } else {
-            self.performSegue(withIdentifier: "transactionVC", sender: Any.self)
+            self.even = false
         }
+        self.performSegue(withIdentifier: "transactionVC", sender: Any.self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -84,7 +86,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "transactionVC" {
             let vc = segue.destination as! TransactionViewController
-            vc.isForReceive = false
+            vc.isForReceive = self.even
         }
     }
 }

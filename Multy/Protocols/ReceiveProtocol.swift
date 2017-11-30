@@ -5,5 +5,5 @@
 import Foundation
 
 protocol ReceiveSumTransferProtocol {
-    func transferSum(amount: Double, currency: String, additionalInfo: String)
+    func transferSum(cryptoAmount: Double, cryptoCurrency: String, fiatAmount: Double, fiatName: String)
 }

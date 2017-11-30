@@ -29,4 +29,8 @@ class SeedPhraseAboutViewController: UIViewController {
         self.performSegue(withIdentifier: "seedWordsVC", sender: UIButton.self)
     }
     
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

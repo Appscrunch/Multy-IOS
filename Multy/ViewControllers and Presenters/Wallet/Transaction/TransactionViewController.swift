@@ -49,9 +49,9 @@ class TransactionViewController: UIViewController {
     }
     
     func checkForSendOrReceive() {
-        if self.isForReceive == true {
+        if self.isForReceive == true {  // RECEIVE
             self.makeBackColor(color: self.presenter.receiveBackColor)
-        } else {  // SEND
+        } else {                        // SEND
             self.makeBackColor(color: self.presenter.sendBackColor)
             self.titleLbl.text = "Send \(self.cryptoName)"
             self.transactionImg.image = #imageLiteral(resourceName: "sendBigIcon")

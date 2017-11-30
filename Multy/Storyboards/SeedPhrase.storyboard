@@ -12,6 +12,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="AvenirNext.ttc">
+            <string>AvenirNext-DemiBold</string>
             <string>AvenirNext-Medium</string>
             <string>AvenirNext-Regular</string>
         </array>
@@ -94,6 +95,16 @@
                                 <color key="textColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2M-Lw-dYk">
+                                <rect key="frame" x="16" y="33" width="54" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelAction:" destination="wqv-j7-zb4" eventType="touchUpInside" id="G2g-TO-Gh8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9762609601020813" green="0.98015815019607544" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -102,6 +113,7 @@
                             <constraint firstItem="R0c-OL-Rcy" firstAttribute="leading" secondItem="fT1-tl-U4h" secondAttribute="leading" id="BK9-gq-JcK"/>
                             <constraint firstItem="q5S-mD-zQb" firstAttribute="leading" secondItem="b3R-rP-gYc" secondAttribute="leading" constant="35" id="EE8-aF-Tz0"/>
                             <constraint firstItem="pf7-VK-HCy" firstAttribute="top" secondItem="wn3-PW-6tC" secondAttribute="bottom" constant="51" id="F9Y-FH-Xmc"/>
+                            <constraint firstItem="c2M-Lw-dYk" firstAttribute="leading" secondItem="b3R-rP-gYc" secondAttribute="leading" constant="16" id="GMe-j6-ESW"/>
                             <constraint firstItem="Wey-AO-45o" firstAttribute="leading" secondItem="b3R-rP-gYc" secondAttribute="leading" id="IaB-Uk-XdV"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tNr-xh-HkC" secondAttribute="trailing" constant="20" id="Kz8-JV-qSJ"/>
                             <constraint firstItem="R0c-OL-Rcy" firstAttribute="top" secondItem="fT1-tl-U4h" secondAttribute="bottom" constant="60" id="Oh5-n0-dK3"/>
@@ -112,6 +124,7 @@
                             <constraint firstItem="vvN-cn-dsq" firstAttribute="leading" secondItem="q5S-mD-zQb" secondAttribute="trailing" constant="35" id="YY6-bs-Rbi"/>
                             <constraint firstAttribute="trailing" secondItem="IHG-IF-sNd" secondAttribute="trailing" constant="20" id="a0r-av-Gnc"/>
                             <constraint firstItem="IHG-IF-sNd" firstAttribute="top" secondItem="pf7-VK-HCy" secondAttribute="bottom" constant="34" id="a0x-bm-3L2"/>
+                            <constraint firstItem="c2M-Lw-dYk" firstAttribute="top" secondItem="wn3-PW-6tC" secondAttribute="bottom" constant="13" id="bqc-xR-2OF"/>
                             <constraint firstItem="IHG-IF-sNd" firstAttribute="leading" secondItem="b3R-rP-gYc" secondAttribute="leading" constant="20" id="dkA-3Y-3hL"/>
                             <constraint firstItem="pf7-VK-HCy" firstAttribute="centerX" secondItem="b3R-rP-gYc" secondAttribute="centerX" id="fgb-7k-FTE"/>
                             <constraint firstItem="QNx-57-hSf" firstAttribute="top" secondItem="Wey-AO-45o" secondAttribute="bottom" id="kd9-IG-cRd"/>

@@ -1,4 +1,4 @@
-//Copyright 2017 Idealnaya rabota LLC
+ //Copyright 2017 Idealnaya rabota LLC
 //Licensed under Multy.io license.
 //See LICENSE for details
 
@@ -11,6 +11,8 @@ class ReceiveStartViewController: UIViewController {
     
     let presenter = ReceiveStartPresenter()
     
+    var sendWalletDelegate: SendWalletProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -19,6 +21,7 @@ class ReceiveStartViewController: UIViewController {
         
         self.presenter.receiveStartVC = self
         self.registerCells()
+        self.presenter.createWallets()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +37,11 @@ class ReceiveStartViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if self.presenter.isNeedToPop {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
 //    Deselecting
@@ -54,29 +61,41 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.presenter.numberOfWallets()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
         walletCell.arrowImage.image = nil
+        walletCell.wallet = self.presenter.walletsArr[indexPath.row]
+        walletCell.fillInCell()
         return walletCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let wallCell = self.tableView.cellForRow(at: indexPath) as! WalletTableViewCell
-//        if !wallCell.isBorderOn {
-//            wallCell.makeBlueBorderAndArrow()
-//            // save selected wallet
+        self.presenter.selectedIndex = indexPath.row
+        if self.presenter.isNeedToPop == true {
+            self.sendWalletDelegate?.sendWallet(wallet: self.presenter.walletsArr[self.presenter.selectedIndex!])
+            self.navigationController?.popViewController(animated: true)
+        } else {
             self.performSegue(withIdentifier: "receiveDetails", sender: Any.self)
-//            self.presenter.selectedIndexPath = indexPath
-//        } else {
-//            wallCell.clearBorderAndArrow()
-//            // delete selected wallet
-//        }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 104
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let walletCell = cell as! WalletTableViewCell
+        walletCell.makeshadow()
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "receiveDetails" {
+            let receiveDetails = segue.destination as! ReceiveAllDetailsViewController
+            receiveDetails.presenter.wallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
+        }
     }
 }
