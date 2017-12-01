@@ -12,7 +12,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var donationSeparatorView: UIView!
     @IBOutlet weak var donationTitleLbl: UILabel!
     @IBOutlet weak var donationTF: UITextField!
-    @IBOutlet weak var donationSumLbl: UILabel!
+    @IBOutlet weak var donationFiatSumLbl: UILabel!
     @IBOutlet weak var donationFiatNameLbl: UILabel!
     @IBOutlet weak var donationCryptoNameLbl: UILabel!
     @IBOutlet weak var isDonateAvailableSW: UISwitch!
@@ -21,6 +21,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nextBtn: ZFRippleButton!
     
     let presenter = SendDetailsPresenter()
+    
+    var maxLengthForSum = 12
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,18 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                    gradientOrientation: .horizontal)
+        self.setupDonationUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.presenter.nullifyDonation()
+    }
+    
+    func setupDonationUI() {
+        self.donationTF.text = "\(self.presenter.donationInCrypto ?? 0.0)"
+        self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
+        self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat ?? 0.0)"
     }
     
     func registerCells() {
@@ -48,7 +62,17 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "sendAmountVC", sender: sender)
+        if self.presenter.selectedIndexOfSpeed != nil {
+            if isDonateAvailableSW.isOn {
+                self.presenter.createDonation()
+            }
+            self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
+            self.performSegue(withIdentifier: "sendAmountVC", sender: sender)
+        } else {
+            let alert = UIAlertController(title: "Transaction speed not selected!", message: "Please choose one or set cuctom", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //MARK: Keyboard to scrollview
@@ -79,11 +103,17 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     //MARK: donationSwitch actions
     @IBAction func switchDonationAction(_ sender: Any) {
         if self.isDonateAvailableSW.isOn == false {
+            self.donationTF.resignFirstResponder()
+            self.presenter.donationInCrypto = 0.0
+            self.presenter.donationInFiat = 0.0
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant / 2
-            self.scrollView.contentSize.height = self.scrollView.contentSize.height - self.constraintDonationHeight.constant
+            self.scrollView.contentSize.height = self.scrollView.contentSize.height -
+                self.constraintDonationHeight.constant
         } else {
+            self.donationTF.becomeFirstResponder()
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant * 2
-            self.scrollView.contentSize.height = self.scrollView.contentSize.height + self.constraintDonationHeight.constant
+            self.scrollView.contentSize.height = self.scrollView.contentSize.height +
+                self.constraintDonationHeight.constant
         }
         self.hideOrShowDonationBottom()
         self.scrollView.scrollRectToVisible(self.nextBtn.frame, animated: true)
@@ -92,7 +122,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     func hideOrShowDonationBottom() {
         self.donationSeparatorView.isHidden = !self.isDonateAvailableSW.isOn
         self.donationTF.isHidden = !self.isDonateAvailableSW.isOn
-        self.donationSumLbl.isHidden = !self.isDonateAvailableSW.isOn
+        self.donationFiatSumLbl.isHidden = !self.isDonateAvailableSW.isOn
         self.donationFiatNameLbl.isHidden = !self.isDonateAvailableSW.isOn
         self.donationCryptoNameLbl.isHidden = !self.isDonateAvailableSW.isOn
         self.donationTitleLbl.isHidden = !self.isDonateAvailableSW.isOn
@@ -113,7 +143,64 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.scrollView.isScrollEnabled = true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.count + string.count - range.length
+
+        if (string == "," || string == ".") && self.donationTF.text == "" {
+            self.donationTF.text = "0\(string)"
+        }
+        if string == "" {
+            self.donationTF.text?.removeLast()
+            self.saveDonationSum(string: "")
+            return false
+        }
+        
+        if newLength <= self.maxLengthForSum {
+            self.donationTF.text = self.donationTF.text?.replacingOccurrences(of: ",", with: ".")
+            if string == "," && (self.donationTF.text?.contains("."))!{
+                return false
+            }
+            if (self.donationTF.text?.contains("."))! && string != "" {
+                let strAfterDot: [String?] = (self.donationTF.text?.components(separatedBy: "."))!
+                if strAfterDot[1]?.count == 8 {
+                    return false
+                }
+            }
+            self.saveDonationSum(string: string)
+        }
+        
+        return newLength <= self.maxLengthForSum
+    }
+    
+    func saveDonationSum(string: String) {
+        if string == "" && self.donationTF.text == "" {
+            self.presenter.donationInCrypto = 0.0
+            self.presenter.donationInFiat = 0.0
+            self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat ?? 0.0)"
+        } else {
+            self.presenter.donationInCrypto = (self.donationTF.text! + string as NSString).doubleValue
+            self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
+            self.presenter.donationInFiat = Double(round(100*self.presenter.donationInFiat!)/100)
+            self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat ?? 0.0)"
+        }
+    }
+    
     //end
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendAmountVC" {
+            let sendAmountVC = segue.destination as! SendAmountViewController
+            sendAmountVC.presenter.wallet = self.presenter.choosenWallet
+            sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
+            sendAmountVC.presenter.donationObj = self.presenter.donationObj
+            sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
+            if self.presenter.amountFromQr != nil {
+                sendAmountVC.sumInCrypto = self.presenter.amountFromQr!
+            }
+        }
+    }
 }
 
 extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -143,17 +230,18 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             let trueCells = cells as! [TransactionFeeTableViewCell]
             if trueCells[indexPath.row].checkMarkImage.isHidden == false {
                 trueCells[indexPath.row].checkMarkImage.isHidden = true
+                self.presenter.selectedIndexOfSpeed = nil
                 return
             }
             for cell in trueCells {
                 cell.checkMarkImage.isHidden = true
             }
             trueCells[indexPath.row].checkMarkImage.isHidden = false
+            self.presenter.selectedIndexOfSpeed = indexPath.row
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
-        
     }
 }

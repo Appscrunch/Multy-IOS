@@ -7,9 +7,11 @@ import UIKit
 class SearchAddressTableViewCell: UITableViewCell {
 
     @IBOutlet weak var addressTF: UITextField!
+    @IBOutlet weak var addressInTfLlb: UILabel!
     
     var cancelDelegate: CancelProtocol?
     var sendAddressDelegate: SendAddressProtocol?
+    var goToQrDelegate: GoToQrProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +21,7 @@ class SearchAddressTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
     
     @IBAction func cancelAction(_ sender: Any) {
         self.cancelDelegate?.cancelAction()
@@ -31,6 +34,14 @@ class SearchAddressTableViewCell: UITableViewCell {
     }
     
     @IBAction func scanQrAction(_ sender: Any) {
+        self.goToQrDelegate?.goToScanQr()
+    }
+    
+    func updateWithAddress(address: String) {
+//        self.addressTF.isHidden = true
+        self.addressTF.textColor = .white
+        self.addressTF.text = address
+        self.addressInTfLlb.text = address
     }
 }
 
@@ -40,4 +51,20 @@ extension SearchAddressTableViewCell: UITextFieldDelegate {
         self.sendAddressDelegate?.sendAddress(address: textField.text!)
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if string == "" {
+            self.addressInTfLlb.text?.removeLast()
+        } else {
+            self.addressTF.isHidden = true
+            self.addressInTfLlb.text = self.addressTF.text! + string
+        }
+        if self.addressInTfLlb.text == "" {
+            self.addressTF.isHidden = false
+        }
+        
+        return true
+    }
+    
 }

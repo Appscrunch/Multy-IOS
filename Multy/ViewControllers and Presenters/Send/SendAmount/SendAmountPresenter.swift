@@ -6,4 +6,26 @@ import UIKit
 
 class SendAmountPresenter: NSObject {
     var sendAmountVC: SendAmountViewController?
+    
+    var exchangeCourse: Double = 10239.0 // usd for 1 BTC
+    
+    var wallet: WalletRLM?
+    
+    var addressToStr: String?
+    
+    var selectedSpeedIndex: Int?
+    
+    var transactionObj: TransactionRLM?
+    
+    var donationObj: DonationObj?
+    
+    var maxSendable = 0.0
+    
+    func countMaxSpendable() {
+        if self.donationObj == nil {
+            self.maxSendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)!
+        } else {
+            self.maxSendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)! - (self.donationObj?.sumInCrypto)!
+        }
+    }
 }

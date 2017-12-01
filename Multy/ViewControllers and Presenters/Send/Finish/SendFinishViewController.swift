@@ -28,6 +28,20 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendFinishVC = self
+        self.setupUI()
+    }
+    
+    func setupUI() {
+        self.cryptoSumLbl.text = "\(self.presenter.sumInCrypto ?? 0.0)"
+        self.cryptoNamelbl.text = "\(self.presenter.cryptoName ?? "BTC")"
+        self.fiatSumAndCurrancyLbl.text = "\(self.presenter.sumInFiat ?? 0.0) \(self.presenter.fiatName ?? "USD")"
+        self.addressLbl.text = self.presenter.addressToStr
+        self.walletNameLbl.text = self.presenter.walletFrom?.name
+        self.walletCryptoSumAndCurrencyLbl.text = "\(self.presenter.walletFrom?.sumInCrypto ?? 0.0) \(self.presenter.walletFrom?.cryptoName ?? "")"
+//        self.fiatSumAndCurrancyLbl.text = "\(self.presenter.walletFrom?.sumInFiat ?? 0.0) \(self.presenter.walletFrom?.fiatName ?? "")"
+        self.transactionFeeCostLbl.text = "\(self.presenter.transactionObj?.sumInCrypto ?? 0.0) \(self.presenter.transactionObj?.cryptoName ?? "")/\(self.presenter.transactionObj?.sumInFiat ?? 0.0) \(self.presenter.transactionObj?.fiatName ?? "")"
+        self.transactionSpeedNameLbl.text = "\(self.presenter.transactionObj?.speedName ?? "")"
+        self.transactionSpeedTimeLbl.text =  "\(self.presenter.transactionObj?.speedTimeString ?? "")"
     }
     
     @IBAction func cancelAction(_ sender: Any) {

@@ -28,5 +28,15 @@ class NewWalletTableViewCell: UITableViewCell {
         self.topLineView.isHidden = true
         self.cellNameLbl.font = UIFont(name: "Avenir Next Medium", size: 16)
         self.cellNameLbl.text = "Recent Addresses"
+        self.makeTopCorners()
+    }
+    
+    func makeTopCorners() {
+        let maskPath = UIBezierPath.init(roundedRect: self.bounds, byRoundingCorners:[.topLeft, .topRight], cornerRadii: CGSize.init(width: 15.0, height: 15.0))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = self.bounds
+        maskLayer.path = maskPath.cgPath
+        self.layer.mask = maskLayer
     }
 }
+

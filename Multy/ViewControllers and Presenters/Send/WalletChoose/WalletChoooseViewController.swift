@@ -15,6 +15,8 @@ class WalletChoooseViewController: UIViewController {
         super.viewDidLoad()
         self.registerCell()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        self.presenter.walletChoooseVC = self
+        self.presenter.createWallets()
     }
     
     func registerCell() {
@@ -25,6 +27,15 @@ class WalletChoooseViewController: UIViewController {
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendDetailsVC" {
+            let detailsVC = segue.destination as! SendDetailsViewController
+            detailsVC.presenter.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
+            detailsVC.presenter.addressToStr = self.presenter.addressToStr
+            detailsVC.presenter.amountFromQr = self.presenter.amountFromQr
+        }
+    }
 }
 
 extension WalletChoooseViewController: UITableViewDelegate, UITableViewDataSource {
@@ -33,12 +44,14 @@ extension WalletChoooseViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.presenter.numberOfWallets()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
         walletCell.arrowImage.image = nil
+        walletCell.wallet = self.presenter.walletsArr[indexPath.row]
+        walletCell.fillInCell()
         return walletCell
     }
     
@@ -47,6 +60,7 @@ extension WalletChoooseViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "identifier", sender: Any.self)
+        self.presenter.selectedIndex = indexPath.row
+        self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)
     }
 }
