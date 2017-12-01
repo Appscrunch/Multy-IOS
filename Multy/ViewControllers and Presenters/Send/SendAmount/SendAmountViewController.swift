@@ -40,14 +40,25 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendAmountVC = self
+        self.presenter.countMaxSpendable()
         self.nextBtn.isEnabled = false
         self.nextBtn.backgroundColor = .gray
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.amountTF.becomeFirstResponder()
-        self.spendableSumAndCurrencyLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0) \(self.presenter.wallet?.cryptoName.uppercased() ?? "BTC")"
+        self.spendableSumAndCurrencyLbl.text = "\(self.presenter.maxSendable) \(self.presenter.wallet?.cryptoName.uppercased() ?? "BTC")"
         
         self.topSumLbl.addObserver(self, forKeyPath: "text", options: [.old, .new], context: nil)
+        self.setAmountFromQr()
+    }
+    
+    func setAmountFromQr() {
+        if self.sumInCrypto != 0.0 {
+            self.amountTF.text = "\(self.sumInCrypto)"
+            self.topSumLbl.text = "\(self.sumInCrypto)"
+            self.btnSumLbl.text = "\(self.sumInCrypto)"
+            self.cryptoToUsd()
+        }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -116,7 +127,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func cryptoToUsd() {
-        self.sumInFiat = (self.presenter.wallet?.sumInCrypto)! * exchangeCourse
+        self.sumInFiat = self.sumInCrypto * exchangeCourse
         self.sumInFiat = Double(round(100*self.sumInFiat)/100)
         self.bottomSumLbl.text = "\(self.sumInFiat)"
     }
@@ -125,7 +136,19 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
     }
     
+    func presentWarning() {
+        let alert = UIAlertController(title: "Warining", message: "You trying to enter sum more then you have", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (string != "," || string != ".") && ((self.topSumLbl.text! + string) as NSString).doubleValue > (self.presenter.maxSendable) {
+            if string != "" {
+                self.presentWarning()
+                return false
+            }
+        }
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
         
@@ -193,7 +216,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             sendFinishVC.presenter.sumInFiat = self.sumInFiat
             sendFinishVC.presenter.cryptoName = self.cryptoName
             sendFinishVC.presenter.fiatName = self.fiatName
-            
             sendFinishVC.presenter.transactionObj = self.presenter.transactionObj
         }
     }

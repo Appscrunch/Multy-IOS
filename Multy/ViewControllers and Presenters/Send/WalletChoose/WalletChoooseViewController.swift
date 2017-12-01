@@ -33,6 +33,7 @@ class WalletChoooseViewController: UIViewController {
             let detailsVC = segue.destination as! SendDetailsViewController
             detailsVC.presenter.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
             detailsVC.presenter.addressToStr = self.presenter.addressToStr
+            detailsVC.presenter.amountFromQr = self.presenter.amountFromQr
         }
     }
 }

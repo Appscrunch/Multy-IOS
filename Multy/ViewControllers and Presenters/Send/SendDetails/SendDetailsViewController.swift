@@ -38,6 +38,11 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.setupDonationUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.presenter.nullifyDonation()
+    }
+    
     func setupDonationUI() {
         self.donationTF.text = "\(self.presenter.donationInCrypto ?? 0.0)"
         self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
@@ -58,6 +63,9 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func nextAction(_ sender: Any) {
         if self.presenter.selectedIndexOfSpeed != nil {
+            if isDonateAvailableSW.isOn {
+                self.presenter.createDonation()
+            }
             self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.performSegue(withIdentifier: "sendAmountVC", sender: sender)
         } else {
@@ -96,6 +104,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBAction func switchDonationAction(_ sender: Any) {
         if self.isDonateAvailableSW.isOn == false {
             self.donationTF.resignFirstResponder()
+            self.presenter.donationInCrypto = 0.0
+            self.presenter.donationInFiat = 0.0
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant / 2
             self.scrollView.contentSize.height = self.scrollView.contentSize.height -
                 self.constraintDonationHeight.constant
@@ -184,8 +194,11 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
             let sendAmountVC = segue.destination as! SendAmountViewController
             sendAmountVC.presenter.wallet = self.presenter.choosenWallet
             sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
-            
+            sendAmountVC.presenter.donationObj = self.presenter.donationObj
             sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
+            if self.presenter.amountFromQr != nil {
+                sendAmountVC.sumInCrypto = self.presenter.amountFromQr!
+            }
         }
     }
 }
@@ -230,6 +243,5 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
-        
     }
 }

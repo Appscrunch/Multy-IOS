@@ -10,6 +10,7 @@ class WalletChooosePresenter: NSObject {
     
     var walletsArr = [WalletRLM]()
     var addressToStr: String?
+    var amountFromQr: Double?
     
     var selectedIndex: Int?
     

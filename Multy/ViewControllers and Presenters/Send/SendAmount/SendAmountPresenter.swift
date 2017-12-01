@@ -16,4 +16,16 @@ class SendAmountPresenter: NSObject {
     var selectedSpeedIndex: Int?
     
     var transactionObj: TransactionRLM?
+    
+    var donationObj: DonationObj?
+    
+    var maxSendable = 0.0
+    
+    func countMaxSpendable() {
+        if self.donationObj == nil {
+            self.maxSendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)!
+        } else {
+            self.maxSendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)! - (self.donationObj?.sumInCrypto)!
+        }
+    }
 }

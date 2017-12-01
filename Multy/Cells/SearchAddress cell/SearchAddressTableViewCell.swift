@@ -11,6 +11,7 @@ class SearchAddressTableViewCell: UITableViewCell {
     
     var cancelDelegate: CancelProtocol?
     var sendAddressDelegate: SendAddressProtocol?
+    var goToQrDelegate: GoToQrProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +34,14 @@ class SearchAddressTableViewCell: UITableViewCell {
     }
     
     @IBAction func scanQrAction(_ sender: Any) {
+        self.goToQrDelegate?.goToScanQr()
+    }
+    
+    func updateWithAddress(address: String) {
+//        self.addressTF.isHidden = true
+        self.addressTF.textColor = .white
+        self.addressTF.text = address
+        self.addressInTfLlb.text = address
     }
 }
 

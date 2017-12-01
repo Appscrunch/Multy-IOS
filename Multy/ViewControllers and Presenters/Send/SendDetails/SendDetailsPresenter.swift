@@ -14,10 +14,15 @@ class SendDetailsPresenter: NSObject {
     
     var donationInCrypto: Double? = 0.0001
     var donationInFiat: Double?
+    var cryptoName = "BTC"
+    var fiatName = "USD"
     
     var addressToStr: String?
+    var amountFromQr: Double?
     
     let trasactionObj = TransactionRLM()
+    
+    let donationObj = DonationObj()
     
 //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
     
@@ -66,6 +71,20 @@ class SendDetailsPresenter: NSObject {
         default:
             return
         }
+    }
+    
+    func createDonation() {
+        self.donationObj.sumInCrypto = self.donationInCrypto
+        self.donationObj.cryptoName = self.cryptoName
+        self.donationObj.sumInFiat = Double(round(100*self.donationInCrypto!*exchangeCourse/100))
+        self.donationObj.fiatName = self.fiatName
+    }
+    
+    func nullifyDonation() {
+        self.donationObj.sumInCrypto = 0.0
+        self.donationObj.cryptoName = ""
+        self.donationObj.sumInFiat = 0.0
+        self.donationObj.fiatName = ""
     }
     
 }

@@ -76,11 +76,49 @@
                         <outlet property="nextBtn" destination="S0T-Fm-OmK" id="IAc-OO-F78"/>
                         <outlet property="tableView" destination="H94-7K-Etr" id="6mf-E7-FlG"/>
                         <segue destination="3gL-lZ-1hN" kind="show" identifier="chooseWalletVC" id="o35-7A-1Zt"/>
+                        <segue destination="Tfc-aA-5T8" kind="show" identifier="qrCamera" id="FRo-Sp-aVY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uor-oM-Mbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.8000000000000007" y="-35.532233883058474"/>
+        </scene>
+        <!--Qr Scanner View Controller-->
+        <scene sceneID="kSv-e9-VJc">
+            <objects>
+                <viewController id="Tfc-aA-5T8" customClass="QrScannerViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hv6-Ka-87r"/>
+                        <viewControllerLayoutGuide type="bottom" id="mN7-RK-daB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EAS-0V-dgy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="0hP-pz-YnA">
+                                <rect key="frame" x="16" y="33" width="13" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="DqL-oV-NJf"/>
+                                    <constraint firstAttribute="width" constant="13" id="eri-ao-Qg1"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IoS-bS-gaA">
+                                <rect key="frame" x="0.0" y="33" width="49" height="30"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IoS-bS-gaA" firstAttribute="top" secondItem="hv6-Ka-87r" secondAttribute="bottom" constant="13" id="6eR-bM-3IX"/>
+                            <constraint firstItem="0hP-pz-YnA" firstAttribute="top" secondItem="hv6-Ka-87r" secondAttribute="bottom" constant="13" id="H24-ip-Gx0"/>
+                            <constraint firstItem="0hP-pz-YnA" firstAttribute="leading" secondItem="EAS-0V-dgy" secondAttribute="leading" constant="16" id="Iah-x9-bsA"/>
+                            <constraint firstItem="IoS-bS-gaA" firstAttribute="leading" secondItem="EAS-0V-dgy" secondAttribute="leading" id="OJt-aL-2G1"/>
+                            <constraint firstItem="IoS-bS-gaA" firstAttribute="trailing" secondItem="0hP-pz-YnA" secondAttribute="trailing" constant="20" id="Zdf-Zb-IYS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5j7-dh-9Mv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9" y="770"/>
         </scene>
         <!--Wallet Chooose View Controller-->
         <scene sceneID="HO5-Ha-KfH">

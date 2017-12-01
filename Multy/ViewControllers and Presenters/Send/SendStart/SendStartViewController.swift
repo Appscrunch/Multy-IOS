@@ -48,6 +48,10 @@ class SendStartViewController: UIViewController {
         if segue.identifier == "chooseWalletVC" {
             let chooseWalletVC = segue.destination as! WalletChoooseViewController
             chooseWalletVC.presenter.addressToStr = self.presenter.adressSendTo
+            chooseWalletVC.presenter.amountFromQr = self.presenter.amountInCrypto
+        } else if segue.identifier == "qrCamera" {
+            let qrScanerVC = segue.destination as! QrScannerViewController
+            qrScanerVC.qrDelegate = self.presenter
         }
     }
     
@@ -65,8 +69,12 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {
             let searchAddressCell = self.tableView.dequeueReusableCell(withIdentifier: "searchAddressCell") as! SearchAddressTableViewCell
+            if self.presenter.adressSendTo != "" {
+                searchAddressCell.updateWithAddress(address: self.presenter.adressSendTo)
+            }
             searchAddressCell.cancelDelegate = self.presenter
             searchAddressCell.sendAddressDelegate = self.presenter
+            searchAddressCell.goToQrDelegate = self.presenter
             return searchAddressCell
         } else if indexPath == [0, 1] {
             let oneLabelCell = self.tableView.dequeueReusableCell(withIdentifier: "oneLabelCell") as! NewWalletTableViewCell
@@ -91,9 +99,14 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
             let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
             let selectedCell = self.tableView.cellForRow(at: indexPath) as! RecentAddressTableViewCell
             searchCell.addressTF.text = selectedCell.addressLbl.text
+            searchCell.addressInTfLlb.text = selectedCell.addressLbl.text
             self.presenter.adressSendTo = selectedCell.addressLbl.text!
             self.tableView.deselectRow(at: indexPath, animated: true)
             self.makeAvailableNextBtn()
         }
+    }
+    
+    func updateUI() {
+        self.tableView.reloadData()
     }
 }
