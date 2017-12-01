@@ -9,6 +9,7 @@ class WalletChooosePresenter: NSObject {
     var walletChoooseVC: WalletChoooseViewController?
     
     var walletsArr = [WalletRLM]()
+    var addressToStr: String?
     
     var selectedIndex: Int?
     

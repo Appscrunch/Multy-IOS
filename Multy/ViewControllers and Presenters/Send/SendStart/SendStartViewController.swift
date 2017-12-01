@@ -44,6 +44,13 @@ class SendStartViewController: UIViewController {
                                    gradientOrientation: .horizontal)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chooseWalletVC" {
+            let chooseWalletVC = segue.destination as! WalletChoooseViewController
+            chooseWalletVC.presenter.addressToStr = self.presenter.adressSendTo
+        }
+    }
+    
 }
 
 extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
@@ -84,6 +91,7 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
             let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
             let selectedCell = self.tableView.cellForRow(at: indexPath) as! RecentAddressTableViewCell
             searchCell.addressTF.text = selectedCell.addressLbl.text
+            self.presenter.adressSendTo = selectedCell.addressLbl.text!
             self.tableView.deselectRow(at: indexPath, animated: true)
             self.makeAvailableNextBtn()
         }

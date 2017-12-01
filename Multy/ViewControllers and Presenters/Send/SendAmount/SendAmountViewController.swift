@@ -45,7 +45,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         self.amountTF.becomeFirstResponder()
-        self.spendableSumAndCurrencyLbl.text = "\(self.cryptoSumInWallet) BTC"
+        self.spendableSumAndCurrencyLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0) \(self.presenter.wallet?.cryptoName.uppercased() ?? "BTC")"
         
         self.topSumLbl.addObserver(self, forKeyPath: "text", options: [.old, .new], context: nil)
     }
@@ -103,15 +103,22 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     @IBAction func maxAction(_ sender: Any) {
         self.sumInCrypto = self.cryptoSumInWallet
         if self.isCrypto {
-            self.amountTF.text = "\(self.sumInCrypto)"
-            self.topSumLbl.text = "\(self.sumInCrypto)"
+            self.amountTF.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0)"
+            self.topSumLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0)"
+            self.cryptoToUsd()
         } else {
-            self.bottomSumLbl.text = "\(self.sumInCrypto) BTC"
+            self.bottomSumLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0) BTC"
         }
         self.spendableSumAndCurrencyLbl.text = "0.0 BTC"
         self.maxBtn.isEnabled = false
         self.maxLbl.textColor = UIColor.gray
-        
+        self.saveTfValue()
+    }
+    
+    func cryptoToUsd() {
+        self.sumInFiat = (self.presenter.wallet?.sumInCrypto)! * exchangeCourse
+        self.sumInFiat = Double(round(100*self.sumInFiat)/100)
+        self.bottomSumLbl.text = "\(self.sumInFiat)"
     }
     
     @IBAction func nextAction(_ sender: Any) {
@@ -174,6 +181,20 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             self.sumInCrypto = Double(round(100000000*self.sumInCrypto)/100000000 )
             self.bottomSumLbl.text = "\(self.sumInCrypto) "
             self.bottomCurrencyLbl.text = self.cryptoName
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendFinishVC" {
+            let sendFinishVC = segue.destination as! SendFinishViewController
+            sendFinishVC.presenter.addressToStr = self.presenter.addressToStr
+            sendFinishVC.presenter.walletFrom = self.presenter.wallet
+            sendFinishVC.presenter.sumInCrypto = self.sumInCrypto
+            sendFinishVC.presenter.sumInFiat = self.sumInFiat
+            sendFinishVC.presenter.cryptoName = self.cryptoName
+            sendFinishVC.presenter.fiatName = self.fiatName
+            
+            sendFinishVC.presenter.transactionObj = self.presenter.transactionObj
         }
     }
 }

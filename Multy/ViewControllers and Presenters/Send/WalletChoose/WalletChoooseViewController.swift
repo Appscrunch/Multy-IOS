@@ -32,6 +32,7 @@ class WalletChoooseViewController: UIViewController {
         if segue.identifier == "sendDetailsVC" {
             let detailsVC = segue.destination as! SendDetailsViewController
             detailsVC.presenter.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
+            detailsVC.presenter.addressToStr = self.presenter.addressToStr
         }
     }
 }

@@ -58,6 +58,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func nextAction(_ sender: Any) {
         if self.presenter.selectedIndexOfSpeed != nil {
+            self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.performSegue(withIdentifier: "sendAmountVC", sender: sender)
         } else {
             let alert = UIAlertController(title: "Transaction speed not selected!", message: "Please choose one or set cuctom", preferredStyle: .alert)
@@ -168,15 +169,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
             self.presenter.donationInCrypto = 0.0
             self.presenter.donationInFiat = 0.0
             self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat ?? 0.0)"
-        }
-//        else if string == "" {
-//            self.donationTF.text?.removeLast()
-//            self.presenter.donationInCrypto = ("\(self.donationTF.text!)" as NSString).doubleValue
-//            self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
-//            self.presenter.donationInFiat = Double(round(100*self.presenter.donationInFiat!)/100)
-//            self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat ?? 0.0)"
-//        }
-        else {
+        } else {
             self.presenter.donationInCrypto = (self.donationTF.text! + string as NSString).doubleValue
             self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
             self.presenter.donationInFiat = Double(round(100*self.presenter.donationInFiat!)/100)
@@ -185,6 +178,16 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     //end
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendAmountVC" {
+            let sendAmountVC = segue.destination as! SendAmountViewController
+            sendAmountVC.presenter.wallet = self.presenter.choosenWallet
+            sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
+            
+            sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
+        }
+    }
 }
 
 extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource {

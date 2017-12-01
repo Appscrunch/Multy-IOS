@@ -10,4 +10,10 @@ class SendAmountPresenter: NSObject {
     var exchangeCourse: Double = 10239.0 // usd for 1 BTC
     
     var wallet: WalletRLM?
+    
+    var addressToStr: String?
+    
+    var selectedSpeedIndex: Int?
+    
+    var transactionObj: TransactionRLM?
 }
