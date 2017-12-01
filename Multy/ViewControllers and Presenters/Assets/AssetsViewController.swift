@@ -9,24 +9,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
-    var account : AccountRLM? {
-        didSet {
-//            fetchAssets()
-//            fetchTickets()
-//            getExchange()
-//            getTransInfo()
-        }
-    }
     let presenter = AssetsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        self.presenter.assetsVC = self
+        self.presenter.mainVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
-        self.registerCells()
+        self.presenter.registerCells()
         
         let mnemoString = DataManager.shared.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
         print("mnemoString: \(mnemoString)")
@@ -36,6 +28,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MAKE: first launch
 //        let _ = DataManager.shared
         
+        
+        //MARK: test
         DataManager.shared.apiManager.auth { (dict, error) in
             guard dict != nil else {
                 return
@@ -49,56 +43,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(account!)
                 
                 DispatchQueue.main.async {
-                    self.account = account
+                    self.presenter.account = account
                 }
             })
         }
     }
     
-    //////////////////////////////////////////////////////////////////////
-    //test
     
-    func fetchAssets() {
-        guard account?.token != nil else {
-            return
-        }
-        
-        DataManager.shared.apiManager.getAssets(account!.token, completion: { (assetsDict, error) in
-            print(assetsDict)
-        })
-    }
-    
-    func fetchTickets() {
-        DataManager.shared.apiManager.getTickets(account!.token, direction: "") { (dict, error) in
-            guard dict != nil  else {
-                return
-            }
-            
-            print(dict!)
-        }
-    }
-    
-    func getExchange() {
-        DataManager.shared.apiManager.getExchangePrice(account!.token, direction: "") { (dict, error) in
-            guard dict != nil  else {
-                return
-            }
-            
-            print(dict!)
-        }
-    }
-    
-    func getTransInfo() {
-        DataManager.shared.apiManager.getTransactionInfo(account!.token,
-                                                         transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
-                                                            guard transDict != nil else {
-                                                                return
-                                                            }
-                                                            
-                                                            print(transDict)
-        }
-    }
-    //////////////////////////////////////////////////////////////////////
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,17 +66,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             self.tableViewTopConstraint.constant = 0
         }
-    }
-    
-    func registerCells() {
-        let walletCell = UINib.init(nibName: "WalletTableViewCell", bundle: nil)
-        self.tableView.register(walletCell, forCellReuseIdentifier: "walletCell")
-        
-        let portfolioCell = UINib.init(nibName: "PortfolioTableViewCell", bundle: nil)
-        self.tableView.register(portfolioCell, forCellReuseIdentifier: "portfolioCell")
-        
-        let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
-        self.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
 
     //MARK: Table view delegates
@@ -154,19 +94,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [0, 1] {
-            let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-            actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
-                self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
-            }))
-            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
-                //go to import wallet
-            }))
-            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            self.present(actionSheet, animated: true, completion: {
-                //doint something
-            })
-        
+            presenter.openCreateWalletPopup()
         }  else if indexPath == [0, 2] {
             let storyboard = UIStoryboard(name: "Receive", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")

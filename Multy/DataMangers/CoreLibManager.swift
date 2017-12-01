@@ -136,6 +136,7 @@ class CoreLibManager: NSObject {
         
         //HD Account
         createHDAccount(from: rootID)
+        transaction()
         
         return rootID
     }
@@ -189,4 +190,17 @@ class CoreLibManager: NSObject {
         let currency : Currency = currencyPointer.pointee
         print("currency: \(currency)")
     }
+    
+    func transaction() {
+        var amount = Int8(20)
+        var anotherAmount = Int8(30)
+
+        let newAmount = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let ma = make_amount(&amount, newAmount)
+    }
 }
+
+//make_amount(UnsafePointer<Int8>!, UnsafeMutablePointer<OpaquePointer?>!)
+
