@@ -45,11 +45,16 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.nextBtn.backgroundColor = .gray
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        self.amountTF.becomeFirstResponder()
-        self.spendableSumAndCurrencyLbl.text = "\(self.presenter.maxSendable) \(self.presenter.wallet?.cryptoName.uppercased() ?? "BTC")"
+        self.spendableSumAndCurrencyLbl.text = "\(self.presenter.maxSpendable) \(self.presenter.wallet?.cryptoName.uppercased() ?? "BTC")"
         
         self.topSumLbl.addObserver(self, forKeyPath: "text", options: [.old, .new], context: nil)
         self.setAmountFromQr()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.amountTF.resignFirstResponder()
+        self.amountTF.becomeFirstResponder()
     }
     
     func setAmountFromQr() {
@@ -61,8 +66,12 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     //MARK: change sum in button
@@ -114,8 +123,10 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     @IBAction func maxAction(_ sender: Any) {
         self.sumInCrypto = self.cryptoSumInWallet
         if self.isCrypto {
-            self.amountTF.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0)"
-            self.topSumLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0)"
+//            self.amountTF.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0)"
+//            self.topSumLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0)"
+            self.amountTF.text = "\(self.presenter.maxSpendable)"
+            self.topSumLbl.text = "\(self.presenter.maxSpendable)"
             self.cryptoToUsd()
         } else {
             self.bottomSumLbl.text = "\(self.presenter.wallet?.sumInCrypto ?? 0.0) BTC"
@@ -143,7 +154,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if (string != "," || string != ".") && ((self.topSumLbl.text! + string) as NSString).doubleValue > (self.presenter.maxSendable) {
+        if (string != "," || string != ".") && ((self.topSumLbl.text! + string) as NSString).doubleValue > (self.presenter.maxSpendable) {
             if string != "" {
                 self.presentWarning()
                 return false

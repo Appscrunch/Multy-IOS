@@ -25,4 +25,7 @@ class BackupSeedPhraseViewController: UIViewController {
         self.performSegue(withIdentifier: "checkPhraseVC", sender: UIButton.self)
     }
     
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 }

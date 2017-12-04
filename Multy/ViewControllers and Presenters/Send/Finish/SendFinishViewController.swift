@@ -28,6 +28,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendFinishVC = self
+        self.hideKeyboardWhenTappedAround()
         self.setupUI()
     }
     
@@ -44,8 +45,12 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.transactionSpeedTimeLbl.text =  "\(self.presenter.transactionObj?.speedTimeString ?? "")"
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func nextAction(_ sender: Any) {

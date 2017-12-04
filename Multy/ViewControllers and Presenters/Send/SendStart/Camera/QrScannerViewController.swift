@@ -5,7 +5,7 @@
 import UIKit
 import AVFoundation
 
-class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIGestureRecognizerDelegate {
 
     let presenter = QrScannerPresenter()
     
@@ -33,6 +33,12 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.qrScannerVC = self
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     override func viewWillDisappear(_ animated: Bool) {

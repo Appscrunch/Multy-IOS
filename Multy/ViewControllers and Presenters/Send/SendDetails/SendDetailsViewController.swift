@@ -57,8 +57,11 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.tableView.register(customFeeCell, forCellReuseIdentifier: "customFeeCell")
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func nextAction(_ sender: Any) {

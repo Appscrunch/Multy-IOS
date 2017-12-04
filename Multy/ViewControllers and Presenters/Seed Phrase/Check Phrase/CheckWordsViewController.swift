@@ -78,6 +78,10 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             self.constraintBtnBottom.constant = inset.bottom
         }
     }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 
 }
 

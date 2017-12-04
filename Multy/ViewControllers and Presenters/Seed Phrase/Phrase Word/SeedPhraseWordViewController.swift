@@ -43,4 +43,7 @@ class SeedPhraseWordViewController: UIViewController {
         
         presenter.presentNextTripleOrContinue()
     }
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 }

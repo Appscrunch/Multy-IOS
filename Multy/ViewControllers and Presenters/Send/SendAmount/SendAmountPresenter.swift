@@ -19,13 +19,13 @@ class SendAmountPresenter: NSObject {
     
     var donationObj: DonationObj?
     
-    var maxSendable = 0.0
+    var maxSpendable = 0.0
     
     func countMaxSpendable() {
         if self.donationObj == nil {
-            self.maxSendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)!
+            self.maxSpendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)!
         } else {
-            self.maxSendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)! - (self.donationObj?.sumInCrypto)!
+            self.maxSpendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)! - (self.donationObj?.sumInCrypto)!
         }
     }
 }

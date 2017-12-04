@@ -16,6 +16,7 @@ class SearchAddressTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        (self.addressTF.value(forKey: "textInputTraits") as AnyObject).setValue(UIColor.clear , forKey:"insertionPointColor")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,7 +58,7 @@ extension SearchAddressTableViewCell: UITextFieldDelegate {
         if string == "" {
             self.addressInTfLlb.text?.removeLast()
         } else {
-            self.addressTF.isHidden = true
+//            self.addressTF.isHidden = true
             self.addressInTfLlb.text = self.addressTF.text! + string
         }
         if self.addressInTfLlb.text == "" {
