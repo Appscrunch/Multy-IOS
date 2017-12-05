@@ -8,5 +8,5 @@ class ReceiveAmountPresenter: NSObject {
 
     var receiveAmountVC: ReceiveAmountViewController?
     
-    var exchangeCourse: Double = 10239.0 // usd for 1 BTC
+    var exchangeCourse: Double = 10000.0 // usd for 1 BTC
 }

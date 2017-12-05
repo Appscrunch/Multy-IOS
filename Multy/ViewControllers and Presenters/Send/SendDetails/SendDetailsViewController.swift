@@ -200,7 +200,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
             sendAmountVC.presenter.donationObj = self.presenter.donationObj
             sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
             if self.presenter.amountFromQr != nil {
-                sendAmountVC.sumInCrypto = self.presenter.amountFromQr!
+                sendAmountVC.presenter.sumInCrypto = self.presenter.amountFromQr!
             }
         }
     }

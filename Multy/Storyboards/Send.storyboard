@@ -683,6 +683,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bvb-dk-gfb">
                                         <rect key="frame" x="161.5" y="0.0" width="51" height="31"/>
                                         <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="payForCommisionAction:" destination="LFO-Fg-H8V" eventType="valueChanged" id="zRz-8b-Zld"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                             </stackView>
@@ -749,6 +752,7 @@
                         <outlet property="bottomCurrencyLbl" destination="njG-Gh-LWY" id="WuU-9R-olD"/>
                         <outlet property="bottomSumLbl" destination="iP4-gf-E0A" id="wff-n7-Mlp"/>
                         <outlet property="btnSumLbl" destination="oaC-Rz-vgT" id="eJm-WN-mtB"/>
+                        <outlet property="commissionSwitch" destination="Bvb-dk-gfb" id="RCd-v2-the"/>
                         <outlet property="constraintNextBtnBottom" destination="Bq3-lI-q8R" id="fiG-mw-0Dd"/>
                         <outlet property="constratintNextBtnHeight" destination="RGo-sn-svA" id="YXL-gK-NCu"/>
                         <outlet property="maxBtn" destination="6NZ-xx-Nqv" id="pUa-8A-pPb"/>
