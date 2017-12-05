@@ -7,13 +7,21 @@ import RealmSwift
 
 class RealmManager: NSObject {
     static let shared = RealmManager()
+//    let schemaVersion : UInt64 = 2
     
     private override init() {
         super.init()
         
         MasterKeyGenerator.shared.generateMasterKey { (masterKey, error, string) in
             if masterKey != nil {
-                _ = Realm.Configuration(encryptionKey: masterKey!)
+                _ = Realm.Configuration(encryptionKey: masterKey!//,
+//                                        schemaVersion: self.schemaVersion,
+//                                        migrationBlock: { migration, oldSchemaVersion in
+//                                            if oldSchemaVersion < self.schemaVersion {
+//                                                //some migration if needed
+//                                            }
+//                                        }
+                )
             } else {
                 print("Realm error while setting config")
             }
@@ -28,7 +36,10 @@ class RealmManager: NSObject {
                 return
             }
             
-            let realmConfig = Realm.Configuration(encryptionKey: masterKey!)
+            let realmConfig = Realm.Configuration(encryptionKey: masterKey!//,
+//                                                  schemaVersion: self.schemaVersion,
+//                                                  migrationBlock: nil
+            )
             
             do {
                 let realm = try Realm(configuration: realmConfig)
@@ -106,8 +117,26 @@ class RealmManager: NSObject {
                 try! realm.write {
                     //replace old value if exists
                     let accountRLM = account == nil ? AccountRLM() : account!
-                    accountRLM.expireDateString = accountDict["expire"] as! String
-                    accountRLM.token = accountDict["token"] as! String
+                    
+                    if accountDict["expire"] != nil {
+                        accountRLM.expireDateString = accountDict["expire"] as! String
+                    }
+                    
+                    if accountDict["token"] != nil {
+                        accountRLM.token = accountDict["token"] as! String
+                    }
+                    
+                    if accountDict["deviceid"] != nil {
+                        accountRLM.deviceID = accountDict["deviceid"] as! String
+                    }
+                    
+                    if accountDict["password"] != nil {
+                        accountRLM.password = accountDict["password"] as! String
+                    }
+                    
+                    if accountDict["username"] != nil {
+                        accountRLM.username = accountDict["username"] as! String
+                    }
                     
                     realm.add(accountRLM, update: true)
                     
@@ -121,5 +150,24 @@ class RealmManager: NSObject {
             }
         }
         
+    }
+    
+    public func createWallet(_ walletDict: Dictionary<String, Any>, completion: @escaping (_ account : WalletRLM?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let wallet = WalletRLM.initWithDictionary(walletDict)
+                
+                try! realm.write {
+                    realm.add(wallet, update: true)
+                    
+                    completion(wallet, nil)
+                    
+                    print("Successful writing wallet")
+                }
+            } else {
+                print("Error fetching realm:\(#function)")
+                completion(nil, nil)
+            }
+        }
     }
 }

@@ -22,4 +22,11 @@ extension DataManager {
             completion(seedPhrase, error)
         }
     }
+    
+    func createWallet(from walletDict: Dictionary<String, Any>,
+                      completion: @escaping (_ wallet: WalletRLM?, _ error: NSError?) -> ()) {
+        realmManager.createWallet(walletDict) { (wallet, error) in
+            completion(wallet, error)
+        }
+    }
 }

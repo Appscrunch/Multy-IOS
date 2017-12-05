@@ -30,22 +30,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         //MARK: test
-        DataManager.shared.apiManager.auth { (dict, error) in
-            guard dict != nil else {
+        DataManager.shared.auth { (account, error) in
+            guard account != nil else {
                 return
             }
             
-            DataManager.shared.realmManager.writeAccount(dict!, completion: { (account, error) in
-                guard account != nil else {
-                    return
-                }
-                
-                print(account!)
-                
-                DispatchQueue.main.async {
-                    self.presenter.account = account
-                }
-            })
+            DispatchQueue.main.async {
+                self.presenter.account = account
+            }
         }
     }
     

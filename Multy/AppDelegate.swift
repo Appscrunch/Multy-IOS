@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+//import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
 //        self.window?.rootViewController = initialViewController
 //        self.window?.makeKeyAndVisible()
+//        self.realmConfig()
         
         return true
     }
@@ -45,6 +47,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+//    func realmConfig () {
+//        let config = Realm.Configuration(
+//            // Set the new schema version. This must be greater than the previously used
+//            // version (if you've never set a schema version before, the version is 0).
+//            schemaVersion: 1,
+//
+//            // Set the block which will be called automatically when opening a Realm with
+//            // a schema version lower than the one set above
+//            migrationBlock: { migration, oldSchemaVersion in
+//
+//                if oldSchemaVersion < 1 {
+//                    //                    MARK: here is simple example
+//
+//                    //                    migration.enumerate(WorkoutSet.className()) { oldObject, newObject in
+//                    //                        newObject?["setCount"] = setCount
+//                    //                    }
+//                }
+//            }
+//        )
+//        Realm.Configuration.defaultConfiguration = config
+//    }
 }
 

@@ -6,6 +6,10 @@ import Foundation
 import RealmSwift
 
 class AccountRLM: Object {
+    @objc dynamic var deviceID = String()
+    @objc dynamic var username = String()
+    @objc dynamic var password = String()
+    
     @objc dynamic var expireDateString = String()
     @objc dynamic var token = String()
     @objc dynamic var id: NSNumber = 1

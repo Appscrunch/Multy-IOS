@@ -136,9 +136,83 @@ class CoreLibManager: NSObject {
         
         //HD Account
         createHDAccount(from: rootID)
-        transaction()
         
         return rootID
+    }
+    
+    func createWallet(from rootID : String, currencyID : UInt32, walletID : UInt32) -> Dictionary<String, Any>? {
+        let rootIDPointer = OpaquePointer(rootID)
+        let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        //New address
+        let newAddressPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let newAddressStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        //Private
+        let addressPrivateKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        //Public
+        let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+
+        let mHDa = make_hd_account(rootIDPointer, Currency.init(currencyID), walletID, newAccountPointer)
+        if mHDa != nil {
+            print("mHDa: \(String(describing: mHDa))")
+            
+            return nil
+        }
+        
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddressPointer)
+        if mHDa != nil {
+            print("mHDla: \(String(describing: mHDla))")
+            
+            return nil
+        }
+        
+        //Create wallet
+        var walletDict = Dictionary<String, Any>()
+        walletDict["currencyID"] = currencyID
+        walletDict["walletID"] = walletID
+        walletDict["addressID"] = 0 as UInt32
+        
+        let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        var addressString : String? = nil
+        if gaas != nil {
+            print("Cannot get address string: \(String(describing: gaas))")
+        } else {
+            addressString = String(cString: newAddressStringPointer.pointee!)
+            print("addressString: \(addressString)")
+            
+            walletDict["address"] = addressString
+        }
+        
+        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = get_account_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        
+        let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
+        let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
+        
+        print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
+        
+        var privateKeyString : String? = nil
+        var publicKeyString : String? = nil
+        
+        if ktsPRIV != nil {
+            print("Cannot get private string: \(String(describing: gaas))")
+        } else {
+            privateKeyString = String(cString: privateKeyStringPointer.pointee!)
+            walletDict["privateKey"] = privateKeyString
+        }
+        
+        if ktsPUBL != nil {
+            print("Cannot get public string: \(String(describing: gaas))")
+        } else {
+            publicKeyString = String(cString: publicKeyStringPointer.pointee!)
+            walletDict["publicKey"] = publicKeyString
+        }
+        
+        return walletDict
     }
     
     func createHDAccount(from rootID : String)  {
@@ -146,34 +220,34 @@ class CoreLibManager: NSObject {
         let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         //New address
-        let newAddress = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let newAddressPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let newAddressStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
         //Private
-        let addressPrivateKey = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let addressPrivateKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
         //Public
-        let addressPublicKey = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let mHDa = make_hd_account(rootIDPointer, CURRENCY_BITCOIN, 0, newAccountPointer)
+        let mHDa = make_hd_account(rootIDPointer, Currency.init(0), 0, newAccountPointer)
         print("mHDa: \(String(describing: mHDa))")
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddress)
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddressPointer)
         print("mHDla: \(String(describing: mHDla))")
         
-        let gaas = get_account_address_string(newAddress.pointee, newAddressStringPointer)
+        let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
         print("gaas: \(String(describing: gaas))")
         let addressString = String(cString: newAddressStringPointer.pointee!)
         
         print("addressString: \(addressString)")
         
-        let gakPRIV = get_account_key(newAddress.pointee, KEY_TYPE_PRIVATE, addressPrivateKey)
-        let gakPUBL = get_account_key(newAddress.pointee, KEY_TYPE_PUBLIC, addressPublicKey)
+        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = get_account_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
         
-        let ktsPRIV = key_to_string(addressPrivateKey.pointee, privateKeyStringPointer)
-        let ktsPUBL = key_to_string(addressPublicKey.pointee, publicKeyStringPointer)
+        let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
+        let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
         
         print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
         
@@ -184,23 +258,40 @@ class CoreLibManager: NSObject {
         print("publicKeyString: \(publicKeyString)")
         
         let currencyPointer = UnsafeMutablePointer<Currency>.allocate(capacity: 1)
-        let gac = get_account_currency(newAddress.pointee, currencyPointer)
+        let gac = get_account_currency(newAddressPointer.pointee, currencyPointer)
         print("gac: \(gac)")
         
         let currency : Currency = currencyPointer.pointee
         print("currency: \(currency)")
+        
+        amountActivity()
+        transactionActions(account: newAccountPointer.pointee!)
     }
     
-    func transaction() {
-        var amount = Int8(20)
-        var anotherAmount = Int8(30)
+    func transactionActions(account: OpaquePointer) {
+        //create transaction
+        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mt = make_transaction(account, transactionPointer)
+        
+        let pointer = UnsafeMutablePointer<CustomError>(mt)
+        let errr = pointer?.pointee
+        
+        
+        print("\(mt) -- \(UINT64_MAX)")
+    }
+    
+    func amountActivity() {
+        let amount = "20".UTF8CStringPointer
+        let anotherAmount = "30".UTF8CStringPointer
 
         let newAmount = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let ma = make_amount(&amount, newAmount)
+        let ma = make_amount(amount, newAmount)
+        let ats = amount_to_string(newAmount.pointee, amountStringPointer)
+        let asv = amount_set_value(newAmount.pointee, anotherAmount)
+//        free_amount(newAmount.pointee)
     }
 }
-
-//make_amount(UnsafePointer<Int8>!, UnsafeMutablePointer<OpaquePointer?>!)
 

@@ -7,8 +7,8 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
     static let shared = MasterKeyGenerator()
     
     fileprivate var localPasswordString : String = ""
-    fileprivate var instanceIDToken : String = ""
-    fileprivate var deviceUUIDToken : String = ""
+//    fileprivate var instanceIDToken : String = ""
+//    fileprivate var deviceUUIDToken : String = ""
     
     fileprivate var executedFunction : ((Data?, Error?, String?) -> Void)?
     
@@ -28,7 +28,7 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
     public func generateMasterKey(completion: @escaping (_ masterKey: Data?, _ error: Error?, String?) -> ()) {
         executedFunction = completion
         
-        deviceUUIDToken = UIDevice.current.identifierForVendor!.uuidString
+//        deviceUUIDToken = UIDevice.current.identifierForVendor!.uuidString
         generateInstanceID()
         generateLocalPasswordString()
     }
@@ -71,12 +71,12 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
         
         let handler : (String?, Error?) -> Void = { (identity, error) in
             if let iid = identity {
-                self.instanceIDToken = iid
-                print("instanceIDToken: \(self.instanceIDToken)")
+//                self.instanceIDToken = iid
+                print("instanceIDToken: \(iid)")
                 
                 DispatchQueue.main.async {
                     //                    if !self.devicePushToken.isEmpty {
-                    self.asyncGenerateMasterKeyFromTokens()
+                    self.asyncGenerateMasterKeyFromTokens(instanceToken: iid)
                     //                    }
                 }
             } else {
@@ -106,10 +106,10 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
 //    }
     
     //asynch version
-    fileprivate func asyncGenerateMasterKeyFromTokens() {
-        print("\(#function): \(deviceUUIDToken) -- \(instanceIDToken)")
+    fileprivate func asyncGenerateMasterKeyFromTokens(instanceToken: String) {
+        print("\(#function): \(UIDevice.current.identifierForVendor!.uuidString) -- \(instanceToken)")
         
-        let key = sha512(instanceIDToken + UIDevice.current.identifierForVendor!.uuidString + localPasswordString)
+        let key = sha512(instanceToken + UIDevice.current.identifierForVendor!.uuidString + localPasswordString)
         
         //clear secure info
         //MARK: clean
@@ -128,9 +128,9 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
     }
     
     fileprivate func cleanTokens() {
-        instanceIDToken = ""
+//        instanceIDToken = ""
         //        devicePushToken = ""
-        deviceUUIDToken = ""
+//        deviceUUIDToken = ""
     }
     
     fileprivate func sha512(_ str: String) -> Data? {

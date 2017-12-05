@@ -250,6 +250,7 @@
 		FA7406201FCC14C4003C538C /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
 		FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FA74062A1FCC5D6A003C538C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FA869D081FD5AD9700C815C3 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -320,11 +321,11 @@
 				45B9CB021FBB4AEB00AA2A31 /* Storyboards */,
 				45B9CB031FBB4B2300AA2A31 /* ViewControllers and Presenters */,
 				45B9CB041FBB4B6600AA2A31 /* Cells */,
+				FADC00441FC322F400182E45 /* DataMangers */,
 				4583ACA11FBCAC37001991AA /* Extensions */,
 				45A9492D1FC477F3003C3A23 /* Protocols */,
 				457486131FBD7DAF002D1925 /* Additional Libraries */,
 				FA86A74D1FC2C7E8002826EC /* Security */,
-				FADC00441FC322F400182E45 /* DataMangers */,
 				FA4D43E21FC590CC003C7117 /* Model */,
 				4522905B1FBB18D30024B550 /* Assets.xcassets */,
 				FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */,
@@ -787,6 +788,7 @@
 				FA74061B1FCC14C4003C538C /* api.h */,
 				FA74061C1FCC14C4003C538C /* common.h */,
 				FA74061D1FCC14C4003C538C /* run_tests.h */,
+				FA869D081FD5AD9700C815C3 /* error.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";

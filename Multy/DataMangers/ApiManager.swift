@@ -20,19 +20,13 @@ class ApiManager: NSObject {
         self.requestManager = Alamofire.SessionManager(configuration: configuration)
     }
     
-    func auth(completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func auth(with parameters: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
         
-        let params : Parameters = [
-            "password"  : "admin",
-            "username"  : "alex78pro",
-            "deviceid"  : "01010101010101010101010101010101"
-            ]
-        
-        Alamofire.request("\(self.apiUrl)auth", method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

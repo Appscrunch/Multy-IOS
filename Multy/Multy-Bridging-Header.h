@@ -16,3 +16,5 @@
 #import "transaction_fee.h"
 #import "transaction.h"
 #import "api_transaction.h"
+#import "error.h"
+
