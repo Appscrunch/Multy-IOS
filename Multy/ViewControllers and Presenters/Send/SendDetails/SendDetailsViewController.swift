@@ -114,6 +114,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
                 self.constraintDonationHeight.constant
         } else {
             self.donationTF.becomeFirstResponder()
+            self.presenter.donationInCrypto = (self.donationTF.text! as NSString).doubleValue
+            self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant * 2
             self.scrollView.contentSize.height = self.scrollView.contentSize.height +
                 self.constraintDonationHeight.constant
