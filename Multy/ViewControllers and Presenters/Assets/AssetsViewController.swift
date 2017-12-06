@@ -48,6 +48,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return
             }
             
+
 //            DataManager.shared.realmManager.updateAccount(self.account, completion: { (account, error) in
 //                guard account != nil else {
 //                    return
@@ -59,7 +60,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                    self.account = account
 //                }
 //            })
-            
+            DispatchQueue.main.async {
+                self.account = account
+            }
         }
     }
     

@@ -113,7 +113,7 @@
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
-		FADC004C1FC323A900182E45 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC004B1FC323A900182E45 /* SocketManager.swift */; };
+		FADC004C1FC323A900182E45 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC004B1FC323A900182E45 /* Socket.swift */; };
 		FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC004D1FC323C300182E45 /* CoreLibManager.swift */; };
 		FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -249,7 +249,7 @@
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		FADC004B1FC323A900182E45 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		FADC004B1FC323A900182E45 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		FADC004D1FC323C300182E45 /* CoreLibManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLibManager.swift; sourceTree = "<group>"; };
 		FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Extension.swift"; sourceTree = "<group>"; };
 		FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bip44_coin_types.h; sourceTree = "<group>"; };
@@ -806,7 +806,7 @@
 				FADC00451FC3231A00182E45 /* DataManager.swift */,
 				FADC00471FC3236F00182E45 /* ApiManager.swift */,
 				FADC00491FC3238D00182E45 /* RealmManager.swift */,
-				FADC004B1FC323A900182E45 /* SocketManager.swift */,
+				FADC004B1FC323A900182E45 /* Socket.swift */,
 				FADC004D1FC323C300182E45 /* CoreLibManager.swift */,
 			);
 			path = DataMangers;
@@ -992,7 +992,7 @@
 				FA4D43DD1FC581CF003C7117 /* DMSocketExtension.swift in Sources */,
 				FA4D43DF1FC58730003C7117 /* TouchIDAuthentication.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
-				FADC004C1FC323A900182E45 /* SocketManager.swift in Sources */,
+				FADC004C1FC323A900182E45 /* Socket.swift in Sources */,
 				45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */,
 				FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */,
 				45A9494D1FC5D972003C3A23 /* SendDetailsViewController.swift in Sources */,
