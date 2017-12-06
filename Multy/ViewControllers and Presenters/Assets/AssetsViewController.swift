@@ -104,6 +104,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
     }
     
     //MARK: Setup functions
@@ -167,9 +168,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
         
         }  else if indexPath == [0, 2] {
-            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
-            self.navigationController?.pushViewController(initialViewController, animated: true)
+//            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
+//            self.navigationController?.pushViewController(initialViewController, animated: true)
         } else if indexPath == [0, 3] {
             let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
             let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
@@ -179,9 +180,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
             self.navigationController?.pushViewController(initialViewController, animated: true) 
         } else {
-            let storyboard = UIStoryboard(name: "Send", bundle: nil)
-            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
-            self.navigationController?.pushViewController(destVC, animated: true)
+//            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+//            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
+//            self.navigationController?.pushViewController(destVC, animated: true)
         }
     }
     

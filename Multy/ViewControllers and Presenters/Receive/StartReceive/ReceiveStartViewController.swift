@@ -37,11 +37,8 @@ class ReceiveStartViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        if self.presenter.isNeedToPop {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popToRootViewController(animated: false)
     }
 
 //    Deselecting
