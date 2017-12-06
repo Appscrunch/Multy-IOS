@@ -6,7 +6,7 @@ import UIKit
 
 class AssetsPresenter: NSObject {
 
-    weak var mainVC: AssetsViewController?
+    var assetsVC: AssetsViewController?
     
     var tabBarFrame: CGRect?
     
@@ -25,25 +25,25 @@ class AssetsPresenter: NSObject {
                                             preferredStyle: UIAlertControllerStyle.actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
-            self.mainVC?.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
+            self.assetsVC?.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
         }))
         actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
             //go to import wallet
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        self.mainVC?.present(actionSheet, animated: true, completion: nil)
+        self.assetsVC?.present(actionSheet, animated: true, completion: nil)
     }
     
     func registerCells() {
         let walletCell = UINib.init(nibName: "WalletTableViewCell", bundle: nil)
-        self.mainVC?.tableView.register(walletCell, forCellReuseIdentifier: "walletCell")
+        self.assetsVC?.tableView.register(walletCell, forCellReuseIdentifier: "walletCell")
         
         let portfolioCell = UINib.init(nibName: "PortfolioTableViewCell", bundle: nil)
-        self.mainVC?.tableView.register(portfolioCell, forCellReuseIdentifier: "portfolioCell")
+        self.assetsVC?.tableView.register(portfolioCell, forCellReuseIdentifier: "portfolioCell")
         
         let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
-        self.mainVC?.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
+        self.assetsVC?.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
     
     //////////////////////////////////////////////////////////////////////

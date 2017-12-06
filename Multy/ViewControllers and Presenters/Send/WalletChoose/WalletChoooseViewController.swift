@@ -5,7 +5,6 @@
 import UIKit
 
 class WalletChoooseViewController: UIViewController {
-
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,7 +23,7 @@ class WalletChoooseViewController: UIViewController {
         self.tableView.register(walletCell, forCellReuseIdentifier: "walletCell")
     }
 
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -35,6 +34,11 @@ class WalletChoooseViewController: UIViewController {
             detailsVC.presenter.addressToStr = self.presenter.addressToStr
             detailsVC.presenter.amountFromQr = self.presenter.amountFromQr
         }
+    }
+    
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

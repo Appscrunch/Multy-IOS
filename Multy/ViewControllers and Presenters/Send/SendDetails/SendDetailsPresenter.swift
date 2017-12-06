@@ -20,6 +20,8 @@ class SendDetailsPresenter: NSObject {
     var addressToStr: String?
     var amountFromQr: Double?
     
+    var maxAllowedToSpend = 0.0
+    
     let trasactionObj = TransactionRLM()
     
     let donationObj = DonationObj()
@@ -85,6 +87,19 @@ class SendDetailsPresenter: NSObject {
         self.donationObj.cryptoName = ""
         self.donationObj.sumInFiat = 0.0
         self.donationObj.fiatName = ""
+    }
+    
+    func setMaxAllowed() {
+        self.maxAllowedToSpend = (self.choosenWallet?.sumInCrypto)! - self.trasactionObj.sumInCrypto
+    }
+    
+    func checkMaxEvelable() {
+        self.maxAllowedToSpend = (self.choosenWallet?.sumInCrypto)! - self.trasactionObj.sumInCrypto
+        if self.donationObj.sumInCrypto! >= self.maxAllowedToSpend  {
+            self.sendDetailsVC?.presentWarning(message: "Your donation sum and fee cost more than you have in wallet.\n\n Fee cost: \(self.trasactionObj.sumInCrypto) \(self.cryptoName)\n Donation sum: \(self.donationObj.sumInCrypto ?? 0.0) \(self.cryptoName)\n Sum in Wallet: \(self.choosenWallet?.sumInCrypto ?? 0.0) \(self.cryptoName)")
+        } else {
+            self.sendDetailsVC?.performSegue(withIdentifier: "sendAmountVC", sender: Any.self)
+        }
     }
     
 }

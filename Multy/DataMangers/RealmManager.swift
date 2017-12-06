@@ -56,15 +56,17 @@ class RealmManager: NSObject {
             if let realm = realmOpt {
                 let seedPhraseOpt = realm.object(ofType: SeedPhraseRLM.self, forPrimaryKey: 1)
                 
-                if let seedPhrase = seedPhraseOpt {
-                    completion(seedPhrase.seedString, nil)
-                } else {
+                if seedPhraseOpt == nil {
                     completion(nil, nil)
+                } else {
+                    completion(seedPhraseOpt!.seedString, nil)
                 }
             } else {
                 print("Error fetching realm:\(#function)")
+                completion(nil, nil)
             }
         }
+        
     }
     
     public func writeSeedPhrase(_ seedPhrase: String, completion: @escaping (_ error: NSError?) -> ()) {
@@ -84,6 +86,7 @@ class RealmManager: NSObject {
                 print("Error fetching realm:\(#function)")
             }
         }
+        
     }
     
     public func deleteSeedPhrase(completion: @escaping (_ error: NSError?) -> ()) {

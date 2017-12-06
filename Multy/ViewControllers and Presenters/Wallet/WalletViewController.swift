@@ -29,17 +29,6 @@ class WalletViewController: UIViewController {
     }
 }
 
-extension WalletViewController : UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let pageWidth = scrollView.frame.size.width
-        let page = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
-        
-        if let headerCell = scrollView.superview?.superview as? MainWalletHeaderCell {
-            headerCell.pageControl.currentPage = page
-        }
-    }
-}
-
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

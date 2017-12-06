@@ -41,8 +41,13 @@ class ReceiveAllDetailsViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     
     @IBAction func requestSumAction(_ sender: Any) {
         self.performSegue(withIdentifier: "receiveAmount", sender: UIButton.self)
@@ -55,6 +60,11 @@ class ReceiveAllDetailsViewController: UIViewController {
     }
     
     @IBAction func moreOptionsAction(_ sender: Any) {
+        let message = "MULTY \n\nYour Address: \n\(self.presenter.walletAddress) \n\nReqsted Amount: \(self.presenter.cryptoSum ?? 0.0) \(self.presenter.cryptoName ?? "")"
+        let objectsToShare = [message] as [String]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     @IBAction func chooseAnotherWalletAction(_ sender: Any) {
@@ -133,6 +143,8 @@ class ReceiveAllDetailsViewController: UIViewController {
     func checkValuesAndSetupUI() {
         if self.presenter.cryptoSum != nil {
             self.requestSumBtn.titleLabel?.isHidden = true
+            self.requestSumBtn.setTitleColor(.white, for: .selected)
+            self.requestSumBtn.setTitleColor(.white, for: .normal)
         }
     }
     

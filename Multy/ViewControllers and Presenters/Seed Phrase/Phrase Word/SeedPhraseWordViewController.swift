@@ -16,16 +16,10 @@ class SeedPhraseWordViewController: UIViewController {
     @IBOutlet weak var mediumWordLbl: LTMorphingLabel!
     @IBOutlet weak var bottomWord: LTMorphingLabel!
     
-    @IBOutlet weak var constraintTopBricks: NSLayoutConstraint!
-    
     let presenter =  SeedPhraseWordPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if screenWidth < 325 {
-            constraintTopBricks.constant = 90
-        }
         
         presenter.mainVC = self
         
@@ -48,5 +42,8 @@ class SeedPhraseWordViewController: UIViewController {
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
         
         presenter.presentNextTripleOrContinue()
+    }
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }

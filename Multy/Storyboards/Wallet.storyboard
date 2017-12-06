@@ -194,7 +194,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j41-bT-TYo">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="j41-bT-TYo">
                                         <rect key="frame" x="16" y="13" width="12" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="PN6-W4-BLR"/>
@@ -407,6 +407,7 @@
     <resources>
         <image name="BTC_medium_icon" width="39" height="39"/>
         <image name="arrowDownCoin" width="14" height="66"/>
+        <image name="backGrey" width="13" height="21"/>
         <image name="exchangeIconTabbar" width="26" height="26"/>
         <image name="recieveBig" width="66" height="66"/>
         <image name="recieveIconTabbar" width="19" height="23"/>

@@ -57,8 +57,11 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.tableView.register(customFeeCell, forCellReuseIdentifier: "customFeeCell")
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func cancelAction(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func nextAction(_ sender: Any) {
@@ -67,7 +70,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
                 self.presenter.createDonation()
             }
             self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
-            self.performSegue(withIdentifier: "sendAmountVC", sender: sender)
+            self.presenter.checkMaxEvelable()
         } else {
             let alert = UIAlertController(title: "Transaction speed not selected!", message: "Please choose one or set cuctom", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -111,6 +114,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
                 self.constraintDonationHeight.constant
         } else {
             self.donationTF.becomeFirstResponder()
+            self.presenter.donationInCrypto = (self.donationTF.text! as NSString).doubleValue
+            self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant * 2
             self.scrollView.contentSize.height = self.scrollView.contentSize.height +
                 self.constraintDonationHeight.constant
@@ -144,7 +149,19 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.scrollView.isScrollEnabled = true
     }
     
+    func presentWarning(message: String) {
+        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (string != "," || string != ".") && ((self.donationTF.text! + string) as NSString).doubleValue > (self.presenter.choosenWallet?.sumInCrypto)! {
+            if string != "" {
+                self.presentWarning(message: "You trying to enter sum more then you have")
+                return false
+            }
+        }
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
 
@@ -197,7 +214,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
             sendAmountVC.presenter.donationObj = self.presenter.donationObj
             sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
             if self.presenter.amountFromQr != nil {
-                sendAmountVC.sumInCrypto = self.presenter.amountFromQr!
+                sendAmountVC.presenter.sumInCrypto = self.presenter.amountFromQr!
             }
         }
     }

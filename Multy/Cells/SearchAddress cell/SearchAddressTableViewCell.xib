@@ -165,8 +165,9 @@ Scan</string>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="5oJ-Y9-En4"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOw-KZ-LML">
-                                <rect key="frame" x="172" y="35" width="0.0" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fOw-KZ-LML">
+                                <rect key="frame" x="172" y="5" width="0.0" height="60"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -174,6 +175,7 @@ Scan</string>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="fOw-KZ-LML" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="top" constant="5" id="IO1-UP-0NL"/>
                             <constraint firstItem="fOw-KZ-LML" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T7v-9n-7zd" secondAttribute="leading" constant="10" id="PTS-9M-dri"/>
                             <constraint firstAttribute="height" constant="70" id="RCE-ox-Yxy"/>
                             <constraint firstItem="fOw-KZ-LML" firstAttribute="centerX" secondItem="cr8-Jx-Rfq" secondAttribute="centerX" id="ZFH-4a-ayC"/>
@@ -181,6 +183,7 @@ Scan</string>
                             <constraint firstItem="cr8-Jx-Rfq" firstAttribute="leading" secondItem="T7v-9n-7zd" secondAttribute="leading" constant="10" id="ith-eV-6nN"/>
                             <constraint firstItem="cr8-Jx-Rfq" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="top" constant="10" id="k8X-da-3LM"/>
                             <constraint firstItem="fOw-KZ-LML" firstAttribute="centerY" secondItem="cr8-Jx-Rfq" secondAttribute="centerY" id="u4z-Zp-3Th"/>
+                            <constraint firstAttribute="bottom" secondItem="fOw-KZ-LML" secondAttribute="bottom" constant="5" id="uqZ-OQ-gDL"/>
                             <constraint firstAttribute="bottom" secondItem="cr8-Jx-Rfq" secondAttribute="bottom" constant="10" id="vyR-5N-SWY"/>
                             <constraint firstAttribute="trailing" secondItem="cr8-Jx-Rfq" secondAttribute="trailing" constant="10" id="zj5-NP-U9m"/>
                         </constraints>
@@ -190,12 +193,6 @@ Scan</string>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0C-Kh-98z">
-                        <rect key="frame" x="16" y="10" width="54" height="24"/>
-                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LB-ni-Z7I">
                         <rect key="frame" x="156" y="10" width="63" height="24"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
@@ -203,31 +200,37 @@ Scan</string>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMC-Td-VHt">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
+                        <rect key="frame" x="0.0" y="12" width="59" height="30"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
                             <action selector="cancelAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7aW-HN-sha"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="bgK-tu-VKf">
+                        <rect key="frame" x="16" y="13" width="13" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="OC1-VX-7Ts"/>
+                            <constraint firstAttribute="width" constant="13" id="jix-Bk-LCI"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.93689495325088501" green="0.94475537538528442" blue="0.97345036268234253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="T7v-9n-7zd" firstAttribute="top" secondItem="F0C-Kh-98z" secondAttribute="bottom" constant="54" id="1Wl-2S-3jz"/>
+                    <constraint firstItem="T7v-9n-7zd" firstAttribute="top" secondItem="bgK-tu-VKf" secondAttribute="bottom" constant="54" id="1wH-Xi-HX9"/>
                     <constraint firstItem="T7v-9n-7zd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="4Gv-7C-iso"/>
-                    <constraint firstItem="F0C-Kh-98z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="6aG-Xp-UJi"/>
+                    <constraint firstItem="XMC-Td-VHt" firstAttribute="trailing" secondItem="bgK-tu-VKf" secondAttribute="trailing" constant="30" id="B4z-s1-lpb"/>
                     <constraint firstItem="C8a-FN-qsG" firstAttribute="leading" secondItem="T7v-9n-7zd" secondAttribute="leading" constant="20" id="BSs-g7-gKE"/>
+                    <constraint firstItem="bgK-tu-VKf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="KZ6-bR-VN2"/>
+                    <constraint firstItem="bgK-tu-VKf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QhH-Ur-uOf"/>
                     <constraint firstAttribute="trailing" secondItem="T7v-9n-7zd" secondAttribute="trailing" constant="16" id="TrO-xH-abm"/>
                     <constraint firstItem="i2K-a1-cdT" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="bottom" constant="18" id="ZJ0-dT-x80"/>
                     <constraint firstItem="C8a-FN-qsG" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="bottom" constant="-31" id="ZyT-9C-x1l"/>
                     <constraint firstItem="RM9-Ez-HYz" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="bottom" id="c9X-C2-HFG"/>
                     <constraint firstItem="C8a-FN-qsG" firstAttribute="trailing" secondItem="T7v-9n-7zd" secondAttribute="trailing" constant="-20" id="hAl-yV-n0J"/>
-                    <constraint firstItem="XMC-Td-VHt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hpM-JY-9dP"/>
+                    <constraint firstItem="XMC-Td-VHt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="hpM-JY-9dP"/>
                     <constraint firstItem="XMC-Td-VHt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="huq-pZ-iUr"/>
-                    <constraint firstItem="XMC-Td-VHt" firstAttribute="trailing" secondItem="F0C-Kh-98z" secondAttribute="trailing" constant="10" id="jWd-Yc-NF9"/>
-                    <constraint firstItem="XMC-Td-VHt" firstAttribute="bottom" secondItem="F0C-Kh-98z" secondAttribute="bottom" constant="10" id="lc9-8W-Mru"/>
                     <constraint firstItem="2LB-ni-Z7I" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="n9Z-8y-0aF"/>
                     <constraint firstItem="mmw-l9-T1m" firstAttribute="top" secondItem="T7v-9n-7zd" secondAttribute="bottom" constant="18" id="oaO-Yy-Dfa"/>
-                    <constraint firstItem="F0C-Kh-98z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="rFu-xP-hu6"/>
                     <constraint firstItem="2LB-ni-Z7I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="toA-vr-MVI"/>
                 </constraints>
             </tableViewCellContentView>
@@ -240,6 +243,7 @@ Scan</string>
     </objects>
     <resources>
         <image name="Address_Book_Tab" width="25" height="18"/>
+        <image name="backGrey" width="13" height="21"/>
         <image name="icons8NfcSign" width="26" height="24"/>
         <image name="qrIconGray" width="22" height="22"/>
     </resources>

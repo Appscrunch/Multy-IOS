@@ -300,4 +300,3 @@ class CoreLibManager: NSObject {
         print("amountActivity: \(ma) -- \(ats) -- \(asv)")
     }
 }
-
