@@ -7,9 +7,13 @@ import SocketIO
 
 class Socket: NSObject {
     static let shared = Socket()
+    var manager : SocketManager
+    var socket : SocketIOClient
     
-    
-    let manager = SocketManager(socketURL: URL(string: "http://192.168.0.121:6666/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
+    override init() {
+        manager = SocketManager(socketURL: URL(string: "http://192.168.0.121:6666/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
+        socket = manager.defaultSocket
+    }
     
     func start() {
 
@@ -17,6 +21,10 @@ class Socket: NSObject {
         
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")
+        }
+        
+        socket.on("/newTransaction") {data, ack in
+            print("/newTransaction")
         }
         
 //        socket.on("currentAmount") {data, ack in

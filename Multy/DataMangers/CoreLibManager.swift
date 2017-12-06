@@ -281,8 +281,8 @@ class CoreLibManager: NSObject {
             let errr = String(cString: (pointer?.pointee.message)!)
         }
         
+        let properties = transaction_add_source(transactionPointer.pointee, sourcePointer)
         
-//        let properties =
         
     }
     
