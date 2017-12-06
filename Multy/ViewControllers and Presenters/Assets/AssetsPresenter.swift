@@ -46,6 +46,13 @@ class AssetsPresenter: NSObject {
         self.assetsVC?.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
     
+    func updateExchangeCourse() {
+        DataManager.shared.getExhanchgeCourse((account?.token)!) { (dict, err) in
+            print("cicki2")
+        }
+    }
+    
+    
     //////////////////////////////////////////////////////////////////////
     //test
     
