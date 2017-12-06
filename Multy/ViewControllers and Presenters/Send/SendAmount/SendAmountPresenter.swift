@@ -76,7 +76,7 @@ class SendAmountPresenter: NSObject {
             if self.sumInNextBtn > (self.wallet?.sumInCrypto)! {
                 self.sumInNextBtn = self.wallet?.sumInCrypto ?? 0.0
             }
-            return self.sumInNextBtn
+            return Double(round(100000000*self.sumInNextBtn)/100000000)
         case false:
             if (self.sendAmountVC?.commissionSwitch.isOn)! {
                 if self.donationObj != nil {
@@ -198,6 +198,25 @@ class SendAmountPresenter: NSObject {
                 self.cryptoMaxSumWithFeeAndDonate = (self.wallet?.sumInFiat)! - (self.transactionObj?.sumInFiat)!
             }
         }
+    }
+    
+    func messageForAlert() -> String {
+        var message = ""
+        switch isCrypto {
+        case true:
+            if self.donationObj != nil {
+                message = "You can`t spend sum more than you have!\nDon`t forget about Fee and donation.\n\nYour fee is \(self.transactionObj?.sumInCrypto ?? 0.0) \(self.cryptoName) \nand donation is \(self.donationObj?.sumInCrypto ?? 0.0) \(self.cryptoName)"
+            } else {
+                message = "You can`t spend sum more than you have!\nDon`t forget about Fee.\nYour is fee \(self.transactionObj?.sumInCrypto ?? 0.0) \(self.cryptoName)"
+            }
+        case false:
+            if self.donationObj != nil {
+                message = "You can`t spend sum more than you have!\nDon`t forget about Fee and donation.\n\nYour fee is \(self.transactionObj?.sumInFiat ?? 0.0) \(self.fiatName) \nand donation is \(self.donationObj?.sumInFiat ?? 0.0) \(self.fiatName)"
+            } else {
+                message = "You can`t spend sum more than you have!\nDon`t forget about Fee.\nYour is fee \(self.transactionObj?.sumInFiat ?? 0.0) \(self.fiatName)"
+            }
+        }
+        return message
     }
     
 //    func countMaxSpendable() {

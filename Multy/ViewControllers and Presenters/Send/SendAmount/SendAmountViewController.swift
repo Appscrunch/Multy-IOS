@@ -35,6 +35,10 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.presenter.makeMaxSumWithFeeAndDonate()
         self.setSumInNextBtn()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                 UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                   gradientOrientation: .horizontal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +60,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     @IBAction func payForCommisionAction(_ sender: Any) {
         self.presenter.checkMaxEntered()
         if self.presenter.isMaxEntered {
-            self.presentWarning(message: "You can`t spend sum more than you have!\nDon`t forget about Fee.")
+            self.presentWarning(message: self.presenter.messageForAlert())
             self.commissionSwitch.isOn = false
         } else {
             self.setSumInNextBtn()
@@ -151,16 +155,17 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             self.presenter.usdToCrypto()
             self.setSumInNextBtn()
         }
+        self.presenter.saveTfValue()
     }
     
     
     
     @IBAction func nextAction(_ sender: Any) {
-//        if self.sumInCrypto != 0.0 {
-//            self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
-//        } else {
-//            self.presentWarning(message: "You try to send 0.0 \(self.cryptoName).\nPlease enter the correct value")
-//        }
+        if self.presenter.sumInCrypto != 0.0 {
+            self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
+        } else {
+            self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
+        }
     }
     
     func presentWarning(message: String) {
@@ -250,9 +255,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
 //
 //        if self.sumInCrypto != 0.0 || self.btnSumLbl.text != "" {
 //            self.nextBtn.isEnabled = true
-//            self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                     UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                       gradientOrientation: .horizontal)
+    
 //        }
 //    }
     
@@ -261,17 +264,13 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendFinishVC" {
             let sendFinishVC = segue.destination as! SendFinishViewController
-//            sendFinishVC.presenter.addressToStr = self.presenter.addressToStr
-//            sendFinishVC.presenter.walletFrom = self.presenter.wallet
-//            sendFinishVC.presenter.sumInFiat = self.sumInFiat
-//            sendFinishVC.presenter.cryptoName = self.cryptoName
-//            sendFinishVC.presenter.fiatName = self.fiatName
-//            sendFinishVC.presenter.transactionObj = self.presenter.transactionObj
-//            if self.commissionSwitch.isOn {
-//                sendFinishVC.presenter.sumInCrypto = self.presenter.spendableSum
-//            } else {
-//                sendFinishVC.presenter.sumInCrypto = self.sumInCrypto
-//            }
+            sendFinishVC.presenter.addressToStr = self.presenter.addressToStr
+            sendFinishVC.presenter.walletFrom = self.presenter.wallet
+            sendFinishVC.presenter.sumInFiat = self.presenter.sumInFiat
+            sendFinishVC.presenter.cryptoName = self.presenter.cryptoName
+            sendFinishVC.presenter.fiatName = self.presenter.fiatName
+            sendFinishVC.presenter.transactionObj = self.presenter.transactionObj
+            sendFinishVC.presenter.sumInCrypto = self.presenter.sumInCrypto
         }
     }
 }
