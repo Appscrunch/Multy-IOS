@@ -34,4 +34,8 @@ class WalletChooosePresenter: NSObject {
     func numberOfWallets() -> Int {
         return self.walletsArr.count
     }
+    
+    func getExchange() {
+        DataManager.shared.getExchangeCourse()
+    }
 }

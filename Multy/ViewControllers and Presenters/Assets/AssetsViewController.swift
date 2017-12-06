@@ -13,7 +13,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         didSet {
 //            fetchAssets()
 //            fetchTickets()
-//            getExchange()
+            getExchange()
 //            getTransInfo()
         }
     }
@@ -27,7 +27,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         DataManager.shared.startCoreTest()
         
-        self.presenter.getExchange()
         
         self.presenter.assetsVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
@@ -48,18 +47,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return
             }
             
-
-//            DataManager.shared.realmManager.updateAccount(self.account, completion: { (account, error) in
-//                guard account != nil else {
-//                    return
-//                }
-//                
-//                print(account!)
-//                
-//                DispatchQueue.main.async {
-//                    self.account = account
-//                }
-//            })
             DispatchQueue.main.async {
                 self.account = account
             }
@@ -94,8 +81,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             guard dict != nil  else {
                 return
             }
-            
-            print(dict!)
+            if dict!["USD"] != nil {
+                exchangeCourse = dict!["USD"] as! Double
+            }
         }
     }
     

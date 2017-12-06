@@ -219,28 +219,7 @@ class SendAmountPresenter: NSObject {
         return message
     }
     
-//    func countMaxSpendable() {
-//        if (self.sendAmountVC?.commissionSwitch.isOn)! {
-//            self.maxSpendable = (self.wallet?.sumInCrypto)!
-//        } else {
-//            if self.donationObj == nil {
-//                self.maxSpendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)!
-//            } else {
-//                self.maxSpendable = (self.wallet?.sumInCrypto)! - (self.transactionObj?.sumInCrypto)! - (self.donationObj?.sumInCrypto)!
-//            }
-//        }
-//        self.maxSpendable = (self.wallet?.sumInCrypto)!
-//    }
-//
-//    func countSpendable() {
-//        if (self.sendAmountVC?.isCrypto)! {
-//            self.spendableSum = (self.sendAmountVC?.sumInCrypto)! + (self.transactionObj?.sumInCrypto)! + (self.donationObj?.sumInCrypto)!
-//        } else {
-//            self.spendableSum = (self.sendAmountVC?.sumInFiat)! + (self.transactionObj?.sumInFiat)! + (self.donationObj?.sumInFiat)!
-//        }
-//    }
-//
-//    func onMaxAction() {
-//        self.spendableSum = self.maxSpendable
-//    }
+    func getExchange() {
+        DataManager.shared.getExchangeCourse()
+    }
 }

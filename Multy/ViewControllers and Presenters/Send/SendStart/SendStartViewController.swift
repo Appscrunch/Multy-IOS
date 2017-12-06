@@ -15,6 +15,7 @@ class SendStartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendStartVC = self
+        self.presenter.getExchange()
         self.registerCells()
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
