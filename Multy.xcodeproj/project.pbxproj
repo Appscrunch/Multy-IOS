@@ -234,8 +234,6 @@
 		FA4FDB121FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
 		FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
-		FA7406121FCC14C4003C538C /* transaction_fee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
-		FA7406131FCC14C4003C538C /* transaction_change.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
 		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
 		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
 		FA7406161FCC14C4003C538C /* properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
@@ -770,8 +768,6 @@
 			isa = PBXGroup;
 			children = (
 				FA7406111FCC14C4003C538C /* amount.h */,
-				FA7406121FCC14C4003C538C /* transaction_fee.h */,
-				FA7406131FCC14C4003C538C /* transaction_change.h */,
 				FA7406141FCC14C4003C538C /* api_transaction.h */,
 				FA7406151FCC14C4003C538C /* transaction.h */,
 				FA7406161FCC14C4003C538C /* properties.h */,

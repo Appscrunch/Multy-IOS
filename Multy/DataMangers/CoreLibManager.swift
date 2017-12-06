@@ -265,20 +265,70 @@ class CoreLibManager: NSObject {
         print("currency: \(currency)")
         
         amountActivity()
-        transactionActions(account: newAccountPointer.pointee!)
+        transactionActions(account: newAccountPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmount: "20000", donationAddress: "", donationAmount: "10000000")
     }
     
-    func transactionActions(account: OpaquePointer) {
+    func transactionActions(account: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmount: String, donationAddress: String, donationAmount: String) {
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         let mt = make_transaction(account, transactionPointer)
+        if mt != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(mt)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("\(errrString) -- \(UINT64_MAX)")
+        }
         
-        let pointer = UnsafeMutablePointer<CustomError>(mt)
-        let errr = pointer?.pointee
+        let tas = transaction_add_source(transactionPointer.pointee, transactionSource)
+        
+        //amount sum
+        let amountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let amountKey = "amount".UTF8CStringPointer
+        let amountValue = "20".UTF8CStringPointer
+        let ma = make_amount(amountValue, amountPointer)
+        properties_set_amount_value(transactionSource.pointee, amountKey, amountPointer.pointee)
+        
+        //prev transaction hash
+        //prev_tx_hash
+        //prev_tx_out_index
+        //prev_tx_out_script_pubkey
         
         
-        print("\(mt) -- \(UINT64_MAX)")
+        
+        //address
+        let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        transaction_add_destination(transactionPointer.pointee, transactionDestination)
+        
+        let addressKey = "address".UTF8CStringPointer
+        let addressValue = sendAddress.UTF8CStringPointer
+        properties_set_string_value(transactionDestination.pointee, addressKey, addressValue)
+
+        let sendAmountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let sendAmountValue = sendAmountString.UTF8CStringPointer
+        let ma2 = make_amount(sendAmountValue, amountPointer)
+        properties_set_amount_value(transactionDestination.pointee, amountKey, sendAmountPointer.pointee)
+        
+        //change
+        
+//        let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+//        transaction_add_destination(transactionPointer.pointee, transactionDestination)
+//
+//        let addressKey = "address".UTF8CStringPointer
+//        let addressValue = sendAddress.UTF8CStringPointer
+//        properties_set_string_value(transactionDestination.pointee, addressKey, addressValue)
+//
+//        let sendAmountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+//        let sendAmountValue = sendAmountString.UTF8CStringPointer
+//        let ma2 = make_amount(sendAmountValue, amountPointer)
+//        properties_set_amount_value(transactionDestination.pointee, amountKey, sendAmountPointer.pointee)
+        
+        //final
+        let serializedTransaction = UnsafeMutablePointer<UnsafePointer<BinaryData>?>.allocate(capacity: 1)
+        transaction_update(transactionPointer.pointee)
+        transaction_sign(transactionPointer.pointee)
+        transaction_serialize(transactionPointer.pointee, serializedTransaction)
     }
     
     func amountActivity() {
