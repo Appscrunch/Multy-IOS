@@ -229,16 +229,6 @@
 		FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
-		FA4FDB0D1FCDAFA9008AEA2B /* BricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
-		FA4FDB101FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhraseViewController.swift; sourceTree = "<group>"; };
-		FA4FDB121FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
-		FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
-		FA7406121FCC14C4003C538C /* transaction_fee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
-		FA7406131FCC14C4003C538C /* transaction_change.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
-		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
-		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
-		FA7406161FCC14C4003C538C /* properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
 		FA7406181FCC14C4003C538C /* keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		FA7406191FCC14C4003C538C /* account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
 		FA74061A1FCC14C4003C538C /* mnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mnemonic.h; sourceTree = "<group>"; };
@@ -959,6 +949,8 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SecurityExtensions/SecurityExtensions.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/ZFRippleButton/ZFRippleButton.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -972,6 +964,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecurityExtensions.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFRippleButton.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,12 +1018,10 @@
 				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
 				FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */,
-				FA4FDB131FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift in Sources */,
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */,
 				4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
-				FA4FDB111FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift in Sources */,
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,

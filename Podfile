@@ -16,5 +16,6 @@ target 'Multy' do
   pod 'SecurityExtensions'
   pod 'GGLInstanceID'
   pod 'Alamofire'
+  pod 'Socket.IO-Client-Swift'
 
 end

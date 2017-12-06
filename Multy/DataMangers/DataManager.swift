@@ -9,7 +9,7 @@ class DataManager: NSObject {
     
     let apiManager = ApiManager.shared
     let realmManager = RealmManager.shared
-    let socketManager = SocketManager.shared
+    let socketManager = Socket.shared
     let coreLibManager = CoreLibManager.shared
     
     //MARK: ApiManager Functions
