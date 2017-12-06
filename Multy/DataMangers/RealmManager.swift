@@ -213,4 +213,20 @@ class RealmManager: NSObject {
             }
         }
     }
+    
+    public func getAccount(completion: @escaping (_ account: AccountRLM?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, err) in
+            if let realm = realmOpt {
+                let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
+                if acc != nil {
+                    completion(acc, nil)
+                } else {
+                    completion(nil, nil)
+                }
+            } else {
+                print("Err from realm GetAcctount:\(#function)")
+                completion(nil,nil)
+            }
+        }
+    }
 }

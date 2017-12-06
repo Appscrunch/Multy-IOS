@@ -13,7 +13,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         didSet {
 //            fetchAssets()
 //            fetchTickets()
-//            getExchange()
+            getExchange()
 //            getTransInfo()
         }
     }
@@ -23,9 +23,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        DataManager.shared.socketManager.start()
+//        DataManager.shared.socketManager.start()
         
         DataManager.shared.startCoreTest()
+        
         
         self.presenter.assetsVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
@@ -80,8 +81,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             guard dict != nil  else {
                 return
             }
-            
-            print(dict!)
+            if dict!["USD"] != nil {
+                exchangeCourse = dict!["USD"] as! Double
+            }
         }
     }
     

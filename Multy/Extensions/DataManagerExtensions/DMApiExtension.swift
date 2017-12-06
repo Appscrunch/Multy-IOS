@@ -49,7 +49,7 @@ extension DataManager {
     
     func fetchAssets(_ token: String, completion: @escaping (_ assets: [WalletRLM]?,_ error: Error?) -> ()) {
         apiManager.getAssets(token) { (holdingsOpt, error) in
-            if let holdings = holdingsOpt as? NSDictionary {
+            if let holdings = holdingsOpt {  // as? NSDictionary
                 
                 //save exchange prices
                 if let exchnagePrice = holdings["exchangePrice"] as? NSDictionary {
@@ -62,7 +62,7 @@ extension DataManager {
                     let accInfo = [ "wallets" : wallets.count ]
                     
                     self.realmManager.updateAccount(NSDictionary(dictionary: accInfo), completion: { (account, error) in
-                        print("updated account wallet count: \(account?.walletCount)")
+                        print("updated account wallet count: \(account?.walletCount ?? 0)")
                     })
                 }
                 
@@ -80,5 +80,18 @@ extension DataManager {
         params["address"] = 0
         params["addressID"] = 0
         params["walletID"] = 0
+    }
+    
+    func getExhanchgeCourse(_ token: String, completion: @escaping (_ dictionary: NSDictionary?, _ error: Error?) -> ()) {
+        apiManager.getExchangePrice(token, direction: "BTC/USD") { (dict, err) in
+            if err == nil {
+                if dict != nil {
+                    print("cicki")
+                }
+                completion(dict!, nil)
+            } else {
+                completion(nil, err)
+            }
+        }
     }
 }

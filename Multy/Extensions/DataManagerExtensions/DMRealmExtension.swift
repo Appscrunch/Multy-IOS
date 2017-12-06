@@ -35,4 +35,10 @@ extension DataManager {
             completion(exchangePrice, error)
         }
     }
+    
+    func getAccount(completion: @escaping (_ acc: AccountRLM?, _ error: NSError?) -> ()) {
+        realmManager.getAccount { (acc, err) in
+            completion(acc, err)
+        }
+    }
 }

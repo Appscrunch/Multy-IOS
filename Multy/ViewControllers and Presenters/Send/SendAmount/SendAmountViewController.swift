@@ -28,6 +28,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendAmountVC = self
+        self.presenter.getExchange()
         self.presenter.setAmountFromQr()
         self.presenter.cryptoToUsd()
         self.presenter.setSpendableAmountText()

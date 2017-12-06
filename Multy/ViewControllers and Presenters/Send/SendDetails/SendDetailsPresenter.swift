@@ -102,4 +102,8 @@ class SendDetailsPresenter: NSObject {
         }
     }
     
+    
+    func getExchange() {
+        DataManager.shared.getExchangeCourse()
+    }
 }
