@@ -29,6 +29,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.presenter.sendFinishVC = self
         self.hideKeyboardWhenTappedAround()
+        self.presenter.makeEndSum()
         self.setupUI()
     }
     
@@ -40,7 +41,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.walletNameLbl.text = self.presenter.walletFrom?.name
         self.walletCryptoSumAndCurrencyLbl.text = "\(self.presenter.walletFrom?.sumInCrypto ?? 0.0) \(self.presenter.walletFrom?.cryptoName ?? "")"
         self.walletFiatSumAndCurrencyLbl.text = "\(self.presenter.walletFrom?.sumInFiat ?? 0.0) \(self.presenter.walletFrom?.fiatName ?? "")"
-//        self.fiatSumAndCurrancyLbl.text = "\(self.presenter.walletFrom?.sumInFiat ?? 0.0) \(self.presenter.walletFrom?.fiatName ?? "")"
         self.transactionFeeCostLbl.text = "\(self.presenter.transactionObj?.sumInCrypto ?? 0.0) \(self.presenter.transactionObj?.cryptoName ?? "")/\(self.presenter.transactionObj?.sumInFiat ?? 0.0) \(self.presenter.transactionObj?.fiatName ?? "")"
         self.transactionSpeedNameLbl.text = "\(self.presenter.transactionObj?.speedName ?? "") "
         self.transactionSpeedTimeLbl.text =  "\(self.presenter.transactionObj?.speedTimeString ?? "")"

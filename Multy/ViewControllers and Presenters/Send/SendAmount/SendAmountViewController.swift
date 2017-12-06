@@ -75,11 +75,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         if self.presenter.isCrypto {
             self.presenter.isCrypto = !self.presenter.isCrypto
             self.presenter.makeMaxSumWithFeeAndDonate()
-//            if self.sumInFiat != 0.0 {
-//                self.amountTF.text = "\(self.sumInFiat)"
-//            } else {
-//                self.amountTF.text = ""
-//            }
             if self.presenter.sumInFiat > (self.presenter.wallet?.sumInFiat)! {
                 self.amountTF.text = "\(self.presenter.wallet?.sumInFiat ?? 0.0)"
                 self.topSumLbl.text = "\(self.presenter.wallet?.sumInFiat ?? 0.0)"
@@ -97,11 +92,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         } else {
             self.presenter.isCrypto = !self.presenter.isCrypto
             self.presenter.makeMaxSumWithFeeAndDonate()
-//            if self.sumInCrypto != 0.0 {
-//                self.amountTF.text = "\(self.sumInCrypto)"
-//            } else {
-//                self.amountTF.text = ""
-//            }
             if self.presenter.sumInCrypto > (self.presenter.wallet?.sumInCrypto)! || self.presenter.sumInCrypto > self.presenter.cryptoMaxSumWithFeeAndDonate {
                 switch self.commissionSwitch.isOn {
                 case true:
@@ -161,7 +151,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func nextAction(_ sender: Any) {
-        if self.presenter.sumInCrypto != 0.0 {
+        if self.presenter.sumInCrypto != 0.0 || self.presenter.donationObj != nil {
             self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
         } else {
             self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
@@ -228,8 +218,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
-    
     func setSumInNextBtn() {
         let sumForBtn = self.presenter.getNextBtnSum()
         if self.presenter.isCrypto {
@@ -238,28 +226,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             self.btnSumLbl.text = "\(sumForBtn) \(self.presenter.fiatName)"
         }
     }
-//        self.presenter.countSpendable()
-//        if self.commissionSwitch.isOn {
-//            if self.isCrypto {
-//                self.btnSumLbl.text = "\(self.presenter.spendableSum) \(self.cryptoName)"
-//            } else {
-//                self.btnSumLbl.text = "\(self.self.presenter.spendableSum) \(self.fiatName)"
-//            }
-//        } else {
-//            if self.isCrypto {
-//                self.btnSumLbl.text = "\(self.sumInCrypto) \(self.cryptoName)"
-//            } else {
-//                self.btnSumLbl.text = "\(self.sumInFiat) \(self.fiatName)"
-//            }
-//        }
-//
-//        if self.sumInCrypto != 0.0 || self.btnSumLbl.text != "" {
-//            self.nextBtn.isEnabled = true
-    
-//        }
-//    }
-    
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendFinishVC" {
@@ -271,6 +237,8 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             sendFinishVC.presenter.fiatName = self.presenter.fiatName
             sendFinishVC.presenter.transactionObj = self.presenter.transactionObj
             sendFinishVC.presenter.sumInCrypto = self.presenter.sumInCrypto
+            sendFinishVC.presenter.isCrypto = self.presenter.isCrypto
+            sendFinishVC.presenter.endSum = self.presenter.getNextBtnSum()
         }
     }
 }
