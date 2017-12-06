@@ -26,14 +26,14 @@ extension DataManager {
                     
                     let paramsDict = NSDictionary(dictionary: params)
                     
-                    self.realmManager.writeAccount(paramsDict, completion: { (account, error) in
+                    self.realmManager.updateAccount(paramsDict, completion: { (account, error) in
                         
                     })
                 }
                 
                 self.apiManager.auth(with: params, completion: { (dict, error) in
                     if dict != nil {
-                        self.realmManager.writeAccount(dict!, completion: { (account, error) in
+                        self.realmManager.updateAccount(dict!, completion: { (account, error) in
                             completion(account, error)
                         })
                     } else {
@@ -45,5 +45,40 @@ extension DataManager {
                 completion(nil, nil)
             }
         }
+    }
+    
+    func fetchAssets(_ token: String, completion: @escaping (_ assets: [WalletRLM]?,_ error: Error?) -> ()) {
+        apiManager.getAssets(token) { (holdingsOpt, error) in
+            if let holdings = holdingsOpt as? NSDictionary {
+                
+                //save exchange prices
+                if let exchnagePrice = holdings["exchangePrice"] as? NSDictionary {
+                    self.realmManager.updateExchangePrice(exchnagePrice, completion: { (exchangePrice, error) in
+                        
+                    })
+                }
+                
+                if let wallets = holdings["wallets"] as? NSDictionary {
+                    let accInfo = [ "wallets" : wallets.count ]
+                    
+                    self.realmManager.updateAccount(NSDictionary(dictionary: accInfo), completion: { (account, error) in
+                        print("updated account wallet count: \(account?.walletCount)")
+                    })
+                }
+                
+                completion(nil, error)
+            } else {
+                completion(nil, nil)
+            }
+        }
+    }
+    
+    func addWallet(completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        var params = Parameters()
+        
+        params["currency"] = 0
+        params["address"] = 0
+        params["addressID"] = 0
+        params["walletID"] = 0
     }
 }

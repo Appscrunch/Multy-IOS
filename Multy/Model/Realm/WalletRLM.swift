@@ -24,6 +24,9 @@ class WalletRLM: Object {
     @objc dynamic var privateKey = String()
     @objc dynamic var publicKey = String()
     
+    @objc dynamic var seedPhrase = String()
+    @objc dynamic var rootKey = String()
+    
     override class func primaryKey() -> String? {
         return "identifier"
     }

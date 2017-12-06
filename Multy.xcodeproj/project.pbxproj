@@ -110,12 +110,16 @@
 		FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; };
 		FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74062A1FCC5D6A003C538C /* Constants.swift */; };
+		FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */; };
+		FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */; };
+		FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
 		FADC004C1FC323A900182E45 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC004B1FC323A900182E45 /* SocketManager.swift */; };
 		FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC004D1FC323C300182E45 /* CoreLibManager.swift */; };
+		FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -233,12 +237,6 @@
 		FA4FDB101FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhraseViewController.swift; sourceTree = "<group>"; };
 		FA4FDB121FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
 		FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
-		FA7406121FCC14C4003C538C /* transaction_fee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_fee.h; sourceTree = "<group>"; };
-		FA7406131FCC14C4003C538C /* transaction_change.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction_change.h; sourceTree = "<group>"; };
-		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
-		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
-		FA7406161FCC14C4003C538C /* properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
 		FA7406181FCC14C4003C538C /* keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		FA7406191FCC14C4003C538C /* account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
 		FA74061A1FCC14C4003C538C /* mnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mnemonic.h; sourceTree = "<group>"; };
@@ -251,6 +249,9 @@
 		FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FA74062A1FCC5D6A003C538C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA869D081FD5AD9700C815C3 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUDforHambVC.swift; sourceTree = "<group>"; };
+		FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangePriceRLM.swift; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -258,6 +259,12 @@
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		FADC004B1FC323A900182E45 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		FADC004D1FC323C300182E45 /* CoreLibManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLibManager.swift; sourceTree = "<group>"; };
+		FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Extension.swift"; sourceTree = "<group>"; };
+		FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bip44_coin_types.h; sourceTree = "<group>"; };
+		FAFCDA8B1FD806EE0056DD64 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
+		FAFCDA8C1FD806EE0056DD64 /* api_transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
+		FAFCDA8D1FD806EE0056DD64 /* properties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
+		FAFCDA8E1FD806EE0056DD64 /* amount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FB8B9FB3B25309DBF0633968 /* Pods-Multy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Multy/Pods-Multy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,6 +377,7 @@
 		457486131FBD7DAF002D1925 /* Additional Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				FA869D091FD6B84900C815C3 /* HUD */,
 				FA74060F1FCC14C4003C538C /* Core Libs */,
 				457486141FBD7ED8002D1925 /* SMPageControl.swift */,
 			);
@@ -472,6 +480,7 @@
 				45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */,
 				FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */,
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
+				FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -717,6 +726,7 @@
 				FA4D44001FC71B6D003C7117 /* AccountRLM.swift */,
 				45D0836D1FCEEB990066F1CD /* WalletRLM.swift */,
 				45E215D71FD147950078945A /* TransactionRLM.swift */,
+				FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -769,12 +779,10 @@
 		FA7406101FCC14C4003C538C /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				FA7406111FCC14C4003C538C /* amount.h */,
-				FA7406121FCC14C4003C538C /* transaction_fee.h */,
-				FA7406131FCC14C4003C538C /* transaction_change.h */,
-				FA7406141FCC14C4003C538C /* api_transaction.h */,
-				FA7406151FCC14C4003C538C /* transaction.h */,
-				FA7406161FCC14C4003C538C /* properties.h */,
+				FAFCDA8E1FD806EE0056DD64 /* amount.h */,
+				FAFCDA8C1FD806EE0056DD64 /* api_transaction.h */,
+				FAFCDA8D1FD806EE0056DD64 /* properties.h */,
+				FAFCDA8B1FD806EE0056DD64 /* transaction.h */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -782,6 +790,7 @@
 		FA7406171FCC14C4003C538C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */,
 				FA7406181FCC14C4003C538C /* keys.h */,
 				FA7406191FCC14C4003C538C /* account.h */,
 				FA74061A1FCC14C4003C538C /* mnemonic.h */,
@@ -791,6 +800,15 @@
 				FA869D081FD5AD9700C815C3 /* error.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		FA869D091FD6B84900C815C3 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */,
+				FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */,
+			);
+			path = HUD;
 			sourceTree = "<group>";
 		};
 		FA86A74D1FC2C7E8002826EC /* Security */ = {
@@ -1016,6 +1034,7 @@
 				45E215DE1FD164E30078945A /* QrScannerViewController.swift in Sources */,
 				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
+				FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */,
 				FA4FDB131FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift in Sources */,
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */,
@@ -1025,8 +1044,10 @@
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,
+				FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */,
 				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
+				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
 				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
 				45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
@@ -1039,6 +1060,7 @@
 				4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */,
 				FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */,
 				45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */,
+				FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */,
 				45A9493E1FC5A557003C3A23 /* SendStartViewController.swift in Sources */,
 				FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */,
 				457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */,

@@ -29,4 +29,10 @@ extension DataManager {
             completion(wallet, error)
         }
     }
+    
+    func getExchangePrice(completion: @escaping (_ exchangePrice : ExchangePriceRLM?, _ error: NSError?) -> ())  {
+        realmManager.getExchangePrice { (exchangePrice, error) in
+            completion(exchangePrice, error)
+        }
+    }
 }

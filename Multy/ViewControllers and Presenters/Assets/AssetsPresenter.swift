@@ -12,7 +12,7 @@ class AssetsPresenter: NSObject {
     
     var account : AccountRLM? {
         didSet {
-//            fetchAssets()
+            fetchAssets()
 //            fetchTickets()
 //            getExchange()
 //            getTransInfo()
@@ -54,8 +54,11 @@ class AssetsPresenter: NSObject {
             return
         }
         
-        DataManager.shared.apiManager.getAssets(account!.token, completion: { (assetsDict, error) in
-            print(assetsDict)
+        DataManager.shared.fetchAssets(account!.token, completion: { (wallets, error) in
+            print("wallets: \(wallets)")
+            DataManager.shared.getExchangePrice(completion: { (price, error) in
+                print("exchange: \(price)")
+            })
         })
     }
     

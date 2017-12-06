@@ -10,20 +10,24 @@ class CreateWalletViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var constraintContinueBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var createBtn: ZFRippleButton!
-    
+    var presenter = CreateWalletPresenter()
+    let progressHUD = ProgressHUD(text: "Creating Wallet...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.hideKeyboardWhenTappedAround()
+        
+        self.view.addSubview(progressHUD)
+        progressHUD.hide()
+        
+        self.presenter.mainVC = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)),
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide),
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        self.createBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                     gradientOrientation: .horizontal)
     }
     
     @IBAction func cancleAction(_ sender: Any) {
@@ -31,7 +35,20 @@ class CreateWalletViewController: UIViewController {
     }
     
     @IBAction func createAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "", sender: sender)
+//        self.performSegue(withIdentifier: "", sender: sender)
+        
+        progressHUD.show()
+        presenter.createNewWallet { (dict) in
+            print(dict)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.createBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                     gradientOrientation: .horizontal)
     }
 }
 
@@ -63,6 +80,10 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
     }
     
     @objc func keyboardWillShow(_ notification : Notification) {

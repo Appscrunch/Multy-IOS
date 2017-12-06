@@ -109,7 +109,7 @@ class RealmManager: NSObject {
         }
     }
     
-    public func writeAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
+    public func updateAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
         getRealm { (realmOpt, error) in
             if let realm = realmOpt {
                 let account = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
@@ -138,6 +138,10 @@ class RealmManager: NSObject {
                         accountRLM.username = accountDict["username"] as! String
                     }
                     
+                    if accountDict["wallets"] != nil {
+                        accountRLM.walletCount = accountDict["wallets"] as! NSNumber
+                    }
+                    
                     realm.add(accountRLM, update: true)
                     
                     completion(accountRLM, nil)
@@ -163,6 +167,42 @@ class RealmManager: NSObject {
                     completion(wallet, nil)
                     
                     print("Successful writing wallet")
+                }
+            } else {
+                print("Error fetching realm:\(#function)")
+                completion(nil, nil)
+            }
+        }
+    }
+    
+    public func updateExchangePrice(_ ratesDict: NSDictionary, completion: @escaping (_ exchangePrice : ExchangePriceRLM?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let exchange = ExchangePriceRLM.initWithInfo(info: ratesDict)
+                
+                try! realm.write {
+                    realm.add(exchange, update: true)
+
+                    completion(exchange, nil)
+
+                    print("Successful writing exchange price")
+                }
+            } else {
+                print("Error fetching realm:\(#function)")
+                completion(nil, nil)
+            }
+        }
+    }
+    
+    public func getExchangePrice(completion: @escaping (_ exchangePrice : ExchangePriceRLM?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let prices = realm.object(ofType: ExchangePriceRLM.self, forPrimaryKey: 1)
+                
+                if prices != nil {
+                    completion(prices, nil)
+                } else {
+                    completion(nil, nil)
                 }
             } else {
                 print("Error fetching realm:\(#function)")

@@ -15,6 +15,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        DataManager.shared.startCoreTest()
+        
         self.presenter.mainVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
@@ -22,7 +24,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let mnemoString = DataManager.shared.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
         print("mnemoString: \(mnemoString)")
-        let rootID = DataManager.shared.coreLibManager.restoreSeed(from: mnemoString)
+        let rootID = DataManager.shared.getRootID(from: mnemoString)
         print("rootID: \(rootID)")
         
         //MAKE: first launch
@@ -116,4 +118,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "createWalletVC" {
+            let createVC = segue.destination as! CreateWalletViewController
+            createVC.presenter.account = presenter.account
+        }
+    }
 }

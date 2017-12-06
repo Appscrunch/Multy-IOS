@@ -106,7 +106,7 @@ class CoreLibManager: NSObject {
         run_tests(1, UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1))
     }
     
-    func restoreSeed(from phrase: String) -> String {
+    func createRootID(from phrase: String) -> String {
         
         //MAKE: free data
         //use defer function!!!
@@ -172,7 +172,7 @@ class CoreLibManager: NSObject {
         
         //Create wallet
         var walletDict = Dictionary<String, Any>()
-        walletDict["currencyID"] = currencyID
+        walletDict["currency"] = currencyID
         walletDict["walletID"] = walletID
         walletDict["addressID"] = 0 as UInt32
         
@@ -234,7 +234,7 @@ class CoreLibManager: NSObject {
         let mHDa = make_hd_account(rootIDPointer, Currency.init(0), 0, newAccountPointer)
         print("mHDa: \(String(describing: mHDa))")
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddressPointer)
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_EXTERNAL, 0, newAddressPointer)
         print("mHDla: \(String(describing: mHDla))")
         
         let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
@@ -265,20 +265,25 @@ class CoreLibManager: NSObject {
         print("currency: \(currency)")
         
         amountActivity()
-        transactionActions(account: newAccountPointer.pointee!)
+        transactionActions(account: newAddressPointer.pointee!)
     }
     
     func transactionActions(account: OpaquePointer) {
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let sourcePointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         let mt = make_transaction(account, transactionPointer)
+        print("\(mt)")
         
-        let pointer = UnsafeMutablePointer<CustomError>(mt)
-        let errr = pointer?.pointee
+        if mt != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(mt)
+            let errr = String(cString: (pointer?.pointee.message)!)
+        }
         
         
-        print("\(mt) -- \(UINT64_MAX)")
+//        let properties =
+        
     }
     
     func amountActivity() {
@@ -292,6 +297,7 @@ class CoreLibManager: NSObject {
         let ats = amount_to_string(newAmount.pointee, amountStringPointer)
         let asv = amount_set_value(newAmount.pointee, anotherAmount)
 //        free_amount(newAmount.pointee)
+        print("amountActivity: \(ma) -- \(ats) -- \(asv)")
     }
 }
 

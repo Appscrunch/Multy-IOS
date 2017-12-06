@@ -9,6 +9,7 @@ class ApiManager: NSObject {
     static let shared = ApiManager()
     
     let apiUrl = "http://192.168.0.121:8080/"
+    let apiUrlTest = "http://192.168.0.125:8080/"
     
     var requestManager = Alamofire.SessionManager.default
     
@@ -26,7 +27,10 @@ class ApiManager: NSObject {
             "Content-Type": "application/json"
         ]
         
-        Alamofire.request("\(self.apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+            
+            print("----------------------AUTH")
+            
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -39,7 +43,7 @@ class ApiManager: NSObject {
         }
     }
     
-    func getAssets(_ token: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func getAssets(_ token: String, completion: @escaping (_ holdings: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -142,4 +146,7 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+
+    
 }

@@ -26,11 +26,48 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
     
     //asynch version
     public func generateMasterKey(completion: @escaping (_ masterKey: Data?, _ error: Error?, String?) -> ()) {
-        executedFunction = completion
+//        executedFunction = completion
         
 //        deviceUUIDToken = UIDevice.current.identifierForVendor!.uuidString
-        generateInstanceID()
-        generateLocalPasswordString()
+//        generateInstanceID()
+//        generateLocalPasswordString()
+        
+        let instanceIDConfig = GGLInstanceIDConfig.default()
+        instanceIDConfig?.delegate = self
+        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
+        
+        let iidInstance = GGLInstanceID.sharedInstance()
+        
+        let handler : (String?, Error?) -> Void = { (identity, error) in
+            if let iid = identity {
+                //                self.instanceIDToken = iid
+                print("instanceIDToken: \(iid)")
+                
+                
+                DispatchQueue.main.async {
+                    let key = self.sha512(iid + UIDevice.current.identifierForVendor!.uuidString + self.localPasswordString)
+                    
+                    //clear secure info
+                    //MARK: clean
+//                    cleanTokens()
+                    
+                    guard let masterKey = key else {
+                        print("Error generating master key")
+                        
+                        return
+                    }
+                    
+                    //send
+//                    if let function = executedFunction {
+                        completion(masterKey, nil, nil)
+//                    }
+                }
+            } else {
+                print(error ?? "empty error")
+            }
+        }
+        
+        iidInstance?.getWithHandler(handler)
     }
     
     fileprivate func generateLocalPasswordString() {

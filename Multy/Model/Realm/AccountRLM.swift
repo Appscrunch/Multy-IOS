@@ -14,6 +14,8 @@ class AccountRLM: Object {
     @objc dynamic var token = String()
     @objc dynamic var id: NSNumber = 1
     
+    @objc dynamic var walletCount: NSNumber = 0
+    
     override class func primaryKey() -> String? {
         return "id"
     }
