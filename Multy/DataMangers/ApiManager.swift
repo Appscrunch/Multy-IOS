@@ -51,7 +51,7 @@ class ApiManager: NSObject {
             
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/getassetsinfo", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)api/v1/getalluserassets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -146,7 +146,4 @@ class ApiManager: NSObject {
             }
         }
     }
-    
-
-    
 }

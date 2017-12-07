@@ -47,28 +47,18 @@ extension DataManager {
         }
     }
     
-    func fetchAssets(_ token: String, completion: @escaping (_ assets: [WalletRLM]?,_ error: Error?) -> ()) {
+    func fetchAssets(_ token: String, completion: @escaping (_ assets: List<UserWalletRLM>?,_ error: Error?) -> ()) {
         apiManager.getAssets(token) { (holdingsOpt, error) in
-            if let holdings = holdingsOpt {  // as? NSDictionary
-                
-                //save exchange prices
-                if let exchnagePrice = holdings["exchangePrice"] as? NSDictionary {
-                    self.realmManager.updateExchangePrice(exchnagePrice, completion: { (exchangePrice, error) in
-                        
-                    })
+            if let holdings = holdingsOpt {
+                if let wallets = holdings["walletInfo"] as? NSArray {
+                    completion(UserWalletRLM.initWithArray(walletsInfo: wallets), nil)
+                } else {
+                    completion(nil, nil)
                 }
                 
-                if let wallets = holdings["wallets"] as? NSDictionary {
-                    let accInfo = [ "wallets" : wallets.count ]
-                    
-                    self.realmManager.updateAccount(NSDictionary(dictionary: accInfo), completion: { (account, error) in
-                        print("updated account wallet count: \(account?.walletCount ?? 0)")
-                    })
-                }
-                
-                completion(nil, error)
-            } else {
                 completion(nil, nil)
+            } else {
+                completion(nil, error)
             }
         }
     }

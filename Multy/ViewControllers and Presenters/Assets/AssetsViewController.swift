@@ -9,14 +9,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
-    var account : AccountRLM? {
-        didSet {
-//            fetchAssets()
-//            fetchTickets()
-            getExchange()
-//            getTransInfo()
-        }
-    }
+//    var account : AccountRLM? {
+//        didSet {
+////            fetchAssets()
+////            fetchTickets()
+//            getExchange()
+////            getTransInfo()
+//        }
+//    }
     let presenter = AssetsPresenter()
     
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
 //        DataManager.shared.socketManager.start()
         
-        DataManager.shared.startCoreTest()
+//        DataManager.shared.startCoreTest()
         
         
         self.presenter.assetsVC = self
@@ -48,7 +48,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             DispatchQueue.main.async {
-                self.account = account
+                self.presenter.account = account
             }
         }
     }
@@ -57,17 +57,17 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //test
     
     func fetchAssets() {
-        guard account?.token != nil else {
+        guard presenter.account?.token != nil else {
             return
         }
         
-        DataManager.shared.apiManager.getAssets(account!.token, completion: { (assetsDict, error) in
+        DataManager.shared.apiManager.getAssets(presenter.account!.token, completion: { (assetsDict, error) in
             print(assetsDict)
         })
     }
     
     func fetchTickets() {
-        DataManager.shared.apiManager.getTickets(account!.token, direction: "") { (dict, error) in
+        DataManager.shared.apiManager.getTickets(presenter.account!.token, direction: "") { (dict, error) in
             guard dict != nil  else {
                 return
             }
@@ -77,7 +77,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func getExchange() {
-        DataManager.shared.apiManager.getExchangePrice(account!.token, direction: "") { (dict, error) in
+        DataManager.shared.apiManager.getExchangePrice(presenter.account!.token, direction: "") { (dict, error) in
             guard dict != nil  else {
                 return
             }
@@ -88,7 +88,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func getTransInfo() {
-        DataManager.shared.apiManager.getTransactionInfo(account!.token,
+        DataManager.shared.apiManager.getTransactionInfo(presenter.account!.token,
                                                          transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
                                                             guard transDict != nil else {
                                                                 return

@@ -14,7 +14,7 @@ class AssetsPresenter: NSObject {
         didSet {
             fetchAssets()
 //            fetchTickets()
-//            getExchange()
+            getExchange()
 //            getTransInfo()
         }
     }
@@ -63,9 +63,6 @@ class AssetsPresenter: NSObject {
         
         DataManager.shared.fetchAssets(account!.token, completion: { (wallets, error) in
             print("wallets: \(wallets)")
-            DataManager.shared.getExchangePrice(completion: { (price, error) in
-                print("exchange: \(price)")
-            })
         })
     }
     

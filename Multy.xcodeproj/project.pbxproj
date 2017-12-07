@@ -110,6 +110,8 @@
 		FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */; };
 		FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
+		FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88358F1FD854EC007694A2 /* AddressRLM.swift */; };
+		FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8835911FD856F4007694A2 /* UserWalletRLM.swift */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
@@ -229,10 +231,6 @@
 		FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
-		FA4FDB0D1FCDAFA9008AEA2B /* BricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
-		FA4FDB101FCF0A7B008AEA2B /* WrongSeedPhraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhraseViewController.swift; sourceTree = "<group>"; };
-		FA4FDB121FCF0AA3008AEA2B /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
-		FA4FDB141FCFF85C008AEA2B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
 		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
@@ -254,6 +252,8 @@
 		FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangePriceRLM.swift; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA88358F1FD854EC007694A2 /* AddressRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRLM.swift; sourceTree = "<group>"; };
+		FA8835911FD856F4007694A2 /* UserWalletRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWalletRLM.swift; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -261,10 +261,6 @@
 		FADC004D1FC323C300182E45 /* CoreLibManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLibManager.swift; sourceTree = "<group>"; };
 		FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Extension.swift"; sourceTree = "<group>"; };
 		FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bip44_coin_types.h; sourceTree = "<group>"; };
-		FAFCDA8B1FD806EE0056DD64 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
-		FAFCDA8C1FD806EE0056DD64 /* api_transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
-		FAFCDA8D1FD806EE0056DD64 /* properties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = properties.h; sourceTree = "<group>"; };
-		FAFCDA8E1FD806EE0056DD64 /* amount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FB8B9FB3B25309DBF0633968 /* Pods-Multy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Multy/Pods-Multy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -724,6 +720,8 @@
 				45D0836D1FCEEB990066F1CD /* WalletRLM.swift */,
 				45E215D71FD147950078945A /* TransactionRLM.swift */,
 				FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */,
+				FA88358F1FD854EC007694A2 /* AddressRLM.swift */,
+				FA8835911FD856F4007694A2 /* UserWalletRLM.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -990,6 +988,7 @@
 			files = (
 				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
 				FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */,
+				FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */,
 				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
 				45E215DB1FD15D5F0078945A /* DonationObj.swift in Sources */,
 				45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */,
@@ -1008,6 +1007,7 @@
 				45A949351FC5992A003C3A23 /* SearchAddressTableViewCell.swift in Sources */,
 				45A9492A1FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift in Sources */,
 				452236211FCD6BA7004BA490 /* TransactionPresenter.swift in Sources */,
+				FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */,
 				455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */,
 				455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */,
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
