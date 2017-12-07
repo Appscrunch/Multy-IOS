@@ -41,7 +41,8 @@ class ReceiveAllDetailsViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     @IBAction func backAction(_ sender: Any) {

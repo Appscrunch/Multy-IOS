@@ -39,7 +39,8 @@ class WalletChoooseViewController: UIViewController {
     
     
     @IBAction func cancelAction(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popToRootViewController(animated: false)
     }
 }
 

@@ -18,6 +18,8 @@
 		455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCF81FC8535C00EA5ACE /* CreateWalletPresenter.swift */; };
 		455CDCFB1FC8537200EA5ACE /* CreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCFA1FC8537200EA5ACE /* CreateWalletViewController.swift */; };
 		455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCFC1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift */; };
+		455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8751FD842610093F69D /* CustomTabBarViewController.swift */; };
+		455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8781FD851830093F69D /* FastOperationsViewController.swift */; };
 		457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457486141FBD7ED8002D1925 /* SMPageControl.swift */; };
 		4575692D1FBDAA0C00FDEE20 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */; };
 		457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */; };
@@ -153,6 +155,8 @@
 		455CDCF81FC8535C00EA5ACE /* CreateWalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletPresenter.swift; sourceTree = "<group>"; };
 		455CDCFA1FC8537200EA5ACE /* CreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletViewController.swift; sourceTree = "<group>"; };
 		455CDCFC1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletNameTableViewCell.swift; sourceTree = "<group>"; };
+		455EA8751FD842610093F69D /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
+		455EA8781FD851830093F69D /* FastOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastOperationsViewController.swift; sourceTree = "<group>"; };
 		457486141FBD7ED8002D1925 /* SMPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMPageControl.swift; sourceTree = "<group>"; };
 		4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeedPhrase.storyboard; sourceTree = "<group>"; };
 		457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +371,22 @@
 				455CDCFC1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift */,
 			);
 			path = "Create Wallet Name";
+			sourceTree = "<group>";
+		};
+		455EA8721FD841FF0093F69D /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				455EA8751FD842610093F69D /* CustomTabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		455EA8771FD8514F0093F69D /* Fast Operations */ = {
+			isa = PBXGroup;
+			children = (
+				455EA8781FD851830093F69D /* FastOperationsViewController.swift */,
+			);
+			path = "Fast Operations";
 			sourceTree = "<group>";
 		};
 		457486131FBD7DAF002D1925 /* Additional Libraries */ = {
@@ -642,8 +662,10 @@
 		45B9CB031FBB4B2300AA2A31 /* ViewControllers and Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				455EA8721FD841FF0093F69D /* TabBar */,
 				FA4D43E81FC5C305003C7117 /* Wallet */,
 				45B9CB011FBB4AC200AA2A31 /* Assets */,
+				455EA8771FD8514F0093F69D /* Fast Operations */,
 				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 				45A9491D1FC2DF03003C3A23 /* Receive */,
 				45A9493C1FC5A4FB003C3A23 /* Send */,
@@ -1038,6 +1060,7 @@
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
 				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
 				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
+				455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */,
 				45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
 				FA4D43FE1FC6D058003C7117 /* MainWalletCell.swift in Sources */,
@@ -1068,6 +1091,7 @@
 				45A949481FC5C55C003C3A23 /* WalletChooosePresenter.swift in Sources */,
 				4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */,
 				45A9492C1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift in Sources */,
+				455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */,
 				FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */,
 				45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */,
 			);
