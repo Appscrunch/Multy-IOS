@@ -35,7 +35,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let mnemoString = DataManager.shared.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
         print("mnemoString: \(mnemoString)")
-        let rootID = DataManager.shared.getRootID(from: mnemoString)
+        let rootID = DataManager.shared.getRootString(from: mnemoString)
         print("rootID: \(rootID)")
         
         //MAKE: first launch

@@ -15,18 +15,22 @@ extension DataManager {
         coreLibManager.startTests()
     }
     
-    func getRootID(from seedPhase: String) -> String {
-        return coreLibManager.createRootID(from: seedPhase)
+    func getRootString(from seedPhase: String) -> String {
+        var binaryData = coreLibManager.createSeedBinaryData(from: seedPhase)
+        
+        return coreLibManager.createExtendedKey(from: &binaryData)
     }
     
-    func createWallet(from rootID: String, currencyID : UInt32, walletID : UInt32) -> Dictionary<String, Any>? {
-        return coreLibManager.createWallet(from: rootID, currencyID: currencyID, walletID: walletID)
+    func createWallet(from seedPhrase: String, currencyID : UInt32, walletID : UInt32) -> Dictionary<String, Any>? {
+        var binaryData = coreLibManager.createSeedBinaryData(from: seedPhrase)
+        
+        return coreLibManager.createWallet(from: &binaryData, currencyID: currencyID, walletID: walletID)
     }
     
-    func createNewWallet(_ currencyID: UInt32, walletID: UInt32, completion: @escaping (_ wallet: Dictionary<String, Any>?) -> ()) {
+    func createNewAccountWithWallet(_ currencyID: UInt32, walletID: UInt32, completion: @escaping (_ wallet: Dictionary<String, Any>?) -> ()) {
         let seedPharse = getMnenonicArray()
         let seedPhraseString = seedPharse.joined(separator: " ")
-        let rootKey = getRootID(from: seedPhraseString)
+        let rootKey = getRootString(from: seedPhraseString)
         
         var wallet = createWallet(from: rootKey, currencyID: currencyID, walletID: walletID)
         

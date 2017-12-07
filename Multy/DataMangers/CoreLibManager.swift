@@ -106,42 +106,60 @@ class CoreLibManager: NSObject {
         run_tests(1, UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1))
     }
     
-    func createRootID(from phrase: String) -> String {
-        
+    func createSeedBinaryData(from phrase: String) -> BinaryData {
         //MAKE: free data
         //use defer function!!!
         
         print("seed phrase: \(phrase)")
-        
+        let stringPointer = phrase.UTF8CStringPointer
         let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        
+        let ms = make_seed(stringPointer, nil, binaryDataPointer)
+        
+        if ms != nil {
+            print("ms: \(String(describing: ms))")
+//            return nil
+        }
+
+        return binaryDataPointer.pointee!.pointee
+    }
+    
+    func createExtendedKey(from binaryData: inout BinaryData) -> String {
+        let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
+        
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let extendedKeyPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let stringPointer = phrase.UTF8CStringPointer
-        
-        let ms = make_seed(stringPointer, nil, binaryDataPointer)
-        print("ms: \(String(describing: ms))")
-        
-        let binaryData = binaryDataPointer.pointee
-        let mmk = make_master_key(binaryData, masterKeyPointer)
+        var mmk = make_master_key(binaryDataPointer, masterKeyPointer)
         print("mmk: \(String(describing: mmk))")
         
-        let mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
+        var mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
         print("mki: \(String(describing: mki))")
-        print("extended key: \(String(cString: extendedKeyPointer.pointee!))")
         
-        let rootID = String(cString: extendedKeyPointer.pointee!)
+        let extendedKey = String(cString: extendedKeyPointer.pointee!)
+        print("extended key: \(extendedKey)")
         
-        print("rootID: \(rootID)")
+        //free data
+//        binaryDataPointer.deallocate(capacity: 1)
+//        masterKeyPointer.deallocate(capacity: 1)
+//        extendedKeyPointer.deallocate(capacity: 1)
+        mmk = nil
+        mki = nil
+//        binaryData = nil
         
-        //HD Account
-        createHDAccount(from: rootID)
-        
-        return rootID
+        return extendedKey
     }
     
-    func createWallet(from rootID : String, currencyID : UInt32, walletID : UInt32) -> Dictionary<String, Any>? {
-        let rootIDPointer = OpaquePointer(rootID)
+    func createWallet(from binaryData: inout BinaryData, currencyID: UInt32, walletID: UInt32) -> Dictionary<String, Any>? {
+        let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
+        let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
+        print("mmk: \(String(describing: mmk))")
+        
+        //HD Account
+        createHDAccount(from: masterKeyPointer.pointee!)
+        
         let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         //New address
@@ -156,7 +174,7 @@ class CoreLibManager: NSObject {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
 
-        let mHDa = make_hd_account(rootIDPointer, Currency.init(currencyID), walletID, newAccountPointer)
+        let mHDa = make_hd_account(masterKeyPointer.pointee, Currency.init(currencyID), walletID, newAccountPointer)
         if mHDa != nil {
             print("mHDa: \(String(describing: mHDa))")
             
@@ -215,8 +233,7 @@ class CoreLibManager: NSObject {
         return walletDict
     }
     
-    func createHDAccount(from rootID : String)  {
-        let rootIDPointer = OpaquePointer(rootID)
+    func createHDAccount(from masterKey: OpaquePointer)  {
         let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         //New address
@@ -231,7 +248,7 @@ class CoreLibManager: NSObject {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let mHDa = make_hd_account(rootIDPointer, Currency.init(0), 0, newAccountPointer)
+        let mHDa = make_hd_account(masterKey, Currency.init(0), 0, newAccountPointer)
         print("mHDa: \(String(describing: mHDa))")
         
         let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_EXTERNAL, 0, newAddressPointer)

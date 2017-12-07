@@ -38,9 +38,9 @@ class CreateWalletViewController: UIViewController {
 //        self.performSegue(withIdentifier: "", sender: sender)
         
         progressHUD.show()
-        presenter.createNewWallet { (dict) in
-            print(dict)
-        }
+//        presenter.createNewWallet { (dict) in
+//            print(dict)
+//        }
     }
     
     override func viewDidLayoutSubviews() {
