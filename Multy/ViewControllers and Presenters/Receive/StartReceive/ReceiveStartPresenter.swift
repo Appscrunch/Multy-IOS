@@ -23,7 +23,7 @@ class ReceiveStartPresenter: NSObject {
             wallet.name = "Ivan \(index)"
             wallet.cryptoName = "BTC"
             wallet.sumInCrypto = 12.345 + Double(index)
-            wallet.sumInFiat = wallet.sumInCrypto * exchangeCourse
+            wallet.sumInFiat = Double(round(100*wallet.sumInCrypto * exchangeCourse)/100)
             wallet.fiatName = "USD"
             wallet.fiatSymbol = "$"
             wallet.address = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K"

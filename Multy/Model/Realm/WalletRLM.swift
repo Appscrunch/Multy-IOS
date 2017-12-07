@@ -52,6 +52,7 @@ class WalletRLM: Object {
         
         if dictionary["sumInFiat"] != nil {
             wallet.sumInFiat = dictionary["sumInFiat"] as! Double
+            wallet.sumInFiat = Double(round(100*wallet.sumInFiat)/100)
         }
         
         if dictionary["fiatName"] != nil {
