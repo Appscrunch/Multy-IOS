@@ -100,9 +100,16 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
             self.qrDelegate?.qrData(string: stringValue)
+            if self.presenter.isFast {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: {
+                    self.dismiss(animated: true, completion: nil)
+                })
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         
-        self.navigationController?.popViewController(animated: true)
+        
     }
     
     func found(code: String) {

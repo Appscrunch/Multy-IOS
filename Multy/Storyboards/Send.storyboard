@@ -86,7 +86,7 @@
         <!--Qr Scanner View Controller-->
         <scene sceneID="kSv-e9-VJc">
             <objects>
-                <viewController id="Tfc-aA-5T8" customClass="QrScannerViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="qrScanVC" id="Tfc-aA-5T8" customClass="QrScannerViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hv6-Ka-87r"/>
                         <viewControllerLayoutGuide type="bottom" id="mN7-RK-daB"/>

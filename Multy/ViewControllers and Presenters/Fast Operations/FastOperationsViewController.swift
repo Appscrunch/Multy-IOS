@@ -6,9 +6,14 @@ import UIKit
 
 class FastOperationsViewController: UIViewController {
 
+    let presenter = FastOperationsPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.fastOperationsVC = self
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -16,6 +21,7 @@ class FastOperationsViewController: UIViewController {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.navigationController?.navigationBar.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        self.presenter.getExchange()
     }
     
     @IBAction func closeAction(_ sender: Any) {
@@ -38,6 +44,11 @@ class FastOperationsViewController: UIViewController {
     }
     
     @IBAction func scanAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Send", bundle: nil)
+        let qrScanVC = storyboard.instantiateViewController(withIdentifier: "qrScanVC") as! QrScannerViewController
+        qrScanVC.qrDelegate = self.presenter
+        qrScanVC.presenter.isFast = true
+        self.present(qrScanVC, animated: true, completion: nil)
     }
     
     
