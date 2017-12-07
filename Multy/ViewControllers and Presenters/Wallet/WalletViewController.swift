@@ -8,24 +8,41 @@ class WalletViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet var backView: UIView!
     
     var presenter = WalletPresenter()
     var even = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.tabBarController?.tabBar.isHidden = true
         
         presenter.mainVC = self
         
         presenter.fixConstraints()
         presenter.registerCells()
+        
+        self.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                    gradientOrientation: .topRightBottomLeft)
+        self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                    gradientOrientation: .topRightBottomLeft)
+        self.backView.backgroundColor = .red
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
     }
     
     @IBAction func closeAction() {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func settingssAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "settingsVC", sender: sender)
     }
 }
 
@@ -35,7 +52,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        //check number of transactions
+        // else retunrn some empty cells
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,6 +68,8 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "TransactionWalletCellID") as! TransactionWalletCell
             walletCell.selectionStyle = .none
             
+            //if have transactions isEmpty - false
+            walletCell.changeState(isEmpty: true)
             return walletCell
         }
     }

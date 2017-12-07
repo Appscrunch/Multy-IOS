@@ -92,7 +92,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0p-sP-wOM">
                                 <rect key="frame" x="69" y="161" width="236" height="44"/>
-                                <color key="backgroundColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.01119481585919857" green="0.48881852626800537" blue="0.99941509962081909" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g0p-sP-wOM" secondAttribute="height" multiplier="59:11" id="tFW-po-4gl"/>
                                 </constraints>

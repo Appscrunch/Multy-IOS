@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */; };
+		4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */; };
 		451B98631FD947A400DC64A5 /* FastOperationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */; };
 		451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */; };
 		4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522361E1FCD6B94004BA490 /* TransactionViewController.swift */; };
@@ -144,6 +146,8 @@
 /* Begin PBXFileReference section */
 		0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		313568CEE4A41522AB0FD8F0 /* Pods-Multy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Multy/Pods-Multy.release.xcconfig"; sourceTree = "<group>"; };
+		4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsPresenter.swift; sourceTree = "<group>"; };
+		4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
 		451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastOperationsPresenter.swift; sourceTree = "<group>"; };
 		451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarPresenter.swift; sourceTree = "<group>"; };
 		4522361E1FCD6B94004BA490 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
@@ -294,6 +298,15 @@
 				0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4506F1721FD9A2B700D575BA /* Wallet settings */ = {
+			isa = PBXGroup;
+			children = (
+				4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */,
+				4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */,
+			);
+			path = "Wallet settings";
 			sourceTree = "<group>";
 		};
 		4522361D1FCD6B6E004BA490 /* Transaction */ = {
@@ -760,6 +773,7 @@
 				FA4D43F81FC5D8B0003C7117 /* WalletViewController.swift */,
 				FA4D43FA1FC6C760003C7117 /* WalletPresenter.swift */,
 				4522361D1FCD6B6E004BA490 /* Transaction */,
+				4506F1721FD9A2B700D575BA /* Wallet settings */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1040,6 +1054,7 @@
 				FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */,
 				455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */,
 				455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */,
+				4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */,
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
 				457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */,
@@ -1081,6 +1096,7 @@
 				FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */,
 				45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */,
 				FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */,
+				4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */,
 				45A9493E1FC5A557003C3A23 /* SendStartViewController.swift in Sources */,
 				FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */,
 				457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */,
