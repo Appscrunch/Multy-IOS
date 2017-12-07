@@ -44,6 +44,11 @@ class FastOperationsViewController: UIViewController {
     }
     
     @IBAction func scanAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Send", bundle: nil)
+        let qrScanVC = storyboard.instantiateViewController(withIdentifier: "qrScanVC") as! QrScannerViewController
+        qrScanVC.qrDelegate = self.presenter
+        qrScanVC.presenter.isFast = true
+        self.present(qrScanVC, animated: true, completion: nil)
     }
     
     

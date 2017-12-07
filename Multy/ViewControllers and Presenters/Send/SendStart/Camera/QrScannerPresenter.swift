@@ -6,4 +6,6 @@ import UIKit
 
 class QrScannerPresenter: NSObject {
     var qrScannerVC: QrScannerViewController?
+    
+    var isFast = false
 }
