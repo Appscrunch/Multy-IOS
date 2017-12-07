@@ -38,4 +38,5 @@ class DataManager: NSObject {
             }
         }
     }
+    
 }

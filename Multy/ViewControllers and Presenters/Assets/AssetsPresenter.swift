@@ -81,7 +81,6 @@ class AssetsPresenter: NSObject {
             guard dict != nil  else {
                 return
             }
-            
             print(dict!)
         }
     }

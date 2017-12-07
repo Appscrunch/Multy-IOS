@@ -145,13 +145,13 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     func saveTfValue() {
         if self.isCrypto {
             self.sumInCrypto = (self.sumLbl.text! as NSString).doubleValue
-            self.sumInFiat = self.sumInCrypto * self.presenter.exchangeCourse
+            self.sumInFiat = self.sumInCrypto * exchangeCourse
             self.sumInFiat = Double(round(100*self.sumInFiat)/100)
             self.bottomSumLbl.text = "\(self.sumInFiat) "
             self.bottomCurrencyNameLbl.text = self.fiatName
         } else {
             self.sumInFiat = (self.sumLbl.text! as NSString).doubleValue
-            self.sumInCrypto = self.sumInFiat / self.presenter.exchangeCourse
+            self.sumInCrypto = self.sumInFiat / exchangeCourse
             self.sumInCrypto = Double(round(100000000*self.sumInCrypto)/100000000 )
             self.bottomSumLbl.text = "\(self.sumInCrypto) "
             self.bottomCurrencyNameLbl.text = self.cryptoName

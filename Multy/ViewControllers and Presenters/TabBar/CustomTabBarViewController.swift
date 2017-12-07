@@ -6,12 +6,16 @@ import UIKit
 
 class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
+    let presenter = CustomTabBarPresenter()
     // MARK: - View lifecycle
     let menuButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.tabBarVC = self
+//        self.presenter.getExchange()
         setupMiddleButton()
+        
     }
     
     // MARK: - Setups
@@ -36,6 +40,8 @@ class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate
     @objc private func menuButtonAction(sender: UIButton) {
         selectedIndex = 2
     }
+    
+    
     
     
 }

@@ -32,6 +32,7 @@ class SendingAnimationViewController: UIViewController {
     
     
     @IBAction func closeAction(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 0
         self.navigationController?.popToRootViewController(animated: true)
     }
     
