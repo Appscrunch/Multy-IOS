@@ -4,7 +4,7 @@
 
 import UIKit
 
-class MainWalletCell: UITableViewCell {
+class TransactionWalletCell: UITableViewCell {
     
     @IBOutlet weak var transactionImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!

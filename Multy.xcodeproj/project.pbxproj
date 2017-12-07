@@ -98,8 +98,8 @@
 		FA4D43F71FC5D019003C7117 /* MainWalletCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43F51FC5D019003C7117 /* MainWalletCollectionViewCell.xib */; };
 		FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43F81FC5D8B0003C7117 /* WalletViewController.swift */; };
 		FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FA1FC6C760003C7117 /* WalletPresenter.swift */; };
-		FA4D43FE1FC6D058003C7117 /* MainWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */; };
-		FA4D43FF1FC6D058003C7117 /* MainWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */; };
+		FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */; };
+		FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
 		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
 		FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; };
@@ -236,8 +236,8 @@
 		FA4D43F51FC5D019003C7117 /* MainWalletCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCollectionViewCell.xib; sourceTree = "<group>"; };
 		FA4D43F81FC5D8B0003C7117 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		FA4D43FA1FC6C760003C7117 /* WalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPresenter.swift; sourceTree = "<group>"; };
-		FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletCell.swift; sourceTree = "<group>"; };
-		FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCell.xib; sourceTree = "<group>"; };
+		FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionWalletCell.swift; sourceTree = "<group>"; };
+		FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
 		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
@@ -771,8 +771,8 @@
 				FA4D43EB1FC5CEE0003C7117 /* MainWalletHeaderCell.xib */,
 				FA4D43F41FC5D019003C7117 /* MainWalletCollectionViewCell.swift */,
 				FA4D43F51FC5D019003C7117 /* MainWalletCollectionViewCell.xib */,
-				FA4D43FC1FC6D058003C7117 /* MainWalletCell.swift */,
-				FA4D43FD1FC6D058003C7117 /* MainWalletCell.xib */,
+				FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */,
+				FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */,
 			);
 			path = MainWallet;
 			sourceTree = "<group>";
@@ -917,7 +917,7 @@
 				FA4D43F71FC5D019003C7117 /* MainWalletCollectionViewCell.xib in Resources */,
 				4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */,
 				4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */,
-				FA4D43FF1FC6D058003C7117 /* MainWalletCell.xib in Resources */,
+				FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */,
 				45A949541FC6D1E1003C3A23 /* TransactionFeeTableViewCell.xib in Resources */,
 				45A949311FC582BC003C3A23 /* Send.storyboard in Resources */,
 				45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */,
@@ -1071,7 +1071,7 @@
 				455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */,
 				45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
-				FA4D43FE1FC6D058003C7117 /* MainWalletCell.swift in Sources */,
+				FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */,
 				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */,

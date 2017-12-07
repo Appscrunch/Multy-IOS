@@ -14,7 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MainWalletCell" customModule="Multy" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TransactionWalletCell" customModule="Multy" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -87,12 +87,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="addressLabel" destination="HoU-C3-WIc" id="5tc-iW-am3"/>
-                <outlet property="cryptoAmountLabel" destination="3Nq-Xx-0YW" id="Yyz-ot-DH7"/>
-                <outlet property="descriptionLabel" destination="ofF-nW-jBI" id="vRm-he-iqg"/>
-                <outlet property="fiatAmountLabel" destination="Xiz-uF-aUP" id="Rjw-jA-ovZ"/>
-                <outlet property="timeLabel" destination="MhC-GT-MHY" id="VYI-3m-oMQ"/>
-                <outlet property="transactionImage" destination="0fb-sf-7dQ" id="rjw-2e-G1e"/>
+                <outlet property="addressLabel" destination="HoU-C3-WIc" id="gNV-eH-yrA"/>
+                <outlet property="cryptoAmountLabel" destination="3Nq-Xx-0YW" id="ku0-1f-DE4"/>
+                <outlet property="descriptionLabel" destination="ofF-nW-jBI" id="45Y-wM-vQz"/>
+                <outlet property="fiatAmountLabel" destination="Xiz-uF-aUP" id="mRG-ma-EmN"/>
+                <outlet property="timeLabel" destination="MhC-GT-MHY" id="JMK-qS-N2o"/>
+                <outlet property="transactionImage" destination="0fb-sf-7dQ" id="QJN-da-L12"/>
             </connections>
             <point key="canvasLocation" x="-113.5" y="97"/>
         </tableViewCell>

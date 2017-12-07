@@ -16,8 +16,8 @@ class WalletPresenter: NSObject {
 //        let walletCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
 //        self.mainVC?.tableView.register(walletCollectionCell, forCellReuseIdentifier: "WalletCollectionViewCellID")
         
-        let mainWalletCell = UINib.init(nibName: "MainWalletCell", bundle: nil)
-        self.mainVC?.tableView.register(mainWalletCell, forCellReuseIdentifier: "MainWalletCellID")
+        let mainWalletCell = UINib.init(nibName: "TransactionWalletCell", bundle: nil)
+        self.mainVC?.tableView.register(mainWalletCell, forCellReuseIdentifier: "TransactionWalletCellID")
     }
     
     func fixConstraints() {

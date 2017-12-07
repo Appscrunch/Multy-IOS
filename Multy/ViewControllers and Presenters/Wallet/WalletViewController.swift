@@ -45,8 +45,8 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             headerCell.delegate = self
             
             return headerCell
-        } else {                           //  Wallet Cell
-            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "MainWalletCellID") as! MainWalletCell
+        } else {                           //  Wallet Cellx
+            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "TransactionWalletCellID") as! TransactionWalletCell
             walletCell.selectionStyle = .none
             
             return walletCell
@@ -68,7 +68,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath == [0, 1] {
-            (cell as! MainWalletCell).setCorners()
+            (cell as! TransactionWalletCell).setCorners()
         }
     }
     
