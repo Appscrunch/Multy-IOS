@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="c4k-oT-N4s" firstAttribute="centerY" secondItem="6tf-nj-MVi" secondAttribute="centerY" id="FkH-IP-tvc"/>
                             <constraint firstItem="c4k-oT-N4s" firstAttribute="centerX" secondItem="6tf-nj-MVi" secondAttribute="centerX" id="LcD-1s-C2J"/>
@@ -241,7 +241,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yiy-uE-HCf" firstAttribute="centerX" secondItem="FqR-yZ-vN6" secondAttribute="centerX" id="gEf-aP-6x8"/>
                             <constraint firstItem="yiy-uE-HCf" firstAttribute="centerY" secondItem="FqR-yZ-vN6" secondAttribute="centerY" id="nVF-x0-Sea"/>
@@ -292,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dr-dB-Viy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2796" y="1558"/>
+            <point key="canvasLocation" x="-2796" y="1557.5712143928038"/>
         </scene>
         <!--Create Wallet View Controller-->
         <scene sceneID="FNV-5c-hqY">
@@ -716,7 +716,7 @@ correctly</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="s3s-lJ-Eqd" firstAttribute="centerX" secondItem="oAY-1d-N0f" secondAttribute="centerX" id="D5v-91-FbS"/>
                             <constraint firstItem="s3s-lJ-Eqd" firstAttribute="centerY" secondItem="oAY-1d-N0f" secondAttribute="centerY" id="DEO-iU-vh9"/>

@@ -126,6 +126,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
         self.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
+        
+        let textCell = UINib.init(nibName: "TextTableViewCell", bundle: nil)
+        self.tableView.register(textCell, forCellReuseIdentifier: "textCell")
     }
 
     //MARK: Table view delegates
@@ -135,7 +138,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,9 +149,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
             return newWalletCell
         } else {                           //  Wallet Cell
-            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-            walletCell.makeshadow()
-            return walletCell
+            //проверка на наличие валетов
+            let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
+            return textCell
+//            else {
+//            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+//            walletCell.makeshadow()
+//            return walletCell
+//            }
         }
     }
     
