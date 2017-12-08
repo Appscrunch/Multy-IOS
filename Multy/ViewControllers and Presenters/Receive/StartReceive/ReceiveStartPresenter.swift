@@ -12,14 +12,14 @@ class ReceiveStartPresenter: NSObject {
     
     var selectedIndexPath: IndexPath? = nil
     
-    var walletsArr = [WalletRLM]()
+    var walletsArr = [UserWalletRLM]()
     
     var selectedIndex: Int?
     
     //test func
     func createWallets() {
         for index in 1...10 {
-            let wallet = WalletRLM()
+            let wallet = UserWalletRLM()
             wallet.name = "Ivan \(index)"
             wallet.cryptoName = "BTC"
             wallet.sumInCrypto = 12.345 + Double(index)
@@ -27,6 +27,7 @@ class ReceiveStartPresenter: NSObject {
             wallet.fiatName = "USD"
             wallet.fiatSymbol = "$"
             wallet.address = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K"
+            
             self.walletsArr.append(wallet)
         }
     }

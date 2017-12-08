@@ -32,6 +32,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
+        
+        if presenter.account != nil {
+            presenter.fetchAssets()
+        }
     }
     
     //MARK: Setup functions

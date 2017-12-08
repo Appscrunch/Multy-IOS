@@ -171,10 +171,10 @@ class RealmManager: NSObject {
         
     }
     
-    public func createWallet(_ walletDict: Dictionary<String, Any>, completion: @escaping (_ account : WalletRLM?, _ error: NSError?) -> ()) {
+    public func createWallet(_ walletDict: Dictionary<String, Any>, completion: @escaping (_ account : UserWalletRLM?, _ error: NSError?) -> ()) {
         getRealm { (realmOpt, error) in
             if let realm = realmOpt {
-                let wallet = WalletRLM.initWithDictionary(walletDict)
+                let wallet = UserWalletRLM.initWithInfo(walletInfo: NSDictionary(dictionary: walletDict))
                 
                 try! realm.write {
                     realm.add(wallet, update: true)

@@ -24,18 +24,23 @@ class DataManager: NSObject {
     //MARK: CoreLibManager
     //DMCoreLibExtension Functions
     
-    func getExchangeCourse() {
+    func getExchangeCourse(completion: @escaping (_ error: Error?) -> ()) {
         DataManager.shared.realmManager.getAccount { (acc, err) in
             if err == nil {
                 DataManager.shared.apiManager.getExchangePrice(acc!.token, direction: "") { (dict, error) in
-                    guard dict != nil  else {
-                        return
+                    if dict == nil {
+                        completion(error)
                     }
                     
                     if dict!["USD"] != nil {
                         exchangeCourse = dict!["USD"] as! Double
+                        completion(nil)
+                    } else {
+                        completion(nil)
                     }
                 }
+            } else {
+                completion(nil)
             }
         }
     }

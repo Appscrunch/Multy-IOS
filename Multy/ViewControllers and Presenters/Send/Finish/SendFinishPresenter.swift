@@ -8,7 +8,7 @@ class SendFinishPresenter: NSObject {
 
     var sendFinishVC: SendFinishViewController?
     
-    var walletFrom: WalletRLM?
+    var walletFrom: UserWalletRLM?
     
     var addressToStr: String?
     
@@ -36,6 +36,8 @@ class SendFinishPresenter: NSObject {
     }
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse()
+        DataManager.shared.getExchangeCourse { (error) in
+            
+        }
     }
 }

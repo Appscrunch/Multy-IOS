@@ -282,10 +282,10 @@ class CoreLibManager: NSObject {
         print("currency: \(currency)")
         
         amountActivity()
-        transactionActions(account: newAccountPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmount: "20000", donationAddress: "", donationAmount: "10000000")
+        createTransaction(account: newAccountPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmountString: "20000", donationAddress: "", donationAmount: "10000000", txid: "createTransaction", txoutid: 1, txoutamount: 804, txoutscript: "a914bddce1db77593a7ac8d67f0d488c4311d5103ffa87")
     }
     
-    func transactionActions(account: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmount: String, donationAddress: String, donationAmount: String) {
+    func createTransaction(account: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, donationAddress: String, donationAmount: String, txid: String, txoutid: UInt32, txoutamount: UInt32, txoutscript: String) {
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -306,6 +306,7 @@ class CoreLibManager: NSObject {
         let amountValue = "20".UTF8CStringPointer
         let ma = make_amount(amountValue, amountPointer)
         properties_set_amount_value(transactionSource.pointee, amountKey, amountPointer.pointee)
+        
         
         //prev transaction hash
         //prev_tx_hash

@@ -8,7 +8,7 @@ class SendDetailsPresenter: NSObject {
     
     var sendDetailsVC: SendDetailsViewController?
     
-    var choosenWallet: WalletRLM?
+    var choosenWallet: UserWalletRLM?
     
     var selectedIndexOfSpeed: Int?
     
@@ -104,6 +104,8 @@ class SendDetailsPresenter: NSObject {
     
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse()
+        DataManager.shared.getExchangeCourse { (error) in
+            
+        }
     }
 }

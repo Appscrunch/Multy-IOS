@@ -154,7 +154,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/addwallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)api/v1/addadress", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

@@ -8,7 +8,7 @@ class WalletChooosePresenter: NSObject {
 
     var walletChoooseVC: WalletChoooseViewController?
     
-    var walletsArr = [WalletRLM]()
+    var walletsArr = [UserWalletRLM]()
     var addressToStr: String?
     var amountFromQr: Double?
     
@@ -16,7 +16,7 @@ class WalletChooosePresenter: NSObject {
     
     func createWallets() {
         for index in 1...10 {
-            let wallet = WalletRLM()
+            let wallet = UserWalletRLM()
             wallet.name = "Ivan \(index)"
             wallet.cryptoName = "BTC"
             wallet.sumInCrypto = 12.345 + Double(index)
@@ -36,6 +36,8 @@ class WalletChooosePresenter: NSObject {
     }
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse()
+        DataManager.shared.getExchangeCourse { (error) in
+            
+        }
     }
 }

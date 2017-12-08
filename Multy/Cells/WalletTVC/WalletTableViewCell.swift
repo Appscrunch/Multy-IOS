@@ -16,7 +16,7 @@ class WalletTableViewCell: UITableViewCell {
     
     var isBorderOn = false
     
-    var wallet: WalletRLM?
+    var wallet: UserWalletRLM?
     
     override func awakeFromNib() {
         super.awakeFromNib()

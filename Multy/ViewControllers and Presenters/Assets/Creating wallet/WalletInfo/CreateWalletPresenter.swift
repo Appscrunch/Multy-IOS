@@ -27,11 +27,9 @@ class CreateWalletPresenter: NSObject {
             "name"      : cell.walletNameTF.text ?? "Wallet"
             ] as [String : Any]
         
-//        DataManager.shared.apiManager.addWallet(self.account!.token, params, completion: { (dict, error) in
-//            print(dict)
-//        })
         DataManager.shared.addWallet(self.account!.token, params: params) { (dict, error) in
-            print(dict)
+            print(dict as Any)
+            self.mainVC?.cancleAction(UIButton())
         }
     }
 }

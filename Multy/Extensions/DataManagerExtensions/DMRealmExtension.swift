@@ -24,7 +24,7 @@ extension DataManager {
     }
     
     func createWallet(from walletDict: Dictionary<String, Any>,
-                      completion: @escaping (_ wallet: WalletRLM?, _ error: NSError?) -> ()) {
+                      completion: @escaping (_ wallet: UserWalletRLM?, _ error: NSError?) -> ()) {
         realmManager.createWallet(walletDict) { (wallet, error) in
             completion(wallet, error)
         }

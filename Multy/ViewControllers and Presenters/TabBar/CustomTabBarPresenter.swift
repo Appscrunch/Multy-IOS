@@ -9,6 +9,8 @@ class CustomTabBarPresenter: NSObject {
     var tabBarVC: CustomTabBarViewController?
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse()
+        DataManager.shared.getExchangeCourse { (error) in
+            print(error)
+        }
     }
 }

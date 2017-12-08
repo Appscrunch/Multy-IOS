@@ -28,7 +28,7 @@ extension DataManager {
                     //MARK: to avoid generating new account
                     //later will be rootString
                     params["username"] = UIDevice.current.name
-                    params["deviceid"] = UUID().uuidString
+                    params["deviceid"] = self.getRootString(from: seedPhraseString)
                     
                     let paramsDict = NSMutableDictionary(dictionary: params)
                     paramsDict["seedPhrase"] = seedPhraseString
@@ -81,11 +81,17 @@ extension DataManager {
         }
     }
     
+    func addAddress(_ token: String, params: Parameters, completion: @escaping (_ dict: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.addAddress(token, params) { (dict, error) in
+            
+        }
+    }
+    
     func getExhanchgeCourse(_ token: String, completion: @escaping (_ dictionary: NSDictionary?, _ error: Error?) -> ()) {
         apiManager.getExchangePrice(token, direction: "BTC/USD") { (dict, err) in
             if err == nil {
                 if dict != nil {
-                    print("cicki")
+                    
                 }
                 completion(dict!, nil)
             } else {

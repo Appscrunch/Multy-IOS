@@ -15,7 +15,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     
     var walletAddress = ""
     
-    var wallet: WalletRLM?
+    var wallet: UserWalletRLM?
     
     
     
@@ -28,7 +28,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         self.receiveAllDetailsVC?.setupUIWithAmounts()
     }
     
-    func sendWallet(wallet: WalletRLM) {
+    func sendWallet(wallet: UserWalletRLM) {
         self.wallet = wallet
         self.receiveAllDetailsVC?.updateUIWithWallet()
     }

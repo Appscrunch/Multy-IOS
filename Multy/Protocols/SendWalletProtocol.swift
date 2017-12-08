@@ -5,5 +5,5 @@
 import Foundation
 
 protocol SendWalletProtocol {
-    func sendWallet(wallet: WalletRLM)
+    func sendWallet(wallet: UserWalletRLM)
 }

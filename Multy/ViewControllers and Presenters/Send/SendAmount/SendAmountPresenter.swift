@@ -8,7 +8,7 @@ class SendAmountPresenter: NSObject {
     
     var sendAmountVC: SendAmountViewController?
     
-    var wallet: WalletRLM?
+    var wallet: UserWalletRLM?
     var transactionObj: TransactionRLM?
     var donationObj: DonationObj?
     
@@ -220,6 +220,8 @@ class SendAmountPresenter: NSObject {
     }
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse()
+        DataManager.shared.getExchangeCourse { (error) in
+            
+        }
     }
 }

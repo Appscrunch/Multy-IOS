@@ -70,6 +70,8 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     }
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse()
+        DataManager.shared.getExchangeCourse { (error) in
+            
+        }
     }
 }
