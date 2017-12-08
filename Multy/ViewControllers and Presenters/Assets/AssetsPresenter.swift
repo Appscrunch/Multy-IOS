@@ -62,7 +62,7 @@ class AssetsPresenter: NSObject {
     
     func updateExchangeCourse() {
         DataManager.shared.getExhanchgeCourse((account?.token)!) { (dict, err) in
-            print("cicki2")
+            
         }
     }
     

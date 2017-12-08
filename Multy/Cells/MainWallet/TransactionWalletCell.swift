@@ -4,7 +4,7 @@
 
 import UIKit
 
-class MainWalletCell: UITableViewCell {
+class TransactionWalletCell: UITableViewCell {
     
     @IBOutlet weak var transactionImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -12,7 +12,8 @@ class MainWalletCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var fiatAmountLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
+    @IBOutlet weak var emtptyImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,5 +37,16 @@ class MainWalletCell: UITableViewCell {
         maskLayer.frame = bounds
         maskLayer.path = maskPath.cgPath
         layer.mask = maskLayer
+    }
+    
+    
+    func changeState(isEmpty: Bool) {
+        self.transactionImage.isHidden = isEmpty
+        self.addressLabel.isHidden = isEmpty
+        self.cryptoAmountLabel.isHidden = isEmpty
+        self.timeLabel.isHidden = isEmpty
+        self.fiatAmountLabel.isHidden = isEmpty
+        self.descriptionLabel.isHidden = isEmpty
+        self.emtptyImage.isHidden = !isEmpty
     }
 }

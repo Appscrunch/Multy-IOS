@@ -14,7 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MainWalletCell" customModule="Multy" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TransactionWalletCell" customModule="Multy" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -64,11 +64,15 @@
                             <constraint firstAttribute="height" constant="2" id="7QX-De-rlA"/>
                         </constraints>
                     </view>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="combinedShape" translatesAutoresizingMaskIntoConstraints="NO" id="xag-Zn-BqQ">
+                        <rect key="frame" x="20" y="25" width="335" height="40"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0fb-sf-7dQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="1W5-Rj-ojG"/>
                     <constraint firstAttribute="trailing" secondItem="45o-xQ-dp9" secondAttribute="trailing" id="5zp-0l-I9M"/>
                     <constraint firstItem="0fb-sf-7dQ" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="18/375" id="GCk-bw-NqC"/>
+                    <constraint firstItem="xag-Zn-BqQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KTe-5b-tAK"/>
                     <constraint firstItem="HoU-C3-WIc" firstAttribute="leading" secondItem="0fb-sf-7dQ" secondAttribute="trailing" constant="13" id="O0O-s3-gFY"/>
                     <constraint firstItem="Xiz-uF-aUP" firstAttribute="trailing" secondItem="3Nq-Xx-0YW" secondAttribute="trailing" id="QIM-XU-xOA"/>
                     <constraint firstItem="Xiz-uF-aUP" firstAttribute="centerY" secondItem="MhC-GT-MHY" secondAttribute="centerY" id="aZW-qj-xeB"/>
@@ -79,6 +83,7 @@
                     <constraint firstItem="MhC-GT-MHY" firstAttribute="top" secondItem="HoU-C3-WIc" secondAttribute="bottom" constant="5" id="gig-lQ-tUJ"/>
                     <constraint firstItem="HoU-C3-WIc" firstAttribute="top" secondItem="0fb-sf-7dQ" secondAttribute="top" id="gnz-ug-Pqq"/>
                     <constraint firstAttribute="trailing" secondItem="3Nq-Xx-0YW" secondAttribute="trailing" constant="20" id="jvR-cG-Hep"/>
+                    <constraint firstItem="xag-Zn-BqQ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="o9Z-tX-963"/>
                     <constraint firstItem="3Nq-Xx-0YW" firstAttribute="centerY" secondItem="HoU-C3-WIc" secondAttribute="centerY" id="ph8-U0-hu5"/>
                     <constraint firstItem="0fb-sf-7dQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="poW-4q-j0k"/>
                     <constraint firstItem="ofF-nW-jBI" firstAttribute="leading" secondItem="MhC-GT-MHY" secondAttribute="leading" id="tX2-Vh-XtH"/>
@@ -87,17 +92,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="addressLabel" destination="HoU-C3-WIc" id="5tc-iW-am3"/>
-                <outlet property="cryptoAmountLabel" destination="3Nq-Xx-0YW" id="Yyz-ot-DH7"/>
-                <outlet property="descriptionLabel" destination="ofF-nW-jBI" id="vRm-he-iqg"/>
-                <outlet property="fiatAmountLabel" destination="Xiz-uF-aUP" id="Rjw-jA-ovZ"/>
-                <outlet property="timeLabel" destination="MhC-GT-MHY" id="VYI-3m-oMQ"/>
-                <outlet property="transactionImage" destination="0fb-sf-7dQ" id="rjw-2e-G1e"/>
+                <outlet property="addressLabel" destination="HoU-C3-WIc" id="gNV-eH-yrA"/>
+                <outlet property="cryptoAmountLabel" destination="3Nq-Xx-0YW" id="ku0-1f-DE4"/>
+                <outlet property="descriptionLabel" destination="ofF-nW-jBI" id="45Y-wM-vQz"/>
+                <outlet property="emtptyImage" destination="xag-Zn-BqQ" id="ol8-rf-3yy"/>
+                <outlet property="fiatAmountLabel" destination="Xiz-uF-aUP" id="mRG-ma-EmN"/>
+                <outlet property="timeLabel" destination="MhC-GT-MHY" id="JMK-qS-N2o"/>
+                <outlet property="transactionImage" destination="0fb-sf-7dQ" id="QJN-da-L12"/>
             </connections>
             <point key="canvasLocation" x="-113.5" y="97"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="combinedShape" width="335" height="40"/>
         <image name="recieve" width="18" height="23"/>
     </resources>
 </document>

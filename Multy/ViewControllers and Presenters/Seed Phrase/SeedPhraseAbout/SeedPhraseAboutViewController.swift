@@ -17,6 +17,11 @@ class SeedPhraseAboutViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
