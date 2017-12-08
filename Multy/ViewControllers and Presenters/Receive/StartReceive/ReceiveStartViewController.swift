@@ -26,6 +26,7 @@ class ReceiveStartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
 //            self.deselectCell()
 //        })
