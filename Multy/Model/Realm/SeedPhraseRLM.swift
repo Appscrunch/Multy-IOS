@@ -13,4 +13,18 @@ class SeedPhraseRLM: Object {
     override class func primaryKey() -> String? {
         return "id"
     }
+    
+    public class func initWithInfo(seedPhraseInfo: NSDictionary) -> SeedPhraseRLM {
+        let seedPhrase = SeedPhraseRLM()
+        
+        if let seedString = seedPhraseInfo["seedString"]  {
+            seedPhrase.seedString = seedString as! String
+        }
+        
+        if let seedData = seedPhraseInfo["seedData"]  {
+            seedPhrase.seedData = seedData as! Data
+        }
+        
+        return seedPhrase
+    }
 }

@@ -145,6 +145,18 @@ class RealmManager: NSObject {
                         accountRLM.walletCount = accountDict["wallets"] as! NSNumber
                     }
                     
+                    if accountDict["seedPhrase"] != nil {
+                        accountRLM.seedPhrase = accountDict["seedPhrase"] as! String
+                    }
+                    
+                    if accountDict["binaryData"] != nil {
+                        accountRLM.binaryData = accountDict["binaryData"] as! NSData
+                    }
+                    
+                    if accountDict["wallets"] != nil {
+                        accountRLM.wallets = accountDict["wallets"] as! List<UserWalletRLM>
+                    }
+                    
                     realm.add(accountRLM, update: true)
                     
                     completion(accountRLM, nil)

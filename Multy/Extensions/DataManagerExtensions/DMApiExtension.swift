@@ -20,11 +20,19 @@ extension DataManager {
                     params["deviceid"] = account?.deviceID
                 } else {
                     params["password"] = "admin"
+                    
                     //MARK: names
+                    let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
+//                    let rootString = self.getRootString(from: seedPhraseString)
+                    
+                    //MARK: to avoid generating new account
+                    //later will be rootString
                     params["username"] = UIDevice.current.name
                     params["deviceid"] = UUID().uuidString
                     
-                    let paramsDict = NSDictionary(dictionary: params)
+                    let paramsDict = NSMutableDictionary(dictionary: params)
+                    paramsDict["seedPhrase"] = seedPhraseString
+                    paramsDict["binaryData"] = encode(value: self.coreLibManager.createSeedBinaryData(from: seedPhraseString))
                     
                     self.realmManager.updateAccount(paramsDict, completion: { (account, error) in
                         
@@ -63,13 +71,14 @@ extension DataManager {
         }
     }
     
-    func addWallet(completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
-        var params = Parameters()
-        
-        params["currency"] = 0
-        params["address"] = 0
-        params["addressID"] = 0
-        params["walletID"] = 0
+    func addWallet(_ token: String, params: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.addWallet(token, params) { (responceDict, error) in
+            if error != nil {
+                completion(NSDictionary(), nil)
+            } else {
+                completion(nil, error)
+            }
+        }
     }
     
     func getExhanchgeCourse(_ token: String, completion: @escaping (_ dictionary: NSDictionary?, _ error: Error?) -> ()) {
@@ -84,4 +93,8 @@ extension DataManager {
             }
         }
     }
+    
+//    func addAddress(_ token: String, _ walletDict: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+//        DataManager.shared
+//    }
 }

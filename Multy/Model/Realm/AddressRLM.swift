@@ -11,6 +11,9 @@ import RealmSwift
 
 class AddressRLM: Object {
     @objc dynamic var addressID = NSNumber(value: 0)    //UInt32
+    @objc dynamic var currencyID = NSNumber(value: 0)   //UInt32
+    @objc dynamic var walletID = NSNumber(value: 0)     //UInt32
+    
     @objc dynamic var address = String()                //Double
     @objc dynamic var amount = NSNumber(value: 0)       //UInt32
     
@@ -32,6 +35,14 @@ class AddressRLM: Object {
             addressRLM.addressID = NSNumber(value: addressID as! UInt32)
         }
         
+        if let currencyID = addressInfo["currencyID"]  {
+            addressRLM.currencyID = NSNumber(value: currencyID as! UInt32)
+        }
+        
+        if let walletID = addressInfo["walletID"]  {
+            addressRLM.walletID = NSNumber(value: walletID as! UInt32)
+        }
+        
         if let addressString = addressInfo["Address"] {
             addressRLM.address = addressString as! String
         }
@@ -39,6 +50,8 @@ class AddressRLM: Object {
         if let amount = addressInfo["Amount"] {
             addressRLM.amount = NSNumber(value: amount as! UInt32)
         }
+        
+        
         
         return addressRLM
     }

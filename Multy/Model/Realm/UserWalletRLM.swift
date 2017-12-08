@@ -10,9 +10,13 @@ import Foundation
 import RealmSwift
 
 class UserWalletRLM: Object {
-//    @objc dynamic var id = NSNumber(value: 0)     //UInt32
+    @objc dynamic var id = String()    //UInt32
     @objc dynamic var chain = NSNumber(value: 0)    //UInt32
     @objc dynamic var walletID = NSNumber(value: 0) //UInt32
+    @objc dynamic var addressID = NSNumber(value: 0) //UInt32
+    @objc dynamic var privateKey = String()
+    @objc dynamic var publicKey = String()
+    
     var addresses = List<AddressRLM>()
     
     public class func initWithArray(walletsInfo: NSArray) -> List<UserWalletRLM> {
@@ -41,10 +45,12 @@ class UserWalletRLM: Object {
             wallet.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
         }
         
+        
+        
         return wallet
     }
     
-//    override class func primaryKey() -> String? {
-//        return "identifier"
-//    }
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

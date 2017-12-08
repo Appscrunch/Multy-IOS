@@ -41,4 +41,11 @@ extension DataManager {
             completion(acc, err)
         }
     }
+    
+    
+    func updateAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
+        realmManager.updateAccount(accountDict) { (account, error) in
+            completion(account, error)
+        }
+    }
 }

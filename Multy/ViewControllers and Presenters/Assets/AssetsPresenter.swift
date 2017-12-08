@@ -3,10 +3,12 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class AssetsPresenter: NSObject {
 
     var assetsVC: AssetsViewController?
+    var wallets: List<UserWalletRLM>?
     
     var tabBarFrame: CGRect?
     
@@ -16,6 +18,18 @@ class AssetsPresenter: NSObject {
 //            fetchTickets()
             getExchange()
 //            getTransInfo()
+        }
+    }
+    
+    func auth() {
+        DataManager.shared.auth { (account, error) in
+            guard account != nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.account = account
+            }
         }
     }
     
@@ -62,6 +76,11 @@ class AssetsPresenter: NSObject {
         }
         
         DataManager.shared.fetchAssets(account!.token, completion: { (wallets, error) in
+            DataManager.shared.updateAccount(["wallets" : wallets], completion: { (account, error) in
+                self.account = account
+            })
+//            self.wallets = wallets
+//            self.account?.walletCount = NSNumber(value: wallets!.count)
             print("wallets: \(wallets)")
         })
     }
@@ -77,12 +96,7 @@ class AssetsPresenter: NSObject {
     }
     
     func getExchange() {
-        DataManager.shared.apiManager.getExchangePrice(account!.token, direction: "") { (dict, error) in
-            guard dict != nil  else {
-                return
-            }
-            print(dict!)
-        }
+        DataManager.shared.getExchangeCourse()
     }
     
     func getTransInfo() {
@@ -95,5 +109,9 @@ class AssetsPresenter: NSObject {
                                                             print(transDict)
         }
     }
+    
+//    func addAddress() {
+//        DataManager.shared.addWallet(, params: <#T##Parameters#>, completion: <#T##(NSDictionary?, Error?) -> ()#>)
+//    }
     //////////////////////////////////////////////////////////////////////
 }

@@ -31,6 +31,7 @@ class DataManager: NSObject {
                     guard dict != nil  else {
                         return
                     }
+                    
                     if dict!["USD"] != nil {
                         exchangeCourse = dict!["USD"] as! Double
                     }

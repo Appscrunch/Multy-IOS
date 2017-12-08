@@ -96,7 +96,7 @@ class CoreLibManager: NSObject {
         
         //MAKE: check nil
         print(mm ?? "-11")
-
+        
         let phrase = String(cString: mnemo.pointee!)
         
         return phrase.components(separatedBy: " ")
@@ -192,7 +192,7 @@ class CoreLibManager: NSObject {
         var walletDict = Dictionary<String, Any>()
         walletDict["currency"] = currencyID
         walletDict["walletID"] = walletID
-        walletDict["addressID"] = 0 as UInt32
+        walletDict["addressID"] = UInt32()
         
         let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil

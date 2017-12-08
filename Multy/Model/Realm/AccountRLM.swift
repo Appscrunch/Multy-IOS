@@ -6,7 +6,8 @@ import Foundation
 import RealmSwift
 
 class AccountRLM: Object {
-//    @objc dynamic var binaryData = BinaryData()
+    @objc dynamic var seedPhrase = String()
+    @objc dynamic var binaryData = NSData()
     
     @objc dynamic var deviceID = String()
     @objc dynamic var username = String()
@@ -17,6 +18,7 @@ class AccountRLM: Object {
     @objc dynamic var id: NSNumber = 1
     
     @objc dynamic var walletCount: NSNumber = 0
+    var wallets = List<UserWalletRLM>()
     
     override class func primaryKey() -> String? {
         return "id"

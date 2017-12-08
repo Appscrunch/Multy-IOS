@@ -21,26 +21,15 @@ extension DataManager {
         return coreLibManager.createExtendedKey(from: &binaryData)
     }
     
-    func createWallet(from seedPhrase: String, currencyID : UInt32, walletID : UInt32) -> Dictionary<String, Any>? {
-        var binaryData = coreLibManager.createSeedBinaryData(from: seedPhrase)
-        
-        return coreLibManager.createWallet(from: &binaryData, currencyID: currencyID, walletID: walletID)
-    }
     
-    func createNewAccountWithWallet(_ currencyID: UInt32, walletID: UInt32, completion: @escaping (_ wallet: Dictionary<String, Any>?) -> ()) {
-        let seedPharse = getMnenonicArray()
-        let seedPhraseString = seedPharse.joined(separator: " ")
-        let rootKey = getRootString(from: seedPhraseString)
-        
-        var wallet = createWallet(from: rootKey, currencyID: currencyID, walletID: walletID)
-        
-        if wallet == nil {
-            completion(nil)
-        }
-        
-        wallet!["rootKey"] = rootKey
-        wallet!["seedPharse"] = seedPhraseString
-        
-        completion(wallet!)
+    
+//    func createWallet(from seedPhrase: String, currencyID : UInt32, walletID : UInt32, addressID: UInt32) -> Dictionary<String, Any>? {
+//        var binaryData = coreLibManager.createSeedBinaryData(from: seedPhrase)
+//        
+//        
+//    }
+    
+    func createNewWallet(for binaryData: inout BinaryData, _ currencyID: UInt32, walletID: UInt32) -> Dictionary<String, Any>? {
+        return coreLibManager.createWallet(from: &binaryData, currencyID: currencyID, walletID: walletID)
     }
 }

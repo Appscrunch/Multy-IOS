@@ -9,96 +9,23 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
-//    var account : AccountRLM? {
-//        didSet {
-////            fetchAssets()
-////            fetchTickets()
-//            getExchange()
-////            getTransInfo()
-//        }
-//    }
     let presenter = AssetsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-//        DataManager.shared.socketManager.start()
-        
-//        DataManager.shared.startCoreTest()
-        
-        
         self.presenter.assetsVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         self.registerCells()
         
-        let mnemoString = DataManager.shared.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
-        print("mnemoString: \(mnemoString)")
-        let rootID = DataManager.shared.getRootString(from: mnemoString)
-        print("rootID: \(rootID)")
-        
         //MAKE: first launch
 //        let _ = DataManager.shared
         
         //MARK: test
-        DataManager.shared.auth { (account, error) in
-            guard account != nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.presenter.account = account
-            }
-        }
+        presenter.auth()
     }
-    
-    //////////////////////////////////////////////////////////////////////
-    //test
-    
-    func fetchAssets() {
-        guard presenter.account?.token != nil else {
-            return
-        }
-        
-        DataManager.shared.apiManager.getAssets(presenter.account!.token, completion: { (assetsDict, error) in
-            print(assetsDict)
-        })
-    }
-    
-    func fetchTickets() {
-        DataManager.shared.apiManager.getTickets(presenter.account!.token, direction: "") { (dict, error) in
-            guard dict != nil  else {
-                return
-            }
-            
-            print(dict!)
-        }
-    }
-    
-    func getExchange() {
-        DataManager.shared.apiManager.getExchangePrice(presenter.account!.token, direction: "") { (dict, error) in
-            guard dict != nil  else {
-                return
-            }
-            if dict!["USD"] != nil {
-                exchangeCourse = dict!["USD"] as! Double
-            }
-        }
-    }
-    
-    func getTransInfo() {
-        DataManager.shared.apiManager.getTransactionInfo(presenter.account!.token,
-                                                         transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
-                                                            guard transDict != nil else {
-                                                                return
-                                                            }
-                                                            
-                                                            print(transDict)
-        }
-    }
-    //////////////////////////////////////////////////////////////////////
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -160,6 +87,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }))
             actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
                 //go to import wallet
+                
             }))
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
