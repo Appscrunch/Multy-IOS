@@ -527,6 +527,79 @@
             </objects>
             <point key="canvasLocation" x="-2796" y="2437.3313343328336"/>
         </scene>
+        <!--No Internet Connection View Controller-->
+        <scene sceneID="dQO-bG-j9Y">
+            <objects>
+                <viewController storyboardIdentifier="NoConnectionVC" id="JbW-97-tt6" customClass="NoInternetConnectionViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bgs-7C-47o"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Cv-dM-kj0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qNv-C3-uhH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdq-0K-Sb2">
+                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Ism-aW-xZY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Try Again">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tryAgainAction:" destination="JbW-97-tt6" eventType="touchUpInside" id="fnv-BB-gRw"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noInternetConnection" translatesAutoresizingMaskIntoConstraints="NO" id="4xv-6L-vmO">
+                                <rect key="frame" x="126" y="147" width="123" height="104"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="104" id="Pkg-hZ-b5D"/>
+                                    <constraint firstAttribute="width" constant="123" id="VDA-x3-BS4"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-cf-GXL">
+                                <rect key="frame" x="49" y="300" width="276" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="312-E7-Xe2">
+                                <rect key="frame" x="37" y="377" width="301" height="82"/>
+                                <string key="text">Unfortunately you are not conencted to 
+the network now. Multy needs constant 
+conenction to provide it’s work
+correctly</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.010678631253540516" green="0.49669629335403442" blue="0.99941819906234741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tdq-0K-Sb2" firstAttribute="leading" secondItem="qNv-C3-uhH" secondAttribute="leading" id="0af-Tf-3S4"/>
+                            <constraint firstItem="312-E7-Xe2" firstAttribute="top" secondItem="eXV-cf-GXL" secondAttribute="bottom" constant="41" id="19G-Bk-FhF"/>
+                            <constraint firstItem="4xv-6L-vmO" firstAttribute="top" secondItem="bgs-7C-47o" secondAttribute="bottom" constant="127" id="5na-Ok-Xrt"/>
+                            <constraint firstAttribute="trailing" secondItem="tdq-0K-Sb2" secondAttribute="trailing" id="8el-4e-zje"/>
+                            <constraint firstItem="7Cv-dM-kj0" firstAttribute="top" secondItem="tdq-0K-Sb2" secondAttribute="bottom" id="Gx7-nc-o3V"/>
+                            <constraint firstItem="312-E7-Xe2" firstAttribute="leading" secondItem="qNv-C3-uhH" secondAttribute="leading" constant="37" id="IfC-LF-p4P"/>
+                            <constraint firstAttribute="trailing" secondItem="312-E7-Xe2" secondAttribute="trailing" constant="37" id="Nle-00-FuM"/>
+                            <constraint firstItem="eXV-cf-GXL" firstAttribute="centerX" secondItem="qNv-C3-uhH" secondAttribute="centerX" id="gnX-iI-VMn"/>
+                            <constraint firstItem="4xv-6L-vmO" firstAttribute="centerX" secondItem="qNv-C3-uhH" secondAttribute="centerX" id="h5b-s0-bLC"/>
+                            <constraint firstItem="eXV-cf-GXL" firstAttribute="top" secondItem="4xv-6L-vmO" secondAttribute="bottom" constant="49" id="iFH-FP-t58"/>
+                            <constraint firstItem="eXV-cf-GXL" firstAttribute="top" secondItem="4xv-6L-vmO" secondAttribute="bottom" constant="49" id="yp2-6T-zE1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="qNv-C3-uhH" id="U1X-Ln-vS1"/>
+                        <outlet property="tryAgainBtn" destination="tdq-0K-Sb2" id="PK9-MP-pNW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h66-5t-Zy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-588" y="2436.4317841079464"/>
+        </scene>
         <!--Custom Tab Bar View Controller-->
         <scene sceneID="q0k-k1-DrJ">
             <objects>
@@ -686,5 +759,6 @@
         <image name="fastRecieve" width="83" height="83"/>
         <image name="fastScan" width="83" height="83"/>
         <image name="fastSend" width="83" height="83"/>
+        <image name="noInternetConnection" width="123" height="104"/>
     </resources>
 </document>

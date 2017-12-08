@@ -73,6 +73,9 @@
 		45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */; };
 		45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */; };
 		45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949631FC766D3003C3A23 /* SendFinishViewController.swift */; };
+		45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */; };
+		45B5CCA41FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA31FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift */; };
+		45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */; };
 		45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */; };
 		45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */; };
 		45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */; };
@@ -214,6 +217,9 @@
 		45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountPresenter.swift; sourceTree = "<group>"; };
 		45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishPresenter.swift; sourceTree = "<group>"; };
 		45A949631FC766D3003C3A23 /* SendFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishViewController.swift; sourceTree = "<group>"; };
+		45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnectionViewController.swift; sourceTree = "<group>"; };
+		45B5CCA31FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnetctionPresenter.swift; sourceTree = "<group>"; };
+		45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewController.swift; sourceTree = "<group>"; };
 		45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPresenter.swift; sourceTree = "<group>"; };
 		45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
@@ -513,6 +519,7 @@
 				45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */,
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
 				FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */,
+				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -655,6 +662,15 @@
 			path = Finish;
 			sourceTree = "<group>";
 		};
+		45B5CCA01FDA90BA0069BD46 /* No InternetConnection */ = {
+			isa = PBXGroup;
+			children = (
+				45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */,
+				45B5CCA31FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift */,
+			);
+			path = "No InternetConnection";
+			sourceTree = "<group>";
+		};
 		45B9CB011FBB4AC200AA2A31 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +704,7 @@
 				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 				45A9491D1FC2DF03003C3A23 /* Receive */,
 				45A9493C1FC5A4FB003C3A23 /* Send */,
+				45B5CCA01FDA90BA0069BD46 /* No InternetConnection */,
 			);
 			path = "ViewControllers and Presenters";
 			sourceTree = "<group>";
@@ -1073,6 +1090,7 @@
 				FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */,
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */,
+				45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */,
 				4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
@@ -1101,6 +1119,7 @@
 				FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */,
 				457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */,
 				45D083701FCEF94C0066F1CD /* SendWalletProtocol.swift in Sources */,
+				45B5CCA41FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift in Sources */,
 				45A949401FC5A566003C3A23 /* SendStartPresenter.swift in Sources */,
 				457569491FBDEDB900FDEE20 /* BackupFinishPresenter.swift in Sources */,
 				FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */,
@@ -1115,6 +1134,7 @@
 				45A949481FC5C55C003C3A23 /* WalletChooosePresenter.swift in Sources */,
 				4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */,
 				45A9492C1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift in Sources */,
+				45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */,
 				455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */,
 				FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */,
 				45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */,
