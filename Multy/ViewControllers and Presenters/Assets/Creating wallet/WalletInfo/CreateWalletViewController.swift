@@ -15,8 +15,7 @@ class CreateWalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        
         self.hideKeyboardWhenTappedAround()
         
         self.view.addSubview(progressHUD)
@@ -28,6 +27,13 @@ class CreateWalletViewController: UIViewController {
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide),
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
     }
     
     @IBAction func cancleAction(_ sender: Any) {
@@ -102,5 +108,9 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
 //        }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.dismissKeyboard()
+        return true
+    }
     
 }
