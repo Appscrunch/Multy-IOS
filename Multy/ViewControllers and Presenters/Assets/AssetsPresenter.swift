@@ -12,6 +12,8 @@ class AssetsPresenter: NSObject {
     
     var tabBarFrame: CGRect?
     
+    var isJailed: Bool?
+    
     var account : AccountRLM? {
         didSet {
 //            fetchTickets()

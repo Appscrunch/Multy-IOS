@@ -248,4 +248,14 @@ class RealmManager: NSObject {
             }
         }
     }
+    
+    public func clearRealm() {
+        getRealm { (realmOpt, err) in
+            if let realm = realmOpt {
+                try! realm.write {
+                    realm.deleteAll()
+                }
+            }
+        }
+    }
 }

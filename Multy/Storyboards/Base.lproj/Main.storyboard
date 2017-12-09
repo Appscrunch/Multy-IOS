@@ -331,6 +331,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="sUo-XC-rc3" id="e8i-FN-ErP"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>

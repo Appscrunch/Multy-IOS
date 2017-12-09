@@ -63,6 +63,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func changeAction(_ sender: Any) {
         if self.isCrypto {
+            self.isCrypto = !self.isCrypto
             if self.sumInFiat != 0.0 {
                 self.amountTF.text = "\(self.sumInFiat)"
             } else {
@@ -73,6 +74,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             self.sumLbl.text = "\(self.sumInFiat)"
             self.currencyNameLbl.text = self.fiatName
         } else {
+            self.isCrypto = !self.isCrypto
             if self.sumInCrypto != 0.0 {
                 self.amountTF.text = "\(self.sumInCrypto)"
             } else {
@@ -83,7 +85,6 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             self.bottomSumLbl.text = "\(sumInFiat) "
             self.bottomCurrencyNameLbl.text = self.fiatName
         }
-        self.isCrypto = !self.isCrypto
     }
     
     @IBAction func doneAction(_ sender: Any) {
@@ -98,7 +99,25 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func presentWarning(message: String) {
+        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch isCrypto{
+        case true:
+            if ((self.amountTF.text! + string) as NSString).doubleValue > self.presenter.getMaxValueOfChain(curency: Currency.init(0)) {
+                self.presentWarning(message: "You can`t enter sum more than chain have")
+                return false
+            }
+        case false:
+            if ((self.amountTF.text! + string) as NSString).doubleValue/exchangeCourse > self.presenter.getMaxValueOfChain(curency: Currency.init(0)) {
+                self.presentWarning(message: "You can`t enter sum more than chain have")
+                return false
+            }
+        }
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
         

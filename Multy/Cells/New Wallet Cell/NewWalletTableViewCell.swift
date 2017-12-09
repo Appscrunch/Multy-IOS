@@ -38,5 +38,10 @@ class NewWalletTableViewCell: UITableViewCell {
         maskLayer.path = maskPath.cgPath
         self.layer.mask = maskLayer
     }
+    
+    func hideAll() {
+        self.cellNameLbl.isHidden = true
+        self.rigthSmallImage.isHidden = true
+    }
 }
 

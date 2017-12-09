@@ -9,7 +9,7 @@ let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
 
 //var exchangeCourse: Double = 10000.0
-var exchangeCourse: Double = 1.0
+var exchangeCourse: Double = 2.0
 
 func encode<T>( value: T) -> NSData {
     var value = value

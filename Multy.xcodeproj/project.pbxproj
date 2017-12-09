@@ -73,11 +73,15 @@
 		45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */; };
 		45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */; };
 		45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949631FC766D3003C3A23 /* SendFinishViewController.swift */; };
+		45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0CB7E1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift */; };
+		45B0CB811FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B0CB7F1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib */; };
 		45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */; };
 		45B5CCA41FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA31FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift */; };
 		45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */; };
 		45B5CCA91FDAC0B00069BD46 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA71FDAC0B00069BD46 /* TextTableViewCell.swift */; };
 		45B5CCAA1FDAC0B00069BD46 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CCA81FDAC0B00069BD46 /* TextTableViewCell.xib */; };
+		45B5CCAD1FDACF3C0069BD46 /* LogoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCAB1FDACF3C0069BD46 /* LogoTableViewCell.swift */; };
+		45B5CCAE1FDACF3C0069BD46 /* LogoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CCAC1FDACF3C0069BD46 /* LogoTableViewCell.xib */; };
 		45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */; };
 		45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */; };
 		45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */; };
@@ -90,6 +94,7 @@
 		45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215DF1FD164F80078945A /* QrScannerPresenter.swift */; };
 		45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E11FD16AA70078945A /* GoToQrProtocol.swift */; };
 		45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E31FD179100078945A /* QrDataProtocol.swift */; };
+		45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F42C831FDC081400210B1F /* IsJailbroken.swift */; };
 		D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
@@ -219,11 +224,15 @@
 		45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountPresenter.swift; sourceTree = "<group>"; };
 		45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishPresenter.swift; sourceTree = "<group>"; };
 		45A949631FC766D3003C3A23 /* SendFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishViewController.swift; sourceTree = "<group>"; };
+		45B0CB7E1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrRestoreBtnTableViewCell.swift; sourceTree = "<group>"; };
+		45B0CB7F1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrRestoreBtnTableViewCell.xib; sourceTree = "<group>"; };
 		45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnectionViewController.swift; sourceTree = "<group>"; };
 		45B5CCA31FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnetctionPresenter.swift; sourceTree = "<group>"; };
 		45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		45B5CCA71FDAC0B00069BD46 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		45B5CCA81FDAC0B00069BD46 /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
+		45B5CCAB1FDACF3C0069BD46 /* LogoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoTableViewCell.swift; sourceTree = "<group>"; };
+		45B5CCAC1FDACF3C0069BD46 /* LogoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoTableViewCell.xib; sourceTree = "<group>"; };
 		45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewController.swift; sourceTree = "<group>"; };
 		45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPresenter.swift; sourceTree = "<group>"; };
 		45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
@@ -236,6 +245,7 @@
 		45E215DF1FD164F80078945A /* QrScannerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScannerPresenter.swift; sourceTree = "<group>"; };
 		45E215E11FD16AA70078945A /* GoToQrProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToQrProtocol.swift; sourceTree = "<group>"; };
 		45E215E31FD179100078945A /* QrDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrDataProtocol.swift; sourceTree = "<group>"; };
+		45F42C831FDC081400210B1F /* IsJailbroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsJailbroken.swift; sourceTree = "<group>"; };
 		FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMApiExtension.swift; sourceTree = "<group>"; };
 		FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCoreLibExtension.swift; sourceTree = "<group>"; };
 		FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRealmExtension.swift; sourceTree = "<group>"; };
@@ -490,6 +500,8 @@
 			children = (
 				45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */,
 				45B9CB061FBB51AE00AA2A31 /* WalletTableViewCell.xib */,
+				45B0CB7E1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift */,
+				45B0CB7F1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib */,
 			);
 			path = WalletTVC;
 			sourceTree = "<group>";
@@ -501,6 +513,8 @@
 				4583AC911FBC7122001991AA /* PortfolioTableViewCell.xib */,
 				4583AC961FBC8596001991AA /* PortfolioCollectionViewCell.swift */,
 				4583AC971FBC8596001991AA /* PortfolioCollectionViewCell.xib */,
+				45B5CCAB1FDACF3C0069BD46 /* LogoTableViewCell.swift */,
+				45B5CCAC1FDACF3C0069BD46 /* LogoTableViewCell.xib */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -867,6 +881,7 @@
 			children = (
 				FA4D43DE1FC58730003C7117 /* TouchIDAuthentication.swift */,
 				FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */,
+				45F42C831FDC081400210B1F /* IsJailbroken.swift */,
 			);
 			path = Security;
 			sourceTree = "<group>";
@@ -950,6 +965,7 @@
 				4575692D1FBDAA0C00FDEE20 /* SeedPhrase.storyboard in Resources */,
 				FA4D43ED1FC5CEE0003C7117 /* MainWalletHeaderCell.xib in Resources */,
 				FA4D43E71FC5C2A6003C7117 /* Wallet.storyboard in Resources */,
+				45B0CB811FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib in Resources */,
 				45B9CB081FBB51AE00AA2A31 /* WalletTableViewCell.xib in Resources */,
 				FA4D43F71FC5D019003C7117 /* MainWalletCollectionViewCell.xib in Resources */,
 				4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */,
@@ -957,6 +973,7 @@
 				FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */,
 				45A949541FC6D1E1003C3A23 /* TransactionFeeTableViewCell.xib in Resources */,
 				45A949311FC582BC003C3A23 /* Send.storyboard in Resources */,
+				45B5CCAE1FDACF3C0069BD46 /* LogoTableViewCell.xib in Resources */,
 				45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */,
 				4522905A1FBB18D30024B550 /* Main.storyboard in Resources */,
 				45A949581FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib in Resources */,
@@ -1052,6 +1069,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */,
 				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
 				FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */,
 				FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */,
@@ -1078,7 +1096,9 @@
 				452236211FCD6BA7004BA490 /* TransactionPresenter.swift in Sources */,
 				FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */,
 				455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */,
+				45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */,
 				455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */,
+				45B5CCAD1FDACF3C0069BD46 /* LogoTableViewCell.swift in Sources */,
 				4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */,
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,

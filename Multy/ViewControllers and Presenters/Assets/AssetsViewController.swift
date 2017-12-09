@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -17,6 +18,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         self.presenter.assetsVC = self
+        
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         self.registerCells()
@@ -31,6 +33,57 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         presenter.auth()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if self.presenter.isJailed! {
+            self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
+        }
+    }
+    
+    //////////////////////////////////////////////////////////////////////
+    //test
+    
+    func fetchAssets() {
+        guard presenter.account?.token != nil else {
+            return
+        }
+        
+        DataManager.shared.apiManager.getAssets(presenter.account!.token, completion: { (assetsDict, error) in
+            print(assetsDict)
+        })
+    }
+    
+    func fetchTickets() {
+        DataManager.shared.apiManager.getTickets(presenter.account!.token, direction: "") { (dict, error) in
+            guard dict != nil  else {
+                return
+            }
+            
+            print(dict!)
+        }
+    }
+    
+    func getExchange() {
+        DataManager.shared.apiManager.getExchangePrice(presenter.account!.token, direction: "") { (dict, error) in
+            guard dict != nil  else {
+                return
+            }
+            if dict!["USD"] != nil {
+                exchangeCourse = dict!["USD"] as! Double
+            }
+        }
+    }
+    
+    func getTransInfo() {
+        DataManager.shared.apiManager.getTransactionInfo(presenter.account!.token,
+                                                         transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
+                                                            guard transDict != nil else {
+                                                                return
+                                                            }
+                                                            
+                                                            print(transDict)
+        }
+    }
+    //////////////////////////////////////////////////////////////////////
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
@@ -64,6 +117,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let textCell = UINib.init(nibName: "TextTableViewCell", bundle: nil)
         self.tableView.register(textCell, forCellReuseIdentifier: "textCell")
+        
+        let logoCell = UINib.init(nibName: "LogoTableViewCell", bundle: nil)
+        self.tableView.register(logoCell, forCellReuseIdentifier: "logoCell")
+        
+        let createOrRestoreCell = UINib.init(nibName: "CreateOrRestoreBtnTableViewCell", bundle: nil)
+        self.tableView.register(createOrRestoreCell, forCellReuseIdentifier: "createOrRestoreCell")
     }
 
     //MARK: Table view delegates
@@ -104,7 +163,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0, 1] {
+        //проверить авторизацию
+        if indexPath == [0, 2] {
+            // если  есть авторизация то indexPath = 0, 1
             let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
                 self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
@@ -119,7 +180,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 //doint something
             })
         
-        }  else if indexPath == [0, 2] {
+//        } else if indexPath == [0, 2] {
 //            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
 //            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
 //            self.navigationController?.pushViewController(initialViewController, animated: true)
@@ -140,12 +201,24 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            return 283
+            return 283  //portfolio height
+//            return 220 //logo height
         } else if indexPath == [0, 1] {
             return 75
         } else {
-            return 104
+            return 104   // wallet height
+//            return 100
         }
+    }
+    
+    func presentWarningAlert(message: String) {
+        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            DataManager.shared.clearDB(completion: { (err) in
+                exit(0)
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
