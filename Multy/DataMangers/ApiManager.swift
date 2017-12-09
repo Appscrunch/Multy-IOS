@@ -8,7 +8,7 @@ import Alamofire
 class ApiManager: NSObject {
     static let shared = ApiManager()
     
-    let apiUrl = "http://192.168.0.121:8080/"
+    let apiUrl = "http://192.168.0.111:8080/"
     let apiUrlTest = "http://192.168.0.125:8080/"
     
     var requestManager = Alamofire.SessionManager.default

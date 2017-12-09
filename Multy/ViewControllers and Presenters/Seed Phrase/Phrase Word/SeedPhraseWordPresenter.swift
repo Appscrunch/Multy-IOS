@@ -8,7 +8,20 @@ class SeedPhraseWordPresenter: NSObject {
     var mainVC : SeedPhraseWordViewController?
     
     var countOfTaps = -1
-    var mnemonicPhraseArray = Array<String>()
+    var mnemonicPhraseArray = [String]() {
+        didSet {
+            if mnemonicPhraseArray.count > 0 {
+                let mnemonicString = mnemonicPhraseArray.joined(separator: " ")
+                DataManager.shared.realmManager.writeSeedPhrase(mnemonicString, completion: { (error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+                    } else {
+                        print("seed phrase wrote down")
+                    }
+                })
+            }
+        }
+    }
     
     func generateMnemonic() {
         mnemonicPhraseArray = DataManager.shared.getMnenonicArray()

@@ -25,6 +25,16 @@ class BackupSeedPhraseViewController: UIViewController {
         self.performSegue(withIdentifier: "checkPhraseVC", sender: UIButton.self)
     }
     
+    @IBAction func repeatAction(_ sender: UIButton) {
+        let allVCs = self.navigationController!.viewControllers
+        
+        if allVCs.count > 2 {
+            let destinationVC = allVCs[allVCs.count - 3]
+            
+            self.navigationController?.popToViewController(destinationVC, animated: true)
+        }
+    }
+    
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }

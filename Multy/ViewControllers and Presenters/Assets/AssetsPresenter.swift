@@ -12,7 +12,7 @@ class AssetsPresenter: NSObject {
     
     var tabBarFrame: CGRect?
     
-    var isJailed: Bool?
+    var isJailed = false
     
     var account : AccountRLM? {
         didSet {

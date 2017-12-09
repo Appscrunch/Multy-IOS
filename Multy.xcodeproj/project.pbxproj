@@ -25,7 +25,6 @@
 		455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8751FD842610093F69D /* CustomTabBarViewController.swift */; };
 		455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8781FD851830093F69D /* FastOperationsViewController.swift */; };
 		457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457486141FBD7ED8002D1925 /* SMPageControl.swift */; };
-		4575692D1FBDAA0C00FDEE20 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */; };
 		457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */; };
 		457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */; };
 		4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */; };
@@ -113,6 +112,11 @@
 		FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */; };
 		FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
+		FA58DF5F1FDC3FB800C45303 /* BricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF5E1FDC3FB800C45303 /* BricksView.swift */; };
+		FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */; };
+		FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */; };
+		FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */; };
+		FA58DF681FDC429000C45303 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA58DF671FDC429000C45303 /* SeedPhrase.storyboard */; };
 		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
 		FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; };
 		FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; };
@@ -176,7 +180,6 @@
 		455EA8751FD842610093F69D /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
 		455EA8781FD851830093F69D /* FastOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastOperationsViewController.swift; sourceTree = "<group>"; };
 		457486141FBD7ED8002D1925 /* SMPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMPageControl.swift; sourceTree = "<group>"; };
-		4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeedPhrase.storyboard; sourceTree = "<group>"; };
 		457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutViewController.swift; sourceTree = "<group>"; };
 		457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutPresenter.swift; sourceTree = "<group>"; };
 		457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseWordPresenter.swift; sourceTree = "<group>"; };
@@ -263,6 +266,11 @@
 		FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
+		FA58DF5E1FDC3FB800C45303 /* BricksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
+		FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
+		FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrongSeedPhraseViewController.swift; sourceTree = "<group>"; };
+		FA58DF671FDC429000C45303 /* SeedPhrase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SeedPhrase.storyboard; path = "../../../Multy-IOS-Dev — копия 4/Multy/Storyboards/SeedPhrase.storyboard"; sourceTree = "<group>"; };
 		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
 		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
@@ -360,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				452290541FBB18D30024B550 /* AppDelegate.swift */,
+				FA58DF5E1FDC3FB800C45303 /* BricksView.swift */,
 				452290601FBB18D30024B550 /* Info.plist */,
 				45B9CB021FBB4AEB00AA2A31 /* Storyboards */,
 				45B9CB031FBB4B2300AA2A31 /* ViewControllers and Presenters */,
@@ -441,6 +450,7 @@
 		457569301FBDBB7500FDEE20 /* Seed Phrase */ = {
 			isa = PBXGroup;
 			children = (
+				FA58DF621FDC403E00C45303 /* WrongSeedPhrase */,
 				457569371FBDC2FE00FDEE20 /* SeedPhraseAbout */,
 				457569381FBDC34700FDEE20 /* Phrase Word */,
 				4575693D1FBDD65500FDEE20 /* Backup Phrase */,
@@ -540,6 +550,7 @@
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
 				FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */,
 				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
+				FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -706,7 +717,7 @@
 			children = (
 				452290581FBB18D30024B550 /* Main.storyboard */,
 				4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */,
-				4575692C1FBDAA0C00FDEE20 /* SeedPhrase.storyboard */,
+				FA58DF671FDC429000C45303 /* SeedPhrase.storyboard */,
 				45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */,
 				FA4D43E61FC5C2A6003C7117 /* Wallet.storyboard */,
 				45A949301FC582BC003C3A23 /* Send.storyboard */,
@@ -826,6 +837,15 @@
 				FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */,
 			);
 			path = MainWallet;
+			sourceTree = "<group>";
+		};
+		FA58DF621FDC403E00C45303 /* WrongSeedPhrase */ = {
+			isa = PBXGroup;
+			children = (
+				FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */,
+				FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */,
+			);
+			path = WrongSeedPhrase;
 			sourceTree = "<group>";
 		};
 		FA74060F1FCC14C4003C538C /* Core Libs */ = {
@@ -962,7 +982,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4575692D1FBDAA0C00FDEE20 /* SeedPhrase.storyboard in Resources */,
 				FA4D43ED1FC5CEE0003C7117 /* MainWalletHeaderCell.xib in Resources */,
 				FA4D43E71FC5C2A6003C7117 /* Wallet.storyboard in Resources */,
 				45B0CB811FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib in Resources */,
@@ -977,6 +996,7 @@
 				45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */,
 				4522905A1FBB18D30024B550 /* Main.storyboard in Resources */,
 				45A949581FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib in Resources */,
+				FA58DF681FDC429000C45303 /* SeedPhrase.storyboard in Resources */,
 				4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */,
 				45A949361FC5992A003C3A23 /* SearchAddressTableViewCell.xib in Resources */,
 				45B5CCAA1FDAC0B00069BD46 /* TextTableViewCell.xib in Resources */,
@@ -1072,6 +1092,7 @@
 				45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */,
 				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
 				FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */,
+				FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */,
 				FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */,
 				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
 				45E215DB1FD15D5F0078945A /* DonationObj.swift in Sources */,
@@ -1079,6 +1100,7 @@
 				45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */,
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
 				FA4D43EC1FC5CEE0003C7117 /* MainWalletHeaderCell.swift in Sources */,
+				FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */,
 				45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */,
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
 				45B5CCA91FDAC0B00069BD46 /* TextTableViewCell.swift in Sources */,
@@ -1099,6 +1121,7 @@
 				45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */,
 				455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */,
 				45B5CCAD1FDACF3C0069BD46 /* LogoTableViewCell.swift in Sources */,
+				FA58DF5F1FDC3FB800C45303 /* BricksView.swift in Sources */,
 				4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */,
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
@@ -1121,6 +1144,7 @@
 				45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */,
 				4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
+				FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */,
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,

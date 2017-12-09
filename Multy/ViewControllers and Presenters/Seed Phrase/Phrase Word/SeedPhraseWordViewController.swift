@@ -16,10 +16,16 @@ class SeedPhraseWordViewController: UIViewController {
     @IBOutlet weak var mediumWordLbl: LTMorphingLabel!
     @IBOutlet weak var bottomWord: LTMorphingLabel!
     
+    @IBOutlet weak var constraintTopBricks: NSLayoutConstraint!
+    
     let presenter =  SeedPhraseWordPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if screenWidth < 325 {
+            constraintTopBricks.constant = 90
+        }
         
         presenter.mainVC = self
         

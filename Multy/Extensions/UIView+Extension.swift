@@ -7,6 +7,11 @@ import UIKit
 
 extension UIView {
     
+    func setRounded(radius : CGFloat) {
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+    }
+    
     // OUTPUT 1
     func dropShadow(scale: Bool = true) {
         self.layer.masksToBounds = false

@@ -27,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.makeKeyAndVisible()
 //        self.realmConfig()
         
-        switch isDeviceJailbroken() {
-        case true:
-            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
-        case false:
-            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
-        }
+//        switch isDeviceJailbroken() {
+//        case true:
+//            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
+//        case false:
+//            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
+//        }
         
         return true
     }
