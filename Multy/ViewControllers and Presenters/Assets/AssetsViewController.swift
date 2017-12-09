@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -29,6 +30,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         self.presenter.assetsVC = self
+        
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         self.registerCells()
@@ -50,6 +52,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             DispatchQueue.main.async {
                 self.presenter.account = account
             }
+        }
+    }
+    
+    override func proj_viewWillAppear(animated: Bool) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if self.presenter.isJailed! {
+            self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
         }
     }
     
@@ -233,6 +244,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            return 104   // wallet height
             return 100
         }
+    }
+    
+    func presentWarningAlert(message: String) {
+        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            DataManager.shared.clearDB(completion: { (err) in
+                exit(0)
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

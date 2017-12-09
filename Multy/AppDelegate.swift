@@ -3,7 +3,7 @@
 //See LICENSE for details
 
 import UIKit
-//import RealmSwift
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = initialViewController
 //        self.window?.makeKeyAndVisible()
 //        self.realmConfig()
+        
+        switch isDeviceJailbroken() {
+        case true:
+            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
+        case false:
+            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
+        }
         
         return true
     }

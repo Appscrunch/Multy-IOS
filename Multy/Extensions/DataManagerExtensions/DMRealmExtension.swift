@@ -41,4 +41,9 @@ extension DataManager {
             completion(acc, err)
         }
     }
+    
+    func clearDB(completion: @escaping (_ error: NSError?) -> ()) {
+        realmManager.clearRealm()
+        completion(nil)
+    }
 }

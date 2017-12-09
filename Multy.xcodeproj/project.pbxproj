@@ -94,6 +94,7 @@
 		45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215DF1FD164F80078945A /* QrScannerPresenter.swift */; };
 		45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E11FD16AA70078945A /* GoToQrProtocol.swift */; };
 		45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E31FD179100078945A /* QrDataProtocol.swift */; };
+		45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F42C831FDC081400210B1F /* IsJailbroken.swift */; };
 		D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
@@ -244,6 +245,7 @@
 		45E215DF1FD164F80078945A /* QrScannerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScannerPresenter.swift; sourceTree = "<group>"; };
 		45E215E11FD16AA70078945A /* GoToQrProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToQrProtocol.swift; sourceTree = "<group>"; };
 		45E215E31FD179100078945A /* QrDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrDataProtocol.swift; sourceTree = "<group>"; };
+		45F42C831FDC081400210B1F /* IsJailbroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsJailbroken.swift; sourceTree = "<group>"; };
 		FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMApiExtension.swift; sourceTree = "<group>"; };
 		FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCoreLibExtension.swift; sourceTree = "<group>"; };
 		FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRealmExtension.swift; sourceTree = "<group>"; };
@@ -879,6 +881,7 @@
 			children = (
 				FA4D43DE1FC58730003C7117 /* TouchIDAuthentication.swift */,
 				FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */,
+				45F42C831FDC081400210B1F /* IsJailbroken.swift */,
 			);
 			path = Security;
 			sourceTree = "<group>";
@@ -1093,6 +1096,7 @@
 				452236211FCD6BA7004BA490 /* TransactionPresenter.swift in Sources */,
 				FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */,
 				455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */,
+				45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */,
 				455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */,
 				45B5CCAD1FDACF3C0069BD46 /* LogoTableViewCell.swift in Sources */,
 				4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */,

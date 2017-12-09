@@ -19,6 +19,8 @@ class AssetsPresenter: NSObject {
         }
     }
     
+    var isJailed: Bool?
+    
     func openCreateWalletPopup() {
         let actionSheet = UIAlertController(title: "Create or Import New Wallet",
                                             message: nil,
