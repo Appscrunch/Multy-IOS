@@ -53,6 +53,20 @@ class WalletViewController: UIViewController {
                                                         UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                           gradientOrientation: .topRightBottomLeft)
     }
+    
+    @IBAction func sendAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Send", bundle: nil)
+        let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
+        
+        self.navigationController?.pushViewController(sendStartVC, animated: true)
+    }
+    
+    @IBAction func receiveAction(_ sender: Any) {
+    }
+    
+    @IBAction func exchangeAction(_ sender: Any) {
+    }
+    
 }
 
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {

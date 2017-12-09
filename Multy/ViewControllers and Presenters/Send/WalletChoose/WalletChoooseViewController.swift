@@ -16,7 +16,8 @@ class WalletChoooseViewController: UIViewController {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.presenter.walletChoooseVC = self
 //        self.presenter.getExchange()
-        self.presenter.createWallets()
+//        self.presenter.createWallets()
+        self.presenter.getWallets()
     }
     
     func registerCell() {
@@ -68,5 +69,9 @@ extension WalletChoooseViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.presenter.selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)
+    }
+    
+    func updateUI() {
+        self.tableView.reloadData()
     }
 }
