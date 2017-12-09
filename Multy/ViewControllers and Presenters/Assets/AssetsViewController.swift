@@ -129,6 +129,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let textCell = UINib.init(nibName: "TextTableViewCell", bundle: nil)
         self.tableView.register(textCell, forCellReuseIdentifier: "textCell")
+        
+        let logoCell = UINib.init(nibName: "LogoTableViewCell", bundle: nil)
+        self.tableView.register(logoCell, forCellReuseIdentifier: "logoCell")
+        
+        let createOrRestoreCell = UINib.init(nibName: "CreateOrRestoreBtnTableViewCell", bundle: nil)
+        self.tableView.register(createOrRestoreCell, forCellReuseIdentifier: "createOrRestoreCell")
     }
 
     //MARK: Table view delegates
@@ -138,30 +144,53 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {         // PORTFOLIO CELL
-            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-            return portfolioCell
+//            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+//            return portfolioCell
+            let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+            return logoCell
         } else if indexPath == [0, 1] {   // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
+            newWalletCell.hideAll()
             return newWalletCell
-        } else {                           //  Wallet Cell
+        } else if indexPath == [0, 2] {                           //  Wallet Cell
             //проверка на наличие валетов
-            let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
-            return textCell
+            
+            // текстовый селл  нужен когда есть логин но нету валетов
+            //
+//            let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
+//            return textCell
+            
+            
+            // create кнопка селл
+            let createCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+            return createCell
+            
+            
+            // валлет селл
 //            else {
 //            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
 //            walletCell.makeshadow()
 //            return walletCell
 //            }
+        } else {
+            
+            //restore cell
+            let restoreCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+            restoreCell.makeRestoreCell()
+            return restoreCell
         }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0, 1] {
+        //проверить авторизацию
+        if indexPath == [0, 2] {
+            // если  есть авторизация то indexPath = 0, 1
             let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
                 self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
@@ -175,7 +204,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 //doint something
             })
         
-        }  else if indexPath == [0, 2] {
+//        } else if indexPath == [0, 2] {
 //            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
 //            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
 //            self.navigationController?.pushViewController(initialViewController, animated: true)
@@ -196,11 +225,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            return 283
+//            return 283  //portfolio height
+            return 220 //logo height
         } else if indexPath == [0, 1] {
             return 75
         } else {
-            return 104
+//            return 104   // wallet height
+            return 100
         }
     }
     

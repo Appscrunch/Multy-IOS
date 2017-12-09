@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="220" id="KGk-i7-Jjw" customClass="LogoTableViewCell" customModule="Multy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="eJd-b3-U7d">
+                        <rect key="frame" x="86.5" y="46" width="201" height="117"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="117" id="XlF-Zz-YBt"/>
+                            <constraint firstAttribute="width" constant="201" id="apE-Kq-piv"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjc-cA-uLe">
+                        <rect key="frame" x="167.5" y="13" width="39" height="24"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9te-dh-4iM">
+                        <rect key="frame" x="30" y="176" width="315" height="33"/>
+                        <attributedString key="attributedText">
+                            <fragment>
+                                <string key="content">M U L T Y  C R Y P T O C U R R E N C Y  A N D 
+</string>
+                                <attributes>
+                                    <color key="NSColor" red="0.67053765058517456" green="0.74100571870803833" blue="0.84289836883544922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="A S S E T S  O P E N  -  S O U R C E  W A L L E T">
+                                <attributes>
+                                    <color key="NSColor" red="0.67053765058517456" green="0.74100571870803833" blue="0.84289836883544922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="12" name="AvenirNext-Medium"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" minimumLineHeight="4" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iqd-E2-4bq">
+                        <rect key="frame" x="0.0" y="218.5" width="375" height="1"/>
+                        <color key="backgroundColor" red="0.81956082582473755" green="0.8587384819984436" blue="0.9213683009147644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="p8M-NJ-Dik"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="9te-dh-4iM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="3jU-8a-RoI"/>
+                    <constraint firstAttribute="bottom" secondItem="Iqd-E2-4bq" secondAttribute="bottom" id="5Ba-om-sWo"/>
+                    <constraint firstItem="eJd-b3-U7d" firstAttribute="top" secondItem="hjc-cA-uLe" secondAttribute="bottom" constant="9" id="Ejh-rJ-Yg7"/>
+                    <constraint firstItem="eJd-b3-U7d" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Ijg-lB-eZN"/>
+                    <constraint firstItem="Iqd-E2-4bq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OwR-kz-ntT"/>
+                    <constraint firstAttribute="trailing" secondItem="Iqd-E2-4bq" secondAttribute="trailing" id="Rq8-OX-x7D"/>
+                    <constraint firstItem="hjc-cA-uLe" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="aGn-dP-xZ6"/>
+                    <constraint firstItem="9te-dh-4iM" firstAttribute="top" secondItem="eJd-b3-U7d" secondAttribute="bottom" constant="13" id="dmK-qC-PHo"/>
+                    <constraint firstAttribute="trailing" secondItem="9te-dh-4iM" secondAttribute="trailing" constant="30" id="e5G-sA-1cL"/>
+                    <constraint firstItem="hjc-cA-uLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="mmf-o5-xzq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="33.5" y="142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="logoBlue" width="201" height="117"/>
+    </resources>
+</document>
