@@ -10,6 +10,7 @@ class CreateWalletPresenter: NSObject {
     
     func createNewWallet(completion: @escaping (_ dict: Dictionary<String, Any>?) -> ()) {
         if account == nil {
+            print("-------------ERROR: Account nil")
             return
         }
         

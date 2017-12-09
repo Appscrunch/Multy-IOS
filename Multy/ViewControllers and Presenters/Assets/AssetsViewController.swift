@@ -140,10 +140,11 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath == [0, 0] {                                        // PORTFOLIO CELL
-            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-            
-            return portfolioCell
+        if indexPath == [0, 0] {                                        // PORTFOLIO CELL  or LOGO
+//            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+//            return portfolioCell
+            let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+            return logoCell
         } else if indexPath == [0, 1] {                                 // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
             
@@ -164,7 +165,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //проверить авторизацию
-        if indexPath == [0, 2] {
+        if indexPath == [0, 1] {
             // если  есть авторизация то indexPath = 0, 1
             let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
@@ -184,15 +185,18 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
 //            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
 //            self.navigationController?.pushViewController(initialViewController, animated: true)
-        } else if indexPath == [0, 3] {
-            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath == [0, 4] {
-            let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
-            self.navigationController?.pushViewController(initialViewController, animated: true) 
+//        } else {//if indexPath == [0, 3] {
+//            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+//            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        } else if indexPath == [0, 4] {
+            
         } else {
+            if self.presenter.isWalletExist() {
+                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
+                self.navigationController?.pushViewController(initialViewController, animated: true)
+            } 
 //            let storyboard = UIStoryboard(name: "Send", bundle: nil)
 //            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
 //            self.navigationController?.pushViewController(destVC, animated: true)
@@ -201,8 +205,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            return 283  //portfolio height
-//            return 220 //logo height
+//            return 283  //portfolio height
+            return 220 //logo height
         } else if indexPath == [0, 1] {
             return 75
         } else {

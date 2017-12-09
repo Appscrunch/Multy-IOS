@@ -21,7 +21,8 @@ class ReceiveStartViewController: UIViewController {
         
         self.presenter.receiveStartVC = self
         self.registerCells()
-        self.presenter.createWallets()
+//        self.presenter.createWallets()
+        self.presenter.getWallets()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +90,9 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
         walletCell.makeshadow()
     }
     
+    func updateUI() {
+        self.tableView.reloadData()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "receiveDetails" {
