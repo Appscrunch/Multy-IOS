@@ -30,6 +30,8 @@ class DataManager: NSObject {
                 DataManager.shared.apiManager.getExchangePrice(acc!.token, direction: "") { (dict, error) in
                     if dict == nil {
                         completion(error)
+                        
+                        return
                     }
                     
                     if dict!["USD"] != nil {

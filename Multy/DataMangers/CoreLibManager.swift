@@ -192,7 +192,7 @@ class CoreLibManager: NSObject {
         var walletDict = Dictionary<String, Any>()
         walletDict["currency"] = currencyID
         walletDict["walletID"] = walletID
-        walletDict["addressID"] = UInt32()
+        walletDict["addressID"] = UInt32(0)
         
         let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil
@@ -347,6 +347,7 @@ class CoreLibManager: NSObject {
         transaction_update(transactionPointer.pointee)
         transaction_sign(transactionPointer.pointee)
         transaction_serialize(transactionPointer.pointee, serializedTransaction)
+        print("test")
     }
     
     func amountActivity() {

@@ -59,23 +59,23 @@ class UserWalletRLM: Object {
     public class func initWithInfo(walletInfo: NSDictionary) -> UserWalletRLM {
         let wallet = UserWalletRLM()
         
-        if let chain = walletInfo["Chain"]  {
+        if let chain = walletInfo["CurrencyID"]  {
             wallet.chain = NSNumber(value: chain as! UInt32)
         }
         
-        if let walletID = walletInfo["WalletID"] {
+        if let walletID = walletInfo["WalletIndex"] {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
         }
         
-        if walletInfo["Chain"] != nil && walletInfo["WalletID"] != nil {
+        if walletInfo["CurrencyID"] != nil && walletInfo["WalletIndex"] != nil {
             wallet.id = wallet.generateID()
         }
         
-        if let addresses = walletInfo["Address"] {
+        if let addresses = walletInfo["Adresses"] {
             wallet.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
         }
         
-        if let name = walletInfo["name"] {
+        if let name = walletInfo["WalletName"] {
             wallet.name = name as! String
         }
         

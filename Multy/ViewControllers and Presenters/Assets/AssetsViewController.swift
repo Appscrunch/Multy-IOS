@@ -10,6 +10,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
     let presenter = AssetsPresenter()
+    let progressHUD = ProgressHUD(text: "Getting Wallets...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         self.registerCells()
+        
+        self.view.addSubview(progressHUD)
+        progressHUD.hide()
         
         //MAKE: first launch
 //        let _ = DataManager.shared
@@ -69,25 +73,33 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if presenter.isWalletExist() {
+            return 2 + presenter.account!.wallets.count
+        } else {
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath == [0, 0] {         // PORTFOLIO CELL
+        if indexPath == [0, 0] {                                        // PORTFOLIO CELL
             let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+            
             return portfolioCell
-        } else if indexPath == [0, 1] {   // !!!NEW!!! WALLET CELL
+        } else if indexPath == [0, 1] {                                 // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
+            
             return newWalletCell
-        } else {                           //  Wallet Cell
-            //проверка на наличие валетов
+        } else if indexPath == [0, 2] && !presenter.isWalletExist() {   // Text cell
             let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
+            
             return textCell
-//            else {
-//            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-//            walletCell.makeshadow()
-//            return walletCell
-//            }
+        } else {                                                        // Wallet Cell
+            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+            walletCell.makeshadow()
+            walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+            walletCell.fillInCell()
+            
+            return walletCell
         }
     }
     

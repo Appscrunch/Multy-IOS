@@ -9,16 +9,21 @@ class AccountRLM: Object {
     @objc dynamic var seedPhrase = String()
     @objc dynamic var binaryData = NSData()
     
+    @objc dynamic var userID = String()
     @objc dynamic var deviceID = String()
-    @objc dynamic var username = String()
-    @objc dynamic var password = String()
+    @objc dynamic var deviceType = 1
+    @objc dynamic var pushToken = String()
     
     @objc dynamic var expireDateString = String()
     @objc dynamic var token = String()
     @objc dynamic var id: NSNumber = 1
     
     @objc dynamic var walletCount: NSNumber = 0
-    var wallets = List<UserWalletRLM>()
+    var wallets = List<UserWalletRLM>() {
+        didSet {
+            walletCount = NSNumber(value: wallets.count)
+        }
+    }
     
     override class func primaryKey() -> String? {
         return "id"

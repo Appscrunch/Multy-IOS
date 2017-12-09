@@ -14,10 +14,10 @@ class AssetsPresenter: NSObject {
     
     var account : AccountRLM? {
         didSet {
-            fetchAssets()
 //            fetchTickets()
             getExchange()
 //            getTransInfo()
+            assetsVC?.tableView.reloadData()
         }
     }
     
@@ -29,8 +29,13 @@ class AssetsPresenter: NSObject {
             
             DispatchQueue.main.async {
                 self.account = account
+                self.fetchAssets()
             }
         }
+    }
+    
+    func isWalletExist() -> Bool {
+        return !(account == nil || account?.walletCount.intValue == 0)
     }
     
     func openCreateWalletPopup() {
@@ -75,12 +80,17 @@ class AssetsPresenter: NSObject {
             return
         }
         
+        assetsVC?.progressHUD.show()
         DataManager.shared.fetchAssets(account!.token, completion: { (wallets, error) in
+            if wallets == nil || wallets is NSNull {
+                return
+            }
+            
             DataManager.shared.updateAccount(["wallets" : wallets], completion: { (account, error) in
                 self.account = account
+                self.assetsVC?.progressHUD.hide()
             })
-//            self.wallets = wallets
-//            self.account?.walletCount = NSNumber(value: wallets!.count)
+            
             print("wallets: \(wallets)")
         })
     }

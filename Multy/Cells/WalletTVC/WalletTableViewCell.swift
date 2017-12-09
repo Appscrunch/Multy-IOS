@@ -50,9 +50,9 @@ class WalletTableViewCell: UITableViewCell {
     }
     
     func fillInCell() {
-        if self.wallet?.cryptoName == "BTC" {
+//        if self.wallet?.cryptoName == "BTC" {
             self.tokenImage.image = #imageLiteral(resourceName: "btcIconBig")
-        }
+//        }
         self.walletNameLbl.text = self.wallet?.name
         self.cryptoSumLbl.text  = "\(self.wallet?.sumInCrypto ?? 0.0)"
         self.cryptoNameLbl.text = self.wallet?.cryptoName

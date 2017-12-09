@@ -129,20 +129,16 @@ class RealmManager: NSObject {
                         accountRLM.token = accountDict["token"] as! String
                     }
                     
-                    if accountDict["deviceid"] != nil {
-                        accountRLM.deviceID = accountDict["deviceid"] as! String
+                    if accountDict["userID"] != nil {
+                        accountRLM.userID = accountDict["userID"] as! String
                     }
                     
-                    if accountDict["password"] != nil {
-                        accountRLM.password = accountDict["password"] as! String
+                    if accountDict["deviceID"] != nil {
+                        accountRLM.deviceID = accountDict["deviceID"] as! String
                     }
                     
-                    if accountDict["username"] != nil {
-                        accountRLM.username = accountDict["username"] as! String
-                    }
-                    
-                    if accountDict["wallets"] != nil {
-                        accountRLM.walletCount = accountDict["wallets"] as! NSNumber
+                    if accountDict["pushToken"] != nil {
+                        accountRLM.pushToken = accountDict["pushToken"] as! String
                     }
                     
                     if accountDict["seedPhrase"] != nil {
@@ -154,21 +150,32 @@ class RealmManager: NSObject {
                     }
                     
                     if accountDict["wallets"] != nil {
-                        accountRLM.wallets = accountDict["wallets"] as! List<UserWalletRLM>
+                        let walletsList = accountDict["wallets"] as! List<UserWalletRLM>
+                        
+                        for wallet in walletsList {
+                            let walletFromDB = realm.object(ofType: UserWalletRLM.self, forPrimaryKey: wallet.id)
+                            
+                            if walletFromDB != nil {
+                                realm.add(wallet, update: true)
+                            } else {
+                                accountRLM.wallets.append(wallet)
+                            }
+                        }
+                        
+                        accountRLM.walletCount = NSNumber(value: accountRLM.wallets.count)
                     }
                     
                     realm.add(accountRLM, update: true)
                     
                     completion(accountRLM, nil)
                     
-                    print("Successful writing account")
+                    print("Successful writing account: \(accountRLM)")
                 }
             } else {
                 print("Error fetching realm:\(#function)")
                 completion(nil, nil)
             }
         }
-        
     }
     
     public func createWallet(_ walletDict: Dictionary<String, Any>, completion: @escaping (_ account : UserWalletRLM?, _ error: NSError?) -> ()) {

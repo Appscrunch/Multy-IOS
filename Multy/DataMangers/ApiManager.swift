@@ -51,7 +51,7 @@ class ApiManager: NSObject {
             
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/getalluserassets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)api/v1/wallets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -134,11 +134,17 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/addwallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
-                    completion((response.result.value as! NSDictionary), nil)
+                    if ((response.result.value! as! NSDictionary) ["code"] != nil) {
+                        completion(NSDictionary(), nil)
+                    } else {
+                        completion(nil, nil)
+                    }
+                    
+                    
                 }
             case .failure(_):
                 completion(nil, response.result.error)

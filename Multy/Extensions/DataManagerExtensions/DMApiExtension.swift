@@ -15,20 +15,19 @@ extension DataManager {
                 var params : Parameters = [ : ]
                 
                 if account != nil {
-                    params["password"] = account?.password
-                    params["username"] = account?.username
-                    params["deviceid"] = account?.deviceID
+                    params["userID"] = account?.userID
+                    params["deviceID"] = account?.deviceID
+                    params["deviceType"] = account?.deviceType
+                    params["pushToken"] = account?.pushToken
                 } else {
-                    params["password"] = "admin"
-                    
                     //MARK: names
                     let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
 //                    let rootString = self.getRootString(from: seedPhraseString)
                     
-                    //MARK: to avoid generating new account
-                    //later will be rootString
-                    params["username"] = UIDevice.current.name
-                    params["deviceid"] = self.getRootString(from: seedPhraseString)
+                    params["userID"] = self.getRootString(from: seedPhraseString)
+                    params["deviceID"] = UUID().uuidString
+                    params["deviceType"] = 1
+                    params["pushToken"] = UUID().uuidString
                     
                     let paramsDict = NSMutableDictionary(dictionary: params)
                     paramsDict["seedPhrase"] = seedPhraseString
@@ -58,7 +57,7 @@ extension DataManager {
     func fetchAssets(_ token: String, completion: @escaping (_ assets: List<UserWalletRLM>?,_ error: Error?) -> ()) {
         apiManager.getAssets(token) { (holdingsOpt, error) in
             if let holdings = holdingsOpt {
-                if let wallets = holdings["walletInfo"] as? NSArray {
+                if let wallets = holdings["userWallets"] as? NSArray {
                     completion(UserWalletRLM.initWithArray(walletsInfo: wallets), nil)
                 } else {
                     completion(nil, nil)
