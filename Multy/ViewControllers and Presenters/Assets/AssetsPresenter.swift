@@ -26,6 +26,13 @@ class AssetsPresenter: NSObject {
     func auth() {
         DataManager.shared.auth { (account, error) in
             guard account != nil else {
+                DataManager.shared.getAccount { (acc, err) in
+                    if err == nil {
+                        // MARK: check this
+                        self.account = acc
+                    }
+                }
+                
                 return
             }
             
@@ -74,6 +81,7 @@ class AssetsPresenter: NSObject {
     }
     
     
+    
     //////////////////////////////////////////////////////////////////////
     //test
     
@@ -85,6 +93,8 @@ class AssetsPresenter: NSObject {
         assetsVC?.progressHUD.show()
         DataManager.shared.fetchAssets(account!.token, completion: { (wallets, error) in
             if wallets == nil || wallets is NSNull {
+                self.assetsVC?.progressHUD.hide()
+                
                 return
             }
             

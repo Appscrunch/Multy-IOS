@@ -120,7 +120,7 @@ Scan</string>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.65098039220000004" green="0.69411764710000001" blue="0.77647058820000003" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="height" secondItem="RM9-Ez-HYz" secondAttribute="height" id="2OF-GZ-SNR"/>
                             <constraint firstItem="YjI-Zq-zuj" firstAttribute="top" secondItem="Xx2-LV-Ws9" secondAttribute="top" constant="20" id="5a6-KK-JTJ"/>

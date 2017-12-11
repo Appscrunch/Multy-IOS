@@ -215,6 +215,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func updateUI() {
+        self.tableView.reloadData()
+    }
+    
     func presentWarningAlert(message: String) {
         let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
