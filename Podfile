@@ -17,5 +17,6 @@ target 'Multy' do
   pod 'GGLInstanceID'
   pod 'Alamofire'
   pod 'Socket.IO-Client-Swift'
+  pod 'RevealingSplashView'
 
 end
