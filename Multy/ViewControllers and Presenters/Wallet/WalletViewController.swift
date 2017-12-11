@@ -57,7 +57,7 @@ class WalletViewController: UIViewController {
     @IBAction func sendAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Send", bundle: nil)
         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
-        
+        sendStartVC.presenter.choosenWallet = self.presenter.wallet
         self.navigationController?.pushViewController(sendStartVC, animated: true)
     }
     
@@ -77,7 +77,13 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //check number of transactions
         // else retunrn some empty cells
-        return 5
+        if self.presenter.numberOfTransactions() > 0 {
+            self.tableView.isScrollEnabled = true
+            return self.presenter.numberOfTransactions()
+        } else {
+            self.tableView.isScrollEnabled = false
+            return 10
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,6 +91,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             let headerCell = self.tableView.dequeueReusableCell(withIdentifier: "MainWalletHeaderCellID") as! MainWalletHeaderCell
             headerCell.selectionStyle = .none
             headerCell.delegate = self
+            headerCell.wallet = self.presenter.wallet
             
             return headerCell
         } else {                           //  Wallet Cellx
@@ -98,6 +105,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.presenter.numberOfTransactions() == 0 {
+            return
+        }
+        
         if indexPath.row % 2 == 0 {
             self.even = true
         } else {
@@ -114,6 +125,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath == [0, 1] {
             (cell as! TransactionWalletCell).setCorners()
         }
+    }
+    
+    func updateUI() {
+        self.tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

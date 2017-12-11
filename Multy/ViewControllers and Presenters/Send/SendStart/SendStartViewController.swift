@@ -43,7 +43,11 @@ class SendStartViewController: UIViewController {
     }
     
     @IBAction func nextAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "chooseWalletVC", sender: sender)
+        if self.presenter.choosenWallet == nil {
+            self.performSegue(withIdentifier: "chooseWalletVC", sender: sender)
+        } else {
+            self.performSegue(withIdentifier: "transactionDetail", sender: sender)
+        }
     }
     
     func makeAvailableNextBtn() {
@@ -54,13 +58,19 @@ class SendStartViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseWalletVC" {
+        switch segue.identifier {
+        case "chooseWalletVC"?:
             let chooseWalletVC = segue.destination as! WalletChoooseViewController
             chooseWalletVC.presenter.addressToStr = self.presenter.adressSendTo
             chooseWalletVC.presenter.amountFromQr = self.presenter.amountInCrypto
-        } else if segue.identifier == "qrCamera" {
+        case "qrCamera"?:
             let qrScanerVC = segue.destination as! QrScannerViewController
             qrScanerVC.qrDelegate = self.presenter
+        case "transactionDetail"?:
+            let sendDetailsVC = segue.destination as! SendDetailsViewController
+            sendDetailsVC.presenter.choosenWallet = self.presenter.choosenWallet
+            sendDetailsVC.presenter.addressToStr = self.presenter.adressSendTo
+        default: break
         }
     }
     

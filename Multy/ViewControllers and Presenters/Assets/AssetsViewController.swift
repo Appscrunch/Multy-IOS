@@ -194,8 +194,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             if self.presenter.isWalletExist() {
                 let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
-                self.navigationController?.pushViewController(initialViewController, animated: true)
+                let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
+                walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                self.navigationController?.pushViewController(walletVC, animated: true)
             } 
 //            let storyboard = UIStoryboard(name: "Send", bundle: nil)
 //            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")

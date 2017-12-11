@@ -9,6 +9,10 @@ class WalletPresenter: NSObject {
     
     var mainVC : WalletViewController?
     
+    var wallet : UserWalletRLM?
+    
+    var trasactionsArr = [TransactionRLM]()
+    
     func registerCells() {
         let walletHeaderCell = UINib.init(nibName: "MainWalletHeaderCell", bundle: nil)
         self.mainVC?.tableView.register(walletHeaderCell, forCellReuseIdentifier: "MainWalletHeaderCellID")
@@ -26,5 +30,9 @@ class WalletPresenter: NSObject {
         } else {
             self.mainVC?.tableViewTopConstraint.constant = 0
         }
+    }
+    
+    func numberOfTransactions() -> Int {
+        return self.trasactionsArr.count
     }
 }
