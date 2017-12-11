@@ -52,4 +52,8 @@ extension DataManager {
         realmManager.clearRealm()
         completion(nil)
     }
+    
+    func finishRealmSession() {
+        realmManager.finishRealmSession()
+    }
 }

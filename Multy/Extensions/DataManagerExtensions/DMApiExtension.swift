@@ -99,6 +99,16 @@ extension DataManager {
         }
     }
     
+    func getFeeRate(_ token: String, currencyID: UInt32, completion: @escaping (_ feeRateDict: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getFeeRate(token, currencyID: currencyID) { (answer, error) in
+            if answer["Fast"] == nil || error != nil {
+                completion(nil, error)
+            } else {
+                completion(answer, nil)
+            }
+        }
+    }
+    
 //    func addAddress(_ token: String, _ walletDict: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
 //        DataManager.shared
 //    }

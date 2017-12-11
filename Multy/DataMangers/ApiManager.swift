@@ -160,7 +160,28 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/addadress", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(self.apiUrl)api/v1/adress", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+    
+    func getFeeRate(_ token: String, currencyID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        
+        let header: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        //MARK: USD
+        Alamofire.request("\(self.apiUrl)api/v1/transaction/feerate", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

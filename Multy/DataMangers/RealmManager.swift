@@ -7,6 +7,8 @@ import RealmSwift
 
 class RealmManager: NSObject {
     static let shared = RealmManager()
+    
+    private var realm : Realm? = nil
 //    let schemaVersion : UInt64 = 2
     
     private override init() {
@@ -28,7 +30,17 @@ class RealmManager: NSObject {
         }
     }
     
+    public func finishRealmSession() {
+        realm = nil
+    }
+    
     public func getRealm(completion: @escaping (_ realm: Realm?, _ error: NSError?) -> ()) {
+        if realm != nil {
+            completion(realm!, nil)
+            
+            return
+        }
+        
         MasterKeyGenerator.shared.generateMasterKey { (masterKey, error, string) in
             guard masterKey != nil else {
                 completion(nil, nil)
@@ -43,6 +55,8 @@ class RealmManager: NSObject {
             
             do {
                 let realm = try Realm(configuration: realmConfig)
+                self.realm = realm
+                
                 completion(realm, nil)
             } catch let error as NSError {
                 completion(nil, error)
