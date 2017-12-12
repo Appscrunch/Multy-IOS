@@ -44,7 +44,9 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     }
     
     func setupUI() {
-        self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
+        if wallet != nil {
+//            self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
+        }
     }
 }
 
@@ -61,6 +63,7 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! MainWalletCollectionViewCell
         cell.wallet = self.wallet
         cell.fillInCell()
+        
         return cell
     }
 }
