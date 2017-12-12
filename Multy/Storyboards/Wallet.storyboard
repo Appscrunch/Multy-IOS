@@ -201,6 +201,7 @@
                         <outlet property="backView" destination="pbK-RX-Gb3" id="gmG-j3-GT5"/>
                         <outlet property="tableView" destination="9Yy-Xk-shm" id="6qh-tR-nEL"/>
                         <outlet property="tableViewTopConstraint" destination="uHl-F6-APe" id="B3U-Pq-4YE"/>
+                        <outlet property="titleLbl" destination="Puy-SH-843" id="2Re-KZ-cIJ"/>
                         <segue destination="ckJ-B1-hh7" kind="show" identifier="transactionVC" id="462-uL-WTJ"/>
                         <segue destination="CB9-uM-FAg" kind="show" identifier="settingsVC" id="zfl-Te-0xX"/>
                     </connections>

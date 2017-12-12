@@ -9,6 +9,7 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var backView: UIView!
+    @IBOutlet weak var titleLbl: UILabel!
     
     var presenter = WalletPresenter()
     var even = true
@@ -27,6 +28,7 @@ class WalletViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        self.titleLbl.text = self.presenter.wallet?.name
     }
     
     @IBAction func closeAction() {
