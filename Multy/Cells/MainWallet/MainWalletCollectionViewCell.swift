@@ -13,6 +13,8 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var fiatNameLabel : UILabel!
     @IBOutlet weak var addressLabel : UILabel!
     
+    var wallet: UserWalletRLM?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,5 +26,13 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         maskLayer.frame = showAddressesButton.bounds
         maskLayer.path = maskPath.cgPath
         showAddressesButton.layer.mask = maskLayer
+    }
+    
+    func fillInCell() {
+        self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto ?? 0.0)"
+        self.cryptoNameLabel.text = "\(wallet?.cryptoName ?? "")"
+        self.fiatAmountLabel.text = "\((wallet?.sumInCrypto)! * exchangeCourse)"
+        self.fiatNameLabel.text = "\(wallet?.fiatName ?? "")"
+        self.addressLabel.text = "\(wallet?.address ?? "")"
     }
 }

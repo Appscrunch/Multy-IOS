@@ -12,6 +12,8 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     
     var amountInCrypto = 0.0
     
+    var choosenWallet: UserWalletRLM?
+    
     func cancelAction() {
 //        self.sendStartVC?.navigationController?.popViewController(animated: true)
         self.sendStartVC?.tabBarController?.selectedIndex = 0

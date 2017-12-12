@@ -192,14 +192,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        } else if indexPath == [0, 4] {
             
         } else {
-                        let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-                        let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-                        self.navigationController?.pushViewController(vc, animated: true)
+            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+            self.navigationController?.pushViewController(vc, animated: true)
 //            if self.presenter.isWalletExist() {
 //                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
 //                let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID")
 //                self.navigationController?.pushViewController(initialViewController, animated: true)
 //            } 
+
 //            let storyboard = UIStoryboard(name: "Send", bundle: nil)
 //            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
 //            self.navigationController?.pushViewController(destVC, animated: true)

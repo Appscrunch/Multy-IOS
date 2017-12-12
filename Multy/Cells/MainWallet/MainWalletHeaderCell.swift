@@ -8,6 +8,14 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var pageControll: UIPageControl!
+    
+    var wallet: UserWalletRLM? {
+        didSet {
+            self.setupUI()
+        }
+     }
+    
     weak var delegate : UICollectionViewDelegate? {
         didSet {
             self.collectionView.delegate = delegate
@@ -34,6 +42,10 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
 //        self.pageControll.numberOfPages = 2
         
     }
+    
+    func setupUI() {
+        self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
+    }
 }
 
 extension MainWalletHeaderCell: UICollectionViewDataSource {
@@ -42,12 +54,13 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return (self.wallet?.addresses.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! MainWalletCollectionViewCell
-
+        cell.wallet = self.wallet
+        cell.fillInCell()
         return cell
     }
 }

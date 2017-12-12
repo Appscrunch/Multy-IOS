@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -77,6 +77,7 @@
                         <outlet property="tableView" destination="H94-7K-Etr" id="6mf-E7-FlG"/>
                         <segue destination="3gL-lZ-1hN" kind="show" identifier="chooseWalletVC" id="o35-7A-1Zt"/>
                         <segue destination="Tfc-aA-5T8" kind="show" identifier="qrCamera" id="FRo-Sp-aVY"/>
+                        <segue destination="Can-YJ-fx8" kind="show" identifier="transactionDetail" id="EUD-ex-a5v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uor-oM-Mbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1173,4 +1174,7 @@
         <image name="loading" width="117" height="117"/>
         <image name="swap" width="25" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="EUD-ex-a5v"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -113,6 +113,7 @@
 		FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
 		FA4E559D1FDFE47D000FA1A1 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4E559C1FDFE47D000FA1A1 /* SeedPhrase.storyboard */; };
+		FA4E559F1FE00F63000FA1A1 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E559E1FE00F63000FA1A1 /* Double+Extension.swift */; };
 		FA58DF5F1FDC3FB800C45303 /* BricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF5E1FDC3FB800C45303 /* BricksView.swift */; };
 		FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */; };
 		FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */; };
@@ -267,6 +268,7 @@
 		FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
 		FA4E559C1FDFE47D000FA1A1 /* SeedPhrase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SeedPhrase.storyboard; sourceTree = "<group>"; };
+		FA4E559E1FE00F63000FA1A1 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FA58DF5E1FDC3FB800C45303 /* BricksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
 		FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 				FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */,
 				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 				FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */,
+				FA4E559E1FE00F63000FA1A1 /* Double+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -728,9 +731,9 @@
 		45B9CB031FBB4B2300AA2A31 /* ViewControllers and Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				45B9CB011FBB4AC200AA2A31 /* Assets */,
 				455EA8721FD841FF0093F69D /* TabBar */,
 				FA4D43E81FC5C305003C7117 /* Wallet */,
-				45B9CB011FBB4AC200AA2A31 /* Assets */,
 				455EA8771FD8514F0093F69D /* Fast Operations */,
 				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 				45A9491D1FC2DF03003C3A23 /* Receive */,
@@ -1129,6 +1132,7 @@
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
 				457486151FBD7ED8002D1925 /* SMPageControl.swift in Sources */,
 				45A9495A1FC6E785003C3A23 /* ExtensionsUIViewController.swift in Sources */,
+				FA4E559F1FE00F63000FA1A1 /* Double+Extension.swift in Sources */,
 				45A949441FC5C0F4003C3A23 /* SendAddressProtocol.swift in Sources */,
 				45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */,
 				4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */,

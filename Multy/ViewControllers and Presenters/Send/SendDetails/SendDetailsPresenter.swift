@@ -26,7 +26,25 @@ class SendDetailsPresenter: NSObject {
     
     let donationObj = DonationObj()
     
+    var feeRate: NSDictionary?{
+        didSet {
+            sendDetailsVC?.tableView.reloadData()
+        }
+    }
+    
 //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
+    
+    func requestFee() {
+        DataManager.shared.getAccount { (account, error) in
+            DataManager.shared.getFeeRate(account!.token, currencyID: 0, completion: { (dict, error) in
+                if dict != nil {
+                    self.feeRate = dict
+                } else {
+                    print("Did failed getting feeRate")
+                }
+            })
+        }
+    }
     
     func createTransaction(index: Int) {
         switch index {
