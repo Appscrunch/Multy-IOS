@@ -63,14 +63,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func getExchange() {
-        DataManager.shared.apiManager.getExchangePrice(presenter.account!.token, direction: "") { (dict, error) in
-            guard dict != nil  else {
-                return
-            }
-            if dict!["USD"] != nil {
-                exchangeCourse = dict!["USD"] as! Double
-            }
-        }
+//        DataManager.shared.apiManager.getExchangePrice(presenter.account!.token, direction: "") { (dict, error) in
+//            guard dict != nil  else {
+//                return
+//            }
+//            if dict!["USD"] != nil {
+//                exchangeCourse = dict!["USD"] as! Double
+//            }
+//        }
     }
     
     func getTransInfo() {
@@ -193,14 +193,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         } else {
             if self.presenter.isWalletExist() {
-                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-                let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
-                walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
-                self.navigationController?.pushViewController(walletVC, animated: true)
-            } 
-//            let storyboard = UIStoryboard(name: "Send", bundle: nil)
-//            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
-//            self.navigationController?.pushViewController(destVC, animated: true)
+                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+                self.navigationController?.pushViewController(vc, animated: true)
+
+//                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+//                let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
+//                walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+//                self.navigationController?.pushViewController(walletVC, animated: true)
+            }
         }
     }
     

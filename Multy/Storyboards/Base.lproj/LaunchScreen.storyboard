@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="A55-FG-jV3">
-                                <rect key="frame" x="87" y="161" width="201" height="121"/>
+                                <rect key="frame" x="87" y="283" width="201" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="201" id="HWD-gM-G7Z"/>
                                     <constraint firstAttribute="height" constant="121" id="jKA-4D-U48"/>
@@ -28,8 +28,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.010678631253540516" green="0.49669629335403442" blue="0.99941819906234741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="A55-FG-jV3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oKU-R8-FRV"/>
-                            <constraint firstItem="A55-FG-jV3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="141" id="z8W-y7-fCC"/>
+                            <constraint firstItem="A55-FG-jV3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6as-Zw-wc7"/>
+                            <constraint firstItem="A55-FG-jV3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="oKU-R8-FRV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

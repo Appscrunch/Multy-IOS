@@ -3,6 +3,9 @@
 //See LICENSE for details
 
 import UIKit
+import RevealingSplashView
+
+let tabbarSelectedBackground = UIColor(redInt: 3, greenInt: 127, blueInt: 255, alpha: 1.0)
 
 class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
@@ -16,6 +19,24 @@ class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate
 //        self.presenter.getExchange()
         setupMiddleButton()
         
+        self.loadSplashScreen()
+    }
+    
+    func loadSplashScreen() {
+        let logoWidth = 201 as CGFloat
+        let logoHeight = 121 as CGFloat
+        
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo")!,
+                                                      iconInitialSize: CGSize(width: logoWidth, height: logoHeight),
+                                                      backgroundColor: tabbarSelectedBackground)
+        
+        //Adds the revealing splash view as a sub view
+        self.view.addSubview(revealingSplashView)
+        
+        //Starts animation
+        revealingSplashView.startAnimation(){
+            
+        }
     }
     
     // MARK: - Setups
