@@ -42,6 +42,7 @@
 		4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC9D1FBC991E001991AA /* NewWalletTableViewCell.swift */; };
 		4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC9E1FBC991E001991AA /* NewWalletTableViewCell.xib */; };
 		4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583ACA21FBCAC60001991AA /* UIView+Extension.swift */; };
+		45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6D62A1FE01CAA00491446 /* SecureViewController.swift */; };
 		45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */; };
 		45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */; };
 		45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949201FC2DFF9003C3A23 /* ReceiveStartPresenter.swift */; };
@@ -197,6 +198,7 @@
 		4583AC9D1FBC991E001991AA /* NewWalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletTableViewCell.swift; sourceTree = "<group>"; };
 		4583AC9E1FBC991E001991AA /* NewWalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewWalletTableViewCell.xib; sourceTree = "<group>"; };
 		4583ACA21FBCAC60001991AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		45A6D62A1FE01CAA00491446 /* SecureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureViewController.swift; sourceTree = "<group>"; };
 		45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receive.storyboard; sourceTree = "<group>"; };
 		45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartViewController.swift; sourceTree = "<group>"; };
 		45A949201FC2DFF9003C3A23 /* ReceiveStartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartPresenter.swift; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 				45A9491D1FC2DF03003C3A23 /* Receive */,
 				45A9493C1FC5A4FB003C3A23 /* Send */,
 				45B5CCA01FDA90BA0069BD46 /* No InternetConnection */,
+				45A6D62A1FE01CAA00491446 /* SecureViewController.swift */,
 			);
 			path = "ViewControllers and Presenters";
 			sourceTree = "<group>";
@@ -1132,6 +1135,7 @@
 				45A949441FC5C0F4003C3A23 /* SendAddressProtocol.swift in Sources */,
 				45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */,
 				4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */,
+				45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */,
 				455CDCFB1FC8537200EA5ACE /* CreateWalletViewController.swift in Sources */,
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,
 				455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */,
