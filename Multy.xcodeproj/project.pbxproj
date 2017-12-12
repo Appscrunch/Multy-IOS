@@ -728,9 +728,9 @@
 		45B9CB031FBB4B2300AA2A31 /* ViewControllers and Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				45B9CB011FBB4AC200AA2A31 /* Assets */,
 				455EA8721FD841FF0093F69D /* TabBar */,
 				FA4D43E81FC5C305003C7117 /* Wallet */,
-				45B9CB011FBB4AC200AA2A31 /* Assets */,
 				455EA8771FD8514F0093F69D /* Fast Operations */,
 				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 				45A9491D1FC2DF03003C3A23 /* Receive */,

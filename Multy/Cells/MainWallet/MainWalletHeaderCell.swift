@@ -14,7 +14,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
         didSet {
             self.setupUI()
         }
-    }
+     }
     
     weak var delegate : UICollectionViewDelegate? {
         didSet {
