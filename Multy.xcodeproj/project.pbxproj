@@ -85,7 +85,6 @@
 		45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */; };
 		45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */; };
 		45B9CB081FBB51AE00AA2A31 /* WalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B9CB061FBB51AE00AA2A31 /* WalletTableViewCell.xib */; };
-		45CFCCBD1FDE75C800D5F6BF /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CFCCBC1FDE75C700D5F6BF /* SeedPhrase.storyboard */; };
 		45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0836D1FCEEB990066F1CD /* WalletRLM.swift */; };
 		45D083701FCEF94C0066F1CD /* SendWalletProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0836F1FCEF94C0066F1CD /* SendWalletProtocol.swift */; };
 		45E215D81FD147950078945A /* TransactionRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215D71FD147950078945A /* TransactionRLM.swift */; };
@@ -113,6 +112,7 @@
 		FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */; };
 		FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
+		FA4E559D1FDFE47D000FA1A1 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4E559C1FDFE47D000FA1A1 /* SeedPhrase.storyboard */; };
 		FA58DF5F1FDC3FB800C45303 /* BricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF5E1FDC3FB800C45303 /* BricksView.swift */; };
 		FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */; };
 		FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */; };
@@ -240,7 +240,6 @@
 		45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsPresenter.swift; sourceTree = "<group>"; };
 		45B9CB051FBB51AE00AA2A31 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
 		45B9CB061FBB51AE00AA2A31 /* WalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableViewCell.xib; sourceTree = "<group>"; };
-		45CFCCBC1FDE75C700D5F6BF /* SeedPhrase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SeedPhrase.storyboard; sourceTree = "<group>"; };
 		45D0836D1FCEEB990066F1CD /* WalletRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRLM.swift; sourceTree = "<group>"; };
 		45D0836F1FCEF94C0066F1CD /* SendWalletProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendWalletProtocol.swift; sourceTree = "<group>"; };
 		45E215D71FD147950078945A /* TransactionRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRLM.swift; sourceTree = "<group>"; };
@@ -267,6 +266,7 @@
 		FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
+		FA4E559C1FDFE47D000FA1A1 /* SeedPhrase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SeedPhrase.storyboard; sourceTree = "<group>"; };
 		FA58DF5E1FDC3FB800C45303 /* BricksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
 		FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
@@ -717,7 +717,7 @@
 			children = (
 				452290581FBB18D30024B550 /* Main.storyboard */,
 				4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */,
-				45CFCCBC1FDE75C700D5F6BF /* SeedPhrase.storyboard */,
+				FA4E559C1FDFE47D000FA1A1 /* SeedPhrase.storyboard */,
 				45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */,
 				FA4D43E61FC5C2A6003C7117 /* Wallet.storyboard */,
 				45A949301FC582BC003C3A23 /* Send.storyboard */,
@@ -996,10 +996,10 @@
 				45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */,
 				4522905A1FBB18D30024B550 /* Main.storyboard in Resources */,
 				45A949581FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib in Resources */,
+				FA4E559D1FDFE47D000FA1A1 /* SeedPhrase.storyboard in Resources */,
 				4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */,
 				45A949361FC5992A003C3A23 /* SearchAddressTableViewCell.xib in Resources */,
 				45B5CCAA1FDAC0B00069BD46 /* TextTableViewCell.xib in Resources */,
-				45CFCCBD1FDE75C800D5F6BF /* SeedPhrase.storyboard in Resources */,
 				45A9493B1FC59E51003C3A23 /* RecentAddressTableViewCell.xib in Resources */,
 				4583AC931FBC7122001991AA /* PortfolioTableViewCell.xib in Resources */,
 				4583AC991FBC8596001991AA /* PortfolioCollectionViewCell.xib in Resources */,

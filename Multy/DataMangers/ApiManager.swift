@@ -8,7 +8,7 @@ import Alamofire
 class ApiManager: NSObject {
     static let shared = ApiManager()
     
-    let apiUrl = "http://192.168.0.111:8080/"
+    let apiUrl = "http://192.168.0.121:7778/"
     let apiUrlTest = "http://192.168.0.125:8080/"
     
     var requestManager = Alamofire.SessionManager.default
@@ -27,7 +27,7 @@ class ApiManager: NSObject {
             "Content-Type": "application/json"
         ]
         
-        Alamofire.request("\(self.apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             
             print("----------------------AUTH")
             
@@ -51,7 +51,7 @@ class ApiManager: NSObject {
             
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/wallets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/wallets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -72,7 +72,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: change btc_eth
-        Alamofire.request("\(self.apiUrl)api/v1/gettickets/btc_eth", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/gettickets/btc_eth", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -93,7 +93,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: USD
-        Alamofire.request("\(self.apiUrl)api/v1/getexchangeprice/BTC/USD", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/getexchangeprice/BTC/USD", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -114,7 +114,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: USD
-        Alamofire.request("\(self.apiUrl)api/v1/gettransactioninfo/\(transactionString)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/gettransactioninfo/\(transactionString)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -134,7 +134,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -160,7 +160,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        Alamofire.request("\(self.apiUrl)api/v1/adress", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/adress", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -181,7 +181,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: USD
-        Alamofire.request("\(self.apiUrl)api/v1/transaction/feerate", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/transaction/feerate", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
