@@ -193,4 +193,26 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    func getWalletsVerbose(_ token: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/wallets/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
 }
+
+//mjNQJu5QxQNVZf769WWz7zdmPeJMdg4YRA
+//mrHaPLH3rXDj3udV4R6p3ifPoQwZEYZtq1
+
