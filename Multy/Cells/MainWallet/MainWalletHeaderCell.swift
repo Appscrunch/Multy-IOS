@@ -10,6 +10,8 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var pageControll: UIPageControl!
     
+    var mainVC: UIViewController?
+    
     var wallet: UserWalletRLM? {
         didSet {
             self.setupUI()
@@ -59,6 +61,7 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! MainWalletCollectionViewCell
+        cell.mainVC = self.mainVC
         cell.wallet = self.wallet
         cell.fillInCell()
         return cell

@@ -38,14 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) { // 2
+    func applicationWillResignActive(_ application: UIApplication) {
         DataManager.shared.finishRealmSession()
         
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {  // 3
+    func applicationDidEnterBackground(_ application: UIApplication) {
         DataManager.shared.finishRealmSession()
         isNeedToAutorise = true
         if self.presentedVC != nil {
@@ -62,10 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {  // 1  // 1
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if isNeedToAutorise {
             let authVC = SecureViewController()
+            authVC.modalPresentationStyle = .overCurrentContext
             let selectedIndex = (self.window?.rootViewController as! CustomTabBarViewController).selectedIndex
             (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController?.present(authVC, animated: true, completion: nil)
             isNeedToAutorise = false

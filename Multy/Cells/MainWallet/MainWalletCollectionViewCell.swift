@@ -14,6 +14,7 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var addressLabel : UILabel!
     
     var wallet: UserWalletRLM?
+    var mainVC: UIViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,5 +35,21 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         self.fiatAmountLabel.text = "\((wallet?.sumInCrypto)! * exchangeCourse)"
         self.fiatNameLabel.text = "\(wallet?.fiatName ?? "")"
         self.addressLabel.text = "\(wallet?.address ?? "")"
+    }
+    
+    @IBAction func showAddressAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+        let adressVC = storyboard.instantiateViewController(withIdentifier: "walletAdressVC") as! AddressViewController
+        adressVC.modalPresentationStyle = .overCurrentContext
+        adressVC.wallet = self.wallet
+//        self.mainVC.present
+        self.mainVC?.present(adressVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func showAllAddressessAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+        let adressesVC = storyboard.instantiateViewController(withIdentifier: "walletAddresses") as! WalletAddresessViewController
+        adressesVC.presenter.wallet = self.wallet
+        self.mainVC?.navigationController?.pushViewController(adressesVC, animated: true)
     }
 }
