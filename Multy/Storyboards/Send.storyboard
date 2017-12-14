@@ -124,7 +124,7 @@
         <!--Custom Fee View Controller-->
         <scene sceneID="Tq0-BY-Ni9">
             <objects>
-                <viewController id="rrp-ST-Ben" customClass="CustomFeeViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="customVC" id="rrp-ST-Ben" customClass="CustomFeeViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AdN-5e-be1"/>
                         <viewControllerLayoutGuide type="bottom" id="34n-nx-X8l"/>
@@ -148,6 +148,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-Jj-TW4">
                                 <rect key="frame" x="0.0" y="28" width="49" height="30"/>
+                                <connections>
+                                    <action selector="cancelAtion:" destination="rrp-ST-Ben" eventType="touchUpInside" id="0A2-Ge-bCV"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BX5-GH-dDv">
                                 <rect key="frame" x="0.0" y="108" width="375" height="128"/>
@@ -175,7 +178,7 @@
                                         <rect key="frame" x="20" y="28" width="335" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="rrp-ST-Ben" id="mfF-SF-PkO"/>
                                         </connections>
@@ -184,7 +187,7 @@
                                         <rect key="frame" x="20" y="90" width="335" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="rrp-ST-Ben" id="WJj-a7-ofs"/>
                                         </connections>
@@ -200,12 +203,12 @@
                                     <constraint firstItem="sAV-0f-SxV" firstAttribute="leading" secondItem="enn-zm-3do" secondAttribute="leading" id="9Lk-Vz-lgS"/>
                                     <constraint firstAttribute="bottom" secondItem="sAV-0f-SxV" secondAttribute="bottom" constant="8" id="BeA-2z-oAy"/>
                                     <constraint firstAttribute="trailing" secondItem="sAV-0f-SxV" secondAttribute="trailing" constant="20" id="CP0-h9-9RH"/>
+                                    <constraint firstItem="fW7-gx-f9Q" firstAttribute="top" secondItem="BX5-GH-dDv" secondAttribute="top" constant="63.5" id="M5C-3b-4h8"/>
                                     <constraint firstItem="84M-y9-Blm" firstAttribute="top" secondItem="axx-5t-akg" secondAttribute="bottom" constant="3.5" id="Pny-yT-Hzz"/>
                                     <constraint firstItem="84M-y9-Blm" firstAttribute="leading" secondItem="axx-5t-akg" secondAttribute="leading" id="Ss9-to-oT4"/>
                                     <constraint firstItem="fW7-gx-f9Q" firstAttribute="top" secondItem="84M-y9-Blm" secondAttribute="bottom" constant="5.5" id="Wp2-By-a43"/>
                                     <constraint firstItem="axx-5t-akg" firstAttribute="top" secondItem="BX5-GH-dDv" secondAttribute="top" constant="8" id="ZZS-en-5jc"/>
                                     <constraint firstAttribute="trailing" secondItem="fW7-gx-f9Q" secondAttribute="trailing" id="aqH-YH-va2"/>
-                                    <constraint firstItem="fW7-gx-f9Q" firstAttribute="centerY" secondItem="BX5-GH-dDv" secondAttribute="centerY" id="bQQ-So-kBO"/>
                                     <constraint firstItem="axx-5t-akg" firstAttribute="leading" secondItem="fW7-gx-f9Q" secondAttribute="leading" id="lXq-eH-7sI"/>
                                     <constraint firstItem="enn-zm-3do" firstAttribute="leading" secondItem="fW7-gx-f9Q" secondAttribute="leading" id="wV0-Vp-aoU"/>
                                 </constraints>

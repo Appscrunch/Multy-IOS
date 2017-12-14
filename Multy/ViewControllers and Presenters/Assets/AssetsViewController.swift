@@ -35,6 +35,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //MARK: test
         presenter.auth()
+//        DataManager.shared.socketManager.start()
         
     }
     
@@ -53,7 +54,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         DataManager.shared.apiManager.getAssets(presenter.account!.token, completion: { (assetsDict, error) in
-            print(assetsDict)
+             print(assetsDict as Any)
         })
     }
     

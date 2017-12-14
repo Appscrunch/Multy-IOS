@@ -25,7 +25,9 @@ class AssetsPresenter: NSObject {
     }
     
     func auth() {
+        assetsVC?.progressHUD.show()
         DataManager.shared.auth { (account, error) in
+            self.assetsVC?.progressHUD.hide()
             guard account != nil else {
                 DataManager.shared.getAccount { (acc, err) in
                     if err == nil {

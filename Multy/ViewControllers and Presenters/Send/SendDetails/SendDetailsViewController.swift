@@ -24,6 +24,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     
     var maxLengthForSum = 12
     
+    var isCustom = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
@@ -244,6 +246,10 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != 5 {
+            if self.isCustom {
+                let customCell = self.tableView.cellForRow(at: [0,5]) as! CustomTrasanctionFeeTableViewCell
+                customCell.reloadUI()
+            }
             var cells = self.tableView.visibleCells
             cells.removeLast()
             let trueCells = cells as! [TransactionFeeTableViewCell]
@@ -258,10 +264,22 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             trueCells[indexPath.row].checkMarkImage.isHidden = false
             self.presenter.selectedIndexOfSpeed = indexPath.row
         } else {
-            let customVC = CustomFeeViewController()
+            self.isCustom = true
+            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+            let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
             customVC.presenter.chainId = self.presenter.choosenWallet?.chain
-            customVC.setupUI()
+            customVC.delegate = self.presenter
+            self.presenter.selectedIndexOfSpeed = indexPath.row
+            self.navigationController?.pushViewController(customVC, animated: true)
+            
+            var cells = self.tableView.visibleCells
+            cells.removeLast()
+            let trueCells = cells as! [TransactionFeeTableViewCell]
+            for cell in trueCells {
+                cell.checkMarkImage.isHidden = true
+            }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

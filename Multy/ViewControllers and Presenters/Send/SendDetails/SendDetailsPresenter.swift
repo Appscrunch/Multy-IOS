@@ -4,7 +4,7 @@
 
 import UIKit
 
-class SendDetailsPresenter: NSObject {
+class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var sendDetailsVC: SendDetailsViewController?
     
@@ -25,6 +25,8 @@ class SendDetailsPresenter: NSObject {
     let trasactionObj = TransactionRLM()
     
     let donationObj = DonationObj()
+    
+    var customFee = 0.0
     
 //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
     
@@ -70,6 +72,14 @@ class SendDetailsPresenter: NSObject {
             self.trasactionObj.cryptoName = "BTC"
             self.trasactionObj.fiatName = "USD"
             self.trasactionObj.numberOfBlocks = 70
+        case 5:
+            self.trasactionObj.speedName = "Custom"
+            self.trasactionObj.speedTimeString = ""
+            self.trasactionObj.sumInCrypto = self.customFee
+            self.trasactionObj.sumInFiat = 0.0
+            self.trasactionObj.cryptoName = "Satoshi per Byte"
+            self.trasactionObj.fiatName = "USD"
+            self.trasactionObj.numberOfBlocks = 0
         default:
             return
         }
@@ -96,7 +106,7 @@ class SendDetailsPresenter: NSObject {
     func checkMaxEvelable() {
         self.maxAllowedToSpend = (self.choosenWallet?.sumInCrypto)! - self.trasactionObj.sumInCrypto
         if self.donationObj.sumInCrypto! >= self.maxAllowedToSpend  {
-            self.sendDetailsVC?.presentWarning(message: "Your donation sum and fee cost more than you have in wallet.\n\n Fee cost: \(self.trasactionObj.sumInCrypto) \(self.cryptoName)\n Donation sum: \(self.donationObj.sumInCrypto ?? 0.0) \(self.cryptoName)\n Sum in Wallet: \(self.choosenWallet?.sumInCrypto ?? 0.0) \(self.cryptoName)")
+            self.sendDetailsVC?.presentWarning(message: "Your donation sum and fee cost more than you have in wallet.\n\n Fee cost: \(self.trasactionObj.sumInCrypto) \(self.trasactionObj.cryptoName)\n Donation sum: \(self.donationObj.sumInCrypto ?? 0.0) \(self.cryptoName)\n Sum in Wallet: \(self.choosenWallet?.sumInCrypto ?? 0.0) \(self.cryptoName)")
         } else {
             self.sendDetailsVC?.performSegue(withIdentifier: "sendAmountVC", sender: Any.self)
         }
@@ -107,5 +117,17 @@ class SendDetailsPresenter: NSObject {
         DataManager.shared.getExchangeCourse { (error) in
             
         }
+    }
+    
+    func customFeeData(firstValue: Double, secValue: Double) {
+        print(firstValue)
+        if selectedIndexOfSpeed != 5 {
+           selectedIndexOfSpeed = 5
+        }
+        let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
+        cell.value = firstValue
+        cell.setupUIForBtc()
+        self.customFee = firstValue
+        self.sendDetailsVC?.tableView.reloadData()
     }
 }

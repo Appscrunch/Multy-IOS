@@ -12,7 +12,7 @@ class Socket: NSObject {
 
     
     override init() {
-        manager = SocketManager(socketURL: URL(string: "http://192.168.0.105:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
+        manager = SocketManager(socketURL: URL(string: "http://192.168.0.111:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
         socket = manager.defaultSocket
     }
     
@@ -20,12 +20,12 @@ class Socket: NSObject {
 //        let header = ["userID": "\(acc.userID)",
 //                      "deviceType": "\(acc.deviceType)",
 //                      "jwtToken": "\(acc.token)"]
-        
-//        manager = SocketManager(socketURL: URL(string: "http://192.168.0.105:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
+//
+//        manager = SocketManager(socketURL: URL(string: "http://192.168.0.111:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
 //        socket = manager.defaultSocket
 
         
-        let socket = manager.defaultSocket
+//        let socket = manager.defaultSocket
         
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")

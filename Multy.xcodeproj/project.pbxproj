@@ -43,6 +43,7 @@
 		4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583AC9D1FBC991E001991AA /* NewWalletTableViewCell.swift */; };
 		4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4583AC9E1FBC991E001991AA /* NewWalletTableViewCell.xib */; };
 		4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583ACA21FBCAC60001991AA /* UIView+Extension.swift */; };
+		459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */; };
 		45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6D62A1FE01CAA00491446 /* SecureViewController.swift */; };
 		45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */; };
 		45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */; };
@@ -206,6 +207,7 @@
 		4583AC9D1FBC991E001991AA /* NewWalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletTableViewCell.swift; sourceTree = "<group>"; };
 		4583AC9E1FBC991E001991AA /* NewWalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewWalletTableViewCell.xib; sourceTree = "<group>"; };
 		4583ACA21FBCAC60001991AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeeRateProtocol.swift; sourceTree = "<group>"; };
 		45A6D62A1FE01CAA00491446 /* SecureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureViewController.swift; sourceTree = "<group>"; };
 		45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receive.storyboard; sourceTree = "<group>"; };
 		45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartViewController.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				45D0836F1FCEF94C0066F1CD /* SendWalletProtocol.swift */,
 				45E215E11FD16AA70078945A /* GoToQrProtocol.swift */,
 				45E215E31FD179100078945A /* QrDataProtocol.swift */,
+				459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1208,6 +1211,7 @@
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
 				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
 				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
+				459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */,
 				455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */,
 				45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,

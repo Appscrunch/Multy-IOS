@@ -16,18 +16,32 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     let presenter = CustomFeePresenter()
     
+    var delegate: CustomFeeRateProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
 
     func setupUI() {
         switch self.presenter.chainId {
         case 0 as NSNumber:
+//            break
             self.botNameLbl.isHidden = true
             self.botLimitTf.isHidden = true
             self.viewHeightConstraint.constant = viewHeightConstraint.constant/2
+            
+            self.topNameLbl.text = "Satoshi per byte"
+            self.topPriceTf.placeholder = "Enter Satohi per byte here"
+            
+            self.topPriceTf.becomeFirstResponder()
         default: return
         }
+    }
+    
+    @IBAction func cancelAtion(_ sender: Any) {
+        self.delegate?.customFeeData(firstValue: (self.topPriceTf.text! as NSString).doubleValue, secValue: (self.botLimitTf.text! as NSString).doubleValue)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
