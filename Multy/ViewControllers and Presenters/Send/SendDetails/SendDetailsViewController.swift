@@ -35,10 +35,20 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.registerCells()
         self.registerNotificationFromKeyboard()
         
+        self.setupDonationUI()
+        
+        presenter.requestFee()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                    gradientOrientation: .horizontal)
-        self.setupDonationUI()
+        
+        let firstCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TransactionFeeTableViewCell
+        firstCell.setCornersForFirstCell()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,10 +246,13 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row != 5 {
             let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
+            transactionCell.feeRate = presenter.feeRate
             transactionCell.makeCellBy(indexPath: indexPath)
+            
             return transactionCell
         } else {
             let customFeeCell = self.tableView.dequeueReusableCell(withIdentifier: "customFeeCell") as! CustomTrasanctionFeeTableViewCell
+            
             return customFeeCell
         }
     }

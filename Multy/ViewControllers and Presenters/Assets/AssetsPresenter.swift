@@ -8,7 +8,6 @@ import RealmSwift
 class AssetsPresenter: NSObject {
 
     var assetsVC: AssetsViewController?
-    var wallets: List<UserWalletRLM>?
     
     var tabBarFrame: CGRect?
     

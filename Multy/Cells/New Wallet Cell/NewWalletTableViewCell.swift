@@ -28,7 +28,7 @@ class NewWalletTableViewCell: UITableViewCell {
         self.topLineView.isHidden = true
         self.cellNameLbl.font = UIFont(name: "Avenir Next Medium", size: 16)
         self.cellNameLbl.text = "Recent Addresses"
-        self.makeTopCorners()
+//        self.makeTopCorners()
     }
     
     func makeTopCorners() {

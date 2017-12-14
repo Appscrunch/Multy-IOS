@@ -101,10 +101,10 @@ extension DataManager {
     
     func getFeeRate(_ token: String, currencyID: UInt32, completion: @escaping (_ feeRateDict: NSDictionary?,_ error: Error?) -> ()) {
         apiManager.getFeeRate(token, currencyID: currencyID) { (answer, error) in
-            if error != nil || answer!["Fast"] == nil  {
+            if error != nil || (answer!["code"] as! NSNumber).intValue != 200  {
                 completion(nil, error)
             } else {
-                completion(answer, nil)
+                completion(answer!["speeds"] as? NSDictionary, nil)
             }
         }
     }

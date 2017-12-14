@@ -31,6 +31,13 @@ class SendStartViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let topCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? NewWalletTableViewCell
+        topCell?.makeTopCorners()
+    }
+    
     func registerCells() {
         let searchAddressCell = UINib(nibName: "SearchAddressTableViewCell", bundle: nil)
         self.tableView.register(searchAddressCell, forCellReuseIdentifier: "searchAddressCell")

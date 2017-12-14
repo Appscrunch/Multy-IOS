@@ -28,12 +28,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.registerCells()
         
         self.view.addSubview(progressHUD)
-        progressHUD.hide()
+        
         
         //MAKE: first launch
 //        let _ = DataManager.shared
         
+        DataManager.shared.startCoreTest()
+        
         //MARK: test
+        progressHUD.show()
         presenter.auth()
 //        DataManager.shared.socketManager.start()
         
@@ -97,6 +100,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
         
         if presenter.account != nil {
+            progressHUD.show()
             presenter.fetchAssets()
         }
     }
