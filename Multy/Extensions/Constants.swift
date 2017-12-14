@@ -25,7 +25,7 @@ func encode<T>( value: T) -> NSData {
 func decode<T>(data: NSData) -> T {
     let pointer = UnsafeMutablePointer<T>.allocate(capacity: MemoryLayout<T.Type>.size)
     //MARK: fix get bytes
-    data.getBytes(pointer)
+    data.getBytes(pointer, length: MemoryLayout<T>.size)
     
     return pointer.move()
 }
