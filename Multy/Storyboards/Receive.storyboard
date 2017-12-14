@@ -95,7 +95,7 @@
         <!--Receive All Details View Controller-->
         <scene sceneID="kvz-XC-rZj">
             <objects>
-                <viewController storyboardIdentifier="walletsVC" id="Ci5-VC-rpK" customClass="ReceiveAllDetailsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="receiveDetails" id="Ci5-VC-rpK" customClass="ReceiveAllDetailsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MOI-3U-m0P"/>
                         <viewControllerLayoutGuide type="bottom" id="8Hw-Dm-8EG"/>

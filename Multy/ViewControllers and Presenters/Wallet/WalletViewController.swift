@@ -9,6 +9,7 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var backView: UIView!
+    @IBOutlet weak var titleLbl: UILabel!
     
     var presenter = WalletPresenter()
     var even = true
@@ -27,6 +28,7 @@ class WalletViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        self.titleLbl.text = self.presenter.wallet?.name
     }
     
     @IBAction func closeAction() {
@@ -62,6 +64,10 @@ class WalletViewController: UIViewController {
     }
     
     @IBAction func receiveAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+        let receiveDetailsVC = storyboard.instantiateViewController(withIdentifier: "receiveDetails") as! ReceiveAllDetailsViewController
+        receiveDetailsVC.presenter.wallet = self.presenter.wallet
+        self.navigationController?.pushViewController(receiveDetailsVC, animated: true)
     }
     
     @IBAction func exchangeAction(_ sender: Any) {
@@ -90,6 +96,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath == [0, 0] {         // Main Wallet Header Cell
             let headerCell = self.tableView.dequeueReusableCell(withIdentifier: "MainWalletHeaderCellID") as! MainWalletHeaderCell
             headerCell.selectionStyle = .none
+            headerCell.mainVC = self
             headerCell.delegate = self
             headerCell.wallet = self.presenter.wallet
             

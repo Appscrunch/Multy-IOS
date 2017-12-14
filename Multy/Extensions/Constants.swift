@@ -11,6 +11,10 @@ let screenHeight = UIScreen.main.bounds.size.height
 //var exchangeCourse: Double = 10000.0
 var exchangeCourse: Double = 2.0
 
+var isNeedToAutorise = false
+var isViewPresented = false
+
+
 func encode<T>( value: T) -> NSData {
     var value = value
     return withUnsafePointer(to: &value) { p in

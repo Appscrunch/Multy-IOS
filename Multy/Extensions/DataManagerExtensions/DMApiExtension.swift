@@ -109,6 +109,16 @@ extension DataManager {
         }
     }
     
+    func getWalletsVerbose(_ token: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getWalletsVerbose(token) { (answer, err) in
+            if err == nil {
+                completion(answer, nil)
+            } else {
+                completion(nil, err)
+            }
+        }
+    }
+    
 //    func addAddress(_ token: String, _ walletDict: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
 //        DataManager.shared
 //    }

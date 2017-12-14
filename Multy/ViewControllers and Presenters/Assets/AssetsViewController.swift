@@ -4,6 +4,7 @@
 
 import UIKit
 import RealmSwift
+//import BiometricAuthentication
 
 class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -13,7 +14,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let presenter = AssetsPresenter()
     let progressHUD = ProgressHUD(text: "Getting Wallets...")
     
+    
+    
     override func viewDidLoad() {
+
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -34,6 +38,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MARK: test
         progressHUD.show()
         presenter.auth()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -196,19 +201,19 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        } else if indexPath == [0, 4] {
             
         } else {
-//            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-//            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-//            self.navigationController?.pushViewController(vc, animated: true)
             if self.presenter.isWalletExist() {
-                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
-                initialViewController.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
-                self.navigationController?.pushViewController(initialViewController, animated: true)
-            }
+//                let securevc = SecureViewController()
+//                self.present(securevc, animated: true, completion: nil)
+                
+//                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+//                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+//                self.navigationController?.pushViewController(vc, animated: true)
 
-//            let storyboard = UIStoryboard(name: "Send", bundle: nil)
-//            let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
-//            self.navigationController?.pushViewController(destVC, animated: true)
+                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+                let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
+                walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                self.navigationController?.pushViewController(walletVC, animated: true)
+            }
         }
     }
     

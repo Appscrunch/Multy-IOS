@@ -270,6 +270,10 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             }
             trueCells[indexPath.row].checkMarkImage.isHidden = false
             self.presenter.selectedIndexOfSpeed = indexPath.row
+        } else {
+            let customVC = CustomFeeViewController()
+            customVC.presenter.chainId = self.presenter.choosenWallet?.chain
+            customVC.setupUI()
         }
     }
     
