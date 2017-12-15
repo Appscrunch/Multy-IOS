@@ -147,6 +147,8 @@ class AssetsPresenter: NSObject {
                     if answDict!["wallets"] is NSNull {
                         return
                     }
+                    print("answer: \(answer)")
+                    
                     let arrOfwallets = answDict!["wallets"] as! NSArray
                     let firstWallet = arrOfwallets.firstObject as! NSDictionary
                     let addressArr = firstWallet["addresses"] as! NSArray
@@ -162,6 +164,7 @@ class AssetsPresenter: NSObject {
             }
             self.assetsVC?.updateUI()
 //            UserWalletRLM
+
 //            var binData : BinaryData = decode(data: self.account!.binaryData)
 //            let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
 //            DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
@@ -175,7 +178,7 @@ class AssetsPresenter: NSObject {
 //                                                                txoutid: spendDict["txoutid"] as! UInt32,
 //                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
 //                                                                txoutscript: spendDict["txoutscript"] as! String)
-        }
+            
     }
     
 //    func addAddress() {
