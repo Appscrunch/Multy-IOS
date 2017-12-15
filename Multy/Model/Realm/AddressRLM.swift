@@ -17,7 +17,7 @@ class AddressRLM: Object {
     @objc dynamic var address = String()                //Double
     @objc dynamic var amount = NSNumber(value: 0)       //UInt32
     
-   @objc dynamic var spendableOutput = SpendableOutputRLM()
+    var spendableOutput = SpendableOutputRLM()
     
     public class func initWithArray(addressesInfo: NSArray) -> List<AddressRLM> {
         let addresses = List<AddressRLM>()
