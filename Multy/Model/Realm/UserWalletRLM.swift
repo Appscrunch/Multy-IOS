@@ -63,15 +63,23 @@ class UserWalletRLM: Object {
             wallet.chain = NSNumber(value: chain as! UInt32)
         }
         
-        if let walletID = walletInfo["WalletIndex"] {
+        if let walletID = walletInfo["WalletIndex"]  {
+            wallet.walletID = NSNumber(value: walletID as! UInt32)
+        }
+        
+        if let walletID = walletInfo["walletindex"]  {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
         }
         
         if walletInfo["CurrencyID"] != nil && walletInfo["WalletIndex"] != nil {
-            wallet.id = wallet.generateID()
+            wallet.id = generateWalletPrimaryKey(currencyID: wallet.chain.uint32Value, walletID: wallet.walletID.uint32Value)
         }
         
         if let addresses = walletInfo["Adresses"] {
+            wallet.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
+        }
+        
+        if let addresses = walletInfo["addresses"] {
             wallet.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
         }
         
@@ -88,9 +96,5 @@ class UserWalletRLM: Object {
     
     override class func primaryKey() -> String? {
         return "id"
-    }
-    
-    private func generateID() -> String {
-        return ("\(chain)" + "\(walletID)").sha3(.sha512)
     }
 }

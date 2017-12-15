@@ -167,10 +167,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
             walletCell.makeshadow()
             walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
-            if self.presenter.amountWallet != 0 {
-                walletCell.amount = self.presenter.amountWallet
-                walletCell.output = self.presenter.output
-            }
             walletCell.fillInCell()
             
             return walletCell

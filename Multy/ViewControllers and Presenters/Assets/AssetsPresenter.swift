@@ -13,9 +13,6 @@ class AssetsPresenter: NSObject {
     
     var isJailed = false
     
-    var amountWallet: UInt64 = 0
-    var output: UInt32 = 0
-    
     var account : AccountRLM? {
         didSet {
 //            fetchTickets()
@@ -142,39 +139,42 @@ class AssetsPresenter: NSObject {
     func getWalletVerbose() {
         DataManager.shared.getWalletsVerbose((account?.token)!) { (answer, err) in
             print("OK")
+            print(answer ?? "")
             let answDict = answer
             var spendDict = NSDictionary()
             if answDict != nil {
                 if answDict!["wallets"] != nil {
-//                    if answDict!["wallets"] as! NSNull == NSNull() {
-//                        return
-//                    }
+                    if answDict!["wallets"] is NSNull {
+                        return
+                    }
                     let arrOfwallets = answDict!["wallets"] as! NSArray
                     let firstWallet = arrOfwallets.firstObject as! NSDictionary
                     let addressArr = firstWallet["addresses"] as! NSArray
-                    let amount = (addressArr.firstObject as! NSDictionary)["amount"] as! UInt64
-                    self.amountWallet = amount/UInt64(pow(10.0, 8.0))
+                    let amount = (addressArr.firstObject as! NSDictionary)["amount"] as! UInt32
+                    if ((addressArr.firstObject as! NSDictionary)["spendableoutputs"] is NSNull) {
+                        return
+                    }
                     let spendableoutputs = (addressArr.firstObject as! NSDictionary)["spendableoutputs"] as! NSArray
                     spendDict = spendableoutputs.firstObject as! NSDictionary
                     
-                    self.output = spendDict["txoutamount"] as! UInt32 / UInt32(pow(10.0, 8.0))
+                    let spendObj = SpendableOutputRLM.initWithInfo(addressInfo: spendDict)
                 }
             }
             self.assetsVC?.updateUI()
 //            UserWalletRLM
-            var binData : BinaryData = decode(data: self.account!.binaryData)
-            let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
-            DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
-                                                                sendAddress: " ",
-                                                                availableSum: "100",
-                                                                sendAmountString: "10",
-                                                                feeAmountString: "10",
-                                                                donationAddress: "address",
-                                                                donationAmount: "10",
-                                                                txid: spendDict["txid"] as! String,
-                                                                txoutid: spendDict["txoutid"] as! UInt32,
-                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
-                                                                txoutscript: spendDict["txoutscript"] as! String)
+//            var binData : BinaryData = decode(data: self.account!.binaryData)
+//            let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
+//            DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
+//                                                                sendAddress: " ",
+//                                                                availableSum: "100",
+//                                                                sendAmountString: "10",
+//                                                                feeAmountString: "10",
+//                                                                donationAddress: "address",
+//                                                                donationAmount: "10",
+//                                                                txid: spendDict["txid"] as! String,
+//                                                                txoutid: spendDict["txoutid"] as! UInt32,
+//                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
+//                                                                txoutscript: spendDict["txoutscript"] as! String)
         }
     }
     

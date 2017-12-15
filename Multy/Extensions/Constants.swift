@@ -30,3 +30,10 @@ func decode<T>(data: NSData) -> T {
     return pointer.move()
 }
 
+
+func generateWalletPrimaryKey(currencyID: UInt32, walletID: UInt32) -> String {
+    let currencyString = String(currencyID).sha3(.sha256)
+    let walletString = String(walletID).sha3(.sha256)
+    
+    return ("\(currencyString)" + "\(walletString)").sha3(.sha256)
+}
