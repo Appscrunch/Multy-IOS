@@ -17,6 +17,8 @@ class AddressRLM: Object {
     @objc dynamic var address = String()                //Double
     @objc dynamic var amount = NSNumber(value: 0)       //UInt32
     
+   @objc dynamic var spendableOutput = SpendableOutputRLM()
+    
     public class func initWithArray(addressesInfo: NSArray) -> List<AddressRLM> {
         let addresses = List<AddressRLM>()
         
@@ -31,7 +33,7 @@ class AddressRLM: Object {
     public class func initWithInfo(addressInfo: NSDictionary) -> AddressRLM {
         let addressRLM = AddressRLM()
         
-        if let addressID = addressInfo["addressIndex"]  {
+        if let addressID = addressInfo["addressindex"]  {
             addressRLM.addressID = NSNumber(value: addressID as! UInt32)
         }
         
@@ -47,11 +49,13 @@ class AddressRLM: Object {
             addressRLM.address = addressString as! String
         }
         
-//        if let amount = addressInfo["Amount"] {
-//            addressRLM.amount = NSNumber(value: amount as! UInt32)
-//        }
+        if let amount = addressInfo["amount"] {
+            addressRLM.amount = NSNumber(value: amount as! UInt32)
+        }
         
-        
+        if let spendableoutputs = addressInfo["spendableoutputs"] {
+            addressRLM.spendableOutput = SpendableOutputRLM.initWithInfo(addressInfo: spendableoutputs as! NSDictionary)
+        }
         
         return addressRLM
     }
