@@ -246,7 +246,7 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row != 5 {
             let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
-            transactionCell.feeRate = presenter.feeRate
+            transactionCell.feeRate = self.presenter.feeRate
             transactionCell.makeCellBy(indexPath: indexPath)
             
             return transactionCell

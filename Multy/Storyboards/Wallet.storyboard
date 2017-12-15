@@ -842,6 +842,9 @@
                             <constraint firstItem="FT0-h6-feB" firstAttribute="leading" secondItem="zBt-YV-HYV" secondAttribute="leading" id="cn7-93-4iU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="walletNameTF" destination="ygK-hr-LcL" id="x1c-sO-Bxd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHR-vM-u9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,10 +13,14 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var cryptoNameLbl: UILabel!
     @IBOutlet weak var fiatSumLbl: UILabel!
     @IBOutlet weak var arrowImage: UIImageView!
+    @IBOutlet weak var outputs: UILabel!
     
     var isBorderOn = false
     
     var wallet: UserWalletRLM?
+    
+    var amount: UInt64 = 0
+    var output: UInt32 = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,6 +61,9 @@ class WalletTableViewCell: UITableViewCell {
         self.cryptoSumLbl.text  = "\(self.wallet?.sumInCrypto ?? 0.0)"
         self.cryptoNameLbl.text = self.wallet?.cryptoName
         self.fiatSumLbl.text = "\(self.wallet?.sumInFiat ?? 0.0) \(self.wallet?.fiatSymbol ?? "$")"
+        
+        self.outputs.text = "\(self.output) BTC"
+        self.cryptoSumLbl.text = "\(self.output)"
     }
     
 }

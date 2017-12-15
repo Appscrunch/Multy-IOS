@@ -361,6 +361,27 @@ class CoreLibManager: NSObject {
         let tSign = transaction_sign(transactionPointer.pointee)
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
         
+        if tSign != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tSign)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tu: \(errrString))")
+        }
+        
+        if tu != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tu)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tu: \(errrString))")
+        }
+        
+        if tSer != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tSer)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tu: \(errrString))")
+        }
+        
         print("\(tu) -- \(tSign) -- \(tSer)")
         print("end transaction")
     }
@@ -502,9 +523,11 @@ class CoreLibManager: NSObject {
     
     func setBinaryDataValue(key: String, value: String, pointer: OpaquePointer) {
         let binaryKey = key.UTF8CStringPointer
-        let dataValue = [UInt8](value.utf8)
+        let dataValue = value.toPointer()
         
-        var binData = BinaryData(data: dataValue, len: value.count)
+        let dataValue2 = value.data(using: String.Encoding.utf8)
+        
+        var binData = BinaryData(data: dataValue, len: dataValue2!.count)
         
         properties_set_binary_data_value(pointer, binaryKey, &binData)
     }

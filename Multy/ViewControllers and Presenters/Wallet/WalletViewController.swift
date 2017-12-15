@@ -142,6 +142,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         if segue.identifier == "transactionVC" {
             let vc = segue.destination as! TransactionViewController
             vc.isForReceive = self.even
+        } else if segue.identifier == "settingsVC" {
+            let settingsVC = segue.destination as! WalletSettingsViewController
+            settingsVC.presenter.wallet = self.presenter.wallet
         }
     }
 }

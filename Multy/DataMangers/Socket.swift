@@ -12,7 +12,7 @@ class Socket: NSObject {
 
     
     override init() {
-        manager = SocketManager(socketURL: URL(string: "http://192.168.0.111:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
+        manager = SocketManager(socketURL: URL(string: "http://192.168.0.121:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
         socket = manager.defaultSocket
     }
     

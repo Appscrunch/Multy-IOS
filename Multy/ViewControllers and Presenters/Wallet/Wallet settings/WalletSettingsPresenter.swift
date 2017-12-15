@@ -7,4 +7,8 @@ import UIKit
 class WalletSettingsPresenter: NSObject {
 
     var walletSettingsVC: WalletSettingsViewController?
+    
+    var wallet: UserWalletRLM?
+    
+    
 }

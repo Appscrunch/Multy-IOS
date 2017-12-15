@@ -4,7 +4,9 @@
 
 import UIKit
 
-class WalletSettingsViewController: UIViewController {
+class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
+    
+    @IBOutlet weak var walletNameTF: UITextField!
     
     let presenter = WalletSettingsPresenter()
 
@@ -12,11 +14,15 @@ class WalletSettingsViewController: UIViewController {
         super.viewDidLoad()
         self.presenter.walletSettingsVC = self
         self.hideKeyboardWhenTappedAround()
+        self.updateUI()
     }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-
+    func updateUI() {
+        self.walletNameTF.text = self.presenter.wallet?.name
+    }
+    
 }

@@ -315,7 +315,7 @@
         <!--Create Wallet View Controller-->
         <scene sceneID="FNV-5c-hqY">
             <objects>
-                <viewController id="sUo-XC-rc3" customClass="CreateWalletViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="creatingWallet" id="sUo-XC-rc3" customClass="CreateWalletViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gUU-5c-mho"/>
                         <viewControllerLayoutGuide type="bottom" id="eDW-nJ-SPH"/>
