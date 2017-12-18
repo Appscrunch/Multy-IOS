@@ -117,6 +117,12 @@ extension DataManager {
         }
     }
     
+    func getWalletOutputs(_ token: String, walletID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getWalletOutputs(token, walletID: walletID) { (dict, error) in
+            completion(dict, error)
+        }
+    }
+    
 //    func addAddress(_ token: String, _ walletDict: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
 //        DataManager.shared
 //    }

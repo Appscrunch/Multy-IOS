@@ -22,6 +22,7 @@ class AssetsPresenter: NSObject {
             getExchange()
 //            getTransInfo()
 //            getWalletVerbose()
+            getWalletOutputs()
             assetsVC?.tableView.reloadData()
         }
     }
@@ -134,6 +135,12 @@ class AssetsPresenter: NSObject {
                                                             }
                                                             
                                                             print(transDict)
+        }
+    }
+    
+    func getWalletOutputs() {
+        DataManager.shared.getWalletOutputs(account!.token, walletID: 0) { (dict, error) in
+            print("getWalletOutputs: \(dict)")
         }
     }
     

@@ -219,6 +219,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
+        //MARK: TESTNET - send currency is 1
         requestManager.request("\(self.apiUrl)api/v1/transaction/send/1", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
@@ -231,7 +232,24 @@ class ApiManager: NSObject {
             }
         }
     }
-
+    
+    func getWalletOutputs(_ token: String, walletID: UInt32, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/outputs/spendable/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
 }
 
 //mjNQJu5QxQNVZf769WWz7zdmPeJMdg4YRA
