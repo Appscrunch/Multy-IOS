@@ -52,7 +52,7 @@ class CoreLibManager: NSObject {
 //        run_tests(1, UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1))
     }
     
-    func createSeedBinaryData(from phrase: String) -> BinaryData {
+    func createSeedBinaryData(from phrase: String) -> BinaryData? {
         //MAKE: free data
         //use defer function!!!
         
@@ -67,7 +67,12 @@ class CoreLibManager: NSObject {
 //            return nil
         }
 
-        return binaryDataPointer.pointee!.pointee
+        if binaryDataPointer.pointee != nil {
+            return binaryDataPointer.pointee!.pointee
+        } else {
+            return nil
+        }
+        
     }
     
     func createExtendedKey(from binaryData: inout BinaryData) -> String {

@@ -9,6 +9,10 @@ class BackupFinishViewController: UIViewController {
     
     @IBOutlet weak var greatBtn: ZFRippleButton!
     
+    var isRestore = false
+    
+    var seedString = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -23,7 +27,10 @@ class BackupFinishViewController: UIViewController {
     }
     
     @IBAction func greatAction(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        DataManager.shared.auth(rootKey: DataManager.shared.getRootString(from: self.seedString).0) { (acc, err) in
+            print(acc ?? "")
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
 
 }

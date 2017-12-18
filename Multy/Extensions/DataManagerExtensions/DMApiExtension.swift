@@ -7,7 +7,7 @@ import RealmSwift
 import Alamofire
 
 extension DataManager {
-    func auth(completion: @escaping (_ account: AccountRLM?,_ error: Error?) -> ()) {
+    func auth(rootKey: String?, completion: @escaping (_ account: AccountRLM?,_ error: Error?) -> ()) {
         realmManager.getRealm { (realmOpt, error) in
             if let realm = realmOpt {
                 let account = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
@@ -21,18 +21,22 @@ extension DataManager {
                     params["pushToken"] = account?.pushToken
                 } else {
                     //MARK: names
-                    let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
-//                    let rootString = self.getRootString(from: seedPhraseString)
-                    
-                    params["userID"] = self.getRootString(from: seedPhraseString)
-                    params["deviceID"] = UUID().uuidString
-                    params["deviceType"] = 1
-                    params["pushToken"] = UUID().uuidString
-                    
                     let paramsDict = NSMutableDictionary(dictionary: params)
-                    paramsDict["seedPhrase"] = seedPhraseString
-                    paramsDict["binaryData"] = encode(value: self.coreLibManager.createSeedBinaryData(from: seedPhraseString))
-                    
+                    if rootKey == nil {
+                        let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
+                        params["userID"] = self.getRootString(from: seedPhraseString).0
+                        params["deviceID"] = UUID().uuidString
+                        params["deviceType"] = 1
+                        params["pushToken"] = UUID().uuidString
+                        paramsDict["seedPhrase"] = seedPhraseString
+                        paramsDict["binaryData"] = encode(value: self.coreLibManager.createSeedBinaryData(from: seedPhraseString))
+                    } else {
+                        params["userID"] = rootKey
+                        params["deviceID"] = UUID().uuidString
+                        params["deviceType"] = 1
+                        params["pushToken"] = UUID().uuidString
+                        paramsDict["binaryData"] = encode(value: self.coreLibManager.createSeedBinaryData(from: rootKey!))
+                    }
                     self.realmManager.updateAccount(paramsDict, completion: { (account, error) in
                         
                     })

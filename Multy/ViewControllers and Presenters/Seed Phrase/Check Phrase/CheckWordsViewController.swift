@@ -18,6 +18,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var constraintAfterTopLabel: NSLayoutConstraint!
     
     var currentWordNumber = 1
+    var isRestore = false
     
     let presenter = CheckWordsPresenter()
     
@@ -38,11 +39,15 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.wordTF.text = ""
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        self.tabBarController?.tabBar.frame = CGRect.zero
+
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         self.nextWordOrContinue.applyGradient(
             withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                           UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
@@ -73,6 +78,10 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             self.currentWordNumber += 1
             self.wordCounterLbl.text = "\(self.currentWordNumber) from 15"
         } else {
+            if self.isRestore {
+                self.presenter.auth(seedString: self.presenter.phraseArr.joined(separator: " "))
+                return
+            }
             let isPhraseCorrect = presenter.isSeedPhraseCorrect()
             
             if isPhraseCorrect {
@@ -86,7 +95,11 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     @objc func keyboardWillShow(_ notification : Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
-            self.constraintBtnBottom.constant = inset.bottom
+            if self.isRestore {
+                self.constraintBtnBottom.constant = inset.bottom - 50
+            } else {
+                self.constraintBtnBottom.constant = inset.bottom
+            }
         }
     }
     
@@ -94,5 +107,12 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.popToRootViewController(animated: true)
     }
 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "greatVC" {
+            let greatVC = segue.destination as! BackupFinishViewController
+            greatVC.seedString = self.presenter.phraseArr.joined(separator: " ")
+        }
+    }
 }
 

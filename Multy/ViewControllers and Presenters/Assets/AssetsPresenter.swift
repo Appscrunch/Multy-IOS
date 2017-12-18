@@ -16,31 +16,57 @@ class AssetsPresenter: NSObject {
     var account : AccountRLM? {
         didSet {
 //            fetchTickets()
-            getExchange()
+//            getExchange()
 //            getTransInfo()
-            getWalletVerbose()
+            
             assetsVC?.tableView.reloadData()
         }
     }
     
     func auth() {
         assetsVC?.progressHUD.show()
-        DataManager.shared.auth { (account, error) in
-            self.assetsVC?.progressHUD.hide()
-            guard account != nil else {
-                DataManager.shared.getAccount { (acc, err) in
-                    if err == nil {
-                        // MARK: check this
-//                        self.account = acc
+        DataManager.shared.getAccount { (acc, err) in
+            if acc != nil {
+                self.assetsVC?.progressHUD.show()
+                DataManager.shared.auth(rootKey: nil) { (account, error) in
+                    self.assetsVC?.progressHUD.hide()
+                    guard account != nil else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.account = account
+                        self.fetchAssets()
+                        self.getWalletVerbose()
                     }
                 }
-                
+            }
+            self.assetsVC?.progressHUD.hide()
+        }
+    }
+    
+    func guestAuth(completion: @escaping (_ answer: String) -> ()) {
+        DataManager.shared.auth(rootKey: nil) { (account, error) in
+            self.assetsVC?.progressHUD.hide()
+            guard account != nil else {
                 return
             }
             
             DispatchQueue.main.async {
                 self.account = account
                 self.fetchAssets()
+                self.getWalletVerbose()
+            }
+            completion("ok")
+        }
+    }
+    
+    func updateWalletsInfo() {
+        DataManager.shared.getAccount { (acc, err) in
+            if acc != nil {
+                self.account = acc
+                self.fetchAssets()
+                self.getWalletVerbose()
             }
         }
     }
@@ -137,7 +163,7 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletVerbose() {
-        DataManager.shared.getWalletsVerbose((account?.token)!) { (answer, err) in
+        DataManager.shared.getWalletsVerbose((self.account?.token)!) { (answer, err) in
             print("OK")
             print(answer ?? "")
             let answDict = answer
@@ -163,26 +189,29 @@ class AssetsPresenter: NSObject {
                 }
             }
             self.assetsVC?.updateUI()
-//            UserWalletRLM
-
-//            var binData : BinaryData = decode(data: self.account!.binaryData)
-//            let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
-//            DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
-//                                                                sendAddress: " ",
-//                                                                availableSum: "100",
-//                                                                sendAmountString: "10",
-//                                                                feeAmountString: "10",
-//                                                                donationAddress: "address",
-//                                                                donationAmount: "10",
-//                                                                txid: spendDict["txid"] as! String,
-//                                                                txoutid: spendDict["txoutid"] as! UInt32,
-//                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
-//                                                                txoutscript: spendDict["txoutscript"] as! String)
-            
+        }
     }
     
-//    func addAddress() {
-//        DataManager.shared.addWallet(, params: <#T##Parameters#>, completion: <#T##(NSDictionary?, Error?) -> ()#>)
-//    }
-    //////////////////////////////////////////////////////////////////////
+       
+            //            UserWalletRLM
+            
+            //            var binData : BinaryData = decode(data: self.account!.binaryData)
+            //            let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
+            //            DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
+            //                                                                sendAddress: " ",
+            //                                                                availableSum: "100",
+            //                                                                sendAmountString: "10",
+            //                                                                feeAmountString: "10",
+            //                                                                donationAddress: "address",
+            //                                                                donationAmount: "10",
+            //                                                                txid: spendDict["txid"] as! String,
+            //                                                                txoutid: spendDict["txoutid"] as! UInt32,
+            //                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
+            //                                                                txoutscript: spendDict["txoutscript"] as! String)
+        
+        
+        //    func addAddress() {
+        //        DataManager.shared.addWallet(, params: <#T##Parameters#>, completion: <#T##(NSDictionary?, Error?) -> ()#>)
+        //    }
+        //////////////////////////////////////////////////////////////////////
 }

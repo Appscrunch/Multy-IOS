@@ -472,11 +472,11 @@
 		457569301FBDBB7500FDEE20 /* Seed Phrase */ = {
 			isa = PBXGroup;
 			children = (
-				FA58DF621FDC403E00C45303 /* WrongSeedPhrase */,
 				457569371FBDC2FE00FDEE20 /* SeedPhraseAbout */,
 				457569381FBDC34700FDEE20 /* Phrase Word */,
 				4575693D1FBDD65500FDEE20 /* Backup Phrase */,
 				457569421FBDDCBB00FDEE20 /* Check Phrase */,
+				FA58DF621FDC403E00C45303 /* WrongSeedPhrase */,
 				457569471FBDED7B00FDEE20 /* Congratulations */,
 			);
 			path = "Seed Phrase";

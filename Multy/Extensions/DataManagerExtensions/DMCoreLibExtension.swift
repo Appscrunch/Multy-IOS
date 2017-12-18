@@ -15,10 +15,14 @@ extension DataManager {
         coreLibManager.startTests()
     }
     
-    func getRootString(from seedPhase: String) -> String {
+    func getRootString(from seedPhase: String) -> (String?, String?)  {
         var binaryData = coreLibManager.createSeedBinaryData(from: seedPhase)
+        if binaryData != nil {
+            return (coreLibManager.createExtendedKey(from: &binaryData!), nil)
+        } else {
+            return (nil, "Seed phrase is too short")
+        }
         
-        return coreLibManager.createExtendedKey(from: &binaryData)
     }
     
     
