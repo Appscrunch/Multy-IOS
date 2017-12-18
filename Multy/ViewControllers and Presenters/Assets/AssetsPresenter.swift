@@ -21,7 +21,7 @@ class AssetsPresenter: NSObject {
 //            fetchTickets()
             getExchange()
 //            getTransInfo()
-            getWalletVerbose()
+//            getWalletVerbose()
             assetsVC?.tableView.reloadData()
         }
     }
@@ -85,8 +85,6 @@ class AssetsPresenter: NSObject {
         }
     }
     
-    
-    
     //////////////////////////////////////////////////////////////////////
     //test
     
@@ -141,9 +139,16 @@ class AssetsPresenter: NSObject {
     
     func getWalletVerbose() {
         DataManager.shared.getWalletsVerbose((account?.token)!) { (answer, err) in
+            if (answer?["code"] as? NSNumber)?.intValue == 200 {
+                DataManager.shared.updateAccount(answer!["wallets"] as! NSDictionary, completion: { (account, error) in
+                    
+                })
+            }
+            
             print("OK")
             let answDict = answer
             var spendDict = NSDictionary()
+            var spendAddress = String()
             if answDict != nil {
                 if answDict!["wallets"] != nil {
                     if answDict!["wallets"] is NSNull {
@@ -157,6 +162,7 @@ class AssetsPresenter: NSObject {
                     let addressArr = firstWallet["addresses"] as! NSArray
                     let amount = (addressArr.firstObject as! NSDictionary)["amount"] as! UInt64
                     self.amountWallet = amount/UInt64(pow(10.0, 8.0))
+                    spendAddress = (addressArr.firstObject as! NSDictionary)["address"] as! String
                     let spendableoutputs = (addressArr.firstObject as! NSDictionary)["spendableoutputs"] as! NSArray
                     spendDict = spendableoutputs.firstObject as! NSDictionary
                     
@@ -170,24 +176,31 @@ class AssetsPresenter: NSObject {
                 return
             }
             
-            var binData : BinaryData = decode(data: self.account!.binaryData)
+            let availableSum = spendDict["txoutamount"] as? UInt32
+            
+            let oriBinData = DataManager.shared.coreLibManager.createSeedBinaryData(from: self.account!.seedPhrase)
+            
+            var binData : BinaryData = self.account!.binaryDataString.createBinaryData()
+            
             let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
-            DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
-                                                                sendAddress: " ",
-                                                                availableSum: "100",
-                                                                sendAmountString: "10",
-                                                                feeAmountString: "10",
-                                                                donationAddress: "address",
-                                                                donationAmount: "10",
-                                                                txid: spendDict["txid"] as! String,
-                                                                txoutid: spendDict["txoutid"] as! UInt32,
-                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
-                                                                txoutscript: spendDict["txoutscript"] as! String)
+            let hexString = DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
+                                                                                sendAddress: "mrPnciDNg6gSE5Uu6vJEPWN2d6tyzHV3N8",
+                                                                                availableSum: String(describing: availableSum),
+                                                                                sendAmountString: "259998000",
+                                                                                feeAmountString: "2000",
+                                                                                donationAddress: "address",
+                                                                                donationAmount: "10",
+                                                                                txid: spendDict["txid"] as! String,
+                                                                                txoutid: spendDict["txoutid"] as! UInt32,
+                                                                                txoutamount: spendDict["txoutamount"] as! UInt32,
+                                                                                txoutscript: spendDict["txoutscript"] as! String)
+
+            let params = [
+                "transaction" : hexString
+                ] as [String : Any]
+            DataManager.shared.apiManager.sendRawTransaction(self.account!.token, params, completion: { (dict, error) in
+                print("---------\(dict)")
+            })
         }
     }
-    
-//    func addAddress() {
-//        DataManager.shared.addWallet(, params: <#T##Parameters#>, completion: <#T##(NSDictionary?, Error?) -> ()#>)
-//    }
-    //////////////////////////////////////////////////////////////////////
 }

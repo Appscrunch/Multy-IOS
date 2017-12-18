@@ -160,7 +160,7 @@ class RealmManager: NSObject {
                     }
                     
                     if accountDict["binaryData"] != nil {
-                        accountRLM.binaryData = accountDict["binaryData"] as! NSData
+                        accountRLM.binaryDataString = accountDict["binaryData"] as! String
                     }
                     
                     if accountDict["wallets"] != nil {

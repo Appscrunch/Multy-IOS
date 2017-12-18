@@ -71,19 +71,25 @@ class UserWalletRLM: Object {
             wallet.id = wallet.generateID()
         }
         
+        wallet.updateWalletWithInfo(walletInfo: walletInfo)
+        
+        return wallet
+    }
+    
+    public func updateWalletWithInfo(walletInfo: NSDictionary) {
+        
+        
         if let addresses = walletInfo["Adresses"] {
-            wallet.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
+            self.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
         }
         
         if let name = walletInfo["WalletName"] {
-            wallet.name = name as! String
+            self.name = name as! String
         }
         
-        wallet.cryptoName = "BTC"
-        wallet.fiatName = "USD"
-        wallet.fiatSymbol = "$"
-        
-        return wallet
+        self.cryptoName = "BTC"
+        self.fiatName = "USD"
+        self.fiatSymbol = "$"
     }
     
     override class func primaryKey() -> String? {
@@ -93,4 +99,6 @@ class UserWalletRLM: Object {
     private func generateID() -> String {
         return ("\(chain)" + "\(walletID)").sha3(.sha512)
     }
+    
+    
 }

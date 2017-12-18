@@ -7,7 +7,7 @@ import RealmSwift
 
 class AccountRLM: Object {
     @objc dynamic var seedPhrase = String()
-    @objc dynamic var binaryData = NSData()
+    @objc dynamic var binaryDataString = String()
     
     @objc dynamic var userID = String()
     @objc dynamic var deviceID = String()

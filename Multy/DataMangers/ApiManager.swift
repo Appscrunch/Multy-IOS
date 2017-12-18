@@ -211,6 +211,27 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    func sendRawTransaction(_ token: String, _ transactionParameters: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        
+        let header: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/transaction/send/1", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+
 }
 
 //mjNQJu5QxQNVZf769WWz7zdmPeJMdg4YRA

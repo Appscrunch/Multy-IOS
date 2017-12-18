@@ -128,6 +128,7 @@
 		FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */; };
 		FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */; };
 		FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */; };
+		FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */; };
 		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
 		FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; };
 		FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; };
@@ -293,6 +294,7 @@
 		FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrongSeedPhrasePresenter.swift; sourceTree = "<group>"; };
 		FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrongSeedPhraseViewController.swift; sourceTree = "<group>"; };
+		FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		FA7406111FCC14C4003C538C /* amount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amount.h; sourceTree = "<group>"; };
 		FA7406141FCC14C4003C538C /* api_transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api_transaction.h; sourceTree = "<group>"; };
 		FA7406151FCC14C4003C538C /* transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 				FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */,
 				FA4E559E1FE00F63000FA1A1 /* Double+Extension.swift */,
+				FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1150,6 +1153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */,
+				FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */,
 				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
 				FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */,
 				FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */,

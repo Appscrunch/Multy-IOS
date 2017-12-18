@@ -10,6 +10,7 @@ extension Double {
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = digits
+        
         return formatter.string(from: NSNumber(floatLiteral: self))!
     }
 }

@@ -311,7 +311,7 @@ class CoreLibManager: NSObject {
 //        createTransaction(addressPointer: newAddressPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmountString: "20000", donationAddress: "", donationAmount: "10000000", txid: "createTransaction", txoutid: 1, txoutamount: 804, txoutscript: "a914bddce1db77593a7ac8d67f0d488c4311d5103ffa87")
     }
     
-    func createTransaction(addressPointer: OpaquePointer, sendAddress: String, availableSum: String, sendAmountString: String, feeAmountString: String, donationAddress: String, donationAmount: String, txid: String, txoutid: UInt32, txoutamount: UInt32, txoutscript: String) {
+    func createTransaction(addressPointer: OpaquePointer, sendAddress: String, availableSum: String, sendAmountString: String, feeAmountString: String, donationAddress: String, donationAmount: String, txid: String, txoutid: UInt32, txoutamount: UInt32, txoutscript: String) -> String {
 //        let currencyPointer = UnsafeMutablePointer<Currency>.allocate(capacity: 1)
 //        let gac = get_account_currency(addressPointer, currencyPointer)
 //        print("gac: \(gac)")
@@ -352,14 +352,21 @@ class CoreLibManager: NSObject {
         transaction_get_fee(transactionPointer.pointee, fee)
         
         setAmountValue(key: "amount_per_byte", value: feeAmountString, pointer: fee.pointee!)
-        setAmountValue(key: "max_amount_per_byte", value: String(txoutamount), pointer: fee.pointee!)
+//        setAmountValue(key: "max_amount_per_byte", value: feeAmountString, pointer: fee.pointee!) // optional
         
         //final
         let serializedTransaction = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
         
         let tu = transaction_update(transactionPointer.pointee)
+        
+        if tu != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tu)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tu: \(errrString))")
+        }
+        
         let tSign = transaction_sign(transactionPointer.pointee)
-        let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
         
         if tSign != nil {
             let pointer = UnsafeMutablePointer<CustomError>(tSign)
@@ -367,6 +374,9 @@ class CoreLibManager: NSObject {
             
             print("tu: \(errrString))")
         }
+        
+        let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
+        
         
         if tu != nil {
             let pointer = UnsafeMutablePointer<CustomError>(tu)
@@ -383,7 +393,13 @@ class CoreLibManager: NSObject {
         }
         
         print("\(tu) -- \(tSign) -- \(tSer)")
+        
+        let data = serializedTransaction.pointee!.pointee.convertToData()
+        let str = data.hexEncodedString()
+        
         print("end transaction")
+        
+        return str
     }
     
     func amountActivity() {
@@ -515,34 +531,59 @@ class CoreLibManager: NSObject {
         let amountValue = value.UTF8CStringPointer
         
         let amountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        
         let _ = make_amount(amountValue, amountPointer)
         
-        properties_set_amount_value(pointer, amountKey, amountPointer.pointee)
+        let psav = properties_set_amount_value(pointer, amountKey, amountPointer.pointee)
+        
+        if psav != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(psav)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("\(errrString))")
+        }
     }
     
     func setBinaryDataValue(key: String, value: String, pointer: OpaquePointer) {
         let binaryKey = key.UTF8CStringPointer
-        let dataValue = value.toPointer()
+        let dataValue = value.UTF8CStringPointer
         
-        let dataValue2 = value.data(using: String.Encoding.utf8)
+        let binData = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        make_binary_data_from_hex(dataValue, binData)
         
-        var binData = BinaryData(data: dataValue, len: dataValue2!.count)
-        
-        properties_set_binary_data_value(pointer, binaryKey, &binData)
+        let psbdv = properties_set_binary_data_value(pointer, binaryKey, binData.pointee)
+        if psbdv != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(psbdv)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("\(errrString))")
+        }
     }
     
     func setIntValue(key: String, value: UInt32, pointer: OpaquePointer) {
         let intKey = key.UTF8CStringPointer
         let intValue = Int32(value)
 
-        properties_set_int32_value(pointer, intKey, intValue)
+        let psi = properties_set_int32_value(pointer, intKey, intValue)
+        
+        if psi != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(psi)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("\(errrString))")
+        }
     }
     
     func setStringValue(key: String, value: String, pointer: OpaquePointer) {
         let stringKey = key.UTF8CStringPointer
         let stringValue = value.UTF8CStringPointer
         
-        properties_set_string_value(pointer, stringKey, stringValue)
+        let pstv = properties_set_string_value(pointer, stringKey, stringValue)
+        
+        if pstv != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(pstv)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("\(errrString))")
+        }
     }
 }

@@ -8,21 +8,11 @@ extension String {
     var UTF8CStringPointer: UnsafeMutablePointer<Int8> {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
-    
-    func toPointer() -> UnsafePointer<UInt8>? {
-        guard let data = self.data(using: String.Encoding.utf8) else { return nil }
-        
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count)
-        let stream = OutputStream(toBuffer: buffer, capacity: data.count)
-        
-        stream.open()
-        data.withUnsafeBytes({ (p: UnsafePointer<UInt8>) -> Void in
-            stream.write(p, maxLength: data.count)
-        })
-        
-        stream.close()
-        
-        return UnsafePointer<UInt8>(buffer)
-    }
 
+    func createBinaryData() -> BinaryData {
+        let pointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        make_binary_data_from_hex(self.UTF8CStringPointer, pointer)
+        
+        return pointer.pointee!.pointee
+    }
 }

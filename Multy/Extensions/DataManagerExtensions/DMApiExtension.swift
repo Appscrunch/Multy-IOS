@@ -20,9 +20,7 @@ extension DataManager {
                     params["deviceType"] = account?.deviceType
                     params["pushToken"] = account?.pushToken
                 } else {
-                    //MARK: names
                     let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
-//                    let rootString = self.getRootString(from: seedPhraseString)
                     
                     params["userID"] = self.getRootString(from: seedPhraseString)
                     params["deviceID"] = UUID().uuidString
@@ -31,7 +29,7 @@ extension DataManager {
                     
                     let paramsDict = NSMutableDictionary(dictionary: params)
                     paramsDict["seedPhrase"] = seedPhraseString
-                    paramsDict["binaryData"] = encode(value: self.coreLibManager.createSeedBinaryData(from: seedPhraseString))
+                    paramsDict["binaryData"] = self.coreLibManager.createSeedBinaryData(from: seedPhraseString).convertToHexString()
                     
                     self.realmManager.updateAccount(paramsDict, completion: { (account, error) in
                         

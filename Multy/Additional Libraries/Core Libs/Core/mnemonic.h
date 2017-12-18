@@ -13,26 +13,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/** Exposing bare C interface to the users.
- * That greatly simplifies integration with any language/paltform.
- */
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 struct Error;
 struct BinayData;
-
-/** Generator interface.
- * Each function returns a pointer to a GeneratorError, which is null on no
- * error.
- * User must free returned value with `free_error`.
- *
- * Incoming pointers are not freed under no circumstances, with exception of
- * free_X(X*) functions, which do de-allocate given objects.
- * Please do not use those functions to free any object not created
- * by the Generator.
-  */
 
 /** Generate a mnemonic for given amount of entropy using default dictionary
  *(english).
@@ -51,13 +37,18 @@ MULTY_CORE_API struct Error* make_mnemonic(
  */
 MULTY_CORE_API struct Error* make_seed(
         const char* mnemonic, const char* password, struct BinaryData** seed);
-MULTY_CORE_API struct Error* seed_to_string(const struct BinaryData* seed, const char** str);
 
-/** Frees mnemonic, can take null */
+MULTY_CORE_API struct Error* seed_to_string(
+        const struct BinaryData* seed, const char** str);
+
+MULTY_CORE_API struct Error* mnemonic_get_dictionary(
+        const char** new_dictionary);
+
+/** Frees mnemonic, can take nullptr. **/
 MULTY_CORE_API void free_mnemonic(const char* mnemonic);
 
 #ifdef __cplusplus
-} // extern "C"
+} /* extern "C" */
 #endif
 
-#endif // MULTY_CORE_MNEMONIC_H
+#endif /* MULTY_CORE_MNEMONIC_H */

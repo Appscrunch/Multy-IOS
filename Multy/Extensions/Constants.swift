@@ -13,20 +13,3 @@ var exchangeCourse: Double = 2.0
 
 var isNeedToAutorise = false
 var isViewPresented = false
-
-
-func encode<T>( value: T) -> NSData {
-    var value = value
-    return withUnsafePointer(to: &value) { p in
-        NSData(bytes: p, length: MemoryLayout.size(ofValue: value))
-    }
-}
-
-func decode<T>(data: NSData) -> T {
-    let pointer = UnsafeMutablePointer<T>.allocate(capacity: MemoryLayout<T.Type>.size)
-    //MARK: fix get bytes
-    data.getBytes(pointer, length: MemoryLayout<T>.size)
-    
-    return pointer.move()
-}
-
