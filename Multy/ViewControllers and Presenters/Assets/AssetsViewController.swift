@@ -36,13 +36,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         DataManager.shared.startCoreTest()
         
         //MARK: test
-        progressHUD.show()
+//        progressHUD.show()
         presenter.auth()
 //        DataManager.shared.socketManager.start()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.presenter.updateWalletsInfo()
         if self.presenter.isJailed {
             self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
         }
@@ -100,7 +101,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
         
         if presenter.account != nil {
-            progressHUD.show()
+//            progressHUD.show()
             presenter.fetchAssets()
         }
     }
@@ -142,84 +143,160 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if presenter.isWalletExist() {
-            return 2 + presenter.account!.wallets.count
+        if self.presenter.account != nil {
+            if presenter.isWalletExist() {
+                return 2 + presenter.account!.wallets.count  // logo - new wallet - wallets
+            } else {
+                return 3                                     // logo - new wallet - text cell
+            }
         } else {
-            return 3
+            return 4                                         // logo - empty cell - create wallet - restore
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath == [0, 0] {                                        // PORTFOLIO CELL  or LOGO
-//            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-//            return portfolioCell
+        switch indexPath {
+        case [0,0]:         // PORTFOLIO CELL  or LOGO
+            //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+            //            return portfolioCell
             let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
             return logoCell
-        } else if indexPath == [0, 1] {                                 // !!!NEW!!! WALLET CELL
+        case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
-            
-            return newWalletCell
-        } else if indexPath == [0, 2] && !presenter.isWalletExist() {   // Text cell
-            let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
-            
-            return textCell
-        } else {                                                        // Wallet Cell
-            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-            walletCell.makeshadow()
-            walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
-            if self.presenter.amountWallet != 0 {
-                walletCell.amount = self.presenter.amountWallet
-                walletCell.output = self.presenter.output
+            if presenter.account == nil {
+                newWalletCell.hideAll(flag: true)
+            } else {
+                newWalletCell.hideAll(flag: false)
             }
-            walletCell.fillInCell()
-            
-            return walletCell
+            return newWalletCell
+        case [0,2]:
+            if self.presenter.account != nil {
+                if presenter.isWalletExist() {
+                    let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+                    walletCell.makeshadow()
+                    walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                    walletCell.fillInCell()
+                    return walletCell
+                } else {
+                    let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
+                    return textCell
+                }
+            } else {   // acc == nil
+                let createCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+                return createCell
+            }
+        case [0,3]:
+            if self.presenter.account != nil {
+                let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+                walletCell.makeshadow()
+                walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                walletCell.fillInCell()
+                
+                return walletCell
+            } else {
+                let restoreCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+                restoreCell.makeRestoreCell()
+                
+                return restoreCell
+            }
+        default: return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //проверить авторизацию
-        if indexPath == [0, 1] {
-            // если  есть авторизация то indexPath = 0, 1
+        switch indexPath {
+        case [0,0]:
+            break
+        case [0,1]:
+            if self.presenter.account == nil {
+                break
+            }
             let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
                 self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
             }))
             actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
                 //go to import wallet
-                
             }))
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             self.present(actionSheet, animated: true, completion: {
                 //doint something
             })
-        
-//        } else if indexPath == [0, 2] {
-//            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
-//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
-//            self.navigationController?.pushViewController(initialViewController, animated: true)
-//        } else {//if indexPath == [0, 3] {
-//            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-//            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        } else if indexPath == [0, 4] {
-            
-        } else {
+        case [0,2]:
+            if self.presenter.account == nil {
+                progressHUD.show()
+                presenter.guestAuth(completion: { (answer) in
+                    self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
+                })
+            } else {
+                if self.presenter.isWalletExist() {
+                    let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+                    let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
+                    walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                    self.navigationController?.pushViewController(walletVC, animated: true)
+                } else {
+                    break
+                }
+            }
+        case [0,3]:
+            if self.presenter.account == nil {
+                let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+                let backupSeedVC = storyboard.instantiateViewController(withIdentifier: "startBackupVC") as! BackupSeedPhraseViewController
+                backupSeedVC.isRestore = true
+                self.navigationController?.pushViewController(backupSeedVC, animated: true)
+            } else {
+                if self.presenter.isWalletExist() {
+                    let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+                    let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
+                    walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                    self.navigationController?.pushViewController(walletVC, animated: true)
+                }
+            }
+        default:
             if self.presenter.isWalletExist() {
-//                let securevc = SecureViewController()
-//                self.present(securevc, animated: true, completion: nil)
-                
-//                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-//                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-//                self.navigationController?.pushViewController(vc, animated: true)
-
                 let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
                 let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
                 walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
                 self.navigationController?.pushViewController(walletVC, animated: true)
             }
         }
+        //проверить авторизацию
+//        if indexPath == [0, 1] {
+//            
+//        
+//        } else if indexPath == [0, 2] {
+//            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+//            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+//            self.navigationController?.pushViewController(vc, animated: true)
+//
+////            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
+////            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
+////            self.navigationController?.pushViewController(initialViewController, animated: true)
+////        } else {//if indexPath == [0, 3] {
+////            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+////            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+////            self.navigationController?.pushViewController(vc, animated: true)
+////        } else if indexPath == [0, 4] {
+//            
+//        } else if indexPath == [0, 3] {
+//            switch presenter.account {
+//            case nil:
+//                
+//            default: break
+//            }
+//        } else {
+//            if self.presenter.isWalletExist() {
+////                let securevc = SecureViewController()
+////                self.present(securevc, animated: true, completion: nil)
+//                
+////                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+////                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+////                self.navigationController?.pushViewController(vc, animated: true)
+//
+//                
+//            }
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

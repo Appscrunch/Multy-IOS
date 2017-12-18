@@ -39,9 +39,9 @@ class NewWalletTableViewCell: UITableViewCell {
         self.layer.mask = maskLayer
     }
     
-    func hideAll() {
-        self.cellNameLbl.isHidden = true
-        self.rigthSmallImage.isHidden = true
+    func hideAll(flag: Bool) {
+        self.cellNameLbl.isHidden = flag
+        self.rigthSmallImage.isHidden = flag
     }
 }
 

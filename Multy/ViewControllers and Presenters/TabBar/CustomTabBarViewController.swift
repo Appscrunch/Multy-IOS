@@ -34,10 +34,8 @@ class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate
         
         //Adds the revealing splash view as a sub view
         self.view.addSubview(revealingSplashView)
-        
         //Starts animation
         revealingSplashView.startAnimation(){
-            
         }
     }
     

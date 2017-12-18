@@ -19,9 +19,6 @@ class WalletTableViewCell: UITableViewCell {
     
     var wallet: UserWalletRLM?
     
-    var amount: UInt64 = 0
-    var output: UInt32 = 0
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -61,9 +58,6 @@ class WalletTableViewCell: UITableViewCell {
         self.cryptoSumLbl.text  = "\(self.wallet?.sumInCrypto ?? 0.0)"
         self.cryptoNameLbl.text = self.wallet?.cryptoName
         self.fiatSumLbl.text = "\(self.wallet?.sumInFiat ?? 0.0) \(self.wallet?.fiatSymbol ?? "$")"
-        
-        self.outputs.text = "\(self.output) BTC"
-        self.cryptoSumLbl.text = "\(self.output)"
     }
     
 }

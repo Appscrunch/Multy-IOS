@@ -13,13 +13,10 @@ class AssetsPresenter: NSObject {
     
     var isJailed = false
     
-    var amountWallet: UInt64 = 0
-    var output: UInt32 = 0
-    
     var account : AccountRLM? {
         didSet {
 //            fetchTickets()
-            getExchange()
+//            getExchange()
 //            getTransInfo()
 //            getWalletVerbose()
             getWalletOutputs()
@@ -29,22 +26,45 @@ class AssetsPresenter: NSObject {
     
     func auth() {
         assetsVC?.progressHUD.show()
-        DataManager.shared.auth { (account, error) in
-            self.assetsVC?.progressHUD.hide()
-            guard account != nil else {
-                DataManager.shared.getAccount { (acc, err) in
-                    if err == nil {
-                        // MARK: check this
-//                        self.account = acc
+        DataManager.shared.getAccount { (acc, err) in
+            if acc != nil {
+                self.assetsVC?.progressHUD.show()
+                DataManager.shared.auth(rootKey: nil) { (account, error) in
+                    self.assetsVC?.progressHUD.hide()
+                    guard account != nil else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.account = account
+                        self.fetchAssets()
+//                        self.getWalletVerbose()
                     }
                 }
-                
+            }
+            self.assetsVC?.progressHUD.hide()
+        }
+    }
+    
+    func guestAuth(completion: @escaping (_ answer: String) -> ()) {
+        DataManager.shared.auth(rootKey: nil) { (account, error) in
+            self.assetsVC?.progressHUD.hide()
+            guard account != nil else {
                 return
             }
             
-            DispatchQueue.main.async {
-                self.account = account
+            self.account = account
+            
+            completion("ok")
+        }
+    }
+    
+    func updateWalletsInfo() {
+        DataManager.shared.getAccount { (acc, err) in
+            if acc != nil {
+                self.account = acc
                 self.fetchAssets()
+//                self.getWalletVerbose()
             }
         }
     }
@@ -145,6 +165,7 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletVerbose() {
+
         DataManager.shared.getWalletsVerbose((account?.token)!) { (answer, err) in
             if (answer?["code"] as? NSNumber)?.intValue == 200 {
                 DataManager.shared.updateAccount(answer!["wallets"] as! NSDictionary, completion: { (account, error) in
@@ -153,6 +174,7 @@ class AssetsPresenter: NSObject {
             }
             
             print("OK")
+            print(answer ?? "")
             let answDict = answer
             var spendDict = NSDictionary()
             var spendAddress = String()
@@ -161,24 +183,25 @@ class AssetsPresenter: NSObject {
                     if answDict!["wallets"] is NSNull {
                         return
                     }
-                    
                     print("answer: \(answer)")
                     
                     let arrOfwallets = answDict!["wallets"] as! NSArray
                     let firstWallet = arrOfwallets.firstObject as! NSDictionary
                     let addressArr = firstWallet["addresses"] as! NSArray
-                    let amount = (addressArr.firstObject as! NSDictionary)["amount"] as! UInt64
-                    self.amountWallet = amount/UInt64(pow(10.0, 8.0))
-                    spendAddress = (addressArr.firstObject as! NSDictionary)["address"] as! String
+                    let amount = (addressArr.firstObject as! NSDictionary)["amount"] as! UInt32
+                    if ((addressArr.firstObject as! NSDictionary)["spendableoutputs"] is NSNull) {
+                        return
+                    }
+
                     let spendableoutputs = (addressArr.firstObject as! NSDictionary)["spendableoutputs"] as! NSArray
                     spendDict = spendableoutputs.firstObject as! NSDictionary
                     
-                    self.output = spendDict["txoutamount"] as! UInt32 / UInt32(pow(10.0, 8.0))
+                    let spendObj = SpendableOutputRLM.initWithInfo(addressInfo: spendDict)
                 }
             }
             self.assetsVC?.updateUI()
-//            UserWalletRLM
             
+//            UserWalletRLM
             if spendDict["txid"] == nil {
                 return
             }

@@ -21,4 +21,20 @@ class CheckWordsPresenter: NSObject {
             }
         }
     }
+    
+    func auth(seedString: String) {
+        if let errString = DataManager.shared.getRootString(from: seedString).1 {
+            let alert = UIAlertController(title: "Warining", message: errString, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                self.checkWordsVC?.navigationController?.popViewController(animated: true)
+            }))
+            self.checkWordsVC?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        DataManager.shared.auth(rootKey: DataManager.shared.getRootString(from: seedString).0) { (acc, err) in
+//            print(acc ?? "")
+            self.checkWordsVC?.navigationController?.popToRootViewController(animated: true)
+        }
+    }
 }
