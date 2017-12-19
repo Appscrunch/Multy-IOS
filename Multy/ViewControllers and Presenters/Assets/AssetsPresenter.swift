@@ -159,7 +159,7 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletOutputs() {
-        DataManager.shared.getWalletOutputs(account!.token, walletID: 0) { (dict, error) in
+        DataManager.shared.getWalletOutputs(account!.token, walletID: 0, addressID: 0) { (dict, error) in
             print("getWalletOutputs: \(dict)")
         }
     }
@@ -210,7 +210,7 @@ class AssetsPresenter: NSObject {
             
             let oriBinData = DataManager.shared.coreLibManager.createSeedBinaryData(from: self.account!.seedPhrase)
             
-            var binData : BinaryData = self.account!.binaryDataString.createBinaryData()
+            var binData : BinaryData = self.account!.binaryDataString.createBinaryData()!
             
             let dict = DataManager.shared.coreLibManager.createAddress(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binData)
             let hexString = DataManager.shared.coreLibManager.createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,

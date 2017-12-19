@@ -17,6 +17,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var constraintTop: NSLayoutConstraint!
     @IBOutlet weak var constraintAfterTopLabel: NSLayoutConstraint!
     
+    let progressHUD = ProgressHUD(text: "Restoring Wallets...")
+    
     var currentWordNumber = 1
     var isRestore = false
     
@@ -24,6 +26,9 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.addSubview(progressHUD)
+        progressHUD.hide()
         
         if screenWidth < 325 {
             constraintTop.constant = 25

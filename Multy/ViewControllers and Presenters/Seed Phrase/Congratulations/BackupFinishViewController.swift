@@ -27,10 +27,10 @@ class BackupFinishViewController: UIViewController {
     }
     
     @IBAction func greatAction(_ sender: Any) {
-        DataManager.shared.auth(rootKey: DataManager.shared.getRootString(from: self.seedString).0) { (acc, err) in
-            print(acc ?? "")
+//        DataManager.shared.auth(rootKey: DataManager.shared.getRootString(from: self.seedString).0) { (acc, err) in
+//            print(acc ?? "")
             self.navigationController?.popToRootViewController(animated: true)
         }
-    }
+//    }
 
 }
