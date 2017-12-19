@@ -73,10 +73,12 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             videoPreviewLayer?.frame = view.layer.bounds
+            
             view.layer.addSublayer(videoPreviewLayer!)
             
             // Start video capture.
             captureSession?.startRunning()
+            self.addCancelBtn()
         } catch {
             // If any error occurs, simply print it out and don't continue any more.
             print(error)
@@ -118,5 +120,24 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func addCancelBtn() {
+        let btn = UIButton()
+        btn.titleLabel?.textAlignment = .left
+        btn.setTitle("Cancel", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 16)
+        btn.frame = CGRect(x: 20, y: 20, width: 70, height: 25)
+        btn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        self.view.addSubview(btn)
+    }
+    
+    @objc func cancel() {
+        if self.navigationController != nil {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
