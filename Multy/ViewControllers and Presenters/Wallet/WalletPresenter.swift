@@ -10,6 +10,7 @@ class WalletPresenter: NSObject {
     var mainVC : WalletViewController?
     
     var wallet : UserWalletRLM?
+    var account : AccountRLM?
     
     var trasactionsArr = [TransactionRLM]()
     

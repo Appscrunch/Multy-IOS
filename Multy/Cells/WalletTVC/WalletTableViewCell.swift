@@ -13,7 +13,6 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var cryptoNameLbl: UILabel!
     @IBOutlet weak var fiatSumLbl: UILabel!
     @IBOutlet weak var arrowImage: UIImageView!
-    @IBOutlet weak var outputs: UILabel!
     
     var isBorderOn = false
     

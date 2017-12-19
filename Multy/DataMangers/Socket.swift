@@ -14,13 +14,13 @@ class Socket: NSObject {
     override init() {
         //dev:  6680
         //prod: 7780
-        manager = SocketManager(socketURL: URL(string: "http://88.198.47.112:6680/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
+        manager = SocketManager(socketURL: URL(string: "http://88.198.47.112:7780/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
         socket = manager.defaultSocket
     }
     
     func start() {
         DataManager.shared.getAccount { (account, error) in
-            guard error != nil else {
+            guard account != nil else {
                 return
             }
             
@@ -28,7 +28,7 @@ class Socket: NSObject {
                 "deviceType": "\(account?.deviceType)",
                 "jwtToken": "\(account?.token)"]
             
-            self.manager = SocketManager(socketURL: URL(string: "http://192.168.0.111:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
+            self.manager = SocketManager(socketURL: URL(string: "http://88.198.47.112:7780")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
             self.socket = self.manager.defaultSocket
             
             
@@ -45,6 +45,7 @@ class Socket: NSObject {
             
             self.socket.on("exchangeUpdate") {data, ack in
                 print("-----exchangeUpdate: \(data)")
+                exchangeCourse = ((data[0] as! NSDictionary)["BTCtoUSD"] as! NSNumber).doubleValue
             }
             
             

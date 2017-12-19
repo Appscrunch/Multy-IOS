@@ -237,6 +237,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
                     let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
                     walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                    walletVC.presenter.account = self.presenter.account
                     self.navigationController?.pushViewController(walletVC, animated: true)
                 } else {
                     break
@@ -253,6 +254,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
                     let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
                     walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                    walletVC.presenter.account = self.presenter.account
                     self.navigationController?.pushViewController(walletVC, animated: true)
                 }
             }
@@ -261,6 +263,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
                 let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
                 walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
+                walletVC.presenter.account = self.presenter.account
                 self.navigationController?.pushViewController(walletVC, animated: true)
             }
         }

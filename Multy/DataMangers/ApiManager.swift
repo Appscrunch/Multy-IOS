@@ -197,10 +197,50 @@ class ApiManager: NSObject {
     
     func getWalletsVerbose(_ token: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
         let header: HTTPHeaders = [
+            "Content-Type": "application/json",
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallets/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/wallets/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+    
+    func getOneWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        
+        let header: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletID)/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+    
+    func anotherWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping(_ dict: NSDictionary?, _ error: Error?) -> ()) {
+        let header: HTTPHeaders = [
+            "authorization": "Bearer \(token)",
+            "Content-Type": "application/json"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletID)/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

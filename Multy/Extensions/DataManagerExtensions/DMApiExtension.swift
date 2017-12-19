@@ -133,6 +133,14 @@ extension DataManager {
         }
     }
     
+    func getOneWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getOneWalletVerbose(token, walletID: walletID) { (dict, error) in
+            print("getOneWalletVerbose:\n\(dict)")
+            
+            completion(dict, error)
+        }
+    }
+    
     func getWalletOutputs(_ token: String, currencyID: UInt32, address: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         apiManager.getWalletOutputs(token, currencyID: currencyID, address: address) { (dict, error) in
             completion(dict, error)
