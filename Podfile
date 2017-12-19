@@ -18,6 +18,7 @@ target 'Multy' do
   pod 'Alamofire'
   pod 'Socket.IO-Client-Swift'
   pod 'RevealingSplashView'
+  pod 'RAMAnimatedTabBarController'
 #  pod 'BiometricAuthentication'
 
 end

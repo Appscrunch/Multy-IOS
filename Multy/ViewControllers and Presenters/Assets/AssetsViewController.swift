@@ -241,11 +241,19 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 return restoreCell
             }
-        default: return UITableViewCell()
+        default:
+            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+            walletCell.makeshadow()
+            walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+            walletCell.fillInCell()
+            
+            return walletCell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        
         switch indexPath {
         case [0,0]:
             break

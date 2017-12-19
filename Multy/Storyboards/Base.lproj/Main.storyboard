@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -746,7 +746,11 @@ correctly</string>
         <scene sceneID="L1l-cI-1Rj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r8s-Om-7Nx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Main" image="Active_wallet_Tab" id="KWB-7P-gFV"/>
+                    <tabBarItem key="tabBarItem" title="Main" image="Active_wallet_Tab" id="KWB-7P-gFV" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="qCX-UB-LZC" id="ZTv-bG-WxX"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="see-JD-lMq">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -758,6 +762,7 @@ correctly</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Jc-KK-R4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="qCX-UB-LZC" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="-2795.1999999999998" y="577.51124437781118"/>
         </scene>
@@ -765,7 +770,11 @@ correctly</string>
         <scene sceneID="owf-M8-GmK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cAx-yg-zUy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activity" image="activityTab" id="3Tm-8r-aym"/>
+                    <tabBarItem key="tabBarItem" title="Activity" image="activityTab" id="3Tm-8r-aym" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="ham-a4-c0a" id="PeQ-f2-5yr"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JM0-1P-8TQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -777,6 +786,7 @@ correctly</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mo-ig-LP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ham-a4-c0a" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="-1703" y="577"/>
         </scene>
@@ -784,7 +794,11 @@ correctly</string>
         <scene sceneID="coC-Ph-Zc7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VhH-A4-ijB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="mvC-59-4dq"/>
+                    <tabBarItem key="tabBarItem" title="" image="activityTab" id="mvC-59-4dq" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="7dA-2i-B7y" id="7Tz-4d-3ul"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nEL-C1-Vti">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -796,6 +810,7 @@ correctly</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAo-V1-r5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="7dA-2i-B7y" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="-588" y="576"/>
         </scene>
@@ -803,7 +818,11 @@ correctly</string>
         <scene sceneID="Hp6-B5-kBF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o0Y-pt-4et" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Address Book" image="Address_Book_Tab" id="gAL-wV-lQc"/>
+                    <tabBarItem key="tabBarItem" title="Address Book" image="Address_Book_Tab" id="gAL-wV-lQc" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="UQ5-Il-769" id="K4x-zX-yMg"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mGs-8F-Jg3">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -815,6 +834,7 @@ correctly</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XJ-Lg-BKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="UQ5-Il-769" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="497" y="576"/>
         </scene>
@@ -853,7 +873,11 @@ correctly</string>
         <scene sceneID="U7f-dZ-nTb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="azI-Nv-SgC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings_Tab" id="Z17-jd-0eD"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings_Tab" id="Z17-jd-0eD" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="Zah-YW-RJR" id="zHQ-ef-YCv"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qF8-Ag-H85">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -865,6 +889,7 @@ correctly</string>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gg-Za-ecr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Zah-YW-RJR" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="1848" y="574.81259370314842"/>
         </scene>

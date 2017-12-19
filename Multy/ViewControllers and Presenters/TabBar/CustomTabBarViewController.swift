@@ -6,10 +6,11 @@
 
 import UIKit
 import RevealingSplashView
+import RAMAnimatedTabBarController
 
 let tabbarSelectedBackground = UIColor(redInt: 3, greenInt: 127, blueInt: 255, alpha: 1.0)
 
-class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate {
+class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControllerDelegate {
     
     let presenter = CustomTabBarPresenter()
     // MARK: - View lifecycle
@@ -18,7 +19,7 @@ class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.tabBarVC = self
-//        self.presenter.getExchange()
+        
         setupMiddleButton()
         
         self.loadSplashScreen()
@@ -59,11 +60,12 @@ class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate
     // MARK: - Actions
     
     @objc private func menuButtonAction(sender: UIButton) {
+        changeViewVisibility(isHidden: true)
         selectedIndex = 2
     }
     
     func changeViewVisibility(isHidden: Bool) {
-        tabBar.isHidden = isHidden
+        self.animationTabBarHidden(isHidden)
         menuButton.isHidden = isHidden
     }
 }
