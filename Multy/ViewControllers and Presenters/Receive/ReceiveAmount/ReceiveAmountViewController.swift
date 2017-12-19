@@ -33,9 +33,6 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.presenter.receiveAmountVC = self
-        self.doneBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                     UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                   gradientOrientation: .horizontal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)),
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -55,6 +52,14 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         self.currencyNameLbl.text = self.cryptoName
         self.bottomSumLbl.text = "\(self.sumInFiat)"
         self.bottomCurrencyNameLbl.text = "\(self.fiatName)"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.doneBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                 UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                   gradientOrientation: .horizontal)
     }
     
     @IBAction func cancelAction(_ sender: Any) {

@@ -32,9 +32,14 @@ class CheckWordsPresenter: NSObject {
             return
         }
         
-        DataManager.shared.auth(rootKey: DataManager.shared.getRootString(from: seedString).0) { (acc, err) in
+        checkWordsVC?.nextWordOrContinue.isEnabled = false
+        checkWordsVC?.progressHUD.show()
+        
+        DataManager.shared.auth(rootKey: seedString) { (acc, err) in
 //            print(acc ?? "")
             self.checkWordsVC?.navigationController?.popToRootViewController(animated: true)
+            
+            self.checkWordsVC?.progressHUD.hide()
         }
     }
 }

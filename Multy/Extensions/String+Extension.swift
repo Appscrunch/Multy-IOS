@@ -9,10 +9,16 @@ extension String {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
 
-    func createBinaryData() -> BinaryData {
+    func createBinaryData() -> BinaryData? {
         let pointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
-        make_binary_data_from_hex(self.UTF8CStringPointer, pointer)
+        let mbdfh = make_binary_data_from_hex(self.UTF8CStringPointer, pointer)
         
-        return pointer.pointee!.pointee
+        if mbdfh != nil {
+            DataManager.shared.coreLibManager.returnErrorString(opaquePointer: mbdfh!, mask: "make_binary_data_from_hex")
+            
+            return nil
+        } else {
+            return pointer.pointee!.pointee
+        }
     }
 }

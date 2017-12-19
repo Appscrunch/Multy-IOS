@@ -64,7 +64,7 @@ class CoreLibManager: NSObject {
         
         if ms != nil {
             print("ms: \(String(describing: ms))")
-//            return nil
+            let _ = returnErrorString(opaquePointer: ms!, mask: "make_seed")
         }
 
         if binaryDataPointer.pointee != nil {
@@ -590,5 +590,14 @@ class CoreLibManager: NSObject {
             
             print("\(errrString))")
         }
+    }
+    
+    func returnErrorString(opaquePointer: OpaquePointer, mask: String) -> String {
+        let pointer = UnsafeMutablePointer<CustomError>(opaquePointer)
+        let errorString = String(cString: pointer.pointee.message)
+        
+        print("\(mask): \(errorString))")
+        
+        return errorString
     }
 }

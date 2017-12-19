@@ -21,21 +21,30 @@ extension DataManager {
                     params["pushToken"] = account?.pushToken
                 } else {
                     //MARK: names
-                    let paramsDict = NSMutableDictionary(dictionary: params)
+                    var paramsDict = NSMutableDictionary()
                     if rootKey == nil {
                         let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
                         params["userID"] = self.getRootString(from: seedPhraseString).0
                         params["deviceID"] = UUID().uuidString
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
+                        
+                        paramsDict = NSMutableDictionary(dictionary: params)
+                        
                         paramsDict["seedPhrase"] = seedPhraseString
                         paramsDict["binaryData"] = self.coreLibManager.createSeedBinaryData(from: seedPhraseString)?.convertToHexString()
                     } else {
-                        params["userID"] = rootKey
+                        params["userID"] = self.getRootString(from: rootKey!).0
                         params["deviceID"] = UUID().uuidString
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
-                        paramsDict["binaryData"] = self.coreLibManager.createSeedBinaryData(from: rootKey!)?.convertToHexString()
+                        
+                        paramsDict = NSMutableDictionary(dictionary: params)
+                        
+                        let hexBinData = self.coreLibManager.createSeedBinaryData(from: rootKey!)?.convertToHexString()
+                        paramsDict["binaryData"] = hexBinData
+                        
+                        print(paramsDict)
                     }
                     
                     self.realmManager.updateAccount(paramsDict, completion: { (account, error) in
@@ -124,8 +133,8 @@ extension DataManager {
         }
     }
     
-    func getWalletOutputs(_ token: String, walletID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
-        apiManager.getWalletOutputs(token, walletID: walletID) { (dict, error) in
+    func getWalletOutputs(_ token: String, walletID: UInt32, addressID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getWalletOutputs(token, walletID: walletID, addressID: addressID) { (dict, error) in
             completion(dict, error)
         }
     }

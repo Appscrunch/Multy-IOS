@@ -14,7 +14,7 @@ class CreateWalletPresenter: NSObject {
             return
         }
         
-        var binData : BinaryData = account!.binaryDataString.createBinaryData()
+        var binData : BinaryData = account!.binaryDataString.createBinaryData()!
         
         let dict = DataManager.shared.createNewWallet(for: &binData, CURRENCY_BITCOIN.rawValue, walletID: account!.walletCount as! UInt32)
         

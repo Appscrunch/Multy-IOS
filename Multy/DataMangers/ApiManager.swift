@@ -8,8 +8,9 @@ import Alamofire
 class ApiManager: NSObject {
     static let shared = ApiManager()
     
-    let apiUrl = "http://192.168.0.121:7778/"
+    let apiUrl = "http://192.168.0.121:7778/"//"http://88.198.47.112:7778/"
     let apiUrlTest = "http://192.168.0.125:8080/"
+    let nonLocalURL = "http://88.198.47.112:7778/"
     
     var requestManager = Alamofire.SessionManager.default
     
@@ -233,12 +234,12 @@ class ApiManager: NSObject {
         }
     }
     
-    func getWalletOutputs(_ token: String, walletID: UInt32, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func getWalletOutputs(_ token: String, walletID: UInt32, addressID: UInt32, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
         let header: HTTPHeaders = [
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/outputs/spendable/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/outputs/spendable/\(walletID)/\(addressID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

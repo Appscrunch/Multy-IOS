@@ -4,6 +4,7 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
 //import BiometricAuthentication
 
 class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -38,8 +39,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MARK: test
 //        progressHUD.show()
         presenter.auth()
-//        DataManager.shared.socketManager.start()
-        
+        DataManager.shared.socketManager.start()
     }
     
     override func viewDidAppear(_ animated: Bool) {

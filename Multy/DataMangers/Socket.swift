@@ -12,7 +12,9 @@ class Socket: NSObject {
 
     
     override init() {
-        manager = SocketManager(socketURL: URL(string: "http://192.168.0.121:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
+        //dev:  6680
+        //prod: 7780
+        manager = SocketManager(socketURL: URL(string: "http://88.198.47.112:6680/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false)])
         socket = manager.defaultSocket
     }
     
@@ -32,8 +34,12 @@ class Socket: NSObject {
             self.getExchangeReq()
         }
         
-        socket.on("/newTransaction") {data, ack in
-            print("/newTransaction")
+        socket.on("exchangeAll") {data, ack in
+            print("-----exchangeAll")
+        }
+        
+        socket.on("exchangeUpdate") {data, ack in
+            print("-----exchangeUpdate")
         }
         
 
