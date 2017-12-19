@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */; };
 		4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */; };
+		45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */; };
 		451B98631FD947A400DC64A5 /* FastOperationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */; };
 		451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */; };
 		4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522361E1FCD6B94004BA490 /* TransactionViewController.swift */; };
@@ -174,6 +175,7 @@
 		313568CEE4A41522AB0FD8F0 /* Pods-Multy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Multy/Pods-Multy.release.xcconfig"; sourceTree = "<group>"; };
 		4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsPresenter.swift; sourceTree = "<group>"; };
 		4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
+		45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSeedPhraseView.swift; sourceTree = "<group>"; };
 		451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastOperationsPresenter.swift; sourceTree = "<group>"; };
 		451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarPresenter.swift; sourceTree = "<group>"; };
 		4522361E1FCD6B94004BA490 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +363,14 @@
 			path = "Wallet settings";
 			sourceTree = "<group>";
 		};
+		45090ADE1FE95DE400019D00 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4522361D1FCD6B6E004BA490 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +407,7 @@
 				45B9CB021FBB4AEB00AA2A31 /* Storyboards */,
 				45B9CB031FBB4B2300AA2A31 /* ViewControllers and Presenters */,
 				45B9CB041FBB4B6600AA2A31 /* Cells */,
+				45090ADE1FE95DE400019D00 /* Views */,
 				FADC00441FC322F400182E45 /* DataMangers */,
 				4583ACA11FBCAC37001991AA /* Extensions */,
 				45A9492D1FC477F3003C3A23 /* Protocols */,
@@ -1165,6 +1176,7 @@
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
 				FA4D43EC1FC5CEE0003C7117 /* MainWalletHeaderCell.swift in Sources */,
 				FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */,
+				45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */,
 				45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */,
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
 				45B5CCA91FDAC0B00069BD46 /* TextTableViewCell.swift in Sources */,

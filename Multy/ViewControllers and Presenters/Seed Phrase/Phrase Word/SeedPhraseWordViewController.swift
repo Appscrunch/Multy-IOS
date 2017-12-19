@@ -35,7 +35,7 @@ class SeedPhraseWordViewController: UIViewController {
         mediumWordLbl.morphingEffect = effect
         bottomWord.morphingEffect = effect
         
-        presenter.generateMnemonic()
+        presenter.getSeedFromAcc()
         presenter.presentNextTripleOrContinue()
     }
     

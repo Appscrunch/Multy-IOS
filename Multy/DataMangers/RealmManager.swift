@@ -263,6 +263,18 @@ class RealmManager: NSObject {
         }
     }
     
+    public func clearSeedPhraseInAcc() {
+        getRealm { (realmOpt, err) in
+            if let realm = realmOpt {
+                let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
+                try! realm.write {
+                    acc?.seedPhrase = ""
+                    print("Seed phrase was deleted from db by realm Manager")
+                }
+            }
+        }
+    }
+    
     public func clearRealm() {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {

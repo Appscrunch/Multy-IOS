@@ -13,6 +13,8 @@ class WalletPresenter: NSObject {
     
     var trasactionsArr = [TransactionRLM]()
     
+    var account: AccountRLM?
+    
     func registerCells() {
         let walletHeaderCell = UINib.init(nibName: "MainWalletHeaderCell", bundle: nil)
         self.mainVC?.tableView.register(walletHeaderCell, forCellReuseIdentifier: "MainWalletHeaderCellID")

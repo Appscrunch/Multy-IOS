@@ -23,8 +23,11 @@ class SeedPhraseWordPresenter: NSObject {
         }
     }
     
-    func generateMnemonic() {
-        mnemonicPhraseArray = DataManager.shared.getMnenonicArray()
+    func getSeedFromAcc() {
+//        mnemonicPhraseArray = DataManager.shared.getMnenonicArray()
+        DataManager.shared.getAccount { (acc, err) in
+            self.mnemonicPhraseArray = (acc?.seedPhrase.components(separatedBy: " "))!
+        }
     }
     
     func presentNextTripleOrContinue() {
