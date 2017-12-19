@@ -39,7 +39,7 @@ class AssetsPresenter: NSObject {
                         self.account = account
                         DataManager.shared.socketManager.start()                        
                         self.fetchAssets()
-//                        self.getWalletVerbose()
+                        self.getWalletVerbose()
                     }
                 }
             }
@@ -167,16 +167,14 @@ class AssetsPresenter: NSObject {
     
     func getWalletVerbose() {
         DataManager.shared.getWalletsVerbose(account!.token) { (answer, err) in
-            if (answer?["code"] as? NSNumber)?.intValue == 200 {
-                print("getWalletsVerbose:\n \(answer)")
+//            if (answer?["code"] as? NSNumber)?.intValue == 200 {
+//                print("getWalletsVerbose:\n \(answer)")
 //                let walletsArray = answer!["wallets"] as! NSArray
 //                
 //                
 //                DataManager.shared.updateAccount(answer!["wallets"] as! NSArray, completion: { (account, error) in
 //                    
 //                })
-            }
-            
 //            print("OK")
 //            print(answer ?? "")
 //            let answDict = answer

@@ -15,13 +15,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let presenter = AssetsPresenter()
     let progressHUD = ProgressHUD(text: "Getting Wallets...")
     
-    
-    
     override func viewDidLoad() {
 
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
         self.presenter.assetsVC = self
         
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
@@ -47,6 +44,46 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
         }
     }
+    
+    func backUpView() {
+        let view = UIView()
+        view.frame = CGRect(x: 16, y: 5, width: screenWidth - 32, height: 44)
+        view.layer.cornerRadius = 20
+        view.backgroundColor = #colorLiteral(red: 0.9229970574, green: 0.08180250973, blue: 0.2317947149, alpha: 1)
+        
+        if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+            view.isHidden = false
+        } else {
+            view.isHidden = true
+        }
+        
+        if self.tableView.subviews.contains(view) {
+            return
+        }
+        
+        let image = UIImageView()
+        image.image = #imageLiteral(resourceName: "warninngBigWhite")
+        image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
+        
+        let btn = UIButton()
+        btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
+        btn.setTitle("Backup is not executed", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
+        btn.contentHorizontalAlignment = .left
+        btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
+        
+        view.addSubview(btn)
+        view.addSubview(image)
+        self.tableView.addSubview(view)
+    }
+    
+    @objc func goToSeed() {
+        let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+        let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     //////////////////////////////////////////////////////////////////////
     //test
@@ -97,7 +134,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(animated)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
-        
         if presenter.account != nil {
 //            progressHUD.show()
             presenter.fetchAssets()
@@ -158,7 +194,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             //            return portfolioCell
             let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-            
+            self.backUpView()
             return logoCell
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
@@ -296,9 +332,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 ////                let securevc = SecureViewController()
 ////                self.present(securevc, animated: true, completion: nil)
 //                
-////                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-////                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-////                self.navigationController?.pushViewController(vc, animated: true)
+//                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+//                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+//                self.navigationController?.pushViewController(vc, animated: true)
 //
 //                
 //            }

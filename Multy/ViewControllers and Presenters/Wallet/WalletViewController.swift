@@ -34,6 +34,51 @@ class WalletViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.titleLbl.text = self.presenter.wallet?.name
+        self.backUpView()
+    }
+    
+    func backUpView() {
+        let view = UIView()
+        view.frame = CGRect(x: 16, y: (300 * (screenWidth / 375.0)) - 20, width: screenWidth - 32, height: 40)
+        view.layer.cornerRadius = 20
+        view.backgroundColor = .white
+        
+        if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+            view.isHidden = false
+        } else {
+            view.isHidden = true
+        }
+        
+        if self.view.subviews.contains(view) {
+            return
+        }
+        
+        let image = UIImageView()
+        image.image = #imageLiteral(resourceName: "warninngBig")
+        image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
+        
+        let btn = UIButton()
+        btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
+        btn.setTitle("Backup is not executed", for: .normal)
+        btn.setTitleColor(.red, for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
+        btn.contentHorizontalAlignment = .left
+        btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
+        
+        let chevron = UIImageView()
+        chevron.image = #imageLiteral(resourceName: "chevronRed")
+        chevron.frame = CGRect(x: view.frame.width - 35, y: 15, width: 11, height: 11)
+        
+        view.addSubview(chevron)
+        view.addSubview(btn)
+        view.addSubview(image)
+        self.tableView.addSubview(view)
+    }
+    
+    @objc func goToSeed() {
+        let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+        let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func closeAction() {
