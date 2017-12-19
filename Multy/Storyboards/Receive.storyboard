@@ -218,7 +218,7 @@ Book</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TcM-XW-eXl">
-                                                <rect key="frame" x="20" y="175" width="291" height="18"/>
+                                                <rect key="frame" x="27" y="175" width="290" height="18"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
                                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -230,7 +230,7 @@ Book</string>
                                                     <constraint firstAttribute="height" constant="15" id="aNp-is-JxO"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7R-G0-LAB">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7R-G0-LAB">
                                                 <rect key="frame" x="78" y="201" width="182" height="32"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.1040239726" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -353,9 +353,9 @@ Book</string>
                                             <constraint firstItem="d7q-S5-bpY" firstAttribute="trailing" secondItem="aB9-44-yVp" secondAttribute="trailing" id="R6F-mg-klZ"/>
                                             <constraint firstItem="TcM-XW-eXl" firstAttribute="top" secondItem="yfh-1j-Y6Q" secondAttribute="bottom" constant="16" id="UF0-8W-0B9"/>
                                             <constraint firstItem="AXb-Qw-h0b" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" id="UKD-fF-PG9"/>
-                                            <constraint firstItem="TcM-XW-eXl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WdU-vV-Cb8" secondAttribute="leading" constant="20" id="ajp-BD-myM"/>
                                             <constraint firstItem="6a8-cd-Cp7" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" id="ank-0A-3Tl"/>
                                             <constraint firstItem="AXb-Qw-h0b" firstAttribute="top" secondItem="Aj5-6E-t5v" secondAttribute="bottom" id="b4C-Up-Uov"/>
+                                            <constraint firstItem="TcM-XW-eXl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WdU-vV-Cb8" secondAttribute="leading" constant="20" id="b6f-wK-tb6"/>
                                             <constraint firstAttribute="trailing" secondItem="AXb-Qw-h0b" secondAttribute="trailing" constant="6" id="bVZ-bx-wNA"/>
                                             <constraint firstAttribute="trailing" secondItem="aB9-44-yVp" secondAttribute="trailing" constant="10" id="cYM-F1-Shw"/>
                                             <constraint firstItem="yfh-1j-Y6Q" firstAttribute="centerX" secondItem="WdU-vV-Cb8" secondAttribute="centerX" constant="-3" id="d1s-h9-rAu"/>
@@ -363,13 +363,14 @@ Book</string>
                                             <constraint firstItem="WPa-6H-9ZB" firstAttribute="top" secondItem="fc4-7b-wBs" secondAttribute="bottom" id="e77-4w-Fs0"/>
                                             <constraint firstItem="CTc-56-hc2" firstAttribute="leading" secondItem="fc4-7b-wBs" secondAttribute="trailing" constant="4.5" id="fA1-d3-oNR"/>
                                             <constraint firstItem="L7R-G0-LAB" firstAttribute="top" secondItem="TcM-XW-eXl" secondAttribute="bottom" constant="8" id="htU-xK-C0M"/>
+                                            <constraint firstItem="aB9-44-yVp" firstAttribute="leading" secondItem="TcM-XW-eXl" secondAttribute="trailing" constant="2" id="iRH-g3-2dv"/>
                                             <constraint firstAttribute="bottom" secondItem="Aj5-6E-t5v" secondAttribute="bottom" constant="94" id="koT-5y-B06"/>
                                             <constraint firstItem="6a8-cd-Cp7" firstAttribute="top" secondItem="L7R-G0-LAB" secondAttribute="bottom" constant="14" id="mEo-lF-Rbq"/>
                                             <constraint firstItem="L7R-G0-LAB" firstAttribute="centerX" secondItem="yfh-1j-Y6Q" secondAttribute="centerX" id="nwK-Dk-bhB"/>
+                                            <constraint firstItem="TcM-XW-eXl" firstAttribute="centerX" secondItem="WdU-vV-Cb8" secondAttribute="centerX" id="oGw-TG-0WN"/>
                                             <constraint firstItem="8Fl-G0-iLU" firstAttribute="leading" secondItem="WPa-6H-9ZB" secondAttribute="trailing" constant="5" id="pkH-xf-ZTn"/>
                                             <constraint firstItem="Aj5-6E-t5v" firstAttribute="top" secondItem="SXI-5J-BlV" secondAttribute="bottom" id="pqc-45-DkU"/>
                                             <constraint firstItem="fc4-7b-wBs" firstAttribute="centerX" secondItem="SXI-5J-BlV" secondAttribute="centerX" constant="-30" id="t5e-Cl-qKI"/>
-                                            <constraint firstItem="aB9-44-yVp" firstAttribute="leading" secondItem="TcM-XW-eXl" secondAttribute="trailing" constant="8" id="t7n-mK-nIL"/>
                                             <constraint firstItem="8Fl-G0-iLU" firstAttribute="centerY" secondItem="WPa-6H-9ZB" secondAttribute="centerY" id="ugl-A0-19F"/>
                                             <constraint firstItem="Aws-8s-3F6" firstAttribute="centerY" secondItem="AXb-Qw-h0b" secondAttribute="centerY" id="uih-h1-65d"/>
                                             <constraint firstItem="Aj5-6E-t5v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WPa-6H-9ZB" secondAttribute="bottom" constant="5" id="vkG-6B-huB"/>

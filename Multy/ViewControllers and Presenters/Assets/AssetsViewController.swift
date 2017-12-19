@@ -211,18 +211,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.presenter.account == nil {
                 break
             }
-            let actionSheet = UIAlertController(title: "Create or import Wallet", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
                 self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
             }))
-            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
-                //go to import wallet
-            }))
+//            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
+//                //go to import wallet
+//            }))
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            self.present(actionSheet, animated: true, completion: {
-                //doint something
-            })
+            self.present(actionSheet, animated: true, completion: nil)
         case [0,2]:
             if self.presenter.account == nil {
                 progressHUD.show()
