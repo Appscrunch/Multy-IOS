@@ -6,14 +6,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-Medium</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,14 +25,8 @@
                         <color key="pageIndicatorTintColor" red="0.83393996953964233" green="0.86599963903427124" blue="0.92358797788619995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="currentPageIndicatorTintColor" red="0.52471911907196045" green="0.62955904006958008" blue="0.76947301626205444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </pageControl>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJq-tk-6Jy">
-                        <rect key="frame" x="167.5" y="14" width="39" height="24"/>
-                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TeY-lp-B8s">
-                        <rect key="frame" x="0.0" y="60" width="375" height="187"/>
+                        <rect key="frame" x="0.0" y="54" width="375" height="193"/>
                         <color key="backgroundColor" red="0.92515683174133301" green="0.93285363912582397" blue="0.96979457139968872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rAr-H7-mCb">
                             <size key="itemSize" width="343" height="186"/>
@@ -54,17 +44,24 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sign" translatesAutoresizingMaskIntoConstraints="NO" id="FEP-ny-giM">
+                        <rect key="frame" x="167.5" y="14" width="40" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="2tS-fd-aaH"/>
+                            <constraint firstAttribute="height" constant="32" id="snA-fI-xdm"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="S2L-8z-rrr" secondAttribute="bottom" constant="0.5" id="FAE-g4-Nev"/>
                     <constraint firstItem="TeY-lp-B8s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="RHm-Rx-3ug"/>
                     <constraint firstAttribute="trailing" secondItem="TeY-lp-B8s" secondAttribute="trailing" id="SZW-UQ-rCp"/>
-                    <constraint firstItem="TeY-lp-B8s" firstAttribute="top" secondItem="TJq-tk-6Jy" secondAttribute="bottom" constant="22" id="Xe8-dH-ivQ"/>
-                    <constraint firstItem="TJq-tk-6Jy" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YEh-IS-XSE"/>
                     <constraint firstItem="S2L-8z-rrr" firstAttribute="top" secondItem="TeY-lp-B8s" secondAttribute="bottom" constant="-2" id="Z51-HE-P2M"/>
-                    <constraint firstItem="TJq-tk-6Jy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="bCQ-Ln-hK8"/>
                     <constraint firstItem="S2L-8z-rrr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cD4-qm-viB"/>
+                    <constraint firstItem="TeY-lp-B8s" firstAttribute="top" secondItem="FEP-ny-giM" secondAttribute="bottom" constant="8" id="cIL-9C-QWE"/>
+                    <constraint firstItem="FEP-ny-giM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="qKR-qA-Dqe"/>
+                    <constraint firstItem="FEP-ny-giM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="vZO-IK-1m4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -75,4 +72,7 @@
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="sign" width="40" height="32"/>
+    </resources>
 </document>
