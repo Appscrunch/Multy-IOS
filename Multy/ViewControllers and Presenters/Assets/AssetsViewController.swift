@@ -39,7 +39,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MARK: test
 //        progressHUD.show()
         presenter.auth()
-        DataManager.shared.socketManager.start()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,9 +95,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //////////////////////////////////////////////////////////////////////
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
         
         if presenter.account != nil {
 //            progressHUD.show()
@@ -160,6 +158,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             //            return portfolioCell
             let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+            
             return logoCell
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
@@ -168,14 +167,19 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 newWalletCell.hideAll(flag: false)
             }
+            
             return newWalletCell
         case [0,2]:
             if self.presenter.account != nil {
+                
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+                
                 if presenter.isWalletExist() {
                     let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
                     walletCell.makeshadow()
                     walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
                     walletCell.fillInCell()
+                    
                     return walletCell
                 } else {
                     let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
@@ -183,6 +187,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             } else {   // acc == nil
                 let createCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+                
                 return createCell
             }
         case [0,3]:

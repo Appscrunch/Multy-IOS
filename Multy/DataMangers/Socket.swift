@@ -19,50 +19,55 @@ class Socket: NSObject {
     }
     
     func start() {
-//        let header = ["userID": "\(acc.userID)",
-//                      "deviceType": "\(acc.deviceType)",
-//                      "jwtToken": "\(acc.token)"]
-//
-//        manager = SocketManager(socketURL: URL(string: "http://192.168.0.111:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
-//        socket = manager.defaultSocket
-
-        
-//        let socket = manager.defaultSocket
-        
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-            self.getExchangeReq()
-        }
-        
-        socket.on("exchangeAll") {data, ack in
-            print("-----exchangeAll")
-        }
-        
-        socket.on("exchangeUpdate") {data, ack in
-            print("-----exchangeUpdate")
-        }
-        
-
-        
-        socket.on("currentAmount") {data, ack in
-            guard let cur = data[0] as? Double else { return }
-
-            self.socket.emitWithAck("canUpdate", cur).timingOut(after: 0) {data in
-                self.socket.emit("update", ["amount": cur + 2.50])
+        DataManager.shared.getAccount { (account, error) in
+            guard error != nil else {
+                return
             }
-
-            ack.with("Got your currentAmount", "dude")
+            
+            let header = ["userID": "\(account?.userID)",
+                "deviceType": "\(account?.deviceType)",
+                "jwtToken": "\(account?.token)"]
+            
+            self.manager = SocketManager(socketURL: URL(string: "http://192.168.0.111:7780/socket.io/")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
+            self.socket = self.manager.defaultSocket
+            
+            
+            //        let socket = manager.defaultSocket
+            
+            self.socket.on(clientEvent: .connect) {data, ack in
+                print("socket connected")
+                self.getExchangeReq()
+            }
+            
+            self.socket.on("exchangeAll") {data, ack in
+                print("-----exchangeAll: \(data)")
+            }
+            
+            self.socket.on("exchangeUpdate") {data, ack in
+                print("-----exchangeUpdate: \(data)")
+            }
+            
+            
+            
+            self.socket.on("currentAmount") {data, ack in
+                guard let cur = data[0] as? Double else { return }
+                
+                self.socket.emitWithAck("canUpdate", cur).timingOut(after: 0) {data in
+                    self.socket.emit("update", ["amount": cur + 2.50])
+                }
+                
+                ack.with("Got your currentAmount", "dude")
+            }
+            
+            self.socket.connect()
         }
-        
-        socket.connect()
-        
     }
     
     func getExchangeReq() {
         let abc = NSDictionary(dictionary: ["From": "USD",
                                             "To": "BTC"]).socketRepresentation()
         
-        socket.emitWithAck("getExchangeReq", abc).timingOut(after: 0) { (data) in
+        socket.emitWithAck("/getExchangeReq", abc).timingOut(after: 0) { (data) in
             print("\n\n\n\n\n\n\n")
             print(data)
             print("\n\n\n\n\n\n\n")

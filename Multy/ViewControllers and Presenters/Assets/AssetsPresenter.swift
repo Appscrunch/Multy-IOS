@@ -19,8 +19,9 @@ class AssetsPresenter: NSObject {
 //            getExchange()
 //            getTransInfo()
 //            getWalletVerbose()
-            getWalletOutputs()
+//            getWalletOutputs()
             assetsVC?.tableView.reloadData()
+            DataManager.shared.socketManager.start()
         }
     }
     
@@ -159,7 +160,7 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletOutputs() {
-        DataManager.shared.getWalletOutputs(account!.token, walletID: 0, addressID: 0) { (dict, error) in
+        DataManager.shared.getWalletOutputs(account!.token, currencyID: 0, address: account!.wallets[0].address) { (dict, error) in
             print("getWalletOutputs: \(dict)")
         }
     }

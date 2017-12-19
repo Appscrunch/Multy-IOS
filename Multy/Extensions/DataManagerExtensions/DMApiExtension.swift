@@ -133,8 +133,8 @@ extension DataManager {
         }
     }
     
-    func getWalletOutputs(_ token: String, walletID: UInt32, addressID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
-        apiManager.getWalletOutputs(token, walletID: walletID, addressID: addressID) { (dict, error) in
+    func getWalletOutputs(_ token: String, currencyID: UInt32, address: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getWalletOutputs(token, currencyID: currencyID, address: address) { (dict, error) in
             completion(dict, error)
         }
     }

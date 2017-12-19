@@ -96,7 +96,6 @@ class TransactionFeeTableViewCell: UITableViewCell {
         }
     }
     
-    
     func setCornersForFirstCell() {
         let maskPath = UIBezierPath.init(roundedRect: self.backView.bounds,
                                          byRoundingCorners:[.topLeft, .topRight],

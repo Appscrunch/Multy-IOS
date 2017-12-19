@@ -62,7 +62,8 @@ class CustomTabBarViewController: UITabBarController, UITabBarControllerDelegate
         selectedIndex = 2
     }
     
-    
-    
-    
+    func changeViewVisibility(isHidden: Bool) {
+        tabBar.isHidden = isHidden
+        menuButton.isHidden = isHidden
+    }
 }
