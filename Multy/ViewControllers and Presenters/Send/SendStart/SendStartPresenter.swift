@@ -14,10 +14,15 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     
     var choosenWallet: UserWalletRLM?
     
+    var isFromWallet = false
+    
     func cancelAction() {
-//        self.sendStartVC?.navigationController?.popViewController(animated: true)
-        self.sendStartVC?.tabBarController?.selectedIndex = 0
-        self.sendStartVC?.navigationController?.popToRootViewController(animated: false)
+        if self.isFromWallet {
+            self.sendStartVC?.navigationController?.popViewController(animated: true)
+        } else {
+            self.sendStartVC?.tabBarController?.selectedIndex = 0
+            self.sendStartVC?.navigationController?.popToRootViewController(animated: false)
+        }
     }
     
     func sendAddress(address: String) {

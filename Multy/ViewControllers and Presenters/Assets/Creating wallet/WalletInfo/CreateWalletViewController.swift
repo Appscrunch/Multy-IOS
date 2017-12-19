@@ -10,7 +10,9 @@ class CreateWalletViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var constraintContinueBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var createBtn: ZFRippleButton!
+    
     var presenter = CreateWalletPresenter()
+    var maxNameLength = 30
     let progressHUD = ProgressHUD(text: "Creating Wallet...")
     
     override func viewDidLoad() {
@@ -109,6 +111,14 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.dismissKeyboard()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (textField.text?.count)! + string.count < maxNameLength {
+            return true
+        } else {
+            return false
+        }
     }
     
 }

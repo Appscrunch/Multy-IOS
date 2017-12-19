@@ -60,6 +60,7 @@ class WalletViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Send", bundle: nil)
         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
         sendStartVC.presenter.choosenWallet = self.presenter.wallet
+        sendStartVC.presenter.isFromWallet = true
         self.navigationController?.pushViewController(sendStartVC, animated: true)
     }
     
