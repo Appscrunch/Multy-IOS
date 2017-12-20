@@ -23,6 +23,7 @@ class CheckWordsPresenter: NSObject {
     }
     
     func auth(seedString: String) {
+        self.checkWordsVC?.view.isUserInteractionEnabled = false
         if let errString = DataManager.shared.getRootString(from: seedString).1 {
             let alert = UIAlertController(title: "Warining", message: errString, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
@@ -38,7 +39,7 @@ class CheckWordsPresenter: NSObject {
         DataManager.shared.auth(rootKey: seedString) { (acc, err) in
 //            print(acc ?? "")
             self.checkWordsVC?.navigationController?.popToRootViewController(animated: true)
-            
+            self.checkWordsVC?.view.isUserInteractionEnabled = true
             self.checkWordsVC?.progressHUD.hide()
         }
     }
