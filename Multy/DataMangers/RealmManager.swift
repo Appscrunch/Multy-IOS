@@ -9,20 +9,20 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-//    let schemaVersion : UInt64 = 2
+    let schemaVersion : UInt64 = 5
     
     private override init() {
         super.init()
         
         MasterKeyGenerator.shared.generateMasterKey { (masterKey, error, string) in
             if masterKey != nil {
-                _ = Realm.Configuration(encryptionKey: masterKey!//,
-//                                        schemaVersion: self.schemaVersion,
-//                                        migrationBlock: { migration, oldSchemaVersion in
-//                                            if oldSchemaVersion < self.schemaVersion {
-//                                                //some migration if needed
-//                                            }
-//                                        }
+                _ = Realm.Configuration(encryptionKey: masterKey!,
+                                        schemaVersion: self.schemaVersion,
+                                        migrationBlock: { migration, oldSchemaVersion in
+                                            if oldSchemaVersion < self.schemaVersion {
+                                                //some migration if needed
+                                            }
+                                        }
                 )
             } else {
                 print("Realm error while setting config")
@@ -48,9 +48,9 @@ class RealmManager: NSObject {
                 return
             }
             
-            let realmConfig = Realm.Configuration(encryptionKey: masterKey!//,
-//                                                  schemaVersion: self.schemaVersion,
-//                                                  migrationBlock: nil
+            let realmConfig = Realm.Configuration(encryptionKey: masterKey!,
+                                                  schemaVersion: self.schemaVersion,
+                                                  migrationBlock: nil
             )
             
             do {

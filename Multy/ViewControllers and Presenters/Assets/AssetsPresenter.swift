@@ -18,7 +18,7 @@ class AssetsPresenter: NSObject {
 //            fetchTickets()
 //            getExchange()
 //            getTransInfo()
-            getWalletVerbose()
+//            getWalletVerbose()
 //            getWalletOutputs()
             assetsVC?.tableView.reloadData()
         }
@@ -38,7 +38,7 @@ class AssetsPresenter: NSObject {
                     DispatchQueue.main.async {
                         self.account = account
                         DataManager.shared.socketManager.start()                        
-                        self.fetchAssets()
+//                        self.fetchAssets()
                         self.getWalletVerbose()
                     }
                 }

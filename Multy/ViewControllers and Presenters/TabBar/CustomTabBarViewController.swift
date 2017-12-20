@@ -60,6 +60,7 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     // MARK: - Actions
     
     @objc private func menuButtonAction(sender: UIButton) {
+        setSelectIndex(from: selectedIndex, to: 2)
         changeViewVisibility(isHidden: true)
         selectedIndex = 2
     }

@@ -136,7 +136,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         if presenter.account != nil {
 //            progressHUD.show()
-            presenter.fetchAssets()
+            presenter.getWalletVerbose()
         }
     }
     
