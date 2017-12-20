@@ -168,14 +168,26 @@ class AssetsPresenter: NSObject {
             print("getWalletOutputs: \(dict)")
         }
     }
-    
+    // для саши
     func getWalletVerbose() {
-        DataManager.shared.getWalletsVerbose(account!.token) { (answer, err) in
-            if (answer?["code"] as? NSNumber)?.intValue == 200 {
+        DataManager.shared.getWalletsVerbose(account!.token) { (walletsArrayFromApi, err) in
+            if err != nil {
+                return
+            } else {
+                let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
+                DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
+                    print(acc)
+                })
+            }
+            
+        }
+    }
+//        DataManager.shared.getWalletsVerbose(account!.token) { (answer, err) in
+//            if (answer?["code"] as? NSNumber)?.intValue == 200 {
 //                print("getWalletsVerbose:\n \(answer)")
 //
 //                let walletsArray = answer!["wallets"] as! NSArray
-            }
+//            }
 //
 //                DataManager.shared.updateAccount(<#T##accountDict: NSDictionary##NSDictionary#>, completion: <#T##(AccountRLM?, NSError?) -> ()#>)
 //                DataManager.shared.updateAccount(answer!["wallets"] as! NSArray, completion: { (account, error) in
@@ -239,6 +251,6 @@ class AssetsPresenter: NSObject {
 //            DataManager.shared.apiManager.sendRawTransaction(self.account!.token, params, completion: { (dict, error) in
 //                print("---------\(dict)")
 //            })
-        }
-    }
+//        }
 }
+

@@ -278,6 +278,22 @@ class RealmManager: NSObject {
             }
         }
     }
+    // для саши
+    public func updateWalletsInAcc(arrOfWallets: List<UserWalletRLM>, completion: @escaping(_ account: AccountRLM?, _ error: NSError?)->()) {
+        getRealm { (realmOpt, err) in
+            if let realm = realmOpt {
+                let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
+                if acc != nil {
+                    try! realm.write {
+                        acc?.wallets = arrOfWallets
+                        completion(acc, nil)
+                    }
+                } else {
+                    completion(nil, err)
+                }
+            }
+        }
+    }
     
     public func clearRealm() {
         getRealm { (realmOpt, err) in

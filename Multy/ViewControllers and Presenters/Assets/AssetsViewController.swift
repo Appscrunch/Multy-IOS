@@ -252,9 +252,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath != [0,1] {
-            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        }
+//        if indexPath != [0,1] {
+//            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+//        }
         
         switch indexPath {
         case [0,0]:
@@ -354,7 +354,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
 //            return 283  //portfolio height
-            return 225 //logo height
+            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+                return 225 //logo height
+            } else {
+                return 220
+            }
+            
         } else if indexPath == [0, 1] {
             return 75
         } else {
