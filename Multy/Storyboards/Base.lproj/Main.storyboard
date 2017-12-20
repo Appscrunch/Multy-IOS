@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -746,7 +746,7 @@ correctly</string>
         <scene sceneID="L1l-cI-1Rj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r8s-Om-7Nx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Main" image="Active_wallet_Tab" id="KWB-7P-gFV" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                    <tabBarItem key="tabBarItem" title="Main" image="walletTab" id="KWB-7P-gFV" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
                         <connections>
                             <outlet property="animation" destination="qCX-UB-LZC" id="ZTv-bG-WxX"/>
                         </connections>
@@ -895,7 +895,6 @@ correctly</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Active_wallet_Tab" width="20" height="19"/>
         <image name="Address_Book_Tab" width="25" height="18"/>
         <image name="Settings_Tab" width="20" height="20"/>
         <image name="activityEs" width="210" height="180"/>
@@ -909,5 +908,6 @@ correctly</string>
         <image name="fastSend" width="83" height="83"/>
         <image name="icons8TouchId" width="28" height="28"/>
         <image name="noInternetConnection" width="123" height="104"/>
+        <image name="walletTab" width="20" height="19"/>
     </resources>
 </document>
