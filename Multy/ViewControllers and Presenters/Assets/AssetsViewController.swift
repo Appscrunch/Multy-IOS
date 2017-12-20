@@ -47,7 +47,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func backUpView() {
         let view = UIView()
-        view.frame = CGRect(x: 16, y: 5, width: screenWidth - 32, height: 44)
+        view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: 44)
         view.layer.cornerRadius = 20
         view.backgroundColor = #colorLiteral(red: 0.9229970574, green: 0.08180250973, blue: 0.2317947149, alpha: 1)
         
@@ -75,7 +75,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         view.addSubview(btn)
         view.addSubview(image)
-        self.tableView.addSubview(view)
+        self.view.addSubview(view)
     }
     
     @objc func goToSeed() {
@@ -252,7 +252,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        if indexPath != [0,1] {
+            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        }
         
         switch indexPath {
         case [0,0]:
@@ -352,7 +354,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
 //            return 283  //portfolio height
-            return 220 //logo height
+            return 225 //logo height
         } else if indexPath == [0, 1] {
             return 75
         } else {

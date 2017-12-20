@@ -21,6 +21,7 @@ class BackupSeedPhraseViewController: UIViewController {
         super.viewWillAppear(animated)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect.zero
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     override func viewDidLayoutSubviews() {

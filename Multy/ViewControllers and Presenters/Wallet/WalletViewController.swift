@@ -95,9 +95,9 @@ class WalletViewController: UIViewController {
         self.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                     gradientOrientation: .topRightBottomLeft)
-        self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                     gradientOrientation: .topRightBottomLeft)
+//        self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+//                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+//                                     gradientOrientation: .topRightBottomLeft)
         
         let headerCell = tableView.cellForRow(at:IndexPath(row: 0, section: 0)) as! MainWalletHeaderCell
         

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -71,11 +70,11 @@
                     <constraint firstItem="eJd-b3-U7d" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Ijg-lB-eZN"/>
                     <constraint firstItem="Iqd-E2-4bq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OwR-kz-ntT"/>
                     <constraint firstAttribute="trailing" secondItem="Iqd-E2-4bq" secondAttribute="trailing" id="Rq8-OX-x7D"/>
-                    <constraint firstItem="mSA-cS-6XS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Vef-fF-R3b"/>
                     <constraint firstItem="eJd-b3-U7d" firstAttribute="top" secondItem="mSA-cS-6XS" secondAttribute="bottom" constant="8" id="ZBu-58-WEv"/>
                     <constraint firstItem="9te-dh-4iM" firstAttribute="top" secondItem="eJd-b3-U7d" secondAttribute="bottom" constant="13" id="dmK-qC-PHo"/>
                     <constraint firstAttribute="trailing" secondItem="9te-dh-4iM" secondAttribute="trailing" constant="30" id="e5G-sA-1cL"/>
                     <constraint firstItem="mSA-cS-6XS" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qS0-l0-qHH"/>
+                    <constraint firstItem="Iqd-E2-4bq" firstAttribute="top" secondItem="9te-dh-4iM" secondAttribute="bottom" constant="4.5" id="uGF-6v-KHE"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

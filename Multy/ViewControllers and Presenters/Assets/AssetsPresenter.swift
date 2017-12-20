@@ -25,8 +25,10 @@ class AssetsPresenter: NSObject {
     }
     
     func auth() {
+        self.assetsVC?.view.isUserInteractionEnabled = false
         assetsVC?.progressHUD.show()
         DataManager.shared.getAccount { (acc, err) in
+            self.assetsVC?.view.isUserInteractionEnabled = true
             if acc != nil {
                 self.assetsVC?.progressHUD.show()
                 DataManager.shared.auth(rootKey: nil) { (account, error) in
@@ -48,7 +50,9 @@ class AssetsPresenter: NSObject {
     }
     
     func guestAuth(completion: @escaping (_ answer: String) -> ()) {
+        self.assetsVC?.view.isUserInteractionEnabled = false
         DataManager.shared.auth(rootKey: nil) { (account, error) in
+            self.assetsVC?.view.isUserInteractionEnabled = true
             self.assetsVC?.progressHUD.hide()
             guard account != nil else {
                 return
@@ -168,8 +172,9 @@ class AssetsPresenter: NSObject {
     func getWalletVerbose() {
         DataManager.shared.getWalletsVerbose(account!.token) { (answer, err) in
             if (answer?["code"] as? NSNumber)?.intValue == 200 {
-                print("getWalletsVerbose:\n \(answer)")
-                let walletsArray = answer!["wallets"] as! NSArray
+//                print("getWalletsVerbose:\n \(answer)")
+//
+//                let walletsArray = answer!["wallets"] as! NSArray
             }
 //
 //                DataManager.shared.updateAccount(<#T##accountDict: NSDictionary##NSDictionary#>, completion: <#T##(AccountRLM?, NSError?) -> ()#>)

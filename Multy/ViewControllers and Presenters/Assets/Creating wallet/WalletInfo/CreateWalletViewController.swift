@@ -36,6 +36,7 @@ class CreateWalletViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     @IBAction func cancleAction(_ sender: Any) {
@@ -64,7 +65,7 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,12 +76,13 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
         } else if indexPath == [0,1] {
             let cell2 = self.tableView.dequeueReusableCell(withIdentifier: "cell2")
             return cell2!
-        } else if indexPath == [0,2] {
-            let cell3 = self.tableView.dequeueReusableCell(withIdentifier: "cell3")
-            return cell3!
-        } else { //if indexPath == [0,3] {
+        } else {//if indexPath == [0,2] {
             let cell4 = self.tableView.dequeueReusableCell(withIdentifier: "cell4")
             return cell4!
+            //        } else { //if indexPath == [0,3] {
+            //            let cell3 = self.tableView.dequeueReusableCell(withIdentifier: "cell3")
+            //            return cell3!
+
         }
     }
     
