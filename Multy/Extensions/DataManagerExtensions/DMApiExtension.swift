@@ -126,6 +126,12 @@ extension DataManager {
     func getWalletsVerbose(_ token: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         apiManager.getWalletsVerbose(token) { (answer, err) in
             if err == nil {
+//                if (answer?["code"] as? NSNumber)?.intValue == 200 {
+//                    print("getWalletsVerbose:\n \(answer ?? ["":""])")
+//                    let walletsArrayFromApi = answer!["wallets"] as! NSArray
+//                    let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi)
+//                    print(walletsArr)
+//                }
                 completion(answer, nil)
             } else {
                 completion(nil, err)

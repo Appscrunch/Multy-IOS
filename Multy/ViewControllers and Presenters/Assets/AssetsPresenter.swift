@@ -167,13 +167,14 @@ class AssetsPresenter: NSObject {
     
     func getWalletVerbose() {
         DataManager.shared.getWalletsVerbose(account!.token) { (answer, err) in
-//            if (answer?["code"] as? NSNumber)?.intValue == 200 {
-//                print("getWalletsVerbose:\n \(answer)")
-//                let walletsArray = answer!["wallets"] as! NSArray
-//                
-//                
+            if (answer?["code"] as? NSNumber)?.intValue == 200 {
+                print("getWalletsVerbose:\n \(answer)")
+                let walletsArray = answer!["wallets"] as! NSArray
+            }
+//
+//                DataManager.shared.updateAccount(<#T##accountDict: NSDictionary##NSDictionary#>, completion: <#T##(AccountRLM?, NSError?) -> ()#>)
 //                DataManager.shared.updateAccount(answer!["wallets"] as! NSArray, completion: { (account, error) in
-//                    
+//
 //                })
 //            print("OK")
 //            print(answer ?? "")

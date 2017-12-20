@@ -14,6 +14,7 @@ class SecureViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isUserInteractionEnabled = false
         let appDel = UIApplication.shared.delegate as! AppDelegate
         appDel.presentedVC = self
         
@@ -24,8 +25,10 @@ class SecureViewController: UIViewController {
                 let alert = UIAlertController(title: "Access Denied", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                appDel.openedAlert = alert
             } else {
                 self.dismiss(animated: true, completion: nil)
+                self.tabBarController?.tabBar.isUserInteractionEnabled = true
             }
         }
     }

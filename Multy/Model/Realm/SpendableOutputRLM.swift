@@ -12,6 +12,17 @@ class SpendableOutputRLM: Object {
     @objc dynamic var transactionOutID = NSNumber(value: 0)      // UInt32
     @objc dynamic var transactionOutScript = String()
     
+    public class func initWithArray(spendableArray: NSArray) -> List<SpendableOutputRLM> {
+        let outputs = List<SpendableOutputRLM>()
+        
+        for outputInfo in spendableArray {
+            let output = SpendableOutputRLM.initWithInfo(addressInfo: outputInfo as! NSDictionary)
+            outputs.append(output)
+        }
+        
+        return outputs
+    }
+    
     public class func initWithInfo(addressInfo: NSDictionary) -> SpendableOutputRLM {
      
         let spendable = SpendableOutputRLM()

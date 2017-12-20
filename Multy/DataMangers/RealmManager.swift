@@ -191,6 +191,10 @@ class RealmManager: NSObject {
             }
         }
     }
+//     public func updateAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
+//    public func updateAccountWallets(_ wallets) {
+//        
+//    }
     
     public func createWallet(_ walletDict: Dictionary<String, Any>, completion: @escaping (_ account : UserWalletRLM?, _ error: NSError?) -> ()) {
         getRealm { (realmOpt, error) in

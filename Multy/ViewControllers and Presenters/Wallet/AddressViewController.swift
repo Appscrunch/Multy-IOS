@@ -16,6 +16,8 @@ class AddressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.presentedVC = self
         self.makeQRCode()
         self.addressLbl.text = self.wallet?.address
         

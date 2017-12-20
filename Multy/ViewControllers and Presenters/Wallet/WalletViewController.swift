@@ -24,7 +24,7 @@ class WalletViewController: UIViewController {
         
         DataManager.shared.getOneWalletVerbose(presenter.account!.token,
                                                walletID: presenter.wallet!.walletID) { (dict, error) in
-            
+            print("\n\nok\n\n")
         }
     }
     
