@@ -19,6 +19,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var isFirstLaunch = true
     
+    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -40,6 +42,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MARK: test
 //        progressHUD.show()
         presenter.auth()
+        
+        self.createAlert()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +67,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.presenter.updateWalletsInfo()
         }
         self.isFirstLaunch = false
+    }
+    
+    func createAlert() {
+        actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
+            self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
+        }))
+        //            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
+        //                //go to import wallet
+        //            }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     }
     
     func backUpView() {
@@ -279,14 +293,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.presenter.account == nil {
                 break
             }
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-            actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
-                self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
-            }))
-//            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
-//                //go to import wallet
-//            }))
-            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             self.present(actionSheet, animated: true, completion: nil)
         case [0,2]:
             if self.presenter.account == nil {
