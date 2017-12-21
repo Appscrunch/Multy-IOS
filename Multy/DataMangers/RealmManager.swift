@@ -9,7 +9,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 5
+    let schemaVersion : UInt64 = 6
     
     private override init() {
         super.init()
@@ -278,14 +278,33 @@ class RealmManager: NSObject {
             }
         }
     }
-    // для саши
+    
     public func updateWalletsInAcc(arrOfWallets: List<UserWalletRLM>, completion: @escaping(_ account: AccountRLM?, _ error: NSError?)->()) {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
                 let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
                 if acc != nil {
+                    let accWallets = acc!.wallets
+                    let newWallets = List<UserWalletRLM>()
+                    
+                    for wallet in arrOfWallets {
+                        let modifiedWallet = accWallets.filter("walletID = \(wallet.walletID)").first
+                        
+                        try! realm.write {
+                            if modifiedWallet != nil {
+                                modifiedWallet!.addresses = wallet.addresses
+                                newWallets.append(modifiedWallet!)
+                            } else {
+                                newWallets.append(wallet)
+                            }
+                        }
+                    }
+                    
                     try! realm.write {
-                        acc?.wallets = arrOfWallets
+                        
+                        
+                        acc!.wallets = newWallets
+//                        acc?.wallets = arrOfWallets
                         completion(acc, nil)
                     }
                 } else {

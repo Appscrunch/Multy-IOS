@@ -56,7 +56,7 @@ class WalletTableViewCell: UITableViewCell {
         self.walletNameLbl.text = self.wallet?.name
         self.cryptoSumLbl.text  = "\(self.wallet?.sumInCrypto ?? 0.0)"
         self.cryptoNameLbl.text = self.wallet?.cryptoName
-        self.fiatSumLbl.text = "\(self.wallet?.sumInFiat ?? 0.0) \(self.wallet?.fiatSymbol ?? "$")"
+        self.fiatSumLbl.text = "\(wallet!.sumInCrypto * exchangeCourse) \(self.wallet!.fiatSymbol)"
     }
     
 }

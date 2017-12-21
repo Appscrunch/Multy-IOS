@@ -39,7 +39,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.presenter.updateWalletsInfo()
+//        self.presenter.updateWalletsInfo()
         if self.presenter.isJailed {
             self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
         }

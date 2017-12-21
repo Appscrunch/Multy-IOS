@@ -68,8 +68,7 @@ class AssetsPresenter: NSObject {
         DataManager.shared.getAccount { (acc, err) in
             if acc != nil {
                 self.account = acc
-                self.fetchAssets()
-//                self.getWalletVerbose()
+                self.getWalletVerbose()
             }
         }
     }
@@ -114,28 +113,6 @@ class AssetsPresenter: NSObject {
     //////////////////////////////////////////////////////////////////////
     //test
     
-    func fetchAssets() {
-        guard account?.token != nil else {
-            return
-        }
-        
-        assetsVC?.progressHUD.show()
-        DataManager.shared.fetchAssets(account!.token, completion: { (wallets, error) in
-            if wallets == nil || wallets is NSNull {
-                self.assetsVC?.progressHUD.hide()
-                
-                return
-            }
-            
-            DataManager.shared.updateAccount(["wallets" : wallets], completion: { (account, error) in
-                self.account = account
-                self.assetsVC?.progressHUD.hide()
-            })
-            
-            print("wallets: \(wallets)")
-        })
-    }
-    
     func fetchTickets() {
         DataManager.shared.apiManager.getTickets(account!.token, direction: "") { (dict, error) in
             guard dict != nil  else {
@@ -176,7 +153,8 @@ class AssetsPresenter: NSObject {
             } else {
                 let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
-                    print(acc)
+                    self.account = acc
+//                    print(acc)
                 })
             }
             
