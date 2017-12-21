@@ -8,6 +8,9 @@ import ZFRippleButton
 class BackupSeedPhraseViewController: UIViewController {
 
     @IBOutlet weak var continueBtn: ZFRippleButton!
+    @IBOutlet weak var restartBtn: UIButton!
+    @IBOutlet weak var restartLbl: UILabel!
+    @IBOutlet weak var infoIconImg: UIImageView!
     
     var isRestore = false
     
@@ -22,6 +25,7 @@ class BackupSeedPhraseViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect.zero
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        self.uiForRestore()
     }
     
     override func viewDidLayoutSubviews() {
@@ -29,6 +33,14 @@ class BackupSeedPhraseViewController: UIViewController {
         self.continueBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                      UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                        gradientOrientation: .horizontal)
+    }
+    
+    func uiForRestore() {
+        if self.isRestore {
+            self.restartBtn.isEnabled = false
+            self.restartLbl.isHidden = true
+            self.infoIconImg.isHidden = true
+        }
     }
     
     @IBAction func continueAction(_ sender: Any) {

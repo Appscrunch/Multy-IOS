@@ -18,6 +18,8 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     var delegate: CustomFeeRateProtocol?
     
+    var rate = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -33,7 +35,10 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             
             self.topNameLbl.text = "Satoshi per byte"
             self.topPriceTf.placeholder = "Enter Satohi per byte here"
-            
+            self.topPriceTf.placeholder = "0"
+            if self.rate != 0 {
+                self.topPriceTf.text = "\(rate)"
+            }
             self.topPriceTf.becomeFirstResponder()
         default: return
         }

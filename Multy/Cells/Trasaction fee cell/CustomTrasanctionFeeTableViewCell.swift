@@ -24,12 +24,12 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
     }
     
     func setupUIForBtc() {
-        self.middleLbl.isHidden = true
+//        self.middleLbl.isHidden = true
         self.checkImg.isHidden = false
-        self.toplbl.isHidden = false
-        self.valuelbl.isHidden = false
+//        self.toplbl.isHidden = false
+//        self.valuelbl.isHidden = false
         
-        self.valuelbl.text = "\(Int(self.value))"
+//        self.valuelbl.text = "\(Int(self.value))"
     }
     
     func reloadUI() {

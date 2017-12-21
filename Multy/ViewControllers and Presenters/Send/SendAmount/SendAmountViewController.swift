@@ -171,6 +171,12 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.text == "" {
+            if (string as NSString).doubleValue > self.presenter.maxAllowedToSpend {
+                self.presentWarning(message: "You trying to enter sum more then you have")
+                return false
+            }
+        }
         if (string != "," || string != ".") && ((self.topSumLbl.text! + string) as NSString).doubleValue > self.presenter.maxAllowedToSpend {
             if string != "" {
                 self.presentWarning(message: "You trying to enter sum more then you have")
