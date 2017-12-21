@@ -145,7 +145,7 @@ class AssetsPresenter: NSObject {
             print("getWalletOutputs: \(dict)")
         }
     }
-    // для саши
+    
     func getWalletVerbose() {
         DataManager.shared.getWalletsVerbose(account!.token) { (walletsArrayFromApi, err) in
             if err != nil {
@@ -154,11 +154,16 @@ class AssetsPresenter: NSObject {
                 let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
-//                    print(acc)
+                    self.createTestTrans()
                 })
             }
             
         }
+    }
+    
+    func createTestTrans() {
+        var binData = account!.binaryDataString.createBinaryData()!
+        DataManager.shared.coreLibManager.testTransaction(from: &binData, wallet: account!.wallets[0])
     }
 //        DataManager.shared.getWalletsVerbose(account!.token) { (answer, err) in
 //            if (answer?["code"] as? NSNumber)?.intValue == 200 {

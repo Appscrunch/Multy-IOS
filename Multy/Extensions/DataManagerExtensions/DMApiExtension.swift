@@ -134,6 +134,14 @@ extension DataManager {
                     let walletsArrayFromApi = answer!["wallets"] as! NSArray
 //                    let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi)
                     completion(walletsArrayFromApi, nil)
+                } else {
+                    //MARK: delete
+                    if answer!["wallets"] is NSNull {
+                        return
+                    }
+                    let walletsArrayFromApi = answer!["wallets"] as! NSArray
+                    //                    let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi)
+                    completion(walletsArrayFromApi, nil)
                 }
             } else {
                 completion(nil, err)

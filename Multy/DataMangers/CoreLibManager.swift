@@ -6,20 +6,18 @@ import UIKit
 
 class CoreLibManager: NSObject {
     static let shared = CoreLibManager()
+    let donationAddress = "myzc96ighfvKRAb1EsizgKyKFZboc8mSdh"
     
-    func testTransaction(from binaryData: inout BinaryData, currencyID: UInt32, walletID: UInt32, addressID: UInt32) {
-        let dict = createAddress(currencyID: currencyID, walletID: walletID, addressID: addressID, binaryData: &binaryData)
+    func testTransaction(from binaryData: inout BinaryData, wallet: UserWalletRLM) {
+        let dict = createAddress(currencyID: wallet.chain.uint32Value, walletID: wallet.walletID.uint32Value, addressID: 0, binaryData: &binaryData)
         createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
                           sendAddress: " ",
-                          availableSum: "100",
                           sendAmountString: "10",
                           feeAmountString: "10",
-                          donationAddress: "address",
+                          isDonationExists: true,
                           donationAmount: "10",
-                          txid: "trans",
-                          txoutid: 22,
-                          txoutamount: 10,
-                          txoutscript: "script")
+                          wallet: wallet,
+                          binaryData: &binaryData)
     }
     
     func createMnemonicPhraseArray() -> Array<String> {
@@ -182,6 +180,47 @@ class CoreLibManager: NSObject {
         return walletDict
     }
     
+    func createPrivateKey(currencyID: UInt32, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> OpaquePointer? {
+        let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
+        let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
+        print("mmk: \(String(describing: mmk))")
+        
+        //HD Account
+        let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        //New address
+        let newAddressPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        //Private
+        let addressPrivateKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+
+        
+        let mHDa = make_hd_account(masterKeyPointer.pointee, Currency.init(currencyID), walletID, newAccountPointer)
+        if mHDa != nil {
+            let _ = returnErrorString(opaquePointer: mHDa!, mask: "mHDa")
+            
+            return nil
+        }
+        
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, addressID, newAddressPointer)
+        if mHDla != nil {
+            let _ = returnErrorString(opaquePointer: mHDla!, mask: "mHDla")
+            
+            return nil
+        }
+        
+        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        if gakPRIV != nil {
+            let _ = returnErrorString(opaquePointer: gakPRIV!, mask: "gakPRIV")
+            
+            return nil
+        } else {
+            return addressPrivateKeyPointer.pointee
+        }
+    }
+    
     func createAddress(currencyID: UInt32, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> Dictionary<String, Any>? {
         let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -252,6 +291,8 @@ class CoreLibManager: NSObject {
         } else {
             privateKeyString = String(cString: privateKeyStringPointer.pointee!)
             addressDict["privateKey"] = privateKeyString
+            
+            addressDict["addressPrivateKeyPointer"] = addressPublicKeyPointer.pointee
         }
         
         if ktsPUBL != nil {
@@ -313,37 +354,60 @@ class CoreLibManager: NSObject {
         print("currency: \(currency)")
         
         amountActivity()
-//        createTransaction(addressPointer: newAddressPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmountString: "20000", donationAddress: "", donationAmount: "10000000", txid: "createTransaction", txoutid: 1, txoutamount: 804, txoutscript: "a914bddce1db77593a7ac8d67f0d488c4311d5103ffa87")
+//        createTransaction(addressPointer: newAddressPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmountString: "20000", donationAddress: "", donationAmount: "10000000", txid: "`x", txoutid: 1, txoutamount: 804, txoutscript: "a914bddce1db77593a7ac8d67f0d488c4311d5103ffa87")
     }
     
-    func createTransaction(addressPointer: OpaquePointer, sendAddress: String, availableSum: String, sendAmountString: String, feeAmountString: String, donationAddress: String, donationAmount: String, txid: String, txoutid: UInt32, txoutamount: UInt32, txoutscript: String) -> String {
-//        let currencyPointer = UnsafeMutablePointer<Currency>.allocate(capacity: 1)
-//        let gac = get_account_currency(addressPointer, currencyPointer)
-//        print("gac: \(gac)")
-//
-//        let currency : Currency = currencyPointer.pointee
-//        print("another currency: \(currency)")
+    func getAmountPerByte() {
+        
+    }
+    
+    func createTransaction(addressPointer: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, wallet: UserWalletRLM, binaryData: inout BinaryData) -> String {
         
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         let mt = make_transaction(addressPointer, transactionPointer)
         if mt != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(mt)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            print("\(errrString) -- \(UINT64_MAX)")
+            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
         }
         
+        //fee
+        let fee = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgf = transaction_get_fee(transactionPointer.pointee, fee)
+        if tgf != nil {
+            let _ = returnErrorString(opaquePointer: tgf!, mask: "transaction_get_fee")
+        }
         
+        //Amount
+        setAmountValue(key: "amount_per_byte", value: feeAmountString, pointer: fee.pointee!)
+        //        setAmountValue(key: "max_amount_per_byte", value: feeAmountString, pointer: fee.pointee!) // optional
+        //detect ouputs
+        
+        let estimate = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        let tet = transaction_estimate_total_fee(transactionPointer.pointee, 2, 2, estimate)
+        if tet != nil {
+            let _ = returnErrorString(opaquePointer: tet!, mask: "transaction_estimate_total_fee")
+        }
+        
+        let ats = amount_to_string(estimate.pointee, amountStringPointer)
+        if ats != nil {
+            let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
+        }
+        let amountString = String(cString: amountStringPointer.pointee!)
+
         //spendable info
         let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let tas = transaction_add_source(transactionPointer.pointee, transactionSource)
         
-        setAmountValue(key: "amount", value: String(txoutamount), pointer: transactionSource.pointee!)
-        setBinaryDataValue(key: "prev_tx_hash", value: txid, pointer: transactionSource.pointee!)
-        setIntValue(key: "prev_tx_out_index", value: txoutid, pointer: transactionSource.pointee!)
-        setBinaryDataValue(key: "prev_tx_out_script_pubkey", value: txoutscript, pointer: transactionSource.pointee!)
+//        setAmountValue(key: "amount", value: String(txoutamount), pointer: transactionSource.pointee!)
+//        setBinaryDataValue(key: "prev_tx_hash", value: txid, pointer: transactionSource.pointee!)
+//        setIntValue(key: "prev_tx_out_index", value: txoutid, pointer: transactionSource.pointee!)
+//        setBinaryDataValue(key: "prev_tx_out_script_pubkey", value: txoutscript, pointer: transactionSource.pointee!)
+        
+        let privateKey = createPrivateKey(currencyID: 0, walletID: 0, addressID: 0, binaryData: &binaryData)
+        setPrivateKeyValue(key: "private_key", value: privateKey!, pointer: transactionSource.pointee!)
+        
         
         //address
         let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -352,12 +416,14 @@ class CoreLibManager: NSObject {
         setStringValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
         setAmountValue(key: "amount", value: sendAmountString, pointer: transactionDestination.pointee!)
         
-        //fee
-        let fee = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        transaction_get_fee(transactionPointer.pointee, fee)
-        
-        setAmountValue(key: "amount_per_byte", value: feeAmountString, pointer: fee.pointee!)
-//        setAmountValue(key: "max_amount_per_byte", value: feeAmountString, pointer: fee.pointee!) // optional
+        //donation
+        if isDonationExists {
+            let donationDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+            transaction_add_destination(transactionPointer.pointee, donationDestination)
+            
+            setStringValue(key: "address", value: donationAddress, pointer: donationDestination.pointee!)
+            setAmountValue(key: "amount", value: donationAmount, pointer: donationDestination.pointee!)
+        }
         
         //final
         let serializedTransaction = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
@@ -589,6 +655,19 @@ class CoreLibManager: NSObject {
             let errrString = String(cString: pointer!.pointee.message)
             
             print("\(errrString))")
+        }
+    }
+    
+    func setPrivateKeyValue(key: String, value: OpaquePointer, pointer: OpaquePointer) {
+        let stringKey = key.UTF8CStringPointer
+        
+        let pspkv = properties_set_private_key_value(pointer, stringKey, value)
+        
+        if pspkv != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(pspkv)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("properties_set_private_key_value: \(errrString))")
         }
     }
     

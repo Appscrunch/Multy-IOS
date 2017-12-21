@@ -135,7 +135,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

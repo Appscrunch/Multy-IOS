@@ -88,7 +88,9 @@ class UserWalletRLM: Object {
         }
         
         if let addresses = walletInfo["addresses"] {
-            self.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
+            if !(addresses is NSNull) {
+                self.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
+            }
         }
         
         if let name = walletInfo["WalletName"] {

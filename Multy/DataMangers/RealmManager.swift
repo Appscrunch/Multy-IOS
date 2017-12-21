@@ -300,6 +300,15 @@ class RealmManager: NSObject {
                         }
                     }
                     
+                    //append wallets without spendOut
+//                    for wallet in accWallets {
+//                        let unmodifiedWallet = newWallets.filter("walletID = \(wallet.walletID)").first
+//
+//                        if (unmodifiedWallet == nil) {
+//                            newWallets.append(wallet)
+//                        }
+//                    }
+                    
                     try! realm.write {
                         
                         
