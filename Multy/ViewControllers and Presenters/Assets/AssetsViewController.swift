@@ -17,6 +17,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var isSeedBackupOnScreen = false
     
+    var isFirstLaunch = true
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -51,6 +53,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
+        self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
+        if !self.isFirstLaunch {
+            self.presenter.updateWalletsInfo()
+        }
+        self.isFirstLaunch = false
     }
     
     func backUpView() {
@@ -142,15 +154,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     //////////////////////////////////////////////////////////////////////
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
-        self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
-        if presenter.account != nil {
-//            progressHUD.show()
-            presenter.getWalletVerbose()
-        }
-    }
+    
     
     //MARK: Setup functions
     

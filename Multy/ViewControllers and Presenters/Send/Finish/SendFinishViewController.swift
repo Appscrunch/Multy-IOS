@@ -41,7 +41,8 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.addressLbl.text = self.presenter.addressToStr
         self.walletNameLbl.text = self.presenter.walletFrom?.name
         self.walletCryptoSumAndCurrencyLbl.text = "\(self.presenter.walletFrom?.sumInCrypto ?? 0.0) \(self.presenter.walletFrom?.cryptoName ?? "")"
-        self.walletFiatSumAndCurrencyLbl.text = "\(self.presenter.walletFrom?.sumInFiat ?? 0.0) \(self.presenter.walletFrom?.fiatName ?? "")"
+        let fiatSum = ((self.presenter.walletFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
+        self.walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(self.presenter.walletFrom?.fiatName ?? "")"
         self.transactionFeeCostLbl.text = "\(self.presenter.transactionObj?.sumInCrypto ?? 0.0) \(self.presenter.transactionObj?.cryptoName ?? "")/\(self.presenter.transactionObj?.sumInFiat ?? 0.0) \(self.presenter.transactionObj?.fiatName ?? "")"
         self.transactionSpeedNameLbl.text = "\(self.presenter.transactionObj?.speedName ?? "") "
         self.transactionSpeedTimeLbl.text =  "\(self.presenter.transactionObj?.speedTimeString ?? "")"

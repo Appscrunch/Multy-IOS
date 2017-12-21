@@ -59,7 +59,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     func setupDonationUI() {
         self.donationTF.text = "\(self.presenter.donationInCrypto ?? 0.0)"
         self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
-        self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat ?? 0.0)"
+        self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat?.fixedFraction(digits: 2) ?? "0.00")"
     }
     
     func registerCells() {
