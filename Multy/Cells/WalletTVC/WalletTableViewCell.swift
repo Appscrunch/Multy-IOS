@@ -21,6 +21,11 @@ class WalletTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        self.backView.layer.shadowColor = UIColor.black.cgColor
+        self.backView.layer.shadowOpacity = 0.1
+        self.backView.layer.shadowOffset = .zero
+        self.backView.layer.shadowRadius = 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,9 +33,9 @@ class WalletTableViewCell: UITableViewCell {
     }
     
     
-    func makeshadow() {
-        self.backView.dropShadow(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), opacity: 1.0, offSet: CGSize(width: -1, height: 1), radius: 4, scale: true)
-    }
+//    func makeshadow() {
+//        self.backView.dropShadow(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), opacity: 1.0, offSet: CGSize(width: -1, height: 1), radius: 4, scale: true)
+//    }
     
     func makeBlueBorderAndArrow() {
         self.backView.layer.borderWidth = 2
@@ -53,10 +58,11 @@ class WalletTableViewCell: UITableViewCell {
 //        if self.wallet?.cryptoName == "BTC" {
             self.tokenImage.image = #imageLiteral(resourceName: "btcIconBig")
 //        }
+        let sumInFiat = ((self.wallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
         self.walletNameLbl.text = self.wallet?.name
-        self.cryptoSumLbl.text  = "\(self.wallet?.sumInCrypto ?? 0.0)"
+        self.cryptoSumLbl.text  = self.wallet?.sumInCrypto.fixedFraction(digits: 8)
         self.cryptoNameLbl.text = self.wallet?.cryptoName
-        self.fiatSumLbl.text = "\(wallet!.sumInCrypto * exchangeCourse) \(self.wallet!.fiatSymbol)"
+        self.fiatSumLbl.text = "\(sumInFiat) \(self.wallet!.fiatSymbol)"
     }
     
 }

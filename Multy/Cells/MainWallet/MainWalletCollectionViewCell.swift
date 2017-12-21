@@ -30,9 +30,10 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     }
     
     func fillInCell() {
-        self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto ?? 0.0)"
+        let sumInFiat = ((self.wallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
+        self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0")"
         self.cryptoNameLabel.text = "\(wallet?.cryptoName ?? "")"
-        self.fiatAmountLabel.text = "\((wallet?.sumInCrypto)! * exchangeCourse)"
+        self.fiatAmountLabel.text = "\(sumInFiat)"
         self.fiatNameLabel.text = "\(wallet?.fiatName ?? "")"
         self.addressLabel.text = "\(wallet?.address ?? "")"
     }

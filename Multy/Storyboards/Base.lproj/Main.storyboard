@@ -17,10 +17,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Activity View Controller-->
         <scene sceneID="VPd-c9-EvE">
             <objects>
-                <viewController id="dmP-I8-1Pw" sceneMemberID="viewController">
+                <viewController id="dmP-I8-1Pw" customClass="ActivityViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1De-4d-wjN"/>
                         <viewControllerLayoutGuide type="bottom" id="u8k-fD-1Dr"/>
@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="-588" y="1557.5712143928038"/>
         </scene>
-        <!--View Controller-->
+        <!--Contacts View Controller-->
         <scene sceneID="htg-2c-S9y">
             <objects>
-                <viewController id="mgl-nb-TC2" sceneMemberID="viewController">
+                <viewController id="mgl-nb-TC2" customClass="ContactsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rpk-wf-apb"/>
                         <viewControllerLayoutGuide type="bottom" id="ivD-82-abP"/>
@@ -800,10 +800,10 @@ correctly</string>
             </objects>
             <point key="canvasLocation" x="497" y="576"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="Ds3-39-44j">
             <objects>
-                <viewController id="iYV-U9-fj0" sceneMemberID="viewController">
+                <viewController id="iYV-U9-fj0" customClass="SettingsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ydE-vw-AGj"/>
                         <viewControllerLayoutGuide type="bottom" id="WU9-9d-Ces"/>
