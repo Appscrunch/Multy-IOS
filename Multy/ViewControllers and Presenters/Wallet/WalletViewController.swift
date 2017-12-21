@@ -14,6 +14,8 @@ class WalletViewController: UIViewController {
     var presenter = WalletPresenter()
     var even = true
     
+    var isBackupOnScreen = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,10 +40,18 @@ class WalletViewController: UIViewController {
     }
     
     func backUpView() {
+        if self.isBackupOnScreen == false {
+            return
+        }
         let view = UIView()
         view.frame = CGRect(x: 16, y: (300 * (screenWidth / 375.0)) - 20, width: screenWidth - 32, height: 40)
         view.layer.cornerRadius = 20
         view.backgroundColor = .white
+        
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOpacity = 1
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 10
         
         if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
             view.isHidden = false
@@ -73,6 +83,7 @@ class WalletViewController: UIViewController {
         view.addSubview(btn)
         view.addSubview(image)
         self.tableView.addSubview(view)
+        self.isBackupOnScreen = false
     }
     
     @objc func goToSeed() {
@@ -91,19 +102,27 @@ class WalletViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if #available(iOS 11.0, *) {
+            
+        } else {
+            self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                       UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                         gradientOrientation: .topRightBottomLeft)
+        }
         
         self.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                     gradientOrientation: .topRightBottomLeft)
-//        self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                     gradientOrientation: .topRightBottomLeft)
         
         let headerCell = tableView.cellForRow(at:IndexPath(row: 0, section: 0)) as! MainWalletHeaderCell
         
         headerCell.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                         UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                           gradientOrientation: .topRightBottomLeft)
+        
+//        headerCell.podlojkaView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+//                                                            UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+//                                              gradientOrientation: .topRightBottomLeft)
     }
     
     @IBAction func sendAction(_ sender: Any) {
@@ -158,6 +177,14 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             
             //if have transactions isEmpty - false
             walletCell.changeState(isEmpty: true)
+            if indexPath == [0,1] {
+                walletCell.setCorners()
+//                walletCell.backgroundView?.backgroundColor = .red
+//                walletCell.backgroundView?.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+//                                                                      UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+//                                                        gradientOrientation: .topRightBottomLeft)
+            }
+            
             return walletCell
         }
     }

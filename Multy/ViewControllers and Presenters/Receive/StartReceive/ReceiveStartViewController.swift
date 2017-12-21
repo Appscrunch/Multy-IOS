@@ -91,7 +91,7 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let walletCell = cell as! WalletTableViewCell
-        walletCell.makeshadow()
+//        walletCell.makeshadow()
     }
     
     func updateUI() {

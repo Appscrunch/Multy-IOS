@@ -15,6 +15,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let presenter = AssetsPresenter()
     let progressHUD = ProgressHUD(text: "Getting Wallets...")
     
+    var isSeedBackupOnScreen = false
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -40,42 +42,52 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidAppear(_ animated: Bool) {
 //        self.presenter.updateWalletsInfo()
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         if self.presenter.isJailed {
             self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
+    
     func backUpView() {
+        if self.isSeedBackupOnScreen {
+            return
+        }
         let view = UIView()
         view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: 44)
         view.layer.cornerRadius = 20
         view.backgroundColor = #colorLiteral(red: 0.9229970574, green: 0.08180250973, blue: 0.2317947149, alpha: 1)
         
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOpacity = 1
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 10
+        
         if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
             view.isHidden = false
+            self.isSeedBackupOnScreen = true
+            let image = UIImageView()
+            image.image = #imageLiteral(resourceName: "warninngBigWhite")
+            image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
+            
+            let btn = UIButton()
+            btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
+            btn.setTitle("Backup is not executed", for: .normal)
+            btn.setTitleColor(.white, for: .normal)
+            btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
+            btn.contentHorizontalAlignment = .left
+            btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
+            
+            view.addSubview(btn)
+            view.addSubview(image)
+            self.view.addSubview(view)
         } else {
             view.isHidden = true
         }
-        
-        if self.tableView.subviews.contains(view) {
-            return
-        }
-        
-        let image = UIImageView()
-        image.image = #imageLiteral(resourceName: "warninngBigWhite")
-        image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
-        
-        let btn = UIButton()
-        btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
-        btn.setTitle("Backup is not executed", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
-        btn.contentHorizontalAlignment = .left
-        btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
-        
-        view.addSubview(btn)
-        view.addSubview(image)
-        self.view.addSubview(view)
     }
     
     @objc func goToSeed() {
@@ -212,7 +224,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 if presenter.isWalletExist() {
                     let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-                    walletCell.makeshadow()
+//                    walletCell.makeshadow()
                     walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
                     walletCell.fillInCell()
                     
@@ -230,7 +242,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case [0,3]:
             if self.presenter.account != nil {
                 let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-                walletCell.makeshadow()
+//                walletCell.makeshadow()
                 walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
                 walletCell.fillInCell()
                 
@@ -243,7 +255,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         default:
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-            walletCell.makeshadow()
+//            walletCell.makeshadow()
             walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
             walletCell.fillInCell()
             

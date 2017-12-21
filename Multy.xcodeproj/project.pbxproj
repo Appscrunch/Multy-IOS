@@ -77,6 +77,12 @@
 		45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */; };
 		45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */; };
 		45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949631FC766D3003C3A23 /* SendFinishViewController.swift */; };
+		45B0B0E61FEBEDE9005BB1C0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */; };
+		45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */; };
+		45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */; };
+		45B0B0ED1FEBF2CF005BB1C0 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EC1FEBF2CF005BB1C0 /* ContactsViewController.swift */; };
+		45B0B0F01FEBF30C005BB1C0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */; };
+		45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0F11FEBF326005BB1C0 /* SettingsPresenter.swift */; };
 		45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0CB7E1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift */; };
 		45B0CB811FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B0CB7F1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib */; };
 		45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */; };
@@ -245,6 +251,12 @@
 		45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountPresenter.swift; sourceTree = "<group>"; };
 		45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishPresenter.swift; sourceTree = "<group>"; };
 		45A949631FC766D3003C3A23 /* SendFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishViewController.swift; sourceTree = "<group>"; };
+		45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPresnter.swift; sourceTree = "<group>"; };
+		45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPresenter.swift; sourceTree = "<group>"; };
+		45B0B0EC1FEBF2CF005BB1C0 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		45B0B0F11FEBF326005BB1C0 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		45B0CB7E1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrRestoreBtnTableViewCell.swift; sourceTree = "<group>"; };
 		45B0CB7F1FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrRestoreBtnTableViewCell.xib; sourceTree = "<group>"; };
 		45B5CCA11FDA90DF0069BD46 /* NoInternetConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnectionViewController.swift; sourceTree = "<group>"; };
@@ -457,6 +469,9 @@
 		455EA8721FD841FF0093F69D /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				45B0B0E41FEBEDC3005BB1C0 /* Activity */,
+				45B0B0E91FEBF29D005BB1C0 /* Contacts */,
+				45B0B0EE1FEBF2F2005BB1C0 /* Settings */,
 				455EA8751FD842610093F69D /* CustomTabBarViewController.swift */,
 				451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */,
 			);
@@ -730,6 +745,33 @@
 				45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */,
 			);
 			path = Finish;
+			sourceTree = "<group>";
+		};
+		45B0B0E41FEBEDC3005BB1C0 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */,
+				45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		45B0B0E91FEBF29D005BB1C0 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				45B0B0EC1FEBF2CF005BB1C0 /* ContactsViewController.swift */,
+				45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		45B0B0EE1FEBF2F2005BB1C0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */,
+				45B0B0F11FEBF326005BB1C0 /* SettingsPresenter.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		45B5CCA01FDA90BA0069BD46 /* No InternetConnection */ = {
@@ -1179,11 +1221,13 @@
 				FA4D43EC1FC5CEE0003C7117 /* MainWalletHeaderCell.swift in Sources */,
 				FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */,
 				45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */,
+				45B0B0ED1FEBF2CF005BB1C0 /* ContactsViewController.swift in Sources */,
 				45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */,
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
 				45B5CCA91FDAC0B00069BD46 /* TextTableViewCell.swift in Sources */,
 				FA4D43DD1FC581CF003C7117 /* DMSocketExtension.swift in Sources */,
 				FA4D43DF1FC58730003C7117 /* TouchIDAuthentication.swift in Sources */,
+				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
 				FADC004C1FC323A900182E45 /* Socket.swift in Sources */,
 				45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */,
@@ -1230,18 +1274,22 @@
 				FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */,
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
+				45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,
 				FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */,
 				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
 				45DCF9D71FE19AFD005A9896 /* CustomFeePresenter.swift in Sources */,
+				45B0B0F01FEBF30C005BB1C0 /* SettingsViewController.swift in Sources */,
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
 				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
 				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
 				459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */,
+				45B0B0E61FEBEDE9005BB1C0 /* ActivityViewController.swift in Sources */,
 				455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */,
 				45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
 				FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */,
+				45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */,
 				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */,
