@@ -357,8 +357,48 @@ class CoreLibManager: NSObject {
 //        createTransaction(addressPointer: newAddressPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmountString: "20000", donationAddress: "", donationAmount: "10000000", txid: "`x", txoutid: 1, txoutamount: 804, txoutscript: "a914bddce1db77593a7ac8d67f0d488c4311d5103ffa87")
     }
     
-    func getAmountPerByte() {
+    func getTotalFee(addressPointer: OpaquePointer, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, wallet: UserWalletRLM) -> (String,  [SpendableOutputRLM]) {
         
+        //estimate number of ouputs
+        let threshold = UInt32(sendAmountString)! + UInt32(donationAmount)!
+        let outputs = DataManager.shared.fetchSpendableOutput(wallet: wallet)
+        let greedyOuts = DataManager.shared.greedySubSet(outputs: outputs, threshold: threshold)
+        
+        //create transaction
+        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mt = make_transaction(addressPointer, transactionPointer)
+        if mt != nil {
+            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
+        }
+        
+        //fee
+        let fee = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgf = transaction_get_fee(transactionPointer.pointee, fee)
+        if tgf != nil {
+            let _ = returnErrorString(opaquePointer: tgf!, mask: "transaction_get_fee")
+        }
+        
+        //Amount
+        setAmountValue(key: "amount_per_byte", value: feeAmountString, pointer: fee.pointee!)
+        //        setAmountValue(key: "max_amount_per_byte", value: feeAmountString, pointer: fee.pointee!) // optional
+        //detect ouputs
+        
+        let estimate = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        let tet = transaction_estimate_total_fee(transactionPointer.pointee, 2, 2, estimate)
+        if tet != nil {
+            let _ = returnErrorString(opaquePointer: tet!, mask: "transaction_estimate_total_fee")
+        }
+        
+        let ats = amount_to_string(estimate.pointee, amountStringPointer)
+        if ats != nil {
+            let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
+        }
+        
+        let amountString = String(cString: amountStringPointer.pointee!)
+        
+        return (amountString, greedyOuts)
     }
     
     func createTransaction(addressPointer: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, wallet: UserWalletRLM, binaryData: inout BinaryData) -> String {
@@ -465,12 +505,13 @@ class CoreLibManager: NSObject {
         
         print("\(tu) -- \(tSign) -- \(tSer)")
         
-        let data = serializedTransaction.pointee!.pointee.convertToData()
-        let str = data.hexEncodedString()
-        
-        print("end transaction")
-        
-        return str
+//        let data = serializedTransaction.pointee!.pointee.convertToData()
+//        let str = data.hexEncodedString()
+//
+//        print("end transaction")
+//
+//        return str
+        return ""
     }
     
     func amountActivity() {

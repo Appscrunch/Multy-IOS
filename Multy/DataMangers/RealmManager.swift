@@ -9,7 +9,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 6
+    let schemaVersion : UInt64 = 7
     
     private override init() {
         super.init()
@@ -19,8 +19,8 @@ class RealmManager: NSObject {
                 _ = Realm.Configuration(encryptionKey: masterKey!,
                                         schemaVersion: self.schemaVersion,
                                         migrationBlock: { migration, oldSchemaVersion in
-                                            if oldSchemaVersion < self.schemaVersion {
-                                                //some migration if needed
+                                            if oldSchemaVersion < 7 {
+                                                self.migrateFrom6To7(with: migration)
                                             }
                                         }
                 )
@@ -50,8 +50,11 @@ class RealmManager: NSObject {
             
             let realmConfig = Realm.Configuration(encryptionKey: masterKey!,
                                                   schemaVersion: self.schemaVersion,
-                                                  migrationBlock: nil
-            )
+                                                  migrationBlock: { migration, oldSchemaVersion in
+                                                    if oldSchemaVersion < 7 {
+                                                        self.migrateFrom6To7(with: migration)
+                                                    }
+            })
             
             do {
                 let realm = try Realm(configuration: realmConfig)
@@ -331,5 +334,56 @@ class RealmManager: NSObject {
                 }
             }
         }
+    }
+    
+    // MARK: - Migrations
+    func migrateFrom6To7(with migration: Migration) {
+        // Add an email property
+        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendOut) in
+            newSpendOut?["addressID"] = NSNumber(value: 0)
+        }
+    }
+    
+    func spendableOutput(wallet: UserWalletRLM) -> [SpendableOutputRLM] {
+        let ouputs = List<SpendableOutputRLM>()
+        
+        let addresses = wallet.addresses
+        for address in addresses {
+            for out in address.spendableOutput {
+                ouputs.append(out)
+            }
+        }
+        
+        let results = ouputs.sorted(by: { (out1, out2) -> Bool in
+            out1.transactionOutAmount.uint32Value > out2.transactionOutAmount.int32Value
+        })
+        
+        return results
+    }
+    
+    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt32) -> [SpendableOutputRLM] {
+        var sum = UInt32(0)
+        var result = outputs
+        
+        for output in outputs {
+            sum += output.transactionOutAmount.uint32Value
+        }
+        
+        if sum < threshold {
+            return [SpendableOutputRLM]()
+        }
+        
+        var index = 0
+        while index < result.count {
+            let output = result[index]
+            if sum > threshold + output.transactionOutAmount.uint32Value {
+                sum = sum - output.transactionOutAmount.uint32Value
+                result.remove(at: index)
+            } else {
+                index += 1
+            }
+        }
+        
+        return result
     }
 }

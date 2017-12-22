@@ -55,7 +55,7 @@ class AddressRLM: Object {
         
         if let spendableOutputs = addressInfo["spendableoutputs"] {
             if !(spendableOutputs is NSNull) {
-                addressRLM.spendableOutput = SpendableOutputRLM.initWithArray(spendableArray: spendableOutputs as! NSArray)
+                addressRLM.spendableOutput = SpendableOutputRLM.initWithArray(spendableArray: spendableOutputs as! NSArray, addressID: addressRLM.addressID)
             }
         }
         

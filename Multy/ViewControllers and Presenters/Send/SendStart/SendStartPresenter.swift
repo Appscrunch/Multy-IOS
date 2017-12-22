@@ -56,6 +56,7 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         switch array.count {
         case 1:                              // shit in qr
             let messageFromQr = array[0]
+            self.adressSendTo = messageFromQr
             print(messageFromQr)
         case 2:                              // chain name + address
 //            let blockchainName = array[0]

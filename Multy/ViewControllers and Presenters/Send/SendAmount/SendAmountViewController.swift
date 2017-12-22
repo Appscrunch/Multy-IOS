@@ -245,6 +245,33 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             sendFinishVC.presenter.sumInCrypto = self.presenter.sumInCrypto
             sendFinishVC.presenter.isCrypto = self.presenter.isCrypto
             sendFinishVC.presenter.endSum = self.presenter.getNextBtnSum()
+            
+            
+            test()
+        }
+    }
+    
+    func test () {
+        DataManager.shared.getAccount { (account, error) in
+            let core = DataManager.shared.coreLibManager
+            let wallet = self.presenter.wallet!
+            var binData = account!.binaryDataString.createBinaryData()!
+            
+            let addressData = core.createAddress(currencyID: wallet.chain.uint32Value,
+                                                    walletID: wallet.walletID.uint32Value,
+                                                    addressID: 0,
+                                                    binaryData: &binData)
+            
+            
+            let feeRate = core.getTotalFee(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                           sendAmountString: "2000000",
+                                           feeAmountString: "20",
+                                           isDonationExists: true,
+                                           donationAmount: "10000",
+                                           wallet: wallet)
+            
+//            let outputs = DataManager.shared.fetchSpendableOutput(wallet: presenter.wallet!)
+//            let subset = DataManager.shared.greedySubSet(outputs: outputs, threshold: 130000)
         }
     }
 }

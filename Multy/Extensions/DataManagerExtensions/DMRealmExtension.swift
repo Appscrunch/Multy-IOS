@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import Foundation
+import RealmSwift
 
 extension DataManager {
     func writeSeedPhrase(_ seedPhrase : String, completion: @escaping (_ error: NSError?) -> ()) {
@@ -55,5 +56,13 @@ extension DataManager {
     
     func finishRealmSession() {
         realmManager.finishRealmSession()
+    }
+    
+    func fetchSpendableOutput(wallet: UserWalletRLM) -> [SpendableOutputRLM] {
+        return realmManager.spendableOutput(wallet: wallet)
+    }
+    
+    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt32) -> [SpendableOutputRLM] {
+        return realmManager.greedySubSet(outputs: outputs, threshold: threshold)
     }
 }
