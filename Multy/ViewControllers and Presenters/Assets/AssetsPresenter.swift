@@ -60,6 +60,8 @@ class AssetsPresenter: NSObject {
             
             self.account = account
             
+            DataManager.shared.socketManager.start()
+            
             completion("ok")
         }
     }

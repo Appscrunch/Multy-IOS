@@ -44,6 +44,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         presenter.auth()
         
         self.createAlert()
+        
+        NotificationCenter.default.addObserver(self.tableView, selector: #selector(self.tableView.reloadData), name: NSNotification.Name("exchageUpdated"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

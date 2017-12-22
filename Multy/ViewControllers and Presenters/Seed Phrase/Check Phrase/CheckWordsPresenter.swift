@@ -41,6 +41,8 @@ class CheckWordsPresenter: NSObject {
             self.checkWordsVC?.navigationController?.popToRootViewController(animated: true)
             self.checkWordsVC?.view.isUserInteractionEnabled = true
             self.checkWordsVC?.progressHUD.hide()
+            
+            DataManager.shared.socketManager.start()
         }
     }
 }
