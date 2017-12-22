@@ -282,6 +282,7 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
             customVC.presenter.chainId = self.presenter.choosenWallet?.chain
             customVC.delegate = self.presenter
+            customVC.rate = Int(self.presenter.customFee)
             self.presenter.selectedIndexOfSpeed = indexPath.row
             self.navigationController?.pushViewController(customVC, animated: true)
             

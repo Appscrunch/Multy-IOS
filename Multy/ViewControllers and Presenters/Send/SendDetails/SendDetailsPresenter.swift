@@ -27,7 +27,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     let donationObj = DonationObj()
     
 
-    var customFee = 0.0
+    var customFee = 0
 
     var feeRate: NSDictionary?{
         didSet {
@@ -95,7 +95,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 5:
             self.trasactionObj.speedName = "Custom"
             self.trasactionObj.speedTimeString = ""
-            self.trasactionObj.sumInCrypto = self.customFee
+            self.trasactionObj.sumInCrypto = Double(self.customFee)
             self.trasactionObj.sumInFiat = 0.0
             self.trasactionObj.cryptoName = "Satoshi per Byte"
             self.trasactionObj.fiatName = "USD"
@@ -147,7 +147,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
         cell.value = firstValue
         cell.setupUIForBtc()
-        self.customFee = firstValue
+        self.customFee = Int(firstValue)
         self.sendDetailsVC?.tableView.reloadData()
     }
 }
