@@ -344,6 +344,8 @@ class RealmManager: NSObject {
         }
     }
     
+    //Greedy algorithm
+    
     func spendableOutput(wallet: UserWalletRLM) -> [SpendableOutputRLM] {
         let ouputs = List<SpendableOutputRLM>()
         
