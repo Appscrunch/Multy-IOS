@@ -28,6 +28,7 @@ class WalletViewController: UIViewController {
                                                walletID: presenter.wallet!.walletID) { (dict, error) in
             print("\n\nok\n\n")
         }
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +36,7 @@ class WalletViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView()
     }
