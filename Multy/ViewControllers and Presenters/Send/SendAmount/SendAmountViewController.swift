@@ -35,7 +35,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.presenter.setMaxAllowed()
         self.presenter.makeMaxSumWithFeeAndDonate()
         self.setSumInNextBtn()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,10 +47,17 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard), name: NSNotification.Name(rawValue: "hideKeyboard"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showKeyboard), name: NSNotification.Name(rawValue: "showKeyboard"), object: nil)
         self.amountTF.resignFirstResponder()
         self.amountTF.becomeFirstResponder()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
     @IBAction func backAction(_ sender: Any) {
@@ -126,12 +132,22 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    @objc func hideKeyboard() {
+        self.amountTF.resignFirstResponder()
+    }
+    
+    @objc func showKeyboard() {
+        self.amountTF.becomeFirstResponder()
+    }
+    
     @objc func keyboardWillShow(_ notification : Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             self.constraintNextBtnBottom.constant = inset.bottom
         }
     }
+    
+    
     
     @IBAction func maxAction(_ sender: Any) {
         if self.presenter.isCrypto {
@@ -231,11 +247,16 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     func setSumInNextBtn() {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
         let sumForBtn = self.presenter.getNextBtnSum()
         if self.presenter.isCrypto {
-            self.btnSumLbl.text = "\(sumForBtn) \(self.presenter.cryptoName)"
+            numberFormatter.maximumFractionDigits = 8
+            self.btnSumLbl.text = "\(numberFormatter.string(for: sumForBtn) ?? "0.0") \(self.presenter.cryptoName)"
         } else {
-            self.btnSumLbl.text = "\(sumForBtn) \(self.presenter.fiatName)"
+            numberFormatter.maximumFractionDigits = 2
+            self.btnSumLbl.text = "\(numberFormatter.string(for: sumForBtn) ?? "0.0") \(self.presenter.fiatName)"
         }
     }
     
