@@ -8,7 +8,7 @@ import Alamofire
 class ApiManager: NSObject {
     static let shared = ApiManager()
     
-    let apiUrl = "http://88.198.47.112:7778/"//"http://192.168.0.121:7778/"
+    let apiUrl = "http://88.198.47.112:6678/"//"http://192.168.0.121:7778/"
     let apiUrlTest = "http://192.168.0.125:8080/"
     let nonLocalURL = "http://88.198.47.112:7778/"
     
@@ -138,6 +138,8 @@ class ApiManager: NSObject {
         requestManager.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
+                
+                print("api/v1/wallet: \(response.result.value)")
                 if response.result.value != nil {
                     if ((response.result.value! as! NSDictionary) ["code"] != nil) {
                         completion(NSDictionary(), nil)
@@ -253,7 +255,7 @@ class ApiManager: NSObject {
         }
     }
     
-    func sendRawTransaction(_ token: String, _ transactionParameters: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func sendRawTransaction(_ token: String, walletID: NSNumber, _ transactionParameters: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -261,7 +263,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: TESTNET - send currency is 1
-        requestManager.request("\(self.apiUrl)api/v1/transaction/send/0", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/transaction/send/\(walletID)", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

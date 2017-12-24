@@ -571,7 +571,7 @@ class CoreLibManager: NSObject {
             let pointer = UnsafeMutablePointer<CustomError>(tSer)
             let errrString = String(cString: pointer!.pointee.message)
             
-            print("tu: \(errrString))")
+            print("tSer: \(errrString))")
         }
         
         print("\(tu) -- \(tSign) -- \(tSer)")

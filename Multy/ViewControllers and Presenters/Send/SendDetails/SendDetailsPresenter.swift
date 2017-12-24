@@ -126,9 +126,11 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     func checkMaxEvelable() {
         self.maxAllowedToSpend = (self.choosenWallet?.sumInCrypto)!
 //        self.maxAllowedToSpend = (self.choosenWallet?.sumInCrypto)! - self.trasactionObj.sumInCrypto
-        if self.donationObj.sumInCrypto! >= self.maxAllowedToSpend  {
+        if self.donationObj.sumInCrypto! > self.maxAllowedToSpend  {
 //            self.sendDetailsVC?.presentWarning(message: "Your donation sum and fee cost more than you have in wallet.\n\n Fee cost: \(self.trasactionObj.sumInCrypto) \(self.trasactionObj.cryptoName)\n Donation sum: \(self.donationObj.sumInCrypto ?? 0.0) \(self.cryptoName)\n Sum in Wallet: \(self.choosenWallet?.sumInCrypto ?? 0.0) \(self.cryptoName)")
             self.sendDetailsVC?.presentWarning(message: "Your donation more than you have in wallet.\n\nDonation sum: \(self.donationObj.sumInCrypto ?? 0.0) \(self.cryptoName)\n Sum in Wallet: \(self.choosenWallet?.sumInCrypto ?? 0.0) \(self.cryptoName)")
+        } else if self.donationObj.sumInCrypto! == self.maxAllowedToSpend {
+            self.sendDetailsVC?.presentWarning(message: "Your donation is equal your wallet sum.\n\nDonation sum: \(self.donationObj.sumInCrypto ?? 0.0) \(self.cryptoName)\n Sum in Wallet: \(self.choosenWallet?.sumInCrypto ?? 0.0) \(self.cryptoName)")
         } else {
             self.sendDetailsVC?.performSegue(withIdentifier: "sendAmountVC", sender: Any.self)
         }

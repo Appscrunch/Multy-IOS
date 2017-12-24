@@ -82,7 +82,7 @@ class AssetsPresenter: NSObject {
     }
     
     func isWalletExist() -> Bool {
-        return !(account == nil || account?.walletCount.intValue == 0)
+        return !(account == nil || account?.wallets.count == 0)
     }
     
     func openCreateWalletPopup() {

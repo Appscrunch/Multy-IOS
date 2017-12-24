@@ -8,6 +8,7 @@ import ZFRippleButton
 class BackupFinishViewController: UIViewController {
     
     @IBOutlet weak var greatBtn: ZFRippleButton!
+    @IBOutlet weak var bricksView: UIView!
     
     var isRestore = false
     
@@ -15,6 +16,9 @@ class BackupFinishViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bricksView.subviews.forEach({ $0.removeFromSuperview() })
+        bricksView.addSubview(BricksView(with: bricksView.bounds, and: 15))
     }
     
     override func viewDidLayoutSubviews() {

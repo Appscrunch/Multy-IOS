@@ -16,7 +16,7 @@ class CreateWalletPresenter: NSObject {
         
         var binData : BinaryData = account!.binaryDataString.createBinaryData()!
         
-        let dict = DataManager.shared.createNewWallet(for: &binData, CURRENCY_BITCOIN.rawValue, walletID: account!.walletCount as! UInt32)
+        let dict = DataManager.shared.createNewWallet(for: &binData, CURRENCY_BITCOIN.rawValue, walletID: UInt32(account!.wallets.count))
         
         let cell = mainVC?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
         

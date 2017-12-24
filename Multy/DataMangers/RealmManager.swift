@@ -321,6 +321,16 @@ class RealmManager: NSObject {
                         acc!.wallets.removeAll()
                         for wallet in newWallets {
                             acc!.wallets.append(wallet)
+                            
+                            acc!.wallets.last!.addresses.removeAll()
+                            for address in wallet.addresses {
+                                acc!.wallets.last!.addresses.append(address)
+                                
+                                acc!.wallets.last!.addresses.last!.spendableOutput.removeAll()
+                                for ouput in address.spendableOutput {
+                                    acc?.wallets.last!.addresses.last!.spendableOutput.append(ouput)
+                                }
+                            }
                         }
                         
 //                        acc!.wallets = newWallets

@@ -11,6 +11,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
     let progressHUD = ProgressHUD(text: "Getting Wallets...")
@@ -83,6 +84,11 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func backUpView() {
         if self.isSeedBackupOnScreen {
+            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+                backupView?.removeFromSuperview()
+                isSeedBackupOnScreen = false
+            }
+            
             return
         }
         let view = UIView()
@@ -113,6 +119,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             view.addSubview(btn)
             view.addSubview(image)
             self.view.addSubview(view)
+            backupView = view
         } else {
             view.isHidden = true
         }
@@ -284,23 +291,23 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        let wallet = presenter.account!.wallets[2]
-        var binData = presenter.account!.binaryDataString.createBinaryData()!
-        let newAddressDict = DataManager.shared.coreLibManager.createAddress(currencyID: wallet.chain.uint32Value,
-                                                                             walletID: wallet.walletID.uint32Value,
-                                                                             addressID: UInt32(wallet.addresses.count),
-                                                                             binaryData: &binData)
         
-        var parameters: Parameters = [ : ]
-        parameters["walletIndex"] = wallet.walletID
-        parameters["address"] = newAddressDict!["address"] as! String
-        parameters["addressIndex"] = UInt32(wallet.addresses.count)
-        
-        DataManager.shared.addAddress(presenter.account!.token, params: parameters) { (dict, error) in
-            print("addAddress:\n\(dict) -- \(error)")
-        }
-        */
+//        let wallet = presenter.account!.wallets[0]
+//        var binData = presenter.account!.binaryDataString.createBinaryData()!
+//        let newAddressDict = DataManager.shared.coreLibManager.createAddress(currencyID: wallet.chain.uint32Value,
+//                                                                             walletID: wallet.walletID.uint32Value,
+//                                                                             addressID: UInt32(wallet.addresses.count),
+//                                                                             binaryData: &binData)
+//
+//        var parameters: Parameters = [ : ]
+//        parameters["walletIndex"] = wallet.walletID
+//        parameters["address"] = newAddressDict!["address"] as! String
+//        parameters["addressIndex"] = UInt32(wallet.addresses.count)
+//
+//        DataManager.shared.addAddress(presenter.account!.token, params: parameters) { (dict, error) in
+//            print("addAddress:\n\(dict) -- \(error)")
+//        }
+ 
         if indexPath != [0, 1] && indexPath != [0, 0] {
             (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         }

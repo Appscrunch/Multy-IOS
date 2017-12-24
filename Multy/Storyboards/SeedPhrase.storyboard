@@ -513,19 +513,31 @@ Your wallet is protected!</string>
                                     <action selector="greatAction:" destination="6EH-xy-Qwn" eventType="touchUpInside" id="Z09-Lb-WH9"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nBQ-cz-rgU">
+                                <rect key="frame" x="52" y="173" width="271" height="42"/>
+                                <color key="backgroundColor" red="0.97619837519999997" green="0.98009961840000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nBQ-cz-rgU" secondAttribute="height" multiplier="271:42" id="02t-RF-TWZ"/>
+                                    <constraint firstAttribute="height" constant="42" id="1VF-C9-oQB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="t9x-FX-ph5" firstAttribute="top" secondItem="Qnt-XF-2lR" secondAttribute="bottom" constant="51" id="1jQ-jq-qAw"/>
                             <constraint firstItem="t9x-FX-ph5" firstAttribute="centerX" secondItem="J9H-T2-f7l" secondAttribute="centerX" id="ZOq-BE-mbJ"/>
+                            <constraint firstItem="nBQ-cz-rgU" firstAttribute="centerX" secondItem="J9H-T2-f7l" secondAttribute="centerX" id="aQQ-yd-mOs"/>
                             <constraint firstItem="V58-I7-0OT" firstAttribute="top" secondItem="rQ5-TK-TFt" secondAttribute="bottom" id="ahK-kf-Z4O"/>
                             <constraint firstAttribute="trailing" secondItem="t9x-FX-ph5" secondAttribute="trailing" constant="16" id="gXx-0C-L5P"/>
                             <constraint firstItem="t9x-FX-ph5" firstAttribute="leading" secondItem="J9H-T2-f7l" secondAttribute="leading" constant="16" id="hge-lF-Eld"/>
                             <constraint firstAttribute="trailing" secondItem="rQ5-TK-TFt" secondAttribute="trailing" id="rML-6s-zhJ"/>
                             <constraint firstItem="rQ5-TK-TFt" firstAttribute="leading" secondItem="J9H-T2-f7l" secondAttribute="leading" id="v82-b7-Lrm"/>
+                            <constraint firstItem="nBQ-cz-rgU" firstAttribute="width" secondItem="nBQ-cz-rgU" secondAttribute="height" multiplier="271:42" id="x9S-n1-PEY"/>
+                            <constraint firstItem="nBQ-cz-rgU" firstAttribute="top" secondItem="t9x-FX-ph5" secondAttribute="bottom" constant="30" id="xrX-sR-Fw3"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bricksView" destination="nBQ-cz-rgU" id="EbP-8n-YYh"/>
                         <outlet property="greatBtn" destination="rQ5-TK-TFt" id="AGy-k6-Qhy"/>
                     </connections>
                 </viewController>

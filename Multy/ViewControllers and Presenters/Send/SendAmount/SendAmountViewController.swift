@@ -312,7 +312,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
                 "transaction" : hexString
                 ] as [String : Any]
             
-            DataManager.shared.apiManager.sendRawTransaction(account!.token, params, completion: { (dict, error) in
+            DataManager.shared.apiManager.sendRawTransaction(account!.token, walletID: wallet.walletID, params, completion: { (dict, error) in
                 print("---------\(dict)")
             })
             
