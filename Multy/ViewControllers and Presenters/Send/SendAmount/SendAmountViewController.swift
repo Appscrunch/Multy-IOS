@@ -36,6 +36,8 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.presenter.makeMaxSumWithFeeAndDonate()
         self.setSumInNextBtn()
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard), name: NSNotification.Name(rawValue: "hideKeyboard"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showKeyboard), name: NSNotification.Name(rawValue: "showKeyboard"), object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,6 +54,10 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.amountTF.becomeFirstResponder()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.amountTF.becomeFirstResponder()
+    }
     
     
     @IBAction func backAction(_ sender: Any) {
@@ -126,12 +132,22 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    @objc func hideKeyboard() {
+        self.amountTF.resignFirstResponder()
+    }
+    
+    @objc func showKeyboard() {
+        self.amountTF.becomeFirstResponder()
+    }
+    
     @objc func keyboardWillShow(_ notification : Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             self.constraintNextBtnBottom.constant = inset.bottom
         }
     }
+    
+    
     
     @IBAction func maxAction(_ sender: Any) {
         if self.presenter.isCrypto {

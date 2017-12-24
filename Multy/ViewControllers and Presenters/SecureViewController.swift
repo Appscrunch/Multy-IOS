@@ -32,6 +32,8 @@ class SecureViewController: UIViewController {
             } else {
                 self.dismiss(animated: true, completion: nil)
                 self.tabBarController?.tabBar.isUserInteractionEnabled = true
+//                NotificationCenter.default.post(name: Notification.Name("hideKeyboard"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("showKeyboard"), object: nil)
             }
         }
     }

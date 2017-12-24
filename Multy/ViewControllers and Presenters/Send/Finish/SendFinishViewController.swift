@@ -22,6 +22,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var transactionSpeedTimeLbl: UILabel!
     @IBOutlet weak var transactionFeeCostLbl: UILabel! // exp: 0.002 BTC / 1.54 USD
     
+    @IBOutlet weak var btnTopConstraint: NSLayoutConstraint!
     
     let presenter = SendFinishPresenter()
     
@@ -49,6 +50,9 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.transactionFeeCostLbl.text = "\(self.presenter.transactionObj?.sumInCrypto ?? 0.0) \(self.presenter.transactionObj?.cryptoName ?? "")/\(self.presenter.transactionObj?.sumInFiat ?? 0.0) \(self.presenter.transactionObj?.fiatName ?? "")"
         self.transactionSpeedNameLbl.text = "\(self.presenter.transactionObj?.speedName ?? "") "
         self.transactionSpeedTimeLbl.text =  "\(self.presenter.transactionObj?.speedTimeString ?? "")"
+        if self.view.frame.height == 736 {
+            self.btnTopConstraint.constant = 105
+        }
     }
     
     @IBAction func backAction(_ sender: Any) {
