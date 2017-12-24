@@ -58,11 +58,23 @@
                                     <action selector="nextAction:" destination="kRf-Ct-SnX" eventType="touchUpInside" id="cxf-xh-vOF"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TqU-bF-Cd8">
+                                <rect key="frame" x="50" y="307" width="275" height="93"/>
+                                <string key="text">No recent addresses yet.
+
+This feature will be in the next update.</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94867724180221558" blue="0.97737151384353638" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="TqU-bF-Cd8" firstAttribute="leading" secondItem="cxe-5O-fnm" secondAttribute="leading" constant="50" id="4ED-OC-uti"/>
                             <constraint firstItem="H94-7K-Etr" firstAttribute="leading" secondItem="cxe-5O-fnm" secondAttribute="leading" id="8V4-zq-Kui"/>
+                            <constraint firstItem="TqU-bF-Cd8" firstAttribute="centerY" secondItem="cxe-5O-fnm" secondAttribute="centerY" constant="20" id="AGL-D9-sSR"/>
                             <constraint firstAttribute="trailing" secondItem="S0T-Fm-OmK" secondAttribute="trailing" id="EIl-6I-6V5"/>
+                            <constraint firstAttribute="trailing" secondItem="TqU-bF-Cd8" secondAttribute="trailing" constant="50" id="EN3-5W-dzp"/>
                             <constraint firstItem="S0T-Fm-OmK" firstAttribute="top" secondItem="H94-7K-Etr" secondAttribute="bottom" id="Ih9-y2-L8Z"/>
                             <constraint firstAttribute="trailing" secondItem="H94-7K-Etr" secondAttribute="trailing" id="LS2-Ot-m0d"/>
                             <constraint firstItem="4a2-g0-5pT" firstAttribute="top" secondItem="S0T-Fm-OmK" secondAttribute="bottom" id="hKu-IL-6qL"/>
@@ -1179,6 +1191,7 @@
                     </view>
                     <connections>
                         <outlet property="addressLbl" destination="j2L-wX-UIu" id="csh-tv-bhJ"/>
+                        <outlet property="btnTopConstraint" destination="jt3-2l-KnY" id="SLk-pd-fEV"/>
                         <outlet property="cryptoImage" destination="M7S-64-Prv" id="hpi-S5-jDf"/>
                         <outlet property="cryptoNamelbl" destination="CEc-LJ-btu" id="bL4-yM-ZCK"/>
                         <outlet property="cryptoSumLbl" destination="Ycp-p1-sYK" id="he6-vW-8zn"/>
@@ -1275,6 +1288,6 @@
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RTX-aa-bzX"/>
+        <segue reference="EUD-ex-a5v"/>
     </inferredMetricsTieBreakers>
 </document>
