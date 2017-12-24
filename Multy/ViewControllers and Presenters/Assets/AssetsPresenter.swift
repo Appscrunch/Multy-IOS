@@ -24,7 +24,9 @@ class AssetsPresenter: NSObject {
 //            getTransInfo()
 //            getWalletVerbose()
 //            getWalletOutputs()
-            assetsVC?.tableView.reloadData()
+            if (self.assetsVC!.tabBarController!.viewControllers![0].childViewControllers.count == 1) {
+                assetsVC?.tableView.reloadData()
+            }
         }
     }
     
@@ -158,6 +160,7 @@ class AssetsPresenter: NSObject {
                 return
             } else {
                 let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
+                print("afterVerbose:rawdata: \(walletsArrayFromApi)")
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
                     

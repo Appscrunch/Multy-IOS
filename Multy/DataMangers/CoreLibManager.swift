@@ -494,7 +494,7 @@ class CoreLibManager: NSObject {
                                value: input.transactionID,
                                pointer: transactionSource.pointee!)
             setIntValue(key: "prev_tx_out_index",
-                        value: input.transactionOutAmount.uint32Value,
+                        value: input.transactionOutID.uint32Value,
                         pointer: transactionSource.pointee!)
             setBinaryDataValue(key: "prev_tx_out_script_pubkey",
                                value: input.transactionOutScript,

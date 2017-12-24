@@ -239,8 +239,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return newWalletCell
         case [0,2]:
             if self.presenter.account != nil {
-                
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+                //MARK: change logiv
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: self.tabBarController!.viewControllers![0].childViewControllers.count != 1)
                 
                 if presenter.isWalletExist() {
                     let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
@@ -301,7 +301,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("addAddress:\n\(dict) -- \(error)")
         }
         */
-        if indexPath != [0,1] {
+        if indexPath != [0, 1] && indexPath != [0, 0] {
             (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         }
         
