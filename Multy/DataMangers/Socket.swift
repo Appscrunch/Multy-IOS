@@ -11,6 +11,8 @@ class Socket: NSObject {
     var socket : SocketIOClient
 
     
+    //do exp timeout
+    
     override init() {
         //dev:  6680
         //prod: 7780
@@ -45,7 +47,9 @@ class Socket: NSObject {
             
             self.socket.on("exchangeUpdate") {data, ack in
                 print("-----exchangeUpdate: \(data)")
-                exchangeCourse = ((data[0] as! NSDictionary)["BTCtoUSD"] as! NSNumber).doubleValue
+                if !(data is NSNull) {
+                    exchangeCourse = ((data[0] as! NSDictionary)["BTCtoUSD"] as! NSNumber).doubleValue
+                }
             }
             
             

@@ -24,3 +24,11 @@ func generateWalletPrimaryKey(currencyID: UInt32, walletID: UInt32) -> String {
     
     return ("\(currencyString)" + "\(walletString)").sha3(.sha256)
 }
+
+func convertSatoshiToBTC(sum: UInt32) -> Double {
+    return Double(sum) / pow(10, 8)
+}
+
+func convertBTCStringToSatoshi(sum: String) -> UInt32 {
+    return UInt32(Double(sum)! * pow(10, 8))
+}

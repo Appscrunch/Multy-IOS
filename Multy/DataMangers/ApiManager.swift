@@ -161,7 +161,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/adress", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/address", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -261,7 +261,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: TESTNET - send currency is 1
-        requestManager.request("\(self.apiUrl)api/v1/transaction/send/1", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/transaction/send/0", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

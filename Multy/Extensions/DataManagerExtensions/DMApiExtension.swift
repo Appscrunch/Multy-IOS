@@ -96,7 +96,7 @@ extension DataManager {
     
     func addAddress(_ token: String, params: Parameters, completion: @escaping (_ dict: NSDictionary?,_ error: Error?) -> ()) {
         apiManager.addAddress(token, params) { (dict, error) in
-            
+            completion(dict, error)
         }
     }
     
@@ -162,8 +162,4 @@ extension DataManager {
             completion(dict, error)
         }
     }
-    
-//    func addAddress(_ token: String, _ walletDict: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
-//        DataManager.shared
-//    }
 }

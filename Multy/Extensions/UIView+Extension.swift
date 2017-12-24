@@ -26,7 +26,7 @@ extension UIView {
     }
     
     // OUTPUT 2
-    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
+        public func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = color.cgColor
         self.layer.shadowOpacity = opacity

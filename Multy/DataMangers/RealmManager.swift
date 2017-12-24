@@ -303,6 +303,11 @@ class RealmManager: NSObject {
                         }
                     }
                     
+                    //MARK: Back's BUG!!!!
+                    if newWallets.count > 8 && newWallets[8].walletID.intValue == 0 {
+                        newWallets.remove(at: 8)
+                    }
+                    
                     //append wallets without spendOut
 //                    for wallet in accWallets {
 //                        let unmodifiedWallet = newWallets.filter("walletID = \(wallet.walletID)").first
@@ -313,9 +318,12 @@ class RealmManager: NSObject {
 //                    }
                     
                     try! realm.write {
+                        acc!.wallets.removeAll()
+                        for wallet in newWallets {
+                            acc!.wallets.append(wallet)
+                        }
                         
-                        
-                        acc!.wallets = newWallets
+//                        acc!.wallets = newWallets
 //                        acc?.wallets = arrOfWallets
                         completion(acc, nil)
                     }
@@ -345,12 +353,13 @@ class RealmManager: NSObject {
     }
     
     //Greedy algorithm
-    
     func spendableOutput(wallet: UserWalletRLM) -> [SpendableOutputRLM] {
         let ouputs = List<SpendableOutputRLM>()
         
         let addresses = wallet.addresses
         for address in addresses {
+            //add checking output (in/out)
+            
             for out in address.spendableOutput {
                 ouputs.append(out)
             }
@@ -363,22 +372,18 @@ class RealmManager: NSObject {
         return results
     }
     
-    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt32) -> [SpendableOutputRLM] {
-        var sum = UInt32(0)
+    func greedySubSet(outputs: [SpendableOutputRLM], threshold: Double) -> [SpendableOutputRLM] {
+        var sum = spendableOutputSum(outputs: outputs)
         var result = outputs
         
-        for output in outputs {
-            sum += output.transactionOutAmount.uint32Value
-        }
-        
-        if sum < threshold {
+        if convertSatoshiToBTC(sum: sum) < threshold {
             return [SpendableOutputRLM]()
         }
         
         var index = 0
         while index < result.count {
             let output = result[index]
-            if sum > threshold + output.transactionOutAmount.uint32Value {
+            if convertSatoshiToBTC(sum: sum) > threshold + convertSatoshiToBTC(sum: output.transactionOutAmount.uint32Value) {
                 sum = sum - output.transactionOutAmount.uint32Value
                 result.remove(at: index)
             } else {
@@ -387,5 +392,15 @@ class RealmManager: NSObject {
         }
         
         return result
+    }
+    
+    func spendableOutputSum(outputs: [SpendableOutputRLM]) -> UInt32 {
+        var sum = UInt32(0)
+        
+        for output in outputs {
+            sum += output.transactionOutAmount.uint32Value
+        }
+        
+        return sum
     }
 }

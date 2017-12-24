@@ -14,7 +14,11 @@ class AssetsPresenter: NSObject {
     var isJailed = false
     
     var account : AccountRLM? {
+        willSet {
+            print("will set account: \(newValue)")
+        }
         didSet {
+            print("")
 //            fetchTickets()
 //            getExchange()
 //            getTransInfo()
@@ -156,7 +160,14 @@ class AssetsPresenter: NSObject {
                 let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
-                    self.createTestTrans()
+                    
+                    print("wallets: \(acc?.wallets)")
+                    
+//                    self.createTestTrans()
+                    
+                    DataManager.shared.getAccount(completion: { (acc, err) in
+                        print("afterVerbose: \(acc!)")
+                    })
                 })
             }
             

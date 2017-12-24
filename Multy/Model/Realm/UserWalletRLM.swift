@@ -71,8 +71,10 @@ class UserWalletRLM: Object {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
         }
         
-        if walletInfo["CurrencyID"] != nil && walletInfo["WalletIndex"] != nil {
-            wallet.id = generateWalletPrimaryKey(currencyID: wallet.chain.uint32Value, walletID: wallet.walletID.uint32Value)
+        //MARK: temporary only 0-currency
+        //No data from server
+        if walletInfo["walletindex"] != nil {
+            wallet.id = generateWalletPrimaryKey(currencyID: 0, walletID: wallet.walletID.uint32Value)
         }
         
         wallet.updateWalletWithInfo(walletInfo: walletInfo)

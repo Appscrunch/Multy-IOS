@@ -37,7 +37,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MAKE: first launch
 //        let _ = DataManager.shared
         
-        DataManager.shared.startCoreTest()
+//        DataManager.shared.startCoreTest()
         
         //MARK: test
 //        progressHUD.show()
@@ -284,9 +284,26 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath != [0,1] {
-//            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-//        }
+        /*
+        let wallet = presenter.account!.wallets[2]
+        var binData = presenter.account!.binaryDataString.createBinaryData()!
+        let newAddressDict = DataManager.shared.coreLibManager.createAddress(currencyID: wallet.chain.uint32Value,
+                                                                             walletID: wallet.walletID.uint32Value,
+                                                                             addressID: UInt32(wallet.addresses.count),
+                                                                             binaryData: &binData)
+        
+        var parameters: Parameters = [ : ]
+        parameters["walletIndex"] = wallet.walletID
+        parameters["address"] = newAddressDict!["address"] as! String
+        parameters["addressIndex"] = UInt32(wallet.addresses.count)
+        
+        DataManager.shared.addAddress(presenter.account!.token, params: parameters) { (dict, error) in
+            print("addAddress:\n\(dict) -- \(error)")
+        }
+        */
+        if indexPath != [0,1] {
+            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        }
         
         switch indexPath {
         case [0,0]:

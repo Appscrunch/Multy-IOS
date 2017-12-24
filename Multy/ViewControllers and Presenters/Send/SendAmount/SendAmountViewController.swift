@@ -252,8 +252,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             sendFinishVC.presenter.isCrypto = self.presenter.isCrypto
             sendFinishVC.presenter.endSum = self.presenter.getNextBtnSum()
             
-            
-            test()
+//            test()
         }
     }
     
@@ -269,13 +268,34 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
                                                     binaryData: &binData)
             
             
-            let feeRate = core.getTotalFee(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                           sendAmountString: "2000000",
-                                           feeAmountString: "20",
-                                           isDonationExists: true,
-                                           donationAmount: "10000",
-                                           wallet: wallet)
+            let feeRate = core.getTotalFeeAndInputs(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                    sendAmountString: String(self.presenter.sumInCrypto),
+                                                    feeAmountString: "50",
+                                                    isDonationExists: true,
+                                                    donationAmount: String(describing: self.presenter.donationObj!.sumInCrypto!),
+                                                    isPayCommission: self.commissionSwitch.isOn,
+                                                    wallet: wallet)
             
+            let hexString = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                                                sendAddress: self.presenter.addressToStr!,
+                                                                                sendAmountString: String(self.presenter.sumInCrypto),
+                                                                                feeAmountString: "50",
+                                                                                isDonationExists: true,
+                                                                                donationAmount: String(describing: self.presenter.donationObj!.sumInCrypto!),
+                                                                                isPayCommission: self.commissionSwitch.isOn,
+                                                                                wallet: wallet,
+                                                                                binaryData: &binData,
+                                                                                inputs: feeRate)
+            
+            let params = [
+                "transaction" : hexString
+                ] as [String : Any]
+            
+            DataManager.shared.apiManager.sendRawTransaction(account!.token, params, completion: { (dict, error) in
+                print("---------\(dict)")
+            })
+            
+            print("feeRate: \(feeRate)")
 //            let outputs = DataManager.shared.fetchSpendableOutput(wallet: presenter.wallet!)
 //            let subset = DataManager.shared.greedySubSet(outputs: outputs, threshold: 130000)
         }
