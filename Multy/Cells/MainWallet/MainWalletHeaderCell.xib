@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rya-sD-JBP">
+                    <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rya-sD-JBP">
                         <rect key="frame" x="168" y="252.5" width="39" height="37"/>
                     </pageControl>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oci-Q7-YYq">

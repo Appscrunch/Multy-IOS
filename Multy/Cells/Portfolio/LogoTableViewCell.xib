@@ -55,13 +55,6 @@
                             <constraint firstAttribute="height" constant="1" id="p8M-NJ-Dik"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sign" translatesAutoresizingMaskIntoConstraints="NO" id="mSA-cS-6XS">
-                        <rect key="frame" x="167.5" y="11" width="40" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="Ocb-FL-0yT"/>
-                            <constraint firstAttribute="height" constant="32" id="QhN-qu-Jbr"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
@@ -70,10 +63,9 @@
                     <constraint firstItem="eJd-b3-U7d" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Ijg-lB-eZN"/>
                     <constraint firstItem="Iqd-E2-4bq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OwR-kz-ntT"/>
                     <constraint firstAttribute="trailing" secondItem="Iqd-E2-4bq" secondAttribute="trailing" id="Rq8-OX-x7D"/>
-                    <constraint firstItem="eJd-b3-U7d" firstAttribute="top" secondItem="mSA-cS-6XS" secondAttribute="bottom" constant="8" id="ZBu-58-WEv"/>
                     <constraint firstItem="9te-dh-4iM" firstAttribute="top" secondItem="eJd-b3-U7d" secondAttribute="bottom" constant="13" id="dmK-qC-PHo"/>
                     <constraint firstAttribute="trailing" secondItem="9te-dh-4iM" secondAttribute="trailing" constant="30" id="e5G-sA-1cL"/>
-                    <constraint firstItem="mSA-cS-6XS" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qS0-l0-qHH"/>
+                    <constraint firstItem="eJd-b3-U7d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="51" id="fG0-cg-jFA"/>
                     <constraint firstItem="Iqd-E2-4bq" firstAttribute="top" secondItem="9te-dh-4iM" secondAttribute="bottom" constant="4.5" id="uGF-6v-KHE"/>
                 </constraints>
             </tableViewCellContentView>
@@ -83,6 +75,5 @@
     </objects>
     <resources>
         <image name="logoBlue" width="201" height="117"/>
-        <image name="sign" width="40" height="32"/>
     </resources>
 </document>
