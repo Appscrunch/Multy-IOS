@@ -382,18 +382,18 @@ class RealmManager: NSObject {
         return results
     }
     
-    func greedySubSet(outputs: [SpendableOutputRLM], threshold: Double) -> [SpendableOutputRLM] {
+    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt32) -> [SpendableOutputRLM] {
         var sum = spendableOutputSum(outputs: outputs)
         var result = outputs
         
-        if convertSatoshiToBTC(sum: sum) < threshold {
+        if sum < threshold {
             return [SpendableOutputRLM]()
         }
         
         var index = 0
         while index < result.count {
             let output = result[index]
-            if convertSatoshiToBTC(sum: sum) > threshold + convertSatoshiToBTC(sum: output.transactionOutAmount.uint32Value) {
+            if sum > threshold + output.transactionOutAmount.uint32Value {
                 sum = sum - output.transactionOutAmount.uint32Value
                 result.remove(at: index)
             } else {

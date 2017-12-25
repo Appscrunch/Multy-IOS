@@ -7,6 +7,7 @@ import UIKit
 class SendAmountPresenter: NSObject {
     
     var sendAmountVC: SendAmountViewController?
+    var account: AccountRLM?
     
     var wallet: UserWalletRLM?
     var transactionObj: TransactionRLM?
@@ -28,6 +29,59 @@ class SendAmountPresenter: NSObject {
     var sumInNextBtn = 0.0
     var maxAllowedToSpend = 0.0
     var cryptoMaxSumWithFeeAndDonate = 0.0
+    
+    var rawTransaction: String?
+    
+    func getData() {
+        DataManager.shared.getAccount { (account, error) in
+            self.account = account
+        } 
+    }
+    
+    func estimateTransaction() -> Double {
+        let core = DataManager.shared.coreLibManager
+        let wallet = self.wallet!
+        var binaryData = account!.binaryDataString.createBinaryData()!
+        
+        let addressData = core.createAddress(currencyID: wallet.chain.uint32Value,
+                                             walletID: wallet.walletID.uint32Value,
+                                             addressID: 0,
+                                             binaryData: &binaryData)
+        
+        
+        let feeRate = core.getTotalFeeAndInputs(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                sendAmountString: String(self.sumInCrypto),
+                                                feeAmountString: "50",
+                                                isDonationExists: true,
+                                                donationAmount: String(describing: self.donationObj!.sumInCrypto!),
+                                                isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
+                                                wallet: wallet)
+        
+        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                                         sendAddress: self.addressToStr!,
+                                                                         sendAmountString: String(self.sumInCrypto),
+                                                                         feeAmountString: "50",
+                                                                         isDonationExists: true,
+                                                                         donationAmount: String(describing: self.donationObj!.sumInCrypto!),
+                                                                         isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
+                                                                         wallet: wallet,
+                                                                         binaryData: &binaryData,
+                                                                         inputs: feeRate)
+        
+        return trData.1
+        
+        //        let params = [
+        //            "transaction" : trData.0
+        //            ] as [String : Any]
+        
+//        DataManager.shared.apiManager.sendRawTransaction(account!.token, walletID: wallet.walletID, params, completion: { (dict, error) in
+//            print("---------\(dict)")
+//        })
+        
+//        print("feeRate: \(feeRate)")
+        //            let outputs = DataManager.shared.fetchSpendableOutput(wallet: presenter.wallet!)
+        //            let subset = DataManager.shared.greedySubSet(outputs: outputs, threshold: 130000)
+    }
     
     func setAmountFromQr() {
         if self.sumInCrypto != 0.0 {
@@ -62,6 +116,10 @@ class SendAmountPresenter: NSObject {
     }
     
     func getNextBtnSum() -> Double {
+//        let estimate = estimateTransaction()
+//        self.transactionObj?.sumInCrypto = estimate
+//        self.transactionObj?.sumInFiat = estimate * exchangeCourse
+        
         switch self.isCrypto {
         case true:
             if (self.sendAmountVC?.commissionSwitch.isOn)! {

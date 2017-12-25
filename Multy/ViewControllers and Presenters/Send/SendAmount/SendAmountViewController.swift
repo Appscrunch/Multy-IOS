@@ -35,6 +35,8 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         self.presenter.setMaxAllowed()
         self.presenter.makeMaxSumWithFeeAndDonate()
         self.setSumInNextBtn()
+        
+        self.presenter.getData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -237,7 +239,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             self.presenter.saveTfValue()
-            self.setSumInNextBtn()
         }
 //        self.presenter.setMaxAllowed()
         self.presenter.checkMaxEntered()
@@ -247,6 +248,12 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     func setSumInNextBtn() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        
+        self.perform(#selector(self.changeSum), with: nil, afterDelay: 0.3)
+    }
+    
+    @objc func changeSum() {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
@@ -272,53 +279,16 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
             sendFinishVC.presenter.sumInCrypto = self.presenter.sumInCrypto
             sendFinishVC.presenter.isCrypto = self.presenter.isCrypto
             sendFinishVC.presenter.endSum = self.presenter.getNextBtnSum()
+            sendFinishVC.presenter.rawTransaction = self.presenter.rawTransaction
+            sendFinishVC.presenter.account = self.presenter.account
             
-//            test()
+            test()
         }
     }
     
     func test () {
         DataManager.shared.getAccount { (account, error) in
-            let core = DataManager.shared.coreLibManager
-            let wallet = self.presenter.wallet!
-            var binData = account!.binaryDataString.createBinaryData()!
             
-            let addressData = core.createAddress(currencyID: wallet.chain.uint32Value,
-                                                    walletID: wallet.walletID.uint32Value,
-                                                    addressID: 0,
-                                                    binaryData: &binData)
-            
-            
-            let feeRate = core.getTotalFeeAndInputs(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                                    sendAmountString: String(self.presenter.sumInCrypto),
-                                                    feeAmountString: "50",
-                                                    isDonationExists: true,
-                                                    donationAmount: String(describing: self.presenter.donationObj!.sumInCrypto!),
-                                                    isPayCommission: self.commissionSwitch.isOn,
-                                                    wallet: wallet)
-            
-            let hexString = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                                                                sendAddress: self.presenter.addressToStr!,
-                                                                                sendAmountString: String(self.presenter.sumInCrypto),
-                                                                                feeAmountString: "50",
-                                                                                isDonationExists: true,
-                                                                                donationAmount: String(describing: self.presenter.donationObj!.sumInCrypto!),
-                                                                                isPayCommission: self.commissionSwitch.isOn,
-                                                                                wallet: wallet,
-                                                                                binaryData: &binData,
-                                                                                inputs: feeRate)
-            
-            let params = [
-                "transaction" : hexString
-                ] as [String : Any]
-            
-            DataManager.shared.apiManager.sendRawTransaction(account!.token, walletID: wallet.walletID, params, completion: { (dict, error) in
-                print("---------\(dict)")
-            })
-            
-            print("feeRate: \(feeRate)")
-//            let outputs = DataManager.shared.fetchSpendableOutput(wallet: presenter.wallet!)
-//            let subset = DataManager.shared.greedySubSet(outputs: outputs, threshold: 130000)
         }
     }
 }

@@ -65,6 +65,17 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextAction(_ sender: Any) {
+        let params = [
+            "transaction" : presenter.rawTransaction!
+            ] as [String : Any]
+        
+        //MARK: add transaction
+//        DataManager.shared.apiManager.sendRawTransaction(presenter.account!.token,
+//                                                         walletID: presenter.walletFrom!.walletID,
+//                                                         params, completion: { (dict, error) in
+//            print("---------\(dict)")
+//        })
+        
         self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
     }
 

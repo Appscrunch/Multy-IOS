@@ -8,6 +8,9 @@ class SendFinishPresenter: NSObject {
 
     var sendFinishVC: SendFinishViewController?
     
+    var rawTransaction: String?
+    var account: AccountRLM?
+    
     var walletFrom: UserWalletRLM?
     
     var addressToStr: String?
