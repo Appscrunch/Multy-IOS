@@ -303,11 +303,6 @@ class RealmManager: NSObject {
                         }
                     }
                     
-                    //MARK: Back's BUG!!!!
-                    if newWallets.count > 8 && newWallets[8].walletID.intValue == 0 {
-                        newWallets.remove(at: 8)
-                    }
-                    
                     //append wallets without spendOut
 //                    for wallet in accWallets {
 //                        let unmodifiedWallet = newWallets.filter("walletID = \(wallet.walletID)").first

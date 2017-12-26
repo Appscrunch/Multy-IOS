@@ -24,6 +24,7 @@ class AssetsPresenter: NSObject {
 //            getTransInfo()
 //            getWalletVerbose()
 //            getWalletOutputs()
+            self.assetsVC?.backUpView()
             if (self.assetsVC!.tabBarController!.viewControllers![0].childViewControllers.count == 1) {
                 assetsVC?.tableView.reloadData()
             }
