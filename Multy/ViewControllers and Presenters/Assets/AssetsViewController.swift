@@ -11,6 +11,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
@@ -46,7 +47,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.createAlert()
         
-        NotificationCenter.default.addObserver(self.tableView, selector: #selector(self.tableView.reloadData), name: NSNotification.Name("exchageUpdated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +71,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.presenter.updateWalletsInfo()
         }
         self.isFirstLaunch = false
+    }
+    
+    @objc func updateExchange() {
+        let offsetBeforeUpdate = self.tableView.contentOffset
+        self.tableView.reloadData()
+        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
     }
     
     func createAlert() {
@@ -187,6 +194,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //OK: Storyboard was made for iOS 11
         } else {
             self.tableViewTopConstraint.constant = 0
+//            self.tableViewBottomConstraint.constant = 50
         }
     }
     
