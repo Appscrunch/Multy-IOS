@@ -84,7 +84,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func backUpView() {
         if self.isSeedBackupOnScreen {
-            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+            if self.presenter.account?.seedPhrase == nil || self.presenter.account?.seedPhrase == "" {
                 backupView?.removeFromSuperview()
                 isSeedBackupOnScreen = false
             }
@@ -118,8 +118,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             view.addSubview(btn)
             view.addSubview(image)
-            self.view.addSubview(view)
             backupView = view
+            self.view.addSubview(backupView!)
+            
         } else {
             view.isHidden = true
         }
@@ -233,7 +234,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             //            return portfolioCell
             let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-            self.backUpView()
             return logoCell
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
