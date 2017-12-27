@@ -8,7 +8,7 @@ import Alamofire
 class ApiManager: NSObject {
     static let shared = ApiManager()
     
-    let apiUrl = "http://88.198.47.112:6678/"//"http://192.168.0.121:7778/"
+    let apiUrl = "http://88.198.47.112:7778/"//"http://192.168.0.121:7778/"
     let apiUrlTest = "http://192.168.0.125:8080/"
     let nonLocalURL = "http://88.198.47.112:7778/"
     

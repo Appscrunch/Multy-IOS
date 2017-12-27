@@ -11,6 +11,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
@@ -38,7 +39,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MAKE: first launch
 //        let _ = DataManager.shared
         
-//        DataManager.shared.startCoreTest()
+        DataManager.shared.startCoreTest()
         
         //MARK: test
 //        progressHUD.show()
@@ -46,7 +47,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.createAlert()
         
-        NotificationCenter.default.addObserver(self.tableView, selector: #selector(self.tableView.reloadData), name: NSNotification.Name("exchageUpdated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,6 +73,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.isFirstLaunch = false
     }
     
+    @objc func updateExchange() {
+        let offsetBeforeUpdate = self.tableView.contentOffset
+        self.tableView.reloadData()
+        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
+    }
+    
     func createAlert() {
         actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
             self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
@@ -84,7 +91,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func backUpView() {
         if self.isSeedBackupOnScreen {
-            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase == "" {
+            if self.presenter.account?.seedPhrase == nil || self.presenter.account?.seedPhrase == "" {
                 backupView?.removeFromSuperview()
                 isSeedBackupOnScreen = false
             }
@@ -118,8 +125,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             view.addSubview(btn)
             view.addSubview(image)
-            self.view.addSubview(view)
             backupView = view
+            self.view.addSubview(backupView!)
+            
         } else {
             view.isHidden = true
         }
@@ -186,6 +194,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //OK: Storyboard was made for iOS 11
         } else {
             self.tableViewTopConstraint.constant = 0
+//            self.tableViewBottomConstraint.constant = 50
         }
     }
     
@@ -233,7 +242,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
             //            return portfolioCell
             let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-            self.backUpView()
             return logoCell
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell

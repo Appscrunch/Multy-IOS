@@ -111,7 +111,6 @@
 		45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E11FD16AA70078945A /* GoToQrProtocol.swift */; };
 		45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E31FD179100078945A /* QrDataProtocol.swift */; };
 		45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F42C831FDC081400210B1F /* IsJailbroken.swift */; };
-		D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */; };
 		FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B618C1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift */; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
@@ -138,14 +137,13 @@
 		FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */; };
 		FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */; };
 		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
-		FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; };
 		FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; };
 		FA7406241FCC4855003C538C /* libmulty_core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FA7406251FCC4855003C538C /* libmulty_testd.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; };
 		FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74062A1FCC5D6A003C538C /* Constants.swift */; };
+		FA7E97241FF2504200735D73 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7E97231FF2504100735D73 /* Pods_Multy.framework */; };
 		FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */; };
 		FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */; };
 		FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */; };
@@ -168,7 +166,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				FA7406241FCC4855003C538C /* libmulty_core.dylib in Embed Libraries */,
-				FA7406251FCC4855003C538C /* libmulty_testd.dylib in Embed Libraries */,
 				FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */,
 				FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */,
 			);
@@ -178,7 +175,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		313568CEE4A41522AB0FD8F0 /* Pods-Multy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Multy/Pods-Multy.release.xcconfig"; sourceTree = "<group>"; };
 		4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsPresenter.swift; sourceTree = "<group>"; };
 		4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
@@ -322,10 +318,10 @@
 		FA74061C1FCC14C4003C538C /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		FA74061D1FCC14C4003C538C /* run_tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_tests.h; sourceTree = "<group>"; };
 		FA74061E1FCC14C4003C538C /* libmulty_core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_core.dylib; sourceTree = "<group>"; };
-		FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_testd.dylib; sourceTree = "<group>"; };
 		FA7406201FCC14C4003C538C /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
 		FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FA74062A1FCC5D6A003C538C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FA7E97231FF2504100735D73 /* Pods_Multy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pods_Multy.framework; sourceTree = "<group>"; };
 		FA869D081FD5AD9700C815C3 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
 		FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUDforHambVC.swift; sourceTree = "<group>"; };
 		FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
@@ -349,10 +345,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D496D62434EEF751018C3C3E /* Pods_Multy.framework in Frameworks */,
+				FA7E97241FF2504200735D73 /* Pods_Multy.framework in Frameworks */,
 				FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */,
 				FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */,
-				FA7406221FCC14C4003C538C /* libmulty_testd.dylib in Frameworks */,
 				FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,14 +355,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2228F864DD3E73268CE85B0A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0B3BE9914E6DC6547AB733A8 /* Pods_Multy.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4506F1721FD9A2B700D575BA /* Wallet settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,7 +387,7 @@
 				452290531FBB18D30024B550 /* Multy */,
 				452290521FBB18D30024B550 /* Products */,
 				A1CDC6A3E0B64716CC85520E /* Pods */,
-				2228F864DD3E73268CE85B0A /* Frameworks */,
+				FA7E97221FF2504100735D73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -969,10 +956,6 @@
 			children = (
 				FA7406101FCC14C4003C538C /* Transaction */,
 				FA7406171FCC14C4003C538C /* Core */,
-				FA74061E1FCC14C4003C538C /* libmulty_core.dylib */,
-				FA74061F1FCC14C4003C538C /* libmulty_testd.dylib */,
-				FA7406201FCC14C4003C538C /* liblibwally-core.dylib */,
-				FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */,
 			);
 			path = "Core Libs";
 			sourceTree = "<group>";
@@ -1001,6 +984,18 @@
 				FA869D081FD5AD9700C815C3 /* error.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		FA7E97221FF2504100735D73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA74061E1FCC14C4003C538C /* libmulty_core.dylib */,
+				FA7406201FCC14C4003C538C /* liblibwally-core.dylib */,
+				FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */,
+				FA7E97231FF2504100735D73 /* Pods_Multy.framework */,
+			);
+			name = Frameworks;
+			path = Multy/Frameworks;
 			sourceTree = "<group>";
 		};
 		FA869D091FD6B84900C815C3 /* HUD */ = {
@@ -1443,7 +1438,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1472,6 +1467,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7SW78L9W6E;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Multy/Frameworks",
+				);
 				INFOPLIST_FILE = Multy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1489,6 +1488,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -1500,8 +1500,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7SW78L9W6E;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Multy/Frameworks",
+				);
 				INFOPLIST_FILE = Multy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1518,6 +1523,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Multy/Multy-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
