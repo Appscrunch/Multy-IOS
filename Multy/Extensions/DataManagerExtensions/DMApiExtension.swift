@@ -149,11 +149,19 @@ extension DataManager {
         }
     }
     
-    func getOneWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func getOneWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping (_ answer: List<AddressRLM>?,_ error: Error?) -> ()) {
         apiManager.getOneWalletVerbose(token, walletID: walletID) { (dict, error) in
-            print("getOneWalletVerbose:\n\(dict)")
+            if dict != nil && dict!["wallet"] != nil && !(dict!["wallet"] is NSNull) {
+                let addressesInfo = ((dict!["wallet"] as! NSArray)[0] as! NSDictionary)["addresses"]!
+                
+                let addresses = AddressRLM.initWithArray(addressesInfo: addressesInfo as! NSArray)
+                
+                completion(addresses, nil)
+            } else {
+                completion(nil, error)
+            }
             
-            completion(dict, error)
+            print("getOneWalletVerbose:\n\(dict)")
         }
     }
     

@@ -3,12 +3,14 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var sendDetailsVC: SendDetailsViewController?
     
     var choosenWallet: UserWalletRLM?
+    var walletAddresses: List<AddressRLM>?
     
     var selectedIndexOfSpeed: Int?
     
@@ -28,7 +30,8 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
 
     var customFee = 0
-
+    
+    
     var feeRate: NSDictionary?{
         didSet {
             sendDetailsVC?.tableView.reloadData()
@@ -37,6 +40,16 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
 
     
 //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
+    
+    func getWalletVerbose() {
+        DataManager.shared.getAccount { (account, err) in
+            DataManager.shared.getOneWalletVerbose(account!.token,
+                                                   walletID: self.choosenWallet!.walletID,
+                                                   completion: { (addresses, error) in
+                self.walletAddresses = addresses
+            })
+        }
+    }
     
     func requestFee() {
         DataManager.shared.getAccount { (account, error) in

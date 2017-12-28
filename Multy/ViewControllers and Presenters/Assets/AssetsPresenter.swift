@@ -14,9 +14,6 @@ class AssetsPresenter: NSObject {
     var isJailed = false
     
     var account : AccountRLM? {
-        willSet {
-            print("will set account: \(newValue)")
-        }
         didSet {
             print("")
 //            fetchTickets()

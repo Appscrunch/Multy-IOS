@@ -38,6 +38,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.setupDonationUI()
         
         presenter.requestFee()
+        
+        presenter.getWalletVerbose()
     }
     
     override func viewDidLayoutSubviews() {
@@ -227,6 +229,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
             sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
             sendAmountVC.presenter.donationObj = self.presenter.donationObj
             sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
+            sendAmountVC.presenter.walletAddresses = self.presenter.walletAddresses
             if self.presenter.amountFromQr != nil {
                 sendAmountVC.presenter.sumInCrypto = self.presenter.amountFromQr!
             }

@@ -72,8 +72,9 @@ class UserWalletRLM: Object {
         }
         
         //MARK: temporary only 0-currency
+        //MARK: server BUG: WalletIndex and walletindex
         //No data from server
-        if walletInfo["walletindex"] != nil {
+        if walletInfo["walletindex"] != nil || walletInfo["WalletIndex"] != nil {
             wallet.id = generateWalletPrimaryKey(currencyID: 0, walletID: wallet.walletID.uint32Value)
         }
         
@@ -107,4 +108,32 @@ class UserWalletRLM: Object {
     override class func primaryKey() -> String? {
         return "id"
     }
+    
+//    public func updateWallet(walletInfo: NSDictionary) {
+//        
+//        if let addresses = walletInfo["Adresses"] {
+//            self.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
+//        }
+//        
+//        if let addresses = walletInfo["addresses"] {
+//            if !(addresses is NSNull) {
+//                for address in addresses {
+//                    let address = address as! NSDictionary
+//                    let addressID = address["addressIndex"] != nil ? address["addressindex"] : address["walletindex"]
+//                    
+//                    let modifiedWallet = accountWallets.filter("walletID = \(walletID)").first
+//                }
+//                
+//                self.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
+//            }
+//        }
+//        
+//        if let name = walletInfo["WalletName"] {
+//            self.name = name as! String
+//        }
+//        
+//        self.cryptoName = "BTC"
+//        self.fiatName = "USD"
+//        self.fiatSymbol = "$"
+//    }
 }

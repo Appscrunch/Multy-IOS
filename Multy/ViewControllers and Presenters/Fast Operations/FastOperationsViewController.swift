@@ -34,7 +34,7 @@ class FastOperationsViewController: UIViewController {
     }
     
     @IBAction func sendAction(_ sender: Any) {
-        if self.acc.walletCount == 0 {
+        if self.acc.wallets.count == 0 {
             self.alertForCreatingWallet()
         } else {
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
@@ -44,7 +44,7 @@ class FastOperationsViewController: UIViewController {
     }
     
     @IBAction func receiveAction(_ sender: Any) {
-        switch self.acc.walletCount {
+        switch self.acc.wallets.count {
         case 0:
             self.alertForCreatingWallet()
         default:

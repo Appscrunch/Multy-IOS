@@ -3,10 +3,11 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class CoreLibManager: NSObject {
     static let shared = CoreLibManager()
-    let donationAddress = "n1ALQhKZ2cQXdvJBkpYDoDyhDkH2XtmFR2"
+    let donationAddress = "n165LkPsBxDVeztbT3SYmVAxckfXoS6k7X"
     
     func testTransaction(from binaryData: inout BinaryData, wallet: UserWalletRLM) {
         
@@ -362,6 +363,46 @@ class CoreLibManager: NSObject {
 //        createTransaction(addressPointer: newAddressPointer.pointee!, sendAddress: "", sendAmountString: "100000000", feeAmountString: "20000", donationAddress: "", donationAmount: "10000000", txid: "`x", txoutid: 1, txoutamount: 804, txoutscript: "a914bddce1db77593a7ac8d67f0d488c4311d5103ffa87")
     }
     
+    func getTotalFee(addressPointer: OpaquePointer, feeAmountString: String, isDonationExists: Bool, isPayCommission: Bool , addressesCount: Int) -> UInt32 {
+        
+        //create transaction
+        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mt = make_transaction(addressPointer, transactionPointer)
+        if mt != nil {
+            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
+        }
+        
+        //fee
+        let fee = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgf = transaction_get_fee(transactionPointer.pointee, fee)
+        if tgf != nil {
+            let _ = returnErrorString(opaquePointer: tgf!, mask: "transaction_get_fee")
+        }
+        
+        //Amount
+        setAmountValue(key: "amount_per_byte", value: feeAmountString, pointer: fee.pointee!)
+        
+        let outputCount = 1 + (isDonationExists ? 1 : 0) + 1 //addresses: destination/donation/change
+        
+        let estimate = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        let tet = transaction_estimate_total_fee(transactionPointer.pointee, addressesCount, outputCount, estimate)
+        if tet != nil {
+            let _ = returnErrorString(opaquePointer: tet!, mask: "transaction_estimate_total_fee")
+        }
+        
+        let ats = amount_to_string(estimate.pointee, amountStringPointer)
+        if ats != nil {
+            let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
+        }
+        
+        let amountString = String(cString: amountStringPointer.pointee!)
+        let feeSum = UInt32(amountString)!
+        
+        return feeSum
+    }
+    
     func getTotalFeeAndInputs(addressPointer: OpaquePointer, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, isPayCommission: Bool , wallet: UserWalletRLM) -> (String,  [SpendableOutputRLM], String?) {
         
         //estimate number of ouputs
@@ -434,7 +475,150 @@ class CoreLibManager: NSObject {
         }
     }
     
-    func createTransaction(addressPointer: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, isPayCommission: Bool, wallet: UserWalletRLM, binaryData: inout BinaryData, inputs: (String,  [SpendableOutputRLM], String?)) -> (String, Double) {
+    func createTransaction(addressPointer: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, isPayCommission: Bool, wallet: UserWalletRLM, binaryData: inout BinaryData, feeAmount: UInt32, inputs: List<AddressRLM>) -> (String, Double) {
+        
+        let inputs = DataManager.shared.realmManager.spendableOutput(addresses: inputs)
+        let inputSum = DataManager.shared.spendableOutputSum(outputs: inputs)
+        
+        //create transaction
+        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mt = make_transaction(addressPointer, transactionPointer)
+        if mt != nil {
+            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
+        }
+        
+        //fee
+        let fee = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgf = transaction_get_fee(transactionPointer.pointee, fee)
+        if tgf != nil {
+            let _ = returnErrorString(opaquePointer: tgf!, mask: "transaction_get_fee")
+        }
+        
+        
+        let maxFee = UInt32(feeAmountString)!
+        let maxFeeString = String(maxFee + (maxFee / 10))
+        //Amount
+        setAmountValue(key: "amount_per_byte", value: feeAmountString, pointer: fee.pointee!)
+        setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
+
+        //spendable info
+        
+        for input in inputs {
+            let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+            let tas = transaction_add_source(transactionPointer.pointee, transactionSource)
+            
+            setAmountValue(key: "amount",
+                           value: String(describing: input.transactionOutAmount),
+                           pointer: transactionSource.pointee!)
+            setBinaryDataValue(key: "prev_tx_hash",
+                               value: input.transactionID,
+                               pointer: transactionSource.pointee!)
+            setIntValue(key: "prev_tx_out_index",
+                        value: input.transactionOutID.uint32Value,
+                        pointer: transactionSource.pointee!)
+            setBinaryDataValue(key: "prev_tx_out_script_pubkey",
+                               value: input.transactionOutScript,
+                               pointer: transactionSource.pointee!)
+            
+            let privateKey = createPrivateKey(currencyID: 0,
+                                              walletID: wallet.walletID.uint32Value,
+                                              addressID: input.addressID.uint32Value,
+                                              binaryData: &binaryData)
+            setPrivateKeyValue(key: "private_key", value: privateKey!, pointer: transactionSource.pointee!)
+        }
+        
+        var sendSum = UInt32(0)
+        var changeSum = UInt32(0)
+        
+        if isPayCommission {
+            sendSum = convertBTCStringToSatoshi(sum: sendAmountString)
+            changeSum = inputSum - (convertBTCStringToSatoshi(sum: sendAmountString) + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+        } else {
+            sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+            changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)
+        }
+        
+        //address
+        let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        transaction_add_destination(transactionPointer.pointee, transactionDestination)
+        
+        setStringValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
+        setAmountValue(key: "amount", value: String(sendSum), pointer: transactionDestination.pointee!)
+        
+        //donation
+        if isDonationExists {
+            let donationDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+            transaction_add_destination(transactionPointer.pointee, donationDestination)
+            
+            setStringValue(key: "address", value: donationAddress, pointer: donationDestination.pointee!)
+            setAmountValue(key: "amount", value: String(convertBTCStringToSatoshi(sum: donationAmount)), pointer: donationDestination.pointee!)
+        }
+        
+        //change
+        //MARK: UInt32(wallet.addresses.count)
+        let dict = createAddress(currencyID: wallet.chain.uint32Value, walletID: wallet.walletID.uint32Value, addressID: 0, binaryData: &binaryData)
+        
+        let changeDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        transaction_add_destination(transactionPointer.pointee, changeDestination)
+        
+        setStringValue(key: "address", value: dict!["address"] as! String, pointer: changeDestination.pointee!)
+        setAmountValue(key: "amount", value: String(changeSum), pointer: changeDestination.pointee!)
+        
+        //final
+        let serializedTransaction = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        
+        let tu = transaction_update(transactionPointer.pointee)
+        
+        if tu != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tu)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tu: \(errrString))")
+        }
+        
+        let tSign = transaction_sign(transactionPointer.pointee)
+        
+        if tSign != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tSign)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tSign: \(errrString))")
+        }
+        
+        let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
+        
+        if tSer != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tSer)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tSer: \(errrString))")
+        }
+        
+        print("\(tu) -- \(tSign) -- \(tSer)")
+        
+        let data = serializedTransaction.pointee!.pointee.convertToData()
+        let str = data.hexEncodedString()
+        
+        print("end transaction: \(str)")
+        
+        let totalSumPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgtf = transaction_get_total_fee(transactionPointer.pointee, totalSumPointer)
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let ats = amount_to_string(totalSumPointer.pointee, amountStringPointer)
+        if ats != nil {
+            let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
+        }
+        
+        let amountString = String(cString: amountStringPointer.pointee!)
+        let satoshiAmount = convertSatoshiToBTC(sum: UInt32(amountString)!)
+        
+        return (str, satoshiAmount)
+        //        return ""
+    }
+    
+    func createTransactionOld(addressPointer: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, isPayCommission: Bool, wallet: UserWalletRLM, binaryData: inout BinaryData, inputs: (String,  [SpendableOutputRLM], String?)) -> (String, Double) {
         
         let inputSum = DataManager.shared.spendableOutputSum(outputs: inputs.1)
         

@@ -70,11 +70,11 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
             ] as [String : Any]
         
         //MARK: add transaction
-//        DataManager.shared.apiManager.sendRawTransaction(presenter.account!.token,
-//                                                         walletID: presenter.walletFrom!.walletID,
-//                                                         params, completion: { (dict, error) in
-//            print("---------\(dict)")
-//        })
+        DataManager.shared.apiManager.sendRawTransaction(presenter.account!.token,
+                                                         walletID: presenter.walletFrom!.walletID,
+                                                         params, completion: { (dict, error) in
+            print("---------\(dict)")
+        })
         
         self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
     }

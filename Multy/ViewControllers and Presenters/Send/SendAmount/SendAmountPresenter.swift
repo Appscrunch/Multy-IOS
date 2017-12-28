@@ -3,13 +3,17 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class SendAmountPresenter: NSObject {
     
     var sendAmountVC: SendAmountViewController?
     var account: AccountRLM?
     
+    //MARK: fix addresses in wallet and delete second ivar
     var wallet: UserWalletRLM?
+    var walletAddresses: List<AddressRLM>?
+    
     var transactionObj: TransactionRLM?
     var donationObj: DonationObj?
     
@@ -48,14 +52,19 @@ class SendAmountPresenter: NSObject {
                                              addressID: 0,
                                              binaryData: &binaryData)
         
+        let feeAmount = core.getTotalFee(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                       feeAmountString: "50",
+                                       isDonationExists: donationObj?.sumInCrypto != Double(0.0),
+                                       isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
+                                       addressesCount: walletAddresses!.count)
         
-        let feeRate = core.getTotalFeeAndInputs(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                                sendAmountString: String(self.sumInCrypto),
-                                                feeAmountString: "50",
-                                                isDonationExists: true,
-                                                donationAmount: String(describing: self.donationObj!.sumInCrypto!),
-                                                isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
-                                                wallet: wallet)
+//        let feeRateOld = core.getTotalFeeAndInputs(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+//                                                sendAmountString: String(self.sumInCrypto),
+//                                                feeAmountString: "50",
+//                                                isDonationExists: true,
+//                                                donationAmount: String(describing: self.donationObj!.sumInCrypto!),
+//                                                isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
+//                                                wallet: wallet)
         
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
                                                                          sendAddress: self.addressToStr!,
@@ -66,7 +75,10 @@ class SendAmountPresenter: NSObject {
                                                                          isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
                                                                          wallet: wallet,
                                                                          binaryData: &binaryData,
-                                                                         inputs: feeRate)
+                                                                         feeAmount: feeAmount,
+                                                                         inputs: walletAddresses!)
+        
+        self.rawTransaction = trData.0
         
         return trData.1
         
@@ -116,9 +128,9 @@ class SendAmountPresenter: NSObject {
     }
     
     func getNextBtnSum() -> Double {
-//        let estimate = estimateTransaction()
-//        self.transactionObj?.sumInCrypto = estimate
-//        self.transactionObj?.sumInFiat = estimate * exchangeCourse
+        let estimate = estimateTransaction()
+        self.transactionObj?.sumInCrypto = estimate
+        self.transactionObj?.sumInFiat = estimate * exchangeCourse
         
         switch self.isCrypto {
         case true:

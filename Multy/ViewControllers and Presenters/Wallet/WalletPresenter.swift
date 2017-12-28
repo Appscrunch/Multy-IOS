@@ -11,7 +11,7 @@ class WalletPresenter: NSObject {
     
     var wallet : UserWalletRLM? {
         didSet {
-            print("wallet")
+            print("WalletPresenter:\n\(wallet?.addresses)")
         }
     }
     var account : AccountRLM?

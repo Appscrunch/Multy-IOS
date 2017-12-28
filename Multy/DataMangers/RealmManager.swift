@@ -282,6 +282,64 @@ class RealmManager: NSObject {
         }
     }
     
+    public func createOrUpdateAccount(accountInfo: NSArray, completion: @escaping(_ account: AccountRLM?, _ error: NSError?)->()) {
+        getRealm { (realmOpt, err) in
+            guard let realm = realmOpt else {
+                completion(nil, nil)
+                
+                return
+            }
+            
+            let account = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
+            
+            guard account != nil else {
+                completion(nil, nil)
+                
+                return
+            }
+            
+            let accountWallets = account!.wallets
+            let newWallets = List<UserWalletRLM>()
+            
+            for wallet in accountInfo {
+                let wallet = wallet as! NSDictionary
+                let walletID = wallet["WalletIndex"] != nil ? wallet["WalletIndex"] : wallet["walletindex"]
+                
+                let modifiedWallet = accountWallets.filter("walletID = \(walletID)").first
+
+                try! realm.write {
+//                    if modifiedWallet != nil {
+//                        modifiedWallet!.addresses = wallet.addresses
+//                        newWallets.append(modifiedWallet!)
+//                    } else {
+//                        newWallets.append(wallet)
+//                    }
+                }
+            }
+            
+            try! realm.write {
+                account!.wallets.removeAll()
+                for wallet in newWallets {
+                    account!.wallets.append(wallet)
+                    
+                    account!.wallets.last!.addresses.removeAll()
+                    for address in wallet.addresses {
+                        account!.wallets.last!.addresses.append(address)
+                        
+                        account!.wallets.last!.addresses.last!.spendableOutput.removeAll()
+                        for ouput in address.spendableOutput {
+                            account?.wallets.last!.addresses.last!.spendableOutput.append(ouput)
+                        }
+                    }
+                }
+                
+                //                        acc!.wallets = newWallets
+                //                        acc?.wallets = arrOfWallets
+                completion(account, nil)
+            }
+        }
+    }
+    
     public func updateWalletsInAcc(arrOfWallets: List<UserWalletRLM>, completion: @escaping(_ account: AccountRLM?, _ error: NSError?)->()) {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
@@ -358,6 +416,24 @@ class RealmManager: NSObject {
     }
     
     //Greedy algorithm
+    func spendableOutput(addresses: List<AddressRLM>) -> [SpendableOutputRLM] {
+        let ouputs = List<SpendableOutputRLM>()
+        
+        for address in addresses {
+            //add checking output (in/out)
+            
+            for out in address.spendableOutput {
+                ouputs.append(out)
+            }
+        }
+        
+        let results = ouputs.sorted(by: { (out1, out2) -> Bool in
+            out1.transactionOutAmount.uint32Value > out2.transactionOutAmount.int32Value
+        })
+        
+        return results
+    }
+    
     func spendableOutput(wallet: UserWalletRLM) -> [SpendableOutputRLM] {
         let ouputs = List<SpendableOutputRLM>()
         
