@@ -25,11 +25,12 @@ class CheckWordsPresenter: NSObject {
     func auth(seedString: String) {
         self.checkWordsVC?.view.isUserInteractionEnabled = false
         if let errString = DataManager.shared.getRootString(from: seedString).1 {
-            let alert = UIAlertController(title: "Warining", message: errString, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                self.checkWordsVC?.navigationController?.popViewController(animated: true)
-            }))
-            self.checkWordsVC?.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "Warining", message: errString, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+//                self.checkWordsVC?.navigationController?.popViewController(animated: true)
+//            }))
+//            self.checkWordsVC?.present(alert, animated: true, completion: nil)
+            self.checkWordsVC?.performSegue(withIdentifier: "wrongVC", sender: (Any).self)
             return
         }
         

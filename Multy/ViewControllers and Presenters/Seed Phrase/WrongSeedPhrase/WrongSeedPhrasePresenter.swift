@@ -6,4 +6,6 @@ import UIKit
 
 class WrongSeedPhrasePresenter: NSObject {
     weak var mainVC : WrongSeedPhraseViewController?
+    
+    var prevVC : CheckWordsViewController?
 }

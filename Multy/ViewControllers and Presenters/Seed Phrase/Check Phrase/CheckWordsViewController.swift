@@ -22,6 +22,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     var currentWordNumber = 1
     var isRestore = false
+    var isNeedToClean = false
     
     let presenter = CheckWordsPresenter()
     
@@ -66,6 +67,14 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         if self.isRestore {
             self.titleLbl.text = "Restore Multy"
         }
+        if self.isNeedToClean {
+            self.currentWordNumber = 1
+            self.wordCounterLbl.text = "\(self.currentWordNumber) from 15"
+            self.view.isUserInteractionEnabled = true
+            self.presenter.phraseArr.removeAll()
+            bricksView.subviews.forEach({ $0.removeFromSuperview() })
+            bricksView.addSubview(BricksView(with: bricksView.bounds, and: 0))
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -74,6 +83,10 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
+        if (self.wordTF.text?.count)! < 3 {
+            return
+        }
+        
         if !(self.wordTF.text?.isEmpty)! {
             self.presenter.phraseArr.append((self.wordTF.text?.lowercased())!)
             self.wordTF.text = ""
@@ -118,7 +131,14 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        let alert = UIAlertController(title: "Cancel", message: "Are you really want to cancel?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 
     
@@ -139,6 +159,9 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "greatVC" {
             let greatVC = segue.destination as! BackupFinishViewController
             greatVC.seedString = self.presenter.phraseArr.joined(separator: " ")
+        } else if segue.identifier == "wrongVC" {
+            let wrongVC = segue.destination as! WrongSeedPhraseViewController
+            wrongVC.presenter.prevVC = self
         }
     }
 }
