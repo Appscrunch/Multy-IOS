@@ -336,10 +336,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.present(actionSheet, animated: true, completion: nil)
         case [0,2]:
             if self.presenter.account == nil {
-                progressHUD.show()
-                presenter.guestAuth(completion: { (answer) in
+//                progressHUD.show()
+//                presenter.guestAuth(completion: { (answer) in
                     self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
-                })
+//                })
             } else {
                 if self.presenter.isWalletExist() {
                     let storyboard = UIStoryboard(name: "Wallet", bundle: nil)

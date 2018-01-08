@@ -21,12 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
-        let defaults = UserDefaults.standard
-        if defaults.object(forKey: "maxtries") == nil {
-            let maxTries = 6
-            defaults.set(maxTries, forKey: "maxtries")
+//        let defaults = UserDefaults.standard
+//        if defaults.object(forKey: "maxtries") == nil {
+//            let maxTries = 6
+//            defaults.set(maxTries, forKey: "maxtries")
+//        }
+//        defaults.synchronize()
+        
+        NotificationCenter.default.addObserver(
+            forName: .UIApplicationUserDidTakeScreenshot,
+            object: nil,
+            queue: .main) { notification in
+                print("cicki")
+                //executes after screenshot
         }
-        defaults.synchronize()
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)

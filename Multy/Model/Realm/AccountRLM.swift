@@ -6,7 +6,14 @@ import Foundation
 import RealmSwift
 
 class AccountRLM: Object {
-    @objc dynamic var seedPhrase = String()
+    @objc dynamic var seedPhrase = String() {
+        didSet {
+            if seedPhrase != "" {
+                self.backupSeedPhrase = seedPhrase
+            }
+        }
+    }
+    @objc dynamic var backupSeedPhrase = String()
     @objc dynamic var binaryDataString = String()
     
     @objc dynamic var userID = String()

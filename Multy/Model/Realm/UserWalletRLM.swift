@@ -71,6 +71,10 @@ class UserWalletRLM: Object {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
         }
         
+        if let walletName = walletInfo["walletname"] {
+            wallet.name = walletName as! String
+        }
+        
         //MARK: temporary only 0-currency
         //No data from server
         if walletInfo["walletindex"] != nil {

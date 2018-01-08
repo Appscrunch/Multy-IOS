@@ -317,7 +317,8 @@ class RealmManager: NSObject {
                         for wallet in newWallets {
                             acc!.wallets.append(wallet)
                             
-                            acc!.wallets.last!.addresses.removeAll()
+//                            acc!.wallets.last!.addresses.removeAll()
+                            //MARK: CHECK THIS    deleting addresses    Check addressID and delete existing
                             for address in wallet.addresses {
                                 acc!.wallets.last!.addresses.append(address)
                                 
@@ -327,7 +328,6 @@ class RealmManager: NSObject {
                                 }
                             }
                         }
-                        
 //                        acc!.wallets = newWallets
 //                        acc?.wallets = arrOfWallets
                         completion(acc, nil)
