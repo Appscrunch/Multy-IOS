@@ -30,19 +30,12 @@
                         <rect key="frame" x="30" y="181" width="315" height="33"/>
                         <attributedString key="attributedText">
                             <fragment>
-                                <string key="content">M U L T Y  C R Y P T O C U R R E N C Y  A N D 
-</string>
+                                <string key="content">B L O C K C H A I N
+  O P E N  -  S O U R C E  W A L L E T</string>
                                 <attributes>
                                     <color key="NSColor" red="0.67053765058517456" green="0.74100571870803833" blue="0.84289836883544922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <font key="NSFont" size="12" name="AvenirNext-Medium"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                            <fragment content="A S S E T S  O P E N  -  S O U R C E  W A L L E T">
-                                <attributes>
-                                    <color key="NSColor" red="0.67053765058517456" green="0.74100571870803833" blue="0.84289836883544922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" minimumLineHeight="4" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
                         </attributedString>

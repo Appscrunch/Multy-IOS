@@ -67,4 +67,23 @@ class BackupSeedPhraseViewController: UIViewController {
             nextVC.isRestore = self.isRestore
         }
     }
+    
+    
+//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+//        /* So first we take the inverted set of the characters we want to keep,
+//         this will act as the separator set, i.e. those characters we want to
+//         take out from the user input */
+//        let inverseSet = NSCharacterSet(charactersInString:"ABCDEFGHIJKLMNOPQRSTUVWXUZ")
+//
+//        /* We then use this separator set to remove those unwanted characters.
+//         So we are basically separating the characters we want to keep, by those
+//         we don't */
+//        let components = string.componentsSeparatedByCharactersInSet(inverseSet)
+//
+//        /* We then join those characters together */
+//        let filtered = components.joinWithSeparator("")
+//
+//        return string == filtered
+//    }
+    
 }

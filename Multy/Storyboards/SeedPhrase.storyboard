@@ -372,7 +372,7 @@
         <!--Check Words View Controller-->
         <scene sceneID="pTC-7J-sCK">
             <objects>
-                <viewController id="Uyg-Ci-oxp" customClass="CheckWordsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="backupSeed" id="Uyg-Ci-oxp" customClass="CheckWordsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AZG-3X-j8a"/>
                         <viewControllerLayoutGuide type="bottom" id="vPN-ZX-auX"/>
@@ -462,6 +462,7 @@
                         <outlet property="constraintBtnBottom" destination="rWO-DS-6N4" id="mom-em-0LT"/>
                         <outlet property="constraintTop" destination="szz-4r-x2x" id="hX3-iP-1s0"/>
                         <outlet property="nextWordOrContinue" destination="wV8-0l-POJ" id="Fo8-Cg-dJX"/>
+                        <outlet property="titleLbl" destination="YXe-ZO-gQe" id="U9n-X2-xcF"/>
                         <outlet property="wordCounterLbl" destination="K1E-dc-1Bn" id="CYN-Ln-LSf"/>
                         <outlet property="wordTF" destination="827-G2-PrD" id="dY6-9v-8c7"/>
                         <segue destination="6EH-xy-Qwn" kind="show" identifier="greatVC" id="RUV-XK-j11"/>

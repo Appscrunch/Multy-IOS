@@ -73,6 +73,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.isFirstLaunch = false
     }
     
+    override func viewDidLayoutSubviews() {
+        if presenter.account == nil {
+            self.tableView.contentInset.bottom = 0
+        }
+    }
+    
     @objc func updateExchange() {
         let offsetBeforeUpdate = self.tableView.contentOffset
         self.tableView.reloadData()
@@ -348,7 +354,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case [0,3]:
             if self.presenter.account == nil {
                 let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-                let backupSeedVC = storyboard.instantiateViewController(withIdentifier: "startBackupVC") as! BackupSeedPhraseViewController
+                let backupSeedVC = storyboard.instantiateViewController(withIdentifier: "backupSeed") as! CheckWordsViewController
                 backupSeedVC.isRestore = true
                 self.navigationController?.pushViewController(backupSeedVC, animated: true)
             } else {
@@ -423,6 +429,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            return 100
         }
     }
+    
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        targetContentOffset.pointee.y = max(targetContentOffset.pointee.y + 1, 1)
+//    }
     
     func updateUI() {
         self.tableView.reloadData()

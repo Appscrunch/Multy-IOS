@@ -9,6 +9,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var wordTF: UITextField!
     @IBOutlet weak var wordCounterLbl: UILabel!
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var nextWordOrContinue: ZFRippleButton!
     
     @IBOutlet weak var bricksView: UIView!
@@ -41,6 +42,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.presenter.getSeedPhrase()
         
         self.wordTF.becomeFirstResponder()
+        self.wordTF.delegate = self
         self.wordTF.text = ""
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -57,6 +59,13 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                           UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
             gradientOrientation: .horizontal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.isRestore {
+            self.titleLbl.text = "Restore Multy"
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -112,6 +121,19 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.popToRootViewController(animated: true)
     }
 
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "" {
+            return true
+        }
+        let inverseSet = NSCharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz")
+        
+        let components = string.components(separatedBy: inverseSet as CharacterSet)
+        
+        let filtered = components.joined(separator: "")
+        
+        return string != filtered
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "greatVC" {
