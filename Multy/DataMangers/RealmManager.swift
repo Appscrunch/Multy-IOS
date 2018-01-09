@@ -354,6 +354,21 @@ class RealmManager: NSObject {
                         try! realm.write {
                             if modifiedWallet != nil {
                                 modifiedWallet!.addresses = wallet.addresses
+
+                                for (index,address) in wallet.addresses.enumerated() {
+//                                    modifiedWallet!.addresses[index].spendableOutput.removeAll()
+//                                    for out in address.spendableOutput {
+//                                        modifiedWallet!.addresses[index].spendableOutput.append(out)
+//                                    }
+                                }
+                                
+//                                for address in wallet.addresses {
+//
+//                                    for output in address.spendableOutput {
+//                                        modifiedWallet!.addresses.last!.spendableOutput.append(output)
+//                                    }
+//                                }
+                                
                                 newWallets.append(modifiedWallet!)
                             } else {
                                 newWallets.append(wallet)
@@ -376,16 +391,17 @@ class RealmManager: NSObject {
                             acc!.wallets.append(wallet)
                             
                             acc!.wallets.last!.addresses.removeAll()
+                            //MARK: CHECK THIS    deleting addresses    Check addressID and delete existing
                             for address in wallet.addresses {
+//                                let modifiedAddress = wallet.address.filter("addressID = \(wallet.addressID)").first
+
                                 acc!.wallets.last!.addresses.append(address)
-                                
-                                acc!.wallets.last!.addresses.last!.spendableOutput.removeAll()
-                                for ouput in address.spendableOutput {
-                                    acc?.wallets.last!.addresses.last!.spendableOutput.append(ouput)
-                                }
+//                                acc!.wallets.last!.addresses.last!.spendableOutput.removeAll()
+//                                for ouput in address.spendableOutput {
+//                                    acc?.wallets.last!.addresses.last!.spendableOutput.append(ouput)
+//                                }
                             }
                         }
-                        
 //                        acc!.wallets = newWallets
 //                        acc?.wallets = arrOfWallets
                         completion(acc, nil)

@@ -24,10 +24,10 @@ class WalletViewController: UIViewController {
         presenter.fixConstraints()
         presenter.registerCells()
         
-        DataManager.shared.getOneWalletVerbose(presenter.account!.token,
-                                               walletID: presenter.wallet!.walletID) { (dict, error) in
-            print("\n\nok\n\n")
-        }
+//        DataManager.shared.getOneWalletVerbose(presenter.account!.token,
+//                                               walletID: presenter.wallet!.walletID) { (dict, error) in
+//            print("\n\nok\n\n")
+//        }
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     

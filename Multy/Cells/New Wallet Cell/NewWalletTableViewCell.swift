@@ -9,7 +9,7 @@ class NewWalletTableViewCell: UITableViewCell {
     @IBOutlet weak var topLineView: UIView!
     @IBOutlet weak var cellNameLbl: UILabel!
     @IBOutlet weak var rigthSmallImage: UIImageView!
-    @IBOutlet weak var backView: UIView!
+//    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var content: UIView!
     
     override func awakeFromNib() {
@@ -42,6 +42,7 @@ class NewWalletTableViewCell: UITableViewCell {
     func hideAll(flag: Bool) {
         self.cellNameLbl.isHidden = flag
         self.rigthSmallImage.isHidden = flag
+        self.content.backgroundColor = UIColor(red: 236/255, green: 238/255, blue: 247/255, alpha: 1.0)
     }
 }
 

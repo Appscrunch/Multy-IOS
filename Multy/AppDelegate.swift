@@ -20,6 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+    
+//        let defaults = UserDefaults.standard
+//        if defaults.object(forKey: "maxtries") == nil {
+//            let maxTries = 6
+//            defaults.set(maxTries, forKey: "maxtries")
+//        }
+//        defaults.synchronize()
+        
+        NotificationCenter.default.addObserver(
+            forName: .UIApplicationUserDidTakeScreenshot,
+            object: nil,
+            queue: .main) { notification in
+                print("cicki")
+                //executes after screenshot
+        }
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -48,10 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         NotificationCenter.default.post(name: Notification.Name("hideKeyboard"), object: nil)
         DataManager.shared.finishRealmSession()
-        isNeedToAutorise = true
-        if self.presentedVC != nil {
-            presentedVC?.dismiss(animated: true, completion: nil)
-            openedAlert?.dismiss(animated: true, completion: nil)
+        DataManager.shared.realmManager.getAccount { (acc, err) in
+            isNeedToAutorise = acc != nil
+            //         isNeedToAutorise = true
+            if self.presentedVC != nil {
+                self.presentedVC?.dismiss(animated: true, completion: nil)
+                self.openedAlert?.dismiss(animated: true, completion: nil)
+            }
         }
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.

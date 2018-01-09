@@ -58,7 +58,8 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (self.wallet?.addresses.count)!
+//        return (self.wallet?.addresses.count)!
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

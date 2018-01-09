@@ -20,6 +20,7 @@ class TouchIDAuth {
         guard canEvaluatePolicy() else {
             return
         }
+//        context.touchIDAuthenticationAllowableReuseDuration = 3
         context.evaluatePolicy(.deviceOwnerAuthentication,
                                localizedReason: "Logging in with Touch ID") { (success, evaluateError) in
                                 if success {
