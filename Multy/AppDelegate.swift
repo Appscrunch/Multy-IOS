@@ -67,8 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             isNeedToAutorise = acc != nil
             
             //MAKR: Check here isPin option from NSUserDefaults
-            // isNeedToAutorise = isPin
-            //         isNeedToAutorise = true
+            // isNeedToAutorise = unlockMode
+            
             if self.presentedVC != nil {
                 self.presentedVC?.dismiss(animated: true, completion: nil)
                 self.openedAlert?.dismiss(animated: true, completion: nil)
