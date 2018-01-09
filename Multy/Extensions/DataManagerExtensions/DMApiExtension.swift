@@ -25,7 +25,7 @@ extension DataManager {
                     if rootKey == nil {
                         let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
                         params["userID"] = self.getRootString(from: seedPhraseString).0
-                        params["deviceID"] = UUID().uuidString
+                        params["deviceID"] = "iOS \(UIDevice.current.name)"
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
                         
@@ -35,7 +35,7 @@ extension DataManager {
                         paramsDict["binaryData"] = self.coreLibManager.createSeedBinaryData(from: seedPhraseString)?.convertToHexString()
                     } else {
                         params["userID"] = self.getRootString(from: rootKey!).0
-                        params["deviceID"] = UUID().uuidString
+                        params["deviceID"] = "iOS \(UIDevice.current.name)"//UUID().uuidString
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
                         
