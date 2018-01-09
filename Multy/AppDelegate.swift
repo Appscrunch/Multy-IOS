@@ -65,6 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.shared.finishRealmSession()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             isNeedToAutorise = acc != nil
+            
+            //MAKR: Check here isPin option from NSUserDefaults
+            // isNeedToAutorise = isPin
             //         isNeedToAutorise = true
             if self.presentedVC != nil {
                 self.presentedVC?.dismiss(animated: true, completion: nil)

@@ -813,24 +813,36 @@ correctly</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming soon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3s-lJ-Eqd">
-                                <rect key="frame" x="46" y="302" width="283.5" height="63"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="46"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is PIN enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-4X-Tia">
+                                <rect key="frame" x="21" y="97" width="134.5" height="27.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" red="0.31764705882352939" green="0.40784313725490196" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a69-V8-DmE">
+                                <rect key="frame" x="305" y="95" width="51" height="31"/>
+                                <color key="onTintColor" red="0.056432507932186127" green="0.55575066804885864" blue="0.99944394826889038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="onSwitch:" destination="iYV-U9-fj0" eventType="touchUpInside" id="fVR-aI-4dt"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="s3s-lJ-Eqd" firstAttribute="centerX" secondItem="oAY-1d-N0f" secondAttribute="centerX" id="D5v-91-FbS"/>
-                            <constraint firstItem="s3s-lJ-Eqd" firstAttribute="centerY" secondItem="oAY-1d-N0f" secondAttribute="centerY" id="DEO-iU-vh9"/>
+                            <constraint firstItem="a69-V8-DmE" firstAttribute="centerY" secondItem="ta1-4X-Tia" secondAttribute="centerY" id="062-Q7-Jam"/>
+                            <constraint firstItem="ta1-4X-Tia" firstAttribute="leading" secondItem="oAY-1d-N0f" secondAttribute="leading" constant="21" id="TtE-FD-Uiq"/>
+                            <constraint firstAttribute="trailing" secondItem="a69-V8-DmE" secondAttribute="trailing" constant="21" id="aae-DZ-esf"/>
+                            <constraint firstItem="ta1-4X-Tia" firstAttribute="top" secondItem="ydE-vw-AGj" secondAttribute="bottom" constant="33" id="nhb-g1-k6P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wOA-Hu-U4A"/>
+                    <connections>
+                        <outlet property="pinSwitch" destination="a69-V8-DmE" id="9P6-kX-cmd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZK-ge-wwy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1847" y="1558"/>
+            <point key="canvasLocation" x="1845.5999999999999" y="1557.5712143928038"/>
         </scene>
         <!--Settings-->
         <scene sceneID="U7f-dZ-nTb">
