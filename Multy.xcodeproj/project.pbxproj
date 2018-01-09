@@ -113,15 +113,12 @@
 		45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F42C831FDC081400210B1F /* IsJailbroken.swift */; };
 		FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B618C1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift */; };
 		FA4125DF2004C0FD00DF9AC3 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */; };
-		FA4125EC2004FF1500DF9AC3 /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E42004FF1200DF9AC3 /* libgtest.a */; };
 		FA4125ED2004FF1500DF9AC3 /* libmulty_transaction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E52004FF1200DF9AC3 /* libmulty_transaction.a */; };
 		FA4125EE2004FF1500DF9AC3 /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E62004FF1300DF9AC3 /* libkeccak-tiny.a */; };
 		FA4125EF2004FF1500DF9AC3 /* libmulty_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E72004FF1300DF9AC3 /* libmulty_core.a */; };
 		FA4125F02004FF1500DF9AC3 /* libmini-gmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E82004FF1400DF9AC3 /* libmini-gmp.a */; };
 		FA4125F12004FF1500DF9AC3 /* liblibwally-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E92004FF1400DF9AC3 /* liblibwally-core.a */; };
 		FA4125F22004FF1500DF9AC3 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125EA2004FF1400DF9AC3 /* libsecp256k1.a */; };
-		FA4125F32004FF1500DF9AC3 /* libmulty_test.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125EB2004FF1500DF9AC3 /* libmulty_test.dylib */; };
-		FA4125F42004FF8700DF9AC3 /* libmulty_test.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA4125EB2004FF1500DF9AC3 /* libmulty_test.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
 		FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */; };
@@ -169,7 +166,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FA4125F42004FF8700DF9AC3 /* libmulty_test.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,14 +282,12 @@
 		45F42C831FDC081400210B1F /* IsJailbroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsJailbroken.swift; sourceTree = "<group>"; };
 		FA0B618C1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAddressesRLM.swift; sourceTree = "<group>"; };
 		FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
-		FA4125E42004FF1200DF9AC3 /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgtest.a; sourceTree = "<group>"; };
 		FA4125E52004FF1200DF9AC3 /* libmulty_transaction.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmulty_transaction.a; sourceTree = "<group>"; };
 		FA4125E62004FF1300DF9AC3 /* libkeccak-tiny.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libkeccak-tiny.a"; sourceTree = "<group>"; };
 		FA4125E72004FF1300DF9AC3 /* libmulty_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmulty_core.a; sourceTree = "<group>"; };
 		FA4125E82004FF1400DF9AC3 /* libmini-gmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libmini-gmp.a"; sourceTree = "<group>"; };
 		FA4125E92004FF1400DF9AC3 /* liblibwally-core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibwally-core.a"; sourceTree = "<group>"; };
 		FA4125EA2004FF1400DF9AC3 /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsecp256k1.a; sourceTree = "<group>"; };
-		FA4125EB2004FF1500DF9AC3 /* libmulty_test.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_test.dylib; sourceTree = "<group>"; };
 		FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMApiExtension.swift; sourceTree = "<group>"; };
 		FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCoreLibExtension.swift; sourceTree = "<group>"; };
 		FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRealmExtension.swift; sourceTree = "<group>"; };
@@ -358,10 +352,8 @@
 				FA7E97241FF2504200735D73 /* Pods_Multy.framework in Frameworks */,
 				FA4125EE2004FF1500DF9AC3 /* libkeccak-tiny.a in Frameworks */,
 				FA4125EF2004FF1500DF9AC3 /* libmulty_core.a in Frameworks */,
-				FA4125EC2004FF1500DF9AC3 /* libgtest.a in Frameworks */,
 				FA4125F12004FF1500DF9AC3 /* liblibwally-core.a in Frameworks */,
 				FA4125F02004FF1500DF9AC3 /* libmini-gmp.a in Frameworks */,
-				FA4125F32004FF1500DF9AC3 /* libmulty_test.dylib in Frameworks */,
 				FA4125F22004FF1500DF9AC3 /* libsecp256k1.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1004,12 +996,10 @@
 			isa = PBXGroup;
 			children = (
 				FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */,
-				FA4125E42004FF1200DF9AC3 /* libgtest.a */,
 				FA4125E62004FF1300DF9AC3 /* libkeccak-tiny.a */,
 				FA4125E92004FF1400DF9AC3 /* liblibwally-core.a */,
 				FA4125E82004FF1400DF9AC3 /* libmini-gmp.a */,
 				FA4125E72004FF1300DF9AC3 /* libmulty_core.a */,
-				FA4125EB2004FF1500DF9AC3 /* libmulty_test.dylib */,
 				FA4125E52004FF1200DF9AC3 /* libmulty_transaction.a */,
 				FA4125EA2004FF1400DF9AC3 /* libsecp256k1.a */,
 				FA7E97231FF2504100735D73 /* Pods_Multy.framework */,
