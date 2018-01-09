@@ -112,6 +112,7 @@
 		45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E31FD179100078945A /* QrDataProtocol.swift */; };
 		45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F42C831FDC081400210B1F /* IsJailbroken.swift */; };
 		FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B618C1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift */; };
+		FA4125DF2004C0FD00DF9AC3 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
 		FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */; };
@@ -136,12 +137,6 @@
 		FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF631FDC403E00C45303 /* WrongSeedPhrasePresenter.swift */; };
 		FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA58DF641FDC403E00C45303 /* WrongSeedPhraseViewController.swift */; };
 		FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */; };
-		FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; };
-		FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; };
-		FA7406241FCC4855003C538C /* libmulty_core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA74061E1FCC14C4003C538C /* libmulty_core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406201FCC14C4003C538C /* liblibwally-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; };
-		FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74062A1FCC5D6A003C538C /* Constants.swift */; };
 		FA7E97241FF2504200735D73 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7E97231FF2504100735D73 /* Pods_Multy.framework */; };
 		FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */; };
@@ -150,6 +145,12 @@
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
 		FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88358F1FD854EC007694A2 /* AddressRLM.swift */; };
 		FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8835911FD856F4007694A2 /* UserWalletRLM.swift */; };
+		FA8DB53B2004BE4300BAD0B0 /* libmini-gmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DB5352004BE4200BAD0B0 /* libmini-gmp.a */; };
+		FA8DB53C2004BE4300BAD0B0 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DB5362004BE4200BAD0B0 /* libsecp256k1.a */; };
+		FA8DB53D2004BE4300BAD0B0 /* libmulty_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DB5372004BE4200BAD0B0 /* libmulty_core.a */; };
+		FA8DB53E2004BE4300BAD0B0 /* libkeccak-tiny.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DB5382004BE4200BAD0B0 /* libkeccak-tiny.a */; };
+		FA8DB53F2004BE4300BAD0B0 /* liblibwally-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DB5392004BE4200BAD0B0 /* liblibwally-core.a */; };
+		FA8DB5402004BE4300BAD0B0 /* libmulty_transaction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DB53A2004BE4300BAD0B0 /* libmulty_transaction.a */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
@@ -165,9 +166,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FA7406241FCC4855003C538C /* libmulty_core.dylib in Embed Libraries */,
-				FA7406261FCC4855003C538C /* liblibwally-core.dylib in Embed Libraries */,
-				FA7406291FCC48B5003C538C /* libmulty_transaction.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +281,7 @@
 		45E215E31FD179100078945A /* QrDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrDataProtocol.swift; sourceTree = "<group>"; };
 		45F42C831FDC081400210B1F /* IsJailbroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsJailbroken.swift; sourceTree = "<group>"; };
 		FA0B618C1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentAddressesRLM.swift; sourceTree = "<group>"; };
+		FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMApiExtension.swift; sourceTree = "<group>"; };
 		FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCoreLibExtension.swift; sourceTree = "<group>"; };
 		FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRealmExtension.swift; sourceTree = "<group>"; };
@@ -317,9 +316,6 @@
 		FA74061B1FCC14C4003C538C /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		FA74061C1FCC14C4003C538C /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		FA74061D1FCC14C4003C538C /* run_tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_tests.h; sourceTree = "<group>"; };
-		FA74061E1FCC14C4003C538C /* libmulty_core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_core.dylib; sourceTree = "<group>"; };
-		FA7406201FCC14C4003C538C /* liblibwally-core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liblibwally-core.dylib"; sourceTree = "<group>"; };
-		FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmulty_transaction.dylib; sourceTree = "<group>"; };
 		FA74062A1FCC5D6A003C538C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA7E97231FF2504100735D73 /* Pods_Multy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pods_Multy.framework; sourceTree = "<group>"; };
 		FA869D081FD5AD9700C815C3 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
@@ -330,6 +326,12 @@
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA88358F1FD854EC007694A2 /* AddressRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRLM.swift; sourceTree = "<group>"; };
 		FA8835911FD856F4007694A2 /* UserWalletRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWalletRLM.swift; sourceTree = "<group>"; };
+		FA8DB5352004BE4200BAD0B0 /* libmini-gmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libmini-gmp.a"; sourceTree = "<group>"; };
+		FA8DB5362004BE4200BAD0B0 /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsecp256k1.a; sourceTree = "<group>"; };
+		FA8DB5372004BE4200BAD0B0 /* libmulty_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmulty_core.a; sourceTree = "<group>"; };
+		FA8DB5382004BE4200BAD0B0 /* libkeccak-tiny.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libkeccak-tiny.a"; sourceTree = "<group>"; };
+		FA8DB5392004BE4200BAD0B0 /* liblibwally-core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibwally-core.a"; sourceTree = "<group>"; };
+		FA8DB53A2004BE4300BAD0B0 /* libmulty_transaction.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmulty_transaction.a; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -345,10 +347,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4125DF2004C0FD00DF9AC3 /* libstdc++.tbd in Frameworks */,
+				FA8DB53F2004BE4300BAD0B0 /* liblibwally-core.a in Frameworks */,
+				FA8DB53D2004BE4300BAD0B0 /* libmulty_core.a in Frameworks */,
 				FA7E97241FF2504200735D73 /* Pods_Multy.framework in Frameworks */,
-				FA7406281FCC48B0003C538C /* libmulty_transaction.dylib in Frameworks */,
-				FA7406231FCC14C4003C538C /* liblibwally-core.dylib in Frameworks */,
-				FA7406211FCC14C4003C538C /* libmulty_core.dylib in Frameworks */,
+				FA8DB53B2004BE4300BAD0B0 /* libmini-gmp.a in Frameworks */,
+				FA8DB5402004BE4300BAD0B0 /* libmulty_transaction.a in Frameworks */,
+				FA8DB53E2004BE4300BAD0B0 /* libkeccak-tiny.a in Frameworks */,
+				FA8DB53C2004BE4300BAD0B0 /* libsecp256k1.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,9 +995,13 @@
 		FA7E97221FF2504100735D73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FA74061E1FCC14C4003C538C /* libmulty_core.dylib */,
-				FA7406201FCC14C4003C538C /* liblibwally-core.dylib */,
-				FA7406271FCC48B0003C538C /* libmulty_transaction.dylib */,
+				FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */,
+				FA8DB5382004BE4200BAD0B0 /* libkeccak-tiny.a */,
+				FA8DB5392004BE4200BAD0B0 /* liblibwally-core.a */,
+				FA8DB5352004BE4200BAD0B0 /* libmini-gmp.a */,
+				FA8DB5372004BE4200BAD0B0 /* libmulty_core.a */,
+				FA8DB53A2004BE4300BAD0B0 /* libmulty_transaction.a */,
+				FA8DB5362004BE4200BAD0B0 /* libsecp256k1.a */,
 				FA7E97231FF2504100735D73 /* Pods_Multy.framework */,
 			);
 			name = Frameworks;
@@ -1462,6 +1472,7 @@
 			baseConfigurationReference = FB8B9FB3B25309DBF0633968 /* Pods-Multy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1471,14 +1482,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Multy/Frameworks",
 				);
+				GCC_C_LANGUAGE_STANDARD = c11;
 				INFOPLIST_FILE = Multy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/**",
 					"\"$(SRCROOT)/Pods/GGLInstanceID\"/**",
 					"\"$(SRCROOT)/Multy/Additional Libraries/Core Libs\"",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
+					"$(PROJECT_DIR)/Multy/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.multy;
@@ -1497,6 +1510,7 @@
 			baseConfigurationReference = 313568CEE4A41522AB0FD8F0 /* Pods-Multy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1507,14 +1521,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Multy/Frameworks",
 				);
+				GCC_C_LANGUAGE_STANDARD = c11;
 				INFOPLIST_FILE = Multy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/**",
 					"\"$(SRCROOT)/Pods/GGLInstanceID\"/**",
 					"\"$(SRCROOT)/Multy/Additional Libraries/Core Libs\"",
 					"$(PROJECT_DIR)/Multy/Additional\\ Libraries/Core\\ Libs",
+					"$(PROJECT_DIR)/Multy/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.multy;
