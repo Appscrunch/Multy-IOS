@@ -25,4 +25,7 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
         self.walletNameTF.text = self.presenter.wallet?.name
     }
     
+    @IBAction func deleteAction(_ sender: Any) {
+        self.presenter.delete()
+    }
 }
