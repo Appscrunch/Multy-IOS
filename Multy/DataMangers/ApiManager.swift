@@ -160,8 +160,6 @@ class ApiManager: NSObject {
                     } else {
                         completion(nil, nil)
                     }
-                    
-                    
                 }
             case .failure(_):
                 completion(nil, response.result.error)
@@ -174,7 +172,7 @@ class ApiManager: NSObject {
         let header: HTTPHeaders = [
             "Authorization" : "Bearer \(token)"
         ]
-        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletIndex)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletIndex)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -314,6 +312,24 @@ class ApiManager: NSObject {
         ]
         
         requestManager.request("\(self.apiUrl)api/v1/outputs/spendable/\(currencyID)/\(address)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+    
+    func getTransactionHistory(_ token: String, walletID: NSNumber, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/wallets/transactions/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

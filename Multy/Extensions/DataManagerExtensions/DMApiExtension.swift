@@ -223,4 +223,22 @@ extension DataManager {
             completion(dict, error)
         }
     }
+    
+    func getTransactionHistory(token: String, walletID: NSNumber) {
+        apiManager.getTransactionHistory(token, walletID: walletID) { (answer, err) in
+            switch err {
+            case nil:
+                if answer!["code"] as! Int == 200 {
+                    if answer!["history"] is NSNull {
+                        //history empty
+                        return
+                    }
+                    if answer!["history"] as! NSArray != nil {
+                        print("cicki")
+                    }
+                }
+            default: break //do something here
+            }
+        }
+    }
 }

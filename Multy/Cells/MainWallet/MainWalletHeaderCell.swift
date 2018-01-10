@@ -70,4 +70,8 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
         
         return cell
     }
+    
+    func updateUI() {
+        self.collectionView.reloadData()
+    }
 }
