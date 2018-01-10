@@ -40,4 +40,8 @@ class WalletPresenter: NSObject {
     func numberOfTransactions() -> Int {
         return self.trasactionsArr.count
     }
+    
+    func getHistory() {
+        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!)
+    }
 }

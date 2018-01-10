@@ -40,6 +40,7 @@ class WalletViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView()
+        self.presenter.getHistory()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,9 +48,12 @@ class WalletViewController: UIViewController {
     }
     
     @objc func updateExchange() {
-        let offsetBeforeUpdate = self.tableView.contentOffset
-        self.tableView.reloadData()
-        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
+//        let offsetBeforeUpdate = self.tableView.contentOffset
+//        self.tableView.reloadData()
+//        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
+        
+        let firstCell = self.tableView.cellForRow(at: [0,0]) as! MainWalletHeaderCell
+        firstCell.updateUI()
     }
     
     func backUpView() {
