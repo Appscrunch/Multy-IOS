@@ -32,9 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             forName: .UIApplicationUserDidTakeScreenshot,
             object: nil,
             queue: .main) { notification in
-                print("cicki")
+                print("\n\nScreennshot!\n\n")
                 //executes after screenshot
         }
+        
+        DataManager.shared.getServerConfig()
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
