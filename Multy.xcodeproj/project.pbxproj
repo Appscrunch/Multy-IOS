@@ -119,6 +119,7 @@
 		FA4125F02004FF1500DF9AC3 /* libmini-gmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E82004FF1400DF9AC3 /* libmini-gmp.a */; };
 		FA4125F12004FF1500DF9AC3 /* liblibwally-core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125E92004FF1400DF9AC3 /* liblibwally-core.a */; };
 		FA4125F22004FF1500DF9AC3 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4125EA2004FF1400DF9AC3 /* libsecp256k1.a */; };
+		FA4125F62005139600DF9AC3 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4125F52005139600DF9AC3 /* UserPreferences.swift */; };
 		FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */; };
 		FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */; };
 		FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */; };
@@ -288,6 +289,7 @@
 		FA4125E82004FF1400DF9AC3 /* libmini-gmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libmini-gmp.a"; sourceTree = "<group>"; };
 		FA4125E92004FF1400DF9AC3 /* liblibwally-core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibwally-core.a"; sourceTree = "<group>"; };
 		FA4125EA2004FF1400DF9AC3 /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsecp256k1.a; sourceTree = "<group>"; };
+		FA4125F52005139600DF9AC3 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		FA4D43D61FC5749D003C7117 /* DMApiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMApiExtension.swift; sourceTree = "<group>"; };
 		FA4D43D81FC5772E003C7117 /* DMCoreLibExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCoreLibExtension.swift; sourceTree = "<group>"; };
 		FA4D43DA1FC581AE003C7117 /* DMRealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMRealmExtension.swift; sourceTree = "<group>"; };
@@ -1022,6 +1024,7 @@
 			children = (
 				FA4D43DE1FC58730003C7117 /* TouchIDAuthentication.swift */,
 				FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */,
+				FA4125F52005139600DF9AC3 /* UserPreferences.swift */,
 				45F42C831FDC081400210B1F /* IsJailbroken.swift */,
 			);
 			path = Security;
@@ -1307,6 +1310,7 @@
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
 				4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */,
 				FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */,
+				FA4125F62005139600DF9AC3 /* UserPreferences.swift in Sources */,
 				45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */,
 				FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */,
 				4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */,

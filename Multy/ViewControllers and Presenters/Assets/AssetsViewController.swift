@@ -5,6 +5,7 @@
 import UIKit
 import RealmSwift
 import Alamofire
+import CryptoSwift
 //import BiometricAuthentication
 
 class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -24,8 +25,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
     
     override func viewDidLoad() {
-
         super.viewDidLoad()
+        
+        let _ = MasterKeyGenerator.shared.generateMasterKey{_,_,_ in }
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.presenter.assetsVC = self
         
@@ -48,6 +51,17 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.createAlert()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
+        let _ = UserPreferences.shared
+    }
+
+    func cipherText() {
+        String.generateRandomString()
+        
+        let up = UserPreferences.shared
+        up.writeCiperedDatabasePassword()
+        up.getAndDecryptDatabasePassword { (decipheredText, error) in
+            print("---\(decipheredText!)")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +85,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.presenter.updateWalletsInfo()
         }
         self.isFirstLaunch = false
+        
+        cipherText()
     }
     
     override func viewDidLayoutSubviews() {

@@ -9,7 +9,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 7
+    let schemaVersion : UInt64 = 8
     
     private override init() {
         super.init()
@@ -21,6 +21,9 @@ class RealmManager: NSObject {
                                         migrationBlock: { migration, oldSchemaVersion in
                                             if oldSchemaVersion < 7 {
                                                 self.migrateFrom6To7(with: migration)
+                                            }
+                                            if oldSchemaVersion < 8 {
+                                                self.migrateFrom7To8(with: migration)
                                             }
                                         }
                 )
@@ -53,6 +56,9 @@ class RealmManager: NSObject {
                                                   migrationBlock: { migration, oldSchemaVersion in
                                                     if oldSchemaVersion < 7 {
                                                         self.migrateFrom6To7(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 8 {
+                                                        self.migrateFrom7To8(with: migration)
                                                     }
             })
             
@@ -428,6 +434,13 @@ class RealmManager: NSObject {
         // Add an email property
         migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendOut) in
             newSpendOut?["addressID"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom7To8(with migration: Migration) {
+        // Add an email property
+        migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
+            newAccount?["backupSeedPhrase"] = ""
         }
     }
     
