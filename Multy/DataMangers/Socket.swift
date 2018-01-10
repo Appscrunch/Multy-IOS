@@ -44,12 +44,12 @@ class Socket: NSObject {
             self.socket.on("exchangeAll") {data, ack in
                 print("-----exchangeAll: \(data)")
             }
-            
-            self.socket.on("exchangeUpdate") {data, ack in
+            //"exchangeUpdate"
+            self.socket.on("exchangePoloniex") {data, ack in
                 print("-----exchangeUpdate: \(data)")
                 if !(data is NSNull) {
-                    exchangeCourse = ((data[0] as! NSDictionary)["BTCtoUSD"] as! NSNumber).doubleValue
-                }
+                    exchangeCourse = ((data[0] as! NSDictionary)["btc_usd"] as! NSNumber).doubleValue
+                }//"BTCtoUSD"
             }
             
             

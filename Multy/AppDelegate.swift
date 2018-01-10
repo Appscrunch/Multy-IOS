@@ -32,9 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             forName: .UIApplicationUserDidTakeScreenshot,
             object: nil,
             queue: .main) { notification in
-                print("cicki")
+                print("\n\nScreennshot!\n\n")
                 //executes after screenshot
         }
+        
+        DataManager.shared.getServerConfig()
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -65,7 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.shared.finishRealmSession()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             isNeedToAutorise = acc != nil
-            //         isNeedToAutorise = true
+            
+            //MAKR: Check here isPin option from NSUserDefaults
+            // isNeedToAutorise = unlockMode
+            
             if self.presentedVC != nil {
                 self.presentedVC?.dismiss(animated: true, completion: nil)
                 self.openedAlert?.dismiss(animated: true, completion: nil)

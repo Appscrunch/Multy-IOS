@@ -7,6 +7,59 @@ import RealmSwift
 import Alamofire
 
 extension DataManager {
+    
+    func getServerConfig() {
+        apiManager.getServerConfig { (answerDict, err) in
+            switch err {
+            case nil:
+                var apiVersion: NSString?
+                var hardVersion: Int?
+                var softVersion: Int?
+                var serverTime: NSDate?
+                
+                
+                if answerDict!["api"] != nil {
+                    apiVersion = (answerDict!["api"] as? NSString)
+                    UserDefaults.standard.set(apiVersion, forKey: "apiVersion")
+                }
+                
+                if answerDict!["ios"] != nil {
+                    let iosDict = answerDict!["ios"] as! NSDictionary
+                    hardVersion = iosDict["hard"] as? Int
+                    softVersion = iosDict["soft"] as? Int
+                    
+                    UserDefaults.standard.set(hardVersion, forKey: "hardVersion")
+                    UserDefaults.standard.set(softVersion, forKey: "softVersion")
+                }
+                
+                if answerDict!["servertime"] != nil {
+                    let timestamp = answerDict!["servertime"]
+                    serverTime = NSDate(timeIntervalSince1970: timestamp as! TimeInterval)
+                    
+                    UserDefaults.standard.set(serverTime, forKey: "serverTime")
+                }
+                
+                if answerDict!["stockexchanges"] != nil {
+                    let stocksDict = answerDict!["stockexchanges"] as! NSDictionary
+                    let stocks = StockExchanges(dictWithStocks: stocksDict)
+                    
+                    let encodedData = NSKeyedArchiver.archivedData(withRootObject: stocks.stocks)
+                    UserDefaults.standard.set(encodedData, forKey: "stocks")
+                    
+                    //for get dict from userDefaults
+//                    let decoded  = UserDefaults.standard.object(forKey: UserDefaultsKeys.jobCategory.rawValue) as! Data
+//                    let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! JobCategory
+//                    print(decodedTeams.name)
+                }
+                
+                break
+            default:
+                //do it something
+                break
+            }
+        }
+    }
+    
     func auth(rootKey: String?, completion: @escaping (_ account: AccountRLM?,_ error: Error?) -> ()) {
         realmManager.getRealm { (realmOpt, error) in
             if let realm = realmOpt {
@@ -25,7 +78,7 @@ extension DataManager {
                     if rootKey == nil {
                         let seedPhraseString = self.coreLibManager.createMnemonicPhraseArray().joined(separator: " ")
                         params["userID"] = self.getRootString(from: seedPhraseString).0
-                        params["deviceID"] = UUID().uuidString
+                        params["deviceID"] = "iOS \(UIDevice.current.name)"
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
                         
@@ -35,7 +88,7 @@ extension DataManager {
                         paramsDict["binaryData"] = self.coreLibManager.createSeedBinaryData(from: seedPhraseString)?.convertToHexString()
                     } else {
                         params["userID"] = self.getRootString(from: rootKey!).0
-                        params["deviceID"] = UUID().uuidString
+                        params["deviceID"] = "iOS \(UIDevice.current.name)"//UUID().uuidString
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
                         

@@ -28,6 +28,7 @@ class WalletViewController: UIViewController {
 //                                               walletID: presenter.wallet!.walletID) { (dict, error) in
 //            print("\n\nok\n\n")
 //        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
@@ -39,6 +40,16 @@ class WalletViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func updateExchange() {
+        let offsetBeforeUpdate = self.tableView.contentOffset
+        self.tableView.reloadData()
+        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
     }
     
     func backUpView() {

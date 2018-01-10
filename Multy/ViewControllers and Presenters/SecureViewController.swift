@@ -34,6 +34,7 @@ class SecureViewController: UIViewController {
                 self.tabBarController?.tabBar.isUserInteractionEnabled = true
 //                NotificationCenter.default.post(name: Notification.Name("hideKeyboard"), object: nil)
                 NotificationCenter.default.post(name: Notification.Name("showKeyboard"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("canDisablePin"), object: nil)
             }
         }
     }

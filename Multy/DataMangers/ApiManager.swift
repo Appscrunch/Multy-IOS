@@ -22,6 +22,20 @@ class ApiManager: NSObject {
         self.requestManager = Alamofire.SessionManager(configuration: configuration)
     }
     
+    func getServerConfig(completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        requestManager.request("\(self.apiUrl)server/config", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).debugLog().responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion(response.result.value as? NSDictionary, nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+    
     func auth(with parameters: Parameters, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
@@ -148,6 +162,24 @@ class ApiManager: NSObject {
                     }
                     
                     
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
+    
+    func deleteWallet(_ token: String, walletIndex: NSNumber, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization" : "Bearer \(token)"
+        ]
+        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletIndex)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    print(response.result.value)
+                    completion(response.result.value as? NSDictionary, nil)
                 }
             case .failure(_):
                 completion(nil, response.result.error)
