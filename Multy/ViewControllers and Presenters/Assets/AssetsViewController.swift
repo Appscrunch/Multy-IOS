@@ -468,14 +468,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func presentWarningAlert(message: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let slpashScreen = storyboard.instantiateViewController(withIdentifier: "splash") as! SplashViewController
-        slpashScreen.jailAlert(message: message)
+        slpashScreen.isJailAlert = 1
         self.present(slpashScreen, animated: true, completion: nil)
     }
     
     func presentUpdateAlert() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let slpashScreen = storyboard.instantiateViewController(withIdentifier: "splash") as! SplashViewController
-        slpashScreen.updateAlert()
+        slpashScreen.isJailAlert = 0
         self.present(slpashScreen, animated: true, completion: nil)
     }
     
