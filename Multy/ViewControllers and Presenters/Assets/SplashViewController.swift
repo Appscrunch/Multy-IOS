@@ -6,16 +6,27 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
+    var isJailAlert = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        switch isJailAlert {
+        case 0:
+            self.updateAlert()
+        case 1:
+            self.jailAlert()
+        default: break
+        }
     }
     
     
-    func jailAlert(message: String) {
+    func jailAlert() {
+        let message = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."
         let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             DataManager.shared.clearDB(completion: { (err) in
