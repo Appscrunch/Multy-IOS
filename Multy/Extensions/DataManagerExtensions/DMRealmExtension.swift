@@ -50,7 +50,8 @@ extension DataManager {
     }
     
     func clearDB(completion: @escaping (_ error: NSError?) -> ()) {
-        realmManager.clearRealm()
+        try! FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+//        realmManager.clearRealm()
         completion(nil)
     }
     

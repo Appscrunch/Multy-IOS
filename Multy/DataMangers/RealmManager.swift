@@ -74,6 +74,7 @@ class RealmManager: NSObject {
                 
                 completion(realm, nil)
             } catch let error as NSError {
+                try! FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
                 completion(nil, error)
                 fatalError("Error opening Realm: \(error)")
             }
