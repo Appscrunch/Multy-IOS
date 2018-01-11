@@ -22,10 +22,17 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var isFirstLaunch = true
     
+    var isFlowPassed = false
+    
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.registerCells()
+        
+        guard isFlowPassed == true else {
+            return
+        }
         
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_,_ in }
         
@@ -34,7 +41,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
-        self.registerCells()
+        
         
         self.view.addSubview(progressHUD)
         
@@ -79,6 +86,11 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        guard isFlowPassed == true else {
+            return
+        }
+        
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         if !self.isFirstLaunch {
@@ -86,7 +98,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         self.isFirstLaunch = false
         
-        cipherText()
     }
     
     override func viewDidLayoutSubviews() {
@@ -465,15 +476,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func presentUpdateAlert() {
-        let message = "Please update Multy from App Store"
-        let alert = UIAlertController(title: "We have update!", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Go to update", style: .cancel, handler: { (action) in
-            if let url = URL(string: "itms-apps://itunes.apple.com/"), //"itms-apps://itunes.apple.com/app/id1024941703"
-                UIApplication.shared.canOpenURL(url){
-                UIApplication.shared.openURL(url)
-            }
-        }))
-        self.present(alert, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let slpashScreen = storyboard.instantiateViewController(withIdentifier: "splash")  
+        self.present(slpashScreen, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

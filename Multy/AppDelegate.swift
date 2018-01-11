@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //executes after screenshot
         }
         
-        self.checkForJail()
+        self.performFirstEnterFlow()
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func checkForJail() {
+    func performFirstEnterFlow() {
         switch isDeviceJailbroken() {
         case true:
             (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
@@ -102,9 +102,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
-                if buildVersion > hardVersion! {
-                    (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presentUpdateAlert()
+                let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
+                if buildVersion < hardVersion! {
+                    assetVC.presentUpdateAlert()
                 } else {
+                    assetVC.isFlowPassed = true
+                    assetVC.viewDidLoad()
                     self.saveMkVersion()
                 }
             }
