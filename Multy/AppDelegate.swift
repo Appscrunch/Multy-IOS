@@ -21,13 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
-//        let defaults = UserDefaults.standard
-//        if defaults.object(forKey: "maxtries") == nil {
-//            let maxTries = 6
-//            defaults.set(maxTries, forKey: "maxtries")
-//        }
-//        defaults.synchronize()
-        
+        // check for screenshot
         NotificationCenter.default.addObserver(
             forName: .UIApplicationUserDidTakeScreenshot,
             object: nil,
@@ -36,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //executes after screenshot
         }
         
-        DataManager.shared.getServerConfig()
+        self.checkForJail()
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -45,14 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = initialViewController
 //        self.window?.makeKeyAndVisible()
 //        self.realmConfig()
-        
-//        switch isDeviceJailbroken() {
-//        case true:
-//            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
-//        case false:
-//            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
-//        }
-        
         return true
     }
 
@@ -104,6 +90,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         DataManager.shared.finishRealmSession()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    
+    func checkForJail() {
+        switch isDeviceJailbroken() {
+        case true:
+            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
+        case false:
+            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
+            DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
+                let dictionary = Bundle.main.infoDictionary!
+                let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
+                if buildVersion > hardVersion! {
+                    (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presentUpdateAlert()
+                } else {
+                    self.saveMkVersion()
+                }
+            }
+        }
+    }
+    
+    func saveMkVersion(){
+        if UserDefaults.standard.value(forKey: "MKVersion") != nil {
+            
+        } else {
+            UserDefaults.standard.set("1.0", forKey: "MKVersion")
+        }
     }
 
 //    func realmConfig () {

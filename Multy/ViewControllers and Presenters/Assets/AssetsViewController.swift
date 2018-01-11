@@ -464,6 +464,18 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentUpdateAlert() {
+        let message = "Please update Multy from App Store"
+        let alert = UIAlertController(title: "We have update!", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Go to update", style: .cancel, handler: { (action) in
+            if let url = URL(string: "itms-apps://itunes.apple.com/"), //"itms-apps://itunes.apple.com/app/id1024941703"
+                UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.openURL(url)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createWalletVC" {
             let createVC = segue.destination as! CreateWalletViewController
