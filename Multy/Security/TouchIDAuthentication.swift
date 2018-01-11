@@ -13,7 +13,7 @@ class TouchIDAuth {
     }
     
     func authenticateUser(completion: @escaping (String?) -> Void) { // 1
-        context.touchIDAuthenticationAllowableReuseDuration =
+        context.touchIDAuthenticationAllowableReuseDuration = 5
         guard canEvaluatePolicy() else {
             completion("You have not attemps to TouchId or PIN")
             return
