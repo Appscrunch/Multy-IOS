@@ -25,6 +25,8 @@ class AccountRLM: Object {
     @objc dynamic var token = String()
     @objc dynamic var id: NSNumber = 1
     
+    @objc dynamic var topIndex: NSNumber = 0
+    
     @objc dynamic var walletCount: NSNumber = 0
     var wallets = List<UserWalletRLM>() {
         didSet {

@@ -57,11 +57,11 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func cipherText() {
         String.generateRandomString()
         
-        let up = UserPreferences.shared
-        up.writeCiperedDatabasePassword()
-        up.getAndDecryptDatabasePassword { (decipheredText, error) in
-            print("---\(decipheredText!)")
-        }
+//        let up = UserPreferences.shared
+//        up.writeCiperedDatabasePassword()
+//        up.getAndDecryptDatabasePassword { (decipheredText, error) in
+//            print("---\(decipheredText!)")
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

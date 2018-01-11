@@ -179,9 +179,16 @@ extension DataManager {
     func getWalletsVerbose(_ token: String, completion: @escaping (_ walletsArr: NSArray?,_ error: Error?) -> ()) {
         apiManager.getWalletsVerbose(token) { (answer, err) in
             if err == nil {
+                let dict = NSMutableDictionary()
+                dict["topindex"] = answer!["topindex"]
+                
+                DataManager.shared.realmManager.updateAccount(dict, completion: { (_, _) in })
+                
                 if (answer?["code"] as? NSNumber)?.intValue == 200 {
                     print("getWalletsVerbose:\n \(answer ?? ["":""])")
                     if answer!["wallets"] is NSNull {
+                        completion(NSArray(), nil)
+                        
                         return
                     }
                     let walletsArrayFromApi = answer!["wallets"] as! NSArray

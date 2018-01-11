@@ -9,7 +9,7 @@ import CryptoSwift
 class UserPreferences : NSObject {
     static let shared = UserPreferences()
     
-    fileprivate var executedFunction : ((String?, Error?) -> Void)?
+    fileprivate var executedFunction : ((Data?, Error?) -> Void)?
     
     var aes : AES? {
         didSet {
@@ -84,12 +84,18 @@ class UserPreferences : NSObject {
         let generatedPass = String.generateRandomString()!
         
         let cipheredPass = try! aes!.encrypt(Array(generatedPass.utf8))
-        let cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
+        var cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
+        
+        if cipheredData.length != 64 {
+            let mutableData = cipheredData.mutableCopy() as! NSMutableData
+            mutableData.length = 64
+            cipheredData = mutableData.copy() as! NSData
+        }
         
         UserDefaults.standard.set(cipheredData, forKey: "databasePassword")
     }
     
-    func getAndDecryptDatabasePassword(completion: @escaping (_ password: String?, _ error: Error?) -> ()) {
+    func getAndDecryptDatabasePassword(completion: @escaping (_ password: Data?, _ error: Error?) -> ()) {
         let decipheredData = UserDefaults.standard.data(forKey: "databasePassword")
         
         if decipheredData == nil || aes == nil {
@@ -98,11 +104,11 @@ class UserPreferences : NSObject {
             return
         }
         
-        let decipheredArray = [UInt8](decipheredData!)
-        let originalData = try! aes?.decrypt(decipheredArray)
-        let decipheredString = String(bytes: originalData!, encoding: .utf8)!
+//        let decipheredArray = [UInt8](decipheredData!)
+//        let originalData = try! aes?.decrypt(decipheredArray)
+//        let decipheredString = String(bytes: originalData!, encoding: .utf8)!
         
-        completion(decipheredString, nil)
+        completion(decipheredData!, nil)
     }
     
     func writeCipheredPinMode(mode : Int) {

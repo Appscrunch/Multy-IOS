@@ -9,28 +9,31 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 8
+    let schemaVersion : UInt64 = 9
     
     private override init() {
         super.init()
         
-        MasterKeyGenerator.shared.generateMasterKey { (masterKey, error, string) in
-            if masterKey != nil {
-                _ = Realm.Configuration(encryptionKey: masterKey!,
-                                        schemaVersion: self.schemaVersion,
-                                        migrationBlock: { migration, oldSchemaVersion in
-                                            if oldSchemaVersion < 7 {
-                                                self.migrateFrom6To7(with: migration)
-                                            }
-                                            if oldSchemaVersion < 8 {
-                                                self.migrateFrom7To8(with: migration)
-                                            }
-                                        }
-                )
-            } else {
-                print("Realm error while setting config")
-            }
-        }
+//        UserPreferences.shared.getAndDecryptDatabasePassword { (pass, error) in
+//            if pass != nil {
+//                _ = Realm.Configuration(encryptionKey: pass!.data(using: .utf8),
+//                                        schemaVersion: self.schemaVersion,
+//                                        migrationBlock: { migration, oldSchemaVersion in
+//                                            if oldSchemaVersion < 7 {
+//                                                self.migrateFrom6To7(with: migration)
+//                                            }
+//                                            if oldSchemaVersion < 8 {
+//                                                self.migrateFrom7To8(with: migration)
+//                                            }
+//                                            if oldSchemaVersion < 9 {
+//                                                self.migrateFrom8To9(with: migration)
+//                                            }
+//                }
+//                )
+//            } else {
+//                print("Realm error while setting config")
+//            }
+//        }
     }
     
     public func finishRealmSession() {
@@ -44,14 +47,14 @@ class RealmManager: NSObject {
             return
         }
         
-        MasterKeyGenerator.shared.generateMasterKey { (masterKey, error, string) in
-            guard masterKey != nil else {
+        UserPreferences.shared.getAndDecryptDatabasePassword { (pass, error) in
+            guard pass != nil else {
                 completion(nil, nil)
                 
                 return
             }
             
-            let realmConfig = Realm.Configuration(encryptionKey: masterKey!,
+            let realmConfig = Realm.Configuration(encryptionKey: pass,
                                                   schemaVersion: self.schemaVersion,
                                                   migrationBlock: { migration, oldSchemaVersion in
                                                     if oldSchemaVersion < 7 {
@@ -59,6 +62,9 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 8 {
                                                         self.migrateFrom7To8(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 9 {
+                                                        self.migrateFrom8To9(with: migration)
                                                     }
             })
             
@@ -172,7 +178,11 @@ class RealmManager: NSObject {
                         accountRLM.binaryDataString = accountDict["binaryData"] as! String
                     }
                     
-                    if accountDict["wallets"] != nil {
+                    if accountDict["topindex"] != nil {
+                        accountRLM.topIndex = accountDict["topindex"] as! NSNumber
+                    }
+                    
+                    if accountDict["wallets"] != nil && !(accountDict["wallets"] is NSNull) {
                         let walletsList = accountDict["wallets"] as! List<UserWalletRLM>
                         
                         for wallet in walletsList {
@@ -441,6 +451,13 @@ class RealmManager: NSObject {
         // Add an email property
         migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
             newAccount?["backupSeedPhrase"] = ""
+        }
+    }
+    
+    func migrateFrom8To9(with migration: Migration) {
+        // Add an email property
+        migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
+            newAccount?["topIndex"] = NSNumber(value: 0)
         }
     }
     
