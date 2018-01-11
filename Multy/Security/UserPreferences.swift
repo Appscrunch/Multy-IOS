@@ -135,7 +135,7 @@ class UserPreferences : NSObject {
         
         if decipheredData == nil {
 //            executedFunction = completion
-            writeCipheredPinMode(mode: 1)
+            writeCipheredPinMode(mode: 0)
             completion("0", nil)
             
             return
