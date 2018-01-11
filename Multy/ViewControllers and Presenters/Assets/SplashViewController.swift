@@ -12,6 +12,20 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    
+    func jailAlert(message: String) {
+        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            DataManager.shared.clearDB(completion: { (err) in
+                exit(0)
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateAlert() {
         let message = "Please update Multy from App Store"
         let alert = UIAlertController(title: "We have update!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Go to update", style: .cancel, handler: { (action) in
