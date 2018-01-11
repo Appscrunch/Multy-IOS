@@ -370,6 +370,7 @@ class RealmManager: NSObject {
                         
                         try! realm.write {
                             if modifiedWallet != nil {
+                                modifiedWallet?.name = wallet.name
                                 modifiedWallet!.addresses = wallet.addresses
 
                                 for (index,address) in wallet.addresses.enumerated() {

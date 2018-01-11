@@ -18,4 +18,13 @@ class WalletSettingsPresenter: NSObject {
             })
         }
     }
+    
+    func changeWalletName() {
+        DataManager.shared.getAccount { (account, error) in
+            DataManager.shared.changeWalletName(account!.token , walletID: self.wallet!.walletID, newName: self.walletSettingsVC!.walletNameTF.text!.trimmingCharacters(in: .whitespaces)) { (dict, error) in
+                print(dict)
+                self.walletSettingsVC!.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
 }

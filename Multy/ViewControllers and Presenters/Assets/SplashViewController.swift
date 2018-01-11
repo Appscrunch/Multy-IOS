@@ -27,7 +27,7 @@ class SplashViewController: UIViewController {
     
     func jailAlert() {
         let message = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."
-        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             DataManager.shared.clearDB(completion: { (err) in
                 exit(0)

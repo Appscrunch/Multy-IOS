@@ -341,6 +341,26 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    func changeWalletName(_ token: String, walletID: NSNumber, newName: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        
+        let header: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer \(token)"
+        ]
+        
+        requestManager.request("\(self.apiUrl)api/v1/wallet/name/\(walletID)/\(newName)", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(_):
+                if response.result.value != nil {
+                    completion((response.result.value as! NSDictionary), nil)
+                }
+            case .failure(_):
+                completion(nil, response.result.error)
+                break
+            }
+        }
+    }
 }
 
 //mjNQJu5QxQNVZf769WWz7zdmPeJMdg4YRA

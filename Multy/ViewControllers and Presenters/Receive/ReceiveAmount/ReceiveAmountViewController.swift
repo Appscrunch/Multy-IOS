@@ -105,7 +105,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func presentWarning(message: String) {
-        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

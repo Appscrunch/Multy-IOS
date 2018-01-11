@@ -249,4 +249,17 @@ extension DataManager {
             }
         }
     }
+    
+    func changeWalletName(_ token: String, walletID: NSNumber, newName: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.changeWalletName(token, walletID: walletID, newName: newName) { (answer, error) in
+            if error == nil {
+                if answer != nil {
+                    
+                }
+                completion(answer!, nil)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
 }

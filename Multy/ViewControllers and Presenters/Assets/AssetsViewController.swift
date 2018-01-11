@@ -59,16 +59,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
     }
-
-    func cipherText() {
-        String.generateRandomString()
-        
-//        let up = UserPreferences.shared
-//        up.writeCiperedDatabasePassword()
-//        up.getAndDecryptDatabasePassword { (decipheredText, error) in
-//            print("---\(decipheredText!)")
-//        }
-    }
     
     override func viewDidAppear(_ animated: Bool) {
 //        self.presenter.updateWalletsInfo()
