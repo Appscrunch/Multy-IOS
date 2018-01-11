@@ -100,6 +100,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case false:
             (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
+                if err != nil {
+                    return
+                }
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
