@@ -8,7 +8,7 @@ import Alamofire
 
 extension DataManager {
     
-    func getServerConfig() {
+    func getServerConfig(completion: @escaping(_ hardVersion: Int?,_ softVersion: Int?,_ error: Error?) -> ()) {
         apiManager.getServerConfig { (answerDict, err) in
             switch err {
             case nil:
@@ -51,10 +51,11 @@ extension DataManager {
 //                    let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! JobCategory
 //                    print(decodedTeams.name)
                 }
-                
+                completion(hardVersion, softVersion, nil)
                 break
             default:
                 //do it something
+                completion(nil, nil, err)
                 break
             }
         }

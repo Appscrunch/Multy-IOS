@@ -35,10 +35,12 @@ class SettingsViewController: UIViewController {
             authVC.modalPresentationStyle = .overCurrentContext
             self.present(authVC, animated: true, completion: nil)
         }
+        UserPreferences.shared.writeCipheredPinMode(mode: 1)
     }
     
     @objc func disablePin() {
         self.pinSwitch.isOn = false
         NotificationCenter.default.removeObserver(self)
+        UserPreferences.shared.writeCipheredPinMode(mode: 0)
     }
 }

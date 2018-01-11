@@ -660,7 +660,7 @@ correctly</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.010678631253540516" green="0.49669629335403442" blue="0.99941819906234741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.011764705882352941" green="0.49803921568627452" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tdq-0K-Sb2" firstAttribute="leading" secondItem="qNv-C3-uhH" secondAttribute="leading" id="0af-Tf-3S4"/>
                             <constraint firstItem="312-E7-Xe2" firstAttribute="top" secondItem="eXV-cf-GXL" secondAttribute="bottom" constant="41" id="19G-Bk-FhF"/>
@@ -683,6 +683,24 @@ correctly</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h66-5t-Zy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-588" y="2437"/>
+        </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="ucp-LX-wvs">
+            <objects>
+                <viewController storyboardIdentifier="splash" id="8BE-fQ-pBO" customClass="SplashViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nh5-tH-P81"/>
+                        <viewControllerLayoutGuide type="bottom" id="f3y-3c-C3N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ENQ-94-BLC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.011764705882352941" green="0.49803921568627452" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zvU-qz-4zB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="497" y="2437"/>
         </scene>
         <!--Custom Tab Bar View Controller-->
         <scene sceneID="q0k-k1-DrJ">
