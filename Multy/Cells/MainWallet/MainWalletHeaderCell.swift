@@ -23,7 +23,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
             self.collectionView.delegate = delegate
         }
     }
-//    @IBOutlet weak var pageControll: SMPageControl!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

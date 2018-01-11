@@ -7,7 +7,6 @@ import UIKit
 class PortfolioTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var smPageControll: SMPageControl!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +21,6 @@ class PortfolioTableViewCell: UITableViewCell {
     }
     
     func setupPageControl() {
-        self.smPageControll.numberOfPages = 2
         
     }
     
