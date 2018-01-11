@@ -1,10 +1,6 @@
-//
-//  RecentAddressesRLM.swift
-//  Multy
-//
-//  Created by MacBook on 21.12.2017.
-//Copyright © 2017 Idealnaya rabota. All rights reserved.
-//
+//Copyright 2017 Idealnaya rabota LLC
+//Licensed under Multy.io license.
+//See LICENSE for details
 
 import Foundation
 import RealmSwift

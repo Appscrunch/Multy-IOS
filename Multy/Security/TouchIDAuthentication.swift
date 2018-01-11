@@ -1,10 +1,6 @@
-//
-//  TouchIDAuthentication.swift
-//  TouchMeIn
-//
-//  Created by Andrey Apet on 11/9/17.
-//  Copyright © 2017 iT Guy Technologies. All rights reserved.
-//
+//Copyright 2017 Idealnaya rabota LLC
+//Licensed under Multy.io license.
+//See LICENSE for details
 
 import Foundation
 import LocalAuthentication
@@ -17,7 +13,9 @@ class TouchIDAuth {
     }
     
     func authenticateUser(completion: @escaping (String?) -> Void) { // 1
+        context.touchIDAuthenticationAllowableReuseDuration =
         guard canEvaluatePolicy() else {
+            completion("You have not attemps to TouchId or PIN")
             return
         }
 //        context.touchIDAuthenticationAllowableReuseDuration = 3

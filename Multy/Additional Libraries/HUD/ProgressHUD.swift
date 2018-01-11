@@ -1,10 +1,6 @@
-//
-//  ProgressHUD.swift
-//  TestShare
-//
-//  Created by Andrey Apet on 5/3/17.
-//  Copyright © 2017 i.Apet. All rights reserved.
-//
+//Copyright 2017 Idealnaya rabota LLC
+//Licensed under Multy.io license.
+//See LICENSE for details
 
 import UIKit
 
