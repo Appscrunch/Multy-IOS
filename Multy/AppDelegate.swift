@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.shared.realmManager.getAccount { (acc, err) in
             isNeedToAutorise = acc != nil
             
-            //MAKR: Check here isPin option from NSUserDefaults
+            //MARK: Check here isPin option from NSUserDefaults
             UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
                  isNeedToAutorise = (pinMode as! NSString).boolValue
             })
@@ -103,13 +103,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
-                if buildVersion < hardVersion! {
-                    assetVC.presentUpdateAlert()
-                } else {
+                
+                
+                //MARK: change > to <
+                if err != nil || buildVersion > hardVersion! {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
                     let _ = UserPreferences.shared
                     self.saveMkVersion()
+                } else {
+                    assetVC.presentUpdateAlert()
                 }
             }
         }
