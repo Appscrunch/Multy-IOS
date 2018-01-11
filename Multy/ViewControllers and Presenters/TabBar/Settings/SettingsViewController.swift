@@ -20,6 +20,10 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        
+        UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
+            self.pinSwitch.isOn = (pinMode! as NSString).boolValue
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {

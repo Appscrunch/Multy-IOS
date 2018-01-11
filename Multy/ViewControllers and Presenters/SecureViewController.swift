@@ -25,7 +25,7 @@ class SecureViewController: UIViewController {
                 self.tabBarController?.tabBar.isUserInteractionEnabled = false
                 let alert = UIAlertController(title: "Access Denied", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                    
+                    exit(0)
                 }))
                 self.present(alert, animated: true, completion: nil)
                 appDel.openedAlert = alert
