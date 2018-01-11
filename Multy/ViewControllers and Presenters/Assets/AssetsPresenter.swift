@@ -130,9 +130,9 @@ class AssetsPresenter: NSObject {
     }
     
     func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            print(error)
-        }
+//        DataManager.shared.getExchangeCourse { (error) in
+//            print(error)
+//        }
     }
     
     func getTransInfo() {

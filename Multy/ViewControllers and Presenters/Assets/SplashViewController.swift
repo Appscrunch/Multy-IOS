@@ -43,6 +43,7 @@ class SplashViewController: UIViewController {
             if let url = URL(string: "itms-apps://itunes.apple.com/"), //"itms-apps://itunes.apple.com/app/id1024941703"
                 UIApplication.shared.canOpenURL(url){
                 UIApplication.shared.openURL(url)
+                exit(0)
             }
         }))
         self.present(alert, animated: true, completion: nil)

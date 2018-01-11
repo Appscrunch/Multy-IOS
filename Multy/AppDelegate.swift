@@ -32,6 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.performFirstEnterFlow()
         
+        DataManager.shared.realmManager.getAccount { (acc, err) in
+            isNeedToAutorise = acc != nil
+            
+            //MAKR: Check here isPin option from NSUserDefaults
+            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
+                isNeedToAutorise = (pinMode! as NSString).boolValue
+                self.authorization()
+            })
+        }
+        
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
 //        let storyboard = UIStoryboard(name: "Receive", bundle: nil)
@@ -78,13 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        if isNeedToAutorise {
-            let authVC = SecureViewController()
-            authVC.modalPresentationStyle = .overCurrentContext
-            let selectedIndex = (self.window?.rootViewController as! CustomTabBarViewController).selectedIndex
-            (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController?.present(authVC, animated: true, completion: nil)
-            isNeedToAutorise = false
-        }
+        self.authorization()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -100,6 +104,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case false:
             (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
+                if err != nil {
+                    return
+                }
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
@@ -123,6 +130,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             UserDefaults.standard.set("1.0", forKey: "MKVersion")
+        }
+    }
+    
+    func authorization() {
+        if isNeedToAutorise {
+            let authVC = SecureViewController()
+            authVC.modalPresentationStyle = .overCurrentContext
+            let selectedIndex = (self.window?.rootViewController as! CustomTabBarViewController).selectedIndex
+            (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController?.present(authVC, animated: true, completion: nil)
+            isNeedToAutorise = false
         }
     }
 

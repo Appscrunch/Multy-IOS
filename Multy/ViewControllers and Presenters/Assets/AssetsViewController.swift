@@ -30,7 +30,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         self.registerCells()
         
-        guard isFlowPassed == true else {
+        guard isFlowPassed else {
             return
         }
         
@@ -86,16 +86,17 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if !self.isFirstLaunch {
+            self.presenter.updateWalletsInfo()
+        }
+        self.isFirstLaunch = false
         guard isFlowPassed == true else {
             return
         }
         
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
-        if !self.isFirstLaunch {
-            self.presenter.updateWalletsInfo()
-        }
-        self.isFirstLaunch = false
+        
         
     }
     
