@@ -237,12 +237,14 @@ extension DataManager {
             switch err {
             case nil:
                 if answer!["code"] as! Int == 200 {
-                    if answer!["history"] is NSNull {
+                    if answer!["history"] is NSNull || (answer!["history"] as? NSArray)?.count == 0 {
                         //history empty
                         return
                     }
-                    if answer!["history"] as! NSArray != nil {
-                        print("cicki")
+                    if answer!["history"] as? NSArray != nil {
+                        let historyArr = answer!["history"] as! NSArray
+                        let hhh = HistoryRLM.initWithArray(historyArr: historyArr)
+                        print(hhh)
                     }
                 }
             default: break //do something here
