@@ -132,8 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func authorization() {
         if isNeedToAutorise {
+            self.window?.isUserInteractionEnabled = false
             let authVC = SecureViewController()
-            authVC.modalPresentationStyle = .overCurrentContext
+//            authVC.modalPresentationStyle = .overCurrentContext
             let selectedIndex = (self.window?.rootViewController as! CustomTabBarViewController).selectedIndex
             (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController?.present(authVC, animated: true, completion: nil)
             isNeedToAutorise = false
