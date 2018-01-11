@@ -58,7 +58,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.createAlert()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
-        let _ = UserPreferences.shared
     }
 
     func cipherText() {

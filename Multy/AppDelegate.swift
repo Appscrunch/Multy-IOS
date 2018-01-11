@@ -108,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 } else {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
+                    let _ = UserPreferences.shared
                     self.saveMkVersion()
                 }
             }
