@@ -466,18 +466,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func presentWarningAlert(message: String) {
-        let alert = UIAlertController(title: "Warining", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-            DataManager.shared.clearDB(completion: { (err) in
-                exit(0)
-            })
-        }))
-        self.present(alert, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let slpashScreen = storyboard.instantiateViewController(withIdentifier: "splash") as! SplashViewController
+        slpashScreen.jailAlert(message: message)
+        self.present(slpashScreen, animated: true, completion: nil)
     }
     
     func presentUpdateAlert() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let slpashScreen = storyboard.instantiateViewController(withIdentifier: "splash")  
+        let slpashScreen = storyboard.instantiateViewController(withIdentifier: "splash") as! SplashViewController
+        slpashScreen.updateAlert()
         self.present(slpashScreen, animated: true, completion: nil)
     }
     
