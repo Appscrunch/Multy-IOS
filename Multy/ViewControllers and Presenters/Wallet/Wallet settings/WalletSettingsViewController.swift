@@ -9,9 +9,16 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var walletNameTF: UITextField!
     
     let presenter = WalletSettingsPresenter()
+    
+    let progressHUD = ProgressHUD(text: "Deleting Wallet...")
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        progressHUD.backgroundColor = .gray
+        view.addSubview(progressHUD)
+        progressHUD.hide()
+        
         self.presenter.walletSettingsVC = self
         self.hideKeyboardWhenTappedAround()
         self.updateUI()
@@ -30,6 +37,8 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
             let message = "Are you sure?"
             let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                self.progressHUD.show()
+                
                 self.presenter.delete()
             }))
             
@@ -52,7 +61,7 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        } else {
+        } else {            
             self.presenter.changeWalletName()
         }
     }
