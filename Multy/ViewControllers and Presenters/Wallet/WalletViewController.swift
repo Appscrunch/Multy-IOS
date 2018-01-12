@@ -18,6 +18,7 @@ class WalletViewController: UIViewController {
     var even = true
     
     var isBackupOnScreen = true
+    let progressHUD = ProgressHUD(text: "Getting Wallet...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,11 @@ class WalletViewController: UIViewController {
 //        }
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        self.presenter.getHistory()
+        
+//        progressHUD.backgroundColor = .gray
+//        progressHUD.show()
+//        self.view.addSubview(progressHUD)
+//        self.presenter.getHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +50,8 @@ class WalletViewController: UIViewController {
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView()
         
+//        progressHUD.show()
+        self.presenter.getHistory()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -241,9 +248,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 310.0 : 310.0
-
         if indexPath == [0,0] {
+            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 310.0 : 310.0
+            
             return heightForFirstCell * (screenWidth / 375.0)
         } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
             return 70

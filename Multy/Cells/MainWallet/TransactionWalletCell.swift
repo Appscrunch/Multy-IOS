@@ -32,10 +32,22 @@ class TransactionWalletCell: UITableViewCell {
     public func fillCell() {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "dd MMM yyyy hh:mm"
-        if histObj.txStatus == "incoming in mempool" || histObj.txStatus == "incoming in block" || histObj.txStatus == "incoming in block" {
+        if histObj.txStatus == "incoming in mempool" {
+            self.transactionImage.image = #imageLiteral(resourceName: "pending")
+            let blockedTxInfoColor = UIColor(redInt: 135, greenInt: 161, blueInt: 197, alpha: 0.4)
+            self.addressLabel.textColor = blockedTxInfoColor
+            self.timeLabel.textColor = blockedTxInfoColor
+            self.cryptoAmountLabel.textColor = blockedTxInfoColor
+        } else if histObj.txStatus == "incoming in block" || histObj.txStatus == "in block confirmed" {
             self.transactionImage.image = #imageLiteral(resourceName: "recieve")
+            self.addressLabel.textColor = .black
+            self.timeLabel.textColor = .black
+            self.cryptoAmountLabel.textColor = .black
         } else if histObj.txStatus == "spend in mempool" || histObj.txStatus == "spend in block" {
             self.transactionImage.image = #imageLiteral(resourceName: "send")
+            self.addressLabel.textColor = .black
+            self.timeLabel.textColor = .black
+            self.cryptoAmountLabel.textColor = .black
         }
         self.addressLabel.text = histObj.txInputs[0].address
         self.timeLabel.text = dateFormat.string(from: histObj.blockTime)

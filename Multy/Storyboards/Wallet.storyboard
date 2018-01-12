@@ -55,8 +55,15 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3MT-QQ-iCn">
                                 <rect key="frame" x="333" y="35" width="25" height="20"/>
                                 <state key="normal" backgroundImage="settings"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Ap-aao">
+                                <rect key="frame" x="320.5" y="20" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="LVW-dn-pwO"/>
+                                    <constraint firstAttribute="width" constant="50" id="nha-zs-Jyd"/>
+                                </constraints>
                                 <connections>
-                                    <action selector="settingssAction:" destination="Asu-Y0-uVx" eventType="touchUpInside" id="pQE-n4-oXz"/>
+                                    <action selector="settingssAction:" destination="Asu-Y0-uVx" eventType="touchUpInside" id="hnT-Jt-bpE"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can create first operation here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJt-Qg-K3r">
@@ -228,6 +235,7 @@ operations</string>
                             <constraint firstItem="Puy-SH-843" firstAttribute="centerX" secondItem="pbK-RX-Gb3" secondAttribute="centerX" id="NM2-F7-iTc"/>
                             <constraint firstItem="iJt-Qg-K3r" firstAttribute="top" secondItem="Aqo-BH-hPA" secondAttribute="bottom" constant="30" id="T26-Ns-bse"/>
                             <constraint firstItem="6mJ-yJ-hqs" firstAttribute="leading" secondItem="pbK-RX-Gb3" secondAttribute="leading" constant="17" id="Us4-gW-CkN"/>
+                            <constraint firstItem="z5W-Ap-aao" firstAttribute="centerX" secondItem="3MT-QQ-iCn" secondAttribute="centerX" id="Vvc-kl-iif"/>
                             <constraint firstItem="Aqo-BH-hPA" firstAttribute="centerX" secondItem="iJt-Qg-K3r" secondAttribute="centerX" id="WSr-wo-lZ5"/>
                             <constraint firstItem="6mJ-yJ-hqs" firstAttribute="top" secondItem="9Yy-Xk-shm" secondAttribute="top" constant="30" id="bhD-cA-kTv"/>
                             <constraint firstItem="Puy-SH-843" firstAttribute="centerY" secondItem="6mJ-yJ-hqs" secondAttribute="centerY" id="cKV-OT-MLb"/>
@@ -236,6 +244,7 @@ operations</string>
                             <constraint firstItem="RHH-jh-E3C" firstAttribute="centerX" secondItem="7Jm-m5-Juj" secondAttribute="centerX" id="j0d-vI-VC1"/>
                             <constraint firstAttribute="trailing" secondItem="7Jm-m5-Juj" secondAttribute="trailing" id="mU9-fC-GfM"/>
                             <constraint firstItem="7Jm-m5-Juj" firstAttribute="leading" secondItem="pbK-RX-Gb3" secondAttribute="leading" id="oFJ-9S-5nQ"/>
+                            <constraint firstItem="z5W-Ap-aao" firstAttribute="centerY" secondItem="3MT-QQ-iCn" secondAttribute="centerY" id="psO-mO-wny"/>
                             <constraint firstItem="3MT-QQ-iCn" firstAttribute="centerY" secondItem="6mJ-yJ-hqs" secondAttribute="centerY" id="qCZ-mW-YZm"/>
                             <constraint firstItem="sck-xy-UOK" firstAttribute="top" secondItem="9Yy-Xk-shm" secondAttribute="bottom" id="soB-wj-xrt"/>
                             <constraint firstItem="9Yy-Xk-shm" firstAttribute="top" secondItem="pbK-RX-Gb3" secondAttribute="top" id="uHl-F6-APe"/>

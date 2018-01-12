@@ -27,7 +27,17 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func deleteAction(_ sender: Any) {
         if presenter.wallet?.sumInCrypto.fixedFraction(digits: 8) == "0" {
-            self.presenter.delete()
+            let message = "Are you sure?"
+            let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                self.presenter.delete()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
         } else {
             let message = "Cryptocurrency amount should be empty"
             let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)

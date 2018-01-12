@@ -20,6 +20,8 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lockedInfoStackView : UIStackView!
     @IBOutlet weak var lockedInfoConstraint : NSLayoutConstraint!
     
+    @IBOutlet weak var lockedPopverWithBorders : UIView!
+    
     var blockedAmount = UInt32()
     
     var wallet: UserWalletRLM?
@@ -50,9 +52,18 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         if blockedAmount == 0 {
             lockedInfoStackView.isHidden = true
             lockedInfoConstraint.constant = 20
+            
+            lockedPopverWithBorders.isHidden = true
         } else {
             lockedInfoStackView.isHidden = false
             lockedInfoConstraint.constant = 80
+            
+            lockedPopverWithBorders.isHidden = false
+            
+            lockedPopverWithBorders.layer.borderColor = UIColor.white.cgColor
+            lockedPopverWithBorders.layer.cornerRadius = 20;
+            lockedPopverWithBorders.layer.masksToBounds = true
+            lockedPopverWithBorders.layer.borderWidth = 1.0
         }
     }
     

@@ -82,6 +82,10 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byB-ig-cEG">
+                                <rect key="frame" x="46" y="100" width="283" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1J-tp-Y54">
                                 <rect key="frame" x="56" y="107" width="263" height="42"/>
                                 <subviews>
@@ -119,8 +123,12 @@
                                 <constraints>
                                     <constraint firstItem="qkO-vD-Jy9" firstAttribute="leading" secondItem="U1J-tp-Y54" secondAttribute="leading" id="0g6-Vr-dUh"/>
                                     <constraint firstItem="rUV-eb-nxq" firstAttribute="leading" secondItem="2YE-wb-azz" secondAttribute="trailing" id="EOD-LI-Dcf"/>
+                                    <constraint firstItem="iIr-Hw-f94" firstAttribute="centerY" secondItem="rUV-eb-nxq" secondAttribute="centerY" id="GuL-Iy-ane"/>
                                     <constraint firstItem="qkO-vD-Jy9" firstAttribute="height" secondItem="U1J-tp-Y54" secondAttribute="height" id="KPf-vd-g8n"/>
+                                    <constraint firstItem="2YE-wb-azz" firstAttribute="centerY" secondItem="i4J-vW-qFW" secondAttribute="centerY" id="URs-SH-03v"/>
                                     <constraint firstItem="2YE-wb-azz" firstAttribute="leading" secondItem="i4J-vW-qFW" secondAttribute="trailing" id="fec-37-WAw"/>
+                                    <constraint firstItem="rUV-eb-nxq" firstAttribute="centerY" secondItem="2YE-wb-azz" secondAttribute="centerY" id="lKL-38-dMM"/>
+                                    <constraint firstItem="i4J-vW-qFW" firstAttribute="centerY" secondItem="qkO-vD-Jy9" secondAttribute="centerY" id="lqB-j4-sY1"/>
                                     <constraint firstItem="iIr-Hw-f94" firstAttribute="leading" secondItem="rUV-eb-nxq" secondAttribute="trailing" id="zDJ-0n-RfZ"/>
                                 </constraints>
                             </stackView>
@@ -179,11 +187,15 @@
                             <constraint firstItem="OsK-sF-JN6" firstAttribute="leading" secondItem="gtO-DI-sWH" secondAttribute="trailing" constant="10" id="6tU-zq-EMx"/>
                             <constraint firstItem="g0p-sP-wOM" firstAttribute="width" secondItem="CzU-1Y-Shf" secondAttribute="width" multiplier="236/375" id="8an-IT-kKg"/>
                             <constraint firstItem="sok-FJ-fGN" firstAttribute="trailing" secondItem="OsK-sF-JN6" secondAttribute="trailing" id="ACl-8R-c3u"/>
+                            <constraint firstItem="byB-ig-cEG" firstAttribute="top" secondItem="U1J-tp-Y54" secondAttribute="top" constant="-7" id="BFl-UL-vbY"/>
                             <constraint firstItem="OsK-sF-JN6" firstAttribute="bottom" secondItem="gtO-DI-sWH" secondAttribute="bottom" constant="-2" id="BzS-bW-KhA"/>
                             <constraint firstAttribute="bottom" secondItem="g0p-sP-wOM" secondAttribute="bottom" constant="5" id="IZS-TI-FM6"/>
                             <constraint firstItem="gtO-DI-sWH" firstAttribute="top" secondItem="Ahl-dA-62C" secondAttribute="bottom" constant="80" id="LPp-Lj-CQw"/>
+                            <constraint firstItem="byB-ig-cEG" firstAttribute="leading" secondItem="U1J-tp-Y54" secondAttribute="leading" constant="-10" id="MfH-Ce-Nce"/>
+                            <constraint firstItem="byB-ig-cEG" firstAttribute="trailing" secondItem="U1J-tp-Y54" secondAttribute="trailing" constant="10" id="PHa-gU-Wh8"/>
                             <constraint firstItem="IOd-pK-HjS" firstAttribute="centerX" secondItem="CzU-1Y-Shf" secondAttribute="centerX" id="Pea-FK-olC"/>
                             <constraint firstItem="g0p-sP-wOM" firstAttribute="top" secondItem="gtO-DI-sWH" secondAttribute="bottom" constant="16" id="Tbv-dR-sqE"/>
+                            <constraint firstItem="byB-ig-cEG" firstAttribute="bottom" secondItem="U1J-tp-Y54" secondAttribute="bottom" constant="7" id="ULZ-RM-BHg"/>
                             <constraint firstItem="Ahl-dA-62C" firstAttribute="centerX" secondItem="CzU-1Y-Shf" secondAttribute="centerX" id="b3H-gP-uNz"/>
                             <constraint firstItem="At7-Yl-BnE" firstAttribute="trailing" secondItem="g0p-sP-wOM" secondAttribute="trailing" constant="-15" id="jbT-yq-viw"/>
                             <constraint firstItem="U1J-tp-Y54" firstAttribute="centerX" secondItem="CzU-1Y-Shf" secondAttribute="centerX" id="kEH-Lz-j4J"/>
@@ -214,6 +226,7 @@
                 <outlet property="lockedFiatAmountLabel" destination="rUV-eb-nxq" id="rKP-xY-cXU"/>
                 <outlet property="lockedInfoConstraint" destination="LPp-Lj-CQw" id="tjJ-Ux-kUp"/>
                 <outlet property="lockedInfoStackView" destination="U1J-tp-Y54" id="uZx-4J-5Dq"/>
+                <outlet property="lockedPopverWithBorders" destination="byB-ig-cEG" id="5K2-UD-ocW"/>
                 <outlet property="showAddressesButton" destination="g0p-sP-wOM" id="064-F6-16Z"/>
             </connections>
             <point key="canvasLocation" x="55.5" y="90"/>

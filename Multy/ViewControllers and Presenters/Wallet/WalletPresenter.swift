@@ -12,6 +12,7 @@ class WalletPresenter: NSObject {
     var blockedAmount = UInt32(0)
     var wallet : UserWalletRLM? {
         didSet {
+            blockedAmount = calculateBlockedAmount()
             print("WalletPresenter:\n\(wallet?.addresses)")
         }
     }
@@ -58,6 +59,7 @@ class WalletPresenter: NSObject {
             if err == nil && histList != nil {
                self.historyArray = histList!
             }
+//            self.mainVC?.progressHUD.hide()
             self.mainVC?.updateUI()
         }
     }
@@ -65,9 +67,15 @@ class WalletPresenter: NSObject {
     func calculateBlockedAmount() -> UInt32 {
         var sum = UInt32(0)
         
-        for history in historyArray {
-            if history.txStatus == "incoming in mempool" {
-                sum += history.txOutAmount.uint32Value
+        if wallet == nil {
+            return sum
+        }
+        
+        for address in wallet!.addresses {
+            for out in address.spendableOutput {
+                if out.transactionStatus == "incoming in mempool" {
+                    sum += out.transactionOutAmount.uint32Value
+                }
             }
         }
         
