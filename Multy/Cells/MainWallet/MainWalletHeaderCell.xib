@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rya-sD-JBP">
-                        <rect key="frame" x="168" y="252.5" width="39" height="37"/>
+                        <rect key="frame" x="168" y="262.5" width="39" height="37"/>
                     </pageControl>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oci-Q7-YYq">
-                        <rect key="frame" x="0.0" y="40" width="375" height="207.5"/>
+                        <rect key="frame" x="0.0" y="40" width="375" height="222.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fns-tf-KmS">
                             <size key="itemSize" width="375" height="210"/>
@@ -39,8 +39,8 @@
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.69803921568627447" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="Rya-sD-JBP" secondAttribute="bottom" constant="10" id="Df1-3p-8EG"/>
-                    <constraint firstItem="Rya-sD-JBP" firstAttribute="top" secondItem="oci-Q7-YYq" secondAttribute="bottom" constant="5" id="PSk-jr-XJ2"/>
+                    <constraint firstAttribute="bottom" secondItem="Rya-sD-JBP" secondAttribute="bottom" id="Df1-3p-8EG"/>
+                    <constraint firstItem="Rya-sD-JBP" firstAttribute="top" secondItem="oci-Q7-YYq" secondAttribute="bottom" id="PSk-jr-XJ2"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Poa-UB-qZs"/>
                     <constraint firstAttribute="trailing" secondItem="oci-Q7-YYq" secondAttribute="trailing" id="R4B-1h-vCr"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="40" id="VZY-yx-uG7"/>

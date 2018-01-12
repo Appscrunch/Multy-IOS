@@ -66,6 +66,9 @@ class RealmManager: NSObject {
                                                     if oldSchemaVersion < 9 {
                                                         self.migrateFrom8To9(with: migration)
                                                     }
+                                                    if oldSchemaVersion < 10 {
+                                                        self.migrateFrom9To10(with: migration)
+                                                    }
             })
             
             do {
@@ -96,7 +99,6 @@ class RealmManager: NSObject {
                 completion(nil, nil)
             }
         }
-        
     }
     
     public func writeSeedPhrase(_ seedPhrase: String, completion: @escaping (_ error: NSError?) -> ()) {
@@ -460,6 +462,13 @@ class RealmManager: NSObject {
         // Add an email property
         migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
             newAccount?["topIndex"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom9To10(with migration: Migration) {
+        // Add an email property
+        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendableOutput) in
+            newSpendableOutput?["txStatus"] = ""
         }
     }
     

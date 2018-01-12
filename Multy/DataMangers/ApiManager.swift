@@ -362,7 +362,3 @@ class ApiManager: NSObject {
         }
     }
 }
-
-//mjNQJu5QxQNVZf769WWz7zdmPeJMdg4YRA
-//mrHaPLH3rXDj3udV4R6p3ifPoQwZEYZtq1
-

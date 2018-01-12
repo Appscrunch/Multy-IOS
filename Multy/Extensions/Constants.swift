@@ -32,3 +32,4 @@ func convertSatoshiToBTC(sum: UInt32) -> Double {
 func convertBTCStringToSatoshi(sum: String) -> UInt32 {
     return UInt32(Double(sum)! * pow(10, 8))
 }
+

@@ -220,7 +220,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath == [0,0] ? 300 * (screenWidth / 375.0) : 80
+        return indexPath == [0,0] ? 310 * (screenWidth / 375.0) : 80
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -248,7 +248,7 @@ extension WalletViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth, height: 210.0 * (screenWidth / 375.0))
+        return CGSize(width: screenWidth, height: 250.0 * (screenWidth / 375.0))
     }
     
     func collectionView(_ collectionView: UICollectionView,

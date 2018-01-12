@@ -13,6 +13,12 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var fiatNameLabel : UILabel!
     @IBOutlet weak var addressLabel : UILabel!
     
+    @IBOutlet weak var lockedCryptoAmountLabel : UILabel!
+    @IBOutlet weak var lockedFiatAmountLabel : UILabel!
+    
+    @IBOutlet weak var lockedInfoStackView : UIStackView!
+    @IBOutlet weak var lockedInfoConstraint : NSLayoutConstraint!
+    
     var wallet: UserWalletRLM?
     var mainVC: UIViewController?
     
