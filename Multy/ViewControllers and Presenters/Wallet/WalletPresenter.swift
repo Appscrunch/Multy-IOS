@@ -18,6 +18,8 @@ class WalletPresenter: NSObject {
     
     var trasactionsArr = [TransactionRLM]()
     
+    var historyArray = [HistoryRLM]()
+    
     func registerCells() {
         let walletHeaderCell = UINib.init(nibName: "MainWalletHeaderCell", bundle: nil)
         self.mainVC?.tableView.register(walletHeaderCell, forCellReuseIdentifier: "MainWalletHeaderCellID")
@@ -38,19 +40,15 @@ class WalletPresenter: NSObject {
     }
     
     func numberOfTransactions() -> Int {
-        return self.trasactionsArr.count
+        return self.historyArray.count
     }
     
     func getHistory() {
-        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (historyList, err) in
-            if err != nil || historyList == nil {
-                //do something with it
-                return
+        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (histList, err) in
+            for hist in histList! {
+                self.historyArray.append(hist)
             }
-            DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
-                //update UI
-            })
-            
+            self.mainVC?.updateUI()
         }
     }
 }

@@ -10,6 +10,9 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var backView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var emptyFirstLbl: UILabel!
+    @IBOutlet weak var emptySecondLbl: UILabel!
+    @IBOutlet weak var emptyArrowImg: UIImageView!
     
     var presenter = WalletPresenter()
     var even = true
@@ -30,6 +33,7 @@ class WalletViewController: UIViewController {
 //        }
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        self.presenter.getHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +44,7 @@ class WalletViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView()
-        self.presenter.getHistory()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -54,6 +58,7 @@ class WalletViewController: UIViewController {
         
         let firstCell = self.tableView.cellForRow(at: [0,0]) as! MainWalletHeaderCell
         firstCell.updateUI()
+        self.tableView.reloadData()
     }
     
     func backUpView() {
@@ -172,7 +177,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         // else retunrn some empty cells
         if self.presenter.numberOfTransactions() > 0 {
             self.tableView.isScrollEnabled = true
-            return self.presenter.numberOfTransactions()
+            return self.presenter.numberOfTransactions() + 1
         } else {
             self.tableView.isScrollEnabled = false
             return 10
@@ -191,9 +196,18 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         } else {                           //  Wallet Cellx
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "TransactionWalletCellID") as! TransactionWalletCell
             walletCell.selectionStyle = .none
+            if self.presenter.numberOfTransactions() > 0 {
+                walletCell.histObj = self.presenter.historyArray[indexPath.row - 1]
+                walletCell.fillCell()
+                walletCell.changeState(isEmpty: false)
+                self.hideEmptyLbls()
+                if indexPath.row != 1 {
+                    walletCell.changeTopConstraint()
+                }
+            } else {
+                walletCell.changeState(isEmpty: true)
+            }
             
-            //if have transactions isEmpty - false
-            walletCell.changeState(isEmpty: true)
             if indexPath == [0,1] {
                 walletCell.setCorners()
 //                walletCell.backgroundView?.backgroundColor = .red
@@ -206,21 +220,33 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func hideEmptyLbls() {
+        self.emptyFirstLbl.isHidden = true
+        self.emptySecondLbl.isHidden = true
+        self.emptyArrowImg.isHidden = true
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.presenter.numberOfTransactions() == 0 {
-            return
-        }
-        
-        if indexPath.row % 2 == 0 {
-            self.even = true
-        } else {
-            self.even = false
-        }
-        self.performSegue(withIdentifier: "transactionVC", sender: Any.self)
+//        if self.presenter.numberOfTransactions() == 0 {
+//            return
+//        }
+//
+//        if indexPath.row % 2 == 0 {
+//            self.even = true
+//        } else {
+//            self.even = false
+//        }
+//        self.performSegue(withIdentifier: "transactionVC", sender: Any.self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath == [0,0] ? 300 * (screenWidth / 375.0) : 80
+        if indexPath == [0,0] {
+            return 310 * (screenWidth / 375.0)
+        } else if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
+            return 70
+        } else {
+            return 70
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
