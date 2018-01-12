@@ -42,13 +42,15 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
 //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
     
     func getWalletVerbose() {
-        DataManager.shared.getAccount { (account, err) in
-            DataManager.shared.getOneWalletVerbose(account!.token,
-                                                   walletID: self.choosenWallet!.walletID,
-                                                   completion: { (addresses, error) in
-                self.walletAddresses = addresses
-            })
-        }
+        //MARK: implement changes
+        
+//        DataManager.shared.getAccount { (account, err) in
+//            DataManager.shared.getOneWalletVerbose(account!.token,
+//                                                   walletID: self.choosenWallet!.walletID,
+//                                                   completion: { (addresses, error) in
+//                self.walletAddresses = addresses
+//            })
+//        }
     }
     
     func requestFee() {

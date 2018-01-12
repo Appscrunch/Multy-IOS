@@ -51,7 +51,7 @@ class WalletViewController: UIViewController {
         self.backUpView()
         
 //        progressHUD.show()
-        self.presenter.getHistory()
+        self.presenter.getHistoryAndWallet()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

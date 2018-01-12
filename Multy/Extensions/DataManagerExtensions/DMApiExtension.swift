@@ -210,14 +210,15 @@ extension DataManager {
         }
     }
     
-    func getOneWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping (_ answer: List<AddressRLM>?,_ error: Error?) -> ()) {
+    func getOneWalletVerbose(_ token: String, walletID: NSNumber, completion: @escaping (_ answer: UserWalletRLM?,_ error: Error?) -> ()) {
         apiManager.getOneWalletVerbose(token, walletID: walletID) { (dict, error) in
-            if dict != nil && dict!["wallet"] != nil && !(dict!["wallet"] is NSNull) {
-                let addressesInfo = ((dict!["wallet"] as! NSArray)[0] as! NSDictionary)["addresses"]!
+            if dict != nil && dict!["wallet"] != nil /*&& !(dict!["wallet"] is NSNull)*/ {
+                let wallet = UserWalletRLM.initWithInfo(walletInfo: (dict!["wallet"] as! NSArray)[0] as! NSDictionary)
+//                let addressesInfo = ((dict!["wallet"] as! NSArray)[0] as! NSDictionary)["addresses"]!
                 
-                let addresses = AddressRLM.initWithArray(addressesInfo: addressesInfo as! NSArray)
+//                let addresses = AddressRLM.initWithArray(addressesInfo: addressesInfo as! NSArray)
                 
-                completion(addresses, nil)
+                completion(wallet, nil)
             } else {
                 completion(nil, error)
             }

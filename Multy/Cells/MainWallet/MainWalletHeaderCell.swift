@@ -49,6 +49,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     
     func setupUI() {
         if wallet != nil {
+            self.collectionView.reloadData()
 //            self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
         }
     }

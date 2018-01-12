@@ -14,6 +14,7 @@ class WalletPresenter: NSObject {
         didSet {
             blockedAmount = calculateBlockedAmount()
             print("WalletPresenter:\n\(wallet?.addresses)")
+            updateWalletInfo()
         }
     }
     var account : AccountRLM?
@@ -21,6 +22,7 @@ class WalletPresenter: NSObject {
     var transactionsArray = [TransactionRLM]()
     
     func updateWalletInfo() {
+        mainVC?.titleLbl.text = wallet?.name
         mainVC?.tableView.reloadData()
     }
     
@@ -54,13 +56,17 @@ class WalletPresenter: NSObject {
         return self.historyArray.count
     }
     
-    func getHistory() {
+    func getHistoryAndWallet() {
+        DataManager.shared.getOneWalletVerbose(account!.token, walletID: wallet!.walletID) { (wallet, error) in
+            self.wallet = wallet
+        }
+        
         DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (histList, err) in
             if err == nil && histList != nil {
                self.historyArray = histList!
             }
 //            self.mainVC?.progressHUD.hide()
-            self.mainVC?.updateUI()
+//            self.mainVC?.updateUI()
         }
     }
     
