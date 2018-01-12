@@ -31,7 +31,8 @@ class TransactionWalletCell: UITableViewCell {
     
     public func fillCell() {
         let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "dd MMM yyyy hh:mm"
+        dateFormat.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormat.dateFormat = "dd MMM yyyy HH:mm"
         if histObj.txStatus == "incoming in mempool" {
             self.transactionImage.image = #imageLiteral(resourceName: "pending")
             let blockedTxInfoColor = UIColor(redInt: 135, greenInt: 161, blueInt: 197, alpha: 0.4)
