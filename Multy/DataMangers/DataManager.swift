@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class DataManager: NSObject {
     static let shared = DataManager()
@@ -44,6 +45,19 @@ class DataManager: NSObject {
             } else {
                 completion(nil)
             }
+        }
+    }
+    
+    func getHistoryOfWalletAndSaveToDB(token: String, walletID: NSNumber, completion: @escaping(_ historyArr: List<HistoryRLM>?,_ error: Error?) -> ()) {
+        DataManager.shared.getTransactionHistory(token: token, walletID: walletID) { (historyList, err) in
+            if err != nil || historyList == nil {
+                //do something with it
+                return
+            }
+            DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
+                completion(histList, nil)
+            })
+            
         }
     }
 }

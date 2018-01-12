@@ -14,6 +14,10 @@ class TransactionWalletCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var emtptyImage: UIImageView!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    var histObj = HistoryRLM()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,7 +30,17 @@ class TransactionWalletCell: UITableViewCell {
     }
     
     public func fillCell() {
-    
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "dd MMM yyyy hh:mm"
+        if histObj.txStatus == "incoming in mempool" || histObj.txStatus == "incoming in block" || histObj.txStatus == "incoming in block" {
+            self.transactionImage.image = #imageLiteral(resourceName: "recieve")
+        } else if histObj.txStatus == "spend in mempool" || histObj.txStatus == "spend in block" {
+            self.transactionImage.image = #imageLiteral(resourceName: "send")
+        }
+        self.addressLabel.text = histObj.txInputs[0].address
+        self.timeLabel.text = dateFormat.string(from: histObj.blockTime)
+        self.cryptoAmountLabel.text = "\(convertSatoshiToBTC(sum: histObj.txOutAmount.uint32Value)) BTC"
+        self.fiatAmountLabel.text = "\((convertSatoshiToBTC(sum: histObj.txOutAmount.uint32Value)*exchangeCourse).fixedFraction(digits: 2)) USD"
     }
     
     func setCorners() {
@@ -46,7 +60,11 @@ class TransactionWalletCell: UITableViewCell {
         self.cryptoAmountLabel.isHidden = isEmpty
         self.timeLabel.isHidden = isEmpty
         self.fiatAmountLabel.isHidden = isEmpty
-        self.descriptionLabel.isHidden = isEmpty
+//        self.descriptionLabel.isHidden = isEmpty
         self.emtptyImage.isHidden = !isEmpty
+    }
+    
+    func changeTopConstraint() {
+        self.topConstraint.constant = 15
     }
 }

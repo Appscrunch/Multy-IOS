@@ -245,6 +245,9 @@ operations</string>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="backView" destination="pbK-RX-Gb3" id="gmG-j3-GT5"/>
+                        <outlet property="emptyArrowImg" destination="RHH-jh-E3C" id="MvX-bc-HnW"/>
+                        <outlet property="emptyFirstLbl" destination="Aqo-BH-hPA" id="Vzn-eb-Yzp"/>
+                        <outlet property="emptySecondLbl" destination="iJt-Qg-K3r" id="ECa-jb-nGk"/>
                         <outlet property="tableView" destination="9Yy-Xk-shm" id="6qh-tR-nEL"/>
                         <outlet property="tableViewTopConstraint" destination="uHl-F6-APe" id="B3U-Pq-4YE"/>
                         <outlet property="titleLbl" destination="Puy-SH-843" id="2Re-KZ-cIJ"/>

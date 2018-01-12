@@ -9,12 +9,6 @@ import RealmSwift
 class WalletPresenter: NSObject {
     
     var mainVC : WalletViewController?
-    var historyList = List<HistoryRLM>() {
-        didSet {
-            blockedAmount = calculateBlockedAmount()
-            updateWalletInfo()
-        }
-    }
     var blockedAmount = UInt32(0)
     var wallet : UserWalletRLM? {
         didSet {
@@ -27,6 +21,13 @@ class WalletPresenter: NSObject {
     
     func updateWalletInfo() {
         mainVC?.tableView.reloadData()
+    }
+    
+    var historyArray = List<HistoryRLM>() {
+        didSet {
+            blockedAmount = calculateBlockedAmount()
+            updateWalletInfo()
+        }
     }
     
     func registerCells() {
@@ -49,25 +50,22 @@ class WalletPresenter: NSObject {
     }
     
     func numberOfTransactions() -> Int {
-        return self.transactionsArray.count
+        return self.historyArray.count
     }
     
     func getHistory() {
-        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (historyList, err) in
-            if err == nil && historyList != nil {
-                self.historyList = historyList!
-                
-                DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
-                    
-                })
+        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (histList, err) in
+            if err == nil && histList != nil {
+               self.historyArray = histList!
             }
+            self.mainVC?.updateUI()
         }
     }
     
     func calculateBlockedAmount() -> UInt32 {
         var sum = UInt32(0)
         
-        for history in historyList {
+        for history in historyArray {
             if history.txStatus == "incoming in mempool" {
                 sum += history.txOutAmount.uint32Value
             }
