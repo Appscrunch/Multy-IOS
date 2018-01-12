@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
 
@@ -18,13 +19,14 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
         }
      }
     
+    var blockedAmount = UInt32()
+    
     weak var delegate : UICollectionViewDelegate? {
         didSet {
             self.collectionView.delegate = delegate
         }
     }
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -66,6 +68,7 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! MainWalletCollectionViewCell
         cell.mainVC = self.mainVC
         cell.wallet = self.wallet
+        cell.blockedAmount = self.blockedAmount
         cell.fillInCell()
         
         return cell

@@ -186,6 +186,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             headerCell.mainVC = self
             headerCell.delegate = self
             headerCell.wallet = self.presenter.wallet
+            headerCell.blockedAmount = self.presenter.blockedAmount
             
             return headerCell
         } else {                           //  Wallet Cellx
@@ -220,7 +221,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath == [0,0] ? 310 * (screenWidth / 375.0) : 80
+        let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 310.0 : 310.0
+        
+        return indexPath == [0,0] ? heightForFirstCell * (screenWidth / 375.0) : 80
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -248,7 +251,9 @@ extension WalletViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth, height: 250.0 * (screenWidth / 375.0))
+        let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 210.0 : 250.0
+        
+        return CGSize(width: screenWidth, height: heightForFirstCell * (screenWidth / 375.0))
     }
     
     func collectionView(_ collectionView: UICollectionView,

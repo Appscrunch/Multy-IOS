@@ -349,7 +349,11 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallet/name/\(walletID)/\(newName)", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        let params = [
+            "walletname" : newName
+            ] as [String : Any]
+        
+        requestManager.request("\(self.apiUrl)api/v1/wallet/name/\(walletID)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

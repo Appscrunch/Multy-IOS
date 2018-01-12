@@ -4,11 +4,18 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class WalletPresenter: NSObject {
     
     var mainVC : WalletViewController?
-    
+    var historyList = List<HistoryRLM>() {
+        didSet {
+            blockedAmount = calculateBlockedAmount()
+            updateWalletInfo()
+        }
+    }
+    var blockedAmount = UInt32(0)
     var wallet : UserWalletRLM? {
         didSet {
             print("WalletPresenter:\n\(wallet?.addresses)")
@@ -16,7 +23,11 @@ class WalletPresenter: NSObject {
     }
     var account : AccountRLM?
     
-    var trasactionsArr = [TransactionRLM]()
+    var transactionsArray = [TransactionRLM]()
+    
+    func updateWalletInfo() {
+        mainVC?.tableView.reloadData()
+    }
     
     func registerCells() {
         let walletHeaderCell = UINib.init(nibName: "MainWalletHeaderCell", bundle: nil)
@@ -38,19 +49,30 @@ class WalletPresenter: NSObject {
     }
     
     func numberOfTransactions() -> Int {
-        return self.trasactionsArr.count
+        return self.transactionsArray.count
     }
     
     func getHistory() {
         DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (historyList, err) in
-            if err != nil || historyList == nil {
-                //do something with it
-                return
+            if err == nil && historyList != nil {
+                self.historyList = historyList!
+                
+                DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
+                    
+                })
             }
-            DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
-                //update UI
-            })
-            
         }
+    }
+    
+    func calculateBlockedAmount() -> UInt32 {
+        var sum = UInt32(0)
+        
+        for history in historyList {
+            if history.txStatus == "incoming in mempool" {
+                sum += history.txOutAmount.uint32Value
+            }
+        }
+        
+        return sum
     }
 }

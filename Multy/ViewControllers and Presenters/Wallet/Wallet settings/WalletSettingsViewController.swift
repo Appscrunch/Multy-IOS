@@ -26,7 +26,14 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        self.presenter.delete()
+        if presenter.wallet?.sumInCrypto.fixedFraction(digits: 8) == "0" {
+            self.presenter.delete()
+        } else {
+            let message = "Cryptocurrency amount should be empty"
+            let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func changeWalletName(_ sender: Any) {

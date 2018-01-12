@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import RealmSwift
 
 class MainWalletCollectionViewCell: UICollectionViewCell {
 
@@ -18,6 +19,8 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var lockedInfoStackView : UIStackView!
     @IBOutlet weak var lockedInfoConstraint : NSLayoutConstraint!
+    
+    var blockedAmount = UInt32()
     
     var wallet: UserWalletRLM?
     var mainVC: UIViewController?
@@ -43,6 +46,14 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         self.fiatAmountLabel.text = "\(sumInFiat)"
         self.fiatNameLabel.text = "\(wallet?.fiatName ?? "")"
         self.addressLabel.text = "\(wallet?.address ?? "")"
+        
+        if blockedAmount == 0 {
+            lockedInfoStackView.isHidden = true
+            lockedInfoConstraint.constant = 20
+        } else {
+            lockedInfoStackView.isHidden = false
+            lockedInfoConstraint.constant = 80
+        }
     }
     
     @IBAction func showAddressAction(_ sender: Any) {
