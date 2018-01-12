@@ -87,7 +87,9 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         
-        
+        DataManager.shared.realmManager.getTransactionHistoryBy(walletIndex: 0) { (historyArr) in
+            print(historyArr ?? "")
+        }
     }
     
     override func viewDidLayoutSubviews() {

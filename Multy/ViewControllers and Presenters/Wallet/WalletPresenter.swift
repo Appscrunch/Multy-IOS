@@ -42,6 +42,15 @@ class WalletPresenter: NSObject {
     }
     
     func getHistory() {
-        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!)
+        DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (historyList, err) in
+            if err != nil || historyList == nil {
+                //do something with it
+                return
+            }
+            DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
+                //update UI
+            })
+            
+        }
     }
 }

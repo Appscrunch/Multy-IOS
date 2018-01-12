@@ -541,4 +541,46 @@ class RealmManager: NSObject {
         
         return sum
     }
+    
+    func saveHistoryForWallet(historyArr: List<HistoryRLM>, completion: @escaping(_ historyArr: List<HistoryRLM>?) -> ()) {
+        getRealm { (realmOpt, err) in
+            if let realm = realmOpt {
+                try! realm.write {
+                    for obj in historyArr {
+                        realm.add(obj, update: true)
+                    }
+                    completion(historyArr)
+                }
+            } else {
+                print("Err from realm GetAcctount:\(#function)")
+                completion(nil)
+            }
+        }
+    }
+    
+    func getTransactionHistoryBy(walletIndex: Int, completion: @escaping(_ arrOfHist: Results<HistoryRLM>?) -> ()) {
+        getRealm { (realmOpt, err) in
+//            if let realm = realmOpt {
+//                let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
+//                if acc != nil {
+//                    completion(acc, nil)
+//                } else {
+//                    completion(nil, nil)
+//                }
+//            } else {
+//                print("Err from realm GetAcctount:\(#function)")
+//                completion(nil,nil)
+//            }
+            if let realm = realmOpt {
+                let allHistoryObjects = realm.objects(HistoryRLM.self).filter("walletIndex = \(walletIndex)")
+                if !allHistoryObjects.isEmpty {
+                    completion(allHistoryObjects)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    
 }
