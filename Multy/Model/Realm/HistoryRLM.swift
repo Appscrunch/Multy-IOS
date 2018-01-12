@@ -98,4 +98,8 @@ class HistoryRLM: Object {
         
         return hist
     }
+    
+    override class func primaryKey() -> String? {
+        return "txId"
+    }
 }

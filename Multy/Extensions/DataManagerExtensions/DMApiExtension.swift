@@ -232,22 +232,25 @@ extension DataManager {
         }
     }
     
-    func getTransactionHistory(token: String, walletID: NSNumber) {
+    func getTransactionHistory(token: String, walletID: NSNumber, completion: @escaping(_ historyArr: List<HistoryRLM>?,_ error: Error?) ->()) {
         apiManager.getTransactionHistory(token, walletID: walletID) { (answer, err) in
             switch err {
             case nil:
                 if answer!["code"] as! Int == 200 {
                     if answer!["history"] is NSNull || (answer!["history"] as? NSArray)?.count == 0 {
                         //history empty
+                        completion(nil, nil)
                         return
                     }
                     if answer!["history"] as? NSArray != nil {
                         let historyArr = answer!["history"] as! NSArray
-                        let hhh = HistoryRLM.initWithArray(historyArr: historyArr)
-                        print(hhh)
+                        let initializedArr = HistoryRLM.initWithArray(historyArr: historyArr)
+                        completion(initializedArr, nil)
                     }
                 }
-            default: break //do something here
+            default:
+                completion(nil, err)
+                break
             }
         }
     }
