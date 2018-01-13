@@ -12,8 +12,12 @@ class WalletAddressTableViewCell: UITableViewCell {
     
     var wallet: UserWalletRLM?
     
+    var sumInCrypto = 0.0
+    var sumInFiat = 0.0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,17 +25,20 @@ class WalletAddressTableViewCell: UITableViewCell {
     }
     
     func fillInCell(index: Int) {
-        var sumInCrypto = 0.0
-        var sumInFiat = 0.0
         self.addressLbl.text = self.wallet?.addresses[index].address
         
         if self.wallet?.chain == 0 {
-            sumInCrypto = self.wallet!.addresses[index].amount.doubleValue
+            sumInCrypto = convertSatoshiToBTC(sum: UInt32(self.wallet!.addresses[index].amount.int32Value))
         }
         sumInFiat = sumInCrypto * exchangeCourse
         
         self.sumLbl.text = "\(sumInCrypto.fixedFraction(digits: 8)) \(self.wallet?.cryptoName ?? "") / \(sumInFiat.fixedFraction(digits: 2)) \(self.wallet?.fiatName ?? "")"
 //        self.creationTimeLbl.text = self.wallet?.addresses[index].creationData     // date of creation of wallet
+    }
+    
+    func updateExchange() {
+        sumInFiat = sumInCrypto * exchangeCourse
+        self.sumLbl.text = "\(sumInCrypto.fixedFraction(digits: 8)) \(self.wallet?.cryptoName ?? "") / \(sumInFiat.fixedFraction(digits: 2)) \(self.wallet?.fiatName ?? "")"
     }
     
 }

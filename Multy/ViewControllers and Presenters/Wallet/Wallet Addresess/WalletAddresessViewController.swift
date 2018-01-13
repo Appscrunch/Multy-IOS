@@ -17,6 +17,7 @@ class WalletAddresessViewController: UIViewController {
         self.registerCell()
         
         self.tableView.tableFooterView = UIView()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
     }
     
     func registerCell() {
@@ -26,6 +27,14 @@ class WalletAddresessViewController: UIViewController {
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func updateExchange() {
+        let cells = self.tableView.visibleCells
+        for cell in cells {
+            let addressCell = cell as! WalletAddressTableViewCell
+            addressCell.updateExchange()
+        }
     }
     
 }
