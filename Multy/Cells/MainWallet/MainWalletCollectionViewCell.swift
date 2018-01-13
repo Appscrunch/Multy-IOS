@@ -27,14 +27,16 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
     var wallet: UserWalletRLM?
     var mainVC: UIViewController?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//        
+//    }
     
     func makeCornerRadius() {
-        let maskPath = UIBezierPath.init(roundedRect: showAddressesButton.bounds, byRoundingCorners:[.bottomRight, .bottomLeft], cornerRadii: CGSize.init(width: 10.0, height: 10.0))
+        let maskPath = UIBezierPath.init(roundedRect: showAddressesButton.bounds,
+                                         byRoundingCorners:[.bottomRight, .bottomLeft],
+                                         cornerRadii: CGSize.init(width: 10.0, height: 10.0))
         let maskLayer = CAShapeLayer()
         maskLayer.frame = showAddressesButton.bounds
         maskLayer.path = maskPath.cgPath

@@ -149,7 +149,6 @@
 		FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */; };
 		FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74062A1FCC5D6A003C538C /* Constants.swift */; };
 		FA7E97241FF2504200735D73 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7E97231FF2504100735D73 /* Pods_Multy.framework */; };
-		FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */; };
 		FA869D0D1FD6B85700C815C3 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */; };
 		FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */; };
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
@@ -333,7 +332,6 @@
 		FA74062A1FCC5D6A003C538C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA7E97231FF2504100735D73 /* Pods_Multy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pods_Multy.framework; sourceTree = "<group>"; };
 		FA869D081FD5AD9700C815C3 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
-		FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUDforHambVC.swift; sourceTree = "<group>"; };
 		FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		FA869D111FD6C17900C815C3 /* ExchangePriceRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangePriceRLM.swift; sourceTree = "<group>"; };
 		FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterKeyGenerator.swift; sourceTree = "<group>"; };
@@ -1023,7 +1021,6 @@
 			isa = PBXGroup;
 			children = (
 				FA869D0B1FD6B85700C815C3 /* ProgressHUD.swift */,
-				FA869D0A1FD6B85700C815C3 /* ProgressHUDforHambVC.swift */,
 			);
 			path = HUD;
 			sourceTree = "<group>";
@@ -1287,7 +1284,6 @@
 				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
 				45DCF9D91FE19B33005A9896 /* CustomFeeViewController.swift in Sources */,
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
-				FA869D0C1FD6B85700C815C3 /* ProgressHUDforHambVC.swift in Sources */,
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */,
 				45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */,

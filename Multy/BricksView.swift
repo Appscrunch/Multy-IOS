@@ -22,8 +22,7 @@ class BricksView: UIView {
         super.init(coder: aDecoder)
     }
     
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    // here we draw green and red bricks depending the current state (segmentsCountUp and segmentsCountDown)
     override func draw(_ rect: CGRect) {
         
         for index in 0..<segmentsCountUp + segmentsCountDown {

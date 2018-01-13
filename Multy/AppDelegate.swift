@@ -98,16 +98,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func performFirstEnterFlow() {
+        guard self.window != nil && self.window?.rootViewController != nil else {
+            return
+        }
+        
+        let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
         switch isDeviceJailbroken() {
         case true:
-            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = true
+            assetVC.presenter.isJailed = true
         case false:
-            (self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController).presenter.isJailed = false
+            assetVC.presenter.isJailed = false
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
-                let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
-                
                 
                 //MARK: change > to <
                 if err != nil || buildVersion > hardVersion! {
