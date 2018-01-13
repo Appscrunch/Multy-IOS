@@ -10,6 +10,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var pageControll: UIPageControl!
+    @IBOutlet weak var titleLbl: UILabel!
     
     var mainVC: UIViewController?
     
@@ -49,10 +50,21 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     
     func setupUI() {
         if wallet != nil {
+            self.titleLbl.text = wallet?.name
             self.collectionView.reloadData()
 //            self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
         }
     }
+    
+    @IBAction func closeAction(_ sender: Any) {
+        (self.mainVC as! WalletViewController).closeAction()
+    }
+    
+    @IBAction func settingsAction(_ sender: Any) {
+        (self.mainVC as! WalletViewController).settingssAction(Any.self)
+    }
+    
+    
 }
 
 extension MainWalletHeaderCell: UICollectionViewDataSource {

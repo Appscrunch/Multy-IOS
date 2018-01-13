@@ -13,6 +13,8 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var emptyFirstLbl: UILabel!
     @IBOutlet weak var emptySecondLbl: UILabel!
     @IBOutlet weak var emptyArrowImg: UIImageView!
+    @IBOutlet weak var headerView: UIView!
+    
     
     var presenter = WalletPresenter()
     var even = true
@@ -20,8 +22,22 @@ class WalletViewController: UIViewController {
     var isBackupOnScreen = true
     let progressHUD = ProgressHUD(text: "Getting Wallet...")
     
+    let visibleCells = 5  // iphone 6  height 667
+    let gradientLayer = CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        headerView.backgroundColor = .clear
+//        gradientLayer.frame = headerView.bounds
+//        let color1 = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
+//        let color2 = UIColor.clear
+//        gradientLayer.colors = [color1, color2]
+//        gradientLayer.locations = [0.0, 1.0]
+//
+//        self.headerView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        setGradientBackground()
         
         presenter.mainVC = self
         
@@ -40,6 +56,22 @@ class WalletViewController: UIViewController {
 //        self.view.addSubview(progressHUD)
 //        self.presenter.getHistory()
     }
+    
+    func setGradientBackground() {
+        self.headerView.backgroundColor = .clear
+        let colorTop = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1).cgColor
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [ colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.headerView.bounds
+        
+//        self.headerView.layer.insertSublayer(gradientLayer)
+//        self.headerView.alpha = 0.5
+        self.headerView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,7 +97,7 @@ class WalletViewController: UIViewController {
         
         let firstCell = self.tableView.cellForRow(at: [0,0]) as! MainWalletHeaderCell
         firstCell.updateUI()
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
     
     func backUpView() {
@@ -73,7 +105,7 @@ class WalletViewController: UIViewController {
             return
         }
         let view = UIView()
-        view.frame = CGRect(x: 16, y: (300 * (screenWidth / 375.0)) - 20, width: screenWidth - 32, height: 40)
+        view.frame = CGRect(x: 16, y: (325 * (screenWidth / 375.0)) - 20, width: screenWidth - 32, height: 40)
         view.layer.cornerRadius = 20
         view.backgroundColor = .white
         
@@ -182,9 +214,15 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //check number of transactions
         // else retunrn some empty cells
-        if self.presenter.numberOfTransactions() > 0 {
-            self.tableView.isScrollEnabled = true
-            return self.presenter.numberOfTransactions() + 1
+        let countOfHistObjects = self.presenter.numberOfTransactions()
+        if countOfHistObjects > 0 {
+            if countOfHistObjects < visibleCells {
+                self.tableView.isScrollEnabled = false
+                return 10
+            } else {
+                self.tableView.isScrollEnabled = true
+                return countOfHistObjects + 1
+            }
         } else {
             self.tableView.isScrollEnabled = false
             return 10
@@ -202,15 +240,20 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             
             return headerCell
         } else {                           //  Wallet Cellx
+            let countOfHistObjs = self.presenter.numberOfTransactions()
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "TransactionWalletCellID") as! TransactionWalletCell
             walletCell.selectionStyle = .none
-            if self.presenter.numberOfTransactions() > 0 {
-                walletCell.histObj = self.presenter.historyArray[indexPath.row - 1]
-                walletCell.fillCell()
-                walletCell.changeState(isEmpty: false)
-                self.hideEmptyLbls()
-                if indexPath.row != 1 {
-                    walletCell.changeTopConstraint()
+            if countOfHistObjs > 0 {
+                if indexPath.row > countOfHistObjs && countOfHistObjs <= visibleCells {
+                    walletCell.changeState(isEmpty: true)
+                } else {
+                    walletCell.histObj = self.presenter.historyArray[indexPath.row - 1]
+                    walletCell.fillCell()
+                    walletCell.changeState(isEmpty: false)
+                    self.hideEmptyLbls()
+                    if indexPath.row != 1 {
+                        walletCell.changeTopConstraint()
+                    }
                 }
             } else {
                 walletCell.changeState(isEmpty: true)
@@ -249,7 +292,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 310.0 : 310.0
+            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 332.0 : 332.0
             
             return heightForFirstCell * (screenWidth / 375.0)
         } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {

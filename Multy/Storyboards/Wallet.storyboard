@@ -37,7 +37,14 @@
                                     <outlet property="delegate" destination="Asu-Y0-uVx" id="FSO-k1-vSf"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mJ-yJ-hqs">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyO-YX-XwO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="bbk-zN-M7B"/>
+                                </constraints>
+                            </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mJ-yJ-hqs">
                                 <rect key="frame" x="17" y="30" width="39" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,17 +53,17 @@
                                     <action selector="closeAction" destination="Asu-Y0-uVx" eventType="touchUpInside" id="p2m-s8-8Rp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC - Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puy-SH-843">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC - Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puy-SH-843">
                                 <rect key="frame" x="131.5" y="33.5" width="113" height="24"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3MT-QQ-iCn">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3MT-QQ-iCn">
                                 <rect key="frame" x="333" y="35" width="25" height="20"/>
                                 <state key="normal" backgroundImage="settings"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Ap-aao">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Ap-aao">
                                 <rect key="frame" x="320.5" y="20" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="LVW-dn-pwO"/>
@@ -232,11 +239,14 @@ operations</string>
                             <constraint firstAttribute="trailing" secondItem="3MT-QQ-iCn" secondAttribute="trailing" constant="17" id="6Fx-VE-Kt4"/>
                             <constraint firstItem="7Jm-m5-Juj" firstAttribute="top" secondItem="RHH-jh-E3C" secondAttribute="bottom" constant="30" id="99l-6Q-6u7"/>
                             <constraint firstItem="iJt-Qg-K3r" firstAttribute="centerX" secondItem="RHH-jh-E3C" secondAttribute="centerX" id="A4R-Ad-NvD"/>
+                            <constraint firstItem="SyO-YX-XwO" firstAttribute="leading" secondItem="pbK-RX-Gb3" secondAttribute="leading" id="HXM-D8-POa"/>
+                            <constraint firstAttribute="trailing" secondItem="SyO-YX-XwO" secondAttribute="trailing" id="ItC-gb-mmE"/>
                             <constraint firstItem="Puy-SH-843" firstAttribute="centerX" secondItem="pbK-RX-Gb3" secondAttribute="centerX" id="NM2-F7-iTc"/>
                             <constraint firstItem="iJt-Qg-K3r" firstAttribute="top" secondItem="Aqo-BH-hPA" secondAttribute="bottom" constant="30" id="T26-Ns-bse"/>
                             <constraint firstItem="6mJ-yJ-hqs" firstAttribute="leading" secondItem="pbK-RX-Gb3" secondAttribute="leading" constant="17" id="Us4-gW-CkN"/>
                             <constraint firstItem="z5W-Ap-aao" firstAttribute="centerX" secondItem="3MT-QQ-iCn" secondAttribute="centerX" id="Vvc-kl-iif"/>
                             <constraint firstItem="Aqo-BH-hPA" firstAttribute="centerX" secondItem="iJt-Qg-K3r" secondAttribute="centerX" id="WSr-wo-lZ5"/>
+                            <constraint firstItem="SyO-YX-XwO" firstAttribute="top" secondItem="pbK-RX-Gb3" secondAttribute="top" id="Z2v-db-oR6"/>
                             <constraint firstItem="6mJ-yJ-hqs" firstAttribute="top" secondItem="9Yy-Xk-shm" secondAttribute="top" constant="30" id="bhD-cA-kTv"/>
                             <constraint firstItem="Puy-SH-843" firstAttribute="centerY" secondItem="6mJ-yJ-hqs" secondAttribute="centerY" id="cKV-OT-MLb"/>
                             <constraint firstAttribute="trailing" secondItem="9Yy-Xk-shm" secondAttribute="trailing" id="fhl-NO-Isj"/>
@@ -257,6 +267,7 @@ operations</string>
                         <outlet property="emptyArrowImg" destination="RHH-jh-E3C" id="MvX-bc-HnW"/>
                         <outlet property="emptyFirstLbl" destination="Aqo-BH-hPA" id="Vzn-eb-Yzp"/>
                         <outlet property="emptySecondLbl" destination="iJt-Qg-K3r" id="ECa-jb-nGk"/>
+                        <outlet property="headerView" destination="SyO-YX-XwO" id="xFC-MF-zrR"/>
                         <outlet property="tableView" destination="9Yy-Xk-shm" id="6qh-tR-nEL"/>
                         <outlet property="tableViewTopConstraint" destination="uHl-F6-APe" id="B3U-Pq-4YE"/>
                         <outlet property="titleLbl" destination="Puy-SH-843" id="2Re-KZ-cIJ"/>

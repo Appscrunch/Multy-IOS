@@ -23,7 +23,7 @@ class WalletPresenter: NSObject {
     
     func updateWalletInfo() {
         mainVC?.titleLbl.text = wallet?.name
-        mainVC?.tableView.reloadData()
+        mainVC?.updateUI()
     }
     
     var historyArray = List<HistoryRLM>() {
