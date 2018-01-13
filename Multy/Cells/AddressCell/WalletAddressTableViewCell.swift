@@ -26,12 +26,12 @@ class WalletAddressTableViewCell: UITableViewCell {
         self.addressLbl.text = self.wallet?.addresses[index].address
         
         if self.wallet?.chain == 0 {
-            sumInCrypto = Double(round(100000000*(self.wallet?.addresses[index].amount.doubleValue)!)/100000000)
+            sumInCrypto = self.wallet!.addresses[index].amount.doubleValue
         }
-        sumInFiat = Double(round(100*sumInCrypto*exchangeCourse)/100)
+        sumInFiat = sumInCrypto * exchangeCourse
         
-        self.sumLbl.text = "\(sumInCrypto) \(self.wallet?.cryptoName ?? "") / \(sumInFiat) \(self.wallet?.fiatName ?? "")"
-//        self.creationTimeLbl.text = self.wallet?.addresses[index].creationData     // дата создания кошелька
+        self.sumLbl.text = "\(sumInCrypto.fixedFraction(digits: 8)) \(self.wallet?.cryptoName ?? "") / \(sumInFiat.fixedFraction(digits: 2)) \(self.wallet?.fiatName ?? "")"
+//        self.creationTimeLbl.text = self.wallet?.addresses[index].creationData     // date of creation of wallet
     }
     
 }

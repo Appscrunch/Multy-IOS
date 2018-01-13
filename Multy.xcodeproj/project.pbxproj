@@ -98,7 +98,6 @@
 		45B9CB081FBB51AE00AA2A31 /* WalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B9CB061FBB51AE00AA2A31 /* WalletTableViewCell.xib */; };
 		45C8D143200780CF00F5994E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8D142200780CF00F5994E /* SplashViewController.swift */; };
 		45C8D1452007EACE00F5994E /* TxHistoryRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C8D1442007EACE00F5994E /* TxHistoryRLM.swift */; };
-		45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0836D1FCEEB990066F1CD /* WalletRLM.swift */; };
 		45D083701FCEF94C0066F1CD /* SendWalletProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0836F1FCEF94C0066F1CD /* SendWalletProtocol.swift */; };
 		45DCF9CD1FE139C9005A9896 /* WalletAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCF9CB1FE139C9005A9896 /* WalletAddressTableViewCell.swift */; };
 		45DCF9CE1FE139C9005A9896 /* WalletAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DCF9CC1FE139C9005A9896 /* WalletAddressTableViewCell.xib */; };
@@ -270,7 +269,6 @@
 		45B9CB061FBB51AE00AA2A31 /* WalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletTableViewCell.xib; sourceTree = "<group>"; };
 		45C8D142200780CF00F5994E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		45C8D1442007EACE00F5994E /* TxHistoryRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxHistoryRLM.swift; sourceTree = "<group>"; };
-		45D0836D1FCEEB990066F1CD /* WalletRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRLM.swift; sourceTree = "<group>"; };
 		45D0836F1FCEF94C0066F1CD /* SendWalletProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendWalletProtocol.swift; sourceTree = "<group>"; };
 		45DCF9CB1FE139C9005A9896 /* WalletAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddressTableViewCell.swift; sourceTree = "<group>"; };
 		45DCF9CC1FE139C9005A9896 /* WalletAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddressTableViewCell.xib; sourceTree = "<group>"; };
@@ -918,7 +916,6 @@
 			children = (
 				FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */,
 				FA4D44001FC71B6D003C7117 /* AccountRLM.swift */,
-				45D0836D1FCEEB990066F1CD /* WalletRLM.swift */,
 				45E215D71FD147950078945A /* TransactionRLM.swift */,
 				454A9D7B20067E530035966F /* HistoryRLM.swift */,
 				45C8D1442007EACE00F5994E /* TxHistoryRLM.swift */,
@@ -1285,7 +1282,6 @@
 				45DCF9D91FE19B33005A9896 /* CustomFeeViewController.swift in Sources */,
 				45A9492F1FC4780F003C3A23 /* ReceiveProtocol.swift in Sources */,
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
-				45D0836E1FCEEB990066F1CD /* WalletRLM.swift in Sources */,
 				45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */,
 				4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
