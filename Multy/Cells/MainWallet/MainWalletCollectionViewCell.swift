@@ -67,11 +67,11 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
             lockedPopverWithBorders.layer.masksToBounds = true
             lockedPopverWithBorders.layer.borderWidth = 1.0
             
-            let lockedCryptoAmount = convertSatoshiToBTC(sum: blockedAmount)
-            let lockedFiatAmount = lockedCryptoAmount * exchangeCourse
+            let availableCryptoAmount = convertSatoshiToBTC(sum: convertBTCStringToSatoshi(sum: "\(wallet!.sumInCrypto)") - blockedAmount)
+            let availableFiatAmount = availableCryptoAmount * exchangeCourse
             
-            lockedCryptoAmountLabel.text = lockedCryptoAmount.fixedFraction(digits: 8)
-            lockedFiatAmountLabel.text = lockedFiatAmount.fixedFraction(digits: 2)
+            lockedCryptoAmountLabel.text = availableCryptoAmount.fixedFraction(digits: 8)
+            lockedFiatAmountLabel.text = availableFiatAmount.fixedFraction(digits: 2)
         }
     }
     

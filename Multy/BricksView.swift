@@ -6,11 +6,6 @@ import UIKit
 
 class BricksView: UIView {
     var currentCheckedWordCounter : Int = 3;
-    var segmentsCountUp : Int  = 7
-    var segmentsCountDown : Int  = 8
-    
-    let upperSizes : [CGFloat] = [0, 35, 79, 107, 151, 183, 218, 253]
-    let downSizes : [CGFloat] = [0, 23, 40, 53, 81, 136, 153, 197, 249]
     
     init(with rect : CGRect, and currentWordCounter: Int) {
         super.init(frame: rect)

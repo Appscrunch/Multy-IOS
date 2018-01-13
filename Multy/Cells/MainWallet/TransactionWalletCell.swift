@@ -33,6 +33,7 @@ class TransactionWalletCell: UITableViewCell {
         let dateFormat = DateFormatter()
         dateFormat.timeZone = TimeZone(abbreviation: "GMT")
         dateFormat.dateFormat = "dd MMM yyyy HH:mm"
+        
         if histObj.txStatus == "incoming in mempool" {
             self.transactionImage.image = #imageLiteral(resourceName: "pending")
             let blockedTxInfoColor = UIColor(redInt: 135, greenInt: 161, blueInt: 197, alpha: 0.4)
@@ -40,18 +41,32 @@ class TransactionWalletCell: UITableViewCell {
             self.timeLabel.textColor = blockedTxInfoColor
             self.cryptoAmountLabel.textColor = blockedTxInfoColor
         } else if histObj.txStatus == "incoming in block" || histObj.txStatus == "in block confirmed" {
+            let blockedTxInfoColor = UIColor(redInt: 135, greenInt: 161, blueInt: 197, alpha: 0.4)
             self.transactionImage.image = #imageLiteral(resourceName: "recieve")
             self.addressLabel.textColor = .black
-            self.timeLabel.textColor = .black
+            self.timeLabel.textColor = blockedTxInfoColor
             self.cryptoAmountLabel.textColor = .black
         } else if histObj.txStatus == "spend in mempool" || histObj.txStatus == "spend in block" {
+            let blockedTxInfoColor = UIColor(redInt: 135, greenInt: 161, blueInt: 197, alpha: 0.4)
             self.transactionImage.image = #imageLiteral(resourceName: "send")
             self.addressLabel.textColor = .black
-            self.timeLabel.textColor = .black
+            self.timeLabel.textColor = blockedTxInfoColor
+            self.cryptoAmountLabel.textColor = .black
+        } else if histObj.txStatus == "rejected block" {
+            self.transactionImage.image = #imageLiteral(resourceName: "warninngBig")
+            self.addressLabel.textColor = .black
+            self.timeLabel.textColor = .red
             self.cryptoAmountLabel.textColor = .black
         }
+        
         self.addressLabel.text = histObj.txInputs[0].address
-        self.timeLabel.text = dateFormat.string(from: histObj.blockTime)
+        
+        if histObj.txStatus == "rejected block" {
+            self.timeLabel.text = "Unable to send transaction"
+        } else {
+            self.timeLabel.text = dateFormat.string(from: histObj.blockTime)
+        }
+        
         self.cryptoAmountLabel.text = "\(convertSatoshiToBTC(sum: histObj.txOutAmount.uint32Value)) BTC"
         
         self.fiatAmountLabel.text = "\((convertSatoshiToBTC(sum: histObj.txOutAmount.uint32Value) * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
