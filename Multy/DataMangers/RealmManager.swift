@@ -477,7 +477,7 @@ class RealmManager: NSObject {
         }
         
         migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (oldOutput, newOutput) in
-            newOutput?["txStatus"] = oldOutput?["transactionStatus"]
+            newOutput?["transactionStatus"] = oldOutput?["txStatus"]
         }
     }
     
