@@ -58,13 +58,6 @@
                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FXV-sK-1Qn">
-                        <rect key="frame" x="59" y="132.5" width="316" height="2"/>
-                        <color key="backgroundColor" red="0.65098039220000004" green="0.69411764710000001" blue="0.77647058820000003" alpha="0.26000000000000001" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="BXM-sa-YBh"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4h3-rK-U1v">
                         <rect key="frame" x="58" y="72" width="297" height="46"/>
                         <subviews>
@@ -104,6 +97,13 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXV-sK-1Qn">
+                        <rect key="frame" x="58" y="132.5" width="317" height="2"/>
+                        <color key="backgroundColor" red="0.65098039220000004" green="0.69411764710000001" blue="0.77647058820000003" alpha="0.26000000000000001" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="BXM-sa-YBh"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="4h3-rK-U1v" firstAttribute="leading" secondItem="Wkg-xt-4Vz" secondAttribute="leading" id="1jb-nz-syY"/>
@@ -120,12 +120,20 @@
                     <constraint firstItem="nb2-JT-vh4" firstAttribute="centerY" secondItem="LUD-jm-sHC" secondAttribute="centerY" id="cSP-TC-tl2"/>
                     <constraint firstAttribute="bottom" secondItem="FXV-sK-1Qn" secondAttribute="bottom" id="ckt-cV-iyG"/>
                     <constraint firstItem="4h3-rK-U1v" firstAttribute="trailing" secondItem="VKt-WA-8se" secondAttribute="trailing" id="gAy-un-ArS"/>
+                    <constraint firstItem="FXV-sK-1Qn" firstAttribute="leading" secondItem="4h3-rK-U1v" secondAttribute="leading" id="nU6-dM-9U9"/>
                     <constraint firstItem="LUD-jm-sHC" firstAttribute="leading" secondItem="5SE-HC-bAz" secondAttribute="trailing" constant="13" id="ooF-nB-O4o"/>
                     <constraint firstItem="Wkg-xt-4Vz" firstAttribute="top" secondItem="LUD-jm-sHC" secondAttribute="bottom" constant="5" id="qnG-1J-puq"/>
                     <constraint firstItem="LUD-jm-sHC" firstAttribute="top" secondItem="5SE-HC-bAz" secondAttribute="top" id="tkk-tc-1kF"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addressLabel" destination="LUD-jm-sHC" id="Ob1-x2-hFf"/>
+                <outlet property="cryptoAmountLabel" destination="nb2-JT-vh4" id="yZo-NP-Guu"/>
+                <outlet property="fiatAmountLabel" destination="VKt-WA-8se" id="u3I-F3-mWU"/>
+                <outlet property="lockedCryptoAmountLabel" destination="38G-n5-RHc" id="ifQ-lS-Wec"/>
+                <outlet property="lockedFiatAmountLabel" destination="mUH-JS-GfD" id="Ifj-gh-VfE"/>
+            </connections>
             <point key="canvasLocation" x="34.5" y="99.5"/>
         </tableViewCell>
     </objects>

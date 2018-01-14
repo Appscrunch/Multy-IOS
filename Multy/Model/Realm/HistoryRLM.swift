@@ -20,7 +20,7 @@ class HistoryRLM: Object {
     var txOutputs = List<TxHistoryRLM>()
     @objc dynamic var txOutScript = String()
     @objc dynamic var txStatus = String()
-    @objc dynamic var walletIndex = Int()
+    @objc dynamic var walletIndex = NSNumber(value: 0)
     
     
     public class func initWithArray(historyArr: NSArray) -> List<HistoryRLM> {
@@ -93,7 +93,7 @@ class HistoryRLM: Object {
         }
         
         if let walletindex = historyDict["walletindex"] {
-            hist.walletIndex = walletindex as! Int
+            hist.walletIndex = walletindex as! NSNumber
         }
         
         return hist

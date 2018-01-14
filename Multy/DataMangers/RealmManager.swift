@@ -9,7 +9,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 9
+    let schemaVersion : UInt64 = 10
     
     private override init() {
         super.init()
@@ -68,6 +68,9 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 10 {
                                                         self.migrateFrom9To10(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 11 {
+                                                        self.migrateFrom10To11(with: migration)
                                                     }
             })
             
@@ -445,30 +448,32 @@ class RealmManager: NSObject {
     
     // MARK: - Migrations
     func migrateFrom6To7(with migration: Migration) {
-        // Add an email property
         migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendOut) in
             newSpendOut?["addressID"] = NSNumber(value: 0)
         }
     }
     
     func migrateFrom7To8(with migration: Migration) {
-        // Add an email property
         migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
             newAccount?["backupSeedPhrase"] = ""
         }
     }
     
     func migrateFrom8To9(with migration: Migration) {
-        // Add an email property
         migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
             newAccount?["topIndex"] = NSNumber(value: 0)
         }
     }
     
     func migrateFrom9To10(with migration: Migration) {
-        // Add an email property
         migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendableOutput) in
             newSpendableOutput?["txStatus"] = ""
+        }
+    }
+    
+    func migrateFrom10To11(with migration: Migration) {
+        migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
+            newHistoryRLM?["walletIndex"] = NSNumber(value: oldHistoryRLM?["walletIndex"] as? Int ?? 0)
         }
     }
     
@@ -582,5 +587,28 @@ class RealmManager: NSObject {
         }
     }
     
+    func getWallet(walletID: NSNumber, completion: @escaping(_ wallet: UserWalletRLM?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let primaryKey = generateWalletPrimaryKey(currencyID: 0, walletID: walletID.uint32Value)
+                let wallet = realm.object(ofType: UserWalletRLM.self, forPrimaryKey: primaryKey)
+                
+                completion(wallet)
+            } else {
+                completion(nil)
+            }
+        }
+    }
     
+    func fetchAddressesForWalllet(walletID: NSNumber, completion: @escaping(_ : [String]?) -> ()) {
+        getWallet(walletID: walletID) { (wallet) in
+            if wallet != nil {
+                var addresses = [String]()
+                wallet!.addresses.forEach({ addresses.append($0.address) })
+                completion(addresses)
+            } else {
+                completion(nil)
+            }
+        }
+    }
 }
