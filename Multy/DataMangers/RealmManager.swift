@@ -475,6 +475,10 @@ class RealmManager: NSObject {
         migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
             newHistoryRLM?["walletIndex"] = NSNumber(value: oldHistoryRLM?["walletIndex"] as? Int ?? 0)
         }
+        
+        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (oldOutput, newOutput) in
+            newOutput?["txStatus"] = oldOutput?["transactionStatus"]
+        }
     }
     
     //Greedy algorithm
