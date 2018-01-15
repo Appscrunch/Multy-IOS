@@ -69,6 +69,8 @@ class CoreLibManager: NSObject {
         if ms != nil {
             print("ms: \(String(describing: ms))")
             let _ = returnErrorString(opaquePointer: ms!, mask: "make_seed")
+            
+            return nil
         }
 
         if binaryDataPointer.pointee != nil {

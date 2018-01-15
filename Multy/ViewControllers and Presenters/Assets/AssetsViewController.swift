@@ -31,20 +31,19 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.registerCells()
         self.presenter.assetsVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         guard isFlowPassed else {
             return
         }
         
-        guard DataManager.shared.checkIsFirstLaunch() else {
+        let isFirst = DataManager.shared.checkIsFirstLaunch()
+        if isFirst {
             return
         }
         
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_,_ in }
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
         self.checkOSForConstraints()
-        
         
         self.view.addSubview(progressHUD)
         

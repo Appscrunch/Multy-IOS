@@ -58,7 +58,9 @@ class WalletPresenter: NSObject {
     
     func getHistoryAndWallet() {
         DataManager.shared.getOneWalletVerbose(account!.token, walletID: wallet!.walletID) { (wallet, error) in
-            self.wallet = wallet
+            if wallet != nil {
+                self.wallet = wallet
+            }
         }
         
         DataManager.shared.getTransactionHistory(token: (account?.token)!, walletID: (wallet?.walletID)!) { (histList, err) in
@@ -79,7 +81,7 @@ class WalletPresenter: NSObject {
         
         for address in wallet!.addresses {
             for out in address.spendableOutput {
-                if out.transactionStatus == "incoming in mempool" {
+                if out.transactionStatus == 0 {
                     sum += out.transactionOutAmount.uint32Value
                 }
             }
