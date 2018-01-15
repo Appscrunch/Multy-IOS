@@ -339,10 +339,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        DataManager.shared.addAddress(presenter.account!.token, params: parameters) { (dict, error) in
 //            print("addAddress:\n\(dict) -- \(error)")
 //        }
- 
-        if indexPath != [0, 1] && indexPath != [0, 0] {
-            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        }
+// 
+//        if indexPath != [0, 1] && indexPath != [0, 0] {
+//            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+//        }
         
         switch indexPath {
         case [0,0]:

@@ -153,7 +153,6 @@
 		FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86A7401FC2C72B002826EC /* MasterKeyGenerator.swift */; };
 		FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88358F1FD854EC007694A2 /* AddressRLM.swift */; };
 		FA8835921FD856F4007694A2 /* UserWalletRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8835911FD856F4007694A2 /* UserWalletRLM.swift */; };
-		FAC9F02F200B88900048A57E /* StatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC9F02E200B88900048A57E /* StatusEnum.swift */; };
 		FACEB5A1200A46F600055788 /* TransactionPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEB59F200A46F600055788 /* TransactionPendingCell.swift */; };
 		FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEB5A0200A46F600055788 /* TransactionPendingCell.xib */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
@@ -339,7 +338,6 @@
 		FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Multy-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA88358F1FD854EC007694A2 /* AddressRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRLM.swift; sourceTree = "<group>"; };
 		FA8835911FD856F4007694A2 /* UserWalletRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWalletRLM.swift; sourceTree = "<group>"; };
-		FAC9F02E200B88900048A57E /* StatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusEnum.swift; sourceTree = "<group>"; };
 		FACEB59F200A46F600055788 /* TransactionPendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPendingCell.swift; sourceTree = "<group>"; };
 		FACEB5A0200A46F600055788 /* TransactionPendingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionPendingCell.xib; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -607,7 +605,6 @@
 				FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */,
 				FA4E559E1FE00F63000FA1A1 /* Double+Extension.swift */,
 				FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */,
-				FAC9F02E200B88900048A57E /* StatusEnum.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1287,7 +1284,6 @@
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
 				458FD4C71FE3C2CB001C25BA /* SpendableOutputRLM.swift in Sources */,
 				FA4D43E51FC590F6003C7117 /* SeedPhraseRLM.swift in Sources */,
-				FAC9F02F200B88900048A57E /* StatusEnum.swift in Sources */,
 				45E215DE1FD164E30078945A /* QrScannerViewController.swift in Sources */,
 				457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */,
 				45DCF9D91FE19B33005A9896 /* CustomFeeViewController.swift in Sources */,
