@@ -25,9 +25,19 @@ class WalletViewController: UIViewController {
     let visibleCells = 5  // iphone 6  height 667
     let gradientLayer = CAGradientLayer()
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                     gradientOrientation: .topRightBottomLeft)
 //        headerView.backgroundColor = .clear
 //        gradientLayer.frame = headerView.bounds
 //        let color1 = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
@@ -50,7 +60,7 @@ class WalletViewController: UIViewController {
 //        }
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        
+        self.tableView.addSubview(self.refreshControl)
 //        progressHUD.backgroundColor = .gray
 //        progressHUD.show()
 //        self.view.addSubview(progressHUD)
@@ -88,6 +98,13 @@ class WalletViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.presenter.getHistoryAndWallet()
+        
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     @objc func updateExchange() {
@@ -166,9 +183,9 @@ class WalletViewController: UIViewController {
         if #available(iOS 11.0, *) {
             
         } else {
-            self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                       UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                         gradientOrientation: .topRightBottomLeft)
+//            self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+//                                                       UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+//                                         gradientOrientation: .topRightBottomLeft)
         }
         
         self.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
@@ -177,10 +194,10 @@ class WalletViewController: UIViewController {
         
         let headerCell = tableView.cellForRow(at:IndexPath(row: 0, section: 0)) as! MainWalletHeaderCell
         
-        headerCell.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                                          gradientOrientation: .topRightBottomLeft)
-        
+//        headerCell.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+//                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+//                                          gradientOrientation: .topRightBottomLeft)
+        headerCell.backgroundColor = .clear
 //        headerCell.podlojkaView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
 //                                                            UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
 //                                              gradientOrientation: .topRightBottomLeft)
@@ -224,7 +241,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
                 return countOfHistObjects + 1
             }
         } else {
-            self.tableView.isScrollEnabled = false
+//            self.tableView.isScrollEnabled = false
             return 10
         }
     }

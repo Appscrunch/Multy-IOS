@@ -60,4 +60,14 @@ class DataManager: NSObject {
             
         }
     }
+    
+    func checkIsFirstLaunch() -> Bool {
+        if let isFirst = UserDefaults.standard.value(forKey: "isFirstLaunch") {
+            return isFirst as! Bool
+        } else {
+            UserDefaults.standard.set(false, forKey: "isFirstLaunch")
+            
+            return false
+        }
+    }
 }

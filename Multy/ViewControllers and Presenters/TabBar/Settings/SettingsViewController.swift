@@ -8,10 +8,13 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var pinSwitch: UISwitch!
     
+    let presenter = SettingsPresenter()
     let authVC = SecureViewController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.settingsVC = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,12 +37,21 @@ class SettingsViewController: UIViewController {
     
     @IBAction func onSwitch(_ sender: Any) {
         if !pinSwitch.isOn {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.disablePin), name: Notification.Name("canDisablePin"), object: nil)
-            pinSwitch.isOn = true
-            authVC.modalPresentationStyle = .overCurrentContext
-            self.present(authVC, animated: true, completion: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(self.disablePin), name: Notification.Name("canDisablePin"), object: nil)
+                pinSwitch.isOn = true
+                authVC.modalPresentationStyle = .overCurrentContext
+                self.present(authVC, animated: true, completion: nil)
+        } else {
+            if self.presenter.canEvaluatePolicy() {
+                UserPreferences.shared.writeCipheredPinMode(mode: 1)
+            } else {
+                pinSwitch.isOn = false
+                let message = "Biometric authentication is not configured on your device"
+                let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-        UserPreferences.shared.writeCipheredPinMode(mode: 1)
     }
     
     @objc func disablePin() {

@@ -29,17 +29,20 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerCells()
-        
+        self.presenter.assetsVC = self
+        self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         guard isFlowPassed else {
+            return
+        }
+        
+        guard DataManager.shared.checkIsFirstLaunch() else {
             return
         }
         
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_,_ in }
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.presenter.assetsVC = self
         
-        self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.checkOSForConstraints()
         
         

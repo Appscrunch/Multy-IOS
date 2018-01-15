@@ -33,7 +33,7 @@ class AssetsPresenter: NSObject {
         assetsVC?.progressHUD.show()
         DataManager.shared.getAccount { (acc, err) in
             self.assetsVC?.view.isUserInteractionEnabled = true
-            if acc != nil {
+            if acc == nil {
                 self.assetsVC?.progressHUD.show()
                 DataManager.shared.auth(rootKey: nil) { (account, error) in
                     self.assetsVC?.progressHUD.hide()
@@ -48,7 +48,16 @@ class AssetsPresenter: NSObject {
                         self.getWalletVerbose()
                     }
                 }
+            } else {
+                self.account = acc
+                DataManager.shared.auth(rootKey: self.account?.backupSeedPhrase, completion: { (acc, err) in
+                    if acc != nil {
+                        self.account = acc
+                        self.getWalletVerbose()
+                    }
+                })
             }
+            
             self.assetsVC?.progressHUD.hide()
         }
     }

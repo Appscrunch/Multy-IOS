@@ -109,6 +109,7 @@ extension DataManager {
                 self.apiManager.auth(with: params, completion: { (dict, error) in
                     if dict != nil {
                         self.realmManager.updateAccount(dict!, completion: { (account, error) in
+                            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
                             completion(account, error)
                         })
                     } else {
