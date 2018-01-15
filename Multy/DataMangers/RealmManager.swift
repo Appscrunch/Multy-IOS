@@ -555,8 +555,19 @@ class RealmManager: NSObject {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
                 try! realm.write {
+                    let oldHistoryObjects = realm.objects(HistoryRLM.self)
+                    
                     for obj in historyArr {
-                        realm.add(obj, update: true)
+                        //add checking for repeated tx and updated status
+                        let repeatedObj = oldHistoryObjects.filter("txHash = \(obj.txHash)").first
+                        if repeatedObj != nil {
+                            if shouldUpdate(fromStatus: repeatedObj!.txStatus,
+                                            toStatus: obj.txStatus) {
+                                realm.add(obj, update: true)
+                            }
+                        } else {
+                            realm.add(obj, update: true)
+                        }
                     }
                     completion(historyArr)
                 }
