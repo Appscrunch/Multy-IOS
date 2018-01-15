@@ -12,7 +12,7 @@ class SpendableOutputRLM: Object {
     @objc dynamic var transactionOutID = NSNumber(value: 0)      // UInt32
     @objc dynamic var transactionOutScript = String()
     @objc dynamic var addressID = NSNumber(value: 0)             // UInt32
-    @objc dynamic var transactionStatus = String()
+    @objc dynamic var transactionStatus = NSNumber(value: 0)
     
     public class func initWithArray(spendableArray: NSArray, addressID: NSNumber) -> List<SpendableOutputRLM> {
         let outputs = List<SpendableOutputRLM>()
@@ -47,7 +47,7 @@ class SpendableOutputRLM: Object {
         }
         
         if let txStatus = addressInfo["txstatus"]  {
-            spendable.transactionStatus = txStatus as! String
+            spendable.transactionStatus = txStatus as! NSNumber
         }
      
         return spendable
