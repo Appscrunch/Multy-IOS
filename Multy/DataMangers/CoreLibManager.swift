@@ -78,7 +78,6 @@ class CoreLibManager: NSObject {
         } else {
             return nil
         }
-        
     }
     
     func createExtendedKey(from binaryData: inout BinaryData) -> String {
