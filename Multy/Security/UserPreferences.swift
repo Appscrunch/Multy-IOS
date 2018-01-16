@@ -145,6 +145,7 @@ class UserPreferences : NSObject {
         let originalData = try! aes?.decrypt(decipheredArray)
         let decipheredString = String(bytes: originalData!, encoding: .utf8)!
         
+        
         completion(decipheredString, nil)
     }
 }
