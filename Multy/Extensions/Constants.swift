@@ -16,7 +16,7 @@ let downSizes : [CGFloat] = [0, 23, 40, 53, 81, 136, 153, 197, 249]
 
 let statuses = ["createdTx", "fromSocketTx", "incoming in mempool", "spend in mempool", "incoming in block", "spend in block", "in block confirmed", "rejected block"]
 
-func shouldUpdate(fromStatus: String, toStatus: String) -> Bool {
+func shouldUpdate(fromStatus: Int, toStatus: Int) -> Bool {
     return true
 }
 
@@ -45,3 +45,12 @@ func convertBTCStringToSatoshi(sum: String) -> UInt32 {
     return UInt32(Double(sum)! * pow(10, 8))
 }
 
+
+enum TxStatus : Int {
+    case
+        MempoolIncoming =       0,
+        BlockIncoming =         1,
+        MempoolOutcoming =      2,
+        BlockOutcoming =        3,
+        BlockConfirmed =        4
+}
