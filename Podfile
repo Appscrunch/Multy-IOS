@@ -19,6 +19,10 @@ target 'Multy' do
   pod 'Socket.IO-Client-Swift'
   pod 'RevealingSplashView'
   pod 'RAMAnimatedTabBarController'
+  pod 'Firebase/Core'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  
 #  pod 'BiometricAuthentication'
 
 end
