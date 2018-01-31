@@ -4,6 +4,27 @@
 
 import UIKit
 
+struct Constants {
+    //Assets screen
+    struct AssetsScreen {
+        static let progressString = "Getting Wallets..."
+        static let createWalletString = "Create wallet"
+        static let createOrImportWalletString = "Create or Import New Wallet"
+        static let cancelString = "Cancel"
+    }
+    
+    //Scurity strings
+    struct Security {
+        static let jailbrokenDeviceWarningString = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."
+    }
+    
+    //StoryboardStrings
+    struct Storyboard {
+        //Assets
+        static let createWalletVCSegueID = "createWalletVC"
+    }
+}
+
 let screenSize = UIScreen.main.bounds
 let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
@@ -48,9 +69,15 @@ func convertBTCStringToSatoshi(sum: String) -> UInt32 {
 
 enum TxStatus : Int {
     case
-        MempoolIncoming =       0,
-        BlockIncoming =         1,
-        MempoolOutcoming =      2,
-        BlockOutcoming =        3,
-        BlockConfirmed =        4
+        MempoolIncoming =           1,
+        BlockIncoming =             2,
+        MempoolOutcoming =          3,
+        BlockOutcoming =            4,
+        BlockConfirmedIncoming =    5,
+        BlockConfirmedOutcoming =   6
 }
+
+//API REST constants
+let apiUrl = "http://88.198.47.112:7778/"//"http://192.168.0.121:7778/"
+let apiUrlTest = "http://192.168.0.125:8080/"
+let nonLocalURL = "http://88.198.47.112:7778/"

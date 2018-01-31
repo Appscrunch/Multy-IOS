@@ -32,7 +32,10 @@ class UserWalletRLM: Object {
             var sum : UInt32 = 0
             
             for address in addresses {
-                sum += address.amount.uint32Value
+                for out in address.spendableOutput {
+                    sum += out.transactionOutAmount.uint32Value
+                }
+//                sum += address.amount.uint32Value
             }
             
             sumInCrypto = Double(sum) / 100000000.0
@@ -103,6 +106,33 @@ class UserWalletRLM: Object {
         self.cryptoName = "BTC"
         self.fiatName = "USD"
         self.fiatSymbol = "$"
+    }
+    
+    public func fetchAddresses() -> [String] {
+        var addresses = [String]()
+        self.addresses.forEach({ addresses.append($0.address) })
+        
+        return addresses
+    }
+    
+    func calculateBlockedAmount() -> UInt32 {
+        var sum = UInt32(0)
+        
+        for address in self.addresses {
+            for out in address.spendableOutput {
+                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+                    sum += out.transactionOutAmount.uint32Value
+                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+                    let addresses = self.fetchAddresses()
+                    
+                    if addresses.contains(address.address) {
+                        sum += out.transactionOutAmount.uint32Value
+                    }
+                }
+            }
+        }
+        
+        return sum
     }
     
     override class func primaryKey() -> String? {

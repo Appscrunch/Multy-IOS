@@ -37,10 +37,4 @@ class SendFinishPresenter: NSObject {
             self.sumInCrypto = Double(round(100000000*self.sumInFiat!)/100000000)
         }
     }
-    
-    func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            
-        }
-    }
 }

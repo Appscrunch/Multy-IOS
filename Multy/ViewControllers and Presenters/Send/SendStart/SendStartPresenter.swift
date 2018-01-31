@@ -20,7 +20,9 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         if self.isFromWallet {
             self.sendStartVC?.navigationController?.popViewController(animated: true)
         } else {
-            self.sendStartVC?.tabBarController?.selectedIndex = 0
+            if let tbc = self.sendStartVC?.tabBarController as? CustomTabBarViewController {
+                tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+            }
             self.sendStartVC?.navigationController?.popToRootViewController(animated: false)
         }
     }
@@ -75,11 +77,5 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         }
         self.sendStartVC?.makeAvailableNextBtn()
         self.sendStartVC?.updateUI()
-    }
-    
-    func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            
-        }
     }
 }

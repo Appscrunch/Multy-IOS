@@ -15,7 +15,6 @@ class WalletChoooseViewController: UIViewController {
         self.registerCell()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.presenter.walletChoooseVC = self
-//        self.presenter.getExchange()
 //        self.presenter.createWallets()
         self.presenter.getWallets()
     }

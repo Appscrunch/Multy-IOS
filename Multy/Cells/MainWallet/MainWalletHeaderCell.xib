@@ -29,7 +29,7 @@
                         <rect key="frame" x="168" y="294.5" width="39" height="37"/>
                     </pageControl>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oci-Q7-YYq">
-                        <rect key="frame" x="0.0" y="64" width="375" height="230.5"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="245.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fns-tf-KmS">
                             <size key="itemSize" width="375" height="210"/>
@@ -72,7 +72,7 @@
                             <action selector="settingsAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3LI-uv-qaf"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC - Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bew-sY-tZZ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC - Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="bew-sY-tZZ">
                         <rect key="frame" x="131" y="30" width="113" height="24"/>
                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,13 +82,15 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="57B-xg-IGV" secondAttribute="bottom" id="0dp-sO-DkV"/>
+                    <constraint firstItem="bew-sY-tZZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="prT-1y-lyc" secondAttribute="trailing" constant="5" id="4iD-fC-YK6"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="prT-1y-lyc" secondAttribute="bottom" id="6DX-fc-kea"/>
                     <constraint firstItem="prT-1y-lyc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="AtO-k0-u6t"/>
                     <constraint firstAttribute="bottom" secondItem="Rya-sD-JBP" secondAttribute="bottom" id="Df1-3p-8EG"/>
                     <constraint firstAttribute="trailing" secondItem="SDL-hS-0qY" secondAttribute="trailing" constant="17" id="Dgl-pI-AQe"/>
                     <constraint firstItem="57B-xg-IGV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="DjK-KQ-prD"/>
+                    <constraint firstItem="57B-xg-IGV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bew-sY-tZZ" secondAttribute="trailing" constant="5" id="EZu-UV-x4o"/>
                     <constraint firstItem="prT-1y-lyc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FPP-iW-WVh"/>
-                    <constraint firstItem="Rya-sD-JBP" firstAttribute="top" secondItem="oci-Q7-YYq" secondAttribute="bottom" id="PSk-jr-XJ2"/>
+                    <constraint firstItem="Rya-sD-JBP" firstAttribute="top" secondItem="oci-Q7-YYq" secondAttribute="bottom" constant="-15" id="PSk-jr-XJ2"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Poa-UB-qZs"/>
                     <constraint firstAttribute="trailing" secondItem="oci-Q7-YYq" secondAttribute="trailing" id="R4B-1h-vCr"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="64" id="VZY-yx-uG7"/>

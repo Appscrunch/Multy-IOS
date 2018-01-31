@@ -119,7 +119,7 @@ class UserPreferences : NSObject {
 //            return
 //        }
         
-        //MARK: Generate secure KEY
+        //MARK: Generate secure KEY 
         if aes == nil {
             return
         }
@@ -143,9 +143,11 @@ class UserPreferences : NSObject {
         
         let decipheredArray = [UInt8](decipheredData!)
         let originalData = try! aes?.decrypt(decipheredArray)
-        let decipheredString = String(bytes: originalData!, encoding: .utf8)!
-        
-        
-        completion(decipheredString, nil)
+        if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
+            completion(decipheredString, nil)
+        } else {
+            self.writeCipheredPinMode(mode: 0)
+            completion("0", nil)
+        }
     }
 }

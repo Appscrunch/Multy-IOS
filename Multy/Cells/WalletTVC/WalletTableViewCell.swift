@@ -13,6 +13,7 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var cryptoNameLbl: UILabel!
     @IBOutlet weak var fiatSumLbl: UILabel!
     @IBOutlet weak var arrowImage: UIImageView!
+    @IBOutlet weak var statusImage: UIImageView!
     
     var isBorderOn = false
     
@@ -63,6 +64,10 @@ class WalletTableViewCell: UITableViewCell {
         self.cryptoSumLbl.text  = self.wallet?.sumInCrypto.fixedFraction(digits: 8)
         self.cryptoNameLbl.text = self.wallet?.cryptoName
         self.fiatSumLbl.text = "\(sumInFiat) \(self.wallet!.fiatSymbol)"
+        
+        if wallet != nil {
+            let isHidden = wallet!.calculateBlockedAmount() == 0
+            self.statusImage.isHidden = isHidden
+        }
     }
-    
 }

@@ -11,6 +11,7 @@ class NoInternetConnectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -23,7 +24,6 @@ class NoInternetConnectionViewController: UIViewController {
                                                      UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                        gradientOrientation: .horizontal)
     }
-    
     
     @IBAction func tryAgainAction(_ sender: Any) {
         if ConnectionCheck.isConnectedToNetwork() {

@@ -45,10 +45,4 @@ class WalletChooosePresenter: NSObject {
             }
         }
     }
-    
-    func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            
-        }
-    }
 }

@@ -24,12 +24,15 @@ class WalletPresenter: NSObject {
     func updateWalletInfo() {
         mainVC?.titleLbl.text = wallet?.name
         mainVC?.updateUI()
+//        mainVC?.updateExchange()
+//        mainVC?.updateHistory()
     }
     
     var historyArray = List<HistoryRLM>() {
         didSet {
             blockedAmount = calculateBlockedAmount()
-            updateWalletInfo()
+//            updateWalletInfo()
+            mainVC?.updateHistory()
         }
     }
     
@@ -40,8 +43,11 @@ class WalletPresenter: NSObject {
 //        let walletCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
 //        self.mainVC?.tableView.register(walletCollectionCell, forCellReuseIdentifier: "WalletCollectionViewCellID")
         
-        let mainWalletCell = UINib.init(nibName: "TransactionWalletCell", bundle: nil)
-        self.mainVC?.tableView.register(mainWalletCell, forCellReuseIdentifier: "TransactionWalletCellID")
+        let transactionCell = UINib.init(nibName: "TransactionWalletCell", bundle: nil)
+        self.mainVC?.tableView.register(transactionCell, forCellReuseIdentifier: "TransactionWalletCellID")
+        
+        let transactionPendingCell = UINib.init(nibName: "TransactionPendingCell", bundle: nil)
+        self.mainVC?.tableView.register(transactionPendingCell, forCellReuseIdentifier: "TransactionPendingCellID")
     }
     
     func fixConstraints() {
@@ -79,10 +85,37 @@ class WalletPresenter: NSObject {
             return sum
         }
         
-        for address in wallet!.addresses {
-            for out in address.spendableOutput {
-                if out.transactionStatus == 0 {
-                    sum += out.transactionOutAmount.uint32Value
+        if historyArray.count == 0 {
+            return sum
+        }
+        
+//        for address in wallet!.addresses {
+//            for out in address.spendableOutput {
+//                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+//                    sum += out.transactionOutAmount.uint32Value
+//                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+//                    out.
+//                }
+//            }
+//        }
+        for history in historyArray {
+            sum += blockedAmount(for: history)
+        }
+        
+        return sum
+    }
+    
+    func blockedAmount(for transaction: HistoryRLM) -> UInt32 {
+        var sum = UInt32(0)
+        
+        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+            sum += transaction.txOutAmount.uint32Value
+        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+            let addresses = wallet!.fetchAddresses()
+            
+            for tx in transaction.txOutputs {
+                if addresses.contains(tx.address) {
+                    sum += tx.amount.uint32Value
                 }
             }
         }

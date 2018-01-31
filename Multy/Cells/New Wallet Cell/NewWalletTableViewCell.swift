@@ -12,6 +12,8 @@ class NewWalletTableViewCell: UITableViewCell {
 //    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var content: UIView!
     
+    var delegate: CreateNewWalletProtocol?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -21,6 +23,9 @@ class NewWalletTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    @IBAction func openActionSheet() {
+        delegate?.openNewWalletSheet()
+    }
     
     func setupForSendStartVC() {
         self.content.backgroundColor = UIColor.white

@@ -25,7 +25,14 @@ class WalletAddressTableViewCell: UITableViewCell {
     }
     
     func fillInCell(index: Int) {
-        self.addressLbl.text = self.wallet?.addresses[index].address
+        let address = self.wallet?.addresses[index]
+        
+        if address == nil {
+            return
+        }
+        
+        self.addressLbl.text = address!.address
+        self.creationTimeLbl?.text = Date.walletAddressGMTDateFormatter().string(from: address!.lastActionDate)
         
         if self.wallet?.chain == 0 {
             sumInCrypto = convertSatoshiToBTC(sum: UInt32(self.wallet!.addresses[index].amount.int32Value))

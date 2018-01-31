@@ -27,7 +27,7 @@
                             <constraint firstAttribute="width" secondItem="0fb-sf-7dQ" secondAttribute="height" multiplier="1:1" id="B9B-qy-h36"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HoU-C3-WIc">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HoU-C3-WIc">
                         <rect key="frame" x="54" y="21" width="174" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,6 +70,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="45o-xQ-dp9" secondAttribute="trailing" id="5zp-0l-I9M"/>
+                    <constraint firstAttribute="trailing" secondItem="xag-Zn-BqQ" secondAttribute="trailing" constant="20" id="CM6-Qu-6c3"/>
                     <constraint firstItem="0fb-sf-7dQ" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="18/375" id="GCk-bw-NqC"/>
                     <constraint firstItem="xag-Zn-BqQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KTe-5b-tAK"/>
                     <constraint firstItem="HoU-C3-WIc" firstAttribute="leading" secondItem="0fb-sf-7dQ" secondAttribute="trailing" constant="13" id="O0O-s3-gFY"/>
@@ -88,6 +89,7 @@
                     <constraint firstItem="0fb-sf-7dQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="poW-4q-j0k"/>
                     <constraint firstItem="ofF-nW-jBI" firstAttribute="leading" secondItem="MhC-GT-MHY" secondAttribute="leading" id="tX2-Vh-XtH"/>
                     <constraint firstItem="3Nq-Xx-0YW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HoU-C3-WIc" secondAttribute="trailing" constant="15" id="uCe-se-jvs"/>
+                    <constraint firstItem="xag-Zn-BqQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="zzb-5z-Mpb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

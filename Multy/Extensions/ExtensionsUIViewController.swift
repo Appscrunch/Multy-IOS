@@ -53,4 +53,8 @@ extension UIViewController {
         }
         //        print("swizzled_layoutSubviews")
     }
+    
+    func isVisible() -> Bool {
+        return self.isViewLoaded && view.window != nil
+    }
 }

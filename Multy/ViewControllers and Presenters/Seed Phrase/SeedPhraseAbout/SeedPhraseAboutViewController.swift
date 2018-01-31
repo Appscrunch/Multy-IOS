@@ -9,12 +9,18 @@ class SeedPhraseAboutViewController: UIViewController {
 
     @IBOutlet weak var continueBtn: ZFRippleButton!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var firstConstraint: NSLayoutConstraint!   //
+    @IBOutlet weak var secondConstraint: NSLayoutConstraint!  // for fix ipad
+    @IBOutlet weak var thirdConstraint: NSLayoutConstraint!   //
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
+        self.fixiPadUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +43,15 @@ class SeedPhraseAboutViewController: UIViewController {
     
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func fixiPadUI() {
+        if screenHeight == 480 {
+            self.topConstraint.constant = 15
+            self.firstConstraint.constant = 25
+            self.secondConstraint.constant = 25
+            self.thirdConstraint.constant = 25
+        }
     }
     
 }

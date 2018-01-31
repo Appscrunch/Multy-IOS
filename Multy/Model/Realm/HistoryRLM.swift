@@ -19,7 +19,7 @@ class HistoryRLM: Object {
     @objc dynamic var txOutId = Int()
     var txOutputs = List<TxHistoryRLM>()
     @objc dynamic var txOutScript = String()
-    @objc dynamic var txStatus = String()
+    @objc dynamic var txStatus = NSNumber(value: 0)
     @objc dynamic var walletIndex = NSNumber(value: 0)
     
     
@@ -89,7 +89,7 @@ class HistoryRLM: Object {
         }
         
         if let txstatus = historyDict["txstatus"] {
-            hist.txStatus = txstatus as! String
+            hist.txStatus = txstatus as! NSNumber
         }
         
         if let walletindex = historyDict["walletindex"] {

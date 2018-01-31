@@ -12,6 +12,7 @@ class AddressRLM: Object {
     
     @objc dynamic var address = String()                //Double
     @objc dynamic var amount = NSNumber(value: 0)       //UInt32
+    @objc dynamic var lastActionDate = Date()
     
     var spendableOutput = List<SpendableOutputRLM>()
     
@@ -43,6 +44,10 @@ class AddressRLM: Object {
         
         if let addressString = addressInfo["address"] {
             addressRLM.address = addressString as! String
+        }
+        
+        if let date = addressInfo["lastActionTime"] {
+            addressRLM.lastActionDate = NSDate(timeIntervalSince1970: (date as! Double)) as Date
         }
         
         if let amount = addressInfo["amount"] {
