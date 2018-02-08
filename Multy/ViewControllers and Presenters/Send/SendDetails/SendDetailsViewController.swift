@@ -31,7 +31,6 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.hideKeyboardWhenTappedAround()
         self.presenter.sendDetailsVC = self
-//        self.presenter.getExchange()
         self.registerCells()
         self.registerNotificationFromKeyboard()
         

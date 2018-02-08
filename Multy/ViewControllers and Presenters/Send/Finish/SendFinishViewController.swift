@@ -29,7 +29,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendFinishVC = self
-//        self.presenter.getExchange()
         self.hideKeyboardWhenTappedAround()
         self.presenter.makeEndSum()
         self.setupUI()

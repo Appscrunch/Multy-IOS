@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import RAMAnimatedTabBarController
 
 class FastOperationsViewController: UIViewController {
 
@@ -18,19 +19,18 @@ class FastOperationsViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.navigationController?.navigationBar.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
-        self.presenter.getExchange()
     }
     
     @IBAction func closeAction(_ sender: Any) {
-        self.tabBarController?.selectedIndex = 0
+        if let tbc = self.tabBarController as? CustomTabBarViewController {
+            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+        }
     }
     
     @IBAction func sendAction(_ sender: Any) {
@@ -64,7 +64,6 @@ class FastOperationsViewController: UIViewController {
         qrScanVC.presenter.isFast = true
         self.present(qrScanVC, animated: true, completion: nil)
     }
-    
     
     func alertForCreatingWallet() {
         let alert = UIAlertController(title: "Warning", message: "You don`t have any wallets yet. Please create one", preferredStyle: UIAlertControllerStyle.alert)

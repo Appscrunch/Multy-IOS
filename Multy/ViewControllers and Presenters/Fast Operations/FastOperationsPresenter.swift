@@ -11,12 +11,6 @@ class FastOperationsPresenter: NSObject, QrDataProtocol {
     var adressSendTo = ""
     var amountInCrypto = 0.0
     
-    func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            print(error)
-        }
-    }
-    
     func qrData(string: String) {
         let array = string.components(separatedBy: CharacterSet(charactersIn: ":?="))
         switch array.count {

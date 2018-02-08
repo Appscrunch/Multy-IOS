@@ -42,7 +42,9 @@ class ReceiveStartViewController: UIViewController {
         if self.presenter.isNeedToPop {
             self.navigationController?.popViewController(animated: true)
         } else {
-            self.tabBarController?.selectedIndex = 0
+            if let tbc = self.tabBarController as? CustomTabBarViewController {
+                tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+            }
             self.navigationController?.popToRootViewController(animated: false)
         }
     }

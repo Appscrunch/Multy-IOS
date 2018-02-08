@@ -43,14 +43,24 @@
                             <constraint firstAttribute="width" constant="25" id="taE-8N-psn"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGk-qJ-Yu8">
+                        <rect key="frame" x="310" y="0.0" width="65" height="75"/>
+                        <connections>
+                            <action selector="openActionSheet" destination="KGk-i7-Jjw" eventType="touchUpInside" id="097-Cy-o0C"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
+                    <constraint firstItem="nGk-qJ-Yu8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DC5-w1-yEL"/>
                     <constraint firstItem="4Tz-BM-Mnj" firstAttribute="centerY" secondItem="qfm-lh-ZwC" secondAttribute="centerY" id="RSI-tj-qCs"/>
                     <constraint firstItem="qfm-lh-ZwC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="TbW-lU-Qdx"/>
+                    <constraint firstAttribute="bottom" secondItem="nGk-qJ-Yu8" secondAttribute="bottom" constant="-0.5" id="dDx-YY-Uke"/>
                     <constraint firstAttribute="bottom" secondItem="qfm-lh-ZwC" secondAttribute="bottom" constant="6" id="eaA-ft-pyf"/>
+                    <constraint firstAttribute="trailing" secondItem="nGk-qJ-Yu8" secondAttribute="trailing" id="fch-fg-99i"/>
                     <constraint firstItem="qOB-ii-daI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jiN-V1-rOQ"/>
                     <constraint firstAttribute="trailing" secondItem="4Tz-BM-Mnj" secondAttribute="trailing" constant="20" id="qHV-Fj-iag"/>
+                    <constraint firstItem="nGk-qJ-Yu8" firstAttribute="leading" secondItem="4Tz-BM-Mnj" secondAttribute="leading" constant="-20" id="qmK-0a-T5N"/>
                     <constraint firstItem="qOB-ii-daI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qnm-jS-AQr"/>
                     <constraint firstAttribute="trailing" secondItem="qOB-ii-daI" secondAttribute="trailing" id="r4Y-xC-uWD"/>
                 </constraints>

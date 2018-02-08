@@ -12,12 +12,19 @@ class BackupSeedPhraseViewController: UIViewController {
     @IBOutlet weak var restartLbl: UILabel!
     @IBOutlet weak var infoIconImg: UIImageView!
     
+    @IBOutlet weak var bricksConstraint: NSLayoutConstraint!    //
+    @IBOutlet weak var firstLblConstraint: NSLayoutConstraint!  // ipad
+    @IBOutlet weak var secondLblConstraint: NSLayoutConstraint! //
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    
     var isRestore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
 //        self.tabBarController?.tabBar.frame = CGRect.zero
+        self.fixForiPad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +72,15 @@ class BackupSeedPhraseViewController: UIViewController {
         if segue.identifier == "checkPhraseVC" {
             let nextVC = segue.destination as! CheckWordsViewController
             nextVC.isRestore = self.isRestore
+        }
+    }
+    
+    func fixForiPad() {
+        if screenHeight == 480 {
+            self.bricksConstraint.constant = 15
+            self.firstLblConstraint.constant = 20
+            self.secondLblConstraint.constant = 9
+            self.bottomConstraint.constant = 10
         }
     }
     

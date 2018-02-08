@@ -2,9 +2,8 @@
 //Licensed under Multy.io license.
 //See LICENSE for details
 
-import UIKit
+import Foundation
 
-class CustomTabBarPresenter: NSObject {
-
-    var tabBarVC: CustomTabBarViewController?
+protocol CreateNewWalletProtocol {
+    func openNewWalletSheet()
 }

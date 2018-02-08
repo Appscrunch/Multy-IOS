@@ -58,7 +58,7 @@ extension WalletAddresessViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
+        return (64.0 / 375.0) * screenWidth
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

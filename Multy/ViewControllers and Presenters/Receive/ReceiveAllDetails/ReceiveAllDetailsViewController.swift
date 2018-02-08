@@ -30,7 +30,6 @@ class ReceiveAllDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.receiveAllDetailsVC = self
-        self.makeQRCode()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
     
@@ -38,6 +37,7 @@ class ReceiveAllDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.checkValuesAndSetupUI()
         self.updateUIWithWallet()
+        self.makeQRCode()
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -92,7 +92,7 @@ class ReceiveAllDetailsViewController: UIViewController {
     
 // MARK: QRCode Activity
     func makeQRCode() {
-        let data = self.presenter.walletAddress.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let data = self.makeStringForQRWithSumAndAdress(cryptoName: "bitcoin").data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(data, forKey: "inputMessage")
         filter?.setValue("Q", forKey: "inputCorrectionLevel")

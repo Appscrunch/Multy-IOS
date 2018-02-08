@@ -5,25 +5,47 @@
 import UIKit
 import Alamofire
 
-class ApiManager: NSObject {
+class ApiManager: NSObject, RequestRetrier {
     static let shared = ApiManager()
-    
-    let apiUrl = "http://88.198.47.112:7778/"//"http://192.168.0.121:7778/"
-    let apiUrlTest = "http://192.168.0.125:8080/"
-    let nonLocalURL = "http://88.198.47.112:7778/"
-    
     var requestManager = Alamofire.SessionManager.default
     
     override init() {
+        super.init()
+        
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 10 // seconds
         configuration.timeoutIntervalForResource = 10
         
-        self.requestManager = Alamofire.SessionManager(configuration: configuration)
+        requestManager = Alamofire.SessionManager(configuration: configuration)
+        requestManager.retrier = self
+    }
+    
+//    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
+//        if let urlString = urlRequest.url?.absoluteString {
+//            if urlString.hasPrefix("\(apiUrl)server/config") || false {
+//
+//            }
+//        }
+//    }
+    
+    public func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
+        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
+            DataManager.shared.getAccount(completion: { (account, error) in
+                if account != nil && !account!.token.isEmpty {
+                    DataManager.shared.auth(rootKey: account!.token, completion: { (account, error) in
+                        completion(true, 0.3) // retry after 0.3 second
+                    })
+                } else {
+                    completion(false, 0.0) // don't retry
+                }
+            })
+        } else {
+            completion(false, 0.0) // don't retry
+        }
     }
     
     func getServerConfig(completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
-        requestManager.request("\(self.apiUrl)server/config", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)server/config", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -42,7 +64,7 @@ class ApiManager: NSObject {
             "Content-Type": "application/json"
         ]
         
-        requestManager.request("\(self.apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             
             print("----------------------AUTH")
             
@@ -66,7 +88,7 @@ class ApiManager: NSObject {
             
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallets", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -87,7 +109,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: change btc_eth
-        requestManager.request("\(self.apiUrl)api/v1/gettickets/btc_eth", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/gettickets/btc_eth", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -100,26 +122,26 @@ class ApiManager: NSObject {
         }
     }
     
-    func getExchangePrice(_ token: String, direction: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
-        
-        let header: HTTPHeaders = [
-            "Content-Type": "application/json",
-            "Authorization" : "Bearer \(token)"
-        ]
-        
-        //MARK: USD
-        requestManager.request("\(self.apiUrl)api/v1/getexchangeprice/BTC/USD", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
-            switch response.result {
-            case .success(_):
-                if response.result.value != nil {
-                    completion((response.result.value as! NSDictionary), nil)
-                }
-            case .failure(_):
-                completion(nil, response.result.error)
-                break
-            }
-        }
-    }
+//    func getExchangePrice(_ token: String, direction: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+//        
+//        let header: HTTPHeaders = [
+//            "Content-Type": "application/json",
+//            "Authorization" : "Bearer \(token)"
+//        ]
+//        
+//        //MARK: USD
+//        requestManager.request("\(apiUrl)api/v1/getexchangeprice/BTC/USD", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+//            switch response.result {
+//            case .success(_):
+//                if response.result.value != nil {
+//                    completion((response.result.value as! NSDictionary), nil)
+//                }
+//            case .failure(_):
+//                completion(nil, response.result.error)
+//                break
+//            }
+//        }
+//    }
     
     func getTransactionInfo(_ token: String, transactionString: String, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
@@ -129,7 +151,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: USD
-        requestManager.request("\(self.apiUrl)api/v1/gettransactioninfo/\(transactionString)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/gettransactioninfo/\(transactionString)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -149,7 +171,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 
@@ -172,7 +194,7 @@ class ApiManager: NSObject {
         let header: HTTPHeaders = [
             "Authorization" : "Bearer \(token)"
         ]
-        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletIndex)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet/\(walletIndex)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -193,7 +215,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/address", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/address", method: .post, parameters: walletDict, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -214,7 +236,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: USD
-        requestManager.request("\(self.apiUrl)api/v1/transaction/feerate", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/transaction/feerate", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -233,7 +255,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallets/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallets/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -253,7 +275,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletID)/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet/\(walletID)/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -272,7 +294,7 @@ class ApiManager: NSObject {
             "Content-Type": "application/json"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallet/\(walletID)/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet/\(walletID)/verbose", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -293,7 +315,7 @@ class ApiManager: NSObject {
         ]
         
         //MARK: TESTNET - send currency is 1
-        requestManager.request("\(self.apiUrl)api/v1/transaction/send/\(walletID)", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/transaction/send/\(walletID)", method: .post, parameters: transactionParameters, encoding: JSONEncoding.default, headers: header).responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -311,7 +333,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/outputs/spendable/\(currencyID)/\(address)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/outputs/spendable/\(currencyID)/\(address)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -329,7 +351,7 @@ class ApiManager: NSObject {
             "Authorization" : "Bearer \(token)"
         ]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallets/transactions/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallets/transactions/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -353,7 +375,7 @@ class ApiManager: NSObject {
             "walletname" : newName
             ] as [String : Any]
         
-        requestManager.request("\(self.apiUrl)api/v1/wallet/name/\(walletID)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet/name/\(walletID)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

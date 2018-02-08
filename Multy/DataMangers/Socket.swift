@@ -26,9 +26,9 @@ class Socket: NSObject {
                 return
             }
             
-            let header = ["userID": "\(account?.userID)",
-                "deviceType": "\(account?.deviceType)",
-                "jwtToken": "\(account?.token)"]
+            let header = ["userID": "\(account!.userID)",
+                "deviceType": "\(account!.deviceType)",
+                "jwtToken": "\(account!.token)"]
             
             self.manager = SocketManager(socketURL: URL(string: "http://88.198.47.112:7780")!, config: [.log(true), .compress, .forceWebsockets(true), .reconnectAttempts(3), .forcePolling(false), .extraHeaders(header)])
             self.socket = self.manager.defaultSocket
@@ -52,7 +52,11 @@ class Socket: NSObject {
                 }//"BTCtoUSD"
             }
             
-            
+            self.socket.on("btcTransactionUpdate") { data, ack in
+                print("-----btcTransactionUpdate: \(data)")
+                
+                NotificationCenter.default.post(name: NSNotification.Name("transactionUpdated"), object: nil)
+            }
             
             self.socket.on("currentAmount") {data, ack in
                 guard let cur = data[0] as? Double else { return }

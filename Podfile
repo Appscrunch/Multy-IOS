@@ -23,6 +23,7 @@ target 'Multy' do
   pod 'Fabric'
   pod 'Crashlytics'
   
+  
 #  pod 'BiometricAuthentication'
 
 end

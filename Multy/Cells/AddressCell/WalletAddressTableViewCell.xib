@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,13 +31,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0001 BTC / 100 USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxM-0D-kqw">
-                        <rect key="frame" x="20" y="32" width="124" height="17"/>
+                        <rect key="frame" x="20" y="34.5" width="124" height="17"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                         <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.11.2017 ∙  23:15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zn1-Ux-Rxq">
-                        <rect key="frame" x="254" y="32" width="101" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.11.2017 ∙  23:15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zn1-Ux-Rxq">
+                        <rect key="frame" x="254" y="34.5" width="101" height="17"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -46,10 +46,10 @@
                 <constraints>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dfF-68-ywH" secondAttribute="trailing" constant="20" id="04V-46-hMS"/>
                     <constraint firstAttribute="trailing" secondItem="Zn1-Ux-Rxq" secondAttribute="trailing" constant="20" id="HiD-mm-d8v"/>
-                    <constraint firstItem="pxM-0D-kqw" firstAttribute="top" secondItem="dfF-68-ywH" secondAttribute="bottom" constant="4.5" id="KcQ-Zi-gWE"/>
                     <constraint firstItem="pxM-0D-kqw" firstAttribute="leading" secondItem="dfF-68-ywH" secondAttribute="leading" id="MWc-Em-34I"/>
                     <constraint firstItem="Zn1-Ux-Rxq" firstAttribute="centerY" secondItem="pxM-0D-kqw" secondAttribute="centerY" id="R6X-fH-5kh"/>
                     <constraint firstItem="dfF-68-ywH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="eOA-lL-RYL"/>
+                    <constraint firstAttribute="bottom" secondItem="pxM-0D-kqw" secondAttribute="bottom" constant="12" id="jVm-Wa-xKJ"/>
                     <constraint firstItem="dfF-68-ywH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="xbo-YW-uVq"/>
                 </constraints>
             </tableViewCellContentView>

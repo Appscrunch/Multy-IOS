@@ -17,6 +17,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var constraintBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintTop: NSLayoutConstraint!
     @IBOutlet weak var constraintAfterTopLabel: NSLayoutConstraint!
+    @IBOutlet weak var constraintAfterBricks: NSLayoutConstraint!
     
     let progressHUD = ProgressHUD(text: "Restoring Wallets...")
     
@@ -33,8 +34,10 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         progressHUD.hide()
         
         if screenWidth < 325 {
-            constraintTop.constant = 25
+            constraintTop.constant = 10
             constraintAfterTopLabel.constant = 10
+            constraintAfterBricks.constant = 10
+            wordTF.font?.withSize(50.0)
         }
         
         bricksView.addSubview(BricksView(with: bricksView.bounds, and: 0))
@@ -42,12 +45,11 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         self.presenter.checkWordsVC = self
         self.presenter.getSeedPhrase()
         
-        self.wordTF.becomeFirstResponder()
         self.wordTF.delegate = self
         self.wordTF.text = ""
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard(_:)), name: Notification.Name("hideKeyboard"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect.zero
 
@@ -64,6 +66,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.wordTF.becomeFirstResponder()
         if self.isRestore {
             self.titleLbl.text = "Restore Multy"
         }
@@ -77,13 +80,27 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @objc func hideKeyboard(_ notification : Notification) {
+        self.wordTF.resignFirstResponder()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         return true
     }
     
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
-        if (self.wordTF.text?.count)! < 3 {
+        if self.wordTF.text == nil {
+            return
+        }
+        
+        if self.wordTF.text!.count < 3 {
+            return
+        }
+        
+        if !DataManager.shared.isWordCorrect(word: self.wordTF.text!) {
+            presentAlert()
+            
             return
         }
         
@@ -123,7 +140,11 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             if self.isRestore {
-                self.constraintBtnBottom.constant = inset.bottom// - 50
+                if screenHeight == 812 {
+                    self.constraintBtnBottom.constant = inset.bottom - 35
+                } else {
+                    self.constraintBtnBottom.constant = inset.bottom// - 50
+                }
             } else {
                 self.constraintBtnBottom.constant = inset.bottom
             }
@@ -163,6 +184,17 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             let wrongVC = segue.destination as! WrongSeedPhraseViewController
             wrongVC.presenter.prevVC = self
         }
+    }
+    
+    func presentAlert() {
+        let message = "You entered wrong word!"
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            
+        }))
+        
+        let rootViewController: UIViewController = UIApplication.shared.windows.last!.rootViewController!
+        rootViewController.present(alert, animated: true, completion: nil)
     }
 }
 

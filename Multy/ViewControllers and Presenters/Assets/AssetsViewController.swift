@@ -8,15 +8,16 @@ import Alamofire
 import CryptoSwift
 //import BiometricAuthentication
 
-class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
+
+class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateNewWalletProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
-    let progressHUD = ProgressHUD(text: "Getting Wallets...")
+    let progressHUD = ProgressHUD(text: Constants.AssetsScreen.progressString)
     
     var isSeedBackupOnScreen = false
     
@@ -24,29 +25,41 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var isFlowPassed = false
     
-    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+    var isSocketInitiateUpdating = false
+    
+    var isInsetCorrect = false
+    
+    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.isUserInteractionEnabled = false
         self.registerCells()
         self.presenter.assetsVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
+        
+        self.createAlert()
+
         guard isFlowPassed else {
+            self.view.isUserInteractionEnabled = true
             return
         }
         
         let isFirst = DataManager.shared.checkIsFirstLaunch()
         if isFirst {
+            self.view.isUserInteractionEnabled = true
             return
         }
         
-        let _ = MasterKeyGenerator.shared.generateMasterKey{_,_,_ in }
+        let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
         
         self.checkOSForConstraints()
         
         self.view.addSubview(progressHUD)
-        
         
         //MAKE: first launch
 //        let _ = DataManager.shared
@@ -57,22 +70,24 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        progressHUD.show()
         presenter.auth()
         
-        self.createAlert()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
 //        self.presenter.updateWalletsInfo()
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         if self.presenter.isJailed {
-            self.presentWarningAlert(message: "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices.")
+            self.presentWarningAlert(message: Constants.Security.jailbrokenDeviceWarningString)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        self.isInsetCorrect = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,28 +103,67 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
+        
+        tableView.reloadData()
+        tableView.scrollToRow(at: [0, presenter.account!.wallets.count - 1], at: .bottom, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
-        if presenter.account == nil {
+        if isInsetCorrect {
             self.tableView.contentInset.bottom = 0
+        } else {
+            self.tableView.contentInset.bottom = 49
         }
     }
     
     @objc func updateExchange() {
-        let offsetBeforeUpdate = self.tableView.contentOffset
-        self.tableView.reloadData()
-        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
+//        let offsetBeforeUpdate = self.tableView.contentOffset
+//        self.tableView.reloadData()
+//        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
+        for cell in self.tableView.visibleCells {
+            if cell.isKind(of: WalletTableViewCell.self) {
+                (cell as! WalletTableViewCell).fillInCell()
+            }
+        }
+    }
+    
+    @objc func updateWalletAfterSockets() {
+        if isSocketInitiateUpdating {
+            return
+        }
+        
+        if !isVisible() {
+            return
+        }
+        
+        isSocketInitiateUpdating = true
+        presenter.getWalletVerboseForSockets { (_) in
+            self.isSocketInitiateUpdating = false
+            
+            for cell in self.tableView.visibleCells {
+                if cell.isKind(of: WalletTableViewCell.self) {
+                    (cell as! WalletTableViewCell).fillInCell()
+                }
+            }
+        }
     }
     
     func createAlert() {
-        actionSheet.addAction(UIAlertAction(title: "Create wallet", style: .default, handler: { (result : UIAlertAction) -> Void in
-            self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
-        }))
-        //            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
-        //                //go to import wallet
-        //            }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        if actionSheet.actions.count == 0 {
+            actionSheet.addAction(
+                UIAlertAction(title: Constants.AssetsScreen.createWalletString,
+                              style: .default,
+                              handler: { (result : UIAlertAction) -> Void in
+                                self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID,
+                                                  sender: Any.self)
+                }))
+            //            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
+            //                //go to import wallet
+            //            }))
+            actionSheet.addAction(UIAlertAction(title: Constants.AssetsScreen.cancelString,
+                                                style: UIAlertActionStyle.cancel,
+                                                handler: nil))
+        }
     }
     
     func backUpView() {
@@ -186,17 +240,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func getExchange() {
-//        DataManager.shared.apiManager.getExchangePrice(presenter.account!.token, direction: "") { (dict, error) in
-//            guard dict != nil  else {
-//                return
-//            }
-//            if dict!["USD"] != nil {
-//                exchangeCourse = dict!["USD"] as! Double
-//            }
-//        }
-    }
-    
     func getTransInfo() {
         DataManager.shared.apiManager.getTransactionInfo(presenter.account!.token,
                                                          transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
@@ -268,6 +311,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return logoCell
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
+            newWalletCell.delegate = self
+            
             if presenter.account == nil {
                 newWalletCell.hideAll(flag: true)
             } else {
@@ -340,17 +385,20 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        }
  
         if indexPath != [0, 1] && indexPath != [0, 0] {
-            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            if self.presenter.isWalletExist() {
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            }
         }
         
         switch indexPath {
         case [0,0]:
             break
         case [0,1]:
-            if self.presenter.account == nil {
-                break
-            }
-            self.present(actionSheet, animated: true, completion: nil)
+            break
+//            if self.presenter.account == nil {
+//                break
+//            }
+//            self.present(actionSheet, animated: true, completion: nil)
         case [0,2]:
             if self.presenter.account == nil {
 //                progressHUD.show()
@@ -474,5 +522,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let createVC = segue.destination as! CreateWalletViewController
             createVC.presenter.account = presenter.account
         }
+    }
+    
+    //MARK: CreateNewWalletProtocol
+    func openNewWalletSheet() {
+        if self.presenter.account == nil {
+            return
+        }
+        self.present(self.actionSheet, animated: true, completion: nil)
     }
 }

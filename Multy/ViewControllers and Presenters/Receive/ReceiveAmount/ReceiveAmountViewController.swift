@@ -15,6 +15,8 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bottomCurrencyNameLbl: UILabel!
     @IBOutlet weak var constraintBtnBottom: NSLayoutConstraint!
     
+    @IBOutlet weak var btnTopConstraint: NSLayoutConstraint! // ipad
+    
     let presenter = ReceiveAmountPresenter()
     
     var sumInCrypto = 0.0
@@ -41,6 +43,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         
         self.currencyNameLbl.text = self.cryptoName
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        self.fixForIpad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,6 +182,12 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             self.sumInCrypto = Double(round(100000000*self.sumInCrypto)/100000000 )
             self.bottomSumLbl.text = "\(self.sumInCrypto) "
             self.bottomCurrencyNameLbl.text = self.cryptoName
+        }
+    }
+    
+    func fixForIpad() {
+        if screenHeight == 480 {
+            self.btnTopConstraint.constant = 10
         }
     }
 }

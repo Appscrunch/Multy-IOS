@@ -20,6 +20,9 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var btnSumLbl: UILabel!
     @IBOutlet weak var commissionSwitch: UISwitch!
     
+    @IBOutlet weak var scrollView: UIScrollView!  //
+    @IBOutlet weak var swapBtn: UIButton!         // ipad
+    
     @IBOutlet weak var constraintNextBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var constratintNextBtnHeight: NSLayoutConstraint!
     
@@ -28,20 +31,20 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendAmountVC = self
-//        self.presenter.getExchange()
-        self.presenter.setAmountFromQr()
-        self.presenter.cryptoToUsd()
-        self.presenter.setSpendableAmountText()
-        self.presenter.setMaxAllowed()
-        self.presenter.makeMaxSumWithFeeAndDonate()
-        self.setSumInNextBtn()
+//        self.presenter.setAmountFromQr()
+//        self.presenter.cryptoToUsd()
+//        self.presenter.setSpendableAmountText()
+//        self.presenter.setMaxAllowed()
+//        self.presenter.makeMaxSumWithFeeAndDonate()
+//        self.setSumInNextBtn()
+//        
+//        self.presenter.getData()
         
-        self.presenter.getData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        self.fixForIpad()
         self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                    gradientOrientation: .horizontal)
@@ -289,6 +292,13 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     func test () {
         DataManager.shared.getAccount { (account, error) in
             
+        }
+    }
+    
+    func fixForIpad() {
+        if screenHeight == 480 { 
+            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height - 50)
+            scrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
 }

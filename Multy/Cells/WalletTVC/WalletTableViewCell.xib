@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -68,6 +69,13 @@
                                             <constraint firstAttribute="width" constant="50" id="aVY-5e-Me2"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pending" translatesAutoresizingMaskIntoConstraints="NO" id="fKf-uC-vtg">
+                                        <rect key="frame" x="288" y="35" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fKf-uC-vtg" secondAttribute="height" multiplier="1:1" id="PJa-z9-J2q"/>
+                                            <constraint firstAttribute="width" constant="22" id="gD3-Gz-2rC"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -78,6 +86,7 @@
                                     <constraint firstItem="Msb-b9-SS7" firstAttribute="centerY" secondItem="bGK-TI-pDK" secondAttribute="centerY" id="Kgr-nT-Mbx"/>
                                     <constraint firstItem="wjl-lP-yts" firstAttribute="leading" secondItem="Msb-b9-SS7" secondAttribute="leading" id="LfS-Um-ZFZ"/>
                                     <constraint firstItem="pYm-cg-fCJ" firstAttribute="leading" secondItem="bGK-TI-pDK" secondAttribute="trailing" constant="5" id="Lll-to-FSF"/>
+                                    <constraint firstItem="Vd1-0D-jGB" firstAttribute="leading" secondItem="fKf-uC-vtg" secondAttribute="trailing" constant="5" id="V7h-S1-k9w"/>
                                     <constraint firstItem="d4q-xh-0f4" firstAttribute="centerY" secondItem="Msb-b9-SS7" secondAttribute="centerY" id="Xkm-k0-sfj"/>
                                     <constraint firstItem="d4q-xh-0f4" firstAttribute="leading" secondItem="Msb-b9-SS7" secondAttribute="trailing" constant="4" id="YQt-Zc-Q59"/>
                                     <constraint firstItem="bGK-TI-pDK" firstAttribute="top" secondItem="srv-bR-zld" secondAttribute="top" constant="21" id="Yda-aL-5Di"/>
@@ -85,6 +94,7 @@
                                     <constraint firstItem="pYm-cg-fCJ" firstAttribute="top" secondItem="srv-bR-zld" secondAttribute="top" constant="10" id="bt8-Gk-pAB"/>
                                     <constraint firstItem="Msb-b9-SS7" firstAttribute="leading" secondItem="pYm-cg-fCJ" secondAttribute="leading" id="ct3-dz-Mu7"/>
                                     <constraint firstItem="Vd1-0D-jGB" firstAttribute="centerY" secondItem="bGK-TI-pDK" secondAttribute="centerY" id="dNV-ga-o37"/>
+                                    <constraint firstItem="fKf-uC-vtg" firstAttribute="centerY" secondItem="srv-bR-zld" secondAttribute="centerY" id="oSt-WE-Qyx"/>
                                     <constraint firstItem="bGK-TI-pDK" firstAttribute="centerY" secondItem="srv-bR-zld" secondAttribute="centerY" id="y1B-I1-QVi"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -116,6 +126,7 @@
                 <outlet property="cryptoNameLbl" destination="d4q-xh-0f4" id="9vi-lM-CFw"/>
                 <outlet property="cryptoSumLbl" destination="Msb-b9-SS7" id="bxP-YK-Yum"/>
                 <outlet property="fiatSumLbl" destination="wjl-lP-yts" id="PSd-wZ-4bQ"/>
+                <outlet property="statusImage" destination="fKf-uC-vtg" id="bxK-1y-nU3"/>
                 <outlet property="tokenImage" destination="bGK-TI-pDK" id="YHq-jz-AuX"/>
                 <outlet property="walletNameLbl" destination="pYm-cg-fCJ" id="6sb-yS-ylc"/>
             </connections>
@@ -125,5 +136,6 @@
     <resources>
         <image name="BTC_medium_icon" width="39" height="39"/>
         <image name="chevron" width="15" height="22"/>
+        <image name="pending" width="22" height="22"/>
     </resources>
 </document>

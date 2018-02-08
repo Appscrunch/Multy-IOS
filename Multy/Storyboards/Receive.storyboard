@@ -653,6 +653,7 @@ Options</string>
                         <outlet property="amountTF" destination="qZH-gm-lpy" id="VpS-t6-V8U"/>
                         <outlet property="bottomCurrencyNameLbl" destination="B7w-Pg-fzt" id="cGr-w8-LTK"/>
                         <outlet property="bottomSumLbl" destination="YpJ-0B-C3z" id="Vfu-ol-QTU"/>
+                        <outlet property="btnTopConstraint" destination="Rjl-yb-fSV" id="nNi-ez-xBZ"/>
                         <outlet property="constraintBtnBottom" destination="XJu-tO-ay9" id="5EO-dH-LcB"/>
                         <outlet property="currencyNameLbl" destination="F0n-7y-x9F" id="ols-t6-3hv"/>
                         <outlet property="doneBtn" destination="roV-FV-zns" id="tGd-cV-vj2"/>

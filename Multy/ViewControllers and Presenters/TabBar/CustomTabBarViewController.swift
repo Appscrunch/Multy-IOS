@@ -15,6 +15,7 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     let presenter = CustomTabBarPresenter()
     // MARK: - View lifecycle
     let menuButton = UIButton()
+    var previousSelectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,7 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     // MARK: - Actions
     
     @objc private func menuButtonAction(sender: UIButton) {
+        previousSelectedIndex = selectedIndex
         setSelectIndex(from: selectedIndex, to: 2)
         changeViewVisibility(isHidden: true)
         selectedIndex = 2

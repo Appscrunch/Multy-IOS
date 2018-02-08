@@ -9,7 +9,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 10
+    let schemaVersion : UInt64 = 12
     
     private override init() {
         super.init()
@@ -71,6 +71,12 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 11 {
                                                         self.migrateFrom10To11(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 12 {
+                                                        self.migrateFrom11To12(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 13 {
+                                                        self.migrateFrom12To13(with: migration)
                                                     }
             })
             
@@ -481,6 +487,22 @@ class RealmManager: NSObject {
         }
     }
     
+    func migrateFrom11To12(with migration: Migration) {
+        migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
+            if let intStatus = Int(oldHistoryRLM?["txStatus"] as! String) {
+                newHistoryRLM?["txStatus"] = NSNumber(value: intStatus)
+            } else {
+                newHistoryRLM?["txStatus"] = NSNumber(value: 0)
+            }
+        }
+    }
+    
+    func migrateFrom12To13(with migration: Migration) {
+        migration.enumerateObjects(ofType: AddressRLM.className()) { (_, newAddress) in
+            newAddress?["lastActionDate"] = Date()
+        }
+    }
+    
     //Greedy algorithm
     func spendableOutput(addresses: List<AddressRLM>) -> [SpendableOutputRLM] {
         let ouputs = List<SpendableOutputRLM>()
@@ -561,8 +583,8 @@ class RealmManager: NSObject {
                         //add checking for repeated tx and updated status
                         let repeatedObj = oldHistoryObjects.filter("txHash = \(obj.txHash)").first
                         if repeatedObj != nil {
-                            if shouldUpdate(fromStatus: repeatedObj!.txStatus,
-                                            toStatus: obj.txStatus) {
+                            if shouldUpdate(fromStatus: repeatedObj!.txStatus.intValue,
+                                            toStatus: obj.txStatus.intValue) {
                                 realm.add(obj, update: true)
                             }
                         } else {

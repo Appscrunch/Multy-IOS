@@ -288,10 +288,4 @@ class SendAmountPresenter: NSObject {
         }
         return message
     }
-    
-    func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            
-        }
-    }
 }

@@ -9,19 +9,20 @@ class SendStartViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBtn: ZFRippleButton!
+    @IBOutlet weak var middleConstraint: NSLayoutConstraint!
     
     let presenter = SendStartPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.sendStartVC = self
-        self.presenter.getExchange()
         self.registerCells()
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.hideKeyboardWhenTappedAround()
         self.nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
+        self.ipadFix()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,5 +135,11 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     
     func updateUI() {
         self.tableView.reloadData()
+    }
+    
+    func ipadFix() {
+        if screenHeight == 480 {
+            self.middleConstraint.constant = 80
+        }
     }
 }

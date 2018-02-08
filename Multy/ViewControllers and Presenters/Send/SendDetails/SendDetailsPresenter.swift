@@ -151,13 +151,6 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
     }
     
-    
-    func getExchange() {
-        DataManager.shared.getExchangeCourse { (error) in
-            
-        }
-    }
-    
     func customFeeData(firstValue: Double, secValue: Double) {
         print(firstValue)
         if selectedIndexOfSpeed != 5 {
