@@ -76,7 +76,7 @@ class BackupSeedPhraseViewController: UIViewController {
     }
     
     func fixForiPad() {
-        if screenHeight == 480 {
+        if screenHeight == heightOfiPad {
             self.bricksConstraint.constant = 15
             self.firstLblConstraint.constant = 20
             self.secondLblConstraint.constant = 9

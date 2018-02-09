@@ -61,7 +61,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         self.presenter.nullifyDonation()
         
-        if screenHeight == 812 {
+        if screenHeight == heightOfX {
             bottomBtnConstraint.constant = 0
         }
     }
@@ -116,7 +116,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
                 self.view.frame.origin.y -= keyboardSize.height
-                if screenHeight == 812 {
+                if screenHeight == heightOfX {
                     bottomBtnConstraint.constant -= 35
                 }
             }
@@ -127,7 +127,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height
-                if screenHeight == 812 {
+                if screenHeight == heightOfX {
                     bottomBtnConstraint.constant = 0
                 }
             }

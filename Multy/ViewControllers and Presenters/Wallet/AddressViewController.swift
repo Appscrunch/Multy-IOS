@@ -38,7 +38,7 @@ class AddressViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        if screenHeight == 480 {
+        if screenHeight == heightOfiPad {
             firstConstraint.constant = firstConstraint.constant/2
 //            seondConstraint.constant = seondConstraint.constant/2
 //            thirdConstraint.constant = thirdConstraint.constant/2

@@ -46,7 +46,7 @@ class SeedPhraseAboutViewController: UIViewController {
     }
     
     func fixiPadUI() {
-        if screenHeight == 480 {
+        if screenHeight == heightOfiPad {
             self.topConstraint.constant = 15
             self.firstConstraint.constant = 25
             self.secondConstraint.constant = 25

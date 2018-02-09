@@ -314,16 +314,16 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func fixForIpadAndIphoneX() {
-        if screenHeight == 480 { 
+        if screenHeight == heightOfiPad {
             let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height - 50)
             scrollView.setContentOffset(bottomOffset, animated: true)
             self.constraintSpendableViewBottom.constant = 0
             self.constraintForTitletoBtn.constant = 10
-        } else if screenHeight == 812 {
+        } else if screenHeight == heightOfX {
             self.constraintForTitletoBtn.constant = 175
-        } else if screenHeight == 736 {
+        } else if screenHeight == heightOfPlus {
             self.constraintForTitletoBtn.constant = 165
-        } else if screenHeight == 568 {
+        } else if screenHeight == heightOfFive {
             self.constraintForTitletoBtn.constant = 20
             self.constraintSpendableViewBottom.constant = 0
             self.constraintTop.constant = 20

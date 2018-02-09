@@ -172,7 +172,7 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func ipadFix() {
-        if screenHeight == 480 {
+        if screenHeight == heightOfiPad {
             self.middleConstraint.constant = 80
         }
     }

@@ -273,11 +273,11 @@ class WalletViewController: UIViewController {
     func fixUiWithPendingTransactions() {
         let numberOfPending = presenter.getNumberOfPendingTransactions()
         let numberOfTransactions = presenter.numberOfTransactions()
-        if screenHeight == 736 && numberOfTransactions < 5 {
+        if screenHeight == heightOfPlus && numberOfTransactions < 5 {
             if numberOfPending > 2 {
                 self.tableView.isScrollEnabled = true
             }
-        } else if screenHeight == 667 && numberOfTransactions < 5 {
+        } else if screenHeight == heightOfStandard && numberOfTransactions < 5 {
             if numberOfPending > 1 {
                 self.tableView.isScrollEnabled = true
             }
@@ -416,13 +416,13 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func fixForiPad() {
-        if screenHeight == 480 { //ipad
+        if screenHeight == heightOfiPad {
             hideEmptyLbls()
         }
     }
     
     func fixForX() {
-        if screenHeight == 812 {
+        if screenHeight == heightOfX {
             self.heightOfBottomBar.constant = 83
         }
     }
