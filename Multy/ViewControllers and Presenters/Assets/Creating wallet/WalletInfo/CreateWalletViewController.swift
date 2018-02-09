@@ -13,7 +13,7 @@ class CreateWalletViewController: UIViewController {
     @IBOutlet weak var createBtn: ZFRippleButton!
     
     var presenter = CreateWalletPresenter()
-    var maxNameLength = 30
+    var maxNameLength = 25
     let progressHUD = ProgressHUD(text: "Creating Wallet...")
     
     override func viewDidLoad() {
