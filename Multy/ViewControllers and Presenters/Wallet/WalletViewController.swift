@@ -33,11 +33,13 @@ class WalletViewController: UIViewController {
     
     var isSocketInitiateUpdating = false
     
+    var lastY: CGFloat = 0.0
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         refreshControl.tintColor = UIColor.blue
-        
+//        refreshControl.backgroundColor = .blue
         return refreshControl
     }()
     
@@ -58,6 +60,9 @@ class WalletViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
+        self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
+        self.tableView.bounces = false
+        
 //        progressHUD.backgroundColor = .gray
 //        progressHUD.show()
 //        self.view.addSubview(progressHUD)
@@ -470,6 +475,25 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func updateUI() {
         self.tableView.reloadData()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentY = scrollView.contentOffset.y
+        let currentBottomY = scrollView.frame.size.height + currentY
+        if currentY <= lastY {
+            //"scrolling down"
+            tableView.bounces = true
+        } else {
+            //"scrolling up"
+            // Check that we are not in bottom bounce
+            if currentBottomY < scrollView.contentSize.height + scrollView.contentInset.bottom {
+                tableView.bounces = false
+            }
+        }
+        
+        if scrollView.contentOffset.y >= 0 {
+            lastY = scrollView.contentOffset.y
+        }
     }
 }
 
