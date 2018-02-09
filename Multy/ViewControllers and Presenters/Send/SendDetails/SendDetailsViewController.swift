@@ -137,25 +137,28 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: donationSwitch actions
     @IBAction func switchDonationAction(_ sender: Any) {
-        if self.isDonateAvailableSW.isOn == false {
+        var offset = scrollView.contentOffset
+        
+        if !self.isDonateAvailableSW.isOn {
             self.donationTF.resignFirstResponder()
             self.presenter.donationInCrypto = 0.0
             self.presenter.donationInFiat = 0.0
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant / 2
-            self.scrollView.contentSize.height = self.scrollView.contentSize.height -
-                self.constraintDonationHeight.constant
+            self.scrollView.contentSize.height = self.scrollView.contentSize.height - self.constraintDonationHeight.constant
         } else {
             self.donationTF.becomeFirstResponder()
             self.presenter.donationInCrypto = (self.donationTF.text! as NSString).doubleValue
             self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
             self.constraintDonationHeight.constant = self.constraintDonationHeight.constant * 2
-            self.scrollView.contentSize.height = self.scrollView.contentSize.height +
-                self.constraintDonationHeight.constant
+            self.scrollView.contentSize.height = self.scrollView.contentSize.height + self.constraintDonationHeight.constant
         }
         self.hideOrShowDonationBottom()
 //        self.scrollView.scrollRectToVisible(self.nextBtn.frame, animated: true)
-        var offset = scrollView.contentOffset
+        
         offset.y = scrollView.contentSize.height + scrollView.contentInset.bottom - scrollView.bounds.size.height - 75
+        if !self.isDonateAvailableSW.isOn {
+            offset.y += 74
+        }
         scrollView.setContentOffset(offset, animated: true)
     }
     
