@@ -103,7 +103,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        if self.wordTF.text!.count < 3 {
+        if self.wordTF.text!.count < 3 && wordArray.count != 1 {
             return
         }
         
