@@ -21,6 +21,7 @@ class WalletViewController: UIViewController {
     var backupView : UIView?
 
     @IBOutlet weak var heightOfBottomBar: NSLayoutConstraint!
+    @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
     
     var presenter = WalletPresenter()
     var even = true
@@ -60,6 +61,7 @@ class WalletViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
+        self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
         
@@ -429,6 +431,12 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func fixForX() {
         if screenHeight == heightOfX {
             self.heightOfBottomBar.constant = 83
+        }
+    }
+    
+    func fixForPlus() {
+        if screenHeight == heightOfPlus {
+            self.bottomTableConstraint.constant = -50
         }
     }
     

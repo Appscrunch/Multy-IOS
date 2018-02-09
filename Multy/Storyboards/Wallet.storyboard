@@ -271,6 +271,7 @@ operations</string>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="backView" destination="pbK-RX-Gb3" id="gmG-j3-GT5"/>
+                        <outlet property="bottomTableConstraint" destination="fnW-7u-jc0" id="EEm-mX-yy8"/>
                         <outlet property="emptyArrowImg" destination="RHH-jh-E3C" id="MvX-bc-HnW"/>
                         <outlet property="emptyFirstLbl" destination="Aqo-BH-hPA" id="Vzn-eb-Yzp"/>
                         <outlet property="emptySecondLbl" destination="iJt-Qg-K3r" id="ECa-jb-nGk"/>
