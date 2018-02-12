@@ -30,7 +30,7 @@ class SendAmountPresenter: NSObject {
     var walletAddresses: List<AddressRLM>?
     
     var transactionObj: TransactionRLM?
-    var donationObj: DonationObj?
+    var donationObj: DonationDTO?
     
     var addressToStr: String?
     

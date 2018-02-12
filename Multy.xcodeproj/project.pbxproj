@@ -109,7 +109,7 @@
 		45DCF9D71FE19AFD005A9896 /* CustomFeePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCF9D61FE19AFD005A9896 /* CustomFeePresenter.swift */; };
 		45DCF9D91FE19B33005A9896 /* CustomFeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCF9D81FE19B33005A9896 /* CustomFeeViewController.swift */; };
 		45E215D81FD147950078945A /* TransactionRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215D71FD147950078945A /* TransactionRLM.swift */; };
-		45E215DB1FD15D5F0078945A /* DonationObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215DA1FD15D5F0078945A /* DonationObj.swift */; };
+		45E215DB1FD15D5F0078945A /* DonationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215DA1FD15D5F0078945A /* DonationDTO.swift */; };
 		45E215DE1FD164E30078945A /* QrScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215DD1FD164E30078945A /* QrScannerViewController.swift */; };
 		45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215DF1FD164F80078945A /* QrScannerPresenter.swift */; };
 		45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E215E11FD16AA70078945A /* GoToQrProtocol.swift */; };
@@ -290,7 +290,7 @@
 		45DCF9D61FE19AFD005A9896 /* CustomFeePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeePresenter.swift; sourceTree = "<group>"; };
 		45DCF9D81FE19B33005A9896 /* CustomFeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeeViewController.swift; sourceTree = "<group>"; };
 		45E215D71FD147950078945A /* TransactionRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRLM.swift; sourceTree = "<group>"; };
-		45E215DA1FD15D5F0078945A /* DonationObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationObj.swift; sourceTree = "<group>"; };
+		45E215DA1FD15D5F0078945A /* DonationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDTO.swift; sourceTree = "<group>"; };
 		45E215DD1FD164E30078945A /* QrScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScannerViewController.swift; sourceTree = "<group>"; };
 		45E215DF1FD164F80078945A /* QrScannerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScannerPresenter.swift; sourceTree = "<group>"; };
 		45E215E11FD16AA70078945A /* GoToQrProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToQrProtocol.swift; sourceTree = "<group>"; };
@@ -898,7 +898,7 @@
 		45E215D91FD15D2E0078945A /* PONSO */ = {
 			isa = PBXGroup;
 			children = (
-				45E215DA1FD15D5F0078945A /* DonationObj.swift */,
+				45E215DA1FD15D5F0078945A /* DonationDTO.swift */,
 				45E7A8A520065455005D2D6E /* StockExchanges.swift */,
 			);
 			path = PONSO;
@@ -1303,7 +1303,7 @@
 				FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */,
 				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
 				FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */,
-				45E215DB1FD15D5F0078945A /* DonationObj.swift in Sources */,
+				45E215DB1FD15D5F0078945A /* DonationDTO.swift in Sources */,
 				451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */,
 				45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */,
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,

@@ -37,7 +37,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     let trasactionObj = TransactionRLM()
     
-    let donationObj = DonationObj()
+    let donationObj = DonationDTO()
     
 
     var customFee = UInt32(20)

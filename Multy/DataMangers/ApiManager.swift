@@ -47,7 +47,7 @@ class ApiManager: NSObject, RequestRetrier {
 //                validateCertificateChain: true,
 //                validateHost: true
 //            ),
-            "api.multy.io": .disableEvaluation
+            stageString : .disableEvaluation
             ]
         
         requestManager = SessionManager(serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))
