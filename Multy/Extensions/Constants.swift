@@ -29,6 +29,14 @@ let screenSize = UIScreen.main.bounds
 let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
 
+//Devices Heights
+let heightOfX        : CGFloat = 812.0
+let heightOfPlus     : CGFloat = 736.0
+let heightOfStandard : CGFloat = 667.0
+let heightOfFive     : CGFloat = 568.0
+let heightOfiPad     : CGFloat = 420.0
+//
+
 //brick view
 let segmentsCountUp : Int  = 7
 let segmentsCountDown : Int  = 8

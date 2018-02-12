@@ -178,7 +178,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return
         }
         let view = UIView()
-        if screenHeight == 812 {
+        if screenHeight == heightOfX {
             view.frame = CGRect(x: 16, y: 35, width: screenWidth - 32, height: 44)
         } else {
             view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: 44)
@@ -478,7 +478,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath == [0,0] {
 //            return 283  //portfolio height
             if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
-                if screenHeight == 812 {
+                if screenHeight == heightOfX {
                     return 255 //logo height
                 } else {
                     return 245

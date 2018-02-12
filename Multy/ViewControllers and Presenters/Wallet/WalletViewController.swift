@@ -21,6 +21,7 @@ class WalletViewController: UIViewController {
     var backupView : UIView?
 
     @IBOutlet weak var heightOfBottomBar: NSLayoutConstraint!
+    @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
     
     var presenter = WalletPresenter()
     var even = true
@@ -33,11 +34,13 @@ class WalletViewController: UIViewController {
     
     var isSocketInitiateUpdating = false
     
+    var lastY: CGFloat = 0.0
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         refreshControl.tintColor = UIColor.blue
-        
+//        refreshControl.backgroundColor = .blue
         return refreshControl
     }()
     
@@ -58,6 +61,10 @@ class WalletViewController: UIViewController {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
+        self.fixForPlus()
+        self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
+        self.tableView.bounces = false
+        
 //        progressHUD.backgroundColor = .gray
 //        progressHUD.show()
 //        self.view.addSubview(progressHUD)
@@ -273,11 +280,11 @@ class WalletViewController: UIViewController {
     func fixUiWithPendingTransactions() {
         let numberOfPending = presenter.getNumberOfPendingTransactions()
         let numberOfTransactions = presenter.numberOfTransactions()
-        if screenHeight == 736 && numberOfTransactions < 5 {
+        if screenHeight == heightOfPlus && numberOfTransactions < 5 {
             if numberOfPending > 2 {
                 self.tableView.isScrollEnabled = true
             }
-        } else if screenHeight == 667 && numberOfTransactions < 5 {
+        } else if screenHeight == heightOfStandard && numberOfTransactions < 5 {
             if numberOfPending > 1 {
                 self.tableView.isScrollEnabled = true
             }
@@ -416,14 +423,20 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func fixForiPad() {
-        if screenHeight == 480 { //ipad
+        if screenHeight == heightOfiPad {
             hideEmptyLbls()
         }
     }
     
     func fixForX() {
-        if screenHeight == 812 {
+        if screenHeight == heightOfX {
             self.heightOfBottomBar.constant = 83
+        }
+    }
+    
+    func fixForPlus() {
+        if screenHeight == heightOfPlus {
+            self.bottomTableConstraint.constant = -50
         }
     }
     
@@ -470,6 +483,25 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func updateUI() {
         self.tableView.reloadData()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentY = scrollView.contentOffset.y
+        let currentBottomY = scrollView.frame.size.height + currentY
+        if currentY <= lastY {
+            //"scrolling down"
+            tableView.bounces = true
+        } else {
+            //"scrolling up"
+            // Check that we are not in bottom bounce
+            if currentBottomY < scrollView.contentSize.height + scrollView.contentInset.bottom {
+                tableView.bounces = false
+            }
+        }
+        
+        if scrollView.contentOffset.y >= 0 {
+            lastY = scrollView.contentOffset.y
+        }
     }
 }
 
