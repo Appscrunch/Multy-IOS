@@ -103,7 +103,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        if self.wordTF.text!.count < 3 {
+        if self.wordTF.text!.count < 3 && wordArray.count != 1 {
             return
         }
         
@@ -156,13 +156,13 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             if self.isRestore {
-                if screenHeight == 812 {
+                if screenHeight == heightOfX {
                     self.constraintBtnBottom.constant = inset.bottom - 35
                 } else {
                     self.constraintBtnBottom.constant = inset.bottom// - 50
                 }
             } else {
-                if screenHeight == 812 {
+                if screenHeight == heightOfX {
                     self.constraintBtnBottom.constant = inset.bottom - 35
                 } else {
                     self.constraintBtnBottom.constant = inset.bottom

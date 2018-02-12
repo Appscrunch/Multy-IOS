@@ -13,7 +13,7 @@ class CreateWalletViewController: UIViewController {
     @IBOutlet weak var createBtn: ZFRippleButton!
     
     var presenter = CreateWalletPresenter()
-    var maxNameLength = 30
+    var maxNameLength = 25
     let progressHUD = ProgressHUD(text: "Creating Wallet...")
     
     override func viewDidLoad() {
@@ -101,7 +101,7 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
             self.constraintContinueBtnBottom.constant = inset.bottom
-            if screenHeight == 812 {
+            if screenHeight == heightOfX {
                 self.constraintContinueBtnBottom.constant = inset.bottom - 35
             }
         }
