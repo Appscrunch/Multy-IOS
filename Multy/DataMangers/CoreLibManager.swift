@@ -508,7 +508,7 @@ class CoreLibManager: NSObject {
         
         
         let maxFee = UInt32(feePerByteAmount)!
-        let maxFeeString = String(maxFee + (maxFee / 5))// 20% error
+        let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
         //Amount
         setAmountValue(key: "amount_per_byte", value: feePerByteAmount, pointer: fee.pointee!)
         setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
@@ -546,8 +546,12 @@ class CoreLibManager: NSObject {
             sendSum = convertBTCStringToSatoshi(sum: sendAmountString)
             changeSum = inputSum - (sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
         } else {
-            sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
-            changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)
+            if convertBTCStringToSatoshi(sum: sendAmountString) < convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
+                return ("Sending amount (\(sendAmountString) BTC) must be greater the fee amount (\(convertSatoshiToBTC(sum: feeAmount).fixedFraction(digits: 8)) BTC) plus donation (\(donationAmount) BTC)", -2)
+            } else {
+                sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+                changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)
+            }
         }
         
         //address

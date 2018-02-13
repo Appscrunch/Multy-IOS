@@ -180,8 +180,7 @@ class SendAmountPresenter: NSObject {
         let estimate = satoshiAmount == 0 ? 0.0 : estimateTransaction()
         
         if estimate < 0 {
-            
-            let message = "Please, check destination bitcoin address and enter correct one"
+            let message = rawTransaction!
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in }))
             sendAmountVC!.present(alert, animated: true, completion: nil)
