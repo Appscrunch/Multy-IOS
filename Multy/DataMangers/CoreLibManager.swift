@@ -508,7 +508,7 @@ class CoreLibManager: NSObject {
         
         
         let maxFee = UInt32(feePerByteAmount)!
-        let maxFeeString = String(maxFee + (maxFee / 5))// 20% error
+        let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
         //Amount
         setAmountValue(key: "amount_per_byte", value: feePerByteAmount, pointer: fee.pointee!)
         setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
@@ -544,10 +544,18 @@ class CoreLibManager: NSObject {
         
         if isPayCommission {
             sendSum = convertBTCStringToSatoshi(sum: sendAmountString)
-            changeSum = inputSum - (sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+            if inputSum < sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
+                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation amount (\(donationAmount) BTC)", -2)
+            } else {
+                changeSum = inputSum - (sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+            }
         } else {
-            sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
-            changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)
+            if convertBTCStringToSatoshi(sum: sendAmountString) < convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
+                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation (\(donationAmount) BTC)", -2)
+            } else {
+                sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+                changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)
+            }
         }
         
         //address

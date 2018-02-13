@@ -29,6 +29,17 @@ let screenSize = UIScreen.main.bounds
 let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
 
+//Devices Heights
+let heightOfX        : CGFloat = 812.0
+let heightOfPlus     : CGFloat = 736.0
+let heightOfStandard : CGFloat = 667.0
+let heightOfFive     : CGFloat = 568.0
+let heightOfiPad     : CGFloat = 420.0
+//
+
+//createWallet, WalletSettingd
+let maxNameLength = 25
+
 //brick view
 let segmentsCountUp : Int  = 7
 let segmentsCountDown : Int  = 8
@@ -62,6 +73,10 @@ func convertSatoshiToBTC(sum: UInt32) -> Double {
     return Double(sum) / pow(10, 8)
 }
 
+func convertSatoshiToBTCString(sum: UInt32) -> String {
+    return (Double(sum) / pow(10, 8)).fixedFraction(digits: 8) + " BTC"
+}
+
 func convertBTCStringToSatoshi(sum: String) -> UInt32 {
     return UInt32(sum.toStringWithComma() * pow(10, 8))
 }
@@ -78,8 +93,9 @@ enum TxStatus : Int {
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let apiUrl = "https://api.multy.io/"
-let socketUrl = "wss://api.multy.io/"
+let stageString = "stage.multy.io"
+let apiUrl = "https://\(stageString)/"
+let socketUrl = "wss://\(stageString)/"
 //let socketUrl = "http://88.198.47.112:2280"
 let apiUrlTest = "http://192.168.0.125:8080/"
 let nonLocalURL = "http://88.198.47.112:7778/"

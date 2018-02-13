@@ -203,7 +203,7 @@ class ReceiveAllDetailsViewController: UIViewController {
     }
     
     func ipadFix() {
-        if screenHeight == 480 {
+        if screenHeight == heightOfiPad {
             self.sumValueLbl.font = sumValueLbl.font.withSize(30)
             self.cryptoNameLbl.font = cryptoNameLbl.font.withSize(30)
         }

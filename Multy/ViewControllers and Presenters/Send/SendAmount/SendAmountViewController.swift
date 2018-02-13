@@ -205,7 +205,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.text == "" {
+        if textField.text == "" || (textField.text == "0" && string != "," && string != "." && !string.isEmpty) {
             if string.toStringWithComma() > self.presenter.maxAllowedToSpend {
                 self.presentWarning(message: "You trying to enter sum more then you have")
                 
@@ -215,6 +215,12 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
         
         if let textString = textField.text {
             if textString == "0" && string != "," && string != "." && !string.isEmpty {
+                textField.text = string
+                self.topSumLbl.text = self.amountTF.text!
+                self.presenter.saveTfValue()
+                self.presenter.checkMaxEntered()
+                setSumInNextBtn()
+                
                 return false
             } else if textString.isEmpty && (string == "," || string == ".") {
                 return false
@@ -314,16 +320,16 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func fixForIpadAndIphoneX() {
-        if screenHeight == 480 { 
+        if screenHeight == heightOfiPad {
             let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height - 50)
             scrollView.setContentOffset(bottomOffset, animated: true)
             self.constraintSpendableViewBottom.constant = 0
             self.constraintForTitletoBtn.constant = 10
-        } else if screenHeight == 812 {
+        } else if screenHeight == heightOfX {
             self.constraintForTitletoBtn.constant = 175
-        } else if screenHeight == 736 {
+        } else if screenHeight == heightOfPlus {
             self.constraintForTitletoBtn.constant = 165
-        } else if screenHeight == 568 {
+        } else if screenHeight == heightOfFive {
             self.constraintForTitletoBtn.constant = 20
             self.constraintSpendableViewBottom.constant = 0
             self.constraintTop.constant = 20
