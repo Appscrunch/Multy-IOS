@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
+class WalletSettingsViewController: UIViewController {
     
     @IBOutlet weak var walletNameTF: UITextField!
     
@@ -65,4 +65,15 @@ class WalletSettingsViewController: UIViewController, UITextFieldDelegate {
             self.presenter.changeWalletName()
         }
     }
+}
+
+extension WalletSettingsViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (textField.text?.count)! + string.count < maxNameLength {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }

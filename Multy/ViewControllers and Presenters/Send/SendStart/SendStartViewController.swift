@@ -109,6 +109,7 @@ class SendStartViewController: UIViewController {
             let sendDetailsVC = segue.destination as! SendDetailsViewController
             sendDetailsVC.presenter.choosenWallet = self.presenter.choosenWallet
             sendDetailsVC.presenter.addressToStr = self.presenter.addressSendTo
+            sendDetailsVC.presenter.amountFromQr = self.presenter.amountInCrypto
         default: break
         }
     }
@@ -172,7 +173,7 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func ipadFix() {
-        if screenHeight == 480 {
+        if screenHeight == heightOfiPad {
             self.middleConstraint.constant = 80
         }
     }

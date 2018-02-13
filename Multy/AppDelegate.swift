@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
-        switch isDeviceJailbroken() {
+        switch false /*isDeviceJailbroken()*/ {
         case true:
             assetVC.presenter.isJailed = true
         case false:

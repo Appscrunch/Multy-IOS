@@ -77,11 +77,12 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        self.presenter.updateWalletsInfo()
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         if self.presenter.isJailed {
             self.presentWarningAlert(message: Constants.Security.jailbrokenDeviceWarningString)
         }
+        
+        fixBottomOffset()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,6 +116,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.tableView.contentInset.bottom = 0
         } else {
             self.tableView.contentInset.bottom = 49
+        }
+    }
+    
+    func fixBottomOffset() {
+        //fix table offset
+        if (tableView.contentSize.height > tableView.bounds.height) && (tableView.contentSize.height - tableView.bounds.origin.y < tableView.bounds.height) {
+            tableView.contentOffset = CGPoint(x: 0.0, y: tableView.contentSize.height - tableView.bounds.height)
         }
     }
     
@@ -178,7 +186,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return
         }
         let view = UIView()
-        if screenHeight == 812 {
+        if screenHeight == heightOfX {
             view.frame = CGRect(x: 16, y: 35, width: screenWidth - 32, height: 44)
         } else {
             view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: 44)
@@ -478,7 +486,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath == [0,0] {
 //            return 283  //portfolio height
             if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
-                if screenHeight == 812 {
+                if screenHeight == heightOfX {
                     return 255 //logo height
                 } else {
                     return 245
