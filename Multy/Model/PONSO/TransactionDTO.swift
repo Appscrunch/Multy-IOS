@@ -4,7 +4,30 @@
 
 import Foundation
 
-class TransactionsDTO: NSObject {
+class TransactionDTO: NSObject {
+    var currencyID : NSNumber? {
+        didSet {
+            
+        }
+    }
+    
+    var transactionDTO: BaseTransactionDTO?
+}
+
+class BaseTransactionDTO {
     var sendAddress : String?
+    
+}
+
+class BTCTransactionDTO: BaseTransactionDTO {
+    
+    
+}
+
+class ETHTransactionDTO: BaseTransactionDTO {
+    
+}
+
+class GOLOSTransactionDTO: BaseTransactionDTO {
     
 }
