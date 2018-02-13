@@ -37,6 +37,9 @@ let heightOfFive     : CGFloat = 568.0
 let heightOfiPad     : CGFloat = 420.0
 //
 
+//createWallet, WalletSettingd
+let maxNameLength = 25
+
 //brick view
 let segmentsCountUp : Int  = 7
 let segmentsCountDown : Int  = 8
@@ -68,6 +71,10 @@ func generateWalletPrimaryKey(currencyID: UInt32, walletID: UInt32) -> String {
 
 func convertSatoshiToBTC(sum: UInt32) -> Double {
     return Double(sum) / pow(10, 8)
+}
+
+func convertSatoshiToBTCString(sum: UInt32) -> String {
+    return (Double(sum) / pow(10, 8)).fixedFraction(digits: 8) + " BTC"
 }
 
 func convertBTCStringToSatoshi(sum: String) -> UInt32 {

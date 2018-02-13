@@ -544,10 +544,14 @@ class CoreLibManager: NSObject {
         
         if isPayCommission {
             sendSum = convertBTCStringToSatoshi(sum: sendAmountString)
-            changeSum = inputSum - (sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+            if inputSum < sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
+                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation amount (\(donationAmount) BTC)", -2)
+            } else {
+                changeSum = inputSum - (sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
+            }
         } else {
             if convertBTCStringToSatoshi(sum: sendAmountString) < convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
-                return ("Sending amount (\(sendAmountString) BTC) must be greater the fee amount (\(convertSatoshiToBTC(sum: feeAmount).fixedFraction(digits: 8)) BTC) plus donation (\(donationAmount) BTC)", -2)
+                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation (\(donationAmount) BTC)", -2)
             } else {
                 sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
                 changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2903DBF32668295CED1C9139 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7304C17824311A19240183E0 /* Pods_Multy.framework */; };
 		440AD8D22020D1220015AEF1 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */; };
+		447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447ECAD220330C2C0085C26D /* TransactionDTO.swift */; };
 		4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */; };
 		4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */; };
 		45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */; };
@@ -188,6 +189,7 @@
 
 /* Begin PBXFileReference section */
 		440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		447ECAD220330C2C0085C26D /* TransactionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDTO.swift; sourceTree = "<group>"; };
 		4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsPresenter.swift; sourceTree = "<group>"; };
 		4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
 		45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSeedPhraseView.swift; sourceTree = "<group>"; };
@@ -899,6 +901,7 @@
 			isa = PBXGroup;
 			children = (
 				45E215DA1FD15D5F0078945A /* DonationDTO.swift */,
+				447ECAD220330C2C0085C26D /* TransactionDTO.swift */,
 				45E7A8A520065455005D2D6E /* StockExchanges.swift */,
 			);
 			path = PONSO;
@@ -1317,6 +1320,7 @@
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
 				45B5CCA91FDAC0B00069BD46 /* TextTableViewCell.swift in Sources */,
 				FA4D43DD1FC581CF003C7117 /* DMSocketExtension.swift in Sources */,
+				447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */,
 				FA4D43DF1FC58730003C7117 /* TouchIDAuthentication.swift in Sources */,
 				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,

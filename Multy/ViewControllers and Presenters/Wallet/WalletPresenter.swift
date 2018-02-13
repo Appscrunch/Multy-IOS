@@ -12,6 +12,7 @@ class WalletPresenter: NSObject {
     var wallet : UserWalletRLM? {
         didSet {
             mainVC?.titleLbl.text = self.wallet?.name
+            mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
             blockedAmount = wallet!.calculateBlockedAmount()
 //            updateWalletInfo()
         }

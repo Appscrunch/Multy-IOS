@@ -84,7 +84,9 @@ class AssetsPresenter: NSObject {
     }
     
     func updateWalletsInfo() {
+        assetsVC!.progressHUD.show()
         DataManager.shared.getAccount { (acc, err) in
+            self.assetsVC!.progressHUD.hide()
             if acc != nil {
                 self.account = acc
                 self.getWalletsVerbose(completion: {_ in })
