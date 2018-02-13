@@ -69,7 +69,7 @@ class ReceiveAllDetailsViewController: UIViewController {
         let chainName = "bitcoin"
         let dict: NSDictionary = ["$og_title" : "Multy",
                                   "address"   : "\(chainName):\(presenter.walletAddress)",
-                                  "amount"    : presenter.cryptoSum ?? 0.0]
+                                  "amount"    : presenter.cryptoSum?.fixedFraction(digits: 8) ?? "0.0"]
         
         return dict
     }

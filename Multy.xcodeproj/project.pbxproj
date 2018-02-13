@@ -20,6 +20,10 @@
 		4522905A1FBB18D30024B550 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452290581FBB18D30024B550 /* Main.storyboard */; };
 		4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4522905B1FBB18D30024B550 /* Assets.xcassets */; };
 		4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */; };
+		4540944A2031EEFD00603DB5 /* SecuritySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */; };
+		4540944C2031EF1600603DB5 /* SecuritySettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */; };
+		4540944E2032E92F00603DB5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4540944D2032E92F00603DB5 /* Settings.storyboard */; };
+		454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540944F2033236B00603DB5 /* ResetAllDataViewController.swift */; };
 		454A9D7C20067E530035966F /* HistoryRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A9D7B20067E530035966F /* HistoryRLM.swift */; };
 		455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455126BB1FE04AAD0026A892 /* AddressViewController.swift */; };
 		455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */; };
@@ -202,6 +206,10 @@
 		4522905E1FBB18D30024B550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		452290601FBB18D30024B550 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4526F8DD2015383D00D2E491 /* Multy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Multy.entitlements; sourceTree = "<group>"; };
+		454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsViewController.swift; sourceTree = "<group>"; };
+		4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsPresenter.swift; sourceTree = "<group>"; };
+		4540944D2032E92F00603DB5 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		4540944F2033236B00603DB5 /* ResetAllDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetAllDataViewController.swift; sourceTree = "<group>"; };
 		454A9D7B20067E530035966F /* HistoryRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRLM.swift; sourceTree = "<group>"; };
 		455126BB1FE04AAD0026A892 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingAnimationViewController.swift; sourceTree = "<group>"; };
@@ -456,6 +464,24 @@
 				FA86A74E1FC2C806002826EC /* Multy-Bridging-Header.h */,
 			);
 			path = Multy;
+			sourceTree = "<group>";
+		};
+		454094482031EED500603DB5 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */,
+				4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */,
+				454094512033308600603DB5 /* ResetData */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+		454094512033308600603DB5 /* ResetData */ = {
+			isa = PBXGroup;
+			children = (
+				4540944F2033236B00603DB5 /* ResetAllDataViewController.swift */,
+			);
+			path = ResetData;
 			sourceTree = "<group>";
 		};
 		455CDCED1FC8338100EA5ACE /* Sending Animation */ = {
@@ -799,6 +825,7 @@
 			children = (
 				45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */,
 				45B0B0F11FEBF326005BB1C0 /* SettingsPresenter.swift */,
+				454094482031EED500603DB5 /* Security */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -832,6 +859,7 @@
 				45A9491B1FC2D8C9003C3A23 /* Receive.storyboard */,
 				FA4D43E61FC5C2A6003C7117 /* Wallet.storyboard */,
 				45A949301FC582BC003C3A23 /* Send.storyboard */,
+				4540944D2032E92F00603DB5 /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1174,6 +1202,7 @@
 				45DCF9CE1FE139C9005A9896 /* WalletAddressTableViewCell.xib in Resources */,
 				45A9491C1FC2D8C9003C3A23 /* Receive.storyboard in Resources */,
 				4522905A1FBB18D30024B550 /* Main.storyboard in Resources */,
+				4540944E2032E92F00603DB5 /* Settings.storyboard in Resources */,
 				45A949581FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib in Resources */,
 				FA4E559D1FDFE47D000FA1A1 /* SeedPhrase.storyboard in Resources */,
 				4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */,
@@ -1365,6 +1394,7 @@
 				FACEB5A1200A46F600055788 /* TransactionPendingCell.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChoooseViewController.swift in Sources */,
 				45C8D1452007EACE00F5994E /* TxHistoryRLM.swift in Sources */,
+				4540944C2031EF1600603DB5 /* SecuritySettingsPresenter.swift in Sources */,
 				FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */,
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
@@ -1384,9 +1414,11 @@
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
 				FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */,
 				45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */,
+				4540944A2031EEFD00603DB5 /* SecuritySettingsViewController.swift in Sources */,
 				45F6340C202388DF00C17A7C /* ViewInBlockchainViewController.swift in Sources */,
 				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
+				454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */,
 				45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */,
 				FA4D43F61FC5D019003C7117 /* MainWalletCollectionViewCell.swift in Sources */,
 				455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */,
