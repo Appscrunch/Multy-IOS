@@ -1,4 +1,4 @@
-/* Copyright 2017 by Multy.io
+/* Copyright 2018 by Multy.io
  * Licensed under Multy.io license.
  *
  * See LICENSE for details
@@ -17,7 +17,7 @@ struct CoinType
 
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 
-CoinType CointTypes[] = {
+struct CoinType CointTypes[] = {
         {0x80000000, "Bitcoin"},
         {0x80000001, "Testnet (all coins)"},
         {0x80000002, "Litecoin"},

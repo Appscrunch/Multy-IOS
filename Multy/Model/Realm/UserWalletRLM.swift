@@ -166,6 +166,24 @@ class UserWalletRLM: Object {
         return sum
     }
     
+    func blockedAmount(for transaction: HistoryRLM) -> UInt32 {
+        var sum = UInt32(0)
+        
+        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+            sum += transaction.txOutAmount.uint32Value
+        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+            let addresses = self.fetchAddresses()
+            
+            for tx in transaction.txOutputs {
+                if addresses.contains(tx.address) {
+                    sum += tx.amount.uint32Value
+                }
+            }
+        }
+        
+        return sum
+    }
+    
     func isTherePendingAmount() -> Bool {
         for address in self.addresses {
             for out in address.spendableOutput {

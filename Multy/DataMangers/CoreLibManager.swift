@@ -148,7 +148,7 @@ class CoreLibManager: NSObject {
         walletDict["walletID"] = walletID
         walletDict["addressID"] = UInt32(0)
         
-        let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil
         if gaas != nil {
             print("Cannot get address string: \(String(describing: gaas))")
@@ -159,8 +159,8 @@ class CoreLibManager: NSObject {
             walletDict["address"] = addressString!
         }
         
-        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
-        let gakPUBL = get_account_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
         
         let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
         let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
@@ -218,7 +218,7 @@ class CoreLibManager: NSObject {
             return nil
         }
         
-        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
         if gakPRIV != nil {
             let _ = returnErrorString(opaquePointer: gakPRIV!, mask: "gakPRIV")
             
@@ -271,7 +271,7 @@ class CoreLibManager: NSObject {
         addressDict["addressIndex"] = addressID
         addressDict["addressPointer"] = newAddressPointer.pointee
         
-        let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil
         if gaas != nil {
             print("Cannot get address string: \(String(describing: gaas))")
@@ -282,8 +282,8 @@ class CoreLibManager: NSObject {
             addressDict["address"] = addressString!
         }
         
-        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
-        let gakPUBL = get_account_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
         
         let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
         let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
@@ -333,14 +333,14 @@ class CoreLibManager: NSObject {
         let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_EXTERNAL, 0, newAddressPointer)
         print("mHDla: \(String(describing: mHDla))")
         
-        let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
         print("gaas: \(String(describing: gaas))")
         let addressString = String(cString: newAddressStringPointer.pointee!)
         
         print("addressString: \(addressString)")
         
-        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
-        let gakPUBL = get_account_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
         
         let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
         let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
@@ -354,7 +354,7 @@ class CoreLibManager: NSObject {
         print("publicKeyString: \(publicKeyString)")
         
         let currencyPointer = UnsafeMutablePointer<Currency>.allocate(capacity: 1)
-        let gac = get_account_currency(newAddressPointer.pointee, currencyPointer)
+        let gac = account_get_currency(newAddressPointer.pointee, currencyPointer)
         print("gac: \(gac)")
         
         let currency : Currency = currencyPointer.pointee
@@ -393,7 +393,7 @@ class CoreLibManager: NSObject {
             let _ = returnErrorString(opaquePointer: tet!, mask: "transaction_estimate_total_fee")
         }
         
-        let ats = amount_to_string(estimate.pointee, amountStringPointer)
+        let ats = big_int_to_string(estimate.pointee, amountStringPointer)
         if ats != nil {
             let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
         }
@@ -453,7 +453,7 @@ class CoreLibManager: NSObject {
                 let _ = returnErrorString(opaquePointer: tet!, mask: "transaction_estimate_total_fee")
             }
             
-            let ats = amount_to_string(estimate.pointee, amountStringPointer)
+            let ats = big_int_to_string(estimate.pointee, amountStringPointer)
             if ats != nil {
                 let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
             }
@@ -601,16 +601,16 @@ class CoreLibManager: NSObject {
             return (errrString, -1)
         }
         
-        let tSign = transaction_sign(transactionPointer.pointee)
-        
-        if tSign != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(tSign)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            print("tSign: \(errrString))")
-            
-            return (errrString, -1)
-        }
+//        let tSign = transaction_sign(transactionPointer.pointee)
+//
+//        if tSign != nil {
+//            let pointer = UnsafeMutablePointer<CustomError>(tSign)
+//            let errrString = String(cString: pointer!.pointee.message)
+//
+//            print("tSign: \(errrString))")
+//
+//            return (errrString, -1)
+//        }
         
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
         
@@ -623,7 +623,7 @@ class CoreLibManager: NSObject {
             return (errrString, -1)
         }
         
-        print("\(tu) -- \(tSign) -- \(tSer)")
+        print("\(tu) -- \(tSer)")
         
         let data = serializedTransaction.pointee!.pointee.convertToData()
         let str = data.hexEncodedString()
@@ -634,7 +634,7 @@ class CoreLibManager: NSObject {
         let tgtf = transaction_get_total_fee(transactionPointer.pointee, totalSumPointer)
         let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let ats = amount_to_string(totalSumPointer.pointee, amountStringPointer)
+        let ats = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
         if ats != nil {
             let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
         }
@@ -769,14 +769,14 @@ class CoreLibManager: NSObject {
             print("tu: \(errrString))")
         }
         
-        let tSign = transaction_sign(transactionPointer.pointee)
-        
-        if tSign != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(tSign)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            print("tSign: \(errrString))")
-        }
+//        let tSign = transaction_sign(transactionPointer.pointee)
+//
+//        if tSign != nil {
+//            let pointer = UnsafeMutablePointer<CustomError>(tSign)
+//            let errrString = String(cString: pointer!.pointee.message)
+//
+//            print("tSign: \(errrString))")
+//        }
         
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
         
@@ -787,7 +787,7 @@ class CoreLibManager: NSObject {
             print("tSer: \(errrString))")
         }
         
-        print("\(tu) -- \(tSign) -- \(tSer)")
+        print("\(tu) -- \(tSer)")
         
         let data = serializedTransaction.pointee!.pointee.convertToData()
         let str = data.hexEncodedString()
@@ -798,7 +798,7 @@ class CoreLibManager: NSObject {
         let tgtf = transaction_get_total_fee(transactionPointer.pointee, totalSumPointer)
         let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let ats = amount_to_string(totalSumPointer.pointee, amountStringPointer)
+        let ats = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
         if ats != nil {
             let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
         }
@@ -817,9 +817,9 @@ class CoreLibManager: NSObject {
         let newAmount = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let ma = make_amount(amount, newAmount)
-        let ats = amount_to_string(newAmount.pointee, amountStringPointer)
-        let asv = amount_set_value(newAmount.pointee, anotherAmount)
+        let ma = make_big_int(amount, newAmount)
+        let ats = big_int_to_string(newAmount.pointee, amountStringPointer)
+        let asv = big_int_set_value(newAmount.pointee, anotherAmount)
 //        free_amount(newAmount.pointee)
         print("amountActivity: \(ma) -- \(ats) -- \(asv)")
     }
@@ -893,7 +893,7 @@ class CoreLibManager: NSObject {
         
         //Create wallet
         
-        let gaas = get_account_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil
         if gaas != nil {
             print("Cannot get address string: \(String(describing: gaas))")
@@ -902,8 +902,8 @@ class CoreLibManager: NSObject {
             print("addressString: \(addressString!)")
         }
         
-        let gakPRIV = get_account_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
-        let gakPUBL = get_account_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
         
         let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
         let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
@@ -912,7 +912,7 @@ class CoreLibManager: NSObject {
         
         
         let currencyPointer = UnsafeMutablePointer<Currency>.allocate(capacity: 1)
-        let gac = get_account_currency(newAddressPointer.pointee, currencyPointer)
+        let gac = account_get_currency(newAddressPointer.pointee, currencyPointer)
         print("gac: \(gac)")
         
         let currency : Currency = currencyPointer.pointee
@@ -939,9 +939,9 @@ class CoreLibManager: NSObject {
         let amountValue = value.UTF8CStringPointer
         
         let amountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let _ = make_amount(amountValue, amountPointer)
+        let _ = make_big_int(amountValue, amountPointer)
         
-        let psav = properties_set_amount_value(pointer, amountKey, amountPointer.pointee)
+        let psav = properties_set_big_int_value(pointer, amountKey, amountPointer.pointee)
         
         if psav != nil {
             let pointer = UnsafeMutablePointer<CustomError>(psav)

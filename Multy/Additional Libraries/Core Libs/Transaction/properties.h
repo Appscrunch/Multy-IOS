@@ -1,13 +1,13 @@
-/* Copyright 2017 by Multy.io
+/* Copyright 2018 by Multy.io
  * Licensed under Multy.io license.
  *
  * See LICENSE for details
  */
 
-#ifndef MULTY_TRANSACTION_PROPERTIES_H
-#define MULTY_TRANSACTION_PROPERTIES_H
+#ifndef MULTY_CORE_PROPERTIES_H
+#define MULTY_CORE_PROPERTIES_H
 
-#include "api_transaction.h"
+#include "api.h"
 
 #include <stdint.h>
 
@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-struct Amount;
+struct BigInt;
 struct BinaryData;
 struct PrivateKey;
 struct Properties;
@@ -41,7 +41,7 @@ struct Properties;
  * @param value - int to set as value.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_set_int32_value(
+MULTY_CORE_API struct Error* properties_set_int32_value(
         struct Properties* properties, const char* name, int32_t value);
 
 /** Set property string value.
@@ -52,21 +52,21 @@ MULTY_TRANSACTION_API struct Error* properties_set_int32_value(
  * @param value - string to set as value.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_set_string_value(
+MULTY_CORE_API struct Error* properties_set_string_value(
         struct Properties* properties, const char* name, const char* value);
 
-/** Set property Amount value.
+/** Set property BigInt value.
  *
- * Sets property value to a copy of given Amount.
+ * Sets property value to a copy of given BigInt.
  * @param properties - non null valid properties object.
  * @param name - name of the property to reset.
- * @param value - Amount to set as value.
+ * @param value - BigInt to set as value.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_set_amount_value(
+MULTY_CORE_API struct Error* properties_set_big_int_value(
         struct Properties* properties,
         const char* name,
-        const struct Amount* value);
+        const struct BigInt* value);
 
 /** Set property BinaryData value.
  *
@@ -76,7 +76,7 @@ MULTY_TRANSACTION_API struct Error* properties_set_amount_value(
  * @param value - BinaryData to set as value.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_set_binary_data_value(
+MULTY_CORE_API struct Error* properties_set_binary_data_value(
         struct Properties* properties,
         const char* name,
         const struct BinaryData* value);
@@ -89,7 +89,7 @@ MULTY_TRANSACTION_API struct Error* properties_set_binary_data_value(
  * @param value - private key to set as value.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_set_private_key_value(
+MULTY_CORE_API struct Error* properties_set_private_key_value(
         struct Properties* properties,
         const char* name,
         const struct PrivateKey* value);
@@ -102,7 +102,7 @@ MULTY_TRANSACTION_API struct Error* properties_set_private_key_value(
  * @param name - name of the property to reset.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_reset_value(
+MULTY_CORE_API struct Error* properties_reset_value(
         struct Properties* properties, const char* name);
 
 /** Validate properties instance.
@@ -111,7 +111,7 @@ MULTY_TRANSACTION_API struct Error* properties_reset_value(
  * @param properties - non null valid properties object.
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_validate(
+MULTY_CORE_API struct Error* properties_validate(
         const struct Properties* properties);
 
 /** Get properties specification string.
@@ -121,11 +121,11 @@ MULTY_TRANSACTION_API struct Error* properties_validate(
  * @param out_specification - specification string, must be freed with free_string().
  * @return null if no error, Error object otherwise.
  */
-MULTY_TRANSACTION_API struct Error* properties_get_specification(
+MULTY_CORE_API struct Error* properties_get_specification(
         const struct Properties* properties, const char** out_specification);
 
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
 
-#endif /* MULTY_TRANSACTION_PROPERTIES_H */
+#endif /* MULTY_CORE_PROPERTIES_H */

@@ -77,14 +77,14 @@ class WalletPresenter: NSObject {
     }
     
     func isTherePendingMoney(for indexPath: IndexPath) -> Bool {
-        return blockedAmount(for: historyArray[indexPath.row - 1]) > 0
+        return wallet!.blockedAmount(for: historyArray[indexPath.row - 1]) > 0
     }
     
     func getNumberOfPendingTransactions() -> Int {
         var count = 0
         
         for transaction in historyArray {
-            if blockedAmount(for: transaction) > 0 {
+            if wallet!.blockedAmount(for: transaction) > 0 {
                 count += 1
             }
         }
@@ -143,22 +143,4 @@ class WalletPresenter: NSObject {
 //
 //        return sum
 //    }
-
-    func blockedAmount(for transaction: HistoryRLM) -> UInt32 {
-        var sum = UInt32(0)
-
-        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += transaction.txOutAmount.uint32Value
-        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-            let addresses = wallet!.fetchAddresses()
-
-            for tx in transaction.txOutputs {
-                if addresses.contains(tx.address) {
-                    sum += tx.amount.uint32Value
-                }
-            }
-        }
-
-        return sum
-    }
 }
