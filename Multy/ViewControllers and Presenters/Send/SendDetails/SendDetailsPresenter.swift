@@ -9,9 +9,6 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var sendDetailsVC: SendDetailsViewController?
     var transactionDTO = TransactionDTO()
-    
-//    var choosenWallet: UserWalletRLM?
-    var walletAddresses: List<AddressRLM>?
     var historyArray : List<HistoryRLM>? {
         didSet {
             self.blockedAmount = calculateBlockedAmount()
@@ -43,7 +40,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
 
     var customFee = UInt32(20)
     
-    var feeRate: NSDictionary?{
+    var feeRate: NSDictionary? {
         didSet {
             sendDetailsVC?.tableView.reloadData()
         }
@@ -92,7 +89,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 0:
             self.transactionObj.speedName = "Very Fast"
             self.transactionObj.speedTimeString = "∙ 10 minutes"
-            self.transactionObj.sumInCrypto = 0.0001
+            self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "BTC"
             self.transactionObj.fiatName = "USD"
@@ -100,7 +97,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 1:
             self.transactionObj.speedName = "Fast"
             self.transactionObj.speedTimeString = "∙ 6 hour"
-            self.transactionObj.sumInCrypto = 0.0001
+            self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "BTC"
             self.transactionObj.fiatName = "USD"
@@ -108,7 +105,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 2:
             self.transactionObj.speedName = "Medium"
             self.transactionObj.speedTimeString = "∙ 5 days"
-            self.transactionObj.sumInCrypto = 0.0001
+            self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "BTC"
             self.transactionObj.fiatName = "USD"
@@ -116,7 +113,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 3:
             self.transactionObj.speedName = "Slow"
             self.transactionObj.speedTimeString = "∙ 1 week"
-            self.transactionObj.sumInCrypto = 0.0001
+            self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "BTC"
             self.transactionObj.fiatName = "USD"
@@ -124,7 +121,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 4:
             self.transactionObj.speedName = "Very Slow"
             self.transactionObj.speedTimeString = "∙ 2 weeks"
-            self.transactionObj.sumInCrypto = 0.0001
+            self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "BTC"
             self.transactionObj.fiatName = "USD"

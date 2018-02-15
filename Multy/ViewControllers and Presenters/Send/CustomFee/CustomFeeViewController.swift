@@ -44,10 +44,10 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func cancelAtion(_ sender: Any) {
+    @IBAction func cancelAction(_ sender: Any) {
         //for BTC
-        if topPriceTf.text == nil || (topPriceTf.text! as NSString).intValue == 0 {
-            let message = "Value cannot be zero"
+        if topPriceTf.text == nil || (topPriceTf.text! as NSString).intValue < 2 {
+            let message = "Value should be greater than 1"
             let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                 self.topPriceTf.becomeFirstResponder()

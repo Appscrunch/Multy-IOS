@@ -15,7 +15,6 @@ class WalletChooseViewController: UIViewController {
         self.registerCell()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.presenter.walletChoooseVC = self
-//        self.presenter.createWallets()
         self.presenter.getWallets()
     }
     
@@ -32,8 +31,6 @@ class WalletChooseViewController: UIViewController {
         if segue.identifier == "sendDetailsVC" {
             let detailsVC = segue.destination as! SendDetailsViewController
             presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
-//            detailsVC.presenter.addressToStr = self.presenter.addressToStr
-//            detailsVC.presenter.amountFromQr = self.presenter.amountFromQr
             detailsVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }

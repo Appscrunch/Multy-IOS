@@ -97,26 +97,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
                 self.presentAlert()
             }
         }
-        
-//        DataManager.shared.addAddress(presenter.account!.token, params: newAddressParams) { (dict, error) in
-//            if error != nil {
-//
-//
-//                return
-//            }
-//
-//            let params = [
-//                "transaction" : self.presenter.rawTransaction!
-//                ] as [String : Any]
-//
-//            DataManager.shared.apiManager.sendRawTransaction(self.presenter.account!.token,
-//                                                             walletID: self.presenter.walletFrom!.walletID,
-//                                                             transactionParameters: params,
-//                                                             completion: { (dict, error) in
-//                                                                print("---------\(dict)")
-//                                                                self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
-//            })
-//        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

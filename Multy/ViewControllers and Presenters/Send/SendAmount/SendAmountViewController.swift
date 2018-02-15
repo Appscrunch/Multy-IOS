@@ -298,18 +298,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendFinishVC" {
             let sendFinishVC = segue.destination as! SendFinishViewController
-//            sendFinishVC.presenter.addressToStr =   presenter.addressToStr
-//            sendFinishVC.presenter.walletFrom =     presenter.wallet
-//            sendFinishVC.presenter.sumInFiat =      presenter.sumInFiat
-            sendFinishVC.presenter.cryptoName =     presenter.cryptoName
-            sendFinishVC.presenter.fiatName =       presenter.fiatName
-//            sendFinishVC.presenter.transactionObj = presenter.transactionObj
-//            sendFinishVC.presenter.sumInCrypto =    presenter.sumInCrypto
             sendFinishVC.presenter.isCrypto =       presenter.isCrypto
-//            sendFinishVC.presenter.endSum =         presenter.getNextBtnSum ()
-//            sendFinishVC.presenter.rawTransaction = presenter.rawTransaction
-//            sendFinishVC.presenter.account =        presenter.account
-//            sendFinishVC.presenter.addressData =    presenter.addressData
             
             presenter.transactionDTO.sendAmount = presenter.sumInCrypto
             presenter.transactionDTO.transaction?.newChangeAddress = presenter.addressData!["address"] as? String

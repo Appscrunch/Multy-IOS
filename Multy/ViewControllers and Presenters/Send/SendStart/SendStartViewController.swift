@@ -100,17 +100,12 @@ class SendStartViewController: UIViewController {
         switch segue.identifier {
         case "chooseWalletVC"?:
             let chooseWalletVC = segue.destination as! WalletChooseViewController
-//            chooseWalletVC.presenter.addressToStr = self.presenter.addressSendTo
-//            chooseWalletVC.presenter.amountFromQr = self.presenter.amountInCrypto
             chooseWalletVC.presenter.transactionDTO = presenter.transactionDTO
         case "qrCamera"?:
             let qrScanerVC = segue.destination as! QrScannerViewController
             qrScanerVC.qrDelegate = self.presenter
         case "transactionDetail"?:
             let sendDetailsVC = segue.destination as! SendDetailsViewController
-//            sendDetailsVC.presenter.choosenWallet = self.presenter.choosenWallet
-//            sendDetailsVC.presenter.addressToStr = self.presenter.addressSendTo
-//            sendDetailsVC.presenter.amountFromQr = self.presenter.amountInCrypto
             sendDetailsVC.presenter.transactionDTO = presenter.transactionDTO
         default: break
         }

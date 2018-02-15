@@ -116,31 +116,4 @@ class WalletPresenter: NSObject {
 //            self.mainVC?.updateUI()
         }
     }
-    
-//    func calculateBlockedAmount() -> UInt32 {
-//        var sum = UInt32(0)
-//
-//        if wallet == nil {
-//            return sum
-//        }
-//
-//        if historyArray.count == 0 {
-//            return sum
-//        }
-//
-////        for address in wallet!.addresses {
-////            for out in address.spendableOutput {
-////                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-////                    sum += out.transactionOutAmount.uint32Value
-////                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-////                    out.
-////                }
-////            }
-////        }
-//        for history in historyArray {
-//            sum += blockedAmount(for: history)
-//        }
-//
-//        return sum
-//    }
 }

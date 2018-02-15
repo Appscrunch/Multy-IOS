@@ -8,13 +8,6 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     
     var sendStartVC: SendStartViewController?
     var transactionDTO = TransactionDTO()
-    
-//    var addressSendTo = ""
-    
-//    var amountInCrypto = 0.0
-    
-//    var choosenWallet: UserWalletRLM?
-    
     var isFromWallet = false
     
     func cancelAction() {

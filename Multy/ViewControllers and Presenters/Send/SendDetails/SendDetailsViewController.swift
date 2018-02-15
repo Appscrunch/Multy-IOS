@@ -247,15 +247,6 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendAmountVC" {
             let sendAmountVC = segue.destination as! SendAmountViewController
-//            sendAmountVC.presenter.wallet = self.presenter.choosenWallet
-//            sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
-//            sendAmountVC.presenter.donationObj = self.presenter.donationObj
-//            sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
-//            sendAmountVC.presenter.historyArray = self.presenter.historyArray
-//            sendAmountVC.presenter.customFee = presenter.customFee
-//            if self.presenter.amountFromQr != nil {
-//                sendAmountVC.presenter.sumInCrypto = self.presenter.amountFromQr!
-//            }
             
             presenter.transactionDTO.transaction!.donationDTO = presenter.donationObj
             presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj
@@ -302,6 +293,7 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             if trueCells[indexPath.row].checkMarkImage.isHidden == false {
                 trueCells[indexPath.row].checkMarkImage.isHidden = true
                 self.presenter.selectedIndexOfSpeed = nil
+                
                 return
             }
             for cell in trueCells {
