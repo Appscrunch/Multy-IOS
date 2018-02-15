@@ -294,7 +294,7 @@ class WalletViewController: UIViewController {
     @IBAction func sendAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Send", bundle: nil)
         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
-        sendStartVC.presenter.choosenWallet = self.presenter.wallet
+        sendStartVC.presenter.transactionDTO.choosenWallet = self.presenter.wallet
         sendStartVC.presenter.isFromWallet = true
         self.navigationController?.pushViewController(sendStartVC, animated: true)
     }
@@ -374,6 +374,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             return headerCell
         } else {                           //  Wallet Cellx
             let countOfHistObjs = self.presenter.numberOfTransactions()
+            
+            if indexPath.row <= countOfHistObjs && presenter.historyArray[indexPath.row - 1].txStatus.uint32Value == 1 {
+                print(presenter.historyArray[indexPath.row - 1])
+            }
             
             if indexPath.row <= countOfHistObjs && presenter.isTherePendingMoney(for: indexPath) {
                 let walletCell = tableView.dequeueReusableCell(withIdentifier: "TransactionPendingCellID") as! TransactionPendingCell

@@ -209,4 +209,3 @@ class AssetsPresenter: NSObject {
         DataManager.shared.coreLibManager.testTransaction(from: &binData, wallet: account!.wallets[0])
     }
 }
-

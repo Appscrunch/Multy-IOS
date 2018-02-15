@@ -194,7 +194,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if (string != "," || string != ".") && ((self.donationTF.text! + string) as NSString).doubleValue > (self.presenter.choosenWallet?.sumInCrypto)! {
+        if (string != "," || string != ".") && ((self.donationTF.text! + string) as NSString).doubleValue > presenter.transactionDTO.choosenWallet!.sumInCrypto {
             if string != "" {
                 self.presentWarning(message: "You trying to enter sum more then you have")
                 return false
@@ -247,16 +247,22 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendAmountVC" {
             let sendAmountVC = segue.destination as! SendAmountViewController
-            sendAmountVC.presenter.wallet = self.presenter.choosenWallet
-            sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
-            sendAmountVC.presenter.donationObj = self.presenter.donationObj
-            sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
-            sendAmountVC.presenter.walletAddresses = self.presenter.walletAddresses
-            sendAmountVC.presenter.historyArray = self.presenter.historyArray
-            sendAmountVC.presenter.customFee = presenter.customFee
-            if self.presenter.amountFromQr != nil {
-                sendAmountVC.presenter.sumInCrypto = self.presenter.amountFromQr!
-            }
+//            sendAmountVC.presenter.wallet = self.presenter.choosenWallet
+//            sendAmountVC.presenter.addressToStr = self.presenter.addressToStr
+//            sendAmountVC.presenter.donationObj = self.presenter.donationObj
+//            sendAmountVC.presenter.transactionObj = self.presenter.trasactionObj
+//            sendAmountVC.presenter.historyArray = self.presenter.historyArray
+//            sendAmountVC.presenter.customFee = presenter.customFee
+//            if self.presenter.amountFromQr != nil {
+//                sendAmountVC.presenter.sumInCrypto = self.presenter.amountFromQr!
+//            }
+            
+            presenter.transactionDTO.transaction!.donationDTO = presenter.donationObj
+            presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj
+            presenter.transactionDTO.transaction!.historyArray = presenter.historyArray
+            presenter.transactionDTO.transaction!.customFee = presenter.customFee
+            
+            sendAmountVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
 }
@@ -307,7 +313,7 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             self.isCustom = true
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
-            customVC.presenter.chainId = self.presenter.choosenWallet?.chain
+            customVC.presenter.chainId = self.presenter.transactionDTO.choosenWallet!.chain
             customVC.delegate = self.presenter
             customVC.rate = Int(self.presenter.customFee)
             self.presenter.selectedIndexOfSpeed = indexPath.row

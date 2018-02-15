@@ -4,11 +4,11 @@
 
 import UIKit
 
-class WalletChoooseViewController: UIViewController {
+class WalletChooseViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let presenter = WalletChooosePresenter()
+    let presenter = WalletChoosePresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +31,10 @@ class WalletChoooseViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendDetailsVC" {
             let detailsVC = segue.destination as! SendDetailsViewController
-            detailsVC.presenter.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
-            detailsVC.presenter.addressToStr = self.presenter.addressToStr
-            detailsVC.presenter.amountFromQr = self.presenter.amountFromQr
+            presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
+//            detailsVC.presenter.addressToStr = self.presenter.addressToStr
+//            detailsVC.presenter.amountFromQr = self.presenter.amountFromQr
+            detailsVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
     
@@ -44,7 +45,7 @@ class WalletChoooseViewController: UIViewController {
     }
 }
 
-extension WalletChoooseViewController: UITableViewDelegate, UITableViewDataSource {
+extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -67,8 +68,8 @@ extension WalletChoooseViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.amountFromQr != nil {
-            if presenter.walletsArr[indexPath.row].sumInCrypto < presenter.amountFromQr! {
+        if presenter.transactionDTO.sendAmount != nil {
+            if presenter.walletsArr[indexPath.row].sumInCrypto < presenter.transactionDTO.sendAmount! {
                 presenter.presentAlert()
                 
                 return

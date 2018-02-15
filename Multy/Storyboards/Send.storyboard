@@ -124,7 +124,7 @@ This feature will be in the next update.</string>
                         <viewControllerLayoutGuide type="bottom" id="34n-nx-X8l"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XeL-rT-NvT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="511-LX-aXv">
@@ -234,10 +234,10 @@ This feature will be in the next update.</string>
             </objects>
             <point key="canvasLocation" x="1697" y="1046"/>
         </scene>
-        <!--Wallet Chooose View Controller-->
+        <!--Wallet Choose View Controller-->
         <scene sceneID="HO5-Ha-KfH">
             <objects>
-                <viewController id="3gL-lZ-1hN" customClass="WalletChoooseViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3gL-lZ-1hN" customClass="WalletChooseViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9BJ-vZ-ZUf"/>
                         <viewControllerLayoutGuide type="bottom" id="qXe-wl-HWf"/>
@@ -917,7 +917,7 @@ This feature will be in the next update.</string>
                         <viewControllerLayoutGuide type="bottom" id="qEO-HG-hCm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SHc-LJ-IY7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzU-CV-d25">
@@ -1012,7 +1012,7 @@ This feature will be in the next update.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="j2L-wX-UIu">
-                                                <rect key="frame" x="41" y="151.5" width="261" height="33"/>
+                                                <rect key="frame" x="41" y="151.5" width="261.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1232,18 +1232,18 @@ This feature will be in the next update.</string>
                         <viewControllerLayoutGuide type="bottom" id="eBC-rP-NLv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Nih-cX-8L4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="P2z-Fa-KbC">
-                                <rect key="frame" x="128.5" y="274.5" width="117" height="117"/>
+                                <rect key="frame" x="129" y="275" width="117" height="117"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="117" id="bTI-zm-OW7"/>
                                     <constraint firstAttribute="width" constant="117" id="fA0-R2-OVf"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jg-ab-E9W">
-                                <rect key="frame" x="147.5" y="411.5" width="79" height="23.5"/>
+                                <rect key="frame" x="148" y="412" width="79" height="23.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

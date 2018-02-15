@@ -7,12 +7,13 @@ import UIKit
 class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrProtocol, QrDataProtocol {
     
     var sendStartVC: SendStartViewController?
+    var transactionDTO = TransactionDTO()
     
-    var addressSendTo = ""
+//    var addressSendTo = ""
     
-    var amountInCrypto = 0.0
+//    var amountInCrypto = 0.0
     
-    var choosenWallet: UserWalletRLM?
+//    var choosenWallet: UserWalletRLM?
     
     var isFromWallet = false
     
@@ -40,7 +41,7 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     }
     
     func sendAddress(address: String) {
-        self.addressSendTo = address
+        self.transactionDTO.sendAddress = address
         self.sendStartVC?.modifyNextButtonMode()
     }
     
@@ -70,20 +71,20 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         switch array.count {
         case 1:                              // shit in qr
             let messageFromQr = array[0]
-            self.addressSendTo = messageFromQr
+            self.transactionDTO.sendAddress = messageFromQr
             print(messageFromQr)
         case 2:                              // chain name + address
 //            let blockchainName = array[0]
             let addressStr = array[1]
 //            print(blockchainName, addressStr)
-            self.addressSendTo = addressStr
+            self.transactionDTO.sendAddress = addressStr
         case 4:                                // chain name + address + amount
 //            let blockchainName = array[0]
             let addressStr = array[1]
             let amount = array[3]
 //            print(blockchainName, addressStr, amount)
-            self.addressSendTo = addressStr
-            self.amountInCrypto = (amount as NSString).doubleValue
+            self.transactionDTO.sendAddress = addressStr
+            self.transactionDTO.sendAmount = (amount as NSString).doubleValue
         default:
             return
         }

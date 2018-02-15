@@ -5,13 +5,14 @@
 import UIKit
 import RealmSwift
 
-class WalletChooosePresenter: NSObject {
+class WalletChoosePresenter: NSObject {
 
-    var walletChoooseVC: WalletChoooseViewController?
+    var walletChoooseVC: WalletChooseViewController?
+    var transactionDTO = TransactionDTO()
     
     var walletsArr = List<UserWalletRLM>()
-    var addressToStr: String?
-    var amountFromQr: Double?
+//    var addressToStr: String?
+//    var amountFromQr: Double?
     
     var selectedIndex: Int?
     
@@ -47,7 +48,7 @@ class WalletChooosePresenter: NSObject {
     }
     
     func presentAlert() {
-        let message = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals \(self.amountFromQr!.fixedFraction(digits: 8)) BTC"
+        let message = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals \(transactionDTO.sendAmount!.fixedFraction(digits: 8)) BTC"
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             
