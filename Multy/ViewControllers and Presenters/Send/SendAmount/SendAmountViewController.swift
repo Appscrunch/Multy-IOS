@@ -191,7 +191,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func nextAction(_ sender: Any) {
-        if self.presenter.sumInCrypto != 0.0 && self.presenter.donationObj != nil && !amountTF.text!.isEmpty && convertBTCStringToSatoshi(sum: amountTF.text!) != 0 {
+        if self.presenter.sumInCrypto != 0.0 && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty && convertBTCStringToSatoshi(sum: amountTF.text!) != 0 {
             self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
         } else {
             self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
@@ -298,18 +298,15 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendFinishVC" {
             let sendFinishVC = segue.destination as! SendFinishViewController
-            sendFinishVC.presenter.addressToStr =   presenter.addressToStr
-            sendFinishVC.presenter.walletFrom =     presenter.wallet
-            sendFinishVC.presenter.sumInFiat =      presenter.sumInFiat
-            sendFinishVC.presenter.cryptoName =     presenter.cryptoName
-            sendFinishVC.presenter.fiatName =       presenter.fiatName
-            sendFinishVC.presenter.transactionObj = presenter.transactionObj
-            sendFinishVC.presenter.sumInCrypto =    presenter.sumInCrypto
             sendFinishVC.presenter.isCrypto =       presenter.isCrypto
-            sendFinishVC.presenter.endSum =         presenter.getNextBtnSum()
-            sendFinishVC.presenter.rawTransaction = presenter.rawTransaction
-            sendFinishVC.presenter.account =        presenter.account
-            sendFinishVC.presenter.addressData =    presenter.addressData
+            
+            presenter.transactionDTO.sendAmount = presenter.sumInCrypto
+            presenter.transactionDTO.transaction?.newChangeAddress = presenter.addressData!["address"] as? String
+            presenter.transactionDTO.transaction?.rawTransaction = presenter.rawTransaction
+            presenter.transactionDTO.transaction?.transactionRLM = presenter.transactionObj
+            presenter.transactionDTO.transaction?.endSum = presenter.getNextBtnSum()
+            
+            sendFinishVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
     

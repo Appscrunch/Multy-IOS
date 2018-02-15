@@ -1,4 +1,4 @@
-/* Copyright 2017 by Multy.io
+/* Copyright 2018 by Multy.io
  * Licensed under Multy.io license.
  *
  * See LICENSE for details
@@ -21,10 +21,12 @@ extern "C" {
 #    else
 #        define MULTY_TESTS_API
 #    endif
-#elif defined(__GNUC__) && (BUILDING_MULTY_TESTS)
-#    define MULTY_TESTS_API __attribute__ ((visibility ("default")))
-#else
-#    define MULTY_TESTS_API
+#elif defined(__GNUC__)
+#    if (BUILDING_MULTY_TESTS)
+#        define MULTY_TESTS_API __attribute__ ((visibility ("default")))
+#    else
+#        define MULTY_TESTS_API
+#    endif
 #endif
 
 MULTY_TESTS_API int run_tests(int argc, char **argv);

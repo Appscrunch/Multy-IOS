@@ -36,8 +36,9 @@ class FastOperationsPresenter: NSObject, QrDataProtocol {
         
         let storyboard = UIStoryboard(name: "Send", bundle: nil)
         let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
-        destVC.presenter.addressSendTo = self.addressSendTo
-        destVC.presenter.amountInCrypto = self.amountInCrypto
+        destVC.presenter.transactionDTO.sendAddress = self.addressSendTo
+        destVC.presenter.transactionDTO.sendAmount = self.amountInCrypto
+        
         self.fastOperationsVC?.navigationController?.pushViewController(destVC, animated: true)
     }
     

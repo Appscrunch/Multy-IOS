@@ -42,15 +42,15 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.cryptoSumLbl.text = "\(presenter.sumInCrypto?.fixedFraction(digits: 8) ?? "0.0")"
         self.cryptoNamelbl.text = "\(self.presenter.cryptoName ?? "BTC")"
         self.fiatSumAndCurrancyLbl.text = "\(self.presenter.sumInFiat?.fixedFraction(digits: 2) ?? "0.0") \(self.presenter.fiatName ?? "USD")"
-        self.addressLbl.text = self.presenter.addressToStr
-        self.walletNameLbl.text = self.presenter.walletFrom?.name
+        self.addressLbl.text = presenter.transactionDTO.sendAddress
+        self.walletNameLbl.text = presenter.transactionDTO.choosenWallet?.name
         
-        self.walletCryptoSumAndCurrencyLbl.text = "\(self.presenter.walletFrom?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(self.presenter.walletFrom?.cryptoName ?? "")"
-        let fiatSum = ((self.presenter.walletFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
-        self.walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(self.presenter.walletFrom?.fiatName ?? "")"
-        self.transactionFeeCostLbl.text = "\((presenter.transactionObj?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(presenter.transactionObj?.cryptoName ?? "")/\((presenter.transactionObj?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(presenter.transactionObj?.fiatName ?? "")"
-        self.transactionSpeedNameLbl.text = "\(self.presenter.transactionObj?.speedName ?? "") "
-        self.transactionSpeedTimeLbl.text =  "\(self.presenter.transactionObj?.speedTimeString ?? "")"
+        self.walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(presenter.transactionDTO.choosenWallet?.cryptoName ?? "")"
+        let fiatSum = ((presenter.transactionDTO.choosenWallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
+        self.walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet?.fiatName ?? "")"
+        self.transactionFeeCostLbl.text = "\((presenter.transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(presenter.transactionDTO.transaction?.transactionRLM?.cryptoName ?? "")/\((presenter.transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(presenter.transactionDTO.transaction?.transactionRLM?.fiatName ?? "")"
+        self.transactionSpeedNameLbl.text = "\(presenter.transactionDTO.transaction?.transactionRLM?.speedName ?? "") "
+        self.transactionSpeedTimeLbl.text =  "\(presenter.transactionDTO.transaction?.transactionRLM?.speedTimeString ?? "")"
         if self.view.frame.height == 736 {
             self.btnTopConstraint.constant = 105
         }
@@ -66,16 +66,17 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextAction(_ sender: Any) {
+        let wallet = presenter.transactionDTO.choosenWallet!
         let newAddressParams = [
-            "walletindex"   : presenter.walletFrom!.walletID.intValue,
-            "address"       : presenter.addressData!["address"] as! String,
-            "addressindex"  : presenter.walletFrom!.addresses.count,
-            "transaction"   : self.presenter.rawTransaction!,
+            "walletindex"   : wallet.walletID.intValue,
+            "address"       : presenter.transactionDTO.transaction!.newChangeAddress!,
+            "addressindex"  : wallet.addresses.count,
+            "transaction"   : presenter.transactionDTO.transaction!.rawTransaction!,
             "ishd"          : NSNumber(booleanLiteral: true)
             ] as [String : Any]
         
         let params = [
-            "currencyid": presenter.walletFrom!.chain,
+            "currencyid": wallet.chain,
             "payload"   : newAddressParams
             ] as [String : Any]
         
@@ -96,26 +97,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
                 self.presentAlert()
             }
         }
-        
-//        DataManager.shared.addAddress(presenter.account!.token, params: newAddressParams) { (dict, error) in
-//            if error != nil {
-//
-//
-//                return
-//            }
-//
-//            let params = [
-//                "transaction" : self.presenter.rawTransaction!
-//                ] as [String : Any]
-//
-//            DataManager.shared.apiManager.sendRawTransaction(self.presenter.account!.token,
-//                                                             walletID: self.presenter.walletFrom!.walletID,
-//                                                             transactionParameters: params,
-//                                                             completion: { (dict, error) in
-//                                                                print("---------\(dict)")
-//                                                                self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
-//            })
-//        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
