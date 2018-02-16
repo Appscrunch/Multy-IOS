@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletViewController: UIViewController {
+class WalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -64,7 +64,7 @@ class WalletViewController: UIViewController {
         self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
-        
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
 //        progressHUD.backgroundColor = .gray
 //        progressHUD.show()
 //        self.view.addSubview(progressHUD)
@@ -151,6 +151,7 @@ class WalletViewController: UIViewController {
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         self.tableView.isUserInteractionEnabled = false
         self.presenter.getHistoryAndWallet()
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(pullWalletWithChain)\(presenter.wallet?.chain)")
     }
     
     @objc func updateExchange() {
@@ -236,13 +237,16 @@ class WalletViewController: UIViewController {
         let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
         let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
         self.navigationController?.pushViewController(vc, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: backupSeedTap)
     }
     
     @IBAction func closeAction() {
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func settingssAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(settingsWithChainTap)\(presenter.wallet!.chain)")
         self.performSegue(withIdentifier: "settingsVC", sender: sender)
     }
     
@@ -297,6 +301,7 @@ class WalletViewController: UIViewController {
         sendStartVC.presenter.transactionDTO.choosenWallet = self.presenter.wallet
         sendStartVC.presenter.isFromWallet = true
         self.navigationController?.pushViewController(sendStartVC, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(sendWithChainTap)\(presenter.wallet!.chain)")
     }
     
     @IBAction func receiveAction(_ sender: Any) {
@@ -304,9 +309,11 @@ class WalletViewController: UIViewController {
         let receiveDetailsVC = storyboard.instantiateViewController(withIdentifier: "receiveDetails") as! ReceiveAllDetailsViewController
         receiveDetailsVC.presenter.wallet = self.presenter.wallet
         self.navigationController?.pushViewController(receiveDetailsVC, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(receiveWithChainTap)\(presenter.wallet!.chain)")
     }
     
     @IBAction func exchangeAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -456,8 +463,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
-        
+        transactionVC.presenter.chainId = presenter.wallet?.chain as! Int
         self.navigationController?.pushViewController(transactionVC, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

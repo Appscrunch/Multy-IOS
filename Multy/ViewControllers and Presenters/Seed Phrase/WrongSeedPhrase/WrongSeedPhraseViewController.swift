@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WrongSeedPhraseViewController: UIViewController {
+class WrongSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     
     let presenter = WrongSeedPhrasePresenter()
     
@@ -12,6 +12,8 @@ class WrongSeedPhraseViewController: UIViewController {
         super.viewDidLoad()
 
         presenter.mainVC = self
+        sendAnalyticsEvent(screenName: screenFailRestore, eventName: screenFailRestore)
+        sendAnalyticsEvent(screenName: screenFailRestore, eventName: seedBackupFailed)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +32,7 @@ class WrongSeedPhraseViewController: UIViewController {
             } else {
                 self.navigationController?.popToRootViewController(animated: true)
             }
+            self.sendAnalyticsEvent(screenName: screenFailRestore, eventName: cancelTap)
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
@@ -50,5 +53,6 @@ class WrongSeedPhraseViewController: UIViewController {
             let destinationVC = allVCs[allVCs.count - 3]
             self.navigationController?.popToViewController(destinationVC, animated: true)
         }
+        sendAnalyticsEvent(screenName: screenFailRestore, eventName: tryAgainTap)
     }
 }

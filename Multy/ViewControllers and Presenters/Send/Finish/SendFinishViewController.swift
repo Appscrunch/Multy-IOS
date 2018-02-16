@@ -4,7 +4,7 @@
 
 import UIKit
 
-class SendFinishViewController: UIViewController, UITextFieldDelegate {
+class SendFinishViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var cryptoImage: UIImageView!
     @IBOutlet weak var cryptoSumLbl: UILabel!
@@ -36,6 +36,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
         self.noteTF.delegate = self
 
         self.setupUI()
+        sendAnalyticsEvent(screenName: "\(screenSendSummaryWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: "\(screenSendSummaryWithChain)\(presenter.transactionDTO.choosenWallet!.chain)")
     }
     
     func setupUI() {
@@ -58,11 +59,16 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: "\(screenSendSummaryWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: closeTap)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.tabBarController?.selectedIndex = 0
         self.navigationController?.popToRootViewController(animated: false)
+    }
+    
+    @IBAction func addNoteAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenSendSummaryWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: addNoteTap)
     }
     
     @IBAction func nextAction(_ sender: Any) {
@@ -118,6 +124,13 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate {
     func fixUIForX() {
         if screenHeight == heightOfX {
             self.btnTopConstraint.constant = 110
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendingAnimationVC" {
+            let sendAnimationVC = segue.destination as! SendingAnimationViewController
+            sendAnimationVC.chainId = presenter.transactionDTO.choosenWallet!.chain as? Int
         }
     }
 }

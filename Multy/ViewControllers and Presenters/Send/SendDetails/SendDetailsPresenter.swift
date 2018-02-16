@@ -193,6 +193,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         cell.setupUIForBtc()
         self.customFee = UInt32(firstValue)
         self.sendDetailsVC?.tableView.reloadData()
+        sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
     }
     
     //==============================

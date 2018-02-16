@@ -10,7 +10,7 @@ import RAMAnimatedTabBarController
 
 let tabbarSelectedBackground = UIColor(redInt: 3, greenInt: 127, blueInt: 255, alpha: 1.0)
 
-class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControllerDelegate {
+class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControllerDelegate, AnalyticsProtocol {
     
     let presenter = CustomTabBarPresenter()
     // MARK: - View lifecycle
@@ -20,7 +20,7 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.tabBarVC = self
-        
+        self.delegate = self
         setupMiddleButton()
         
         self.loadSplashScreen()
@@ -65,6 +65,7 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     // MARK: - Actions
     
     @objc private func menuButtonAction(sender: UIButton) {
+        sendAnalyticsEvent(screenName: screenMain, eventName: fastOperationsTap)
         previousSelectedIndex = selectedIndex
         setSelectIndex(from: selectedIndex, to: 2)
         changeViewVisibility(isHidden: true)
@@ -74,5 +75,25 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     func changeViewVisibility(isHidden: Bool) {
         self.animationTabBarHidden(isHidden)
         menuButton.isHidden = isHidden
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print(item)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch tabBarController.selectedIndex {
+        case 0:
+            sendAnalyticsEvent(screenName: screenMain, eventName: tabMainTap)
+        case 1:
+            sendAnalyticsEvent(screenName: screenMain, eventName: tabActivityTap)
+//        case 2:
+            // fast operations
+        case 3:
+            sendAnalyticsEvent(screenName: screenMain, eventName: tabContactsTap)
+        case 4:
+            sendAnalyticsEvent(screenName: screenMain, eventName: tabSettingsTap)
+        default: break
+        }
     }
 }

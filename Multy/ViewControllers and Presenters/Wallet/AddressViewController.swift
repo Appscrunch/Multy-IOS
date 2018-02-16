@@ -5,7 +5,7 @@
 import UIKit
 import Branch
 
-class AddressViewController: UIViewController {
+class AddressViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var qrImg: UIImageView!
@@ -67,9 +67,19 @@ class AddressViewController: UIViewController {
             let objectsToShare = [url] as! [String]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+            activityVC.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                if !completed {
+                    // User canceled
+                    return
+                } else {
+                    if let appName = activityType?.rawValue {
+                        self.sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(self.wallet!.chain)", eventName: "\(shareToAppWithChainTap)\(self.wallet!.chain)_\(appName)")
+                    }
+                }
+            }
             self.present(activityVC, animated: true, completion: nil)
         })
-
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(shareWithChainTap)\(wallet!.chain)")
 //        let message = "MULTY \n\nMy \(self.wallet?.cryptoName ?? "") Address: \n\(makeStringWithAddress())"
 //        let objectsToShare = [message] as [String]
 //        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

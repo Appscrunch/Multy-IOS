@@ -4,14 +4,14 @@
 
 import UIKit
 
-class NoInternetConnectionViewController: UIViewController {
+class NoInternetConnectionViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet var backView: UIView!
     @IBOutlet weak var tryAgainBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sendAnalyticsEvent(screenName: screenNoInternet, eventName: screenNoInternet)
     }
     
     override func viewDidLayoutSubviews() {
@@ -26,6 +26,7 @@ class NoInternetConnectionViewController: UIViewController {
     }
     
     @IBAction func tryAgainAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenNoInternet, eventName: checkTap)
         if ConnectionCheck.isConnectedToNetwork() {
             self.dismiss(animated: true, completion: nil)
         } else {

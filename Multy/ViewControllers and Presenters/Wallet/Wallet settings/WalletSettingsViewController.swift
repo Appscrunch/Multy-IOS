@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletSettingsViewController: UIViewController {
+class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     @IBOutlet weak var walletNameTF: UITextField!
     
@@ -22,10 +22,12 @@ class WalletSettingsViewController: UIViewController {
         self.presenter.walletSettingsVC = self
         self.hideKeyboardWhenTappedAround()
         self.updateUI()
+        sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)")
     }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(closeWithChainTap)\(presenter.wallet!.chain)")
     }
     
     func updateUI() {
@@ -36,14 +38,14 @@ class WalletSettingsViewController: UIViewController {
         if presenter.wallet?.sumInCrypto.fixedFraction(digits: 8) == "0" {
             let message = "Are you sure?"
             let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { (action) in
                 self.progressHUD.show()
-                
                 self.presenter.delete()
+                self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(walletDeletedWithChain)\(self.presenter.wallet!.chain)")
             }))
-            
             alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
+                self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(walletDeleteCancelWithChain)\(self.presenter.wallet!.chain)")
             }))
             
             self.present(alert, animated: true, completion: nil)
@@ -53,8 +55,12 @@ class WalletSettingsViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(deleteWithChainTap)\(self.presenter.wallet!.chain)")
     }
     
+    @IBAction func touchInTF(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(renameWithChainTap)\(presenter.wallet!.chain)")
+    }
     @IBAction func changeWalletName(_ sender: Any) {
         if walletNameTF.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             let message = "Wallet name should be non empty"
@@ -63,7 +69,16 @@ class WalletSettingsViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {            
             self.presenter.changeWalletName()
+            sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(saveWithChainTap)\(presenter.wallet!.chain)")
         }
+    }
+    
+    @IBAction func chooseCurrenceAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(fiatWithChainTap)\(presenter.wallet!.chain)")
+    }
+    
+    @IBAction func myPrivateAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(showKeyWithChainTap)\(presenter.wallet!.chain)")
     }
 }
 

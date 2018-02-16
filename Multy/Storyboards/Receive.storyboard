@@ -321,6 +321,21 @@ Book</string>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPh-t6-b7t">
+                                                <rect key="frame" x="99" y="18" width="140" height="141"/>
+                                                <connections>
+                                                    <action selector="qrTapAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="1e5-AW-tdB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ann-9P-bqo">
+                                                <rect key="frame" x="27" y="175" width="290" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="Pvz-ko-cX6"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="addressAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="t5f-oc-q66"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -338,10 +353,13 @@ Book</string>
                                             <constraint firstAttribute="height" constant="434" id="B3G-iD-VJq"/>
                                             <constraint firstItem="Aj5-6E-t5v" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" id="BJz-Mn-AJD"/>
                                             <constraint firstItem="SXI-5J-BlV" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" id="D6L-2j-rsR"/>
+                                            <constraint firstItem="Ann-9P-bqo" firstAttribute="top" secondItem="TcM-XW-eXl" secondAttribute="top" id="DE8-UW-Vhc"/>
                                             <constraint firstItem="d7q-S5-bpY" firstAttribute="trailing" secondItem="SXI-5J-BlV" secondAttribute="trailing" id="F2c-0v-py0"/>
+                                            <constraint firstItem="Ann-9P-bqo" firstAttribute="leading" secondItem="TcM-XW-eXl" secondAttribute="leading" id="Jow-Z1-LD5"/>
                                             <constraint firstAttribute="bottom" secondItem="AXb-Qw-h0b" secondAttribute="bottom" id="LY1-T8-rDW"/>
                                             <constraint firstItem="WPa-6H-9ZB" firstAttribute="centerX" secondItem="SXI-5J-BlV" secondAttribute="centerX" constant="-20" id="N4d-5t-p6f"/>
                                             <constraint firstItem="SXI-5J-BlV" firstAttribute="top" secondItem="6a8-cd-Cp7" secondAttribute="bottom" id="N7L-rc-GLi"/>
+                                            <constraint firstItem="JPh-t6-b7t" firstAttribute="trailing" secondItem="yfh-1j-Y6Q" secondAttribute="trailing" id="NZi-jE-upA"/>
                                             <constraint firstItem="AXb-Qw-h0b" firstAttribute="top" secondItem="6cq-qs-W93" secondAttribute="bottom" constant="-34" id="Noc-xI-POE"/>
                                             <constraint firstItem="fc4-7b-wBs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WdU-vV-Cb8" secondAttribute="leading" constant="5" id="Ood-gv-SR2"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CTc-56-hc2" secondAttribute="trailing" constant="20" id="TPH-vy-yhf"/>
@@ -350,6 +368,7 @@ Book</string>
                                             <constraint firstItem="6a8-cd-Cp7" firstAttribute="leading" secondItem="WdU-vV-Cb8" secondAttribute="leading" id="ank-0A-3Tl"/>
                                             <constraint firstItem="AXb-Qw-h0b" firstAttribute="top" secondItem="Aj5-6E-t5v" secondAttribute="bottom" id="b4C-Up-Uov"/>
                                             <constraint firstItem="TcM-XW-eXl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WdU-vV-Cb8" secondAttribute="leading" constant="20" id="b6f-wK-tb6"/>
+                                            <constraint firstItem="JPh-t6-b7t" firstAttribute="top" secondItem="yfh-1j-Y6Q" secondAttribute="top" id="bDT-zZ-Byv"/>
                                             <constraint firstAttribute="trailing" secondItem="AXb-Qw-h0b" secondAttribute="trailing" constant="6" id="bVZ-bx-wNA"/>
                                             <constraint firstItem="yfh-1j-Y6Q" firstAttribute="centerX" secondItem="WdU-vV-Cb8" secondAttribute="centerX" constant="-3" id="d1s-h9-rAu"/>
                                             <constraint firstItem="Aws-8s-3F6" firstAttribute="trailing" secondItem="d7q-S5-bpY" secondAttribute="trailing" id="e5a-WM-nVM"/>
@@ -358,11 +377,14 @@ Book</string>
                                             <constraint firstItem="L7R-G0-LAB" firstAttribute="top" secondItem="TcM-XW-eXl" secondAttribute="bottom" constant="8" id="htU-xK-C0M"/>
                                             <constraint firstAttribute="bottom" secondItem="Aj5-6E-t5v" secondAttribute="bottom" constant="94" id="koT-5y-B06"/>
                                             <constraint firstItem="6a8-cd-Cp7" firstAttribute="top" secondItem="L7R-G0-LAB" secondAttribute="bottom" constant="14" id="mEo-lF-Rbq"/>
+                                            <constraint firstItem="JPh-t6-b7t" firstAttribute="bottom" secondItem="yfh-1j-Y6Q" secondAttribute="bottom" id="n98-hi-JTe"/>
                                             <constraint firstItem="L7R-G0-LAB" firstAttribute="centerX" secondItem="yfh-1j-Y6Q" secondAttribute="centerX" id="nwK-Dk-bhB"/>
                                             <constraint firstItem="TcM-XW-eXl" firstAttribute="centerX" secondItem="WdU-vV-Cb8" secondAttribute="centerX" id="oGw-TG-0WN"/>
                                             <constraint firstItem="8Fl-G0-iLU" firstAttribute="leading" secondItem="WPa-6H-9ZB" secondAttribute="trailing" constant="5" id="pkH-xf-ZTn"/>
                                             <constraint firstItem="Aj5-6E-t5v" firstAttribute="top" secondItem="SXI-5J-BlV" secondAttribute="bottom" id="pqc-45-DkU"/>
                                             <constraint firstItem="fc4-7b-wBs" firstAttribute="centerX" secondItem="SXI-5J-BlV" secondAttribute="centerX" constant="-30" id="t5e-Cl-qKI"/>
+                                            <constraint firstItem="JPh-t6-b7t" firstAttribute="leading" secondItem="yfh-1j-Y6Q" secondAttribute="leading" id="tqi-cg-JLw"/>
+                                            <constraint firstItem="Ann-9P-bqo" firstAttribute="trailing" secondItem="TcM-XW-eXl" secondAttribute="trailing" id="u5M-KG-ydc"/>
                                             <constraint firstItem="8Fl-G0-iLU" firstAttribute="centerY" secondItem="WPa-6H-9ZB" secondAttribute="centerY" id="ugl-A0-19F"/>
                                             <constraint firstItem="Aws-8s-3F6" firstAttribute="centerY" secondItem="AXb-Qw-h0b" secondAttribute="centerY" id="uih-h1-65d"/>
                                             <constraint firstItem="Aj5-6E-t5v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WPa-6H-9ZB" secondAttribute="bottom" constant="5" id="vkG-6B-huB"/>
@@ -471,6 +493,7 @@ Options</string>
                     </view>
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
+                        <outlet property="addressAction" destination="Ann-9P-bqo" id="zU4-Wz-65h"/>
                         <outlet property="addressLbl" destination="TcM-XW-eXl" id="518-rV-EwW"/>
                         <outlet property="cancelBtn" destination="UQf-gq-ib1" id="Mwv-vl-IpK"/>
                         <outlet property="constraintForSum" destination="e77-4w-Fs0" id="WlQ-ub-GRa"/>

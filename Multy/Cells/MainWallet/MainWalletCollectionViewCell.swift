@@ -5,7 +5,7 @@
 import UIKit
 import RealmSwift
 
-class MainWalletCollectionViewCell: UICollectionViewCell {
+class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
 
     @IBOutlet weak var showAddressesButton : UIButton!
     @IBOutlet weak var cryptoAmountLabel : UILabel!
@@ -85,6 +85,14 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBAction func cryptoAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(cryptoAmountWithChainTap)\(wallet!.chain)")
+    }
+    
+    @IBAction func fiatAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(fiatAmountWithChainTap)\(wallet!.chain)")
+    }
+    
     @IBAction func showAddressAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
         let adressVC = storyboard.instantiateViewController(withIdentifier: "walletAdressVC") as! AddressViewController
@@ -92,6 +100,7 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         adressVC.wallet = self.wallet
 //        self.mainVC.present
         self.mainVC?.present(adressVC, animated: true, completion: nil)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(addressWithChainTap)\(wallet!.chain)")
     }
     
     @IBAction func showAllAddressessAction(_ sender: Any) {
@@ -99,5 +108,6 @@ class MainWalletCollectionViewCell: UICollectionViewCell {
         let adressesVC = storyboard.instantiateViewController(withIdentifier: "walletAddresses") as! WalletAddresessViewController
         adressesVC.presenter.wallet = self.wallet
         self.mainVC?.navigationController?.pushViewController(adressesVC, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(allAddressesWithChainTap)\(wallet!.chain)")
     }
 }

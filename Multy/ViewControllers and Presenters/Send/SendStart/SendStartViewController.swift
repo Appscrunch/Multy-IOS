@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class SendStartViewController: UIViewController {
+class SendStartViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBtn: ZFRippleButton!
@@ -23,6 +23,7 @@ class SendStartViewController: UIViewController {
         self.hideKeyboardWhenTappedAroundForSendStart()
         self.nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
         self.ipadFix()
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: screenSendTo)
     }
     
     override func viewWillAppear(_ animated: Bool) {

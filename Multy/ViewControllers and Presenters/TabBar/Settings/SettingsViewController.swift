@@ -4,7 +4,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var pinSwitch: UISwitch!
     
@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var defFiatView: UIView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var feedbackView: UIView!
+    @IBOutlet weak var pushSwitch: UISwitch!
     
     let presenter = SettingsPresenter()
     let authVC = SecureViewController()
@@ -23,6 +24,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         self.presenter.settingsVC = self
         setupForNotImplementedViews()
+        sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +44,14 @@ class SettingsViewController: UIViewController {
         super.viewWillDisappear(animated)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @IBAction func pushAction(_ sender: Any) {
+        if self.pushSwitch.isOn {
+            sendAnalyticsEvent(screenName: screenSettings, eventName: pushesEnabled)
+        } else {
+            sendAnalyticsEvent(screenName: screenSettings, eventName: pushesDisabled)
+        }
     }
     
     func setupForNotImplementedViews() {
@@ -74,6 +84,7 @@ class SettingsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings")
         self.navigationController?.pushViewController(secureSettingsVC, animated: true)
+        sendAnalyticsEvent(screenName: screenSettings, eventName: securitySettingsTap)
     }
     
     @objc func disablePin() {

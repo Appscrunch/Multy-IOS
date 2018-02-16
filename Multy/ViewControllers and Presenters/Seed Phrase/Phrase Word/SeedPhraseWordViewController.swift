@@ -6,7 +6,7 @@ import UIKit
 import LTMorphingLabel
 import ZFRippleButton
 
-class SeedPhraseWordViewController: UIViewController {
+class SeedPhraseWordViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var nextWordBtn: ZFRippleButton!
     
@@ -37,6 +37,7 @@ class SeedPhraseWordViewController: UIViewController {
         
         presenter.getSeedFromAcc()
         presenter.presentNextTripleOrContinue()
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: screenViewPhrase)
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,6 +51,7 @@ class SeedPhraseWordViewController: UIViewController {
         presenter.presentNextTripleOrContinue()
     }
     @IBAction func cancelAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: cancelTap)
         self.navigationController?.popToRootViewController(animated: true)
     }
 }

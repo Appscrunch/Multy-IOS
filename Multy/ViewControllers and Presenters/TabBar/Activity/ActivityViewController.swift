@@ -4,15 +4,15 @@
 
 import UIKit
 
-class ActivityViewController: UIViewController {
+class ActivityViewController: UIViewController, AnalyticsProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sendAnalyticsEvent(screenName: screenActivity, eventName: screenActivity)
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)   
     }
     
     override func viewWillAppear(_ animated: Bool) {

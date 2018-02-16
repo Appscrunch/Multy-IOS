@@ -894,6 +894,9 @@ correctly</string>
                                             <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2Cs-So-yJx">
                                                 <rect key="frame" x="310" y="16.5" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.01176470588" green="0.49803921569999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="pushAction:" destination="iYV-U9-fj0" eventType="touchUpInside" id="FRN-Il-mdG"/>
+                                                </connections>
                                             </switch>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsNotifications" translatesAutoresizingMaskIntoConstraints="NO" id="apD-ps-Wne">
                                                 <rect key="frame" x="20" y="17" width="29" height="29"/>
@@ -1144,6 +1147,7 @@ correctly</string>
                         <outlet property="aboutView" destination="sd1-gT-DhV" id="tYS-ch-Cik"/>
                         <outlet property="defFiatView" destination="LU1-QU-4a2" id="usH-e0-lXK"/>
                         <outlet property="feedbackView" destination="b4Q-oK-RUx" id="eTn-69-I9O"/>
+                        <outlet property="pushSwitch" destination="2Cs-So-yJx" id="Ywi-ck-BbO"/>
                         <outlet property="pushView" destination="x4M-9u-Tco" id="iBm-Yb-isi"/>
                         <outlet property="securityView" destination="FxV-OV-cca" id="a1I-6f-DWs"/>
                     </connections>

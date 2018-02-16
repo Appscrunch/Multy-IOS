@@ -4,8 +4,8 @@
 
 import UIKit
 
-class WalletChooseViewController: UIViewController {
-    
+class WalletChooseViewController: UIViewController, AnalyticsProtocol {
+
     @IBOutlet weak var tableView: UITableView!
     
     let presenter = WalletChoosePresenter()
@@ -16,6 +16,7 @@ class WalletChooseViewController: UIViewController {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.presenter.walletChoooseVC = self
         self.presenter.getWallets()
+        sendAnalyticsEvent(screenName: screenSendFrom, eventName: screenSendFrom)
     }
     
     func registerCell() {
@@ -25,6 +26,7 @@ class WalletChooseViewController: UIViewController {
 
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: screenSendFrom, eventName: closeTap)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -75,6 +77,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         
         self.presenter.selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)
+        sendAnalyticsEvent(screenName: screenSendFrom, eventName: "\(walletWithChainTap)\(presenter.walletsArr[indexPath.row].chain)")
     }
     
     func updateUI() {

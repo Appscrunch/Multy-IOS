@@ -4,11 +4,11 @@
 
 import UIKit
 
-class ContactsViewController: UIViewController {
+class ContactsViewController: UIViewController, AnalyticsProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sendAnalyticsEvent(screenName: screenContacts, eventName: screenContacts)
     }
     
     override func viewDidAppear(_ animated: Bool) {

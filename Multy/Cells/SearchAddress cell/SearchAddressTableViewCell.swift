@@ -4,7 +4,7 @@
 
 import UIKit
 
-class SearchAddressTableViewCell: UITableViewCell {
+class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
 
 //    @IBOutlet weak var addressTF: UITextField!
     @IBOutlet weak var addressInTfLlb: UILabel!
@@ -28,16 +28,20 @@ class SearchAddressTableViewCell: UITableViewCell {
     
     @IBAction func cancelAction(_ sender: Any) {
         self.cancelDelegate?.cancelAction()
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: closeTap)
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: addressBookTap)
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: wirelessScanTap)
     }
     
     @IBAction func scanQrAction(_ sender: Any) {
         self.goToQrDelegate?.goToScanQr()
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: scanQrTap)
     }
     
     func updateWithAddress(address: String) {

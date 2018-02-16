@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class SeedPhraseAboutViewController: UIViewController {
+class SeedPhraseAboutViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var continueBtn: ZFRippleButton!
     
@@ -21,6 +21,7 @@ class SeedPhraseAboutViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
         self.fixiPadUI()
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: screenViewPhrase)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +43,7 @@ class SeedPhraseAboutViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: cancelTap)
         self.navigationController?.popViewController(animated: true)
     }
     

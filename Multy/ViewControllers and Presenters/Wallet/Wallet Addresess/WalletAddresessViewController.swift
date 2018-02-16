@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletAddresessViewController: UIViewController {
+class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerLbl: UILabel!
@@ -18,6 +18,7 @@ class WalletAddresessViewController: UIViewController {
         
         self.tableView.tableFooterView = UIView()
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
+        sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)")
     }
     
     func registerCell() {
@@ -27,6 +28,7 @@ class WalletAddresessViewController: UIViewController {
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(closeWithChainTap)\(presenter.wallet!.chain)")
     }
     
     @objc func updateExchange() {
@@ -70,5 +72,6 @@ extension WalletAddresessViewController: UITableViewDelegate, UITableViewDataSou
         //        self.mainVC.present
         self.present(adressVC, animated: true, completion: nil)
         self.tableView.deselectRow(at: indexPath, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(addressWithChainTap)\(presenter.wallet!.chain)")
     }
 }

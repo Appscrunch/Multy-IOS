@@ -912,6 +912,9 @@ operations</string>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3W-mh-U2K">
                                                 <rect key="frame" x="0.0" y="64" width="375" height="64"/>
+                                                <connections>
+                                                    <action selector="chooseCurrenceAction:" destination="CB9-uM-FAg" eventType="touchUpInside" id="dJI-nf-5iP"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency to convert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12v-85-n0R">
                                                 <rect key="frame" x="20" y="75" width="118" height="18"/>
@@ -925,6 +928,7 @@ operations</string>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <connections>
+                                                    <action selector="touchInTF:" destination="CB9-uM-FAg" eventType="touchUpInside" id="LYr-W4-Wx4"/>
                                                     <outlet property="delegate" destination="CB9-uM-FAg" id="RgZ-o8-vkN"/>
                                                 </connections>
                                             </textField>
@@ -981,6 +985,9 @@ operations</string>
                                                 <state key="normal">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="myPrivateAction:" destination="CB9-uM-FAg" eventType="touchUpInside" id="1Sc-6P-FhC"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

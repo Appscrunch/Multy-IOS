@@ -5,7 +5,7 @@
 import UIKit
 import AVFoundation
 
-class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIGestureRecognizerDelegate {
+class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIGestureRecognizerDelegate, AnalyticsProtocol {
 
     let presenter = QrScannerPresenter()
     
@@ -35,6 +35,7 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         self.presenter.qrScannerVC = self
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        sendAnalyticsEvent(screenName: screenQR, eventName: screenQR)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -50,8 +51,25 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let captureDevice = AVCaptureDevice.devices(for: AVMediaType.video)
         
+        if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
+            self.sendAnalyticsEvent(screenName: screenQR, eventName: scanGotPermossion)
+            self.camera()
+        } else {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                if granted {
+                    self.sendAnalyticsEvent(screenName: screenQR, eventName: scanGotPermossion)
+                    self.camera()
+                } else {
+                    self.sendAnalyticsEvent(screenName: screenQR, eventName: scanDeniedPermission)
+                    self.alertForGetNewPermission()
+                }
+            })
+        }
+    }
+    
+    func camera() {
+        let captureDevice = AVCaptureDevice.devices(for: AVMediaType.video)
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.
             let input = try AVCaptureDeviceInput(device: captureDevice[0])
@@ -84,6 +102,14 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             print(error)
             return
         }
+    }
+    
+    func alertForGetNewPermission() {
+        let alert = UIAlertController(title: "Warning", message: "Please go to the Settings -> Multy and allow camera usage", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+            self.cancel()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func failed() {
@@ -128,7 +154,7 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         btn.setTitle("Cancel", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 16)
-        btn.frame = CGRect(x: 20, y: 20, width: 70, height: 25)
+        btn.frame = CGRect(x: 20, y: 40, width: 70, height: 25)
         btn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         self.view.addSubview(btn)
     }

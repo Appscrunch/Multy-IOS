@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class BackupSeedPhraseViewController: UIViewController {
+class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var continueBtn: ZFRippleButton!
     @IBOutlet weak var restartBtn: UIButton!
@@ -25,6 +25,7 @@ class BackupSeedPhraseViewController: UIViewController {
 //        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
 //        self.tabBarController?.tabBar.frame = CGRect.zero
         self.fixForiPad()
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: screenViewPhrase)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,16 +56,16 @@ class BackupSeedPhraseViewController: UIViewController {
     }
     
     @IBAction func repeatAction(_ sender: UIButton) {
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: repeatTap)
         let allVCs = self.navigationController!.viewControllers
-        
         if allVCs.count > 2 {
             let destinationVC = allVCs[allVCs.count - 3]
-            
             self.navigationController?.popToViewController(destinationVC, animated: true)
         }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: closeTap)
         self.navigationController?.popToRootViewController(animated: true)
     }
     
