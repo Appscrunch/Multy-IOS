@@ -493,7 +493,6 @@ Options</string>
                     </view>
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
-                        <outlet property="addressAction" destination="Ann-9P-bqo" id="zU4-Wz-65h"/>
                         <outlet property="addressLbl" destination="TcM-XW-eXl" id="518-rV-EwW"/>
                         <outlet property="cancelBtn" destination="UQf-gq-ib1" id="Mwv-vl-IpK"/>
                         <outlet property="constraintForSum" destination="e77-4w-Fs0" id="WlQ-ub-GRa"/>

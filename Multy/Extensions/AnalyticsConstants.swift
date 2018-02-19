@@ -176,12 +176,14 @@ let switchTap                   = "Button_Switch"
 let payForCommissionEnabled     = "Button_Pay_For_Commission_Enabled"
 let payForCommissionDisabled    = "Button_Pay_For_Commission_Disabled"
 let payMaxTap                   = "Button_Pay_Max"
+let transactionErr              = "Error_Transaction_Sign"
 
 //              new screen  21
 
 let screenSendSummaryWithChain  = "Screen_Send_Summary "//+chainID
 //let closeWithChainTap        = "Button_Close_"//+chainID         //cancel or back
 let addNoteTap                  = "Button_Add_Note"
+let transactionErrorFromServer  = "Error_Sending_Trasaction_From_Api"
 
 //              new screen  22
 
@@ -237,3 +239,7 @@ let pinSetuped                  = "PIN_Setuped"
 
 let pushReceivedWithPushId      = "Push_Received_"//+pushID
 let openAppByPushWithPushId     = "Open_App_By_Push "//+pushID
+
+
+
+

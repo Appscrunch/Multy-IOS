@@ -188,6 +188,10 @@ class RealmManager: NSObject {
                         accountRLM.seedPhrase = accountDict["seedPhrase"] as! String
                     }
                     
+                    if accountDict["backupSeedPhrase"] != nil {
+                        accountRLM.backupSeedPhrase = accountDict["backupSeedPhrase"] as! String
+                    }
+                    
                     if accountDict["binaryData"] != nil {
                         accountRLM.binaryDataString = accountDict["binaryData"] as! String
                     }
@@ -458,13 +462,19 @@ class RealmManager: NSObject {
         }
     }
     
-    public func clearRealm() {
+    public func clearRealm(completion: @escaping(_ ok: String?, _ error: Error?) -> ()) {
         getRealm { (realmOpt, err) in
+            if err != nil {
+                completion(nil, err)
+                return
+            }
             if let realm = realmOpt {
                 try! realm.write {
                     realm.deleteAll()
+                    completion("ok", nil)
                 }
             }
+            
         }
         
         self.account = nil

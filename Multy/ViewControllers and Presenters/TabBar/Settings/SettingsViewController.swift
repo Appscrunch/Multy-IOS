@@ -4,7 +4,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, AnalyticsProtocol {
+class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var pinSwitch: UISwitch!
     
@@ -82,14 +82,33 @@ class SettingsViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func goToSecuritySettingsAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings")
+        let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings") as! SecuritySettingsViewController
+        secureSettingsVC.resetDelegate = self
         self.navigationController?.pushViewController(secureSettingsVC, animated: true)
         sendAnalyticsEvent(screenName: screenSettings, eventName: securitySettingsTap)
     }
+    
     
     @objc func disablePin() {
         self.pinSwitch.isOn = false
         NotificationCenter.default.removeObserver(self)
         UserPreferences.shared.writeCipheredPinMode(mode: 0)
+    }
+    
+    func cancelAction() {
+        RealmManager.shared.clearRealm { (ok, err) in
+            DataManager.shared.clearDB { (err) in
+                let assetVC = self.tabBarController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
+                UserDefaults.standard.removeObject(forKey: "isFirstLaunch")
+                assetVC.isFirstLaunch = true
+                assetVC.presenter.account = nil
+                assetVC.viewDidLoad()
+                (self.tabBarController as! CustomTabBarViewController).setSelectIndex(from: 4, to: 0)
+            }
+        }
+    }
+    
+    func presentNoInternet() {
+        
     }
 }

@@ -135,6 +135,8 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             if textString == "0" && string != "," && string != "." && !string.isEmpty {
                 return false
             } else if textString.isEmpty && (string == "," || string == ".") {
+                self.amountTF.text = "0" + string
+                self.sumLbl.text = self.amountTF.text
                 return false
             }
         }

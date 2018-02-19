@@ -165,7 +165,7 @@ class SendAmountPresenter: NSObject {
             saveTfValue()
             checkMaxEntered()
             sendAmountVC?.setSumInNextBtn()
-            
+            sendAmountVC?.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: transactionErr)
             return 0
         }
         

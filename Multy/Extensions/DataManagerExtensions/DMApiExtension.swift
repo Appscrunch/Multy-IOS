@@ -108,7 +108,7 @@ extension DataManager {
                         
                         let hexBinData = self.coreLibManager.createSeedBinaryData(from: rootKey!)?.convertToHexString()
                         paramsDict["binaryData"] = hexBinData
-                        
+                        paramsDict["backupSeedPhrase"] = rootKey
                         print(paramsDict)
                         
                         self.apiManager.userID = params["userID"] as! String

@@ -25,6 +25,10 @@
 		4540944C2031EF1600603DB5 /* SecuritySettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */; };
 		4540944E2032E92F00603DB5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4540944D2032E92F00603DB5 /* Settings.storyboard */; };
 		454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540944F2033236B00603DB5 /* ResetAllDataViewController.swift */; };
+		45409454203348CA00603DB5 /* EntranceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45409453203348CA00603DB5 /* EntranceSettingsViewController.swift */; };
+		45409456203348DD00603DB5 /* EntranceSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45409455203348DD00603DB5 /* EntranceSettingsPresenter.swift */; };
+		45409459203352B800603DB5 /* PinCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45409458203352B800603DB5 /* PinCodePresenter.swift */; };
+		4540945B203352CC00603DB5 /* PinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540945A203352CC00603DB5 /* PinCodeViewController.swift */; };
 		454A9D7C20067E530035966F /* HistoryRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A9D7B20067E530035966F /* HistoryRLM.swift */; };
 		455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455126BB1FE04AAD0026A892 /* AddressViewController.swift */; };
 		455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */; };
@@ -217,6 +221,10 @@
 		4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsPresenter.swift; sourceTree = "<group>"; };
 		4540944D2032E92F00603DB5 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		4540944F2033236B00603DB5 /* ResetAllDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetAllDataViewController.swift; sourceTree = "<group>"; };
+		45409453203348CA00603DB5 /* EntranceSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceSettingsViewController.swift; sourceTree = "<group>"; };
+		45409455203348DD00603DB5 /* EntranceSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceSettingsPresenter.swift; sourceTree = "<group>"; };
+		45409458203352B800603DB5 /* PinCodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodePresenter.swift; sourceTree = "<group>"; };
+		4540945A203352CC00603DB5 /* PinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeViewController.swift; sourceTree = "<group>"; };
 		454A9D7B20067E530035966F /* HistoryRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRLM.swift; sourceTree = "<group>"; };
 		455126BB1FE04AAD0026A892 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingAnimationViewController.swift; sourceTree = "<group>"; };
@@ -475,6 +483,7 @@
 			children = (
 				454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */,
 				4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */,
+				45409452203348A500603DB5 /* Entrance settings */,
 				454094512033308600603DB5 /* ResetData */,
 			);
 			path = Security;
@@ -486,6 +495,25 @@
 				4540944F2033236B00603DB5 /* ResetAllDataViewController.swift */,
 			);
 			path = ResetData;
+			sourceTree = "<group>";
+		};
+		45409452203348A500603DB5 /* Entrance settings */ = {
+			isa = PBXGroup;
+			children = (
+				45409453203348CA00603DB5 /* EntranceSettingsViewController.swift */,
+				45409455203348DD00603DB5 /* EntranceSettingsPresenter.swift */,
+				454094572033529600603DB5 /* PinCode */,
+			);
+			path = "Entrance settings";
+			sourceTree = "<group>";
+		};
+		454094572033529600603DB5 /* PinCode */ = {
+			isa = PBXGroup;
+			children = (
+				4540945A203352CC00603DB5 /* PinCodeViewController.swift */,
+				45409458203352B800603DB5 /* PinCodePresenter.swift */,
+			);
+			path = PinCode;
 			sourceTree = "<group>";
 		};
 		455CDCED1FC8338100EA5ACE /* Sending Animation */ = {
@@ -1359,11 +1387,13 @@
 				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
 				FA8C87852010B44300F8D5D9 /* UITableViewCell+Extension.swift in Sources */,
+				45409459203352B800603DB5 /* PinCodePresenter.swift in Sources */,
 				FADC004C1FC323A900182E45 /* Socket.swift in Sources */,
 				45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */,
 				FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */,
 				45D2D6DF203463FC00751ED4 /* AnalyticsConstants.swift in Sources */,
 				45A9494D1FC5D972003C3A23 /* SendDetailsViewController.swift in Sources */,
+				4540945B203352CC00603DB5 /* PinCodeViewController.swift in Sources */,
 				45A9494F1FC6BDF3003C3A23 /* SendDetailsPresenter.swift in Sources */,
 				45A949351FC5992A003C3A23 /* SearchAddressTableViewCell.swift in Sources */,
 				45A9492A1FC426B7003C3A23 /* ReceiveAllDetailsViewController.swift in Sources */,
@@ -1417,6 +1447,7 @@
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
 				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
 				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
+				45409454203348CA00603DB5 /* EntranceSettingsViewController.swift in Sources */,
 				459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */,
 				45B0B0E61FEBEDE9005BB1C0 /* ActivityViewController.swift in Sources */,
 				455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */,
@@ -1454,6 +1485,7 @@
 				45B9CB001FBB4AB200AA2A31 /* AssetsPresenter.swift in Sources */,
 				FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */,
 				440AD8D22020D1220015AEF1 /* Dictionary+Extension.swift in Sources */,
+				45409456203348DD00603DB5 /* EntranceSettingsPresenter.swift in Sources */,
 				45A9493A1FC59E51003C3A23 /* RecentAddressTableViewCell.swift in Sources */,
 				FA4D43D91FC5772E003C7117 /* DMCoreLibExtension.swift in Sources */,
 				4583AC981FBC8596001991AA /* PortfolioCollectionViewCell.swift in Sources */,

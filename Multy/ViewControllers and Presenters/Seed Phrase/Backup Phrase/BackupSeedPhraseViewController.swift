@@ -17,8 +17,12 @@ class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var secondLblConstraint: NSLayoutConstraint! //
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var middleText: UILabel!
     
     var isRestore = false
+    
+    var whereFrom: UIViewController?
+    var isNeedToBackup: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +52,18 @@ class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
             self.restartBtn.isEnabled = false
             self.restartLbl.isHidden = true
             self.infoIconImg.isHidden = true
+        } else if self.isNeedToBackup == false {
+            self.middleText.isHidden = true
         }
     }
     
     @IBAction func continueAction(_ sender: Any) {
+        if self.isNeedToBackup != nil && self.isNeedToBackup == false {
+            if self.whereFrom != nil {
+                self.navigationController?.popToViewController(whereFrom!, animated: true)
+                return
+            }
+        }
         self.performSegue(withIdentifier: "checkPhraseVC", sender: UIButton.self)
     }
     
@@ -66,7 +78,11 @@ class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func cancelAction(_ sender: Any) {
         sendAnalyticsEvent(screenName: screenViewPhrase, eventName: closeTap)
-        self.navigationController?.popToRootViewController(animated: true)
+        if self.whereFrom != nil {
+            self.navigationController?.popToViewController(whereFrom!, animated: true)
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
