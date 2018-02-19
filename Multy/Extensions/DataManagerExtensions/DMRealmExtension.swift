@@ -50,7 +50,18 @@ extension DataManager {
     }
     
     func clearDB(completion: @escaping (_ error: NSError?) -> ()) {
-        try! FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+        let fileManager = FileManager.default
+        do {
+            let url = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: Realm.Configuration.defaultConfiguration.fileURL!, create: false)
+            if let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil) {
+                while let fileURL = enumerator.nextObject() as? URL {
+                    try fileManager.removeItem(at: fileURL)
+                }
+            }
+        }  catch  {
+            print(error)
+        }
+//        try! FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
 //        realmManager.clearRealm()
         completion(nil)
     }

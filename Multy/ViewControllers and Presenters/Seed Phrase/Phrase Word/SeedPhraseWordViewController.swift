@@ -18,7 +18,10 @@ class SeedPhraseWordViewController: UIViewController, AnalyticsProtocol {
     
     @IBOutlet weak var constraintTopBricks: NSLayoutConstraint!
     
-    let presenter =  SeedPhraseWordPresenter()
+    let presenter = SeedPhraseWordPresenter()
+    
+    var whereFrom: UIViewController?
+    var isNeedToBackup: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,11 +50,24 @@ class SeedPhraseWordViewController: UIViewController, AnalyticsProtocol {
     }
 
     @IBAction func nextWordAndContinueAction(_ sender: Any) {
-        
         presenter.presentNextTripleOrContinue()
     }
     @IBAction func cancelAction(_ sender: Any) {
         sendAnalyticsEvent(screenName: screenViewPhrase, eventName: cancelTap)
-        self.navigationController?.popToRootViewController(animated: true)
+        if self.whereFrom != nil {
+            self.navigationController?.popToViewController(whereFrom!, animated: true)
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backupSeedPhraseVC" {
+            let destVC = segue.destination as! BackupSeedPhraseViewController
+            if self.whereFrom != nil {
+                destVC.whereFrom = self.whereFrom
+                destVC.isNeedToBackup = self.isNeedToBackup!
+            }
+        }
     }
 }

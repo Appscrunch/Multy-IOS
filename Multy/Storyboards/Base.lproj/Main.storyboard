@@ -278,7 +278,7 @@
         <!--Assets View Controller-->
         <scene sceneID="nuC-K4-qjE">
             <objects>
-                <viewController id="alz-wi-MXP" customClass="AssetsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="assetVC" id="alz-wi-MXP" customClass="AssetsViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zZi-rf-sBU"/>
                         <viewControllerLayoutGuide type="bottom" id="TCg-eh-Ffb"/>

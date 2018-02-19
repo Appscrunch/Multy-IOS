@@ -14,6 +14,9 @@ class SeedPhraseAboutViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var secondConstraint: NSLayoutConstraint!  // for fix ipad
     @IBOutlet weak var thirdConstraint: NSLayoutConstraint!   //
     
+    var whereFrom: UIViewController?
+    var isNeedToBackup: Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +56,16 @@ class SeedPhraseAboutViewController: UIViewController, AnalyticsProtocol {
             self.firstConstraint.constant = 25
             self.secondConstraint.constant = 25
             self.thirdConstraint.constant = 25
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "seedWordsVC" {
+            let destVC = segue.destination as! SeedPhraseWordViewController
+            if self.whereFrom != nil {
+                destVC.whereFrom = self.whereFrom
+                destVC.isNeedToBackup = self.isNeedToBackup!
+            }
         }
     }
     

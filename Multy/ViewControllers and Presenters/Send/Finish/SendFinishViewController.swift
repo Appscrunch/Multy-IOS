@@ -93,13 +93,14 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
                 self.presentAlert()
                 
                 print("sendHDTransaction Error: \(error)")
-                
+                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
                 return
             }
             
             if dict!["code"] as! Int == 200 {
                 self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
             } else {
+                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
                 self.presentAlert()
             }
         }
