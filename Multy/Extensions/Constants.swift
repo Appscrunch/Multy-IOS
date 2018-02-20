@@ -81,6 +81,18 @@ func convertBTCStringToSatoshi(sum: String) -> UInt32 {
     return UInt32(sum.toStringWithComma() * pow(10, 8))
 }
 
+func shakeView(viewForShake: UIView) {
+    let animation = CABasicAnimation(keyPath: "position")
+    animation.duration = 0.07
+    animation.repeatCount = 4
+    animation.autoreverses = true
+    animation.fromValue = NSValue(cgPoint: CGPoint(x: viewForShake.center.x - 10, y: viewForShake.center.y))
+    animation.toValue = NSValue(cgPoint: CGPoint(x: viewForShake.center.x + 10, y: viewForShake.center.y))
+    
+    viewForShake.layer.add(animation, forKey: "position")
+//    self.viewWithCircles.layer.add(animation, forKey: "position")
+}
+
 enum TxStatus : Int {
     case
         MempoolIncoming =           1,

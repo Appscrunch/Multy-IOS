@@ -842,6 +842,7 @@
                     <connections>
                         <outlet property="pinTF" destination="vbT-OY-edL" id="NJt-dK-IUa"/>
                         <outlet property="pinTextLbl" destination="gmB-qd-u4D" id="Zxi-lq-LP4"/>
+                        <outlet property="viewWithCircles" destination="WPK-XK-GbL" id="a6e-c5-105"/>
                         <outletCollection property="circleView" destination="FSZ-5f-xP2" collectionClass="NSMutableArray" id="AP1-7f-38Y"/>
                         <outletCollection property="circleView" destination="CfW-Ao-xf0" collectionClass="NSMutableArray" id="cCB-42-Cuq"/>
                         <outletCollection property="circleView" destination="ZtW-td-sLk" collectionClass="NSMutableArray" id="2hG-K7-BDa"/>

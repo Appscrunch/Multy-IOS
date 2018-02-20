@@ -9,6 +9,7 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
 
     @IBOutlet weak var pinTF: UITextField!
     @IBOutlet weak var pinTextLbl: LTMorphingLabel!
+    @IBOutlet weak var viewWithCircles: UIView!
     @IBOutlet var circleView: [UIView]!
     
     var counter = 0
@@ -36,16 +37,13 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if counter == 5 && string != "" {
+            paintCircleAt(position: counter)
             if isRepeat == false {
-                paintCircleAt(position: counter)
                 self.view.isUserInteractionEnabled = false
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.pinTextLbl.text = "Repeat your PIN-code"
-                    for (index, _/*circle*/) in self.circleView.enumerated() {
-                        self.clearCircleAt(position: index + 1)
-                    }
                     self.firstPass = Int(self.pinTF.text! + string)
-                    self.pinTF.text = ""
+                    self.clearAllCircles()
                     self.counter = 0
                     self.isRepeat = true
                     self.view.isUserInteractionEnabled = true
@@ -58,8 +56,13 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
                     if Int(self.pinTF.text! + string) == self.firstPass {
                         UserPreferences.shared.writeCipheredPin(pin: "\(self.firstPass!)")
                         self.navigationController?.popViewController(animated: true)
+                    } else {
+                        shakeView(viewForShake: self.viewWithCircles)
+                        self.clearAllCircles()
+                        self.counter = 0
                     }
                 }
+                return false
             }
         }
         
@@ -91,5 +94,23 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
         circleForClear.layer.borderColor = #colorLiteral(red: 0.7646385431, green: 0.8155806661, blue: 0.8860673904, alpha: 1)
         circleForClear.backgroundColor = .clear
     }
+    
+    func clearAllCircles() {
+        for (index, _/*circle*/) in self.circleView.enumerated() {
+            self.clearCircleAt(position: index + 1)
+        }
+        self.pinTF.text = ""
+    }
+    
+//    func shakeView() {
+//        let animation = CABasicAnimation(keyPath: "position")
+//        animation.duration = 0.07
+//        animation.repeatCount = 4
+//        animation.autoreverses = true
+//        animation.fromValue = NSValue(cgPoint: CGPoint(x: viewWithCircles.center.x - 10, y: viewWithCircles.center.y))
+//        animation.toValue = NSValue(cgPoint: CGPoint(x: viewWithCircles.center.x + 10, y: viewWithCircles.center.y))
+//
+//        self.viewWithCircles.layer.add(animation, forKey: "position")
+//    }
     
 }
