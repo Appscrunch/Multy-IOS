@@ -15,13 +15,12 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     let opacityForNotImplementedView: CGFloat = 0.5  // not implemented features
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.detectingSeed()
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: screenSecuritySettings)
-        self.entranceView.alpha = opacityForNotImplementedView
-        self.entranceView.isUserInteractionEnabled = false
+//        self.entranceView.alpha = opacityForNotImplementedView
+//        self.entranceView.isUserInteractionEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

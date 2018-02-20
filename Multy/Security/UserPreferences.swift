@@ -150,4 +150,35 @@ class UserPreferences : NSObject {
             completion("0", nil)
         }
     }
+    
+    func writeCipheredPin(pin : Int) {
+        if aes == nil {
+            return
+        }
+        
+        let cipheredPass = try! aes!.encrypt(Array("\(pin)".utf8))
+        let cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
+        
+        UserDefaults.standard.set(cipheredData, forKey: "pin")
+    }
+    
+    func getAndDecryptPin(completion: @escaping (_ password: String?, _ error: Error?) -> ()) {
+        let decipheredData = UserDefaults.standard.data(forKey: "pin")
+        
+        if decipheredData == nil {
+            completion(nil, nil)
+            
+            return
+        }
+        
+        let decipheredArray = [UInt8](decipheredData!)
+        let originalData = try! aes?.decrypt(decipheredArray)
+        if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
+            completion(decipheredString, nil)
+        } else {
+//            self.writeCipheredPinMode(mode: 0)
+            completion(nil, nil)
+        }
+    }
+    
 }
