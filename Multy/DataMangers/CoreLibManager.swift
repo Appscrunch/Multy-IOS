@@ -309,6 +309,8 @@ class CoreLibManager: NSObject {
             addressDict["publicKey"] = publicKeyString
         }
         
+        defer {  }
+        
         return addressDict
     }
     
@@ -1063,6 +1065,8 @@ class CoreLibManager: NSObject {
         if error != nil {
             let pointer = UnsafeMutablePointer<CustomError>(error)
             let errorString = String(cString: pointer!.pointee.message)
+            
+            defer { pointer?.deallocate(capacity: 1) }
             
             return (false, errorString)
         } else {
