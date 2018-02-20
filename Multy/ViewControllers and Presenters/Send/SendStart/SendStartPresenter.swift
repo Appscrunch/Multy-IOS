@@ -84,4 +84,29 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         self.sendStartVC?.modifyNextButtonMode()
         self.sendStartVC?.updateUI()
     }
+    
+    func isValidCryptoAddress() -> Bool {
+        if transactionDTO.sendAddress != nil && transactionDTO.choosenWallet != nil {
+            let isValidDTO = DataManager.shared.isAddressValid(address: transactionDTO.sendAddress!, for: transactionDTO.choosenWallet!)
+            
+            if !isValidDTO.0 {
+//                presentAlert(message: isValidDTO.1!)
+            }
+            
+            return isValidDTO.0
+        } else {
+            return transactionDTO.choosenWallet == nil
+        }
+    }
+    
+    func presentAlert(message: String) {
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
+        sendStartVC?.present(alert, animated: true, completion: nil)
+    }
+    
+    func isTappedDisabledNextButton(gesture: UITapGestureRecognizer) -> Bool {
+        return sendStartVC!.nextBtn.frame.minY < gesture.location(in: gesture.view!).y
+    }
 }

@@ -12,9 +12,15 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cancelBtn.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        cancelBtn.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
     }
     
     @IBAction func cancelAction(_ sender: Any) {

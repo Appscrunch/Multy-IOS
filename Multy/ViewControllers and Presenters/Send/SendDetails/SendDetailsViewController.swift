@@ -84,6 +84,11 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
     
     @IBAction func backAction(_ sender: Any) {
+        presenter.transactionDTO.transaction!.donationDTO = nil
+        presenter.transactionDTO.transaction!.transactionRLM = nil
+        presenter.transactionDTO.transaction!.historyArray = nil
+        presenter.transactionDTO.transaction!.customFee = nil
+        
         self.navigationController?.popViewController(animated: true)
         sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: closeTap)
     }
