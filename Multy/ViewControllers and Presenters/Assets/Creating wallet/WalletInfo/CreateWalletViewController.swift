@@ -4,9 +4,8 @@
 
 import UIKit
 import ZFRippleButton
-import Firebase
 
-class CreateWalletViewController: UIViewController {
+class CreateWalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var constraintContinueBtnBottom: NSLayoutConstraint!
@@ -29,8 +28,7 @@ class CreateWalletViewController: UIViewController {
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide),
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        Analytics.setUserProperty("open creating wallet", forName: "open_creating_wallet")
-        Analytics.logEvent("open_creating_wallet", parameters: ["name": "name" as NSObject])
+        sendAnalyticsEvent(screenName: screenCreateWallet, eventName: screenCreateWallet)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,14 +40,16 @@ class CreateWalletViewController: UIViewController {
     }
     
     @IBAction func cancleAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenCreateWallet, eventName: cancelTap)
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func createAction(_ sender: Any) {
         progressHUD.show()
         presenter.createNewWallet { (dict) in
-            print(dict)
+            print(dict!)
         }
+        sendAnalyticsEvent(screenName: screenCreateWallet, eventName: createWalletTap)
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,7 +93,11 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        if indexPath.row == 1 {
+            sendAnalyticsEvent(screenName: screenCreateWallet, eventName: chainIdTap)
+        } else if indexPath.row == 2 {
+            sendAnalyticsEvent(screenName: screenCreateWallet, eventName: fiatIdTap)
+        }
     }
     
     @objc func keyboardWillShow(_ notification : Notification) {

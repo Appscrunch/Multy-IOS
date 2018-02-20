@@ -5,13 +5,14 @@
 import UIKit
 import RAMAnimatedTabBarController
 
-class FastOperationsViewController: UIViewController {
+class FastOperationsViewController: UIViewController, AnalyticsProtocol {
 
     let presenter = FastOperationsPresenter()
     var acc = AccountRLM()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sendAnalyticsEvent(screenName: screenFastOperation, eventName: screenFastOperation)
         self.presenter.fastOperationsVC = self
         
         DataManager.shared.realmManager.getAccount { (acc, err) in
@@ -28,6 +29,7 @@ class FastOperationsViewController: UIViewController {
     }
     
     @IBAction func closeAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenFastOperation, eventName: closeTap)
         if let tbc = self.tabBarController as? CustomTabBarViewController {
             tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
         }
@@ -40,6 +42,7 @@ class FastOperationsViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let destVC = storyboard.instantiateViewController(withIdentifier: "sendStart")
             self.navigationController?.pushViewController(destVC, animated: true)
+            sendAnalyticsEvent(screenName: screenFastOperation, eventName: sendTap)
         }
     }
     
@@ -51,10 +54,12 @@ class FastOperationsViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Receive", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
             self.navigationController?.pushViewController(initialViewController, animated: true)
+            sendAnalyticsEvent(screenName: screenFastOperation, eventName: receiveTap)
         }
     }
     
     @IBAction func nfcAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenFastOperation, eventName: nfcTap)
     }
     
     @IBAction func scanAction(_ sender: Any) {
@@ -63,6 +68,7 @@ class FastOperationsViewController: UIViewController {
         qrScanVC.qrDelegate = self.presenter
         qrScanVC.presenter.isFast = true
         self.present(qrScanVC, animated: true, completion: nil)
+        sendAnalyticsEvent(screenName: screenFastOperation, eventName: scanTap)
     }
     
     func alertForCreatingWallet() {

@@ -10,7 +10,7 @@ class SeedPhraseWordPresenter: NSObject {
     var countOfTaps = -1
     var mnemonicPhraseArray = [String]() {
         didSet {
-            if mnemonicPhraseArray.count > 0 {
+            if mnemonicPhraseArray.count > 0 && mainVC?.isNeedToBackup == nil {
                 let mnemonicString = mnemonicPhraseArray.joined(separator: " ")
                 DataManager.shared.realmManager.writeSeedPhrase(mnemonicString, completion: { (error) in
                     if let err = error {
@@ -26,7 +26,11 @@ class SeedPhraseWordPresenter: NSObject {
     func getSeedFromAcc() {
 //        mnemonicPhraseArray = DataManager.shared.getMnenonicArray()
         DataManager.shared.getAccount { (acc, err) in
-            self.mnemonicPhraseArray = (acc?.seedPhrase.components(separatedBy: " "))!
+            if acc!.seedPhrase != nil && acc!.seedPhrase != "" {
+                self.mnemonicPhraseArray = (acc?.seedPhrase.components(separatedBy: " "))!
+            } else {
+                self.mnemonicPhraseArray = (acc?.backupSeedPhrase.components(separatedBy: " "))!
+            }
         }
     }
     

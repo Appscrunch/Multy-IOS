@@ -5,7 +5,7 @@
 import UIKit
 import Branch
 
-class ReceiveAllDetailsViewController: UIViewController {
+class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var qrImage: UIImageView!
@@ -32,7 +32,7 @@ class ReceiveAllDetailsViewController: UIViewController {
         super.viewDidLoad()
         self.presenter.receiveAllDetailsVC = self
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,21 +46,33 @@ class ReceiveAllDetailsViewController: UIViewController {
     @IBAction func cancelAction(_ sender: Any) {
         self.tabBarController?.selectedIndex = 0
         self.navigationController?.popToRootViewController(animated: false)
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
     }
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
     }
     
+    @IBAction func qrTapAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: qrTap)
+    }
     
     @IBAction func requestSumAction(_ sender: Any) {
         self.performSegue(withIdentifier: "receiveAmount", sender: UIButton.self)
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: requestSumTap)
+    }
+    
+    @IBAction func addressAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressTap)
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: wirelessScanTap)
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressBookTap)
     }
     
     func branchDict() -> NSDictionary {
@@ -81,8 +93,19 @@ class ReceiveAllDetailsViewController: UIViewController {
             let objectsToShare = [url] as! [String]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+            activityVC.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                if !completed {
+                    // User canceled
+                    return
+                } else {
+                    if let appName = activityType?.rawValue {
+                        self.sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(self.presenter.wallet!.chain)", eventName: "\(shareToAppWithChainTap)\(self.presenter.wallet!.chain)_\(appName)")
+                    }
+                }
+            }
             self.present(activityVC, animated: true, completion: nil)
         })
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: moreOptionsTap)
         
 //        let linkProperties: BranchLinkProperties = BranchLinkProperties()
 //        linkProperties.feature = "sharing"
@@ -113,6 +136,7 @@ class ReceiveAllDetailsViewController: UIViewController {
         walletsVC.presenter.isNeedToPop = true
         walletsVC.sendWalletDelegate = self.presenter
         self.navigationController?.pushViewController(walletsVC, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: changeWalletTap)
     }
     
     

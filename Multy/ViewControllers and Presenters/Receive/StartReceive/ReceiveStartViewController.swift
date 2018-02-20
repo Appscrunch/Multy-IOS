@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class ReceiveStartViewController: UIViewController {
+class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +23,7 @@ class ReceiveStartViewController: UIViewController {
         self.registerCells()
 //        self.presenter.createWallets()
         self.presenter.getWallets()
+        sendAnalyticsEvent(screenName: screenReceive, eventName: screenReceive)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +48,7 @@ class ReceiveStartViewController: UIViewController {
             }
             self.navigationController?.popToRootViewController(animated: false)
         }
+        sendAnalyticsEvent(screenName: screenReceive, eventName: closeTap)
     }
 
 //    Deselecting
@@ -85,6 +87,7 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
         } else {
             self.performSegue(withIdentifier: "receiveDetails", sender: Any.self)
         }
+        sendAnalyticsEvent(screenName: screenReceive, eventName: "\(walletWithChainTap)\(presenter.walletsArr[indexPath.row].chain)")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

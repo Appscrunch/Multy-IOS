@@ -51,15 +51,4 @@ extension String {
             return formatter.number(from: self)!.doubleValue
         }
     }
-    
-    func isValidCryptoAddress() -> Bool {
-        //for now: bitcoin
-//        let pattern = "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$"//for bitcoin main net
-//        let addressPredicate = NSPredicate(format: "SELF MATHES %@", pattern)
-//
-//        return addressPredicate.evaluate(with: self)
-        
-        //bitcoin testnet
-        return self.count < 36 && self.count > 25
-    }
 }

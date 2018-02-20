@@ -4,7 +4,7 @@
 
 import UIKit
 
-class TransactionViewController: UIViewController {
+class TransactionViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -41,23 +41,39 @@ class TransactionViewController: UIViewController {
     
     var isIncoming = true
     
+    var state = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.transctionVC = self
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.isIncoming = presenter.histObj.isIncoming()
-        self.checkHeightForSrollAvailability()
+        self.checkHeightForScrollAvailability()
         self.checkForSendOrReceive()
         self.constraintDonationHeight.constant = 0
         self.donationView.isHidden = true
         self.updateUI()
+        self.sendAnalyticOnStrart()
     }
 
-    func checkHeightForSrollAvailability() {
+    func checkHeightForScrollAvailability() {
 //        if screenHeight >= 667 {
 //            self.scrollView.isScrollEnabled = false
 //        }
+    }
+    
+    func sendAnalyticOnStrart() {
+        if self.presenter.blockedAmount(for: presenter.histObj) > 0 {
+            state = 0
+        } else {
+            if isIncoming {
+                state = -1
+            } else {
+                state = 1
+            }
+        }
+        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.chainId)", eventName: "\(screenTransactionWithChain)\(presenter.chainId)_\(state)")
     }
     
     func checkForSendOrReceive() {
@@ -151,10 +167,12 @@ class TransactionViewController: UIViewController {
     
     @IBAction func closeAction() {
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.chainId)", eventName: "\(closeWithChainTap)\(presenter.chainId)")
     }
     
     @IBAction func viewInBlockchainAction(_ sender: Any) {
         self.performSegue(withIdentifier: "viewInBlockchain", sender: nil)
+        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.chainId)", eventName: "\(viewInBlockchainWithTxStatus)\(presenter.chainId)_\(state)")
     }
     
     

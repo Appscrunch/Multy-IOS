@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class SendingAnimationViewController: UIViewController {
+class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet var backView: UIView!
     @IBOutlet weak var sendingImage: UIImageView!
@@ -14,12 +14,15 @@ class SendingAnimationViewController: UIViewController {
     
     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
 
+    var chainId: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.sendOK()
         }
+        sendAnalyticsEvent(screenName: "\(screenSendSuccessWithChain)\(chainId!)", eventName: "\(screenSendSuccessWithChain)\(chainId!)")
     }
     
     override func viewDidLayoutSubviews() {

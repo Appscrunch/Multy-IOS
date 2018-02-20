@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class CheckWordsViewController: UIViewController, UITextFieldDelegate {
+class CheckWordsViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var wordTF: UITextField!
     @IBOutlet weak var wordCounterLbl: UILabel!
@@ -56,6 +56,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard(_:)), name: Notification.Name("hideKeyboard"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect.zero
+        sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: screenRestoreSeed)
     }
     
     override func viewDidLayoutSubviews() {
@@ -174,6 +175,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelAction(_ sender: Any) {
         let alert = UIAlertController(title: "Cancel", message: "Are you really want to cancel?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: cancelTap)
             self.navigationController?.popToRootViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in

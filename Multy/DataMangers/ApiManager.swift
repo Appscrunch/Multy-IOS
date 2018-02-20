@@ -47,7 +47,7 @@ class ApiManager: NSObject, RequestRetrier {
 //                validateCertificateChain: true,
 //                validateHost: true
 //            ),
-            stageString : .disableEvaluation
+            shortURL : .disableEvaluation
             ]
         
         requestManager = SessionManager(serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))

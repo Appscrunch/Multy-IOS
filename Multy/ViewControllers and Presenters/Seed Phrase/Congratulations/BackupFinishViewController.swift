@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class BackupFinishViewController: UIViewController {
+class BackupFinishViewController: UIViewController, AnalyticsProtocol {
     
     @IBOutlet weak var greatBtn: ZFRippleButton!
     @IBOutlet weak var bricksView: UIView!
@@ -19,6 +19,8 @@ class BackupFinishViewController: UIViewController {
         
         bricksView.subviews.forEach({ $0.removeFromSuperview() })
         bricksView.addSubview(BricksView(with: bricksView.bounds, and: 15))
+        sendAnalyticsEvent(screenName: screenSuccessRestore, eventName: screenSuccessRestore)
+        sendAnalyticsEvent(screenName: screenSuccessRestore, eventName: seedBackuped)
     }
     
     override func viewDidLayoutSubviews() {
@@ -31,10 +33,11 @@ class BackupFinishViewController: UIViewController {
     }
     
     @IBAction func greatAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenSuccessRestore, eventName: greatTap)
 //        DataManager.shared.auth(rootKey: DataManager.shared.getRootString(from: self.seedString).0) { (acc, err) in
 //            print(acc ?? "")
-            DataManager.shared.realmManager.clearSeedPhraseInAcc()
-            self.navigationController?.popToRootViewController(animated: true)
-        }
+        DataManager.shared.realmManager.clearSeedPhraseInAcc()
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 
 }

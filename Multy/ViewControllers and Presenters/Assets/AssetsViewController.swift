@@ -10,7 +10,7 @@ import CryptoSwift
 
 
 
-class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateNewWalletProtocol {
+class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateNewWalletProtocol, AnalyticsProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -44,6 +44,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.createAlert()
 
+        sendAnalyticsEvent(screenName: screenMain, eventName: screenMain)
         guard isFlowPassed else {
             self.view.isUserInteractionEnabled = true
             return
@@ -51,6 +52,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let isFirst = DataManager.shared.checkIsFirstLaunch()
         if isFirst {
+            sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: screenFirstLaunch)
             self.view.isUserInteractionEnabled = true
             return
         }
@@ -194,7 +196,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         view.layer.cornerRadius = 20
         view.backgroundColor = #colorLiteral(red: 0.9229970574, green: 0.08180250973, blue: 0.2317947149, alpha: 1)
-        
         view.layer.shadowColor = UIColor.gray.cgColor
         view.layer.shadowOpacity = 1
         view.layer.shadowOffset = .zero
@@ -219,13 +220,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             view.addSubview(image)
             backupView = view
             self.view.addSubview(backupView!)
-            
         } else {
             view.isHidden = true
         }
     }
     
     @objc func goToSeed() {
+        sendAnalyticsEvent(screenName: screenMain, eventName: backupSeedTap)
         let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
         let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
         self.navigationController?.pushViewController(vc, animated: true)
@@ -396,6 +397,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         switch indexPath {
         case [0,0]:
+            sendAnalyticsEvent(screenName: screenMain, eventName: logoTap)
             break
         case [0,1]:
             break
@@ -407,41 +409,31 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.presenter.account == nil {
 //                progressHUD.show()
 //                presenter.guestAuth(completion: { (answer) in
+                    sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: createFirstWalletTap)
                     self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
 //                })
             } else {
                 if self.presenter.isWalletExist() {
-                    let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-                    let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
-                    walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
-                    walletVC.presenter.account = self.presenter.account
-                    self.navigationController?.pushViewController(walletVC, animated: true)
+                    goToWalletVC(indexPath: indexPath)
                 } else {
                     break
                 }
             }
         case [0,3]:
             if self.presenter.account == nil {
+                sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: restoreMultyTap)
                 let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
                 let backupSeedVC = storyboard.instantiateViewController(withIdentifier: "backupSeed") as! CheckWordsViewController
                 backupSeedVC.isRestore = true
                 self.navigationController?.pushViewController(backupSeedVC, animated: true)
             } else {
                 if self.presenter.isWalletExist() {
-                    let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-                    let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
-                    walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
-                    walletVC.presenter.account = self.presenter.account
-                    self.navigationController?.pushViewController(walletVC, animated: true)
+                    goToWalletVC(indexPath: indexPath)
                 }
             }
         default:
             if self.presenter.isWalletExist() {
-                let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-                let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
-                walletVC.presenter.wallet = self.presenter.account?.wallets[indexPath.row - 2]
-                walletVC.presenter.account = self.presenter.account
-                self.navigationController?.pushViewController(walletVC, animated: true)
+                goToWalletVC(indexPath: indexPath)
             }
         }
         //проверить авторизацию
@@ -480,6 +472,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                
 //            }
 //        }
+    }
+    
+    func goToWalletVC(indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+        let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
+        let wallet = self.presenter.account?.wallets[indexPath.row - 2]
+        walletVC.presenter.wallet = wallet
+        walletVC.presenter.account = self.presenter.account
+        sendAnalyticsEvent(screenName: screenMain, eventName: "\(walletOpenWithChainTap)\(wallet!.chain)")
+        self.navigationController?.pushViewController(walletVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -537,6 +539,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if self.presenter.account == nil {
             return
         }
+        sendAnalyticsEvent(screenName: screenMain, eventName: createWalletTap)
         self.present(self.actionSheet, animated: true, completion: nil)
     }
 }

@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class SendStartViewController: UIViewController {
+class SendStartViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBtn: ZFRippleButton!
@@ -23,6 +23,7 @@ class SendStartViewController: UIViewController {
         self.hideKeyboardWhenTappedAroundForSendStart()
         self.nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
         self.ipadFix()
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: screenSendTo)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +39,19 @@ class SendStartViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    @objc func dismissSendKeyboard() {
-        let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
+    @objc func dismissSendKeyboard(gesture: UITapGestureRecognizer) {
+        let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell        
         presenter.transactionDTO.sendAddress = searchCell.addressTV.text
+        
+        if presenter.transactionDTO.choosenWallet != nil && presenter.isTappedDisabledNextButton(gesture: gesture) {
+            let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
+            
+            if !isValidDTO.0 {
+                presenter.presentAlert(message: isValidDTO.1!)
+            }
+            
+            return
+        }
         
         modifyNextButtonMode()
         view.endEditing(true)
@@ -77,7 +88,7 @@ class SendStartViewController: UIViewController {
     }
     
     func modifyNextButtonMode() {
-        if presenter.transactionDTO.sendAddress != nil && presenter.transactionDTO.sendAddress!.isValidCryptoAddress() {
+        if presenter.transactionDTO.sendAddress != nil && presenter.isValidCryptoAddress() {
             if !nextBtn.isEnabled {
                 self.nextBtn.isEnabled = true
                 self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),

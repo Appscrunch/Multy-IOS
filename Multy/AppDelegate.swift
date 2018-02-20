@@ -91,7 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
         return true
     }
     
@@ -187,7 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
-        switch false /*isDeviceJailbroken()*/ {
+        switch isDeviceJailbroken() {
         case true:
             assetVC.presenter.isJailed = true
         case false:

@@ -4,8 +4,8 @@
 
 import UIKit
 
-class WalletChooseViewController: UIViewController {
-    
+class WalletChooseViewController: UIViewController, AnalyticsProtocol {
+
     @IBOutlet weak var tableView: UITableView!
     
     let presenter = WalletChoosePresenter()
@@ -16,6 +16,7 @@ class WalletChooseViewController: UIViewController {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.presenter.walletChoooseVC = self
         self.presenter.getWallets()
+        sendAnalyticsEvent(screenName: screenSendFrom, eventName: screenSendFrom)
     }
     
     func registerCell() {
@@ -24,7 +25,9 @@ class WalletChooseViewController: UIViewController {
     }
 
     @IBAction func backAction(_ sender: Any) {
+        presenter.transactionDTO.choosenWallet = nil
         self.navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: screenSendFrom, eventName: closeTap)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,7 +37,6 @@ class WalletChooseViewController: UIViewController {
             detailsVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
-    
     
     @IBAction func cancelAction(_ sender: Any) {
         self.tabBarController?.selectedIndex = 0
@@ -67,14 +69,24 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.transactionDTO.sendAmount != nil {
             if presenter.walletsArr[indexPath.row].sumInCrypto < presenter.transactionDTO.sendAmount! {
-                presenter.presentAlert()
+                presenter.presentAlert(message: nil)
                 
                 return
             }
         }
         
+        let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: self.presenter.walletsArr[indexPath.row])
+        
+        if !isValidDTO.0 {
+            presenter.presentAlert(message: isValidDTO.1!)
+            
+            return
+        }
+
+        
         self.presenter.selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)
+        sendAnalyticsEvent(screenName: screenSendFrom, eventName: "\(walletWithChainTap)\(presenter.walletsArr[indexPath.row].chain)")
     }
     
     func updateUI() {

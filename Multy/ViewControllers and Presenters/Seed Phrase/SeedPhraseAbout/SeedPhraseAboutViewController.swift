@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class SeedPhraseAboutViewController: UIViewController {
+class SeedPhraseAboutViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var continueBtn: ZFRippleButton!
     
@@ -14,6 +14,9 @@ class SeedPhraseAboutViewController: UIViewController {
     @IBOutlet weak var secondConstraint: NSLayoutConstraint!  // for fix ipad
     @IBOutlet weak var thirdConstraint: NSLayoutConstraint!   //
     
+    var whereFrom: UIViewController?
+    var isNeedToBackup: Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +24,7 @@ class SeedPhraseAboutViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
         self.fixiPadUI()
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: screenViewPhrase)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +46,7 @@ class SeedPhraseAboutViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
+        sendAnalyticsEvent(screenName: screenViewPhrase, eventName: cancelTap)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -51,6 +56,16 @@ class SeedPhraseAboutViewController: UIViewController {
             self.firstConstraint.constant = 25
             self.secondConstraint.constant = 25
             self.thirdConstraint.constant = 25
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "seedWordsVC" {
+            let destVC = segue.destination as! SeedPhraseWordViewController
+            if self.whereFrom != nil {
+                destVC.whereFrom = self.whereFrom
+                destVC.isNeedToBackup = self.isNeedToBackup!
+            }
         }
     }
     

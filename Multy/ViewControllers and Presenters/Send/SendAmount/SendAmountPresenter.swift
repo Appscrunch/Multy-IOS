@@ -90,22 +90,15 @@ class SendAmountPresenter: NSObject {
     }
     
     func estimateTransaction() -> Double {
-        let feeAmount = DataManager.shared.coreLibManager.getTotalFee(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                                                      feeAmountString: "\(transactionDTO.transaction!.customFee!)",
-                                                                      isDonationExists: transactionDTO.transaction?.donationDTO?.sumInCrypto != Double(0.0),
-                                                                      isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
-                                                                      inputsCount: DataManager.shared.realmManager.spendableOutput(addresses: transactionDTO.choosenWallet!.addresses).count)
-        
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
                                                                          sendAddress: transactionDTO.sendAddress!,
                                                                          sendAmountString: self.sumInCrypto.fixedFraction(digits: 8),
                                                                          feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
-                                                                         isDonationExists: true,
+                                                                         isDonationExists: transactionDTO.transaction!.donationDTO!.sumInCrypto != 0.0,
                                                                          donationAmount: transactionDTO.transaction!.donationDTO!.sumInCrypto!.fixedFraction(digits: 8),
                                                                          isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
                                                                          wallet: transactionDTO.choosenWallet!,
                                                                          binaryData: &binaryData!,
-                                                                         feeAmount: feeAmount,
                                                                          inputs: transactionDTO.choosenWallet!.addresses)
         
         self.rawTransaction = trData.0
@@ -165,7 +158,7 @@ class SendAmountPresenter: NSObject {
             saveTfValue()
             checkMaxEntered()
             sendAmountVC?.setSumInNextBtn()
-            
+            sendAmountVC?.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: transactionErr)
             return 0
         }
         

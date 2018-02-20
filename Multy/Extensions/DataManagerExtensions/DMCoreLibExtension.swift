@@ -36,4 +36,8 @@ extension DataManager {
     func createNewWallet(for binaryData: inout BinaryData, _ currencyID: UInt32, walletID: UInt32) -> Dictionary<String, Any>? {
         return coreLibManager.createWallet(from: &binaryData, currencyID: currencyID, walletID: walletID)
     }
+    
+    func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
+        return coreLibManager.isAddressValid(address: address, for: wallet)
+    }
 }

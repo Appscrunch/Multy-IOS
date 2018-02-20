@@ -377,6 +377,7 @@
                         <outlet property="continueBtn" destination="J88-uo-8qz" id="PNq-Q0-SCE"/>
                         <outlet property="firstLblConstraint" destination="tes-Cn-Vta" id="Gbh-Lj-wHC"/>
                         <outlet property="infoIconImg" destination="Pwe-Ye-XS2" id="be0-Ff-r4N"/>
+                        <outlet property="middleText" destination="hhR-En-7a2" id="PVo-AL-y2y"/>
                         <outlet property="restartBtn" destination="S8x-qS-O85" id="7u0-8X-9nz"/>
                         <outlet property="restartLbl" destination="piY-bH-vcx" id="7ri-JU-0aT"/>
                         <outlet property="secondLblConstraint" destination="D2P-cS-iGa" id="u9o-Ak-UTZ"/>
