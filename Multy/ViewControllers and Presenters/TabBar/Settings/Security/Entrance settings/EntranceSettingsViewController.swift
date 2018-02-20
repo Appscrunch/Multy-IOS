@@ -42,6 +42,8 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
         } else {
             self.pinView.alpha = closeAlpha
             self.pinView.isUserInteractionEnabled = false
+            self.checkMarkOnPin.isHidden = true
+            UserDefaults.standard.removeObject(forKey: "pin")
             sendAnalyticsEvent(screenName: screenBlockSettings, eventName: pinDisableTap)
         }
     }

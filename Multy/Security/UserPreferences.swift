@@ -151,12 +151,12 @@ class UserPreferences : NSObject {
         }
     }
     
-    func writeCipheredPin(pin : Int) {
+    func writeCipheredPin(pin : String) {
         if aes == nil {
             return
         }
         
-        let cipheredPass = try! aes!.encrypt(Array("\(pin)".utf8))
+        let cipheredPass = try! aes!.encrypt(Array(pin.utf8))
         let cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
         
         UserDefaults.standard.set(cipheredData, forKey: "pin")

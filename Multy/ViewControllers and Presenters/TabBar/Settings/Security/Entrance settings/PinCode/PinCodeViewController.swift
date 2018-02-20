@@ -56,7 +56,7 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.view.isUserInteractionEnabled = true
                     if Int(self.pinTF.text! + string) == self.firstPass {
-                        UserPreferences.shared.writeCipheredPin(pin: self.firstPass!)
+                        UserPreferences.shared.writeCipheredPin(pin: "\(self.firstPass!)")
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
