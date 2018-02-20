@@ -631,6 +631,7 @@
                     <connections>
                         <outlet property="backupView" destination="Wzk-mA-tvc" id="3PN-Ua-Dgs"/>
                         <outlet property="biometricView" destination="Rkp-NV-ZRd" id="rET-CQ-TGa"/>
+                        <outlet property="checkMarkOnPin" destination="vew-1F-AjV" id="0RT-oN-3vY"/>
                         <outlet property="pinView" destination="VK2-fJ-cop" id="7fv-jZ-JSs"/>
                         <outlet property="topPassConstraint" destination="iJS-4I-XTw" id="H9X-31-aZA"/>
                         <outlet property="usePassSwitch" destination="8t0-Zx-IHu" id="aPK-n1-HuK"/>
