@@ -56,8 +56,10 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
         UserPreferences.shared.getAndDecryptPin { (pin, err) in
             if pin == nil {
                 self.pinView.alpha = self.closeAlpha
+                
                 return
             }
+            
             let alert = UIAlertController(title: "Title", message: "\(pin!)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
