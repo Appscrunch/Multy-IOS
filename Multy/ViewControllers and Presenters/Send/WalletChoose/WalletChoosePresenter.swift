@@ -35,7 +35,7 @@ class WalletChoosePresenter: NSObject {
             alertMessage = message!
         }
         
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             
         }))
