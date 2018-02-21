@@ -7,6 +7,10 @@ extension DataManager {
 //        return coreLibManager.isDeviceJailbroken()
 //    }
     
+    func getMnenonicAllWords() -> Array<String> {
+        return coreLibManager.mnemonicAllWords()
+    }
+    
     func getMnenonicArray() -> Array<String> {
         return coreLibManager.createMnemonicPhraseArray()
     }

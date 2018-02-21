@@ -18,17 +18,7 @@ class DataManager: NSObject {
     override init() {
         super.init()
         
-        if let path = Bundle.main.path(forResource: "english", ofType: "txt") {
-            do {
-                let data = try String(contentsOfFile: path, encoding: .utf8)
-                var myStrings = data.components(separatedBy: .newlines)
-                myStrings.removeLast()
-                
-                seedWordsArray = myStrings
-            } catch {
-                print(error)
-            }
-        }
+        seedWordsArray = coreLibManager.mnemonicAllWords()
     }
     
     func isWordCorrect(word: String) -> Bool {
