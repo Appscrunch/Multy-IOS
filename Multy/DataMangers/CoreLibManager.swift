@@ -1212,6 +1212,8 @@ class CoreLibManager: NSObject {
 
             defer { pointer?.deallocate(capacity: 1) }
             
+//            defer { pointer?.deallocate(capacity: 1) }
+            
             return (false, errorString)
         } else {
             return (true, nil)
