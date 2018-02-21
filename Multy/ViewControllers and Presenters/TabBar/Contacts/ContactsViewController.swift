@@ -8,6 +8,7 @@ class ContactsViewController: UIViewController, AnalyticsProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         sendAnalyticsEvent(screenName: screenContacts, eventName: screenContacts)
     }
     

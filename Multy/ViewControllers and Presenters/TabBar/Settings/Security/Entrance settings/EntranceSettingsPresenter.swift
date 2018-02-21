@@ -6,4 +6,7 @@ import UIKit
 
 class EntranceSettingsPresenter: NSObject {
 
+    var entranceVC: EntranceSettingsViewController?
+    
+    var isNeedToBackup: Bool?
 }

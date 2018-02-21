@@ -22,20 +22,6 @@ extension String {
         }
     }
     
-    static func generateRandomString() -> String? {
-        
-        var keyData = Data(count: 32)
-        let result = keyData.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, keyData.count, $0)
-        }
-        if result == errSecSuccess {
-            return keyData.base64EncodedString()
-        } else {
-            print("Problem generating random bytes")
-            return nil
-        }
-    }
-    
     func toStringWithComma() -> Double {
         if self.isEmpty {
             return 0.0

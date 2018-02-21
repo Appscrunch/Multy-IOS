@@ -854,6 +854,20 @@ correctly</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHL-uD-DHH">
                                 <rect key="frame" x="0.0" y="85" width="375" height="320"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctg-5q-b08" userLabel="LineView2">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="8Y8-rf-cKd"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAK-LL-JBB" userLabel="LineView2">
+                                        <rect key="frame" x="0.0" y="319" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="xAb-bi-xMf"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vka-N2-WxL" userLabel="LineView1">
                                         <rect key="frame" x="66" y="63" width="309" height="1"/>
                                         <color key="backgroundColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1108,14 +1122,20 @@ correctly</string>
                                     <constraint firstAttribute="trailing" secondItem="Vka-N2-WxL" secondAttribute="trailing" id="L8k-Jj-eTu"/>
                                     <constraint firstAttribute="trailing" secondItem="sd1-gT-DhV" secondAttribute="trailing" id="NWE-Zh-N1M"/>
                                     <constraint firstAttribute="trailing" secondItem="LU1-QU-4a2" secondAttribute="trailing" id="OG9-kp-FBc"/>
+                                    <constraint firstItem="rAK-LL-JBB" firstAttribute="leading" secondItem="vHL-uD-DHH" secondAttribute="leading" id="PBq-uK-OxT"/>
+                                    <constraint firstAttribute="trailing" secondItem="ctg-5q-b08" secondAttribute="trailing" id="Q9O-1p-nKy"/>
                                     <constraint firstItem="LYv-7w-eWa" firstAttribute="top" secondItem="FxV-OV-cca" secondAttribute="bottom" id="QoH-gq-0qt"/>
                                     <constraint firstItem="xfR-da-DhP" firstAttribute="leading" secondItem="E6X-rf-6eP" secondAttribute="leading" id="R3g-vT-0q0"/>
                                     <constraint firstItem="x4M-9u-Tco" firstAttribute="leading" secondItem="vHL-uD-DHH" secondAttribute="leading" id="UHf-1u-KjI"/>
                                     <constraint firstAttribute="trailing" secondItem="FxV-OV-cca" secondAttribute="trailing" id="UzC-kh-AgH"/>
                                     <constraint firstItem="0rb-aE-nDa" firstAttribute="leading" secondItem="E6X-rf-6eP" secondAttribute="leading" id="Vu6-5Y-a2s"/>
+                                    <constraint firstAttribute="trailing" secondItem="rAK-LL-JBB" secondAttribute="trailing" id="WVd-KU-c5b"/>
+                                    <constraint firstItem="ctg-5q-b08" firstAttribute="top" secondItem="vHL-uD-DHH" secondAttribute="top" id="cId-da-4HJ"/>
+                                    <constraint firstItem="ctg-5q-b08" firstAttribute="leading" secondItem="vHL-uD-DHH" secondAttribute="leading" id="caQ-0b-qoV"/>
                                     <constraint firstAttribute="trailing" secondItem="b4Q-oK-RUx" secondAttribute="trailing" id="eOF-YN-Aq0"/>
                                     <constraint firstItem="cGT-gp-Wpw" firstAttribute="leading" secondItem="E6X-rf-6eP" secondAttribute="leading" id="fwu-md-dz8"/>
                                     <constraint firstAttribute="trailing" secondItem="weX-ep-iau" secondAttribute="trailing" id="h3L-Yb-7FC"/>
+                                    <constraint firstAttribute="bottom" secondItem="rAK-LL-JBB" secondAttribute="bottom" id="iNe-ZM-tCW"/>
                                     <constraint firstItem="weX-ep-iau" firstAttribute="top" secondItem="xPn-zs-KFd" secondAttribute="bottom" constant="63" id="j09-Ic-xKG"/>
                                     <constraint firstItem="weX-ep-iau" firstAttribute="leading" secondItem="xPn-zs-KFd" secondAttribute="leading" id="mAQ-Ba-gRl"/>
                                     <constraint firstItem="Vka-N2-WxL" firstAttribute="leading" secondItem="vHL-uD-DHH" secondAttribute="leading" constant="66" id="nHn-Gm-bJv"/>
@@ -1135,7 +1155,7 @@ correctly</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97641962766647339" green="0.97650605440139771" blue="0.97634750604629517" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="vHL-uD-DHH" secondAttribute="trailing" id="W7b-Rc-Ub1"/>
                             <constraint firstItem="vHL-uD-DHH" firstAttribute="leading" secondItem="oAY-1d-N0f" secondAttribute="leading" id="WMm-Ja-Edm"/>

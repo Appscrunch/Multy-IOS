@@ -1064,6 +1064,8 @@ class CoreLibManager: NSObject {
             let pointer = UnsafeMutablePointer<CustomError>(error)
             let errorString = String(cString: pointer!.pointee.message)
             
+//            defer { pointer?.deallocate(capacity: 1) }
+            
             return (false, errorString)
         } else {
             return (true, nil)

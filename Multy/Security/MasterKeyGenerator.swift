@@ -111,7 +111,7 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
         let handler : (String?, Error?) -> Void = { (identity, error) in
             if let iid = identity {
 //                self.instanceIDToken = iid
-                print("instanceIDToken: \(iid)")
+//                print("instanceIDToken: \(iid)")
                 
                 DispatchQueue.main.async {
                     //                    if !self.devicePushToken.isEmpty {

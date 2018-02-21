@@ -81,6 +81,18 @@ func convertBTCStringToSatoshi(sum: String) -> UInt32 {
     return UInt32(sum.toStringWithComma() * pow(10, 8))
 }
 
+func shakeView(viewForShake: UIView) {
+    let animation = CABasicAnimation(keyPath: "position")
+    animation.duration = 0.07
+    animation.repeatCount = 4
+    animation.autoreverses = true
+    animation.fromValue = NSValue(cgPoint: CGPoint(x: viewForShake.center.x - 10, y: viewForShake.center.y))
+    animation.toValue = NSValue(cgPoint: CGPoint(x: viewForShake.center.x + 10, y: viewForShake.center.y))
+    
+    viewForShake.layer.add(animation, forKey: "position")
+//    self.viewWithCircles.layer.add(animation, forKey: "position")
+}
+
 enum TxStatus : Int {
     case
         MempoolIncoming =           1,
@@ -93,7 +105,7 @@ enum TxStatus : Int {
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "api.multy.io"
+let shortURL = "stage.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"
