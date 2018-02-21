@@ -15,10 +15,13 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
     
     let closeAlpha: CGFloat = 0.5
     
+    let presenter = EntranceSettingsPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        backupView.isHidden = true
-        topPassConstraint.constant = 20
+        self.presenter.entranceVC = self
+//        backupView.isHidden = true
+//        topPassConstraint.constant = 20
         
         self.biometricView.alpha = closeAlpha
         sendAnalyticsEvent(screenName: screenBlockSettings, eventName: screenBlockSettings)
@@ -26,7 +29,7 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.uiSetup()
+        self.getAcc()
     }
     
     @IBAction func backAction(_ sender: Any) {
@@ -36,6 +39,7 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func usePassAction(_ sender: Any) {
         if usePassSwitch.isOn {
+            shakeView(viewForShake: backupView)
             self.pinView.alpha = 1.0
             self.pinView.isUserInteractionEnabled = true
             sendAnalyticsEvent(screenName: screenBlockSettings, eventName: pinEnabledTap)
@@ -52,8 +56,20 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
         self.performSegue(withIdentifier: "pinVC", sender: sender)
     }
 
+    @IBAction func goToSeedBackup(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+        let destVC = storyboard.instantiateViewController(withIdentifier: "seedAbout") as! SeedPhraseAboutViewController
+        destVC.whereFrom = self
+        destVC.isNeedToBackup = self.presenter.isNeedToBackup
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    
     func uiSetup() {
         UserPreferences.shared.getAndDecryptPin { (pin, err) in
+            if !self.presenter.isNeedToBackup! {
+                self.backupView.isHidden = true
+                self.topPassConstraint.constant = 20
+            }
             if pin == nil {
                 self.pinView.alpha = self.closeAlpha
                 
@@ -67,6 +83,17 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
             self.usePassSwitch.isOn = true
             self.pinView.alpha = 1.0
             self.checkMarkOnPin.isHidden = false
+        }
+    }
+    
+    func getAcc() {
+        DataManager.shared.getAccount { (acc, erro) in
+            if acc?.seedPhrase != nil && acc?.seedPhrase != "" {
+                self.presenter.isNeedToBackup = true
+            } else {
+                self.presenter.isNeedToBackup = false
+            }
+            self.uiSetup()
         }
     }
 }

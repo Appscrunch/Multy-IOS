@@ -8,6 +8,9 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     @IBOutlet weak var seedLbl: UILabel!  // if backup not complete - text = "Backup Seed" - else - text = "View Seed Phrase"
     @IBOutlet weak var entranceView: UIView!
+    @IBOutlet weak var entranceTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noneLbl: UILabel!
+    @IBOutlet weak var warningImg: UIImageView!
     
     var isNeedToBackup: Bool?
     
@@ -70,10 +73,17 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     }
     
     func setupUi() {
-        if self.isNeedToBackup! {
-            self.seedLbl.text = "Backup Seed"
-        } else {
-            self.seedLbl.text = "View Seed Phrase"
+        UserPreferences.shared.getAndDecryptPin { (pin, err) in
+            if pin == nil {
+                self.entranceTopConstraint.constant = 12
+                self.noneLbl.isHidden = false
+                self.warningImg.isHidden = false
+            }
+            if self.isNeedToBackup! {
+                self.seedLbl.text = "Backup Seed"
+            } else {
+                self.seedLbl.text = "View Seed Phrase"
+            }
         }
     }
     
@@ -94,4 +104,5 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     func presentNoInternet() {
         
     }
+    
 }

@@ -8,6 +8,7 @@ class ActivityViewController: UIViewController, AnalyticsProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         sendAnalyticsEvent(screenName: screenActivity, eventName: screenActivity)
     }
 

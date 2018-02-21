@@ -333,8 +333,11 @@
                     <navigationItem key="navigationItem" id="Lcn-c1-L9p"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="entranceTopConstraint" destination="gvs-Pr-VE6" id="qJZ-ah-D3P"/>
                         <outlet property="entranceView" destination="xMl-ES-nRj" id="4qf-4k-R3V"/>
+                        <outlet property="noneLbl" destination="cer-xN-RHi" id="muG-W0-G37"/>
                         <outlet property="seedLbl" destination="B4h-nl-CRV" id="Zaz-ex-7f8"/>
+                        <outlet property="warningImg" destination="Bzx-57-yOn" id="UkJ-cg-oeF"/>
                         <segue destination="8hJ-UU-u4O" kind="show" identifier="entranceSettingsVC" id="H3K-2t-ZGh"/>
                     </connections>
                 </viewController>
@@ -592,16 +595,26 @@
                                             <constraint firstAttribute="width" constant="15" id="Y6v-nM-6Nr"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks4-fV-dj4">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="67"/>
+                                        <connections>
+                                            <action selector="goToSeedBackup:" destination="8hJ-UU-u4O" eventType="touchUpInside" id="61g-yn-LbA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92156862745098034" green="0.081802509725093842" blue="0.23179471492767334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="ks4-fV-dj4" firstAttribute="leading" secondItem="Wzk-mA-tvc" secondAttribute="leading" id="0lz-1H-oYT"/>
                                     <constraint firstItem="Byc-KO-XkA" firstAttribute="centerY" secondItem="Wzk-mA-tvc" secondAttribute="centerY" id="Aqd-tn-THs"/>
                                     <constraint firstAttribute="trailing" secondItem="tsN-bZ-Zyd" secondAttribute="trailing" constant="12" id="CTP-4n-BaV"/>
                                     <constraint firstItem="nfI-CX-l2b" firstAttribute="leading" secondItem="Wzk-mA-tvc" secondAttribute="leading" constant="13" id="CeY-Wk-o7n"/>
                                     <constraint firstItem="nfI-CX-l2b" firstAttribute="centerY" secondItem="Wzk-mA-tvc" secondAttribute="centerY" id="DiI-dF-zRB"/>
                                     <constraint firstItem="Byc-KO-XkA" firstAttribute="top" secondItem="Wzk-mA-tvc" secondAttribute="top" constant="13" id="EX7-zT-SGs"/>
                                     <constraint firstItem="tsN-bZ-Zyd" firstAttribute="centerY" secondItem="Wzk-mA-tvc" secondAttribute="centerY" id="GR1-DF-bXc"/>
+                                    <constraint firstAttribute="trailing" secondItem="ks4-fV-dj4" secondAttribute="trailing" id="Gdg-dV-5ha"/>
                                     <constraint firstItem="Byc-KO-XkA" firstAttribute="leading" secondItem="nfI-CX-l2b" secondAttribute="trailing" constant="11" id="HtW-RX-Qmj"/>
+                                    <constraint firstItem="ks4-fV-dj4" firstAttribute="top" secondItem="Wzk-mA-tvc" secondAttribute="top" id="RiP-cZ-r6H"/>
+                                    <constraint firstAttribute="bottom" secondItem="ks4-fV-dj4" secondAttribute="bottom" id="XjA-yE-vE0"/>
                                     <constraint firstItem="tsN-bZ-Zyd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Byc-KO-XkA" secondAttribute="trailing" constant="20" id="hMK-zB-ybl"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
