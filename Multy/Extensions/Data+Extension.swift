@@ -5,6 +5,10 @@
 import Foundation
 
 extension Data {
+    var bytes : [UInt8] {
+        return [UInt8](self)
+    }
+    
     func hexEncodedString() -> String {
         return map { String(format: "%02hhx", $0) }.joined()
     }
@@ -24,6 +28,21 @@ extension Data {
         }
         
         self = data
+    }
+    
+    static func generateRandom64ByteData() -> Data? {
+        
+        var keyData = Data(count: 64)
+        let result = keyData.withUnsafeMutableBytes {
+            SecRandomCopyBytes(kSecRandomDefault, keyData.count, $0)
+        }
+        if result == errSecSuccess {
+            print("keyData:\(keyData.base64EncodedString())")
+            return keyData
+        } else {
+            print("Problem generating random bytes")
+            return nil
+        }
     }
 }
 
