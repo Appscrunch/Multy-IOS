@@ -25,6 +25,7 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
     }
 
     @IBAction func backAction(_ sender: Any) {
+        presenter.transactionDTO.choosenWallet = nil
         self.navigationController?.popViewController(animated: true)
         sendAnalyticsEvent(screenName: screenSendFrom, eventName: closeTap)
     }
@@ -36,7 +37,6 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
             detailsVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
-    
     
     @IBAction func cancelAction(_ sender: Any) {
         self.tabBarController?.selectedIndex = 0
@@ -69,11 +69,20 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.transactionDTO.sendAmount != nil {
             if presenter.walletsArr[indexPath.row].sumInCrypto < presenter.transactionDTO.sendAmount! {
-                presenter.presentAlert()
+                presenter.presentAlert(message: nil)
                 
                 return
             }
         }
+        
+        let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: self.presenter.walletsArr[indexPath.row])
+        
+        if !isValidDTO.0 {
+            presenter.presentAlert(message: isValidDTO.1!)
+            
+            return
+        }
+
         
         self.presenter.selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)

@@ -485,7 +485,6 @@ class CoreLibManager: NSObject {
                            isPayCommission: Bool,
                            wallet: UserWalletRLM,
                            binaryData: inout BinaryData,
-                           feeAmount: UInt32,
                            inputs: List<AddressRLM>) -> (String, Double) {
         
         let inputs = DataManager.shared.realmManager.spendableOutput(addresses: inputs)
@@ -508,10 +507,10 @@ class CoreLibManager: NSObject {
         
         
         let maxFee = UInt32(feePerByteAmount)!
-        let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
+//        let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
         //Amount
         setAmountValue(key: "amount_per_byte", value: feePerByteAmount, pointer: fee.pointee!)
-        setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
+//        setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
 
         //spendable info
         
@@ -541,30 +540,37 @@ class CoreLibManager: NSObject {
         
         var sendSum = UInt32(0)
         var changeSum = UInt32(0)
+        let sendSumInSatoshi = convertBTCStringToSatoshi(sum: sendAmountString)
+        let donationSumInSatoshi = convertBTCStringToSatoshi(sum: donationAmount)
+//
+//        if isPayCommission {
+//            sendSum = sendSumInSatoshi
+//            if inputSum < sendSum + sendSumInSatoshi + feeAmount {
+//                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation amount (\(donationAmount) BTC)", -2)
+//            } else {
+//                changeSum = inputSum - (sendSum + donationSumInSatoshi + feeAmount)
+//            }
+//        } else {
+//            if sendSumInSatoshi < donationSumInSatoshi + feeAmount {
+//                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation (\(donationAmount) BTC)", -2)
+//            } else {
+//                sendSum = sendSumInSatoshi - (donationSumInSatoshi + feeAmount)
+//                changeSum = inputSum - donationSumInSatoshi
+//            }
+//        }
         
-        if isPayCommission {
-            sendSum = convertBTCStringToSatoshi(sum: sendAmountString)
-            if inputSum < sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
-                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation amount (\(donationAmount) BTC)", -2)
-            } else {
-                changeSum = inputSum - (sendSum + convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
-            }
-        } else {
-            if convertBTCStringToSatoshi(sum: sendAmountString) < convertBTCStringToSatoshi(sum: donationAmount) + feeAmount {
-                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeAmount))) plus donation (\(donationAmount) BTC)", -2)
-            } else {
-                sendSum = convertBTCStringToSatoshi(sum: sendAmountString) - (convertBTCStringToSatoshi(sum: donationAmount) + feeAmount)
-                changeSum = inputSum - convertBTCStringToSatoshi(sum: sendAmountString)
-            }
+        if sendSumInSatoshi < donationSumInSatoshi {
+            return ("Sending amount (\(sendAmountString) BTC) must be greater then donation amount (\(donationAmount) BTC)", -2)
         }
+        
+        sendSum = sendSumInSatoshi
         
         //address
         let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         transaction_add_destination(transactionPointer.pointee, transactionDestination)
         
         setStringValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
-        setAmountValue(key: "amount", value: String(sendSum), pointer: transactionDestination.pointee!)
-        
+
         //donation
         if isDonationExists {
             let donationDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -581,11 +587,23 @@ class CoreLibManager: NSObject {
                                  addressID: UInt32(wallet.addresses.count),
                                  binaryData: &binaryData)
         
-        let changeDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        transaction_add_destination(transactionPointer.pointee, changeDestination)
-        
-        setStringValue(key: "address", value: dict!["address"] as! String, pointer: changeDestination.pointee!)
-        setAmountValue(key: "amount", value: String(changeSum), pointer: changeDestination.pointee!)
+        //if we send MAX than we mark "is_change" for destination
+        if sendSumInSatoshi == inputSum {
+            setIntValue(key: "is_change", value: UInt32(1), pointer: transactionDestination.pointee!)
+        } else {
+            if !isPayCommission {
+                sendSum -= donationSumInSatoshi
+            }
+            
+            setAmountValue(key: "amount", value: String(sendSum), pointer: transactionDestination.pointee!)
+            
+            let changeDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+            transaction_add_destination(transactionPointer.pointee, changeDestination)
+            
+            setIntValue(key: "is_change", value: UInt32(1), pointer: changeDestination.pointee!)
+            setStringValue(key: "address", value: dict!["address"] as! String, pointer: changeDestination.pointee!)
+            //        setAmountValue(key: "amount", value: String(changeSum), pointer: changeDestination.pointee!)
+        }
         
         //final
         let serializedTransaction = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
@@ -601,16 +619,50 @@ class CoreLibManager: NSObject {
             return (errrString, -1)
         }
         
-//        let tSign = transaction_sign(transactionPointer.pointee)
-//
-//        if tSign != nil {
-//            let pointer = UnsafeMutablePointer<CustomError>(tSign)
-//            let errrString = String(cString: pointer!.pointee.message)
-//
-//            print("tSign: \(errrString))")
-//
-//            return (errrString, -1)
-//        }
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //modify sums after transaction update
+        
+        let totalSumPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgtf = transaction_get_total_fee(transactionPointer.pointee, totalSumPointer)
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let ats = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
+        if ats != nil {
+            let errrString = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
+            return (errrString, -1)
+        }
+        
+        let amountString = String(cString: amountStringPointer.pointee!)
+        let feeInSatoshiAmount = UInt32(amountString)!
+        let feeInBTCAmount = convertSatoshiToBTC(sum: feeInSatoshiAmount)
+        
+        //checking sums
+        
+        if isPayCommission {
+            sendSum = sendSumInSatoshi
+            if inputSum < sendSum + donationSumInSatoshi + feeInSatoshiAmount {
+                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeInSatoshiAmount))) plus donation amount (\(donationAmount) BTC)", -2)
+            } else {
+                //reamins just for checking all sums - automatically calculated in core library
+                changeSum = inputSum - (sendSum + donationSumInSatoshi + feeInSatoshiAmount)
+            }
+        } else {
+            if sendSumInSatoshi < donationSumInSatoshi + feeInSatoshiAmount {
+                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeInSatoshiAmount))) plus donation (\(donationAmount) BTC)", -2)
+            } else {
+                if sendSumInSatoshi != inputSum {
+                    sendSum = sendSumInSatoshi - (donationSumInSatoshi + feeInSatoshiAmount)
+                    //update value for sending sum
+                    setAmountValue(key: "amount", value: String(sendSum), pointer: transactionDestination.pointee!)
+                    
+                    //reamins just for checking all sums - automatically calculated in core library
+                    changeSum = inputSum - sendSumInSatoshi
+                }
+            }
+        }
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
         
@@ -623,27 +675,13 @@ class CoreLibManager: NSObject {
             return (errrString, -1)
         }
         
-        print("\(tu) -- \(tSer)")
-        
         let data = serializedTransaction.pointee!.pointee.convertToData()
         let str = data.hexEncodedString()
         
         print("end transaction: \(str)")
         
-        let totalSumPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let tgtf = transaction_get_total_fee(transactionPointer.pointee, totalSumPointer)
-        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let ats = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
-        if ats != nil {
-            let _ = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
-        }
-        
-        let amountString = String(cString: amountStringPointer.pointee!)
-        let satoshiAmount = convertSatoshiToBTC(sum: UInt32(amountString)!)
-        
-        return (str, satoshiAmount)
-        //        return ""
+        return (str, feeInBTCAmount)
     }
     
     func createTransactionOld(addressPointer: OpaquePointer, sendAddress: String, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, isPayCommission: Bool, wallet: UserWalletRLM, binaryData: inout BinaryData, inputs: (String,  [SpendableOutputRLM], String?)) -> (String, Double) {
@@ -1002,9 +1040,9 @@ class CoreLibManager: NSObject {
         
         if pspkv != nil {
             let pointer = UnsafeMutablePointer<CustomError>(pspkv)
-            let errrString = String(cString: pointer!.pointee.message)
+            let errorString = String(cString: pointer!.pointee.message)
             
-            print("setPrivateKeyValue: \(errrString))")
+            print("setPrivateKeyValue: \(errorString))")
         }
     }
     
@@ -1015,5 +1053,22 @@ class CoreLibManager: NSObject {
         print("\(mask): \(errorString))")
         
         return errorString
+    }
+    
+    func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
+        let addressUTF8 = address.UTF8CStringPointer
+        let currency = Currency.init(wallet.chain.uint32Value)
+        let error = validate_address(currency, addressUTF8)
+        
+        if error != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(error)
+            let errorString = String(cString: pointer!.pointee.message)
+            
+//            defer { pointer?.deallocate(capacity: 1) }
+            
+            return (false, errorString)
+        } else {
+            return (true, nil)
+        }
     }
 }

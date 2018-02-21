@@ -78,6 +78,11 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
     
     
     @IBAction func backAction(_ sender: Any) {
+        presenter.transactionDTO.sendAmount = 0.0
+        presenter.transactionDTO.transaction?.newChangeAddress = nil
+        presenter.transactionDTO.transaction?.rawTransaction = nil
+        presenter.transactionDTO.transaction?.endSum = nil
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -199,6 +204,9 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
     
     
     @IBAction func nextAction(_ sender: Any) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        changeSum()
+        
         if self.presenter.sumInCrypto != 0.0 && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty && convertBTCStringToSatoshi(sum: amountTF.text!) != 0 {
             self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
         } else {

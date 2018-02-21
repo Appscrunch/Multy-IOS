@@ -81,34 +81,29 @@ class UserPreferences : NSObject {
             return
         }
         
-        let generatedPass = String.generateRandomString()!
+        let generatedPass = Data.generateRandom64ByteData()!
         
-        let cipheredPass = try! aes!.encrypt(Array(generatedPass.utf8))
-        var cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
+        let cipheredPass = try! aes!.encrypt(generatedPass.bytes)
+        let cipheredData = cipheredPass.nsData
         
-        if cipheredData.length != 64 {
-            let mutableData = cipheredData.mutableCopy() as! NSMutableData
-            mutableData.length = 64
-            cipheredData = mutableData.copy() as! NSData
-        }
+        loggingPrint(print("writeCiperedDatabasePassword:\n\n\(generatedPass.base64EncodedString())\n\n\(cipheredData.base64EncodedString())"))
         
         UserDefaults.standard.set(cipheredData, forKey: "databasePassword")
     }
     
     func getAndDecryptDatabasePassword(completion: @escaping (_ password: Data?, _ error: Error?) -> ()) {
-        let decipheredData = UserDefaults.standard.data(forKey: "databasePassword")
+        let cipheredData = UserDefaults.standard.data(forKey: "databasePassword")
         
-        if decipheredData == nil || aes == nil {
+        if cipheredData == nil || aes == nil {
             executedFunction = completion
             
             return
         }
         
-//        let decipheredArray = [UInt8](decipheredData!)
-//        let originalData = try! aes?.decrypt(decipheredArray)
-//        let decipheredString = String(bytes: originalData!, encoding: .utf8)!
+        let originalArrayData = try! aes?.decrypt(cipheredData!.bytes)
+        loggingPrint("getAndDecryptDatabasePassword:\n\n\(cipheredData!.base64EncodedString())\n\n\(originalArrayData!.data.base64EncodedString())\n\n\(originalArrayData!.data.count)")
         
-        completion(decipheredData!, nil)
+        completion(originalArrayData!.data, nil)
     }
     
     func writeCipheredPinMode(mode : Int) {
@@ -125,15 +120,15 @@ class UserPreferences : NSObject {
         }
         
         let cipheredPass = try! aes!.encrypt(Array("\(mode)".utf8))
-        let cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
+        let cipheredData = cipheredPass.nsData
         
         UserDefaults.standard.set(cipheredData, forKey: "pinMode")
     }
     
     func getAndDecryptCipheredMode(completion: @escaping (_ password: String?, _ error: Error?) -> ()) {
-        let decipheredData = UserDefaults.standard.data(forKey: "pinMode")
+        let cipheredData = UserDefaults.standard.data(forKey: "pinMode")
         
-        if decipheredData == nil {
+        if cipheredData == nil {
 //            executedFunction = completion
             writeCipheredPinMode(mode: 0)
             completion("0", nil)
@@ -141,8 +136,7 @@ class UserPreferences : NSObject {
             return
         }
         
-        let decipheredArray = [UInt8](decipheredData!)
-        let originalData = try! aes?.decrypt(decipheredArray)
+        let originalData = try! aes?.decrypt(cipheredData!.bytes)
         if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
             completion(decipheredString, nil)
         } else {
@@ -157,22 +151,21 @@ class UserPreferences : NSObject {
         }
         
         let cipheredPass = try! aes!.encrypt(Array(pin.utf8))
-        let cipheredData = NSData(bytes: cipheredPass, length: cipheredPass.count)
+        let cipheredData = cipheredPass.nsData
         
         UserDefaults.standard.set(cipheredData, forKey: "pin")
     }
     
     func getAndDecryptPin(completion: @escaping (_ password: String?, _ error: Error?) -> ()) {
-        let decipheredData = UserDefaults.standard.data(forKey: "pin")
+        let cipheredData = UserDefaults.standard.data(forKey: "pin")
         
-        if decipheredData == nil {
+        if cipheredData == nil {
             completion(nil, nil)
             
             return
         }
         
-        let decipheredArray = [UInt8](decipheredData!)
-        let originalData = try! aes?.decrypt(decipheredArray)
+        let originalData = try! aes?.decrypt(cipheredData!.bytes)
         if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
             completion(decipheredString, nil)
         } else {

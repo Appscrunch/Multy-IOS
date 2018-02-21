@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()
         // check for screenshot
         NotificationCenter.default.addObserver(
             forName: .UIApplicationUserDidTakeScreenshot,
@@ -186,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
-        switch false /*isDeviceJailbroken()*/ {
+        switch isDeviceJailbroken() {
         case true:
             assetVC.presenter.isJailed = true
         case false:

@@ -22,20 +22,6 @@ extension String {
         }
     }
     
-    static func generateRandomString() -> String? {
-        
-        var keyData = Data(count: 32)
-        let result = keyData.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, keyData.count, $0)
-        }
-        if result == errSecSuccess {
-            return keyData.base64EncodedString()
-        } else {
-            print("Problem generating random bytes")
-            return nil
-        }
-    }
-    
     func toStringWithComma() -> Double {
         if self.isEmpty {
             return 0.0
@@ -50,16 +36,5 @@ extension String {
         } else {
             return formatter.number(from: self)!.doubleValue
         }
-    }
-    
-    func isValidCryptoAddress() -> Bool {
-        //for now: bitcoin
-//        let pattern = "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$"//for bitcoin main net
-//        let addressPredicate = NSPredicate(format: "SELF MATHES %@", pattern)
-//
-//        return addressPredicate.evaluate(with: self)
-        
-        //bitcoin testnet
-        return self.count < 36 && self.count > 25
     }
 }

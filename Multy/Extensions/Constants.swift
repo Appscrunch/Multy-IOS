@@ -105,9 +105,9 @@ enum TxStatus : Int {
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let stageString = "api.multy.io"
-let apiUrl = "https://\(stageString)/"
-let socketUrl = "wss://\(stageString)/"
+let shortURL = "stage.multy.io"
+let apiUrl = "https://\(shortURL)/"
+let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"
 let apiUrlTest = "http://192.168.0.125:8080/"
 let nonLocalURL = "http://88.198.47.112:7778/"
