@@ -59,6 +59,10 @@ class SeedPhraseWordPresenter: NSObject {
             self.mainVC?.mediumWordLbl.text = mnemonicPhraseArray[3 * countOfTaps + 1]
             self.mainVC?.bottomWord.text = mnemonicPhraseArray[3 * countOfTaps + 2]
         }  else {
+            if self.mainVC!.whereFrom != nil {
+                self.mainVC!.navigationController?.popToViewController(self.mainVC!.whereFrom!, animated: true)
+                return
+            }
             self.mainVC?.performSegue(withIdentifier: "backupSeedPhraseVC", sender: UIButton.self)
         }
     }
