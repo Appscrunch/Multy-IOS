@@ -9,6 +9,18 @@ class CoreLibManager: NSObject {
     static let shared = CoreLibManager()
     var donationAddress = UserDefaults.standard.string(forKey: "BTCDonationAddress") != nil ? UserDefaults.standard.string(forKey: "BTCDonationAddress")! : ""
     
+    func mnemonicAllWords() -> Array<String> {
+        let mnemonicArrayPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        defer { mnemonicArrayPointer.deallocate(capacity: 1) }
+        
+        mnemonic_get_dictionary(mnemonicArrayPointer)
+        
+        let mnemonicArrayString = String(cString: mnemonicArrayPointer.pointee!).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return mnemonicArrayString.components(separatedBy: " ")
+    }
+    
     func testTransaction(from binaryData: inout BinaryData, wallet: UserWalletRLM) {
         
 //        let inData = Date()
