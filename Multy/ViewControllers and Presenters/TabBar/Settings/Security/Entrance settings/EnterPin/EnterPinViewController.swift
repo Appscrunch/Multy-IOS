@@ -17,6 +17,8 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     var passFromPref = ""
     
+    var whereFrom: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupButtons()
@@ -41,6 +43,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                 self.view.isUserInteractionEnabled = true
                 if self.pinTF.text! == self.passFromPref {
+                    self.cancelDelegate?.presentNoInternet()
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     shakeView(viewForShake: self.viewWithCircles)
@@ -61,8 +64,10 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        self.cancelDelegate?.presentNoInternet()
         self.dismiss(animated: true, completion: nil)
+        if self.whereFrom != nil && self.whereFrom!.className == "SettingsViewController" {
+            self.whereFrom?.viewWillAppear(true)
+        }
     }
     
     func clearAllCircles() {

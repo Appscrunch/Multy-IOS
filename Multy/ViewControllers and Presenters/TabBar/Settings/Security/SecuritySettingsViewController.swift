@@ -48,9 +48,9 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     }
     
     @IBAction func goToEntranceSettingsAction(_ sender: Any) {
-        self.overlayBlurredBackgroundView()
-//        self.performSegue(withIdentifier: "entranceSettingsVC", sender: sender)
-//        sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: blockSettingsTap)
+//        self.overlayBlurredBackgroundView()
+        self.performSegue(withIdentifier: "entranceSettingsVC", sender: sender)
+        sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: blockSettingsTap)
     }
     
     @IBAction func restoreSeedAction(_ sender: Any) {

@@ -18,6 +18,8 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     let presenter = SettingsPresenter()
     let authVC = SecureViewController()
     
+    var pinStr: String?
+    
     let opacityForNotImplementedView: CGFloat = 0.5  // not implemented features
     
     override func viewDidLoad() {
@@ -25,6 +27,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         self.presenter.settingsVC = self
         setupForNotImplementedViews()
         sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
+        self.getPassFromUserDef()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,9 +85,19 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     @IBAction func goToSecuritySettingsAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings") as! SecuritySettingsViewController
-        secureSettingsVC.resetDelegate = self
-        self.navigationController?.pushViewController(secureSettingsVC, animated: true)
+        if self.pinStr == nil {
+            let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings") as! SecuritySettingsViewController
+            secureSettingsVC.resetDelegate = self
+            self.navigationController?.pushViewController(secureSettingsVC, animated: true)
+        } else {
+            (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            let pinVC = storyboard.instantiateViewController(withIdentifier: "pinVC") as! EnterPinViewController
+            pinVC.cancelDelegate = self
+            pinVC.whereFrom = self
+            pinVC.modalPresentationStyle = .overCurrentContext
+            self.present(pinVC, animated: true, completion: nil)
+        }
         sendAnalyticsEvent(screenName: screenSettings, eventName: securitySettingsTap)
     }
     
@@ -102,6 +115,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
             DataManager.shared.clearDB { (err) in
                 let assetVC = self.tabBarController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
                 UserDefaults.standard.removeObject(forKey: "isFirstLaunch")
+                UserDefaults.standard.removeObject(forKey: "pin")
                 assetVC.isFirstLaunch = true
                 assetVC.presenter.account = nil
                 exit(0)
@@ -112,6 +126,21 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     }
     
     func presentNoInternet() {
-        
+        self.goToSecureSettings()
+    }
+    
+    func getPassFromUserDef() {
+        UserPreferences.shared.getAndDecryptPin { (pin, err) in
+            if pin != nil {
+                self.pinStr = pin
+            }
+        }
+    }
+    
+    func goToSecureSettings() {
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings") as! SecuritySettingsViewController
+        secureSettingsVC.resetDelegate = self
+        self.navigationController?.pushViewController(secureSettingsVC, animated: true)
     }
 }

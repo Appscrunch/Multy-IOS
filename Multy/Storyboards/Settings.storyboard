@@ -142,7 +142,6 @@
                                                 <rect key="frame" x="0.0" y="1" width="375" height="62"/>
                                                 <connections>
                                                     <action selector="goToEntranceSettingsAction:" destination="AOL-gq-xiv" eventType="touchUpInside" id="EPv-Sm-5PA"/>
-                                                    <segue destination="M6w-XJ-zG4" kind="presentation" identifier="pinVC" modalPresentationStyle="overCurrentContext" id="cIS-lR-rfL"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -987,7 +986,7 @@
         <!--Enter Pin View Controller-->
         <scene sceneID="SF3-Ta-omb">
             <objects>
-                <viewController id="M6w-XJ-zG4" customClass="EnterPinViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pinVC" id="M6w-XJ-zG4" customClass="EnterPinViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P2l-jZ-XrA"/>
                         <viewControllerLayoutGuide type="bottom" id="yRK-n7-OHD"/>
@@ -1109,7 +1108,6 @@
                                             <color key="titleColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="cancelAction:" destination="M6w-XJ-zG4" eventType="touchUpInside" id="Jga-cd-Gxa"/>
                                             <action selector="tapAction:" destination="M6w-XJ-zG4" eventType="touchUpInside" id="xhf-9U-tVk"/>
                                         </connections>
                                     </button>
@@ -1127,14 +1125,26 @@
                                             <action selector="removeLastAction:" destination="M6w-XJ-zG4" eventType="touchUpInside" id="TIB-LK-Ipa"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsO-57-6kh">
+                                        <rect key="frame" x="0.0" y="300" width="76" height="76"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelAction:" destination="M6w-XJ-zG4" eventType="touchUpInside" id="X8S-Ji-zgy"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="eMC-C7-cMe" firstAttribute="centerY" secondItem="eOc-vI-lxb" secondAttribute="centerY" id="18C-Dj-JSH"/>
                                     <constraint firstItem="12e-gm-bgv" firstAttribute="height" secondItem="BUR-c7-sC6" secondAttribute="height" multiplier="76/376" id="4a7-qd-KY9"/>
                                     <constraint firstItem="16o-y8-zbA" firstAttribute="top" secondItem="eOc-vI-lxb" secondAttribute="bottom" constant="24" id="4j5-sO-JTp"/>
+                                    <constraint firstItem="tsO-57-6kh" firstAttribute="centerX" secondItem="12e-gm-bgv" secondAttribute="centerX" id="4lH-Zz-Bec"/>
                                     <constraint firstItem="k0P-oe-mUG" firstAttribute="leading" secondItem="mWH-6e-FNo" secondAttribute="leading" constant="-20" id="5kc-Hl-mg2"/>
                                     <constraint firstItem="k0P-oe-mUG" firstAttribute="trailing" secondItem="mWH-6e-FNo" secondAttribute="trailing" constant="20" id="7Zb-g8-Qbt"/>
                                     <constraint firstItem="12e-gm-bgv" firstAttribute="top" secondItem="BUR-c7-sC6" secondAttribute="top" id="7yp-Fm-7HG"/>
+                                    <constraint firstItem="tsO-57-6kh" firstAttribute="leading" secondItem="BUR-c7-sC6" secondAttribute="leading" id="8Wx-93-5Kb"/>
                                     <constraint firstItem="Q5P-Ni-MVF" firstAttribute="centerY" secondItem="16o-y8-zbA" secondAttribute="centerY" id="8uV-3w-8ec"/>
                                     <constraint firstItem="12e-gm-bgv" firstAttribute="leading" secondItem="BUR-c7-sC6" secondAttribute="leading" id="9Tt-44-bfg"/>
                                     <constraint firstAttribute="trailing" secondItem="DZA-nt-dij" secondAttribute="trailing" id="AH8-bS-Wf3"/>
@@ -1144,6 +1154,7 @@
                                     <constraint firstItem="eOc-vI-lxb" firstAttribute="width" secondItem="12e-gm-bgv" secondAttribute="width" id="Hao-OQ-XKs"/>
                                     <constraint firstItem="kRW-Ja-Vf1" firstAttribute="centerY" secondItem="eOc-vI-lxb" secondAttribute="centerY" id="Ifo-FU-DXM"/>
                                     <constraint firstItem="DZA-nt-dij" firstAttribute="leading" secondItem="HXZ-mX-QWr" secondAttribute="trailing" constant="23" id="Io0-EX-3C8"/>
+                                    <constraint firstAttribute="bottom" secondItem="tsO-57-6kh" secondAttribute="bottom" id="LIQ-jY-tQb"/>
                                     <constraint firstItem="4ZY-SP-GsI" firstAttribute="height" secondItem="12e-gm-bgv" secondAttribute="height" id="LeX-Nh-3dh"/>
                                     <constraint firstItem="4ZY-SP-GsI" firstAttribute="centerX" secondItem="BUR-c7-sC6" secondAttribute="centerX" id="LnE-YL-rDk"/>
                                     <constraint firstItem="ECp-Kf-TNx" firstAttribute="height" secondItem="12e-gm-bgv" secondAttribute="height" id="QhJ-TY-2FH"/>
@@ -1165,6 +1176,7 @@
                                     <constraint firstItem="16o-y8-zbA" firstAttribute="width" secondItem="12e-gm-bgv" secondAttribute="width" id="ggB-ME-1sQ"/>
                                     <constraint firstItem="kRW-Ja-Vf1" firstAttribute="width" secondItem="12e-gm-bgv" secondAttribute="width" id="gsx-rY-zGz"/>
                                     <constraint firstAttribute="bottom" secondItem="4ZY-SP-GsI" secondAttribute="bottom" id="hF5-jy-Myg"/>
+                                    <constraint firstItem="tsO-57-6kh" firstAttribute="width" secondItem="12e-gm-bgv" secondAttribute="width" id="hLT-Ge-enz"/>
                                     <constraint firstAttribute="height" constant="376" id="hw3-uG-XUi"/>
                                     <constraint firstItem="ECp-Kf-TNx" firstAttribute="leading" secondItem="BUR-c7-sC6" secondAttribute="leading" id="iRb-q8-zJO"/>
                                     <constraint firstItem="kRW-Ja-Vf1" firstAttribute="leading" secondItem="BUR-c7-sC6" secondAttribute="leading" id="iaT-mq-l9B"/>
@@ -1178,8 +1190,10 @@
                                     <constraint firstItem="mWH-6e-FNo" firstAttribute="centerX" secondItem="16o-y8-zbA" secondAttribute="centerX" id="p7K-wY-nGV"/>
                                     <constraint firstItem="ECp-Kf-TNx" firstAttribute="centerY" secondItem="16o-y8-zbA" secondAttribute="centerY" id="pSD-4r-A6j"/>
                                     <constraint firstItem="HXZ-mX-QWr" firstAttribute="top" secondItem="BUR-c7-sC6" secondAttribute="top" id="r9f-Ag-0v1"/>
+                                    <constraint firstItem="tsO-57-6kh" firstAttribute="centerY" secondItem="4ZY-SP-GsI" secondAttribute="centerY" id="ryQ-bi-PSL"/>
                                     <constraint firstItem="DZA-nt-dij" firstAttribute="width" secondItem="12e-gm-bgv" secondAttribute="width" id="tO6-6w-cFV"/>
                                     <constraint firstItem="kRW-Ja-Vf1" firstAttribute="centerX" secondItem="12e-gm-bgv" secondAttribute="centerX" id="v8p-3K-HDq"/>
+                                    <constraint firstItem="tsO-57-6kh" firstAttribute="height" secondItem="12e-gm-bgv" secondAttribute="height" id="y1W-sr-eFM"/>
                                     <constraint firstItem="Q5P-Ni-MVF" firstAttribute="width" secondItem="12e-gm-bgv" secondAttribute="width" id="ytL-H3-Tup"/>
                                 </constraints>
                             </view>
@@ -1301,7 +1315,7 @@
                                     <constraint firstItem="5oq-ja-hdi" firstAttribute="top" secondItem="Cnr-wm-19k" secondAttribute="top" id="w9J-rh-wH7"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Krr-n7-dFs">
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Krr-n7-dFs">
                                 <rect key="frame" x="138" y="57" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
