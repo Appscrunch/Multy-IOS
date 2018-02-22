@@ -27,14 +27,16 @@ extension String {
             return 0.0
         }
         
-        let formatter = NumberFormatter()
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.decimalSeparator = ","
+        //        let formatter = NumberFormatter()
+        //        formatter.numberStyle = NumberFormatter.Style.decimal
+        //        formatter.decimalSeparator = ","
+        //        formatter.maximumFractionDigits = 8
         
-        if formatter.number(from: self) == nil {
-            return 0
-        } else {
-            return formatter.number(from: self)!.doubleValue
-        }
+        //        if formatter.number(from: self) == nil {
+        //            return 0
+        //        } else {
+        //            return formatter.number(from: self)!.doubleValue
+        //        }
+        return Double(self.replacingOccurrences(of: ",", with: "."))!
     }
 }
