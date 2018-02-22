@@ -64,7 +64,9 @@ class SeedPhraseAboutViewController: UIViewController, AnalyticsProtocol {
             let destVC = segue.destination as! SeedPhraseWordViewController
             if self.whereFrom != nil {
                 destVC.whereFrom = self.whereFrom
-                destVC.isNeedToBackup = self.isNeedToBackup!
+                if self.isNeedToBackup != nil {
+                    destVC.isNeedToBackup = self.isNeedToBackup!
+                }
             }
         }
     }

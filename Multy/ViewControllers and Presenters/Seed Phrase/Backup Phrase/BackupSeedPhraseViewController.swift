@@ -59,10 +59,10 @@ class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func continueAction(_ sender: Any) {
         if self.isNeedToBackup != nil && self.isNeedToBackup == false {
-            if self.whereFrom != nil {
-                self.navigationController?.popToViewController(whereFrom!, animated: true)
-                return
-            }
+//            if self.whereFrom != nil {
+//                self.navigationController?.popToViewController(whereFrom!, animated: true)
+//                return
+//            }
         }
         self.performSegue(withIdentifier: "checkPhraseVC", sender: UIButton.self)
     }
@@ -89,6 +89,7 @@ class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
         if segue.identifier == "checkPhraseVC" {
             let nextVC = segue.destination as! CheckWordsViewController
             nextVC.isRestore = self.isRestore
+            nextVC.whereFrom = self.whereFrom
         }
     }
     

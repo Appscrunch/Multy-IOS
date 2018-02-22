@@ -78,7 +78,7 @@ func convertSatoshiToBTCString(sum: UInt32) -> String {
 }
 
 func convertBTCStringToSatoshi(sum: String) -> UInt32 {
-    return UInt32(sum.toStringWithComma() * pow(10, 8))
+    return UInt32(sum.convertStringWithCommaToDouble() * pow(10, 8))
 }
 
 func shakeView(viewForShake: UIView) {
