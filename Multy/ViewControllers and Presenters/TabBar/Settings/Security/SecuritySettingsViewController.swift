@@ -48,8 +48,9 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     }
     
     @IBAction func goToEntranceSettingsAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "entranceSettingsVC", sender: sender)
-        sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: blockSettingsTap)
+        self.overlayBlurredBackgroundView()
+//        self.performSegue(withIdentifier: "entranceSettingsVC", sender: sender)
+//        sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: blockSettingsTap)
     }
     
     @IBAction func restoreSeedAction(_ sender: Any) {
@@ -104,7 +105,35 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     }
     
     func presentNoInternet() {
+        removeBlurredBackgroundView()
+    }
+    
+    func overlayBlurredBackgroundView() {
+        let blurredBackgroundView = UIVisualEffectView()
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .extraLight)
+        view.addSubview(blurredBackgroundView)
         
+        //        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        //        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //        blurEffectView.frame = view.bounds
+        //        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //        view.addSubview(blurEffectView)
+    }
+    
+    func removeBlurredBackgroundView() {
+        for subview in view.subviews {
+            if subview.isKind(of: UIVisualEffectView.self) {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pinVC" {
+            let destVC = segue.destination as! EnterPinViewController
+            destVC.cancelDelegate = self
+        }
     }
     
 }

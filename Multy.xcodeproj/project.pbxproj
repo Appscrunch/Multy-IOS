@@ -40,6 +40,8 @@
 		455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCFC1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift */; };
 		455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8751FD842610093F69D /* CustomTabBarViewController.swift */; };
 		455EA8791FD851830093F69D /* FastOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8781FD851830093F69D /* FastOperationsViewController.swift */; };
+		456F20F2203F149000098405 /* EnterPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F20F0203F149000098405 /* EnterPinViewController.swift */; };
+		456F20F3203F149000098405 /* EnterPinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F20F1203F149000098405 /* EnterPinPresenter.swift */; };
 		457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */; };
 		457569341FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */; };
 		4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */; };
@@ -239,6 +241,8 @@
 		455CDCFC1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletNameTableViewCell.swift; sourceTree = "<group>"; };
 		455EA8751FD842610093F69D /* CustomTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarViewController.swift; sourceTree = "<group>"; };
 		455EA8781FD851830093F69D /* FastOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastOperationsViewController.swift; sourceTree = "<group>"; };
+		456F20F0203F149000098405 /* EnterPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterPinViewController.swift; sourceTree = "<group>"; };
+		456F20F1203F149000098405 /* EnterPinPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterPinPresenter.swift; sourceTree = "<group>"; };
 		457569311FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutViewController.swift; sourceTree = "<group>"; };
 		457569331FBDBC9600FDEE20 /* SeedPhraseAboutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseAboutPresenter.swift; sourceTree = "<group>"; };
 		457569391FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseWordPresenter.swift; sourceTree = "<group>"; };
@@ -508,6 +512,7 @@
 			children = (
 				45409453203348CA00603DB5 /* EntranceSettingsViewController.swift */,
 				45409455203348DD00603DB5 /* EntranceSettingsPresenter.swift */,
+				456F20EF203F149000098405 /* EnterPin */,
 				454094572033529600603DB5 /* PinCode */,
 			);
 			path = "Entrance settings";
@@ -575,6 +580,15 @@
 				451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */,
 			);
 			path = "Fast Operations";
+			sourceTree = "<group>";
+		};
+		456F20EF203F149000098405 /* EnterPin */ = {
+			isa = PBXGroup;
+			children = (
+				456F20F0203F149000098405 /* EnterPinViewController.swift */,
+				456F20F1203F149000098405 /* EnterPinPresenter.swift */,
+			);
+			path = EnterPin;
 			sourceTree = "<group>";
 		};
 		457486131FBD7DAF002D1925 /* Additional Libraries */ = {
@@ -1518,6 +1532,8 @@
 				455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */,
 				FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */,
 				45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */,
+				456F20F2203F149000098405 /* EnterPinViewController.swift in Sources */,
+				456F20F3203F149000098405 /* EnterPinPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

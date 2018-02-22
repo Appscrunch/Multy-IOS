@@ -21,12 +21,7 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
     override func viewDidLoad() {
         super.viewDidLoad()
         pinTF.becomeFirstResponder()
-        
-        for circle in circleView {
-            circle.layer.borderWidth = 2
-            circle.layer.borderColor = #colorLiteral(red: 0.7646385431, green: 0.8155806661, blue: 0.8860673904, alpha: 1)
-            circle.backgroundColor = .clear
-        }
+        clearAllCircles()
     }
     
     @IBAction func backAction(_ sender: Any) {
