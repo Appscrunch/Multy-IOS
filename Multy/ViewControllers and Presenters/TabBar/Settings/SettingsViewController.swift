@@ -97,6 +97,8 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     func cancelAction() {
         RealmManager.shared.clearRealm { (ok, err) in
+            DataManager.shared.finishRealmSession()
+            UserDefaults.standard.removeObject(forKey: "databasePassword")
             DataManager.shared.clearDB { (err) in
                 let assetVC = self.tabBarController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
                 UserDefaults.standard.removeObject(forKey: "isFirstLaunch")
