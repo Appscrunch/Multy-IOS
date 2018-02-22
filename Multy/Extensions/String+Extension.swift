@@ -22,7 +22,7 @@ extension String {
         }
     }
     
-    func toStringWithComma() -> Double {
+    func convertStringWithCommaToDouble() -> Double {
         if self.isEmpty {
             return 0.0
         }

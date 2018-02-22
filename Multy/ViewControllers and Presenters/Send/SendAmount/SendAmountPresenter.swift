@@ -225,7 +225,7 @@ class SendAmountPresenter: NSObject {
     
     func saveTfValue() {
         if self.isCrypto {
-            self.sumInCrypto = self.sendAmountVC!.topSumLbl.text!.toStringWithComma()
+            self.sumInCrypto = self.sendAmountVC!.topSumLbl.text!.convertStringWithCommaToDouble()
             self.sumInFiat = self.sumInCrypto * exchangeCourse
             self.sumInFiat = Double(round(100 * self.sumInFiat)/100)
             if self.sumInFiat > transactionDTO.choosenWallet!.sumInFiat {
@@ -235,7 +235,7 @@ class SendAmountPresenter: NSObject {
             }
             self.sendAmountVC?.bottomCurrencyLbl.text = self.fiatName
         } else {
-            self.sumInFiat = self.sendAmountVC!.topSumLbl.text!.toStringWithComma()
+            self.sumInFiat = self.sendAmountVC!.topSumLbl.text!.convertStringWithCommaToDouble()
             self.sumInCrypto = self.sumInFiat / exchangeCourse
             self.sumInCrypto = Double(round(100000000 * self.sumInCrypto)/100000000)
             if self.sumInCrypto > self.availableSumInCrypto! {
