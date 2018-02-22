@@ -56,7 +56,9 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
         let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
         let destVC = storyboard.instantiateViewController(withIdentifier: "seedAbout") as! SeedPhraseAboutViewController
         destVC.whereFrom = self
-        destVC.isNeedToBackup = self.isNeedToBackup
+        if self.isNeedToBackup == true {
+            destVC.isNeedToBackup = self.isNeedToBackup
+        }
         self.navigationController?.pushViewController(destVC, animated: true)
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: viewSeedTap)
     }

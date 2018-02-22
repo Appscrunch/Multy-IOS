@@ -104,8 +104,9 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
                 UserDefaults.standard.removeObject(forKey: "isFirstLaunch")
                 assetVC.isFirstLaunch = true
                 assetVC.presenter.account = nil
-                assetVC.viewDidLoad()
-                (self.tabBarController as! CustomTabBarViewController).setSelectIndex(from: 4, to: 0)
+                exit(0)
+//                assetVC.viewDidLoad()
+//                (self.tabBarController as! CustomTabBarViewController).setSelectIndex(from: 4, to: 0)
             }
         }
     }

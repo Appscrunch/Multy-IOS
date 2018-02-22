@@ -31,6 +31,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     var wordArray = [String]()
     var isWordFinded = false
     
+    var whereFrom: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -176,6 +178,10 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         let alert = UIAlertController(title: "Cancel", message: "Are you really want to cancel?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             self.sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: cancelTap)
+            if self.whereFrom != nil {
+                self.navigationController?.popToViewController(self.whereFrom!, animated: true)
+                return
+            }
             self.navigationController?.popToRootViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
