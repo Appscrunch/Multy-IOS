@@ -20,7 +20,6 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.detectingSeed()
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: screenSecuritySettings)
 //        self.entranceView.alpha = opacityForNotImplementedView
 //        self.entranceView.isUserInteractionEnabled = false
@@ -31,6 +30,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.detectingSeed()
     }
 
     @IBAction func backAction(_ sender: Any) {
@@ -81,6 +81,10 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
                 self.entranceTopConstraint.constant = 12
                 self.noneLbl.isHidden = false
                 self.warningImg.isHidden = false
+            } else {
+                self.entranceTopConstraint.constant = 20
+                self.noneLbl.isHidden = true
+                self.warningImg.isHidden = true
             }
             if self.isNeedToBackup! {
                 self.seedLbl.text = "Backup Seed"

@@ -19,11 +19,18 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     var whereFrom: UIViewController?
     
+    let touchMe = TouchIDAuth()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupButtons()
         self.clearAllCircles()
         self.getPass()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.biometricAuth()
     }
     
     func setupButtons() {
@@ -98,6 +105,27 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
+    func biometricAuth() {
+        self.touchMe.authenticateUser { (message) in
+            if let message = message {
+                self.tabBarController?.tabBar.isUserInteractionEnabled = false
+                let alert = UIAlertController(title: "Access Denied", message: "Something went wrong. Try enter pin", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+
+                }))
+                self.present(alert, animated: true, completion: nil)
+                //                appDel.openedAlert = alert
+            } else {
+                self.cancelDelegate?.presentNoInternet()
+                self.dismiss(animated: true, completion: {
+//                    self.tabBarController?.tabBar.isUserInteractionEnabled = true
+                })
+                
+                //                NotificationCenter.default.post(name: Notification.Name("hideKeyboard"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("showKeyboard"), object: nil)
+                NotificationCenter.default.post(name: Notification.Name("canDisablePin"), object: nil)
+            }
+        }
+    }
     
 }

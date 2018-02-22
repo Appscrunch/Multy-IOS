@@ -27,7 +27,6 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         self.presenter.settingsVC = self
         setupForNotImplementedViews()
         sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
-        self.getPassFromUserDef()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,6 +37,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.getPassFromUserDef()
 //        UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
 //            self.pinSwitch.isOn = (pinMode! as NSString).boolValue
 //        })
@@ -131,9 +131,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     func getPassFromUserDef() {
         UserPreferences.shared.getAndDecryptPin { (pin, err) in
-            if pin != nil {
                 self.pinStr = pin
-            }
         }
     }
     

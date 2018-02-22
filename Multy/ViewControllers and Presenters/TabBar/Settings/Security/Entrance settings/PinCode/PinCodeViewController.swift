@@ -24,6 +24,10 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
         clearAllCircles()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -94,6 +98,7 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
         }
         self.pinTF.text = ""
     }
+    
     
 //    func shakeView() {
 //        let animation = CABasicAnimation(keyPath: "position")
