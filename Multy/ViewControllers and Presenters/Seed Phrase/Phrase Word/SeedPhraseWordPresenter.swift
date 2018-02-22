@@ -10,7 +10,7 @@ class SeedPhraseWordPresenter: NSObject {
     var countOfTaps = -1
     var mnemonicPhraseArray = [String]() {
         didSet {
-            if mnemonicPhraseArray.count > 0 && mainVC?.isNeedToBackup == nil {
+            if mnemonicPhraseArray.count > 0 && DataManager.shared.realmManager.account?.seedPhrase != ""/*&& mainVC?.isNeedToBackup == nil*/ {
                 let mnemonicString = mnemonicPhraseArray.joined(separator: " ")
                 DataManager.shared.realmManager.writeSeedPhrase(mnemonicString, completion: { (error) in
                     if let err = error {
@@ -59,6 +59,10 @@ class SeedPhraseWordPresenter: NSObject {
             self.mainVC?.mediumWordLbl.text = mnemonicPhraseArray[3 * countOfTaps + 1]
             self.mainVC?.bottomWord.text = mnemonicPhraseArray[3 * countOfTaps + 2]
         }  else {
+            if self.mainVC!.whereFrom != nil && self.mainVC!.isNeedToBackup == nil {
+                self.mainVC!.navigationController?.popToViewController(self.mainVC!.whereFrom!, animated: true)
+                return
+            }
             self.mainVC?.performSegue(withIdentifier: "backupSeedPhraseVC", sender: UIButton.self)
         }
     }

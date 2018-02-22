@@ -14,11 +14,9 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
     
     var counter = 0
     
-    var firstPass: Int?
-    var secondPass: Int?
+    var firstPass = ""
     
     var isRepeat = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +40,7 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
                 self.view.isUserInteractionEnabled = false
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.pinTextLbl.text = "Repeat your PIN-code"
-                    self.firstPass = Int(self.pinTF.text! + string)
+                    self.firstPass = self.pinTF.text! + string
                     self.clearAllCircles()
                     self.counter = 0
                     self.isRepeat = true
@@ -53,8 +51,8 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
                 self.view.isUserInteractionEnabled = false
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.view.isUserInteractionEnabled = true
-                    if Int(self.pinTF.text! + string) == self.firstPass {
-                        UserPreferences.shared.writeCipheredPin(pin: "\(self.firstPass!)")
+                    if (self.pinTF.text! + string) == self.firstPass {
+                        UserPreferences.shared.writeCipheredPin(pin: "\(self.firstPass)")
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         shakeView(viewForShake: self.viewWithCircles)
