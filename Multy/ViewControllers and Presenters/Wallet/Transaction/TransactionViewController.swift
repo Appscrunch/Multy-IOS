@@ -79,7 +79,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
     func checkForSendOrReceive() {
         if isIncoming {  // RECEIVE
             self.makeBackColor(color: self.presenter.receiveBackColor)
-            self.titleLbl.text = "Received BTC"
+            self.titleLbl.text = "Transaction Info"
         } else {                        // SEND
             self.makeBackColor(color: self.presenter.sendBackColor)
             self.titleLbl.text = "Sended \(self.cryptoName)"
