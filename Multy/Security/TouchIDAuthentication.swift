@@ -20,7 +20,7 @@ class TouchIDAuth {
         }
 //        context.touchIDAuthenticationAllowableReuseDuration = 3
         
-        context.evaluatePolicy(.deviceOwnerAuthentication,
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                localizedReason: "Logging in with Touch ID") { (success, evaluateError) in
                                 if success {
                                     DispatchQueue.main.async {

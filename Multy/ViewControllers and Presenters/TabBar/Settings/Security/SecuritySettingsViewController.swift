@@ -20,7 +20,6 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.detectingSeed()
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: screenSecuritySettings)
 //        self.entranceView.alpha = opacityForNotImplementedView
 //        self.entranceView.isUserInteractionEnabled = false
@@ -31,6 +30,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.detectingSeed()
     }
 
     @IBAction func backAction(_ sender: Any) {
@@ -48,6 +48,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     }
     
     @IBAction func goToEntranceSettingsAction(_ sender: Any) {
+//        self.overlayBlurredBackgroundView()
         self.performSegue(withIdentifier: "entranceSettingsVC", sender: sender)
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: blockSettingsTap)
     }
@@ -80,6 +81,10 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
                 self.entranceTopConstraint.constant = 12
                 self.noneLbl.isHidden = false
                 self.warningImg.isHidden = false
+            } else {
+                self.entranceTopConstraint.constant = 20
+                self.noneLbl.isHidden = true
+                self.warningImg.isHidden = true
             }
             if self.isNeedToBackup! {
                 self.seedLbl.text = "Backup Seed"
@@ -104,7 +109,35 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     }
     
     func presentNoInternet() {
+        removeBlurredBackgroundView()
+    }
+    
+    func overlayBlurredBackgroundView() {
+        let blurredBackgroundView = UIVisualEffectView()
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .extraLight)
+        view.addSubview(blurredBackgroundView)
         
+        //        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        //        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //        blurEffectView.frame = view.bounds
+        //        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //        view.addSubview(blurEffectView)
+    }
+    
+    func removeBlurredBackgroundView() {
+        for subview in view.subviews {
+            if subview.isKind(of: UIVisualEffectView.self) {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pinVC" {
+            let destVC = segue.destination as! EnterPinViewController
+            destVC.cancelDelegate = self
+        }
     }
     
 }

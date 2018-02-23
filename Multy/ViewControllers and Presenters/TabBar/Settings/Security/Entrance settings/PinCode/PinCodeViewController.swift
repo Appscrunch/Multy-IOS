@@ -21,12 +21,11 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
     override func viewDidLoad() {
         super.viewDidLoad()
         pinTF.becomeFirstResponder()
+        clearAllCircles()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        for circle in circleView {
-            circle.layer.borderWidth = 2
-            circle.layer.borderColor = #colorLiteral(red: 0.7646385431, green: 0.8155806661, blue: 0.8860673904, alpha: 1)
-            circle.backgroundColor = .clear
-        }
     }
     
     @IBAction func backAction(_ sender: Any) {
@@ -99,6 +98,7 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
         }
         self.pinTF.text = ""
     }
+    
     
 //    func shakeView() {
 //        let animation = CABasicAnimation(keyPath: "position")

@@ -12,6 +12,7 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var biometricView: UIView!
     @IBOutlet weak var checkMarkOnPin: UIImageView!
+    @IBOutlet weak var biometricSwitch: UISwitch!
     
     let closeAlpha: CGFloat = 0.5
     
@@ -47,7 +48,11 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
             self.pinView.alpha = closeAlpha
             self.pinView.isUserInteractionEnabled = false
             self.checkMarkOnPin.isHidden = true
+            self.biometricView.alpha = closeAlpha
+            self.biometricView.isUserInteractionEnabled = false
+            self.biometricSwitch.isOn = false
             UserDefaults.standard.removeObject(forKey: "pin")
+            UserPreferences.shared.writeCipheredBiometric(isBiometircOn: false)
             sendAnalyticsEvent(screenName: screenBlockSettings, eventName: pinDisableTap)
         }
     }
@@ -64,6 +69,14 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
         self.navigationController?.pushViewController(destVC, animated: true)
     }
     
+    @IBAction func biometricSwitchAction(_ sender: Any) {
+        if self.biometricSwitch.isOn {
+            UserPreferences.shared.writeCipheredBiometric(isBiometircOn: true)
+        } else {
+            UserPreferences.shared.writeCipheredBiometric(isBiometircOn: false)
+        }
+    }
+    
     func uiSetup() {
         UserPreferences.shared.getAndDecryptPin { (pin, err) in
             if !self.presenter.isNeedToBackup! {
@@ -75,14 +88,23 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
                 
                 return
             }
-            
-            let alert = UIAlertController(title: "Title", message: "\(pin!)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            // check entered pin
+//            let alert = UIAlertController(title: "Title", message: "\(pin!)", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
             self.pinView.isUserInteractionEnabled = true
             self.usePassSwitch.isOn = true
             self.pinView.alpha = 1.0
             self.checkMarkOnPin.isHidden = false
+            UserPreferences.shared.getAndDecryptBiometric(completion: { (isBiometricOn, err) in
+                if isBiometricOn != nil && !isBiometricOn! {
+                    return
+                }
+                self.biometricSwitch.isOn = true
+            })
+            self.biometricView.isUserInteractionEnabled = true
+            self.biometricView.alpha = 1.0
+            
         }
     }
     
