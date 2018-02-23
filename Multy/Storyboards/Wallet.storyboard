@@ -84,14 +84,12 @@
                                 <color key="textColor" red="0.31764705882352939" green="0.40784313725490196" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aqo-BH-hPA">
-                                <rect key="frame" x="124" y="410" width="128" height="56"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any transactions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aqo-BH-hPA">
+                                <rect key="frame" x="112.5" y="410" width="150" height="56"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="D1a-OD-4Sx"/>
+                                    <constraint firstAttribute="width" constant="150" id="D1a-OD-4Sx"/>
                                     <constraint firstAttribute="height" constant="56" id="DsX-qI-nTT"/>
                                 </constraints>
-                                <string key="text">You didn't have 
-operations</string>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.31764705879999999" green="0.40784313729999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -966,8 +964,8 @@ operations</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hzz-4v-4H7">
                                         <rect key="frame" x="0.0" y="265" width="375" height="64"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Private Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8G-dc-Q0i">
-                                                <rect key="frame" x="20" y="21" width="108" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Private Keys" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8G-dc-Q0i">
+                                                <rect key="frame" x="20" y="21" width="133" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1003,18 +1001,17 @@ operations</string>
                                             <constraint firstItem="6mY-Lt-Vq4" firstAttribute="centerY" secondItem="Hzz-4v-4H7" secondAttribute="centerY" id="xJ5-5X-aR0"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8U-E1-QhK">
-                                        <rect key="frame" x="16" y="341" width="343" height="51"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private key allows you or anyone of you behave to spend your crypto assets. You should keep it secret!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8U-E1-QhK">
+                                        <rect key="frame" x="16" y="341" width="343" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="51" id="37W-vN-PiN"/>
+                                            <constraint firstAttribute="height" constant="35" id="37W-vN-PiN"/>
                                         </constraints>
-                                        <string key="text">Private key – A donation is a gift given by physical or legal persons, typically for charitable purposes and/or to benefit a cause. A donation may take various forms, including cash offering, services</string>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBt-8U-2xG">
-                                        <rect key="frame" x="0.0" y="412" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="396" width="375" height="64"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aso-Iw-43a">
                                                 <rect key="frame" x="138" y="21" width="100" height="22"/>
@@ -1040,12 +1037,11 @@ operations</string>
                                             <constraint firstAttribute="trailing" secondItem="c6M-Zm-uVc" secondAttribute="trailing" id="vce-az-dRD"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzu-O0-HqV">
-                                        <rect key="frame" x="16" y="492" width="343" height="69"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove this wallet from UI. Please note that we will be tracking wallet balance and notify you on incoming transactions." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzu-O0-HqV">
+                                        <rect key="frame" x="16" y="476" width="343" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="69" id="U1A-eq-Xjy"/>
+                                            <constraint firstAttribute="height" constant="40" id="U1A-eq-Xjy"/>
                                         </constraints>
-                                        <string key="text">Delete wallet – A donation is a gift given by physical or legal persons, typically for charitable purposes and/or to benefit a cause. A donation may take various forms, including cash offering, services</string>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1130,8 +1126,8 @@ operations</string>
                                     <constraint firstAttribute="height" constant="21" id="ZM4-eZ-dLg"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All BTC Addresses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPx-Xk-TEa">
-                                <rect key="frame" x="116" y="32" width="143" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Wallet Addresses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPx-Xk-TEa">
+                                <rect key="frame" x="107" y="32" width="161" height="24"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1149,14 +1145,8 @@ operations</string>
                                     <constraint firstAttribute="height" constant="1" id="bl2-Zq-jNk"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC ADDRESSES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vv-GM-bV6">
-                                <rect key="frame" x="20" y="86" width="94" height="16.5"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
-                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yul-RR-F2h">
-                                <rect key="frame" x="0.0" y="112.5" width="375" height="554.5"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.81170886754989624" green="0.85090118646621704" blue="0.90960949659347534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -1168,25 +1158,22 @@ operations</string>
                         <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="yul-RR-F2h" secondAttribute="trailing" id="0qd-v5-N8W"/>
-                            <constraint firstItem="9vv-GM-bV6" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" constant="20" id="3Al-uh-bRZ"/>
                             <constraint firstItem="KDx-Q1-Axi" firstAttribute="trailing" secondItem="sBq-8E-UCv" secondAttribute="trailing" constant="20" id="CTt-W3-vxB"/>
+                            <constraint firstItem="yul-RR-F2h" firstAttribute="top" secondItem="0b1-fi-W3g" secondAttribute="bottom" id="CWA-kF-HiC"/>
                             <constraint firstItem="KDx-Q1-Axi" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" id="DT2-Dd-XzC"/>
                             <constraint firstItem="0b1-fi-W3g" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" id="DiG-B5-aew"/>
                             <constraint firstItem="sBq-8E-UCv" firstAttribute="top" secondItem="8tS-Ni-ugU" secondAttribute="bottom" constant="12" id="IBA-nS-nLg"/>
                             <constraint firstItem="0b1-fi-W3g" firstAttribute="top" secondItem="pPx-Xk-TEa" secondAttribute="bottom" constant="9" id="JcS-rn-5yB"/>
-                            <constraint firstItem="9vv-GM-bV6" firstAttribute="top" secondItem="0b1-fi-W3g" secondAttribute="bottom" constant="20" id="Le7-Hp-8Nm"/>
                             <constraint firstItem="POU-36-eGx" firstAttribute="top" secondItem="yul-RR-F2h" secondAttribute="bottom" id="Nng-AL-uZw"/>
                             <constraint firstItem="pPx-Xk-TEa" firstAttribute="centerX" secondItem="ZdL-CL-zEQ" secondAttribute="centerX" id="RWE-U6-T3f"/>
                             <constraint firstItem="pPx-Xk-TEa" firstAttribute="top" secondItem="8tS-Ni-ugU" secondAttribute="bottom" constant="12" id="jnw-ld-LRA"/>
                             <constraint firstItem="sBq-8E-UCv" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" constant="8" id="kvM-jh-SAO"/>
                             <constraint firstAttribute="trailing" secondItem="0b1-fi-W3g" secondAttribute="trailing" id="sUF-Aa-pRu"/>
-                            <constraint firstItem="yul-RR-F2h" firstAttribute="top" secondItem="9vv-GM-bV6" secondAttribute="bottom" constant="10" id="vh2-pS-lE8"/>
                             <constraint firstItem="KDx-Q1-Axi" firstAttribute="top" secondItem="8tS-Ni-ugU" secondAttribute="bottom" constant="8" id="xSH-dh-c6I"/>
                             <constraint firstItem="yul-RR-F2h" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" id="zIV-vN-H9i"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="headerLbl" destination="9vv-GM-bV6" id="5Ts-fP-hDU"/>
                         <outlet property="tableView" destination="yul-RR-F2h" id="aWp-Jy-beM"/>
                     </connections>
                 </viewController>
