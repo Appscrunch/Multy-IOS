@@ -82,7 +82,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             self.titleLbl.text = "Transaction Info"
         } else {                        // SEND
             self.makeBackColor(color: self.presenter.sendBackColor)
-            self.titleLbl.text = "Sended \(self.cryptoName)"
+            self.titleLbl.text = "Transaction Info"
             self.transactionImg.image = #imageLiteral(resourceName: "sendBigIcon")
 //            self.transctionSumLbl.text = "-\(self.sumInCripto)"
 //            self.transactionCurencyLbl.text = self.cryptoName.uppercased()
