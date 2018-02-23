@@ -174,4 +174,33 @@ class UserPreferences : NSObject {
         }
     }
     
+    func writeCipheredBiometric(isBiometircOn: Bool) {
+        if aes == nil {
+            return
+        }
+        
+        let cipheredPass = try! aes!.encrypt(Array("\(isBiometircOn)".utf8))
+        let cipheredData = cipheredPass.nsData
+        
+        UserDefaults.standard.set(cipheredData, forKey: "biometric")
+    }
+    
+    func getAndDecryptBiometric(completion: @escaping (_ isBiometircOn: Bool?, _ error: Error?) -> ()) {
+        let cipheredData = UserDefaults.standard.data(forKey: "biometric")
+        
+        if cipheredData == nil {
+            completion(nil, nil)
+            
+            return
+        }
+        
+        let originalData = try! aes?.decrypt(cipheredData!.bytes)
+        if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
+            completion((decipheredString as NSString).boolValue, nil)
+        } else {
+            //            self.writeCipheredPinMode(mode: 0)
+            completion(nil, nil)
+        }
+    }
+    
 }

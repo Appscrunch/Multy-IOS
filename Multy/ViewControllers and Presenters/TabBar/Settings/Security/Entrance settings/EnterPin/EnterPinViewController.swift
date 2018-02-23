@@ -30,7 +30,12 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.biometricAuth()
+        UserPreferences.shared.getAndDecryptBiometric(completion: { (isBiometricOn, err) in
+            if isBiometricOn != nil && !isBiometricOn! {
+                return
+            }
+            self.biometricAuth()
+        })
     }
     
     func setupButtons() {

@@ -537,6 +537,9 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jEn-aF-XuM">
                                                 <rect key="frame" x="310" y="16" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.01194981113" green="0.47699987890000001" blue="0.99941056969999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="biometricSwitchAction:" destination="8hJ-UU-u4O" eventType="valueChanged" id="Ya5-e6-5Pc"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -643,6 +646,7 @@
                     </view>
                     <connections>
                         <outlet property="backupView" destination="Wzk-mA-tvc" id="3PN-Ua-Dgs"/>
+                        <outlet property="biometricSwitch" destination="jEn-aF-XuM" id="ufA-b0-Yxe"/>
                         <outlet property="biometricView" destination="Rkp-NV-ZRd" id="rET-CQ-TGa"/>
                         <outlet property="checkMarkOnPin" destination="vew-1F-AjV" id="0RT-oN-3vY"/>
                         <outlet property="pinView" destination="VK2-fJ-cop" id="7fv-jZ-JSs"/>
