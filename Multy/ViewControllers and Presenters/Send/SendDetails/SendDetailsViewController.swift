@@ -107,7 +107,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
             self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.presenter.checkMaxAvailable()
         } else {
-            let alert = UIAlertController(title: "Transaction speed not selected!", message: "Please choose one or set custom", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

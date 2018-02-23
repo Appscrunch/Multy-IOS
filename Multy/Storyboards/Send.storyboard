@@ -134,8 +134,8 @@ This feature will be in the next update.</string>
                                     <constraint firstAttribute="width" constant="13" id="otn-bk-Ucv"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro9-45-B2B">
-                                <rect key="frame" x="157" y="28" width="61" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Custom Fee Rate " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro9-45-B2B">
+                                <rect key="frame" x="119" y="28" width="137" height="24"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -343,20 +343,20 @@ This feature will be in the next update.</string>
                                             <action selector="cancelAction:" destination="Can-YJ-fx8" eventType="touchUpInside" id="f95-nT-vlv"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmP-mh-W1O">
-                                        <rect key="frame" x="115.5" y="13" width="144" height="23.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmP-mh-W1O">
+                                        <rect key="frame" x="127" y="13" width="121.5" height="24"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mW-J9-IU9">
-                                        <rect key="frame" x="36" y="53" width="103" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mW-J9-IU9">
+                                        <rect key="frame" x="36" y="54" width="67" height="24"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0U-60-o5z">
-                                        <rect key="frame" x="16" y="89" width="343" height="450"/>
+                                        <rect key="frame" x="16" y="90" width="343" height="450"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zLs-gO-YLW">
                                                 <rect key="frame" x="0.0" y="11" width="343" height="439"/>
@@ -386,14 +386,14 @@ This feature will be in the next update.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donation for Multy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0h-5W-plS">
-                                        <rect key="frame" x="36" y="649" width="145" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support Multy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0h-5W-plS">
+                                        <rect key="frame" x="36" y="634" width="110" height="24"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1U-ne-MsG">
-                                        <rect key="frame" x="16" y="681" width="343" height="149"/>
+                                        <rect key="frame" x="16" y="666" width="343" height="149"/>
                                         <subviews>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MKW-oo-AP1">
                                                 <rect key="frame" x="278" y="23" width="51" height="31"/>
@@ -402,8 +402,8 @@ This feature will be in the next update.</string>
                                                     <action selector="switchDonationAction:" destination="Can-YJ-fx8" eventType="valueChanged" id="CJi-dV-b5R"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow Donation For Multy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCG-9b-EeH">
-                                                <rect key="frame" x="20" y="27.5" width="189.5" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate to Multy " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCG-9b-EeH">
+                                                <rect key="frame" x="20" y="27.5" width="120" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -415,8 +415,8 @@ This feature will be in the next update.</string>
                                                     <constraint firstAttribute="height" constant="2" id="aZo-Yu-L8W"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donation Summ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zg1-x3-6WV">
-                                                <rect key="frame" x="20" y="103.5" width="118.5" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donation Sum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zg1-x3-6WV">
+                                                <rect key="frame" x="20" y="103.5" width="104.5" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -440,7 +440,7 @@ This feature will be in the next update.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0001" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5NH-ZP-Pzn">
-                                                <rect key="frame" x="148.5" y="91" width="141.5" height="24"/>
+                                                <rect key="frame" x="134.5" y="91" width="155.5" height="24"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
@@ -478,14 +478,14 @@ This feature will be in the next update.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXZ-a8-UvA">
-                                        <rect key="frame" x="16" y="850" width="343" height="49.5"/>
-                                        <string key="text">A donation is a gift given by physical or legal persons, typically for charitable purposes and/or to benefit a cause. A donation may take various forms, including cash offering, services</string>
+                                        <rect key="frame" x="16" y="835" width="343" height="66"/>
+                                        <string key="text">By donating to Multy you show your support and appreciation of a product. We are open-source project and your donation is the only source of profit for us. </string>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNT-j7-dlk" customClass="ZFRippleButton" customModule="ZFRippleButton">
-                                        <rect key="frame" x="0.0" y="924.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="926" width="375" height="64"/>
                                         <color key="backgroundColor" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="4mp-K0-igK"/>
@@ -519,9 +519,11 @@ This feature will be in the next update.</string>
                                             <action selector="backAction:" destination="Can-YJ-fx8" eventType="touchUpInside" id="zAs-Nc-VX0"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nM-mt-kya">
-                                        <rect key="frame" x="16" y="561.5" width="343" height="49.5"/>
-                                        <string key="text">A donation is a gift given by physical or legal persons, typically for charitable purposes and/or to benefit a cause. A donation may take various forms, including cash offering, services</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee Rate affects how fast your transaction is going to be accepted in the blockchain." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nM-mt-kya">
+                                        <rect key="frame" x="16" y="563" width="343" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="7P6-Le-sSL"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -684,7 +686,7 @@ This feature will be in the next update.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cLW-Qu-SGI">
-                                        <rect key="frame" x="305" y="26" width="54" height="36"/>
+                                        <rect key="frame" x="305" y="27" width="54" height="36"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -693,41 +695,41 @@ This feature will be in the next update.</string>
                                             <action selector="cancelAction:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="mhB-CD-Sxm"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhT-01-bTB">
-                                        <rect key="frame" x="149.5" y="33" width="76.5" height="23.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhT-01-bTB">
+                                        <rect key="frame" x="134" y="33" width="107" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOo-l7-Vq8">
-                                        <rect key="frame" x="203" y="193" width="30.5" height="22"/>
+                                        <rect key="frame" x="203" y="192.5" width="30.5" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHc-k4-50p">
-                                        <rect key="frame" x="201" y="238" width="158" height="2"/>
+                                        <rect key="frame" x="201" y="237.5" width="158" height="2"/>
                                         <color key="backgroundColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="A0u-GB-AGP"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A45-fp-vZe">
-                                        <rect key="frame" x="16" y="238" width="155" height="2"/>
+                                        <rect key="frame" x="16" y="237.5" width="155" height="2"/>
                                         <color key="backgroundColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="h7e-rf-Hhd"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swap" translatesAutoresizingMaskIntoConstraints="NO" id="70x-BQ-w30">
-                                        <rect key="frame" x="175" y="229" width="24" height="21"/>
+                                        <rect key="frame" x="175" y="228.5" width="24" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="dzY-zt-bpO"/>
                                             <constraint firstAttribute="width" constant="24" id="fyz-pn-CDy"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyQ-1e-aWF">
-                                        <rect key="frame" x="164" y="265" width="47" height="22"/>
+                                        <rect key="frame" x="164" y="264.5" width="47" height="22"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iP4-gf-E0A">
                                                 <rect key="frame" x="0.0" y="0.0" width="14" height="22"/>
@@ -744,7 +746,7 @@ This feature will be in the next update.</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1r8-E7-NF8">
-                                        <rect key="frame" x="82.5" y="302" width="210.5" height="31"/>
+                                        <rect key="frame" x="82.5" y="301.5" width="210.5" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay for commission        " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ie-5f-uXv">
                                                 <rect key="frame" x="0.0" y="0.0" width="161.5" height="31"/>
@@ -762,7 +764,7 @@ This feature will be in the next update.</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rnf-u0-7bX">
-                                        <rect key="frame" x="0.0" y="343" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="342.5" width="375" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhi-Qs-0Ca">
                                                 <rect key="frame" x="325" y="11" width="37" height="22"/>
@@ -770,8 +772,8 @@ This feature will be in the next update.</string>
                                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spendable:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7z-h6-tBd">
-                                                <rect key="frame" x="16" y="11" width="85.5" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7z-h6-tBd">
+                                                <rect key="frame" x="16" y="11" width="74.5" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -784,7 +786,7 @@ This feature will be in the next update.</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1234 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="git-q0-VGX">
-                                                <rect key="frame" x="109.5" y="11" width="87.5" height="22"/>
+                                                <rect key="frame" x="98.5" y="11" width="87.5" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -806,7 +808,7 @@ This feature will be in the next update.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gfE-Vc-rTR">
-                                        <rect key="frame" x="173" y="161.5" width="30" height="68.5"/>
+                                        <rect key="frame" x="173" y="161" width="30" height="68.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="68.5" id="YX9-R0-d07"/>
                                         </constraints>
@@ -815,7 +817,7 @@ This feature will be in the next update.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-Cd-gDu">
-                                        <rect key="frame" x="145" y="216" width="84" height="76"/>
+                                        <rect key="frame" x="145" y="215.5" width="84" height="76"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="84" id="etG-Ra-wBk"/>
                                         </constraints>
@@ -828,13 +830,13 @@ This feature will be in the next update.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDG-0f-Iiz">
-                                        <rect key="frame" x="173" y="161.5" width="60.5" height="53.5"/>
+                                        <rect key="frame" x="173" y="161" width="60.5" height="53.5"/>
                                         <connections>
                                             <action selector="topBtn:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="6De-Ul-Vl7"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDj-lp-BeH">
-                                        <rect key="frame" x="164" y="265" width="47" height="15"/>
+                                        <rect key="frame" x="164" y="264.5" width="47" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="904-c7-kAc"/>
                                         </constraints>
@@ -962,14 +964,16 @@ This feature will be in the next update.</string>
                                             <constraint firstAttribute="width" constant="13" id="u0W-Dw-xhm"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready to Send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk1-tu-7rf">
-                                        <rect key="frame" x="131" y="13" width="113.5" height="23.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk1-tu-7rf">
+                                        <rect key="frame" x="121.5" y="13" width="132.5" height="23.5"/>
+                                        <string key="text">Confirm Sending
+</string>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIf-xQ-WjZ">
-                                        <rect key="frame" x="36" y="223" width="303" height="90"/>
+                                        <rect key="frame" x="36" y="223.5" width="303" height="90"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+ Add Note" textAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="b5c-CM-iki">
                                                 <rect key="frame" x="0.0" y="43" width="303" height="47"/>
@@ -996,7 +1000,7 @@ This feature will be in the next update.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHg-A2-nCQ" userLabel="TopView">
-                                        <rect key="frame" x="16" y="84" width="343" height="182"/>
+                                        <rect key="frame" x="16" y="84.5" width="343" height="182"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI9-ER-ncF">
                                                 <rect key="frame" x="60" y="39" width="223" height="60.5"/>
@@ -1064,14 +1068,14 @@ This feature will be in the next update.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btcIconBig" translatesAutoresizingMaskIntoConstraints="NO" id="M7S-64-Prv">
-                                        <rect key="frame" x="158.5" y="56" width="58" height="58"/>
+                                        <rect key="frame" x="158.5" y="56.5" width="58" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="58" id="kEQ-7s-BTR"/>
                                             <constraint firstAttribute="height" constant="58" id="pb9-b3-nUS"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8x-RC-TUx">
-                                        <rect key="frame" x="36" y="329" width="303" height="220"/>
+                                        <rect key="frame" x="36" y="329.5" width="303" height="220"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuO-o0-aFN">
                                                 <rect key="frame" x="0.0" y="109" width="303" height="2"/>
@@ -1104,8 +1108,8 @@ This feature will be in the next update.</string>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction speed and Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ewh-6y-aEq">
-                                                <rect key="frame" x="54" y="119" width="195.5" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ewh-6y-aEq">
+                                                <rect key="frame" x="120.5" y="119" width="63" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                 <color key="textColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1162,13 +1166,13 @@ This feature will be in the next update.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wl0-kD-24J">
-                                        <rect key="frame" x="0.0" y="582.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="583" width="375" height="64"/>
                                         <color key="backgroundColor" red="0.0" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="xuq-26-gAf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                        <state key="normal" title="Done">
+                                        <state key="normal" title="Slide to Send ">
                                             <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -1278,7 +1282,7 @@ This feature will be in the next update.</string>
                                     <constraint firstAttribute="height" constant="64" id="LFP-LW-HAo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                <state key="normal" title="Close">
+                                <state key="normal" title="Done">
                                     <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
