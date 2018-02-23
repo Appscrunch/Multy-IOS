@@ -47,7 +47,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelAction(_ sender: Any) {
         //for BTC
         if topPriceTf.text == nil || (topPriceTf.text! as NSString).intValue < 2 {
-            let message = "Value should be greater than 1"
+            let message = "Fee rate can not be less then 2 satoshi per byte."
             let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                 self.topPriceTf.becomeFirstResponder()

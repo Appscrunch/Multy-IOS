@@ -223,7 +223,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.text == "" || (textField.text == "0" && string != "," && string != "." && !string.isEmpty) {
             if string.convertStringWithCommaToDouble() > self.presenter.maxAllowedToSpend {
-                self.presentWarning(message: "You trying to enter sum more then you have")
+                self.presentWarning(message: "You are trying to spend more then you have.")
                 
                 return false
             }

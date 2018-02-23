@@ -210,7 +210,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             let btn = UIButton()
             btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
-            btn.setTitle("Backup is not executed", for: .normal)
+            btn.setTitle("Backup is needed!", for: .normal)
             btn.setTitleColor(.white, for: .normal)
             btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
             btn.contentHorizontalAlignment = .left

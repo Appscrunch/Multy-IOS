@@ -44,7 +44,7 @@ class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
     
     func sendOK() {
         self.sendingImage.image = #imageLiteral(resourceName: "completeIcon")
-        self.sendingLbl.text = "Complete!"
+        self.sendingLbl.text = "Succsess!"
         self.closeBtn.isHidden = false
     }
 }
