@@ -74,8 +74,8 @@
                                     <action selector="settingssAction:" destination="Asu-Y0-uVx" eventType="touchUpInside" id="hnT-Jt-bpE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can create first operation here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJt-Qg-K3r">
-                                <rect key="frame" x="123" y="481" width="129" height="80"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to create funds request." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJt-Qg-K3r">
+                                <rect key="frame" x="123.5" y="481" width="129" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="9uR-iP-M76"/>
                                     <constraint firstAttribute="width" constant="129" id="nXZ-Yb-lNp"/>
@@ -916,8 +916,8 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                                     <action selector="chooseCurrenceAction:" destination="CB9-uM-FAg" eventType="touchUpInside" id="dJI-nf-5iP"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency to convert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12v-85-n0R">
-                                                <rect key="frame" x="20" y="75" width="118" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reference currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12v-85-n0R">
+                                                <rect key="frame" x="20" y="75" width="115" height="18"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
