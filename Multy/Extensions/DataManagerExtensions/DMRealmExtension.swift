@@ -74,11 +74,11 @@ extension DataManager {
         return realmManager.spendableOutput(wallet: wallet)
     }
     
-    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt32) -> [SpendableOutputRLM] {
+    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt64) -> [SpendableOutputRLM] {
         return realmManager.greedySubSet(outputs: outputs, threshold: threshold)
     }
     
-    func spendableOutputSum(outputs: [SpendableOutputRLM]) -> UInt32 {
+    func spendableOutputSum(outputs: [SpendableOutputRLM]) -> UInt64 {
         return realmManager.spendableOutputSum(outputs: outputs)
     }
 }

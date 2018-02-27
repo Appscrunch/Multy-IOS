@@ -13,14 +13,14 @@ class TransactionPresenter: NSObject {
     var histObj = HistoryRLM()
     var chainId = 0
     
-    func blockedAmount(for transaction: HistoryRLM) -> UInt32 {
-        var sum = UInt32(0)
+    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
+        var sum = UInt64(0)
         
         if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += transaction.txOutAmount.uint32Value
+            sum += transaction.txOutAmount.uint64Value
         } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
             for tx in transaction.txOutputs {
-                sum += tx.amount.uint32Value
+                sum += tx.amount.uint64Value
             }
         }
         

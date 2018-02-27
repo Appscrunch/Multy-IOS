@@ -25,6 +25,8 @@ struct Constants {
     }
 }
 
+let defaultDelimeter = "," as Character
+
 let screenSize = UIScreen.main.bounds
 let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
@@ -69,16 +71,24 @@ func generateWalletPrimaryKey(currencyID: UInt32, walletID: UInt32) -> String {
     return ("\(currencyString)" + "\(walletString)").sha3(.sha256)
 }
 
-func convertSatoshiToBTC(sum: UInt32) -> Double {
+func convertSatoshiToBTC(sum: UInt64) -> Double {    
     return Double(sum) / pow(10, 8)
 }
 
-func convertSatoshiToBTCString(sum: UInt32) -> String {
+func convertSatoshiToBTCString(sum: UInt64) -> String {
     return (Double(sum) / pow(10, 8)).fixedFraction(digits: 8) + " BTC"
 }
 
-func convertBTCStringToSatoshi(sum: String) -> UInt32 {
-    return UInt32(sum.convertStringWithCommaToDouble() * pow(10, 8))
+func convertSatoshiToBTC(sum: Double) -> String {
+    return (sum / pow(10, 8)).fixedFraction(digits: 8)
+}
+
+func convertBTCStringToSatoshi(sum: String) -> UInt64 {
+    return UInt64(sum.convertStringWithCommaToDouble() * pow(10, 8))
+}
+
+func convertBTCToSatoshi(sum: String) -> Double {
+    return sum.convertStringWithCommaToDouble() * pow(10, 8)
 }
 
 func shakeView(viewForShake: UIView) {
@@ -105,7 +115,7 @@ enum TxStatus : Int {
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "api.multy.io"
+let shortURL = "stage.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"

@@ -24,7 +24,7 @@ class CoreLibManager: NSObject {
     func testTransaction(from binaryData: inout BinaryData, wallet: UserWalletRLM) {
         
 //        let inData = Date()
-//        let dict = createAddress(currencyID: wallet.chain.uint32Value, walletID: wallet.walletID.uint32Value, addressID: 0, binaryData: &binaryData)
+//        let dict = createAddress(currencyID: wallet.chain.uint64Value, walletID: wallet.walletID.uint32Value, addressID: 0, binaryData: &binaryData)
 //        let str = createTransaction(addressPointer: dict!["addressPointer"] as! OpaquePointer,
 //                                    sendAddress: "mkYY2jFnnqrqbQFNnp9eJ5NSV2ggyY1yET",
 //                                    sendAmountString: "60000",
@@ -264,6 +264,11 @@ class CoreLibManager: NSObject {
             
             return nil
         } else {
+//            let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+//            let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee!, privateKeyStringPointer)
+//            let privateKeyString = String(cString: privateKeyStringPointer.pointee!)
+//            print(privateKeyString)
+            
             return addressPrivateKeyPointer.pointee
         }
     }
@@ -462,16 +467,16 @@ class CoreLibManager: NSObject {
     func getTotalFeeAndInputs(addressPointer: OpaquePointer, sendAmountString: String, feeAmountString: String, isDonationExists: Bool, donationAmount: String, isPayCommission: Bool , wallet: UserWalletRLM) -> (String,  [SpendableOutputRLM], String?) {
         
         //estimate number of ouputs
-        var paySum = UInt32(Double(sendAmountString)! * pow(10, 8))
+        var paySum = UInt64(Double(sendAmountString)! * pow(10, 8))
         
-        let donationSum = UInt32(Double(donationAmount)! * pow(10, 8))
+        let donationSum = UInt64(Double(donationAmount)! * pow(10, 8))
         
         if isPayCommission {
             paySum += donationSum
         }
         
-        var inputSum = UInt32(0)
-        var feeSum = UInt32(0)
+        var inputSum = UInt64(0)
+        var feeSum = UInt64(0)
         
         let inputs = DataManager.shared.fetchSpendableOutput(wallet: wallet)
         var greedyInputs = [SpendableOutputRLM]()
@@ -514,7 +519,7 @@ class CoreLibManager: NSObject {
             }
             
             let amountString = String(cString: amountStringPointer.pointee!)
-            feeSum = UInt32(amountString)!
+            feeSum = UInt64(amountString)!
             inputSum = DataManager.shared.spendableOutputSum(outputs: greedyInputs)
         } while (isPayCommission && inputSum <= paySum + feeSum && greedyInputs.count != inputs.count) || (!isPayCommission && paySum <= donationSum + feeSum && greedyInputs.count != inputs.count)
         
@@ -561,7 +566,7 @@ class CoreLibManager: NSObject {
         }
         
         
-        let maxFee = UInt32(feePerByteAmount)!
+        let maxFee = UInt64(feePerByteAmount)!
 //        let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
         //Amount
         setAmountValue(key: "amount_per_byte", value: feePerByteAmount, pointer: fee.pointee!)
@@ -595,8 +600,8 @@ class CoreLibManager: NSObject {
             defer { transactionSource.deallocate(capacity: 1) }
         }
         
-        var sendSum = UInt32(0)
-        var changeSum = UInt32(0)
+        var sendSum = UInt64(0)
+        var changeSum = UInt64(0)
         let sendSumInSatoshi = convertBTCStringToSatoshi(sum: sendAmountString)
         let donationSumInSatoshi = convertBTCStringToSatoshi(sum: donationAmount)
 //
@@ -709,7 +714,7 @@ class CoreLibManager: NSObject {
         }
         
         let amountString = String(cString: amountStringPointer.pointee!)
-        let feeInSatoshiAmount = UInt32(amountString)!
+        let feeInSatoshiAmount = UInt64(amountString)!
         let feeInBTCAmount = convertSatoshiToBTC(sum: feeInSatoshiAmount)
         
         //checking sums

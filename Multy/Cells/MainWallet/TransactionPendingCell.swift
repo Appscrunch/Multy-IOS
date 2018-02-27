@@ -28,8 +28,8 @@ class TransactionPendingCell: UITableViewCell {
         }
         self.addressLabel.text = histObj.txInputs[0].address
         
-        self.cryptoAmountLabel.text = "\(convertSatoshiToBTC(sum: histObj.txOutAmount.uint32Value).fixedFraction(digits: 8)) BTC"
-        self.fiatAmountLabel.text = "\((convertSatoshiToBTC(sum: histObj.txOutAmount.uint32Value) * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        self.cryptoAmountLabel.text = "\(convertSatoshiToBTC(sum: histObj.txOutAmount.uint64Value).fixedFraction(digits: 8)) BTC"
+        self.fiatAmountLabel.text = "\((convertSatoshiToBTC(sum: histObj.txOutAmount.uint64Value) * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
         
         
 //        if histObj.txStatus.intValue == TxStatus.BlockIncoming.rawValue {
@@ -45,10 +45,10 @@ class TransactionPendingCell: UITableViewCell {
         lockedFiatAmountLabel.text = "\((amountInDouble * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
     }
     
-    func calculateAmount(transactions: List<TxHistoryRLM>) -> UInt32 {
-        var sum = UInt32()
+    func calculateAmount(transactions: List<TxHistoryRLM>) -> UInt64 {
+        var sum = UInt64()
         
-        transactions.forEach({ sum += $0.amount.uint32Value })
+        transactions.forEach({ sum += $0.amount.uint64Value })
         
         return sum
     }
@@ -69,17 +69,17 @@ class TransactionPendingCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func blockedAmount() -> UInt32 {
-        var sum = UInt32(0)
+    func blockedAmount() -> UInt64 {
+        var sum = UInt64(0)
         
         if histObj.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += histObj.txOutAmount.uint32Value
+            sum += histObj.txOutAmount.uint64Value
         } else if histObj.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
             let addresses = wallet!.fetchAddresses()
             
             for tx in histObj.txOutputs {
                 if addresses.contains(tx.address) {
-                    sum += tx.amount.uint32Value
+                    sum += tx.amount.uint64Value
                 }
             }
         }

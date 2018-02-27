@@ -22,7 +22,7 @@ class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
     
     @IBOutlet weak var lockedPopverWithBorders : UIView!
     
-    var blockedAmount = UInt32()
+    var blockedAmount = UInt64()
     
     var wallet: UserWalletRLM?
     var mainVC: UIViewController?
@@ -70,7 +70,7 @@ class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
             
             //some strange info from server
             //MARK: FIX THIS
-            var sum = UInt32(0)
+            var sum = UInt64(0)
             if convertBTCStringToSatoshi(sum: wallet!.sumInCrypto.fixedFraction(digits: 8)) >= blockedAmount {
                 sum = convertBTCStringToSatoshi(sum: wallet!.sumInCrypto.fixedFraction(digits: 8)) - blockedAmount
             } else {

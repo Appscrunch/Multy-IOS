@@ -43,7 +43,7 @@ class BaseTransactionDTO {
     var donationDTO: DonationDTO?
     var transactionRLM: TransactionRLM?
     var historyArray: List<HistoryRLM>?
-    var customFee: UInt32?
+    var customFee: UInt64?
     var rawTransaction: String?
     var newChangeAddress: String?
     var endSum: Double?

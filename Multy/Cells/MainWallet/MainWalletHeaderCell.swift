@@ -20,7 +20,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
         }
      }
     
-    var blockedAmount = UInt32()
+    var blockedAmount = UInt64()
     
     weak var delegate : UICollectionViewDelegate? {
         didSet {

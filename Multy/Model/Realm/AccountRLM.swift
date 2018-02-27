@@ -32,7 +32,7 @@ class TopIndexRLM: Object {
         let topIndexRLM = TopIndexRLM()
         
         if let currencyID = indexDict["currencyid"] {
-            topIndexRLM.currencyID = NSNumber(value: currencyID as! UInt32)
+            topIndexRLM.currencyID = NSNumber(value: currencyID as! UInt64)
         }
         
         if let index = indexDict["topindex"] as? UInt32 {
