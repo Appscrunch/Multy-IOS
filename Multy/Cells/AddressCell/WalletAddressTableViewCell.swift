@@ -35,7 +35,7 @@ class WalletAddressTableViewCell: UITableViewCell {
         self.creationTimeLbl?.text = Date.walletAddressGMTDateFormatter().string(from: address!.lastActionDate)
         
         if self.wallet?.chain == 0 {
-            sumInCrypto = convertSatoshiToBTC(sum: UInt32(self.wallet!.addresses[index].amount.int32Value))
+            sumInCrypto = convertSatoshiToBTC(sum: UInt64(self.wallet!.addresses[index].amount.uint64Value))
         }
         sumInFiat = sumInCrypto * exchangeCourse
         

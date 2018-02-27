@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2903DBF32668295CED1C9139 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7304C17824311A19240183E0 /* Pods_Multy.framework */; };
 		440AD8D22020D1220015AEF1 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */; };
+		444B3B6020455489008129B8 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B5F20455489008129B8 /* BigInt.swift */; };
+		444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B642045723C008129B8 /* BigInt+Extension.swift */; };
 		447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447ECAD220330C2C0085C26D /* TransactionDTO.swift */; };
 		44C06FC9203D832B008CBA9D /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FC8203D832B008CBA9D /* Array+Extension.swift */; };
 		44C06FCB203D9021008CBA9D /* LoggingPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FCA203D9020008CBA9D /* LoggingPrint.swift */; };
@@ -203,6 +205,8 @@
 
 /* Begin PBXFileReference section */
 		440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		444B3B5F20455489008129B8 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
+		444B3B642045723C008129B8 /* BigInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		447ECAD220330C2C0085C26D /* TransactionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDTO.swift; sourceTree = "<group>"; };
 		44C06FC8203D832B008CBA9D /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		44C06FCA203D9020008CBA9D /* LoggingPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingPrint.swift; sourceTree = "<group>"; };
@@ -594,6 +598,7 @@
 		457486131FBD7DAF002D1925 /* Additional Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				444B3B5F20455489008129B8 /* BigInt.swift */,
 				45ECDBD4203D9E50009FD339 /* LoggingPrint */,
 				FA869D091FD6B84900C815C3 /* HUD */,
 				FA74060F1FCC14C4003C538C /* Core Libs */,
@@ -700,6 +705,7 @@
 				FA4D43D51FC5745E003C7117 /* DataManagerExtensions */,
 				4583ACA21FBCAC60001991AA /* UIView+Extension.swift */,
 				FA4D43E01FC5895D003C7117 /* String+Extension.swift */,
+				444B3B642045723C008129B8 /* BigInt+Extension.swift */,
 				45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */,
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
 				FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */,
@@ -1494,6 +1500,8 @@
 				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */,
+				444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */,
+				444B3B6020455489008129B8 /* BigInt.swift in Sources */,
 				45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */,
 				FA4D43F61FC5D019003C7117 /* MainWalletCollectionViewCell.swift in Sources */,
 				455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */,

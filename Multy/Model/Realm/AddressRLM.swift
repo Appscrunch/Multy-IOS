@@ -51,7 +51,7 @@ class AddressRLM: Object {
         }
         
         if let amount = addressInfo["amount"] {
-            addressRLM.amount = NSNumber(value: amount as! UInt32)
+            addressRLM.amount = /*NSNumber(value:*/ amount as! NSNumber /*as! UInt32)*/
         }
         
         if let spendableOutputs = addressInfo["spendableoutputs"] {

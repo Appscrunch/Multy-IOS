@@ -544,7 +544,7 @@ class RealmManager: NSObject {
         }
         
         let results = ouputs.sorted(by: { (out1, out2) -> Bool in
-            out1.transactionOutAmount.uint32Value > out2.transactionOutAmount.int32Value
+            out1.transactionOutAmount.uint64Value > out2.transactionOutAmount.int64Value
         })
         
         return results
@@ -563,13 +563,13 @@ class RealmManager: NSObject {
         }
         
         let results = ouputs.sorted(by: { (out1, out2) -> Bool in
-            out1.transactionOutAmount.uint32Value > out2.transactionOutAmount.int32Value
+            out1.transactionOutAmount.uint64Value > out2.transactionOutAmount.int64Value
         })
         
         return results
     }
     
-    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt32) -> [SpendableOutputRLM] {
+    func greedySubSet(outputs: [SpendableOutputRLM], threshold: UInt64) -> [SpendableOutputRLM] {
         var sum = spendableOutputSum(outputs: outputs)
         var result = outputs
         
@@ -580,8 +580,8 @@ class RealmManager: NSObject {
         var index = 0
         while index < result.count {
             let output = result[index]
-            if sum > threshold + output.transactionOutAmount.uint32Value {
-                sum = sum - output.transactionOutAmount.uint32Value
+            if sum > threshold + output.transactionOutAmount.uint64Value {
+                sum = sum - output.transactionOutAmount.uint64Value
                 result.remove(at: index)
             } else {
                 index += 1
@@ -591,11 +591,11 @@ class RealmManager: NSObject {
         return result
     }
     
-    func spendableOutputSum(outputs: [SpendableOutputRLM]) -> UInt32 {
-        var sum = UInt32(0)
+    func spendableOutputSum(outputs: [SpendableOutputRLM]) -> UInt64 {
+        var sum = UInt64(0)
         
         for output in outputs {
-            sum += output.transactionOutAmount.uint32Value
+            sum += output.transactionOutAmount.uint64Value
         }
         
         return sum

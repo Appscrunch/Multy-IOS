@@ -8,7 +8,7 @@ import RealmSwift
 
 class WalletPresenter: NSObject {
     var mainVC : WalletViewController?
-    var blockedAmount = UInt32(0)
+    var blockedAmount = UInt64(0)
     var wallet : UserWalletRLM? {
         didSet {
             mainVC?.titleLbl.text = self.wallet?.name

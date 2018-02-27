@@ -33,14 +33,14 @@ class UserWalletRLM: Object {
     
     var addresses = List<AddressRLM>() {
         didSet {
-            var sum : UInt32 = 0
+            var sum : UInt64 = 0
             
             for address in addresses {
 //                for out in address.spendableOutput {
 //                    sum += out.transactionOutAmount.uint32Value
 //                }
                 for out in address.spendableOutput {
-                    sum += out.transactionOutAmount.uint32Value
+                    sum += out.transactionOutAmount.uint64Value
                 }
             }
             
@@ -126,18 +126,18 @@ class UserWalletRLM: Object {
         return addresses
     }
     
-    func calculateBlockedAmount() -> UInt32 {
-        var sum = UInt32(0)
+    func calculateBlockedAmount() -> UInt64 {
+        var sum = UInt64(0)
         
         for address in self.addresses {
             for out in address.spendableOutput {
                 if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-                    sum += out.transactionOutAmount.uint32Value
+                    sum += out.transactionOutAmount.uint64Value
                 }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
                     let addresses = self.fetchAddresses()
                     
                     if addresses.contains(address.address) {
-                        sum += out.transactionOutAmount.uint32Value
+                        sum += out.transactionOutAmount.uint64Value
                     }
                 }*/
             }
@@ -146,18 +146,18 @@ class UserWalletRLM: Object {
         return sum
     }
     
-    func availableAmount() -> UInt32 {
-        var sum = UInt32(0)
+    func availableAmount() -> UInt64 {
+        var sum = UInt64(0)
         
         for address in self.addresses {
             for out in address.spendableOutput {
                 if out.transactionStatus.intValue == TxStatus.BlockIncoming.rawValue {
-                    sum += out.transactionOutAmount.uint32Value
+                    sum += out.transactionOutAmount.uint64Value
                 }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
                  let addresses = self.fetchAddresses()
                  
                  if addresses.contains(address.address) {
-                 sum += out.transactionOutAmount.uint32Value
+                 sum += out.transactionOutAmount.uint64Value
                  }
                  }*/
             }
@@ -166,17 +166,17 @@ class UserWalletRLM: Object {
         return sum
     }
     
-    func blockedAmount(for transaction: HistoryRLM) -> UInt32 {
-        var sum = UInt32(0)
+    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
+        var sum = UInt64(0)
         
         if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += transaction.txOutAmount.uint32Value
+            sum += transaction.txOutAmount.uint64Value
         } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
             let addresses = self.fetchAddresses()
             
             for tx in transaction.txOutputs {
                 if addresses.contains(tx.address) {
-                    sum += tx.amount.uint32Value
+                    sum += tx.amount.uint64Value
                 }
             }
         }
@@ -187,7 +187,7 @@ class UserWalletRLM: Object {
     func isTherePendingAmount() -> Bool {
         for address in self.addresses {
             for out in address.spendableOutput {
-                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue && out.transactionOutAmount.uint32Value > 0 {
+                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue && out.transactionOutAmount.uint64Value > 0 {
                     return true
                 }
             }

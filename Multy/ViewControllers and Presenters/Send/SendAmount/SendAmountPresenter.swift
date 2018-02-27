@@ -27,7 +27,7 @@ class SendAmountPresenter: NSObject {
 //        }
 //    }
     
-    var blockedAmount           : UInt32? {
+    var blockedAmount           : UInt64? {
         didSet {
             availableSumInCrypto = transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
             availableSumInFiat = availableSumInCrypto! * exchangeCourse
@@ -58,7 +58,7 @@ class SendAmountPresenter: NSObject {
     
     var rawTransaction: String?
     
-//    var customFee : UInt32?
+//    var customFee : UInt64?
     
     //for creating transaction
     var binaryData : BinaryData?
@@ -139,7 +139,7 @@ class SendAmountPresenter: NSObject {
     }
     
     func getNextBtnSum() -> Double {
-        let satoshiAmount = UInt32(sumInCrypto * pow(10, 8))
+        let satoshiAmount = UInt64(sumInCrypto * pow(10, 8))
         
         if satoshiAmount == 0 {
             return 0
@@ -322,8 +322,8 @@ class SendAmountPresenter: NSObject {
         return message
     }
     
-    func calculateBlockedAmount() -> UInt32 {
-        var sum = UInt32(0)
+    func calculateBlockedAmount() -> UInt64 {
+        var sum = UInt64(0)
         
         if transactionDTO.choosenWallet == nil {
             return sum
@@ -336,7 +336,7 @@ class SendAmountPresenter: NSObject {
         //        for address in wallet!.addresses {
         //            for out in address.spendableOutput {
         //                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-        //                    sum += out.transactionOutAmount.uint32Value
+        //                    sum += out.transactionOutAmount.uint64Value
         //                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
         //                    out.
         //                }
@@ -350,17 +350,17 @@ class SendAmountPresenter: NSObject {
         return sum
     }
     
-    func blockedAmount(for transaction: HistoryRLM) -> UInt32 {
-        var sum = UInt32(0)
+    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
+        var sum = UInt64(0)
         
         if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += transaction.txOutAmount.uint32Value
+            sum += transaction.txOutAmount.uint64Value
         } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
             let addresses = transactionDTO.choosenWallet!.fetchAddresses()
             
             for tx in transaction.txOutputs {
                 if addresses.contains(tx.address) {
-                    sum += tx.amount.uint32Value
+                    sum += tx.amount.uint64Value
                 }
             }
         }

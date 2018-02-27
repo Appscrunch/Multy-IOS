@@ -39,7 +39,7 @@ class SpendableOutputRLM: Object {
         }
         
         if let transactionOutAmount = addressInfo["txoutamount"]  {
-            spendable.transactionOutAmount = NSNumber(value: transactionOutAmount as! UInt32)
+            spendable.transactionOutAmount = NSNumber(value: transactionOutAmount as! UInt64)
         }
         
         if let txoutscript = addressInfo["txoutscript"]  {
