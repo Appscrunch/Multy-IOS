@@ -8,16 +8,20 @@ import ZFRippleButton
 class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLbl: UILabel!
     
     let presenter = ReceiveStartPresenter()
     
     var sendWalletDelegate: SendWalletProtocol?
+    
+    var titleText = "Receive"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        self.titleLbl.text = self.titleText
         
         self.presenter.receiveStartVC = self
         self.registerCells()

@@ -85,6 +85,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="39R-Mj-hYl" id="ghC-NS-aIo"/>
+                        <outlet property="titleLbl" destination="lpd-w8-Ylh" id="pTe-Ls-0Ez"/>
                         <segue destination="Ci5-VC-rpK" kind="show" identifier="receiveDetails" id="N0a-eV-HdN"/>
                     </connections>
                 </viewController>
