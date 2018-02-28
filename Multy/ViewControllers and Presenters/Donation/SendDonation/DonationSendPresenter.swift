@@ -14,6 +14,10 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     
     var walletPayFrom: UserWalletRLM?
     
+    var maxAvailable = 0.0
+    
+    var donationAddress = ""
+    
     var feeRate: NSDictionary? {
         didSet {
             mainVC?.tableView.reloadData()
@@ -40,6 +44,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
             self.mainVC?.view.isUserInteractionEnabled = true
             let walletsArr = Array(wallets!.sorted(by: {$0.sumInCrypto > $1.sumInCrypto}))
             self.walletPayFrom = walletsArr.first
+            self.maxAvailable = (self.walletPayFrom?.sumInCrypto)!
             self.mainVC?.updateUIWithWallet()
         }
     }
@@ -47,5 +52,36 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     func sendWallet(wallet: UserWalletRLM) {
         self.walletPayFrom = wallet
         self.mainVC?.updateUIWithWallet()
+    }
+    
+    func makeFiatDonat() {
+        let cryptoDonat = self.mainVC?.donationTF.text //string
+        let cryptoDonatWithDot = cryptoDonat?.replacingOccurrences(of: ",", with: ".") as NSString?
+        let fiatDonat = (cryptoDonatWithDot!.doubleValue) * exchangeCourse
+        
+        self.mainVC?.fiatDonationLbl.text = "\(fiatDonat.fixedFraction(digits: 2)) USD"
+    }
+    
+    func makeTransaction() {
+        let transaction = TransactionDTO()
+        transaction.choosenWallet = self.walletPayFrom
+        transaction.sendAddress = donationAddress
+        transaction.sendAmount = self.mainVC?.donationTF.text?.convertStringWithCommaToDouble()
+        transaction.transaction?.customFee = self.customFee
+        
+        DataManager.shared.createDonationTransaction(transactionDTO: transaction) { (answer, err) in
+            self.mainVC?.progressHud.hide()
+            if err != nil {
+                let alert = UIAlertController(title: "Error", message: err.debugDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.mainVC?.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+            let sendSuccessVC = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC") as! SendingAnimationViewController
+            sendSuccessVC.chainId = transaction.choosenWallet?.chain as? Int
+            self.mainVC?.navigationController?.pushViewController(sendSuccessVC, animated: true)
+        }
     }
 }

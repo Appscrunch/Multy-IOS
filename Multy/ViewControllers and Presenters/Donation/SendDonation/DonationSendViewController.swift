@@ -14,6 +14,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     @IBOutlet weak var donationTF: UITextField!
     @IBOutlet weak var fiatDonationLbl: UILabel!
+    @IBOutlet weak var donatView: UIView!
     
     @IBOutlet weak var sendBtn: UIButton!
     
@@ -25,13 +26,18 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     var isCanDonat = false
     
+    var countSymbolsAfterComma = 0
+    
+    let progressHud = ProgressHUD(text: "Sending...")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(progressHud)
+        self.progressHud.hide()
         self.hideKeyboardWhenTappedAround()
         self.registerNotificationFromKeyboard()
         self.presenter.mainVC = self
         self.registerCells()
-        self.fixForBigScreens()
         
         tableView.layer.shadowColor = UIColor.gray.cgColor
         tableView.layer.shadowOpacity = 1
@@ -54,6 +60,11 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.tableView.register(customFeeCell, forCellReuseIdentifier: "customFeeCell")
     }
     
+    @IBAction func sendAction(_ sender: Any) {
+        self.progressHud.show()
+        self.presenter.makeTransaction()
+    }
+    
     func updateUIWithWallet() {
         let cryptoStr = "\(self.presenter.walletPayFrom?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(self.presenter.walletPayFrom?.cryptoName ?? "BTC")"
         let fiatSum = "\(((self.presenter.walletPayFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)) \(self.presenter.walletPayFrom?.fiatName ?? "USD")"
@@ -70,13 +81,6 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.fiatDonationLbl.text = "\(fiatDonation.fixedFraction(digits: 2)) USD"
     }
     
-    func fixForBigScreens() {
-//        if screenHeight > heightOfStandard {
-//            self.bottomBtnConstraint.constant = -85
-//        }
-    }
-    
-    
     //MARK: Keyboard to scrollview
     func registerNotificationFromKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(SendDetailsViewController.keyboardWillShow),
@@ -92,7 +96,6 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
 //                if screenHeight == heightOfX {
 //                    bottomBtnConstraint.constant = 10
 //                }
-                
             }
         }
     }
@@ -101,6 +104,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0 {
                 self.view.frame.origin.y += keyboardSize.height/4
+                self.makeSendAvailable(isAvailable: true)
 //                if screenHeight == heightOfX {
 //                    bottomBtnConstraint.constant = 0
 //                }
@@ -115,10 +119,18 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         walletsVC.presenter.isNeedToPop = true
         walletsVC.sendWalletDelegate = self.presenter
         walletsVC.titleText = "Send Donation From"
+        walletsVC.whereFrom = self
         self.navigationController?.pushViewController(walletsVC, animated: true)
     }
     
     func makeSendAvailable(isAvailable: Bool) {
+        var isAvailable = isAvailable
+        let donatAmount = self.donationTF.text?.convertStringWithCommaToDouble()
+        if donatAmount! > 0.0 {
+        } else {
+            isAvailable = false
+            shakeView(viewForShake: donatView)
+        }
         if isAvailable {
             self.sendBtn.isUserInteractionEnabled = true
             self.sendBtn.backgroundColor = #colorLiteral(red: 0.009615149349, green: 0.5124486089, blue: 0.9994245172, alpha: 1)
@@ -126,6 +138,46 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
             self.sendBtn.isUserInteractionEnabled = false
             self.sendBtn.backgroundColor = #colorLiteral(red: 0.8196047544, green: 0.8196094632, blue: 0.8390848637, alpha: 1)
         }
+    }
+    
+    func presentWarning(message: String) {
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (string == "." || string == ",") && ((self.donationTF.text?.contains(","))! || (self.donationTF.text?.contains("."))!){
+            return false
+        }
+        
+        if string == "." {
+            self.donationTF.text?.append(",")
+            return false
+        }
+        
+        if (self.donationTF.text?.contains(","))! && string != "" {
+            let strAfterDot: [String?] = (self.donationTF.text?.components(separatedBy: ","))!
+            if strAfterDot[1]?.count == 8 {
+                return false
+            }
+        }
+        
+        if (self.donationTF.text! + string).convertStringWithCommaToDouble() > self.presenter.maxAvailable {
+            self.presentWarning(message: "You trying to enter sum more then you have")
+            return false
+        }
+        
+        if string == "" {
+            self.donationTF.text?.removeLast()
+            self.presenter.makeFiatDonat()
+            return false
+        }
+        self.donationTF.text?.append(string) // = return true
+        self.presenter.makeFiatDonat()
+        return false
     }
     
 }

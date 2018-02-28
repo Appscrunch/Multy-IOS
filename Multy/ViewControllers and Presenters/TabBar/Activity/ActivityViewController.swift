@@ -7,6 +7,9 @@ import UIKit
 class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
     @IBOutlet weak var newsView: UIView!
     
+    var isHaveNotEmpty = false
+    var message = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -42,12 +45,38 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     
     func cancelAction() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
-        self.navigationController?.pushViewController(donatSendVC, animated: true)
+        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+            if wallets == nil {
+                self.message = "You don`t have any wallets yet."
+                self.donateOrAlert()
+                return
+            }
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    self.isHaveNotEmpty = true
+                    break
+//                    return
+                }
+            }
+            self.message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+            self.donateOrAlert()
+        }
     }
     
     func presentNoInternet() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+    }
+    
+    func donateOrAlert() {
+        if self.isHaveNotEmpty {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
+            donatSendVC.presenter.donationAddress = UserDefaults.standard.value(forKey: "BTCDonationAddress") as! String
+            self.navigationController?.pushViewController(donatSendVC, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
