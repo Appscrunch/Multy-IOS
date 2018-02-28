@@ -120,12 +120,12 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch isCrypto{
         case true:
-            if ((self.amountTF.text! + string) as NSString).doubleValue > self.presenter.getMaxValueOfChain(curency: Currency.init(0)) {
+            if ((self.amountTF.text! + string) as NSString).doubleValue > self.presenter.getMaxValueOfChain(curency: BLOCKCHAIN_BITCOIN) {
                 self.presentWarning(message: "You can`t enter sum more than chain have")
                 return false
             }
         case false:
-            if ((self.amountTF.text! + string) as NSString).doubleValue/exchangeCourse > self.presenter.getMaxValueOfChain(curency: Currency.init(0)) {
+            if ((self.amountTF.text! + string) as NSString).doubleValue/exchangeCourse > self.presenter.getMaxValueOfChain(curency: BLOCKCHAIN_BITCOIN) {
                 self.presentWarning(message: "You can`t enter sum more than chain have")
                 return false
             }

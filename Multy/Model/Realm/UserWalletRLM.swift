@@ -8,6 +8,7 @@ import RealmSwift
 class UserWalletRLM: Object {
     @objc dynamic var id = String()    //
     @objc dynamic var chain = NSNumber(value: 0)    //UInt32
+    @objc dynamic var chainType = NSNumber(value: 0)    //UInt32//BlockchainNetType
     @objc dynamic var walletID = NSNumber(value: 0) //UInt32
     @objc dynamic var addressID = NSNumber(value: 0) //UInt32
     
