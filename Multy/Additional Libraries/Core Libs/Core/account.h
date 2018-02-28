@@ -38,7 +38,7 @@ enum BlockchainNetType
 struct BlockchainType
 {
     enum Blockchain blockchain;
-    uint32_t net_type; // blockchain-specific net type, 0 for MAINNET.
+    size_t net_type; // blockchain-specific net type, 0 for MAINNET.
 };
 
 enum AddressType
