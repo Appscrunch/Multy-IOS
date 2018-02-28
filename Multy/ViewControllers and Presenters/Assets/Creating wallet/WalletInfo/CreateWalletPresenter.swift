@@ -40,7 +40,7 @@ class CreateWalletPresenter: NSObject {
     func create() {
         var binData : BinaryData = account!.binaryDataString.createBinaryData()!
         //MARK: topIndex
-        let dict = DataManager.shared.createNewWallet(for: &binData, CURRENCY_BITCOIN.rawValue, walletID: account!.topIndexes[0].topIndex.uint32Value)
+        let dict = DataManager.shared.createNewWallet(for: &binData, BLOCKCHAIN_BITCOIN.rawValue, walletID: account!.topIndexes[0].topIndex.uint32Value)
         let cell = mainVC?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
         let params = [
             "currencyID"  : dict!["currency"] as! UInt32,

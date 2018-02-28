@@ -26,9 +26,9 @@ class TransactionDTO: NSObject {
     
     func createTransactionDTO() {
         switch currencyID?.uint32Value {
-        case CURRENCY_BITCOIN.rawValue?:
+        case BLOCKCHAIN_BITCOIN.rawValue?:
             transaction = BTCTransactionDTO()
-        case CURRENCY_ETHEREUM.rawValue?:
+        case BLOCKCHAIN_ETHEREUM.rawValue?:
             transaction = ETHTransactionDTO()
         default:
             transaction = BTCTransactionDTO()

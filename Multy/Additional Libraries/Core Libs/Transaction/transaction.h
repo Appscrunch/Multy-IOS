@@ -37,8 +37,8 @@ MULTY_CORE_API struct Error* transaction_has_trait(
         enum TransactionTrait trait,
         bool* out_has_capability);
 
-MULTY_CORE_API struct Error* transaction_get_currency(
-        const struct Transaction* transaction, enum Currency* out_currency);
+MULTY_CORE_API struct Error* transaction_get_blockchain_type(
+        const struct Transaction* transaction, struct BlockchainType* out_blockchain_type);
 
 /// @param source - new source, must NOT be freed by the caller.
 MULTY_CORE_API struct Error* transaction_add_source(
@@ -81,6 +81,15 @@ MULTY_CORE_API struct Error* transaction_estimate_total_fee(
  */
 MULTY_CORE_API struct Error* transaction_get_total_fee(
         const struct Transaction* transaction, struct BigInt** out_fee_total);
+
+/** Get resulting total spent value.
+ * Call transaction_update() first to get up to date data.
+ *
+ * @param transaction - transaction to get total spent value from.
+ * @param out_fee_total - total value spent by this transaction.
+ */
+MULTY_CORE_API struct Error* transaction_get_total_spent(
+        const struct Transaction* transaction, struct BigInt** out_total_spent);
 
 /** Update transaction state.
  *
