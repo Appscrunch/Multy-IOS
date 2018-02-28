@@ -9,7 +9,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 12
+    let schemaVersion : UInt64 = 13
     
     var account: AccountRLM?
     
@@ -79,6 +79,9 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 13 {
                                                         self.migrateFrom12To13(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 14 {
+                                                        self.migrateFrom13To14(with: migration)
                                                     }
             })
             
@@ -528,6 +531,12 @@ class RealmManager: NSObject {
     func migrateFrom12To13(with migration: Migration) {
         migration.enumerateObjects(ofType: AddressRLM.className()) { (_, newAddress) in
             newAddress?["lastActionDate"] = Date()
+        }
+    }
+    
+    func migrateFrom13To14(with migration: Migration) {
+        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+            newWallet?["chainType"] = NSNumber(value: 0)
         }
     }
     
