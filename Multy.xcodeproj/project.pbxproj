@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2903DBF32668295CED1C9139 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7304C17824311A19240183E0 /* Pods_Multy.framework */; };
 		440AD8D22020D1220015AEF1 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */; };
+		4446C2E020484D97000D5D07 /* MultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446C2DF20484D97000D5D07 /* MultyTests.swift */; };
+		4446C2EE20484DFC000D5D07 /* MultyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446C2ED20484DFC000D5D07 /* MultyUITests.swift */; };
 		444B3B6020455489008129B8 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B5F20455489008129B8 /* BigInt.swift */; };
 		444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B642045723C008129B8 /* BigInt+Extension.swift */; };
 		447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447ECAD220330C2C0085C26D /* TransactionDTO.swift */; };
@@ -190,6 +192,23 @@
 		FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4446C2E220484D97000D5D07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452290491FBB18D30024B550 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 452290501FBB18D30024B550;
+			remoteInfo = Multy;
+		};
+		4446C2F020484DFC000D5D07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452290491FBB18D30024B550 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 452290501FBB18D30024B550;
+			remoteInfo = Multy;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		FA86A7551FC2C9D7002826EC /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -205,6 +224,12 @@
 
 /* Begin PBXFileReference section */
 		440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		4446C2DD20484D97000D5D07 /* MultyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4446C2DF20484D97000D5D07 /* MultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultyTests.swift; sourceTree = "<group>"; };
+		4446C2E120484D97000D5D07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4446C2EB20484DFC000D5D07 /* MultyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4446C2ED20484DFC000D5D07 /* MultyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultyUITests.swift; sourceTree = "<group>"; };
+		4446C2EF20484DFC000D5D07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444B3B5F20455489008129B8 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
 		444B3B642045723C008129B8 /* BigInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		447ECAD220330C2C0085C26D /* TransactionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDTO.swift; sourceTree = "<group>"; };
@@ -406,6 +431,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4446C2DA20484D97000D5D07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4446C2E820484DFC000D5D07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4522904E1FBB18D30024B550 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +462,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4446C2DE20484D97000D5D07 /* MultyTests */ = {
+			isa = PBXGroup;
+			children = (
+				4446C2DF20484D97000D5D07 /* MultyTests.swift */,
+				4446C2E120484D97000D5D07 /* Info.plist */,
+			);
+			path = MultyTests;
+			sourceTree = "<group>";
+		};
+		4446C2EC20484DFC000D5D07 /* MultyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4446C2ED20484DFC000D5D07 /* MultyUITests.swift */,
+				4446C2EF20484DFC000D5D07 /* Info.plist */,
+			);
+			path = MultyUITests;
+			sourceTree = "<group>";
+		};
 		4506F1721FD9A2B700D575BA /* Wallet settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +511,8 @@
 			isa = PBXGroup;
 			children = (
 				452290531FBB18D30024B550 /* Multy */,
+				4446C2DE20484D97000D5D07 /* MultyTests */,
+				4446C2EC20484DFC000D5D07 /* MultyUITests */,
 				452290521FBB18D30024B550 /* Products */,
 				FA7E97221FF2504100735D73 /* Frameworks */,
 				8F3AE4440B3A342D5B1B0AB7 /* Pods */,
@@ -464,6 +523,8 @@
 			isa = PBXGroup;
 			children = (
 				452290511FBB18D30024B550 /* Multy.app */,
+				4446C2DD20484D97000D5D07 /* MultyTests.xctest */,
+				4446C2EB20484DFC000D5D07 /* MultyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1192,6 +1253,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4446C2DC20484D97000D5D07 /* MultyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4446C2E420484D97000D5D07 /* Build configuration list for PBXNativeTarget "MultyTests" */;
+			buildPhases = (
+				4446C2D920484D97000D5D07 /* Sources */,
+				4446C2DA20484D97000D5D07 /* Frameworks */,
+				4446C2DB20484D97000D5D07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4446C2E320484D97000D5D07 /* PBXTargetDependency */,
+			);
+			name = MultyTests;
+			productName = MultyTests;
+			productReference = 4446C2DD20484D97000D5D07 /* MultyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4446C2EA20484DFC000D5D07 /* MultyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4446C2F220484DFC000D5D07 /* Build configuration list for PBXNativeTarget "MultyUITests" */;
+			buildPhases = (
+				4446C2E720484DFC000D5D07 /* Sources */,
+				4446C2E820484DFC000D5D07 /* Frameworks */,
+				4446C2E920484DFC000D5D07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4446C2F120484DFC000D5D07 /* PBXTargetDependency */,
+			);
+			name = MultyUITests;
+			productName = MultyUITests;
+			productReference = 4446C2EB20484DFC000D5D07 /* MultyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		452290501FBB18D30024B550 /* Multy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 452290631FBB18D30024B550 /* Build configuration list for PBXNativeTarget "Multy" */;
@@ -1220,10 +1317,20 @@
 		452290491FBB18D30024B550 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Idealnaya rabota";
 				TargetAttributes = {
+					4446C2DC20484D97000D5D07 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 452290501FBB18D30024B550;
+					};
+					4446C2EA20484DFC000D5D07 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 452290501FBB18D30024B550;
+					};
 					452290501FBB18D30024B550 = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
@@ -1250,11 +1357,27 @@
 			projectRoot = "";
 			targets = (
 				452290501FBB18D30024B550 /* Multy */,
+				4446C2DC20484D97000D5D07 /* MultyTests */,
+				4446C2EA20484DFC000D5D07 /* MultyUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4446C2DB20484D97000D5D07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4446C2E920484DFC000D5D07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4522904F1FBB18D30024B550 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1392,6 +1515,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4446C2D920484D97000D5D07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4446C2E020484D97000D5D07 /* MultyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4446C2E720484DFC000D5D07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4446C2EE20484DFC000D5D07 /* MultyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4522904D1FBB18D30024B550 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1547,6 +1686,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4446C2E320484D97000D5D07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 452290501FBB18D30024B550 /* Multy */;
+			targetProxy = 4446C2E220484D97000D5D07 /* PBXContainerItemProxy */;
+		};
+		4446C2F120484DFC000D5D07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 452290501FBB18D30024B550 /* Multy */;
+			targetProxy = 4446C2F020484DFC000D5D07 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		452290581FBB18D30024B550 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1567,6 +1719,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4446C2E520484D97000D5D07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7SW78L9W6E;
+				INFOPLIST_FILE = MultyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.multy.MultyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Multy.app/Multy";
+			};
+			name = Debug;
+		};
+		4446C2E620484D97000D5D07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7SW78L9W6E;
+				INFOPLIST_FILE = MultyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.multy.MultyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Multy.app/Multy";
+			};
+			name = Release;
+		};
+		4446C2F320484DFC000D5D07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7SW78L9W6E;
+				INFOPLIST_FILE = MultyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.multy.MultyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Multy;
+			};
+			name = Debug;
+		};
+		4446C2F420484DFC000D5D07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7SW78L9W6E;
+				INFOPLIST_FILE = MultyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.multy.MultyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Multy;
+			};
+			name = Release;
+		};
 		452290611FBB18D30024B550 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1679,6 +1899,7 @@
 			baseConfigurationReference = 4F755B7866B0879E2567D290 /* Pods-Multy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Multy/Multy.entitlements;
@@ -1711,6 +1932,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Multy.app/Multy";
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -1720,6 +1942,7 @@
 			baseConfigurationReference = E4F4E06236FA82100FA1DF80 /* Pods-Multy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Multy/Multy.entitlements;
@@ -1751,6 +1974,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Multy.app/Multy";
 				VALID_ARCHS = arm64;
 			};
 			name = Release;
@@ -1758,6 +1982,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4446C2E420484D97000D5D07 /* Build configuration list for PBXNativeTarget "MultyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4446C2E520484D97000D5D07 /* Debug */,
+				4446C2E620484D97000D5D07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4446C2F220484DFC000D5D07 /* Build configuration list for PBXNativeTarget "MultyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4446C2F320484DFC000D5D07 /* Debug */,
+				4446C2F420484DFC000D5D07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4522904C1FBB18D30024B550 /* Build configuration list for PBXProject "Multy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
