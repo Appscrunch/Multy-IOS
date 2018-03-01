@@ -95,6 +95,7 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
             sendAnalyticsEvent(screenName: screenCreateWallet, eventName: chainIdTap)
+            self.goToChains()
         } else if indexPath.row == 2 {
             sendAnalyticsEvent(screenName: screenCreateWallet, eventName: fiatIdTap)
             self.goToCurrency()
@@ -105,6 +106,12 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let currencyVC = storyboard.instantiateViewController(withIdentifier: "currencyVC")
         self.navigationController?.pushViewController(currencyVC, animated: true)
+    }
+    
+    func goToChains() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let chainsVC = storyboard.instantiateViewController(withIdentifier: "chainsVC")
+        self.navigationController?.pushViewController(chainsVC, animated: true)
     }
     
     @objc func keyboardWillShow(_ notification : Notification) {

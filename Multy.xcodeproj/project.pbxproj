@@ -99,6 +99,10 @@
 		45AC16282048214C00E75BD6 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16262048214C00E75BD6 /* CurrencyTableViewCell.swift */; };
 		45AC16292048214C00E75BD6 /* CurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45AC16272048214C00E75BD6 /* CurrencyTableViewCell.xib */; };
 		45AC162B2048380700E75BD6 /* CurrencyObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC162A2048380700E75BD6 /* CurrencyObj.swift */; };
+		45AC162E20484F0A00E75BD6 /* BlockchainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC162D20484F0A00E75BD6 /* BlockchainsViewController.swift */; };
+		45AC163020484F1900E75BD6 /* BlockchainsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC162F20484F1900E75BD6 /* BlockchainsPresenter.swift */; };
+		45AC1634204850AC00E75BD6 /* BlockchainCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC1632204850AC00E75BD6 /* BlockchainCellTableViewCell.swift */; };
+		45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45AC1633204850AC00E75BD6 /* BlockchainCellTableViewCell.xib */; };
 		45B0B0E61FEBEDE9005BB1C0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */; };
 		45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */; };
 		45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */; };
@@ -311,6 +315,10 @@
 		45AC16262048214C00E75BD6 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		45AC16272048214C00E75BD6 /* CurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyTableViewCell.xib; sourceTree = "<group>"; };
 		45AC162A2048380700E75BD6 /* CurrencyObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyObj.swift; sourceTree = "<group>"; };
+		45AC162D20484F0A00E75BD6 /* BlockchainsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainsViewController.swift; sourceTree = "<group>"; };
+		45AC162F20484F1900E75BD6 /* BlockchainsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainsPresenter.swift; sourceTree = "<group>"; };
+		45AC1632204850AC00E75BD6 /* BlockchainCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCellTableViewCell.swift; sourceTree = "<group>"; };
+		45AC1633204850AC00E75BD6 /* BlockchainCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockchainCellTableViewCell.xib; sourceTree = "<group>"; };
 		45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPresnter.swift; sourceTree = "<group>"; };
 		45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPresenter.swift; sourceTree = "<group>"; };
@@ -561,6 +569,7 @@
 		455CDCF41FC848F700EA5ACE /* Creating wallet */ = {
 			isa = PBXGroup;
 			children = (
+				45AC162C20484EE500E75BD6 /* BlockchainChooser */,
 				455CDCF51FC8490700EA5ACE /* WalletInfo */,
 			);
 			path = "Creating wallet";
@@ -900,6 +909,24 @@
 			path = CurrencyCell;
 			sourceTree = "<group>";
 		};
+		45AC162C20484EE500E75BD6 /* BlockchainChooser */ = {
+			isa = PBXGroup;
+			children = (
+				45AC162D20484F0A00E75BD6 /* BlockchainsViewController.swift */,
+				45AC162F20484F1900E75BD6 /* BlockchainsPresenter.swift */,
+			);
+			path = BlockchainChooser;
+			sourceTree = "<group>";
+		};
+		45AC16312048506800E75BD6 /* BloclchainCell */ = {
+			isa = PBXGroup;
+			children = (
+				45AC1632204850AC00E75BD6 /* BlockchainCellTableViewCell.swift */,
+				45AC1633204850AC00E75BD6 /* BlockchainCellTableViewCell.xib */,
+			);
+			path = BloclchainCell;
+			sourceTree = "<group>";
+		};
 		45B0B0E41FEBEDC3005BB1C0 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,6 +1020,7 @@
 				45A949501FC6D19E003C3A23 /* Trasaction fee cell */,
 				455CDCFE1FC85BC600EA5ACE /* Create Wallet Name */,
 				45AC16252048211600E75BD6 /* CurrencyCell */,
+				45AC16312048506800E75BD6 /* BloclchainCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1327,6 +1355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45DA45A220299E49004A34FB /* Multy.entitlements in Resources */,
+				45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */,
 				FA4D43ED1FC5CEE0003C7117 /* MainWalletHeaderCell.xib in Resources */,
 				FA4D43E71FC5C2A6003C7117 /* Wallet.storyboard in Resources */,
 				45B0CB811FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.xib in Resources */,
@@ -1474,6 +1503,7 @@
 				FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */,
 				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
 				FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */,
+				45AC163020484F1900E75BD6 /* BlockchainsPresenter.swift in Sources */,
 				45E215DB1FD15D5F0078945A /* DonationDTO.swift in Sources */,
 				451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */,
 				45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */,
@@ -1502,6 +1532,7 @@
 				45A949211FC2DFF9003C3A23 /* ReceiveStartPresenter.swift in Sources */,
 				FA4D43DB1FC581AE003C7117 /* DMRealmExtension.swift in Sources */,
 				45D2D6DF203463FC00751ED4 /* AnalyticsConstants.swift in Sources */,
+				45AC162E20484F0A00E75BD6 /* BlockchainsViewController.swift in Sources */,
 				45A9494D1FC5D972003C3A23 /* SendDetailsViewController.swift in Sources */,
 				4540945B203352CC00603DB5 /* PinCodeViewController.swift in Sources */,
 				45A9494F1FC6BDF3003C3A23 /* SendDetailsPresenter.swift in Sources */,
@@ -1535,6 +1566,7 @@
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,
 				455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */,
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
+				45AC1634204850AC00E75BD6 /* BlockchainCellTableViewCell.swift in Sources */,
 				458FD4C71FE3C2CB001C25BA /* SpendableOutputRLM.swift in Sources */,
 				FA4D43E51FC590F6003C7117 /* SeedPhraseRLM.swift in Sources */,
 				45E215DE1FD164E30078945A /* QrScannerViewController.swift in Sources */,

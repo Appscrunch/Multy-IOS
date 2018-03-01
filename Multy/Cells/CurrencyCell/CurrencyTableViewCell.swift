@@ -43,7 +43,7 @@ class CurrencyTableViewCell: UITableViewCell {
         currencyEUR.currencyFullName = "Euro"
         
         let currencyETH = CurrencyObj()
-        currencyETH.currencyImgName = "ETH_medium_icon"
+        currencyETH.currencyImgName = "chainEth"
         currencyETH.currencyShortName = "ETH"
         currencyETH.currencyFullName = "Ethereum"
         
