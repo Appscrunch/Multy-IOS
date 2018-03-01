@@ -8,16 +8,22 @@ import ZFRippleButton
 class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLbl: UILabel!
     
     let presenter = ReceiveStartPresenter()
     
     var sendWalletDelegate: SendWalletProtocol?
+    
+    var titleText = "Receive"
+    
+    var whereFrom: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        self.titleLbl.text = self.titleText
         
         self.presenter.receiveStartVC = self
         self.registerCells()
@@ -82,8 +88,16 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.presenter.selectedIndex = indexPath.row
         if self.presenter.isNeedToPop == true {
-            self.sendWalletDelegate?.sendWallet(wallet: self.presenter.walletsArr[self.presenter.selectedIndex!])
-            self.navigationController?.popViewController(animated: true)
+            if self.whereFrom != nil && self.presenter.walletsArr[indexPath.row].availableAmount() == 0 {
+                let message = "You can not choose empty wallet. Please select wallet with some amount"
+                let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                shakeView(viewForShake: self.tableView.cellForRow(at: indexPath)!)
+            } else {
+                self.sendWalletDelegate?.sendWallet(wallet: self.presenter.walletsArr[self.presenter.selectedIndex!])
+                self.navigationController?.popViewController(animated: true)
+            }
         } else {
             self.performSegue(withIdentifier: "receiveDetails", sender: Any.self)
         }

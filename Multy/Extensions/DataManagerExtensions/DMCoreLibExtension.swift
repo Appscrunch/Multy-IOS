@@ -44,4 +44,62 @@ extension DataManager {
     func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
         return coreLibManager.isAddressValid(address: address, for: wallet)
     }
+    
+    func createDonationTransaction(transactionDTO: TransactionDTO, completion: @escaping(_ answer: String?,_ error: Error?) -> ()) {
+        let core = DataManager.shared.coreLibManager
+        let wallet = transactionDTO.choosenWallet!
+        var binaryData = DataManager.shared.realmManager.account!.binaryDataString.createBinaryData()!
+        
+        
+        let addressData = core.createAddress(currencyID: transactionDTO.choosenWallet!.chain.uint32Value,
+                                             walletID: transactionDTO.choosenWallet!.walletID.uint32Value,
+                                             addressID: UInt32(transactionDTO.choosenWallet!.addresses.count),
+                                             binaryData: &binaryData)
+        
+        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                                         sendAddress: transactionDTO.sendAddress!,
+                                                                         sendAmountString: transactionDTO.sendAmount!.fixedFraction(digits: 8),
+                                                                         feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
+                                                                         isDonationExists: false,
+                                                                         donationAmount: "0",
+                                                                         isPayCommission: true,
+                                                                         wallet: transactionDTO.choosenWallet!,
+                                                                         binaryData: &binaryData,
+                                                                         inputs: transactionDTO.choosenWallet!.addresses)
+        
+        let newAddressParams = [
+            "walletindex"   : wallet.walletID.intValue,
+            "address"       : addressData!["address"] as! String,
+            "addressindex"  : wallet.addresses.count,
+            "transaction"   : trData.0,
+            "ishd"          : NSNumber(booleanLiteral: true)
+            ] as [String : Any]
+        
+        let params = [
+            "currencyid": wallet.chain,
+            "payload"   : newAddressParams
+            ] as [String : Any]
+        
+        DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
+            print("---------\(dict)")
+            
+            if error != nil {
+//                self.presentAlert()
+                
+                print("sendHDTransaction Error: \(error)")
+//                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
+                return
+            }
+            
+            if dict!["code"] as! Int == 200 {
+//                self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
+                completion("good", nil)
+            } else {
+                completion(nil, nil)
+//                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
+//                self.presentAlert()
+            }
+        }
+    }
+    
 }

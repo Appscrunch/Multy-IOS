@@ -1253,7 +1253,7 @@ This feature will be in the next update.</string>
         <!--Sending Animation View Controller-->
         <scene sceneID="pQ1-vc-SFR">
             <objects>
-                <viewController id="UPV-t8-x0n" customClass="SendingAnimationViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SuccessSendVC" id="UPV-t8-x0n" customClass="SendingAnimationViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bv6-DH-6uG"/>
                         <viewControllerLayoutGuide type="bottom" id="eBC-rP-NLv"/>
