@@ -71,6 +71,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         
         DataManager.shared.createDonationTransaction(transactionDTO: transaction) { (answer, err) in
             self.mainVC?.progressHud.hide()
+            self.mainVC?.view.isUserInteractionEnabled = true
             if err != nil {
                 let alert = UIAlertController(title: "Error", message: err.debugDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

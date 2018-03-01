@@ -61,6 +61,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     }
     
     @IBAction func sendAction(_ sender: Any) {
+        self.view.isUserInteractionEnabled = false
         self.progressHud.show()
         self.presenter.makeTransaction()
     }
@@ -93,6 +94,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height/4
+                self.tableView.isUserInteractionEnabled = false
 //                if screenHeight == heightOfX {
 //                    bottomBtnConstraint.constant = 10
 //                }
@@ -104,6 +106,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0 {
                 self.view.frame.origin.y += keyboardSize.height/4
+                self.tableView.isUserInteractionEnabled = true
                 self.makeSendAvailable(isAvailable: true)
 //                if screenHeight == heightOfX {
 //                    bottomBtnConstraint.constant = 0

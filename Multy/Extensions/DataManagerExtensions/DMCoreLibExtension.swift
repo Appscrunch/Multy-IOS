@@ -53,7 +53,7 @@ extension DataManager {
         
         let addressData = core.createAddress(currencyID: transactionDTO.choosenWallet!.chain.uint32Value,
                                              walletID: transactionDTO.choosenWallet!.walletID.uint32Value,
-                                             addressID: UInt32(transactionDTO.choosenWallet!.address.count),
+                                             addressID: UInt32(transactionDTO.choosenWallet!.addresses.count),
                                              binaryData: &binaryData)
         
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
