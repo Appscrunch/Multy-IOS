@@ -30,6 +30,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     let progressHud = ProgressHUD(text: "Sending...")
     
+    var isTransactionSelected = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(progressHud)
@@ -45,6 +47,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         tableView.layer.shadowRadius = 10
         
         self.presenter.getWallets()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissKeyboard), name: Notification.Name("hideKeyboard"), object: nil)
     }
     
     
@@ -134,7 +137,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
             isAvailable = false
             shakeView(viewForShake: donatView)
         }
-        if isAvailable {
+        if isAvailable && isTransactionSelected {
             self.sendBtn.isUserInteractionEnabled = true
             self.sendBtn.backgroundColor = #colorLiteral(red: 0.009615149349, green: 0.5124486089, blue: 0.9994245172, alpha: 1)
         } else {
@@ -240,13 +243,15 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
             if trueCells[indexPath.row].checkMarkImage.isHidden == false {
                 trueCells[indexPath.row].checkMarkImage.isHidden = true
                 self.presenter.selectedIndexOfSpeed = nil
-                makeSendAvailable(isAvailable: false)
+                self.isTransactionSelected = false
+                makeSendAvailable(isAvailable: isTransactionSelected)
                 return
             }
             for cell in trueCells {
                 cell.checkMarkImage.isHidden = true
             }
-            makeSendAvailable(isAvailable: true)
+            self.isTransactionSelected = true
+            makeSendAvailable(isAvailable: isTransactionSelected)
             trueCells[indexPath.row].checkMarkImage.isHidden = false
             self.presenter.selectedIndexOfSpeed = indexPath.row
         } else {
