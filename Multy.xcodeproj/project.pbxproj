@@ -94,6 +94,11 @@
 		45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */; };
 		45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */; };
 		45A949641FC766D3003C3A23 /* SendFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949631FC766D3003C3A23 /* SendFinishViewController.swift */; };
+		45AC1622204820BC00E75BD6 /* CurrencyToConvertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC1621204820BC00E75BD6 /* CurrencyToConvertViewController.swift */; };
+		45AC1624204820CB00E75BD6 /* CurrencyToConvertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC1623204820CB00E75BD6 /* CurrencyToConvertPresenter.swift */; };
+		45AC16282048214C00E75BD6 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC16262048214C00E75BD6 /* CurrencyTableViewCell.swift */; };
+		45AC16292048214C00E75BD6 /* CurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45AC16272048214C00E75BD6 /* CurrencyTableViewCell.xib */; };
+		45AC162B2048380700E75BD6 /* CurrencyObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC162A2048380700E75BD6 /* CurrencyObj.swift */; };
 		45B0B0E61FEBEDE9005BB1C0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */; };
 		45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */; };
 		45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */; };
@@ -301,6 +306,11 @@
 		45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountPresenter.swift; sourceTree = "<group>"; };
 		45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishPresenter.swift; sourceTree = "<group>"; };
 		45A949631FC766D3003C3A23 /* SendFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishViewController.swift; sourceTree = "<group>"; };
+		45AC1621204820BC00E75BD6 /* CurrencyToConvertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyToConvertViewController.swift; sourceTree = "<group>"; };
+		45AC1623204820CB00E75BD6 /* CurrencyToConvertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyToConvertPresenter.swift; sourceTree = "<group>"; };
+		45AC16262048214C00E75BD6 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		45AC16272048214C00E75BD6 /* CurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyTableViewCell.xib; sourceTree = "<group>"; };
+		45AC162A2048380700E75BD6 /* CurrencyObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyObj.swift; sourceTree = "<group>"; };
 		45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPresnter.swift; sourceTree = "<group>"; };
 		45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPresenter.swift; sourceTree = "<group>"; };
@@ -872,6 +882,24 @@
 			path = Finish;
 			sourceTree = "<group>";
 		};
+		45AC16202048209900E75BD6 /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				45AC1621204820BC00E75BD6 /* CurrencyToConvertViewController.swift */,
+				45AC1623204820CB00E75BD6 /* CurrencyToConvertPresenter.swift */,
+			);
+			path = Currency;
+			sourceTree = "<group>";
+		};
+		45AC16252048211600E75BD6 /* CurrencyCell */ = {
+			isa = PBXGroup;
+			children = (
+				45AC16262048214C00E75BD6 /* CurrencyTableViewCell.swift */,
+				45AC16272048214C00E75BD6 /* CurrencyTableViewCell.xib */,
+			);
+			path = CurrencyCell;
+			sourceTree = "<group>";
+		};
 		45B0B0E41FEBEDC3005BB1C0 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -895,6 +923,7 @@
 			children = (
 				45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */,
 				45B0B0F11FEBF326005BB1C0 /* SettingsPresenter.swift */,
+				45AC16202048209900E75BD6 /* Currency */,
 				454094482031EED500603DB5 /* Security */,
 			);
 			path = Settings;
@@ -963,6 +992,7 @@
 				45A949371FC59E23003C3A23 /* RecentAddresses */,
 				45A949501FC6D19E003C3A23 /* Trasaction fee cell */,
 				455CDCFE1FC85BC600EA5ACE /* Create Wallet Name */,
+				45AC16252048211600E75BD6 /* CurrencyCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1027,6 +1057,7 @@
 				45E215DA1FD15D5F0078945A /* DonationDTO.swift */,
 				447ECAD220330C2C0085C26D /* TransactionDTO.swift */,
 				45E7A8A520065455005D2D6E /* StockExchanges.swift */,
+				45AC162A2048380700E75BD6 /* CurrencyObj.swift */,
 			);
 			path = PONSO;
 			sourceTree = "<group>";
@@ -1317,6 +1348,7 @@
 				FA4E559D1FDFE47D000FA1A1 /* SeedPhrase.storyboard in Resources */,
 				4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */,
 				45EBB6A8200D312700F81322 /* GoogleService-Info.plist in Resources */,
+				45AC16292048214C00E75BD6 /* CurrencyTableViewCell.xib in Resources */,
 				FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */,
 				45A949361FC5992A003C3A23 /* SearchAddressTableViewCell.xib in Resources */,
 				45B5CCAA1FDAC0B00069BD46 /* TextTableViewCell.xib in Resources */,
@@ -1453,13 +1485,16 @@
 				FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */,
 				45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */,
 				45B0B0ED1FEBF2CF005BB1C0 /* ContactsViewController.swift in Sources */,
+				45AC1622204820BC00E75BD6 /* CurrencyToConvertViewController.swift in Sources */,
 				45E215E21FD16AA70078945A /* GoToQrProtocol.swift in Sources */,
 				457569441FBDDCFF00FDEE20 /* CheckWordsViewController.swift in Sources */,
 				45B5CCA91FDAC0B00069BD46 /* TextTableViewCell.swift in Sources */,
 				FA4D43DD1FC581CF003C7117 /* DMSocketExtension.swift in Sources */,
 				447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */,
 				FA4D43DF1FC58730003C7117 /* TouchIDAuthentication.swift in Sources */,
+				45AC1624204820CB00E75BD6 /* CurrencyToConvertPresenter.swift in Sources */,
 				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
+				45AC162B2048380700E75BD6 /* CurrencyObj.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
 				FA8C87852010B44300F8D5D9 /* UITableViewCell+Extension.swift in Sources */,
 				45409459203352B800603DB5 /* PinCodePresenter.swift in Sources */,
@@ -1509,6 +1544,7 @@
 				45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */,
 				45B5CCA61FDA94360069BD46 /* ConnectionCheck.swift in Sources */,
 				4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */,
+				45AC16282048214C00E75BD6 /* CurrencyTableViewCell.swift in Sources */,
 				FA8C87872010E59200F8D5D9 /* CreateNewWalletProtocol.swift in Sources */,
 				FACEB5A1200A46F600055788 /* TransactionPendingCell.swift in Sources */,
 				45A9494A1FC5C572003C3A23 /* WalletChooseViewController.swift in Sources */,

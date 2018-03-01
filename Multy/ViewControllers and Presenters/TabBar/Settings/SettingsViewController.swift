@@ -59,7 +59,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     func setupForNotImplementedViews() {
         self.pushView.alpha = opacityForNotImplementedView
-        self.defFiatView.alpha = opacityForNotImplementedView
+//        self.defFiatView.alpha = opacityForNotImplementedView
         self.aboutView.alpha = opacityForNotImplementedView
         self.feedbackView.alpha = opacityForNotImplementedView
     }
@@ -101,6 +101,11 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         sendAnalyticsEvent(screenName: screenSettings, eventName: securitySettingsTap)
     }
     
+    @IBAction func currencyAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let currencyVC = storyboard.instantiateViewController(withIdentifier: "currencyVC")
+        self.navigationController?.pushViewController(currencyVC, animated: true)
+    }
     
     @objc func disablePin() {
         self.pinSwitch.isOn = false

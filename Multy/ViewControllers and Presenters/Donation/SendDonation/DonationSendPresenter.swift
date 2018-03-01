@@ -10,7 +10,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     
     var selectedIndexOfSpeed: Int?
     
-    var customFee = UInt32(20)
+    var customFee = UInt64(20)
     
     var walletPayFrom: UserWalletRLM?
     
@@ -32,7 +32,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         let cell = self.mainVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
         cell.value = firstValue
         cell.setupUIForBtc()
-        self.customFee = UInt32(firstValue)
+        self.customFee = UInt64(firstValue)
         self.mainVC?.tableView.reloadData()
         self.mainVC?.makeSendAvailable(isAvailable: true)
 //        sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
