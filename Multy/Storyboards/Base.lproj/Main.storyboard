@@ -601,7 +601,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Und-P0-72N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2796" y="2436"/>
+            <point key="canvasLocation" x="-2796" y="2435.5322338830588"/>
         </scene>
         <!--Donation Send View Controller-->
         <scene sceneID="fdY-lQ-60C">
