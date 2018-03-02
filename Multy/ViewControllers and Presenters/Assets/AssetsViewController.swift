@@ -76,6 +76,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
+        
+//        DataManager.shared.coreLibManager.startSwiftTest()
     }
     
     override func viewDidAppear(_ animated: Bool) {

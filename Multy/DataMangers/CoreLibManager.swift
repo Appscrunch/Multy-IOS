@@ -1010,12 +1010,19 @@ class CoreLibManager: NSObject {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let blockchain = BlockchainType.init(blockchain: Blockchain.init(0), net_type: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
-        let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, 0, newAccountPointer)
+        let blockchain = BlockchainType.init(blockchain: BLOCKCHAIN_BITCOIN, net_type: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
+        let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, UInt32(0), newAccountPointer)
         print("make_hd_account: \(mHDa)")
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddressPointer)
-        print("make_hd_leaf_account: \(mHDla)")
+        if mHDa != nil {
+            let error = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
+        }
+        
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee!, ADDRESS_INTERNAL, UInt32(0), newAddressPointer)
+//        make_hd_leaf_account(OpaquePointer!, AddressType, UInt32, UnsafeMutablePointer<OpaquePointer?>!)
+        if mHDla != nil {
+            let error = returnErrorString(opaquePointer: mHDla!, mask: "make_hd_leaf_account")
+        }
         
         //Create wallet
         
