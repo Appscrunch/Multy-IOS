@@ -310,11 +310,14 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath {
         case [0,0]:         // PORTFOLIO CELL  or LOGO
-                        let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-                        portfolioCell.mainVC = self
-                        return portfolioCell
-//            let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-//            return logoCell
+            if presenter.account == nil {
+                let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+                return logoCell
+            } else {
+                let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+                portfolioCell.mainVC = self
+                return portfolioCell
+            }
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
             newWalletCell.delegate = self
@@ -474,16 +477,28 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath == [0,0] {
 //            return 283  //portfolio height
             if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
-                if screenHeight == heightOfX {
-//                    return 255 //logo height
-                    return 360
-                } else {
-//                    return 245
-                    return 350
+                if self.presenter.account != nil {
+                    if screenHeight == heightOfX {
+                        //                    return 255 //logo height
+                        return 360
+                    } else {
+                        //                    return 245
+                        return 350
+                    }
+                }else {
+                    if screenHeight == heightOfX {
+                        return 255 //logo height
+                    } else {
+                        return 245
+                    }
                 }
             } else {
-//                return 220  //logo
-                return 300
+                if self.presenter.account != nil {
+//                                return 220  //logo
+                    return 300
+                } else {
+                    return 220  //logo
+                }
             }
         } else if indexPath == [0, 1] {
             return 75
