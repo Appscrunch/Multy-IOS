@@ -72,6 +72,8 @@
 		4585BD392049AD03004542AE /* ExchangeStockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4585BD372049AD03004542AE /* ExchangeStockTableViewCell.xib */; };
 		4585BD3B2049B035004542AE /* ExchangeStockObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD3A2049B035004542AE /* ExchangeStockObj.swift */; };
 		4585BD3D2049C0DD004542AE /* DonationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD3C2049C0DD004542AE /* DonationProtocol.swift */; };
+		4585BD402049CF17004542AE /* ActivityWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD3F2049CF17004542AE /* ActivityWebViewViewController.swift */; };
+		4585BD422049CF3D004542AE /* ActivityWebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD412049CF3D004542AE /* ActivityWebViewPresenter.swift */; };
 		458FD4C71FE3C2CB001C25BA /* SpendableOutputRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458FD4C61FE3C2CB001C25BA /* SpendableOutputRLM.swift */; };
 		459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */; };
 		45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6D62A1FE01CAA00491446 /* SecureViewController.swift */; };
@@ -299,6 +301,8 @@
 		4585BD372049AD03004542AE /* ExchangeStockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExchangeStockTableViewCell.xib; sourceTree = "<group>"; };
 		4585BD3A2049B035004542AE /* ExchangeStockObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeStockObj.swift; sourceTree = "<group>"; };
 		4585BD3C2049C0DD004542AE /* DonationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationProtocol.swift; sourceTree = "<group>"; };
+		4585BD3F2049CF17004542AE /* ActivityWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWebViewViewController.swift; sourceTree = "<group>"; };
+		4585BD412049CF3D004542AE /* ActivityWebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWebViewPresenter.swift; sourceTree = "<group>"; };
 		458FD4C61FE3C2CB001C25BA /* SpendableOutputRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendableOutputRLM.swift; sourceTree = "<group>"; };
 		459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeeRateProtocol.swift; sourceTree = "<group>"; };
 		45A6D62A1FE01CAA00491446 /* SecureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureViewController.swift; sourceTree = "<group>"; };
@@ -801,6 +805,15 @@
 			path = ExchangeStockCell;
 			sourceTree = "<group>";
 		};
+		4585BD3E2049CEEB004542AE /* WebViewForActivity */ = {
+			isa = PBXGroup;
+			children = (
+				4585BD3F2049CF17004542AE /* ActivityWebViewViewController.swift */,
+				4585BD412049CF3D004542AE /* ActivityWebViewPresenter.swift */,
+			);
+			path = WebViewForActivity;
+			sourceTree = "<group>";
+		};
 		45A9491D1FC2DF03003C3A23 /* Receive */ = {
 			isa = PBXGroup;
 			children = (
@@ -984,6 +997,7 @@
 		45B0B0E41FEBEDC3005BB1C0 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				4585BD3E2049CEEB004542AE /* WebViewForActivity */,
 				45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */,
 				45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */,
 			);
@@ -1678,6 +1692,7 @@
 				455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */,
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
 				4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */,
+				4585BD402049CF17004542AE /* ActivityWebViewViewController.swift in Sources */,
 				4585BD2820496224004542AE /* CreatingWalletActionsPresenter.swift in Sources */,
 				4585BD3B2049B035004542AE /* ExchangeStockObj.swift in Sources */,
 				FA4D43D71FC5749D003C7117 /* DMApiExtension.swift in Sources */,
@@ -1710,6 +1725,7 @@
 				45E215D81FD147950078945A /* TransactionRLM.swift in Sources */,
 				45A949481FC5C55C003C3A23 /* WalletChoosePresenter.swift in Sources */,
 				4583AC9F1FBC991E001991AA /* NewWalletTableViewCell.swift in Sources */,
+				4585BD422049CF3D004542AE /* ActivityWebViewPresenter.swift in Sources */,
 				45A9492C1FC426CF003C3A23 /* ReceiveAllDetailsPresenter.swift in Sources */,
 				45C8D143200780CF00F5994E /* SplashViewController.swift in Sources */,
 				45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */,
