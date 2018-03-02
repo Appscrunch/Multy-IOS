@@ -75,7 +75,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func requestFee() {
-        DataManager.shared.getFeeRate(currencyID: 0, completion: { (dict, error) in
+        DataManager.shared.getFeeRate(currencyID: transactionDTO.choosenWallet!.chain.uint32Value, completion: { (dict, error) in
             if dict != nil {
                 self.feeRate = dict
             } else {
