@@ -17,27 +17,27 @@ class BlockchainsPresenter: NSObject {
 //        self.arr.append(btc)
         
         let curForAppend = CurrencyObj()
-        curForAppend.currencyImgName = "chainEth"
-        curForAppend.currencyShortName = "ETH"
-        curForAppend.currencyFullName = "Ethereum"
+        curForAppend.currencyImgName = "chainLbtc"
+        curForAppend.currencyShortName = "LBTC"
+        curForAppend.currencyFullName = "Bitcoin lightning"
         self.arr.append(curForAppend)
         
         let curForAppend2 = CurrencyObj()
-        curForAppend2.currencyImgName = "chainGolos"
-        curForAppend2.currencyShortName = "GOLOS"
-        curForAppend2.currencyFullName = "Golos"
+        curForAppend2.currencyImgName = "chainEth"
+        curForAppend2.currencyShortName = "ETH"
+        curForAppend2.currencyFullName = "Ethereum"
         self.arr.append(curForAppend2)
         
         let curForAppend3 = CurrencyObj()
-        curForAppend3.currencyImgName = "chainSteem"
-        curForAppend3.currencyShortName = "STEEM"
-        curForAppend3.currencyFullName = "Steem Dollars"
+        curForAppend3.currencyImgName = "chainGolos"
+        curForAppend3.currencyShortName = "GOLOS"
+        curForAppend3.currencyFullName = "Golos"
         self.arr.append(curForAppend3)
         
         let curForAppend4 = CurrencyObj()
-        curForAppend4.currencyImgName = "chainErc20"
-        curForAppend4.currencyShortName = "ERC20"
-        curForAppend4.currencyFullName = "ERC20 Tokens"
+        curForAppend4.currencyImgName = "chainSteem"
+        curForAppend4.currencyShortName = "STEEM"
+        curForAppend4.currencyFullName = "Steem Dollars"
         self.arr.append(curForAppend4)
         
         let curForAppend5 = CurrencyObj()
@@ -45,6 +45,12 @@ class BlockchainsPresenter: NSObject {
         curForAppend5.currencyShortName = "BTS"
         curForAppend5.currencyFullName = "BitShares"
         self.arr.append(curForAppend5)
+        
+        let curForBitCash = CurrencyObj()
+        curForBitCash.currencyImgName = "chainBch"
+        curForBitCash.currencyShortName = "BCH"
+        curForBitCash.currencyFullName = "Bitcoin Cash"
+        self.arr.append(curForBitCash)
         
         let curForAppend6 = CurrencyObj()
         curForAppend6.currencyImgName = "chainLtc"
@@ -65,9 +71,10 @@ class BlockchainsPresenter: NSObject {
         self.arr.append(curForAppend8)
         
         let curForAppend9 = CurrencyObj()
-        curForAppend9.currencyImgName = "chainLbtc"
-        curForAppend9.currencyShortName = "LBTC"
-        curForAppend9.currencyFullName = "Bitcoin lightning"
+        curForAppend9.currencyImgName = "chainErc20"
+        curForAppend9.currencyShortName = "ERC20"
+        curForAppend9.currencyFullName = "ERC20 Tokens"
         self.arr.append(curForAppend9)
+        
     }
 }

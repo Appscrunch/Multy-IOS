@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletViewController: UIViewController, AnalyticsProtocol {
+class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -319,6 +319,11 @@ class WalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func exchangeAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.cancelDelegate = self
+        self.present(donatAlert, animated: true, completion: nil)
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
     }
     
@@ -331,6 +336,28 @@ class WalletViewController: UIViewController, AnalyticsProtocol {
             let settingsVC = segue.destination as! WalletSettingsViewController
             settingsVC.presenter.wallet = self.presenter.wallet
         }
+    }
+    
+    func cancelAction() {
+        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+            if wallets == nil {
+                let message = "You don`t have any wallets yet."
+                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                return
+            }
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                }
+            }
+            //            self.donateOrAlert()
+        }
+    }
+    
+    func presentNoInternet() {
+        
     }
 }
 

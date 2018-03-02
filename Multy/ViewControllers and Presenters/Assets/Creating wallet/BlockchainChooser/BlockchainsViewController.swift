@@ -41,12 +41,12 @@ class BlockchainsViewController: UIViewController, CancelProtocol {
         }
     }
     
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     func presentNoInternet() {
         
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -86,7 +86,7 @@ extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource 
         if section == 0 {
             return 1
         } else {
-            return 9
+            return 10
         }
     }
     
