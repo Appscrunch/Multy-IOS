@@ -485,7 +485,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                return 220  //logo
                 return 300
             }
-            
         } else if indexPath == [0, 1] {
             return 75
         } else {

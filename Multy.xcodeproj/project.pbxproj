@@ -71,6 +71,7 @@
 		4585BD382049AD03004542AE /* ExchangeStockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD362049AD03004542AE /* ExchangeStockTableViewCell.swift */; };
 		4585BD392049AD03004542AE /* ExchangeStockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4585BD372049AD03004542AE /* ExchangeStockTableViewCell.xib */; };
 		4585BD3B2049B035004542AE /* ExchangeStockObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD3A2049B035004542AE /* ExchangeStockObj.swift */; };
+		4585BD3D2049C0DD004542AE /* DonationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BD3C2049C0DD004542AE /* DonationProtocol.swift */; };
 		458FD4C71FE3C2CB001C25BA /* SpendableOutputRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458FD4C61FE3C2CB001C25BA /* SpendableOutputRLM.swift */; };
 		459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */; };
 		45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6D62A1FE01CAA00491446 /* SecureViewController.swift */; };
@@ -297,6 +298,7 @@
 		4585BD362049AD03004542AE /* ExchangeStockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeStockTableViewCell.swift; sourceTree = "<group>"; };
 		4585BD372049AD03004542AE /* ExchangeStockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExchangeStockTableViewCell.xib; sourceTree = "<group>"; };
 		4585BD3A2049B035004542AE /* ExchangeStockObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeStockObj.swift; sourceTree = "<group>"; };
+		4585BD3C2049C0DD004542AE /* DonationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationProtocol.swift; sourceTree = "<group>"; };
 		458FD4C61FE3C2CB001C25BA /* SpendableOutputRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendableOutputRLM.swift; sourceTree = "<group>"; };
 		459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeeRateProtocol.swift; sourceTree = "<group>"; };
 		45A6D62A1FE01CAA00491446 /* SecureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureViewController.swift; sourceTree = "<group>"; };
@@ -849,6 +851,7 @@
 				FA8C87862010E59200F8D5D9 /* OpenCtreatingSheet.swift */,
 				45C738C220358D56005AB761 /* AnalyticsProtocol.swift */,
 				4585BD2A20496E14004542AE /* CreateWalletProtocol.swift */,
+				4585BD3C2049C0DD004542AE /* DonationProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1668,6 +1671,7 @@
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */,
 				444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */,
+				4585BD3D2049C0DD004542AE /* DonationProtocol.swift in Sources */,
 				444B3B6020455489008129B8 /* BigInt.swift in Sources */,
 				45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */,
 				FA4D43F61FC5D019003C7117 /* MainWalletCollectionViewCell.swift in Sources */,

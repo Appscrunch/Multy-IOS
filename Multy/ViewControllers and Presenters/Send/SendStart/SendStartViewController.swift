@@ -5,7 +5,7 @@
 import UIKit
 import ZFRippleButton
 
-class SendStartViewController: UIViewController, AnalyticsProtocol {
+class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProtocol, CancelProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBtn: ZFRippleButton!
@@ -122,6 +122,44 @@ class SendStartViewController: UIViewController, AnalyticsProtocol {
         }
     }
     
+    func donate() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.cancelDelegate = self
+        self.present(donatAlert, animated: true, completion: nil)
+    }
+    
+    func cancelDonation() {
+        
+    }
+    
+    func cancelAction() {
+        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+            if wallets == nil {
+                let message = "You don`t have any wallets yet."
+                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                return
+            }
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                } else { // empty wallet
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                    break
+                }
+            }
+            //            self.donateOrAlert()
+        }
+    }
+    
+    func presentNoInternet() {
+        
+    }
+    
 }
 
 extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
@@ -142,6 +180,7 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
             searchAddressCell.cancelDelegate = self.presenter
             searchAddressCell.sendAddressDelegate = self.presenter
             searchAddressCell.goToQrDelegate = self.presenter
+            searchAddressCell.donationDelegate = self
             
             return searchAddressCell
         } else if indexPath == [0, 1] {
