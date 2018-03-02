@@ -73,6 +73,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
+        self.openDonat()
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressBookTap)
     }
     
