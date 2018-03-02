@@ -672,7 +672,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lz-By-ymG">
-                                <rect key="frame" x="0.0" y="20" width="375" height="583"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VE2-jw-Snq">
                                         <rect key="frame" x="151" y="13" width="74" height="24"/>
@@ -863,6 +863,20 @@
                                             <outlet property="delegate" destination="1Rd-nL-ZZ0" id="fdj-EG-z3s"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vCc-C8-70s">
+                                        <rect key="frame" x="0.0" y="583" width="375" height="64"/>
+                                        <color key="backgroundColor" red="0.81960475440000002" green="0.81960946320000005" blue="0.83908486370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="Qlf-FG-dkV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendAction:" destination="1Rd-nL-ZZ0" eventType="touchUpInside" id="DcJ-wW-ow4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -876,54 +890,41 @@
                                     <constraint firstItem="D7n-yQ-Rzj" firstAttribute="top" secondItem="VE2-jw-Snq" secondAttribute="top" id="GHn-79-PFT"/>
                                     <constraint firstAttribute="trailing" secondItem="kqI-Bs-yLP" secondAttribute="trailing" id="IV4-RO-AdR"/>
                                     <constraint firstItem="s5N-ss-Hbk" firstAttribute="leading" secondItem="9lz-By-ymG" secondAttribute="leading" constant="16" id="Ia1-dy-EXr"/>
-                                    <constraint firstAttribute="bottom" secondItem="eRF-IU-ZYv" secondAttribute="bottom" constant="60" id="Lt5-pw-F8F"/>
                                     <constraint firstAttribute="trailing" secondItem="s5N-ss-Hbk" secondAttribute="trailing" constant="16" id="MFN-KP-54R"/>
                                     <constraint firstItem="kqI-Bs-yLP" firstAttribute="leading" secondItem="9lz-By-ymG" secondAttribute="leading" id="QAz-YU-iug"/>
+                                    <constraint firstItem="vCc-C8-70s" firstAttribute="leading" secondItem="9lz-By-ymG" secondAttribute="leading" id="S6B-nv-qDk"/>
                                     <constraint firstItem="20j-m8-EKe" firstAttribute="centerY" secondItem="VE2-jw-Snq" secondAttribute="centerY" id="SqA-Kk-Ig7"/>
                                     <constraint firstItem="eRF-IU-ZYv" firstAttribute="top" secondItem="kVh-aV-sdy" secondAttribute="bottom" constant="10" id="UGW-Fc-tp1"/>
                                     <constraint firstItem="D7n-yQ-Rzj" firstAttribute="trailing" secondItem="20j-m8-EKe" secondAttribute="trailing" id="Zax-pi-bsB"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="D7n-yQ-Rzj" secondAttribute="trailing" constant="20" symbolic="YES" id="eBU-Ne-063"/>
                                     <constraint firstItem="eRF-IU-ZYv" firstAttribute="centerX" secondItem="9lz-By-ymG" secondAttribute="centerX" id="fgv-Hy-HCu"/>
                                     <constraint firstItem="D7n-yQ-Rzj" firstAttribute="leading" secondItem="9lz-By-ymG" secondAttribute="leading" constant="17" id="gst-wH-CT5"/>
+                                    <constraint firstItem="vCc-C8-70s" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eRF-IU-ZYv" secondAttribute="bottom" constant="56" id="iwc-q7-XGo"/>
+                                    <constraint firstAttribute="bottom" secondItem="vCc-C8-70s" secondAttribute="bottom" id="k4d-Vz-dZG"/>
                                     <constraint firstItem="GOV-kb-79y" firstAttribute="top" secondItem="kqI-Bs-yLP" secondAttribute="bottom" constant="20" id="kHB-MK-rgD"/>
                                     <constraint firstItem="kqI-Bs-yLP" firstAttribute="top" secondItem="VE2-jw-Snq" secondAttribute="bottom" constant="7" id="kMH-5c-4kj"/>
+                                    <constraint firstAttribute="trailing" secondItem="vCc-C8-70s" secondAttribute="trailing" id="l3J-rx-p09"/>
                                     <constraint firstItem="20j-m8-EKe" firstAttribute="leading" secondItem="9lz-By-ymG" secondAttribute="leading" constant="17" id="orh-dG-oqf"/>
                                     <constraint firstItem="VE2-jw-Snq" firstAttribute="centerX" secondItem="9lz-By-ymG" secondAttribute="centerX" id="qlb-aA-cHQ"/>
                                     <constraint firstAttribute="trailing" secondItem="eRF-IU-ZYv" secondAttribute="trailing" constant="16" id="rlx-ox-Nri"/>
                                     <constraint firstItem="kVh-aV-sdy" firstAttribute="top" secondItem="s5N-ss-Hbk" secondAttribute="bottom" constant="25" id="wjP-xG-wWZ"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vCc-C8-70s">
-                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.81960475440000002" green="0.81960946320000005" blue="0.83908486370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="Qlf-FG-dkV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendAction:" destination="1Rd-nL-ZZ0" eventType="touchUpInside" id="DcJ-wW-ow4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9lz-By-ymG" firstAttribute="leading" secondItem="hhz-Xz-gRk" secondAttribute="leading" id="GC9-qJ-iQy"/>
-                            <constraint firstAttribute="trailing" secondItem="vCc-C8-70s" secondAttribute="trailing" id="M1r-UB-U8h"/>
-                            <constraint firstItem="GHy-Za-tDc" firstAttribute="top" secondItem="vCc-C8-70s" secondAttribute="bottom" id="Mvq-ro-rFy"/>
+                            <constraint firstItem="GHy-Za-tDc" firstAttribute="top" secondItem="vCc-C8-70s" secondAttribute="bottom" id="IkC-d7-XM6"/>
                             <constraint firstItem="9lz-By-ymG" firstAttribute="top" secondItem="ahO-mY-gdF" secondAttribute="bottom" id="URE-yD-rgd"/>
                             <constraint firstAttribute="trailing" secondItem="9lz-By-ymG" secondAttribute="trailing" id="Wxg-9Z-Rkr"/>
-                            <constraint firstItem="vCc-C8-70s" firstAttribute="top" secondItem="9lz-By-ymG" secondAttribute="bottom" id="kdc-WE-Uzf"/>
-                            <constraint firstItem="vCc-C8-70s" firstAttribute="leading" secondItem="hhz-Xz-gRk" secondAttribute="leading" id="yQ7-D3-SrD"/>
+                            <constraint firstItem="GHy-Za-tDc" firstAttribute="top" secondItem="9lz-By-ymG" secondAttribute="bottom" id="bpM-vs-HeC"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomBtnConstraint" destination="Mvq-ro-rFy" id="vXO-CO-GU1"/>
                         <outlet property="donatView" destination="XJD-dp-D6x" id="lfX-po-vpq"/>
                         <outlet property="donationTF" destination="TQN-Ah-3fP" id="HLb-gZ-X1O"/>
                         <outlet property="fiatDonationLbl" destination="db1-Nv-fng" id="QFf-fA-x6C"/>
+                        <outlet property="scrollView" destination="9lz-By-ymG" id="Xkx-oy-RIu"/>
                         <outlet property="sendBtn" destination="vCc-C8-70s" id="w7H-rZ-rCP"/>
                         <outlet property="tableView" destination="s5N-ss-Hbk" id="35Q-HY-ZM3"/>
                         <outlet property="walletCryptoBtn" destination="mj4-An-rNI" id="Ds5-td-u7T"/>

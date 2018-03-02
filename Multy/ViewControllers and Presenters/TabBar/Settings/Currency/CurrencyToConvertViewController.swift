@@ -37,6 +37,10 @@ class CurrencyToConvertViewController: UIViewController, CancelProtocol {
                     let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
                     self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
                     break
+                } else { // empty wallet
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                    break
                 }
             }
 //            self.donateOrAlert()

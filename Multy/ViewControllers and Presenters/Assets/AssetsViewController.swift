@@ -310,10 +310,11 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath {
         case [0,0]:         // PORTFOLIO CELL  or LOGO
-            //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-            //            return portfolioCell
-            let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-            return logoCell
+                        let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+                        portfolioCell.mainVC = self
+                        return portfolioCell
+//            let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+//            return logoCell
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
             newWalletCell.delegate = self
@@ -474,12 +475,15 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            return 283  //portfolio height
             if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
                 if screenHeight == heightOfX {
-                    return 255 //logo height
+//                    return 255 //logo height
+                    return 360
                 } else {
-                    return 245
+//                    return 245
+                    return 350
                 }
             } else {
-                return 220
+//                return 220  //logo
+                return 300
             }
             
         } else if indexPath == [0, 1] {
@@ -547,6 +551,10 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if wallet.availableAmount() > 0 {
                     let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
                     self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                } else { // empty wallet
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
                     break
                 }
             }

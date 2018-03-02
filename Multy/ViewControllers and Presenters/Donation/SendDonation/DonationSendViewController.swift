@@ -5,7 +5,9 @@
 import UIKit
 
 class DonationSendViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
-
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var walletNameLbl: UILabel!
@@ -109,11 +111,15 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height/4
+//                let bottOffset = CGPoint(x: 0.0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
+//                self.scrollView.setContentOffset(bottOffset, animated: true)
+//                self.view.frame.origin.y -= keyboardSize.height/4
                 self.tableView.isUserInteractionEnabled = false
-//                if screenHeight == heightOfX {
-//                    bottomBtnConstraint.constant = 10
-//                }
+                if screenHeight == heightOfX {
+                    self.view.frame.origin.y -= keyboardSize.height/4
+                } else {
+                    self.view.frame.origin.y -= keyboardSize.height
+                }
             }
         }
     }
@@ -121,12 +127,13 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height/4
                 self.tableView.isUserInteractionEnabled = true
                 self.makeSendAvailable(isAvailable: true)
-//                if screenHeight == heightOfX {
-//                    bottomBtnConstraint.constant = 0
-//                }
+                if screenHeight == heightOfX {
+                    self.view.frame.origin.y += keyboardSize.height/4
+                } else {
+                    self.view.frame.origin.y += keyboardSize.height
+                }
             }
         }
     }
