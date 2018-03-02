@@ -113,6 +113,11 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         UserPreferences.shared.writeCipheredPinMode(mode: 0)
     }
     
+    @IBAction func goToExchangeAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let exchangeVC = storyboard.instantiateViewController(withIdentifier: "exchangeVC")
+        self.navigationController?.pushViewController(exchangeVC, animated: true)
+    }
     func cancelAction() {
         RealmManager.shared.clearRealm { (ok, err) in
             DataManager.shared.finishRealmSession()

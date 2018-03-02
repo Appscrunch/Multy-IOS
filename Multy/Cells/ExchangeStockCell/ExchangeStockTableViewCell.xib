@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ExchangeStockTableViewCell" customModule="Multy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exchange name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRM-bO-i5T">
+                        <rect key="frame" x="20" y="21" width="117.5" height="22"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="4pB-xq-GQz">
+                        <rect key="frame" x="342" y="26.5" width="13" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="ECo-LD-I9G"/>
+                            <constraint firstAttribute="width" constant="13" id="kUP-Bm-saq"/>
+                        </constraints>
+                    </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bIK-Pm-Ofw">
+                        <rect key="frame" x="329" y="14" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="AEa-eI-udZ"/>
+                            <constraint firstAttribute="height" constant="35" id="a0p-Jp-0Co"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4pB-xq-GQz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HPO-yv-2T3"/>
+                    <constraint firstItem="xRM-bO-i5T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="HwQ-ni-iqd"/>
+                    <constraint firstAttribute="trailing" secondItem="4pB-xq-GQz" secondAttribute="trailing" constant="20" id="Zne-QX-Rsa"/>
+                    <constraint firstItem="xRM-bO-i5T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eLJ-9M-sWL"/>
+                    <constraint firstItem="bIK-Pm-Ofw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="liE-Ow-py1"/>
+                    <constraint firstAttribute="trailing" secondItem="bIK-Pm-Ofw" secondAttribute="trailing" constant="16" id="rRg-Tj-Jzz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkmarkImg" destination="4pB-xq-GQz" id="ssb-CB-61j"/>
+                <outlet property="donationImg" destination="bIK-Pm-Ofw" id="UkV-iN-GeK"/>
+                <outlet property="exchangeNameLbl" destination="xRM-bO-i5T" id="PRf-aW-rPM"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark" width="13" height="11"/>
+        <image name="donationIcon" width="30" height="35"/>
+    </resources>
+</document>
