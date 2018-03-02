@@ -135,18 +135,18 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgA-2c-kCm">
-                                        <rect key="frame" x="153" y="549" width="69" height="71"/>
+                                        <rect key="frame" x="149.5" y="549" width="76" height="78.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="69" id="IpS-Fx-ecZ"/>
+                                            <constraint firstAttribute="width" constant="76" id="IpS-Fx-ecZ"/>
                                             <constraint firstAttribute="width" secondItem="cgA-2c-kCm" secondAttribute="height" multiplier="69:71" id="Sp3-0f-wPN"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment>
-                                                    <string key="content">Wireless
-Scan</string>
+                                                    <string key="content">Wireless Scan
+</string>
                                                     <attributes>
                                                         <color key="NSColor" red="0.52941000000000005" green="0.63136999999999999" blue="0.77254999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="12" name="AvenirNext-Medium"/>
@@ -160,7 +160,7 @@ Scan</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Kh-WG-DoX">
-                                        <rect key="frame" x="42" y="549" width="69" height="71"/>
+                                        <rect key="frame" x="31.5" y="549" width="76" height="78.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
@@ -181,13 +181,13 @@ Book</string>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="page1" translatesAutoresizingMaskIntoConstraints="NO" id="hWA-dA-sb2">
-                                        <rect key="frame" x="64" y="554" width="25" height="18"/>
+                                        <rect key="frame" x="57" y="554" width="25" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="655-Lb-fjj"/>
                                             <constraint firstAttribute="width" constant="25" id="7iI-uy-xHm"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8NfcSign" translatesAutoresizingMaskIntoConstraints="NO" id="cPZ-hw-b9v">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cPZ-hw-b9v">
                                         <rect key="frame" x="175" y="554" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="JT2-aC-xXj"/>
@@ -195,7 +195,7 @@ Book</string>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8Upload" translatesAutoresizingMaskIntoConstraints="NO" id="889-1Y-mzt">
-                                        <rect key="frame" x="287.5" y="554" width="22" height="26"/>
+                                        <rect key="frame" x="294.5" y="554" width="22" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="22" id="iXY-j3-v8J"/>
                                             <constraint firstAttribute="height" constant="26" id="jEg-t9-7vd"/>
@@ -398,7 +398,7 @@ Book</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="crd-cd-YE9">
-                                        <rect key="frame" x="264" y="549" width="69" height="71"/>
+                                        <rect key="frame" x="267.5" y="549" width="76" height="78.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal">
@@ -438,6 +438,12 @@ Options</string>
                                             <action selector="cancelAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="9og-7R-6Au"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(work in progress)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgK-fG-Y6q">
+                                        <rect key="frame" x="146.5" y="606" width="82" height="14"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
+                                        <color key="textColor" red="0.92299705743789673" green="0.081802509725093842" blue="0.23179471492767334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cgA-2c-kCm" firstAttribute="leading" secondItem="4Kh-WG-DoX" secondAttribute="trailing" constant="42" id="0BH-eP-mAj"/>
@@ -474,9 +480,11 @@ Options</string>
                                     <constraint firstItem="889-1Y-mzt" firstAttribute="top" secondItem="crd-cd-YE9" secondAttribute="top" constant="5" id="nn0-SP-SkC"/>
                                     <constraint firstItem="Bi9-Qs-MIE" firstAttribute="trailing" secondItem="WdU-vV-Cb8" secondAttribute="trailing" constant="-6" id="nyR-5T-KCX"/>
                                     <constraint firstItem="4Kh-WG-DoX" firstAttribute="height" secondItem="cgA-2c-kCm" secondAttribute="height" id="phX-LR-5aQ"/>
+                                    <constraint firstItem="MgK-fG-Y6q" firstAttribute="centerX" secondItem="dWs-Iy-4aG" secondAttribute="centerX" id="qPj-NR-Nar"/>
                                     <constraint firstItem="crd-cd-YE9" firstAttribute="width" secondItem="cgA-2c-kCm" secondAttribute="width" id="qeP-vh-Zzr"/>
                                     <constraint firstItem="D4k-Y4-FOn" firstAttribute="centerX" secondItem="dWs-Iy-4aG" secondAttribute="centerX" id="qfa-3b-laZ"/>
                                     <constraint firstItem="WdU-vV-Cb8" firstAttribute="top" secondItem="hSx-Am-TJ1" secondAttribute="bottom" constant="13" id="vOZ-z9-OSd"/>
+                                    <constraint firstItem="MgK-fG-Y6q" firstAttribute="top" secondItem="cPZ-hw-b9v" secondAttribute="bottom" constant="27" id="xR1-fc-BMi"/>
                                     <constraint firstAttribute="trailing" secondItem="WdU-vV-Cb8" secondAttribute="trailing" constant="15.5" id="xuc-6H-12P"/>
                                     <constraint firstItem="cgA-2c-kCm" firstAttribute="top" secondItem="D4k-Y4-FOn" secondAttribute="bottom" constant="15" id="yC3-sL-3cK"/>
                                     <constraint firstItem="crd-cd-YE9" firstAttribute="leading" secondItem="cgA-2c-kCm" secondAttribute="trailing" constant="42" id="zLj-Ij-QGN"/>
@@ -702,7 +710,7 @@ Options</string>
     <resources>
         <image name="backGrey" width="13" height="21"/>
         <image name="chevron" width="15" height="22"/>
-        <image name="icons8NfcSign" width="26" height="24"/>
+        <image name="donationIcon" width="30" height="35"/>
         <image name="icons8Upload" width="22" height="26"/>
         <image name="page1" width="25" height="18"/>
         <image name="swap" width="25" height="24"/>

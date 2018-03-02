@@ -5,7 +5,7 @@
 import UIKit
 import Branch
 
-class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol {
+class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var qrImage: UIImageView!
@@ -68,6 +68,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
+        self.openDonat()
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: wirelessScanTap)
     }
     
@@ -84,6 +85,36 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol {
                                   "amount"    : presenter.cryptoSum?.fixedFraction(digits: 8) ?? "0.0"]
         
         return dict
+    }
+    
+    func cancelAction() {
+        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+            if wallets == nil {
+                let message = "You don`t have any wallets yet."
+                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                return
+            }
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                }
+            }
+            //            self.donateOrAlert()
+        }
+    }
+    
+    func presentNoInternet() {
+        
+    }
+    
+    func openDonat() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.cancelDelegate = self
+        self.present(donatAlert, animated: true, completion: nil)
     }
     
     

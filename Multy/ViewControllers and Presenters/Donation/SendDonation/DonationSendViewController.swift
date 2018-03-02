@@ -37,7 +37,6 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.view.addSubview(progressHud)
         self.progressHud.hide()
         self.hideKeyboardWhenTappedAround()
-        self.registerNotificationFromKeyboard()
         self.presenter.mainVC = self
         self.registerCells()
         
@@ -50,6 +49,15 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissKeyboard), name: Notification.Name("hideKeyboard"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.registerNotificationFromKeyboard()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.removeKeyboardNotification()
+    }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -91,6 +99,11 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SendDetailsViewController.keyboardWillHide),
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func removeKeyboardNotification() {
+//        NotificationCenter.default.removeObserver(NSNotification.Name.UIKeyboardWillShow)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -255,6 +268,7 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
             trueCells[indexPath.row].checkMarkImage.isHidden = false
             self.presenter.selectedIndexOfSpeed = indexPath.row
         } else {
+            self.removeKeyboardNotification()
             self.isCustom = true
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
