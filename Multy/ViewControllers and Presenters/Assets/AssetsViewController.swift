@@ -10,7 +10,7 @@ import CryptoSwift
 
 
 
-class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateNewWalletProtocol, AnalyticsProtocol {
+class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenCtreatingSheet, AnalyticsProtocol, CancelProtocol, CreateWalletProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -524,7 +524,42 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if self.presenter.account == nil {
             return
         }
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         sendAnalyticsEvent(screenName: screenMain, eventName: createWalletTap)
-        self.present(self.actionSheet, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let creatingVC = storyboard.instantiateViewController(withIdentifier: "creatingVC") as! CreatingWalletActionsViewController
+        creatingVC.cancelDelegate = self
+        creatingVC.createProtocol = self
+        creatingVC.modalPresentationStyle = .overCurrentContext
+        self.present(creatingVC, animated: true, completion: nil)
+    }
+    
+    func cancelAction() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+            if wallets == nil {
+                let message = "You don`t have any wallets yet."
+                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+                return
+            }
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                }
+            }
+            //            self.donateOrAlert()
+        }
+    }
+    
+    func presentNoInternet() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+    }
+    
+    func goToCreateWallet() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID, sender: Any.self)
     }
 }
