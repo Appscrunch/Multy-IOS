@@ -1131,7 +1131,7 @@ class CoreLibManager: NSObject {
             print("ciphered mode: \(String(describing: dataPass)) - error: \(String(describing: error))")
         }
         
-        print("---===The end of the user's prefs test===---")
+        print("\n\n---===The end of the user's prefs test===---\n\n")
     }
     
     func setAmountValue(key: String, value: String, pointer: OpaquePointer) {
