@@ -105,20 +105,32 @@ Scan</string>
                                     <action selector="wirelessScanAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mmn-fl-29r"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Address_Book_Tab" translatesAutoresizingMaskIntoConstraints="NO" id="2Yk-X6-nsl">
-                                <rect key="frame" x="38" y="51" width="25" height="18"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Yk-X6-nsl">
+                                <rect key="frame" x="38" y="51" width="25" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="saZ-1X-J2n"/>
+                                    <constraint firstAttribute="height" constant="24" id="saZ-1X-J2n"/>
                                     <constraint firstAttribute="width" constant="25" id="t2p-Pk-Knv"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8NfcSign" translatesAutoresizingMaskIntoConstraints="NO" id="jjT-YK-w8c">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="jjT-YK-w8c">
                                 <rect key="frame" x="139" y="49" width="25" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="3z5-Cb-cTE"/>
                                     <constraint firstAttribute="width" constant="25" id="Hzs-YZ-x1z"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(work in progress)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6i-ex-qnj">
+                                <rect key="frame" x="10" y="109" width="82" height="14"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
+                                <color key="textColor" red="0.92299705743789673" green="0.081802509725093842" blue="0.23179471492767334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(work in progress)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcx-Dp-aHk">
+                                <rect key="frame" x="110" y="109" width="82" height="14"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
+                                <color key="textColor" red="0.92299705740000004" green="0.08180250973" blue="0.2317947149" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -127,6 +139,7 @@ Scan</string>
                             <constraint firstItem="2Yk-X6-nsl" firstAttribute="top" secondItem="RM9-Ez-HYz" secondAttribute="top" constant="20" id="5dh-Z9-3Se"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="leading" secondItem="RM9-Ez-HYz" secondAttribute="trailing" constant="1" id="6bW-6N-i2s"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="width" secondItem="RM9-Ez-HYz" secondAttribute="width" id="8vv-rq-cIF"/>
+                            <constraint firstItem="Fcx-Dp-aHk" firstAttribute="top" secondItem="qrm-4B-BZS" secondAttribute="bottom" constant="-7" id="Abd-cm-Mec"/>
                             <constraint firstAttribute="bottom" secondItem="RM9-Ez-HYz" secondAttribute="bottom" constant="10" id="D3b-lo-GRV"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="leading" secondItem="mmw-l9-T1m" secondAttribute="trailing" constant="-0.5" id="H2s-hx-KHD"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="centerY" secondItem="RM9-Ez-HYz" secondAttribute="centerY" id="JOj-2c-xu0"/>
@@ -134,12 +147,15 @@ Scan</string>
                             <constraint firstItem="jjT-YK-w8c" firstAttribute="centerX" secondItem="qrm-4B-BZS" secondAttribute="centerX" id="RXz-qc-pIG"/>
                             <constraint firstItem="RM9-Ez-HYz" firstAttribute="leading" secondItem="C8a-FN-qsG" secondAttribute="leading" id="SMj-gB-lTD"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="leading" secondItem="qrm-4B-BZS" secondAttribute="trailing" constant="1" id="UPL-Tu-PZJ"/>
+                            <constraint firstItem="Fcx-Dp-aHk" firstAttribute="centerX" secondItem="qrm-4B-BZS" secondAttribute="centerX" id="Whh-yq-VCp"/>
                             <constraint firstItem="jjT-YK-w8c" firstAttribute="top" secondItem="qrm-4B-BZS" secondAttribute="top" constant="18" id="c2N-cz-drE"/>
                             <constraint firstItem="2Yk-X6-nsl" firstAttribute="centerX" secondItem="RM9-Ez-HYz" secondAttribute="centerX" id="dRU-uH-2UF"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="centerY" secondItem="RM9-Ez-HYz" secondAttribute="centerY" id="dcB-gc-LaC"/>
                             <constraint firstItem="mmw-l9-T1m" firstAttribute="leading" secondItem="RM9-Ez-HYz" secondAttribute="trailing" constant="0.5" id="fWt-2I-L6I"/>
                             <constraint firstAttribute="bottom" secondItem="i2K-a1-cdT" secondAttribute="bottom" constant="18" id="jYr-Dy-tZw"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="height" secondItem="RM9-Ez-HYz" secondAttribute="height" id="mh4-oY-JZ9"/>
+                            <constraint firstItem="H6i-ex-qnj" firstAttribute="top" secondItem="RM9-Ez-HYz" secondAttribute="bottom" constant="-7" id="nZ0-hd-KAC"/>
+                            <constraint firstItem="H6i-ex-qnj" firstAttribute="centerX" secondItem="RM9-Ez-HYz" secondAttribute="centerX" id="ouq-li-tVG"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="width" secondItem="RM9-Ez-HYz" secondAttribute="width" id="peh-sV-m9e"/>
                             <constraint firstAttribute="bottom" secondItem="mmw-l9-T1m" secondAttribute="bottom" constant="18" id="sNv-N3-Aso"/>
                             <constraint firstAttribute="height" constant="126" id="u2L-Ql-L2k"/>
@@ -252,9 +268,8 @@ Scan</string>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Address_Book_Tab" width="25" height="18"/>
         <image name="backGrey" width="13" height="21"/>
-        <image name="icons8NfcSign" width="26" height="24"/>
+        <image name="donationIcon" width="30" height="35"/>
         <image name="qrIconGray" width="22" height="22"/>
     </resources>
 </document>

@@ -5,7 +5,9 @@
 import UIKit
 
 class DonationSendViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
-
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var walletNameLbl: UILabel!
@@ -30,12 +32,13 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     let progressHud = ProgressHUD(text: "Sending...")
     
+    var isTransactionSelected = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(progressHud)
         self.progressHud.hide()
         self.hideKeyboardWhenTappedAround()
-        self.registerNotificationFromKeyboard()
         self.presenter.mainVC = self
         self.registerCells()
         
@@ -45,8 +48,18 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         tableView.layer.shadowRadius = 10
         
         self.presenter.getWallets()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissKeyboard), name: Notification.Name("hideKeyboard"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.registerNotificationFromKeyboard()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.removeKeyboardNotification()
+    }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -90,14 +103,23 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
                                                name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    func removeKeyboardNotification() {
+//        NotificationCenter.default.removeObserver(NSNotification.Name.UIKeyboardWillShow)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height/4
+//                let bottOffset = CGPoint(x: 0.0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
+//                self.scrollView.setContentOffset(bottOffset, animated: true)
+//                self.view.frame.origin.y -= keyboardSize.height/4
                 self.tableView.isUserInteractionEnabled = false
-//                if screenHeight == heightOfX {
-//                    bottomBtnConstraint.constant = 10
-//                }
+                if screenHeight == heightOfX {
+                    self.view.frame.origin.y -= keyboardSize.height/4
+                } else {
+                    self.view.frame.origin.y -= keyboardSize.height
+                }
             }
         }
     }
@@ -105,12 +127,13 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height/4
                 self.tableView.isUserInteractionEnabled = true
                 self.makeSendAvailable(isAvailable: true)
-//                if screenHeight == heightOfX {
-//                    bottomBtnConstraint.constant = 0
-//                }
+                if screenHeight == heightOfX {
+                    self.view.frame.origin.y += keyboardSize.height/4
+                } else {
+                    self.view.frame.origin.y += keyboardSize.height
+                }
             }
         }
     }
@@ -134,7 +157,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
             isAvailable = false
             shakeView(viewForShake: donatView)
         }
-        if isAvailable {
+        if isAvailable && isTransactionSelected {
             self.sendBtn.isUserInteractionEnabled = true
             self.sendBtn.backgroundColor = #colorLiteral(red: 0.009615149349, green: 0.5124486089, blue: 0.9994245172, alpha: 1)
         } else {
@@ -240,16 +263,19 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
             if trueCells[indexPath.row].checkMarkImage.isHidden == false {
                 trueCells[indexPath.row].checkMarkImage.isHidden = true
                 self.presenter.selectedIndexOfSpeed = nil
-                makeSendAvailable(isAvailable: false)
+                self.isTransactionSelected = false
+                makeSendAvailable(isAvailable: isTransactionSelected)
                 return
             }
             for cell in trueCells {
                 cell.checkMarkImage.isHidden = true
             }
-            makeSendAvailable(isAvailable: true)
+            self.isTransactionSelected = true
+            makeSendAvailable(isAvailable: isTransactionSelected)
             trueCells[indexPath.row].checkMarkImage.isHidden = false
             self.presenter.selectedIndexOfSpeed = indexPath.row
         } else {
+            self.removeKeyboardNotification()
             self.isCustom = true
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController

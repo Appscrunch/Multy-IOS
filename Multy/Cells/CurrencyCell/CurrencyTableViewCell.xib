@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="126" id="KGk-i7-Jjw" customClass="CurrencyTableViewCell" customModule="Multy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="63.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flagUsd" translatesAutoresizingMaskIntoConstraints="NO" id="ibe-Jx-h4e">
+                        <rect key="frame" x="22" y="24" width="22" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="M8Q-1O-dTv"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="xoO-D2-tTK">
+                        <rect key="frame" x="342" y="27" width="13" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="13" id="Fbm-oU-KKD"/>
+                            <constraint firstAttribute="height" constant="10" id="lzY-XT-nYX"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hoN-yh-3aU">
+                        <rect key="frame" x="66" y="12.5" width="52" height="38.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eh9-rp-7uY">
+                                <rect key="frame" x="0.0" y="0.0" width="52" height="22"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                <color key="textColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US Dollar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myh-eL-NZH">
+                                <rect key="frame" x="0.0" y="22" width="52" height="16.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0Gz-AW-Mpi">
+                        <rect key="frame" x="331" y="14.5" width="30" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Z7h-Pb-nvb"/>
+                            <constraint firstAttribute="height" constant="35" id="tZi-fi-Kv7"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="xoO-D2-tTK" secondAttribute="trailing" constant="20" id="2Qm-SP-rdR"/>
+                    <constraint firstItem="ibe-Jx-h4e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="654-yX-bAh"/>
+                    <constraint firstItem="xoO-D2-tTK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6iQ-Zx-94A"/>
+                    <constraint firstAttribute="trailing" secondItem="0Gz-AW-Mpi" secondAttribute="trailing" constant="14" id="D7t-W4-RTL"/>
+                    <constraint firstItem="hoN-yh-3aU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Z5Z-1v-DNr"/>
+                    <constraint firstItem="0Gz-AW-Mpi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Z9y-mD-zCM"/>
+                    <constraint firstItem="hoN-yh-3aU" firstAttribute="leading" secondItem="ibe-Jx-h4e" secondAttribute="trailing" constant="22" id="emI-aV-c87"/>
+                    <constraint firstItem="ibe-Jx-h4e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qgV-MC-Hzr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkmarkImg" destination="xoO-D2-tTK" id="5xX-9F-CJf"/>
+                <outlet property="currencyFullNameLbl" destination="myh-eL-NZH" id="oP0-OM-ibv"/>
+                <outlet property="currencyImg" destination="ibe-Jx-h4e" id="MZU-q2-Psn"/>
+                <outlet property="currencyShortnameLbl" destination="Eh9-rp-7uY" id="6uA-Zt-saN"/>
+                <outlet property="donationImg" destination="0Gz-AW-Mpi" id="Ivf-E3-su3"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="95"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark" width="13" height="11"/>
+        <image name="donationIcon" width="30" height="35"/>
+        <image name="flagUsd" width="22" height="16"/>
+    </resources>
+</document>
