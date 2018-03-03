@@ -549,7 +549,6 @@ class CoreLibManager: NSObject {
                            wallet: UserWalletRLM,
                            binaryData: inout BinaryData,
                            inputs: List<AddressRLM>) -> (String, Double) {
-        
         let inputs = DataManager.shared.realmManager.spendableOutput(addresses: inputs)
         let inputSum = DataManager.shared.spendableOutputSum(outputs: inputs)
         
@@ -594,7 +593,7 @@ class CoreLibManager: NSObject {
                                value: input.transactionOutScript,
                                pointer: transactionSource.pointee!)
             
-            let privateKey = createPrivateKey(currencyID: wallet.chain.uint32Value,
+            let privateKey = createPrivateKey(currencyID: wallet.chain.uint32Value + chainOffset,
                                               walletID: wallet.walletID.uint32Value,
                                               addressID: input.addressID.uint32Value,
                                               binaryData: &binaryData)
@@ -654,7 +653,7 @@ class CoreLibManager: NSObject {
         
         //change
         //MARK: UInt32(wallet.addresses.count)
-        let dict = createAddress(currencyID: wallet.chain.uint32Value,
+        let dict = createAddress(currencyID: wallet.chain.uint32Value + chainOffset,
                                  walletID: wallet.walletID.uint32Value,
                                  addressID: UInt32(wallet.addresses.count),
                                  binaryData: &binaryData)
@@ -1088,6 +1087,25 @@ class CoreLibManager: NSObject {
             
             transactionPointer.deallocate(capacity: 1)
             transactionSource.deallocate(capacity: 1)
+        }
+        
+        DataManager.shared.realmManager.getWallet(walletID: 1) { (wallet) in
+            let addressData = self.createAddress(currencyID:    wallet!.chain.uint32Value + chainOffset,
+                                                 walletID:      wallet!.walletID.uint32Value,
+                                                 addressID:     UInt32(wallet!.addresses.count),
+                                                 binaryData:    &binaryDataPointer.pointee!.pointee)
+            
+            let data = self.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                              sendAddress: "mzxcPwEJ1xYTR9zfexeXuNPGmwdJqEDf9k",
+                                              sendAmountString: "0,001",
+                                              feePerByteAmount: "2",
+                                              isDonationExists: false,
+                                              donationAmount: "0",
+                                              isPayCommission: true,
+                                              wallet: wallet!,
+                                              binaryData: &binaryDataPointer.pointee!.pointee,
+                                              inputs: wallet!.addresses)
+            print("tx: \(data.0)")
         }
     }
     
