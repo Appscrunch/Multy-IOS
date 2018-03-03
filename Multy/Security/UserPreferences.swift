@@ -29,7 +29,7 @@ class UserPreferences : NSObject {
         generateAES()
     }
     
-    func generateAES() {
+    fileprivate func generateAES() {
         let iv = getAESiv()
 
         generateUserDefaultsPassword { (pass, error) in
@@ -39,7 +39,7 @@ class UserPreferences : NSObject {
         }
     }
     
-    func getAESiv() -> [UInt8] {
+    fileprivate func getAESiv() -> [UInt8] {
         let ivData = UserDefaults.standard.data(forKey: "AESivKey")
         
         if ivData == nil {

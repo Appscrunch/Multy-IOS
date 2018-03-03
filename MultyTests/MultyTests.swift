@@ -32,6 +32,8 @@ class MultyTests: XCTestCase {
             
             let core = CoreLibManager.shared
             core.startSwiftTest()
+            
+            core.testUserPreferences()
         }
     }
 }

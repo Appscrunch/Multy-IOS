@@ -1089,6 +1089,8 @@ class CoreLibManager: NSObject {
             transactionSource.deallocate(capacity: 1)
         }
         
+        
+        //creating tx
         DataManager.shared.realmManager.getWallet(walletID: 1) { (wallet) in
             let addressData = self.createAddress(currencyID:    wallet!.chain.uint32Value + chainOffset,
                                                  walletID:      wallet!.walletID.uint32Value,
@@ -1107,6 +1109,29 @@ class CoreLibManager: NSObject {
                                               inputs: wallet!.addresses)
             print("tx: \(data.0)")
         }
+    }
+    
+    func testUserPreferences() {
+        //user prefs test
+        let userPrefs = UserPreferences.shared
+        
+        userPrefs.getAndDecryptPin { (string, error) in
+            print("pin string: \(String(describing: string)) - error: \(String(describing: error))")
+        }
+        
+        userPrefs.getAndDecryptBiometric { (isOn, error) in
+            print("biometric: \(String(describing: isOn)) - error: \(String(describing: error))")
+        }
+        
+        userPrefs.getAndDecryptCipheredMode { (isOn, error) in
+            print("ciphered mode: \(String(describing: isOn)) - error: \(String(describing: error))")
+        }
+        
+        userPrefs.getAndDecryptDatabasePassword { (dataPass, error) in
+            print("ciphered mode: \(String(describing: dataPass)) - error: \(String(describing: error))")
+        }
+        
+        print("---===The end of the user's prefs test===---")
     }
     
     func setAmountValue(key: String, value: String, pointer: OpaquePointer) {
