@@ -90,6 +90,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+        
+        let filePathOpt = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        if let filePath = filePathOpt, let options = FirebaseOptions(contentsOfFile: filePath) {
+            FirebaseApp.configure(options: options)
+        }
+        
         return true
     }
     
@@ -135,6 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        window?.endEditing(true)
         NotificationCenter.default.post(name: Notification.Name("hideKeyboard"), object: nil)
         DataManager.shared.finishRealmSession()
         DataManager.shared.realmManager.getAccount { (acc, err) in

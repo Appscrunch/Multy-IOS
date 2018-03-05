@@ -166,8 +166,8 @@ Scan</string>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment>
-                                                    <string key="content">Address
-Book</string>
+                                                    <string key="content">Contacts
+ </string>
                                                     <attributes>
                                                         <color key="NSColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <font key="NSFont" size="12" name="AvenirNext-Medium"/>

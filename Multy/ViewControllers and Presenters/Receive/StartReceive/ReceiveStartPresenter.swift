@@ -14,7 +14,7 @@ class ReceiveStartPresenter: NSObject {
     var selectedIndexPath: IndexPath? = nil
     
 //    var walletsArr = [UserWalletRLM?]()
-    var walletsArr = List<UserWalletRLM>()
+    var walletsArr = Array<UserWalletRLM>()
     
     var selectedIndex: Int?
     
@@ -42,7 +42,7 @@ class ReceiveStartPresenter: NSObject {
         DataManager.shared.getAccount { (acc, err) in
             if err == nil {
                 // MARK: check this
-                self.walletsArr = acc!.wallets
+                self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
                 self.receiveStartVC?.updateUI()
             }
         }

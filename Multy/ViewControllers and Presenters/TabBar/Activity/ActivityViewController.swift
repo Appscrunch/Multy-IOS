@@ -6,6 +6,7 @@ import UIKit
 
 class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
     @IBOutlet weak var newsView: UIView!
+    @IBOutlet weak var donatView: UIView!
     
     var isHaveNotEmpty = false
     var message = ""
@@ -19,6 +20,13 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
         newsView.layer.shadowRadius = 10
+        
+        setupView()
+    }
+    
+    func setupView() {
+        self.donatView.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 0.9994150996, alpha: 1)
+        self.donatView.layer.borderWidth = 1
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +50,15 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
 //        self.present(donatAlert, animated: true, completion: nil)
         let webView = storyboard.instantiateViewController(withIdentifier: "ActivityWebViewVC")
         self.navigationController?.pushViewController(webView, animated: true)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
+    
+    @IBAction func donatAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.cancelDelegate = self
+        self.present(donatAlert, animated: true, completion: nil)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     

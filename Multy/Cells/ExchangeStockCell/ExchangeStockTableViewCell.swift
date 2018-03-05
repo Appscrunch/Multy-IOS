@@ -19,10 +19,16 @@ class ExchangeStockTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func makeUnAvailable() {
-        self.exchangeNameLbl.alpha = 0.5
-        self.checkmarkImg.isHidden = true
-        self.donationImg.isHidden = false
+    func makeCheckmark(isAvailable: Bool, isChecked: Bool) {
+        self.donationImg.isHidden = isAvailable
+        
+        if isAvailable {
+            self.exchangeNameLbl.alpha = 1.0
+            self.checkmarkImg.isHidden = !isChecked
+        } else {
+            self.exchangeNameLbl.alpha = 0.5
+            self.checkmarkImg.isHidden = true
+        }
     }
     
     func fillCell(exchangeStock: ExchangeStockObj) {

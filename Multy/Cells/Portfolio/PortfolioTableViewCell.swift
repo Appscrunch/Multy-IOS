@@ -11,6 +11,12 @@ class PortfolioTableViewCell: UITableViewCell, UIScrollViewDelegate {
     
     var mainVC: UIViewController?
     
+    weak var delegate : UICollectionViewDelegate? {
+        didSet {
+            self.collectionView.delegate = delegate
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none

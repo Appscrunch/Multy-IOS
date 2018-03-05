@@ -141,7 +141,10 @@ This feature will be in the next update.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-Jj-TW4">
-                                <rect key="frame" x="0.0" y="28" width="49" height="30"/>
+                                <rect key="frame" x="0.0" y="28" width="69" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="xqj-2j-TpH"/>
+                                </constraints>
                                 <connections>
                                     <action selector="cancelAction:" destination="rrp-ST-Ben" eventType="touchUpInside" id="0A2-Ge-bCV"/>
                                 </connections>
@@ -210,7 +213,7 @@ This feature will be in the next update.</string>
                         </subviews>
                         <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3H5-Jj-TW4" firstAttribute="trailing" secondItem="511-LX-aXv" secondAttribute="trailing" constant="20" id="Cfy-oh-IrG"/>
+                            <constraint firstItem="3H5-Jj-TW4" firstAttribute="trailing" secondItem="511-LX-aXv" secondAttribute="trailing" constant="40" id="Cfy-oh-IrG"/>
                             <constraint firstItem="Ro9-45-B2B" firstAttribute="top" secondItem="AdN-5e-be1" secondAttribute="bottom" constant="8" id="JFz-QI-mMt"/>
                             <constraint firstItem="3H5-Jj-TW4" firstAttribute="leading" secondItem="XeL-rT-NvT" secondAttribute="leading" id="Mtf-6M-ZjV"/>
                             <constraint firstAttribute="trailing" secondItem="BX5-GH-dDv" secondAttribute="trailing" id="Sgh-Zh-xkf"/>

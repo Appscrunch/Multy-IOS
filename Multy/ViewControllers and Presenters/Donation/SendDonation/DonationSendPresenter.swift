@@ -43,7 +43,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         self.mainVC?.view.isUserInteractionEnabled = false
         DataManager.shared.realmManager.fetchAllWallets { (wallets) in
             self.mainVC?.view.isUserInteractionEnabled = true
-            let walletsArr = Array(wallets!.sorted(by: {$0.sumInCrypto > $1.sumInCrypto}))
+            let walletsArr = Array(wallets!.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
             self.walletPayFrom = walletsArr.first
             self.maxAvailable = (self.walletPayFrom?.sumInCrypto)!
             self.mainVC?.updateUIWithWallet()
@@ -70,7 +70,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         transaction.sendAmount = self.mainVC?.donationTF.text?.convertStringWithCommaToDouble()
         transaction.transaction?.customFee = self.customFee
         
-        DataManager.shared.createDonationTransaction(transactionDTO: transaction) { (answer, err) in
+        DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { (answer, err) in
             self.mainVC?.progressHud.hide()
             self.mainVC?.view.isUserInteractionEnabled = true
             if err != nil {

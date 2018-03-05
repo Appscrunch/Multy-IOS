@@ -32,8 +32,8 @@
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment>
-                                            <string key="content">Address 
-Book</string>
+                                            <string key="content">Contacts
+ </string>
                                             <attributes>
                                                 <color key="NSColor" red="0.52941000000000005" green="0.63136999999999999" blue="0.77254999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" size="12" name="AvenirNext-Medium"/>
