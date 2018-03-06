@@ -39,7 +39,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>stage.multy.io</key>
+			<key>api.multy.io</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>

@@ -56,5 +56,4 @@ class ExchangeStocksPresenter: NSObject {
         poloniexStock.name = "Poloniex"
         self.availableArr.append(poloniexStock)
     }
-    
 }

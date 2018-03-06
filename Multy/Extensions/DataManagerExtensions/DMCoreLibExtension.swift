@@ -45,7 +45,7 @@ extension DataManager {
         return coreLibManager.isAddressValid(address: address, for: wallet)
     }
     
-    func createDonationTransaction(transactionDTO: TransactionDTO, completion: @escaping(_ answer: String?,_ error: Error?) -> ()) {
+    func createAndSendDonationTransaction(transactionDTO: TransactionDTO, completion: @escaping(_ answer: String?,_ error: Error?) -> ()) {
         let core = DataManager.shared.coreLibManager
         let wallet = transactionDTO.choosenWallet!
         var binaryData = DataManager.shared.realmManager.account!.binaryDataString.createBinaryData()!
@@ -82,12 +82,15 @@ extension DataManager {
         
         DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
             print("---------\(dict)")
+            //FIXME: create messages in bad cases
             
             if error != nil {
 //                self.presentAlert()
                 
                 print("sendHDTransaction Error: \(error)")
 //                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
+                completion(nil, nil)
+                
                 return
             }
             

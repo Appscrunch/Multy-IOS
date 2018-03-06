@@ -18,10 +18,10 @@ class DonationCollectionViewCell: UICollectionViewCell {
         switch index {
         case 0:
             self.backgroundImg.image = #imageLiteral(resourceName: "portfolioBgd")
-            self.midLbl.text = "View my portfolio"
+            self.midLbl.text = "Crypto portfolio"
         case 1:
             self.backgroundImg.image = #imageLiteral(resourceName: "chartsBgd")
-            self.midLbl.text = "View charts"
+            self.midLbl.text = "Currencies charts"
         default: break
         }
     }

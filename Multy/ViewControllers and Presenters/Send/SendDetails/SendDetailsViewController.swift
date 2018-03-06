@@ -211,12 +211,19 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
                 return false
             }
         }
+        
         guard let text = textField.text else { return true }
+        
+        if text == "0" && string != "," && string != "." && !string.isEmpty {
+            return false
+        }
+        
         let newLength = text.count + string.count - range.length
 
         if (string == "," || string == ".") && self.donationTF.text == "" {
             self.donationTF.text = "0\(string)"
         }
+        
         if string == "" {
             self.donationTF.text?.removeLast()
             self.saveDonationSum(string: "")

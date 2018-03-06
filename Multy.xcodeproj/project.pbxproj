@@ -117,7 +117,7 @@
 		45AC1634204850AC00E75BD6 /* BlockchainCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC1632204850AC00E75BD6 /* BlockchainCellTableViewCell.swift */; };
 		45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45AC1633204850AC00E75BD6 /* BlockchainCellTableViewCell.xib */; };
 		45B0B0E61FEBEDE9005BB1C0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */; };
-		45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */; };
+		45B0B0E81FEBEEB3005BB1C0 /* ActivityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0E71FEBEEB3005BB1C0 /* ActivityPresenter.swift */; };
 		45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */; };
 		45B0B0ED1FEBF2CF005BB1C0 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EC1FEBF2CF005BB1C0 /* ContactsViewController.swift */; };
 		45B0B0F01FEBF30C005BB1C0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */; };
@@ -346,7 +346,7 @@
 		45AC1632204850AC00E75BD6 /* BlockchainCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCellTableViewCell.swift; sourceTree = "<group>"; };
 		45AC1633204850AC00E75BD6 /* BlockchainCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockchainCellTableViewCell.xib; sourceTree = "<group>"; };
 		45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
-		45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPresnter.swift; sourceTree = "<group>"; };
+		45B0B0E71FEBEEB3005BB1C0 /* ActivityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPresenter.swift; sourceTree = "<group>"; };
 		45B0B0EA1FEBF2BB005BB1C0 /* ContactsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPresenter.swift; sourceTree = "<group>"; };
 		45B0B0EC1FEBF2CF005BB1C0 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		45B0B0EF1FEBF30C005BB1C0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -999,7 +999,7 @@
 			children = (
 				4585BD3E2049CEEB004542AE /* WebViewForActivity */,
 				45B0B0E51FEBEDE9005BB1C0 /* ActivityViewController.swift */,
-				45B0B0E71FEBEEB3005BB1C0 /* ActivityPresnter.swift */,
+				45B0B0E71FEBEEB3005BB1C0 /* ActivityPresenter.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -1677,7 +1677,7 @@
 				45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */,
 				FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */,
 				FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */,
-				45B0B0E81FEBEEB3005BB1C0 /* ActivityPresnter.swift in Sources */,
+				45B0B0E81FEBEEB3005BB1C0 /* ActivityPresenter.swift in Sources */,
 				4585BD322049A925004542AE /* ExchangeStocksViewController.swift in Sources */,
 				4540944A2031EEFD00603DB5 /* SecuritySettingsViewController.swift in Sources */,
 				45F6340C202388DF00C17A7C /* ViewInBlockchainViewController.swift in Sources */,

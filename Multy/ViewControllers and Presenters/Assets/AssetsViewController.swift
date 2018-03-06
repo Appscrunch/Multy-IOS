@@ -316,6 +316,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
                 portfolioCell.mainVC = self
+                portfolioCell.delegate = self
+                
                 return portfolioCell
             }
         case [0,1]:        // !!!NEW!!! WALLET CELL
@@ -583,5 +585,27 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func goToCreateWallet() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID, sender: Any.self)
+    }
+}
+
+//FIXME: add functionality
+extension AssetsViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: screenWidth - 40, height: 230 /* (screenWidth / 375.0)*/)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(10, 20, 0, 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 }

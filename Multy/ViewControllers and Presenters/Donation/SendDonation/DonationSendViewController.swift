@@ -21,6 +21,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     @IBOutlet weak var sendBtn: UIButton!
     
     @IBOutlet weak var bottomBtnConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonContraint: NSLayoutConstraint!
     
     
     let presenter = DonationSendPresenter()
@@ -33,6 +34,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     let progressHud = ProgressHUD(text: "Sending...")
     
     var isTransactionSelected = false
+    var isDefaultValueSet = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         tableView.layer.shadowRadius = 10
         
         self.presenter.getWallets()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissKeyboard), name: Notification.Name("hideKeyboard"), object: nil)
     }
     
@@ -56,9 +59,27 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.registerNotificationFromKeyboard()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        isDefaultValueSet = true
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         self.removeKeyboardNotification()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        //update send button constraint
+        scrollView.contentInset = .zero
+        
+        if screenHeight > scrollView.contentSize.height + 20 && scrollView.contentSize.height > 0 {
+            sendButtonContraint.constant = 30 + (screenHeight - scrollView.contentSize.height - 20)
+        }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -179,6 +200,12 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
             return false
         }
         
+        if let textString = textField.text {
+            if textString == "0" && string != "," && string != "." && !string.isEmpty {
+                return false
+            }
+        }
+        
         if string == "." {
             self.donationTF.text?.append(",")
             return false
@@ -223,8 +250,17 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
             transactionCell.feeRate = self.presenter.feeRate
             if indexPath.row == 0 {
                 transactionCell.makeCellBy(indexPath: [0, 3])  //Slow
+                
+                //set default 
+                if !isDefaultValueSet {
+                    transactionCell.checkMarkImage.isHidden = false
+                    
+                    self.isTransactionSelected = true
+                    makeSendAvailable(isAvailable: isTransactionSelected)
+                    self.presenter.selectedIndexOfSpeed = indexPath.row
+                }
             } else { //indexPath.row = 1
-                transactionCell.makeCellBy(indexPath: [0, 2])  //Mediom
+                transactionCell.makeCellBy(indexPath: [0, 2])  //Medium
             }
             
             return transactionCell
@@ -258,13 +294,16 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
                 customCell.reloadUI()
             }
             var cells = self.tableView.visibleCells
+            
             cells.removeLast()
+
             let trueCells = cells as! [TransactionFeeTableViewCell]
             if trueCells[indexPath.row].checkMarkImage.isHidden == false {
                 trueCells[indexPath.row].checkMarkImage.isHidden = true
                 self.presenter.selectedIndexOfSpeed = nil
                 self.isTransactionSelected = false
                 makeSendAvailable(isAvailable: isTransactionSelected)
+                
                 return
             }
             for cell in trueCells {

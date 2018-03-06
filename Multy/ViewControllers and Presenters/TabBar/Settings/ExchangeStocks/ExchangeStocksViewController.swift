@@ -95,12 +95,14 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //FIXME: when will be more than 1 available
         let exchangeCell = self.tableView.dequeueReusableCell(withIdentifier: "exchangeStockCell") as! ExchangeStockTableViewCell
         
         if indexPath.section == 0 {
+            exchangeCell.makeCheckmark(isAvailable: true, isChecked: true)
             exchangeCell.fillCell(exchangeStock: self.presenter.availableArr[indexPath.row])
         } else {
-            exchangeCell.makeUnAvailable()
+            exchangeCell.makeCheckmark(isAvailable: false, isChecked: false)
             exchangeCell.fillCell(exchangeStock: self.presenter.arr[indexPath.row])
         }
         

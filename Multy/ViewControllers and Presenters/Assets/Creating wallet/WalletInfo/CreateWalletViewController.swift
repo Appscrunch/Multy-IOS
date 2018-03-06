@@ -45,6 +45,19 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func createAction(_ sender: Any) {
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
+        if let text = cell.walletNameTF.text {
+            if text.trimmingCharacters(in: .whitespaces).count == 0 {
+                presentAlert(with: "Wallet name should not be empty!")
+                
+                return
+            }
+        } else {
+            presentAlert(with: "Wallet name should not be empty!")
+            
+            return
+        }
+        
         progressHUD.show()
         presenter.createNewWallet { (dict) in
             print(dict!)
