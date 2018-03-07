@@ -25,6 +25,9 @@ struct Constants {
     }
 }
 
+//FIXME: chain offset
+let chainOffset = UInt32(2147483648)
+
 let defaultDelimeter = "," as Character
 
 let screenSize = UIScreen.main.bounds

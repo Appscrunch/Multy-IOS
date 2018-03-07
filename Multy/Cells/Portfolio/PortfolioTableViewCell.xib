@@ -19,11 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="S2L-8z-rrr">
-                        <rect key="frame" x="176" y="262" width="23" height="37"/>
-                        <color key="pageIndicatorTintColor" red="0.83393996953964233" green="0.86599963903427124" blue="0.92358797788619995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="currentPageIndicatorTintColor" red="0.52471911907196045" green="0.62955904006958008" blue="0.76947301626205444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </pageControl>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TeY-lp-B8s">
                         <rect key="frame" x="0.0" y="24" width="375" height="240"/>
                         <color key="backgroundColor" red="0.92515683174133301" green="0.93285363912582397" blue="0.96979457139968872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -41,6 +36,11 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="2o9-vp-84J"/>
                         </connections>
                     </collectionView>
+                    <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="S2L-8z-rrr">
+                        <rect key="frame" x="176" y="262" width="23" height="37"/>
+                        <color key="pageIndicatorTintColor" red="0.83393996953964233" green="0.86599963903427124" blue="0.92358797788619995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="currentPageIndicatorTintColor" red="0.52471911907196045" green="0.62955904006958008" blue="0.76947301626205444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </pageControl>
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>

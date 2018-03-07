@@ -76,6 +76,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
+        
+//        DataManager.shared.coreLibManager.startSwiftTest()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -586,9 +588,13 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID, sender: Any.self)
     }
+    
+    func changePageControl(currentpage: Int) {
+        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
+        headerCell?.changePageControl(currentPage: currentpage)
+    }
 }
 
-//FIXME: add functionality
 extension AssetsViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -607,5 +613,23 @@ extension AssetsViewController : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+}
+
+extension AssetsViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.cancelDelegate = self
+        present(donatAlert, animated: true, completion: nil)
+        (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
+}
+
+extension AssetsViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
+        changePageControl(currentpage: pageNumber)
     }
 }
