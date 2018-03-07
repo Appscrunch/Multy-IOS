@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ActivityPresnter: NSObject {
+class ActivityPresenter: NSObject {
     
 
 }

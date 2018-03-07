@@ -74,11 +74,18 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     }
     
     @IBAction func chooseCurrenceAction(_ sender: Any) {
+        self.goToCurrency()
         sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(fiatWithChainTap)\(presenter.wallet!.chain)")
     }
     
     @IBAction func myPrivateAction(_ sender: Any) {
         sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(showKeyWithChainTap)\(presenter.wallet!.chain)")
+    }
+    
+    func goToCurrency() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let currencyVC = storyboard.instantiateViewController(withIdentifier: "currencyVC")
+        self.navigationController?.pushViewController(currencyVC, animated: true)
     }
 }
 

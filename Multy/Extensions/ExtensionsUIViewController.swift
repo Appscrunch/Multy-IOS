@@ -121,5 +121,18 @@ extension UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func donateOrAlert(isHaveNotEmptyWallet: Bool, message: String) {
+        if isHaveNotEmptyWallet {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
+            donatSendVC.presenter.donationAddress = UserDefaults.standard.value(forKey: "BTCDonationAddress") as! String
+            self.navigationController?.pushViewController(donatSendVC, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 
 }

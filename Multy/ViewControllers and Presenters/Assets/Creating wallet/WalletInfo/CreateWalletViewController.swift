@@ -45,6 +45,19 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func createAction(_ sender: Any) {
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
+        if let text = cell.walletNameTF.text {
+            if text.trimmingCharacters(in: .whitespaces).count == 0 {
+                presentAlert(with: "Wallet name should not be empty!")
+                
+                return
+            }
+        } else {
+            presentAlert(with: "Wallet name should not be empty!")
+            
+            return
+        }
+        
         progressHUD.show()
         presenter.createNewWallet { (dict) in
             print(dict!)
@@ -95,9 +108,23 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
             sendAnalyticsEvent(screenName: screenCreateWallet, eventName: chainIdTap)
+            self.goToChains()
         } else if indexPath.row == 2 {
             sendAnalyticsEvent(screenName: screenCreateWallet, eventName: fiatIdTap)
+            self.goToCurrency()
         }
+    }
+    
+    func goToCurrency() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let currencyVC = storyboard.instantiateViewController(withIdentifier: "currencyVC")
+        self.navigationController?.pushViewController(currencyVC, animated: true)
+    }
+    
+    func goToChains() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let chainsVC = storyboard.instantiateViewController(withIdentifier: "chainsVC")
+        self.navigationController?.pushViewController(chainsVC, animated: true)
     }
     
     @objc func keyboardWillShow(_ notification : Notification) {

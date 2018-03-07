@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol CreateNewWalletProtocol {
+protocol OpenCtreatingSheet {
     func openNewWalletSheet()
 }

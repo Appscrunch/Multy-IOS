@@ -685,4 +685,13 @@ class RealmManager: NSObject {
             }
         }
     }
+    
+    func fetchAllWallets(completion: @escaping(_ wallets: Results<UserWalletRLM>?) -> ()) {
+        getRealm { (realmOpt, err) in
+            if let realm = realmOpt {
+                let wallets = realm.objects(UserWalletRLM.self)
+                completion(wallets)
+            }
+        }
+    }
 }

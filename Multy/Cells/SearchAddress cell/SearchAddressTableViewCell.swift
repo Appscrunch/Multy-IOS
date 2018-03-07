@@ -13,6 +13,7 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
     var cancelDelegate: CancelProtocol?
     var sendAddressDelegate: SendAddressProtocol?
     var goToQrDelegate: GoToQrProtocol?
+    var donationDelegate: DonationProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,10 +33,12 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
+        donationDelegate?.donate()
         sendAnalyticsEvent(screenName: screenSendTo, eventName: addressBookTap)
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
+        donationDelegate?.donate()
         sendAnalyticsEvent(screenName: screenSendTo, eventName: wirelessScanTap)
     }
     

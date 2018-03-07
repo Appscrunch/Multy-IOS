@@ -10,7 +10,7 @@ import CryptoSwift
 
 
 
-class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateNewWalletProtocol, AnalyticsProtocol {
+class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenCtreatingSheet, AnalyticsProtocol, CancelProtocol, CreateWalletProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -312,10 +312,16 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath {
         case [0,0]:         // PORTFOLIO CELL  or LOGO
-            //            let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-            //            return portfolioCell
-            let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-            return logoCell
+            if presenter.account == nil {
+                let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+                return logoCell
+            } else {
+                let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+                portfolioCell.mainVC = self
+                portfolioCell.delegate = self
+                
+                return portfolioCell
+            }
         case [0,1]:        // !!!NEW!!! WALLET CELL
             let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
             newWalletCell.delegate = self
@@ -475,15 +481,29 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath == [0,0] {
 //            return 283  //portfolio height
             if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
-                if screenHeight == heightOfX {
-                    return 255 //logo height
-                } else {
-                    return 245
+                if self.presenter.account != nil {
+                    if screenHeight == heightOfX {
+                        //                    return 255 //logo height
+                        return 360
+                    } else {
+                        //                    return 245
+                        return 350
+                    }
+                }else {
+                    if screenHeight == heightOfX {
+                        return 255 //logo height
+                    } else {
+                        return 245
+                    }
                 }
             } else {
-                return 220
+                if self.presenter.account != nil {
+//                                return 220  //logo
+                    return 300
+                } else {
+                    return 220  //logo
+                }
             }
-            
         } else if indexPath == [0, 1] {
             return 75
         } else {
@@ -526,7 +546,90 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if self.presenter.account == nil {
             return
         }
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         sendAnalyticsEvent(screenName: screenMain, eventName: createWalletTap)
-        self.present(self.actionSheet, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let creatingVC = storyboard.instantiateViewController(withIdentifier: "creatingVC") as! CreatingWalletActionsViewController
+        creatingVC.cancelDelegate = self
+        creatingVC.createProtocol = self
+        creatingVC.modalPresentationStyle = .overCurrentContext
+        self.present(creatingVC, animated: true, completion: nil)
+    }
+    
+    func cancelAction() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+            if wallets == nil {
+                let message = "You don`t have any wallets yet."
+                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+                return
+            }
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                } else { // empty wallet
+                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                    break
+                }
+            }
+            //            self.donateOrAlert()
+        }
+    }
+    
+    func presentNoInternet() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+    }
+    
+    func goToCreateWallet() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID, sender: Any.self)
+    }
+    
+    func changePageControl(currentpage: Int) {
+        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
+        headerCell?.changePageControl(currentPage: currentpage)
+    }
+}
+
+extension AssetsViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: screenWidth - 40, height: 230 /* (screenWidth / 375.0)*/)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(10, 20, 0, 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+}
+
+extension AssetsViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.cancelDelegate = self
+        present(donatAlert, animated: true, completion: nil)
+        (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
+}
+
+extension AssetsViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
+        changePageControl(currentpage: pageNumber)
     }
 }

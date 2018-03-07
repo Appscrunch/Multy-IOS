@@ -23,6 +23,12 @@ class UserWalletRLM: Object {
         }
     }
     
+    var availableSumInCrypto: Double {
+        get {
+            return convertSatoshiToBTC(sum: availableAmount())
+        }
+    }
+    
     @objc dynamic var sumInFiat: Double = 0.0
     
     @objc dynamic var fiatName = String()
@@ -31,6 +37,8 @@ class UserWalletRLM: Object {
     @objc dynamic var address = String()
     
     @objc dynamic var historyAddress : AddressRLM?
+    
+    
     
     var addresses = List<AddressRLM>() {
         didSet {

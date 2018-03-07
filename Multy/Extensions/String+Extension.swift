@@ -35,6 +35,10 @@ extension String {
             return 0.0
         }
         
+        if self == "," || self == "." {
+            return 0.0
+        }
+        
         //        let formatter = NumberFormatter()
         //        formatter.numberStyle = NumberFormatter.Style.decimal
         //        formatter.decimalSeparator = ","
