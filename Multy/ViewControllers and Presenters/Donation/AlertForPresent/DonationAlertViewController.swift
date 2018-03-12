@@ -4,7 +4,7 @@
 
 import UIKit
 
-class DonationAlertViewController: UIViewController {
+class DonationAlertViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
     
@@ -35,11 +35,14 @@ class DonationAlertViewController: UIViewController {
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         self.cancelDelegate?.presentNoInternet()
+        
+        sendDonationAlertScreenCancelledAnalytics()
     }
     
     @IBAction func donateAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         self.cancelDelegate?.cancelAction()
+        
+        sendDonationAlertScreenPressDonateAnalytics()
     }
-    
 }

@@ -34,8 +34,6 @@ class TransactionDTO: NSObject {
             transaction = BTCTransactionDTO()
         }
     }
-    
-    
 }
 
 class BaseTransactionDTO {

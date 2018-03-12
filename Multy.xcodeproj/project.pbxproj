@@ -1415,8 +1415,8 @@
 			isa = PBXGroup;
 			children = (
 				FA4D43D51FC5745E003C7117 /* DataManagerExtensions */,
-				FADC00471FC3236F00182E45 /* ApiManager.swift */,
 				FADC00451FC3231A00182E45 /* DataManager.swift */,
+				FADC00471FC3236F00182E45 /* ApiManager.swift */,
 				FADC00491FC3238D00182E45 /* RealmManager.swift */,
 				FADC004B1FC323A900182E45 /* Socket.swift */,
 				FADC004D1FC323C300182E45 /* CoreLibManager.swift */,

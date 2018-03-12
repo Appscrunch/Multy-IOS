@@ -60,6 +60,12 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         donatAlert.cancelDelegate = self
         self.present(donatAlert, animated: true, completion: nil)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        
+        logAnalytics()
+    }
+    
+    func logAnalytics() {
+        sendDonationAlertScreenPresentedAnalytics(code: donationForActivitySC)
     }
     
     func cancelAction() {

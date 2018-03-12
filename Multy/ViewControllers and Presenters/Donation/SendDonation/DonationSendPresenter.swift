@@ -18,6 +18,8 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     
     var donationAddress = ""
     
+    var donationAddresses = Dictionary<Int, String>()
+    
     var feeRate: NSDictionary? {
         didSet {
             mainVC?.tableView.reloadData()
@@ -78,6 +80,8 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.mainVC?.present(alert, animated: true, completion: nil)
                 return
+            } else {
+                self.mainVC!.sendDonationSuccessAnalytics()
             }
             
             let storyboard = UIStoryboard(name: "Send", bundle: nil)

@@ -198,7 +198,7 @@ let screenReceive              = "Screen_Receive"
 
 //              new screen  24
 
-let screenReceiveSummaryWithChain = "Screen_Receive_Simmary_"//+chainID
+let screenReceiveSummaryWithChain = "Screen_Receive_Summary_"//+chainID
 //let closeWithChainTap        = "Button_Close_"//+chainID         //cancel or back
 let qrTap                       = "Button_QR"
 let addressTap                  = "Button_Address"
@@ -241,5 +241,51 @@ let pushReceivedWithPushId      = "Push_Received_"//+pushID
 let openAppByPushWithPushId     = "Open_App_By_Push "//+pushID
 
 
+//Donation section
+let screeenDonationAlert        = "Screen_Donation_Alert"
+let screeenDonationAlertWith_   = "Screen_Donation_Alert_"//+FEATURE_ID
+let buttonClose                 = "Button_Close_"//+FEATURE_ID
+let buttonDonate                = "Button_Donate_"//+FEATURE_ID
 
+let screenSendDonation          = "Screen_Send_Donation"
+let screenSendDonationwith_     = "Screen_Send_Donation_"//+FEATURE_ID
+let buttonSendDonate            = "Button_Send_Donate_"//+FEATURE_ID
 
+let screenDonationSuccess       = "Screen_Donation_Success"
+let screenDonationSuccessWith_  = "Screen_Donation_Success_"//+FEATURE_ID
+
+//featues code
+let donationWithTransaction     = 20000
+
+let donationForBTCLighting      = 20100 //
+let donationForETH              = 20101
+let donationForGOLOS            = 20102
+let donationForSTEEMIT          = 20103
+let donationForBTS              = 20104
+let donationForBCH              = 20105
+let donationForLTC              = 20106
+let donationForDSH              = 20107
+let donationForETC              = 20108
+let donationForERC20Token       = 20109
+let donationForEUR              = 20110 //
+let donationForEstimationETH    = 20111 //
+
+let donationForActivitySC       = 20200 //
+let donationForContactSC        = 20201 //
+let donationForPortfolioSC      = 20202 //
+let donationForChartsSC         = 20203 //
+
+let donationForImportWallet     = 20300 //
+let donationForExchangeFUNC     = 20301 //
+let donationForWirelessScanFUNC = 20302 //
+
+let donationForBinanceStock     = 20400 //
+let donationForOKExStock        = 20401
+let donationForHuobiStock       = 20402
+let donationForUpbitStock       = 20403
+let donationForBitfinexStock    = 20404
+let donationForBittrexStock     = 20405
+let donationForBithumbStock     = 20406
+let donationForGDAXStock        = 20407
+let donationForKrakenStock      = 20408
+let donationForHitBTCStock      = 20409

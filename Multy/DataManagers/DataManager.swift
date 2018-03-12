@@ -15,6 +15,8 @@ class DataManager: NSObject {
     
     var seedWordsArray = [String]()
     
+    var donationCode = 0
+    
     override init() {
         super.init()
         

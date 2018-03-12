@@ -624,6 +624,13 @@ extension AssetsViewController : UICollectionViewDelegate {
         donatAlert.cancelDelegate = self
         present(donatAlert, animated: true, completion: nil)
         (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        
+        logAnalytics(indexPath: indexPath)
+    }
+    
+    func logAnalytics(indexPath: IndexPath) {
+        let eventCode = indexPath.row == 0 ? donationForPortfolioSC : donationForChartsSC
+        sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
 }
 

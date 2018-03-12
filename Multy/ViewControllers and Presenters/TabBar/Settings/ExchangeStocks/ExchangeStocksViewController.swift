@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ExchangeStocksViewController: UIViewController, CancelProtocol {
+class ExchangeStocksViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -120,7 +120,14 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
             donatAlert.cancelDelegate = self
             self.present(donatAlert, animated: true, completion: nil)
             (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            
+            logAnalytics(indexPath: indexPath)
         }
+    }
+    
+    func logAnalytics(indexPath: IndexPath) {
+        let eventCode = donationForBinanceStock + indexPath.row
+        sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
