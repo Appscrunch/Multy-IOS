@@ -35,10 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             isNeedToAutorise = acc != nil
 
             //MAKR: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
-                isNeedToAutorise = (pinMode! as NSString).boolValue
-                self.authorization()
+            UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
+                if code != nil && code != "" {
+                    isNeedToAutorise = true
+                    self.authorization()
+                }
             })
+            
+//            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
+//
+//            })
         }
         
         exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
@@ -224,11 +230,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func authorization() {
         if isNeedToAutorise {
-            self.window?.isUserInteractionEnabled = false
-            let authVC = SecureViewController()
+//            self.window?.isUserInteractionEnabled = false
+//            let authVC = SecureViewController()
 //            authVC.modalPresentationStyle = .overCurrentContext
             let selectedIndex = (self.window?.rootViewController as! CustomTabBarViewController).selectedIndex
-            (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController?.present(authVC, animated: true, completion: nil)
+            let vcOnScreen = (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            let pinVC = storyboard.instantiateViewController(withIdentifier: "pinVC") as! EnterPinViewController
+//            pinVC.cancelDelegate = self
+            pinVC.whereFrom = vcOnScreen
+            pinVC.modalPresentationStyle = .overCurrentContext
+            
+            vcOnScreen?.present(pinVC, animated: true, completion: nil)
             isNeedToAutorise = false
         }
     }
