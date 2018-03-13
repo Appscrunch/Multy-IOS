@@ -39,8 +39,6 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)),
                                                name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        self.amountTF.becomeFirstResponder()
-        
         self.currencyNameLbl.text = self.cryptoName
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.fixForIpad()
@@ -55,6 +53,8 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         self.currencyNameLbl.text = self.cryptoName
         self.bottomSumLbl.text = self.sumInFiat.fixedFraction(digits: 2)
         self.bottomCurrencyNameLbl.text = self.fiatName
+        
+        self.amountTF.becomeFirstResponder()
     }
     
     override func viewDidLayoutSubviews() {

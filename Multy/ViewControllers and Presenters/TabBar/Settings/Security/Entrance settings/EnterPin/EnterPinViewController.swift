@@ -6,6 +6,7 @@ import UIKit
 
 class EnterPinViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var circleView: [UIView]!
     @IBOutlet weak var viewWithCircles: UIView!
@@ -19,6 +20,8 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     var whereFrom: UIViewController?
     
+    var isNeedToPresentBiometric = true
+    
     let touchMe = TouchIDAuth()
     
     override func viewDidLoad() {
@@ -26,21 +29,33 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         self.setupButtons()
         self.clearAllCircles()
         self.getPass()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let tabBarOnPreviousVC = self.whereFrom?.tabBarController as? CustomTabBarViewController {
+            tabBarOnPreviousVC.changeViewVisibility(isHidden: true)
+            tabBarOnPreviousVC.isLocked = true
+        }
+        
         UserPreferences.shared.getAndDecryptBiometric(completion: { (isBiometricOn, err) in
             if isBiometricOn != nil && !isBiometricOn! {
                 return
             }
-            self.biometricAuth()
+            if self.isNeedToPresentBiometric {
+                self.biometricAuth()
+            }
         })
     }
     
     func setupButtons() {
         for btn in self.numberButtons {
             btn.layer.cornerRadius = btn.frame.width/2
+        }
+        
+        if self.whereFrom!.className == "SettingsViewController" {
+            self.cancelBtn.isHidden = false
         }
     }
     
@@ -56,7 +71,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                 self.view.isUserInteractionEnabled = true
                 if self.pinTF.text! == self.passFromPref {
                     self.cancelDelegate?.presentNoInternet()
-                    self.dismiss(animated: true, completion: nil)
+                    self.successDismiss()
                 } else {
                     shakeView(viewForShake: self.viewWithCircles)
                     self.clearAllCircles()
@@ -76,10 +91,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        if self.whereFrom != nil && self.whereFrom!.className == "SettingsViewController" {
-            self.whereFrom?.viewWillAppear(true)
-        }
+        self.successDismiss()
     }
     
     func clearAllCircles() {
@@ -118,19 +130,25 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
 
                 }))
+                alert.setPresentedAlertToDelegate()
                 self.present(alert, animated: true, completion: nil)
                 //                appDel.openedAlert = alert
             } else {
                 self.cancelDelegate?.presentNoInternet()
-                self.dismiss(animated: true, completion: {
-//                    self.tabBarController?.tabBar.isUserInteractionEnabled = true
-                })
-                
+                self.successDismiss()
                 //                NotificationCenter.default.post(name: Notification.Name("hideKeyboard"), object: nil)
                 NotificationCenter.default.post(name: Notification.Name("showKeyboard"), object: nil)
                 NotificationCenter.default.post(name: Notification.Name("canDisablePin"), object: nil)
             }
         }
+    }
+    
+    func successDismiss() {
+        if let tabBarOnPreviousVC = self.whereFrom?.tabBarController as? CustomTabBarViewController {
+            tabBarOnPreviousVC.isLocked = false
+        }
+        self.dismiss(animated: true, completion: nil)
+        self.whereFrom?.viewWillAppear(true)
     }
     
 }

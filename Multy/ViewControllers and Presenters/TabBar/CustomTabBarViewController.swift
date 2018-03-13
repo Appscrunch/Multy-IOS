@@ -17,6 +17,8 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     let menuButton = UIButton()
     var previousSelectedIndex = 0
     
+    var isLocked = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.tabBarVC = self
@@ -73,8 +75,10 @@ class CustomTabBarViewController: RAMAnimatedTabBarController, UITabBarControlle
     }
     
     func changeViewVisibility(isHidden: Bool) {
-        self.animationTabBarHidden(isHidden)
-        menuButton.isHidden = isHidden
+        if !isLocked {
+            self.animationTabBarHidden(isHidden)
+            menuButton.isHidden = isHidden
+        }
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
