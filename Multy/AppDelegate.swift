@@ -11,6 +11,9 @@ import Branch
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var presentedVC: UIViewController?
     var openedAlert: UIAlertController?
+    var sharedDialog: UIActivityViewController?
+    var selectedIndexOfTabBar = 0
+    var isActiveFirstTime: Bool?
     
     override init() {
         super.init()
@@ -30,15 +33,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("\n\nScreennshot!\n\n")
                 //executes after screenshot
         }
+        
         self.performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             isNeedToAutorise = acc != nil
 
             //MAKR: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
-                isNeedToAutorise = (pinMode! as NSString).boolValue
-                self.authorization()
+            UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
+                if code != nil && code != "" {
+                    isNeedToAutorise = true
+                    self.authorization(isNeedToPresentBiometric: true)
+                }
             })
+            
+//            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
+//
+//            })
         }
         
         exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
@@ -98,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+
     
     // Respond to URI scheme links
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -146,16 +157,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.shared.finishRealmSession()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             isNeedToAutorise = acc != nil
-            
+            self.closePresented()
             //MARK: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
-                 isNeedToAutorise = (pinMode as! NSString).boolValue
+            UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
+                if code != nil && code != "" {
+                    isNeedToAutorise = true
+                    self.authorization(isNeedToPresentBiometric: false)
+                }
             })
 
-            if self.presentedVC != nil {
-                self.presentedVC?.dismiss(animated: true, completion: nil)
-                self.openedAlert?.dismiss(animated: true, completion: nil)
-            }
+            
         }
         
         UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
@@ -165,17 +176,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        if self.presentedVC != nil {
-            presentedVC?.dismiss(animated: true, completion: nil)
-            openedAlert?.dismiss(animated: true, completion: nil)
-        }
-        
+        self.closePresented()
+        isActiveFirstTime = true
         exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        self.authorization()
+//        self.authorization()
+        if isActiveFirstTime == nil || isActiveFirstTime == true {
+            if let vcOnScren = (window?.rootViewController?.childViewControllers[selectedIndexOfTabBar] as! UINavigationController).topViewController {
+                if let presentedPinVC = vcOnScren.presentedViewController {
+                    let pinVc = presentedPinVC as? EnterPinViewController
+                    pinVc?.isNeedToPresentBiometric = true
+                    pinVc?.viewWillAppear(true)
+                }
+            }
+            isActiveFirstTime = false
+        }
         exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
     }
 
@@ -222,14 +240,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func authorization() {
+    func authorization(isNeedToPresentBiometric: Bool) {
         if isNeedToAutorise {
-            self.window?.isUserInteractionEnabled = false
-            let authVC = SecureViewController()
+//            self.window?.isUserInteractionEnabled = false
+//            let authVC = SecureViewController()
 //            authVC.modalPresentationStyle = .overCurrentContext
             let selectedIndex = (self.window?.rootViewController as! CustomTabBarViewController).selectedIndex
-            (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController?.present(authVC, animated: true, completion: nil)
+            let vcOnScreen = (self.window?.rootViewController?.childViewControllers[selectedIndex] as! UINavigationController).topViewController
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            let pinVC = storyboard.instantiateViewController(withIdentifier: "pinVC") as! EnterPinViewController
+//            pinVC.cancelDelegate = self
+            pinVC.whereFrom = vcOnScreen
+            pinVC.isNeedToPresentBiometric = isNeedToPresentBiometric
+            pinVC.modalPresentationStyle = .overCurrentContext
+            
+            vcOnScreen?.present(pinVC, animated: true, completion: nil)
             isNeedToAutorise = false
+            selectedIndexOfTabBar = selectedIndex
+        }
+    }
+    
+    func closePresented() {
+        if self.presentedVC != nil {
+            self.presentedVC?.dismiss(animated: true, completion: nil)
+        }
+        if self.openedAlert != nil {
+            self.openedAlert?.dismiss(animated: true, completion: nil)
+        }
+        if self.sharedDialog != nil {
+            self.sharedDialog?.dismiss(animated: true, completion: nil)
         }
     }
 

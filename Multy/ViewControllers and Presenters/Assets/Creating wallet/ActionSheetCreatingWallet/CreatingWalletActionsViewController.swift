@@ -15,6 +15,7 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
+        self.setPresentedVcToDelegate()
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {

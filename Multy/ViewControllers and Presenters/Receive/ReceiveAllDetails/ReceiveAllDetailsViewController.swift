@@ -145,6 +145,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
                     }
                 }
             }
+            activityVC.setPresentedShareDialogToDelegate()
             self.present(activityVC, animated: true, completion: nil)
         })
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: moreOptionsTap)

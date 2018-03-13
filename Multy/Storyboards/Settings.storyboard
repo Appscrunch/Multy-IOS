@@ -1114,7 +1114,7 @@ Make sure that Seed Phrase backup was successfully done!</string>
                                             <action selector="removeLastAction:" destination="M6w-XJ-zG4" eventType="touchUpInside" id="TIB-LK-Ipa"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsO-57-6kh">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsO-57-6kh">
                                         <rect key="frame" x="0.0" y="300" width="76" height="76"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                         <state key="normal" title="Cancel">
@@ -1326,6 +1326,7 @@ Make sure that Seed Phrase backup was successfully done!</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelBtn" destination="tsO-57-6kh" id="Rml-e0-F1x"/>
                         <outlet property="pinTF" destination="Krr-n7-dFs" id="k3n-hb-ctt"/>
                         <outlet property="viewWithCircles" destination="Cnr-wm-19k" id="RbN-gJ-RMD"/>
                         <outletCollection property="numberButtons" destination="12e-gm-bgv" collectionClass="NSMutableArray" id="WFy-dZ-hjU"/>
