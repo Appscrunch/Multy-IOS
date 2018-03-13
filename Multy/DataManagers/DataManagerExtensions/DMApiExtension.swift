@@ -17,17 +17,12 @@ extension DataManager {
                 var softVersion: Int?
                 var serverTime: NSDate?
                 
-                if answerDict!["donate"] != nil {
-                    if let donate = (answerDict!["donate"] as? NSDictionary), let btcAddress = donate["BTC"] as? String {
-                        UserDefaults.standard.set(btcAddress, forKey: "BTCDonationAddress")
-                        self.coreLibManager.donationAddress = btcAddress
-                    }
-                }
+                let userDefaults = UserDefaults.standard
                 
                 
                 if answerDict!["api"] != nil {
                     apiVersion = (answerDict!["api"] as? NSString)
-                    UserDefaults.standard.set(apiVersion, forKey: "apiVersion")
+                    userDefaults.set(apiVersion, forKey: Constants.UserDefaults.apiVersionKey)
                 }
                 
                 if answerDict!["ios"] != nil {
@@ -35,15 +30,15 @@ extension DataManager {
                     hardVersion = iosDict["hard"] as? Int
                     softVersion = iosDict["soft"] as? Int
                     
-                    UserDefaults.standard.set(hardVersion, forKey: "hardVersion")
-                    UserDefaults.standard.set(softVersion, forKey: "softVersion")
+                    userDefaults.set(hardVersion, forKey: Constants.UserDefaults.hardVersionKey)
+                    userDefaults.set(softVersion, forKey: Constants.UserDefaults.softVersionKey)
                 }
                 
                 if answerDict!["servertime"] != nil {
                     let timestamp = answerDict!["servertime"]
                     serverTime = NSDate(timeIntervalSince1970: timestamp as! TimeInterval)
                     
-                    UserDefaults.standard.set(serverTime, forKey: "serverTime")
+                    userDefaults.set(serverTime, forKey: Constants.UserDefaults.serverTimeKey)
                 }
                 
                 if answerDict!["stockexchanges"] != nil {
@@ -51,13 +46,28 @@ extension DataManager {
                     let stocks = StockExchanges(dictWithStocks: stocksDict)
                     
                     let encodedData = NSKeyedArchiver.archivedData(withRootObject: stocks.stocks)
-                    UserDefaults.standard.set(encodedData, forKey: "stocks")
-                    
-                    //for get dict from userDefaults
-//                    let decoded  = UserDefaults.standard.object(forKey: UserDefaultsKeys.jobCategory.rawValue) as! Data
-//                    let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! JobCategory
-//                    print(decodedTeams.name)
+                    userDefaults.set(encodedData, forKey: Constants.UserDefaults.stocksKey)
                 }
+                
+                if let donateInfo = answerDict!["donate"] as? NSArray {
+                    var donateFeatureAndAddressDict = Dictionary<Int, String>()
+                    
+                    for donateEntity in donateInfo {
+                        let donateEntityDict = donateEntity as! NSDictionary
+                        
+                        if let featureCode = donateEntityDict["FeatureCode"] as? Int, let donationAddress = donateEntityDict["DonationAddress"] as? String {
+                            donateFeatureAndAddressDict[featureCode] = donationAddress
+                        }
+                    }
+                    
+                    let encodedData = NSKeyedArchiver.archivedData(withRootObject: donateFeatureAndAddressDict)
+                    
+                    self.coreLibManager.btcMainNetDonationAddress = donateFeatureAndAddressDict[donationWithTransaction]!
+                    userDefaults.set(encodedData, forKey: Constants.UserDefaults.btcDonationAddressesKey)
+                }
+                
+                userDefaults.synchronize()
+                
                 completion(hardVersion, softVersion, nil)
                 break
             default:

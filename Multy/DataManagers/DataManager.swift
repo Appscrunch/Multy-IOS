@@ -23,6 +23,13 @@ class DataManager: NSObject {
         seedWordsArray = coreLibManager.mnemonicAllWords()
     }
     
+    func getDonationAddressesFromUserDerfaults() -> Dictionary<Int, String> {
+        let donationData  = UserDefaults.standard.object(forKey: Constants.UserDefaults.btcDonationAddressesKey) as! Data
+        let decodedDonationAddresses = NSKeyedUnarchiver.unarchiveObject(with: donationData) as! Dictionary<Int, String>
+        
+        return decodedDonationAddresses
+    }
+    
     func isWordCorrect(word: String) -> Bool {
         if seedWordsArray.count > 0 {
             return seedWordsArray.contains(word)

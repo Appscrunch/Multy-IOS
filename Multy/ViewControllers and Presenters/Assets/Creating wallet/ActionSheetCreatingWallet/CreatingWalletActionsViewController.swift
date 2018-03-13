@@ -31,9 +31,7 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
     @IBAction func createAction(_ sender: Any) {
         self.dismiss(animated: true) {
             self.createProtocol?.goToCreateWallet()
-        }
-//        self.dismiss(animated: true, completion: nil)
-        
+        }       
     }
     
     
@@ -56,7 +54,6 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
             self.cancelDelegate?.cancelAction()
         }
     }
-    
     
     func presentNoInternet() {
         

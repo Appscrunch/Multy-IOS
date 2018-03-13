@@ -72,9 +72,41 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
                                                    UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                      gradientOrientation: .horizontal)
     }
+    
+    func goToCurrency() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let currencyVC = storyboard.instantiateViewController(withIdentifier: "currencyVC")
+        self.navigationController?.pushViewController(currencyVC, animated: true)
+    }
+    
+    func goToChains() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let chainsVC = storyboard.instantiateViewController(withIdentifier: "chainsVC")
+        self.navigationController?.pushViewController(chainsVC, animated: true)
+    }
+    
+    @objc func keyboardWillShow(_ notification : Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
+            self.constraintContinueBtnBottom.constant = inset.bottom
+            if screenHeight == heightOfX {
+                self.constraintContinueBtnBottom.constant = inset.bottom - 35
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        //            if self.view.frame.origin.y != 0{
+        //                self.view.frame.origin.y += keyboardSize.height
+        //            }
+        self.constraintContinueBtnBottom.constant = 0
+        //        }
+    }
 }
 
-extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+
+extension CreateWalletViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -101,6 +133,10 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
+}
+
+
+extension CreateWalletViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
     }
@@ -114,38 +150,10 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
             self.goToCurrency()
         }
     }
-    
-    func goToCurrency() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let currencyVC = storyboard.instantiateViewController(withIdentifier: "currencyVC")
-        self.navigationController?.pushViewController(currencyVC, animated: true)
-    }
-    
-    func goToChains() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let chainsVC = storyboard.instantiateViewController(withIdentifier: "chainsVC")
-        self.navigationController?.pushViewController(chainsVC, animated: true)
-    }
-    
-    @objc func keyboardWillShow(_ notification : Notification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let inset : UIEdgeInsets = UIEdgeInsetsMake(64, 0, keyboardSize.height, 0)
-            self.constraintContinueBtnBottom.constant = inset.bottom
-            if screenHeight == heightOfX {
-                self.constraintContinueBtnBottom.constant = inset.bottom - 35
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            if self.view.frame.origin.y != 0{
-//                self.view.frame.origin.y += keyboardSize.height
-//            }
-            self.constraintContinueBtnBottom.constant = 0
-//        }
-    }
-    
+}
+
+
+extension CreateWalletViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.dismissKeyboard()
         return true
@@ -158,5 +166,4 @@ extension CreateWalletViewController: UITableViewDelegate, UITableViewDataSource
             return false
         }
     }
-    
 }

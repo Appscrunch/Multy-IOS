@@ -9,33 +9,12 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 13
+    let schemaVersion : UInt64 = 14
     
     var account: AccountRLM?
     
     private override init() {
         super.init()
-        
-//        UserPreferences.shared.getAndDecryptDatabasePassword { (pass, error) in
-//            if pass != nil {
-//                _ = Realm.Configuration(encryptionKey: pass!.data(using: .utf8),
-//                                        schemaVersion: self.schemaVersion,
-//                                        migrationBlock: { migration, oldSchemaVersion in
-//                                            if oldSchemaVersion < 7 {
-//                                                self.migrateFrom6To7(with: migration)
-//                                            }
-//                                            if oldSchemaVersion < 8 {
-//                                                self.migrateFrom7To8(with: migration)
-//                                            }
-//                                            if oldSchemaVersion < 9 {
-//                                                self.migrateFrom8To9(with: migration)
-//                                            }
-//                }
-//                )
-//            } else {
-//                print("Realm error while setting config")
-//            }
-//        }
     }
     
     public func finishRealmSession() {
@@ -81,6 +60,9 @@ class RealmManager: NSObject {
                                                         self.migrateFrom12To13(with: migration)
                                                     }
                                                     if oldSchemaVersion < 14 {
+                                                        self.migrateFrom13To14(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 15 {
                                                         self.migrateFrom13To14(with: migration)
                                                     }
             })
@@ -540,6 +522,12 @@ class RealmManager: NSObject {
         }
     }
     
+    func migrateFrom14To15(with migration: Migration) {
+        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+            newWallet?["isTherePendingTx"] = NSNumber(booleanLiteral: false)
+        }
+    }
+    
     //Greedy algorithm
     func spendableOutput(addresses: List<AddressRLM>) -> [SpendableOutputRLM] {
         let ouputs = List<SpendableOutputRLM>()
@@ -686,11 +674,13 @@ class RealmManager: NSObject {
         }
     }
     
-    func fetchAllWallets(completion: @escaping(_ wallets: Results<UserWalletRLM>?) -> ()) {
+    func fetchAllWallets(completion: @escaping(_ wallets: [UserWalletRLM]?) -> ()) {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
                 let wallets = realm.objects(UserWalletRLM.self)
-                completion(wallets)
+                let walletsArr = Array(wallets.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
+                
+                completion(walletsArr)
             }
         }
     }

@@ -18,8 +18,6 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     
     var donationAddress = ""
     
-    var donationAddresses = Dictionary<Int, String>()
-    
     var feeRate: NSDictionary? {
         didSet {
             mainVC?.tableView.reloadData()
@@ -45,8 +43,8 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         self.mainVC?.view.isUserInteractionEnabled = false
         DataManager.shared.realmManager.fetchAllWallets { (wallets) in
             self.mainVC?.view.isUserInteractionEnabled = true
-            let walletsArr = Array(wallets!.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
-            self.walletPayFrom = walletsArr.first
+//            let walletsArr = Array(wallets!.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
+            self.walletPayFrom = wallets?.first
             self.maxAvailable = (self.walletPayFrom?.sumInCrypto)!
             self.mainVC?.updateUIWithWallet()
         }

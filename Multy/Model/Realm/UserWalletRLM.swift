@@ -8,7 +8,7 @@ import RealmSwift
 class UserWalletRLM: Object {
     @objc dynamic var id = String()    //
     @objc dynamic var chain = NSNumber(value: 0)    //UInt32
-    @objc dynamic var chainType = NSNumber(value: 0)    //UInt32//BlockchainNetType
+    @objc dynamic var chainType = NSNumber(value: 1)    //UInt32//BlockchainNetType
     @objc dynamic var walletID = NSNumber(value: 0) //UInt32
     @objc dynamic var addressID = NSNumber(value: 0) //UInt32
     
@@ -38,7 +38,7 @@ class UserWalletRLM: Object {
     
     @objc dynamic var historyAddress : AddressRLM?
     
-    
+    @objc dynamic var isTherePendingTx = NSNumber(value: 0)
     
     var addresses = List<AddressRLM>() {
         didSet {
@@ -88,6 +88,10 @@ class UserWalletRLM: Object {
         
         if let walletName = walletInfo["walletname"] {
             wallet.name = walletName as! String
+        }
+        
+        if let isTherePendingTx = walletInfo["pending"] {
+            wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx as! Bool)
         }
         
         //MARK: temporary only 0-currency

@@ -55,51 +55,12 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         
         sendDonationScreenPresentedAnalytics()
         
-        createAddresses()
+        getAddresses()
     }
     
-    func createAddresses() {
-        presenter.donationAddresses = [ donationWithTransaction : "1GQsE1gBf3bjVACVve5R3aFgxiTAVgZReU",
-                                        donationForBTCLighting : "1PwXHW2tKKBu6VfdmTmaFVbfpkHphVHVNu",
-                                        donationForETH : "12iWkYPbwVXovtMUxhbXU6NBm4FcLV2Pbc",
-                                        donationForGOLOS, "1A5USPtadqSzZ7gydT8MzP6SxvdjBkRPzk",
-            
-        ]
-        
-        let donationWithTransaction     = 20000
-
-        let donationForBTCLighting      = 20100 //
-        let donationForETH              = 20101
-        let donationForGOLOS            = 20102
-        let donationForSTEEMIT          = 20103
-        let donationForBTS              = 20104
-        let donationForBCH              = 20105
-        let donationForLTC              = 20106
-        let donationForDSH              = 20107
-        let donationForETC              = 20108
-        let donationForERC20Token       = 20109
-        let donationForEUR              = 20110 //
-        let donationForEstimationETH    = 20111 //
-
-        let donationForActivitySC       = 20200 //
-        let donationForContactSC        = 20201 //
-        let donationForPortfolioSC      = 20202 //
-        let donationForChartsSC         = 20203 //
-
-        let donationForImportWallet     = 20300 //
-        let donationForExchangeFUNC     = 20301 //
-        let donationForWirelessScanFUNC = 20302 //
-
-        let donationForBinanceStock     = 20400 //
-        let donationForOKExStock        = 20401
-        let donationForHuobiStock       = 20402
-        let donationForUpbitStock       = 20403
-        let donationForBitfinexStock    = 20404
-        let donationForBittrexStock     = 20405
-        let donationForBithumbStock     = 20406
-        let donationForGDAXStock        = 20407
-        let donationForKrakenStock      = 20408
-        let donationForHitBTCStock      = 20409
+    func getAddresses() {
+        let addresses = DataManager.shared.getDonationAddressesFromUserDerfaults()
+        presenter.donationAddress = addresses[DataManager.shared.donationCode]!
     }
     
     override func viewWillAppear(_ animated: Bool) {

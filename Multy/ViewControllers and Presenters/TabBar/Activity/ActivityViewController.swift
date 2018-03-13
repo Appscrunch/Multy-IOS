@@ -96,7 +96,6 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         if self.isHaveNotEmpty {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
-            donatSendVC.presenter.donationAddress = UserDefaults.standard.value(forKey: "BTCDonationAddress") as! String
             self.navigationController?.pushViewController(donatSendVC, animated: true)
         } else {
             let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
