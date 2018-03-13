@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
                 if code != nil && code != "" {
                     isNeedToAutorise = true
-                    self.authorization(isNeedToPresentBio: true)
+                    self.authorization(isNeedToPresentBiometric: true)
                 }
             })
             
@@ -162,7 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
                 if code != nil && code != "" {
                     isNeedToAutorise = true
-                    self.authorization(isNeedToPresentBio: false)
+                    self.authorization(isNeedToPresentBiometric: false)
                 }
             })
 
@@ -188,7 +188,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let vcOnScren = (window?.rootViewController?.childViewControllers[selectedIndexOfTabBar] as! UINavigationController).topViewController {
                 if let presentedPinVC = vcOnScren.presentedViewController {
                     let pinVc = presentedPinVC as? EnterPinViewController
-                    pinVc?.isNeedToPresentBio = true
+                    pinVc?.isNeedToPresentBiometric = true
                     pinVc?.viewWillAppear(true)
                 }
             }
@@ -240,7 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func authorization(isNeedToPresentBio: Bool) {
+    func authorization(isNeedToPresentBiometric: Bool) {
         if isNeedToAutorise {
 //            self.window?.isUserInteractionEnabled = false
 //            let authVC = SecureViewController()
@@ -251,7 +251,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let pinVC = storyboard.instantiateViewController(withIdentifier: "pinVC") as! EnterPinViewController
 //            pinVC.cancelDelegate = self
             pinVC.whereFrom = vcOnScreen
-            pinVC.isNeedToPresentBio = isNeedToPresentBio
+            pinVC.isNeedToPresentBiometric = isNeedToPresentBiometric
             pinVC.modalPresentationStyle = .overCurrentContext
             
             vcOnScreen?.present(pinVC, animated: true, completion: nil)

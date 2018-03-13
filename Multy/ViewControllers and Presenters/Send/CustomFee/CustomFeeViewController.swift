@@ -7,7 +7,7 @@ import UIKit
 class CustomFeeViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var topNameLbl: UILabel!  //gas price
-    @IBOutlet weak var topPriceTf: UITextField!
+    @IBOutlet weak var topPriceTF: UITextField!
     
     @IBOutlet weak var botNameLbl: UILabel!   //gas limit
     @IBOutlet weak var botLimitTf: UITextField!
@@ -27,7 +27,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.topPriceTf.becomeFirstResponder()
+        self.topPriceTF.becomeFirstResponder()
     }
 
     func setupUI() {
@@ -39,10 +39,10 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
             
             self.topNameLbl.text = "Satoshi per byte"
-            self.topPriceTf.placeholder = "Enter Satohi per byte here"
-            self.topPriceTf.placeholder = "0"
+            self.topPriceTF.placeholder = "Enter Satohi per byte here"
+            self.topPriceTF.placeholder = "0"
             if self.rate != 0 {
-                self.topPriceTf.text = "\(rate)"
+                self.topPriceTF.text = "\(rate)"
             }
         default: return
         }
@@ -50,16 +50,16 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancelAction(_ sender: Any) {
         //for BTC
-        if topPriceTf.text == nil || (topPriceTf.text! as NSString).intValue < 2 {
+        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < 2 {
             let message = "Fee rate can not be less then 2 satoshi per byte."
             let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                self.topPriceTf.becomeFirstResponder()
+                self.topPriceTF.becomeFirstResponder()
             }))
             
             self.present(alert, animated: true, completion: nil)
         } else {
-            self.delegate?.customFeeData(firstValue: (self.topPriceTf.text! as NSString).doubleValue, secValue: (self.botLimitTf.text! as NSString).doubleValue)
+            self.delegate?.customFeeData(firstValue: (self.topPriceTF.text! as NSString).doubleValue, secValue: (self.botLimitTf.text! as NSString).doubleValue)
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -74,7 +74,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             let message = "You fee is too high. Please enter normal fee amount!"
             let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                self.topPriceTf.becomeFirstResponder()
+                self.topPriceTF.becomeFirstResponder()
             }))
             
             self.present(alert, animated: true, completion: nil)

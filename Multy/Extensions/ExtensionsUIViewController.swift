@@ -41,15 +41,15 @@ extension UIApplication {
 
 extension UIAlertController {
     func setPresentedAlertToDelegate() {
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        appDel.openedAlert = self
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.openedAlert = self
     }
 }
 
 extension UIActivityViewController {
     func setPresentedShareDialogToDelegate() {
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        appDel.sharedDialog = self
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.sharedDialog = self
     }
 }
 
@@ -150,8 +150,8 @@ extension UIViewController {
     }
     
     func setPresentedVcToDelegate() {
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        appDel.presentedVC = self
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.presentedVC = self
     }
 
 }

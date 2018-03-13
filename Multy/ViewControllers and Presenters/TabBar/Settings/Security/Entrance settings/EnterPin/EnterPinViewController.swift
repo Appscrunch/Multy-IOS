@@ -20,7 +20,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     var whereFrom: UIViewController?
     
-    var isNeedToPresentBio = true
+    var isNeedToPresentBiometric = true
     
     let touchMe = TouchIDAuth()
     
@@ -34,16 +34,16 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let tabBarOnPrevVC = self.whereFrom?.tabBarController {
-            (tabBarOnPrevVC as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-            (tabBarOnPrevVC as! CustomTabBarViewController).isLocked = true
+        if let tabBarOnPreviousVC = self.whereFrom?.tabBarController as? CustomTabBarViewController {
+            tabBarOnPreviousVC.changeViewVisibility(isHidden: true)
+            tabBarOnPreviousVC.isLocked = true
         }
         
         UserPreferences.shared.getAndDecryptBiometric(completion: { (isBiometricOn, err) in
             if isBiometricOn != nil && !isBiometricOn! {
                 return
             }
-            if self.isNeedToPresentBio {
+            if self.isNeedToPresentBiometric {
                 self.biometricAuth()
             }
         })
@@ -144,8 +144,8 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     func successDismiss() {
-        if let tabBarOnPrevVC = self.whereFrom?.tabBarController {
-            (tabBarOnPrevVC as! CustomTabBarViewController).isLocked = false
+        if let tabBarOnPreviousVC = self.whereFrom?.tabBarController as? CustomTabBarViewController {
+            tabBarOnPreviousVC.isLocked = false
         }
         self.dismiss(animated: true, completion: nil)
         self.whereFrom?.viewWillAppear(true)
