@@ -266,7 +266,6 @@
 		44FA86BE2035A75A00263C72 /* key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = key.h; sourceTree = "<group>"; };
 		44FA86BF2035A76400263C72 /* big_int.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = big_int.h; sourceTree = "<group>"; };
 		44FA86C02035A77100263C72 /* sha3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
-		44FA86C12035A7AF00263C72 /* account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
 		4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsPresenter.swift; sourceTree = "<group>"; };
 		4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
 		45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSeedPhraseView.swift; sourceTree = "<group>"; };
@@ -1362,7 +1361,6 @@
 		FA7406171FCC14C4003C538C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				44FA86C12035A7AF00263C72 /* account.h */,
 				44FA86C02035A77100263C72 /* sha3.h */,
 				44FA86BE2035A75A00263C72 /* key.h */,
 				FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */,
@@ -1415,8 +1413,8 @@
 			isa = PBXGroup;
 			children = (
 				FA4D43D51FC5745E003C7117 /* DataManagerExtensions */,
-				FADC00471FC3236F00182E45 /* ApiManager.swift */,
 				FADC00451FC3231A00182E45 /* DataManager.swift */,
+				FADC00471FC3236F00182E45 /* ApiManager.swift */,
 				FADC00491FC3238D00182E45 /* RealmManager.swift */,
 				FADC004B1FC323A900182E45 /* Socket.swift */,
 				FADC004D1FC323C300182E45 /* CoreLibManager.swift */,

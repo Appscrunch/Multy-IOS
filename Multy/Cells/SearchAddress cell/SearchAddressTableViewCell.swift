@@ -34,12 +34,14 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
     
     @IBAction func addressBookAction(_ sender: Any) {
         donationDelegate?.donate()
-        sendAnalyticsEvent(screenName: screenSendTo, eventName: addressBookTap)
+//        sendAnalyticsEvent(screenName: screenSendTo, eventName: addressBookTap)
+        sendDonationAlertScreenPresentedAnalytics(code: donationForContactSC)
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
         donationDelegate?.donate()
-        sendAnalyticsEvent(screenName: screenSendTo, eventName: wirelessScanTap)
+//        sendAnalyticsEvent(screenName: screenSendTo, eventName: wirelessScanTap)
+        sendDonationAlertScreenPresentedAnalytics(code: donationForWirelessScanFUNC)
     }
     
     @IBAction func scanQrAction(_ sender: Any) {

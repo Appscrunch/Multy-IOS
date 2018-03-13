@@ -168,8 +168,6 @@ class AssetsPresenter: NSObject {
                     
                     print("wallets: \(acc?.wallets)")
                     
-//                    self.createTestTrans()
-                    
                     completion(true)
                     
 //                    DataManager.shared.getAccount(completion: { (acc, err) in
@@ -192,8 +190,6 @@ class AssetsPresenter: NSObject {
                     
                     print("wallets: \(acc?.wallets)")
                     
-                    //                    self.createTestTrans()
-                    
                     completion(true)
                     
                     DataManager.shared.getAccount(completion: { (acc, err) in
@@ -202,10 +198,5 @@ class AssetsPresenter: NSObject {
                 })
             }
         }
-    }
-    
-    func createTestTrans() {
-        var binData = account!.binaryDataString.createBinaryData()!
-        DataManager.shared.coreLibManager.testTransaction(from: &binData, wallet: account!.wallets[0])
     }
 }

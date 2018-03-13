@@ -324,7 +324,12 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
         donatAlert.modalPresentationStyle = .overCurrentContext
         donatAlert.cancelDelegate = self
         self.present(donatAlert, animated: true, completion: nil)
-        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
+//        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
+        logAnalytics()
+    }
+    
+    func logAnalytics() {
+        sendDonationAlertScreenPresentedAnalytics(code: donationForExchangeFUNC)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

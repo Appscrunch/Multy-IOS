@@ -4,7 +4,7 @@
 
 import UIKit
 
-class BlockchainsViewController: UIViewController, CancelProtocol {
+class BlockchainsViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -121,6 +121,8 @@ extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource 
             donatAlert.cancelDelegate = self
             self.present(donatAlert, animated: true, completion: nil)
             (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            
+            logAnalytics(indexPath: indexPath)
         } else {
             self.navigationController?.popViewController(animated: true)
         }
@@ -128,5 +130,10 @@ extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
+    }
+    
+    func logAnalytics(indexPath: IndexPath) {
+        let eventCode = donationForBTCLighting + indexPath.row
+        sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
 }

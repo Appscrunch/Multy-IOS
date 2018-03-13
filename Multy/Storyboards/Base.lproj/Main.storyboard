@@ -44,7 +44,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNt-RL-cvl">
-                                <rect key="frame" x="16" y="80" width="343" height="263.5"/>
+                                <rect key="frame" x="16" y="80" width="343" height="280"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activityBgd" translatesAutoresizingMaskIntoConstraints="NO" id="Y3F-Qy-sRM">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="160"/>
@@ -52,15 +52,15 @@
                                             <constraint firstAttribute="width" secondItem="Y3F-Qy-sRM" secondAttribute="height" multiplier="343:160" id="dtc-TZ-HCN"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feature Challenge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFB-1G-kDZ">
-                                        <rect key="frame" x="20" y="173" width="135" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote for features" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFB-1G-kDZ">
+                                        <rect key="frame" x="20" y="173" width="121.5" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqW-mj-53c">
-                                        <rect key="frame" x="20" y="201" width="303" height="49.5"/>
-                                        <string key="text">In computer vision and image processing, a feature is a piece of information which is relevant for solving the computational task related to a certain application.</string>
+                                        <rect key="frame" x="20" y="201" width="303" height="66"/>
+                                        <string key="text">We want you to speak up. By voting with your crypto, you can give a feedback on features you want the most and support project at the same time. Your vote will help us to choose the right path.</string>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIM-zT-TDk">
-                                        <rect key="frame" x="0.0" y="160" width="343" height="104"/>
+                                        <rect key="frame" x="0.0" y="160" width="343" height="120.5"/>
                                         <connections>
                                             <action selector="goToAction:" destination="dmP-I8-1Pw" eventType="touchUpInside" id="Pns-gx-mOl"/>
                                         </connections>

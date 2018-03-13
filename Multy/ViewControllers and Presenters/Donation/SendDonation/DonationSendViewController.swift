@@ -52,6 +52,15 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.presenter.getWallets()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissKeyboard), name: Notification.Name("hideKeyboard"), object: nil)
+        
+        sendDonationScreenPresentedAnalytics()
+        
+        getAddresses()
+    }
+    
+    func getAddresses() {
+        let addresses = DataManager.shared.getDonationAddressesFromUserDerfaults()
+        presenter.donationAddress = addresses[DataManager.shared.donationCode]!
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +107,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.view.isUserInteractionEnabled = false
         self.progressHud.show()
         self.presenter.makeTransaction()
+        
+        sendDonationScreenPressSendAnalytics()
     }
     
     func updateUIWithWallet() {

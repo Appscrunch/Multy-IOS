@@ -43,8 +43,8 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         self.mainVC?.view.isUserInteractionEnabled = false
         DataManager.shared.realmManager.fetchAllWallets { (wallets) in
             self.mainVC?.view.isUserInteractionEnabled = true
-            let walletsArr = Array(wallets!.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
-            self.walletPayFrom = walletsArr.first
+//            let walletsArr = Array(wallets!.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
+            self.walletPayFrom = wallets?.first
             self.maxAvailable = (self.walletPayFrom?.sumInCrypto)!
             self.mainVC?.updateUIWithWallet()
         }
@@ -78,6 +78,8 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.mainVC?.present(alert, animated: true, completion: nil)
                 return
+            } else {
+                self.mainVC!.sendDonationSuccessAnalytics()
             }
             
             let storyboard = UIStoryboard(name: "Send", bundle: nil)

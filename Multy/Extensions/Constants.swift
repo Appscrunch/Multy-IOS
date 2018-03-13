@@ -23,10 +23,22 @@ struct Constants {
         //Assets
         static let createWalletVCSegueID = "createWalletVC"
     }
+    
+    struct UserDefaults {
+        //Config constants
+        
+        static let apiVersionKey =         "apiVersion"
+        static let hardVersionKey =        "hardVersion"
+        static let softVersionKey =        "softVersion"
+        static let serverTimeKey =         "serverTime"
+        static let stocksKey =             "stocks"
+        static let btcDonationAddressesKey =  "donationAddresses"
+    }
+    
+    struct CoreLibrary {
+        static let btcTestnetDonationAddress =  "mnUtMQcs3s8kSkSRXpREVtJamgUCWpcFj4"
+    }
 }
-
-//FIXME: chain offset
-let chainOffset = UInt32(2147483648)
 
 let defaultDelimeter = "," as Character
 

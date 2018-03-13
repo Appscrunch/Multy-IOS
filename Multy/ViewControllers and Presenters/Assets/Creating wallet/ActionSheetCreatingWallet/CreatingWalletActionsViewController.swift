@@ -4,7 +4,7 @@
 
 import UIKit
 
-class CreatingWalletActionsViewController: UIViewController, CancelProtocol {
+class CreatingWalletActionsViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
 
     var cancelDelegate: CancelProtocol?
     var createProtocol: CreateWalletProtocol?
@@ -32,9 +32,7 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol {
     @IBAction func createAction(_ sender: Any) {
         self.dismiss(animated: true) {
             self.createProtocol?.goToCreateWallet()
-        }
-//        self.dismiss(animated: true, completion: nil)
-        
+        }       
     }
     
     
@@ -44,6 +42,12 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol {
         donatAlert.modalPresentationStyle = .overCurrentContext
         donatAlert.cancelDelegate = self
         self.present(donatAlert, animated: true, completion: nil)
+        
+        logAnalytics()
+    }
+    
+    func logAnalytics() {
+        sendDonationAlertScreenPresentedAnalytics(code: donationForImportWallet)
     }
     
     func cancelAction() {
@@ -51,7 +55,6 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol {
             self.cancelDelegate?.cancelAction()
         }
     }
-    
     
     func presentNoInternet() {
         

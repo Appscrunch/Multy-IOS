@@ -69,12 +69,15 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     @IBAction func wirelessScanAction(_ sender: Any) {
         self.openDonat()
-        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: wirelessScanTap)
+//        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: wirelessScanTap)
+        
+        logAnalytics(code: donationForWirelessScanFUNC)
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
         self.openDonat()
-        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressBookTap)
+//        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressBookTap)
+        logAnalytics(code: donationForContactSC)
     }
     
     func branchDict() -> NSDictionary {
@@ -122,6 +125,9 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.present(donatAlert, animated: true, completion: nil)
     }
     
+    func logAnalytics(code: Int) {
+        sendDonationAlertScreenPresentedAnalytics(code: code)
+    }
     
     @IBAction func moreOptionsAction(_ sender: Any) {
         let branch = Branch.getInstance()

@@ -31,6 +31,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupUI() {
+        //FIXME: check chainID nullability
         switch self.presenter.chainId {
         case 0 as NSNumber:
 //            break
