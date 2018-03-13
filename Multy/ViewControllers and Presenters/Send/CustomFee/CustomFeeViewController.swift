@@ -24,6 +24,11 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setupUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.topPriceTf.becomeFirstResponder()
+    }
 
     func setupUI() {
         switch self.presenter.chainId {
@@ -39,7 +44,6 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             if self.rate != 0 {
                 self.topPriceTf.text = "\(rate)"
             }
-            self.topPriceTf.becomeFirstResponder()
         default: return
         }
     }

@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var presentedVC: UIViewController?
     var openedAlert: UIAlertController?
     var sharedDialog: UIActivityViewController?
-    var selectedIndexOfTabBar: Int?
+    var selectedIndexOfTabBar = 0
     var isActiveFirstTime: Bool?
     
     override init() {
@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("\n\nScreennshot!\n\n")
                 //executes after screenshot
         }
+        
         self.performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             isNeedToAutorise = acc != nil
@@ -107,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+
     
     // Respond to URI scheme links
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -183,11 +185,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //        self.authorization()
         if isActiveFirstTime == nil || isActiveFirstTime == true {
-            let vcOnScren = (window?.rootViewController?.childViewControllers[selectedIndexOfTabBar!] as! UINavigationController).topViewController
-            if let presentedPinVC = vcOnScren!.presentedViewController {
-                let pinVc = presentedPinVC as? EnterPinViewController
-                pinVc?.isNeedToPresentBio = true
-                pinVc?.viewWillAppear(true)
+            if let vcOnScren = (window?.rootViewController?.childViewControllers[selectedIndexOfTabBar] as! UINavigationController).topViewController {
+                if let presentedPinVC = vcOnScren.presentedViewController {
+                    let pinVc = presentedPinVC as? EnterPinViewController
+                    pinVc?.isNeedToPresentBio = true
+                    pinVc?.viewWillAppear(true)
+                }
             }
             isActiveFirstTime = false
         }
