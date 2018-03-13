@@ -20,6 +20,8 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     var whereFrom: UIViewController?
     
+    var isNeedToPresentBio = true
+    
     let touchMe = TouchIDAuth()
     
     override func viewDidLoad() {
@@ -41,7 +43,9 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
             if isBiometricOn != nil && !isBiometricOn! {
                 return
             }
-            self.biometricAuth()
+            if self.isNeedToPresentBio {
+                self.biometricAuth()
+            }
         })
     }
     
@@ -126,6 +130,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
 
                 }))
+                alert.setPresentedAlertToDelegate()
                 self.present(alert, animated: true, completion: nil)
                 //                appDel.openedAlert = alert
             } else {

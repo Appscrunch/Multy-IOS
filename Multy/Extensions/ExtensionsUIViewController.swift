@@ -39,6 +39,20 @@ extension UIApplication {
     }
 }
 
+extension UIAlertController {
+    func setPresentedAlertToDelegate() {
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.openedAlert = self
+    }
+}
+
+extension UIActivityViewController {
+    func setPresentedShareDialogToDelegate() {
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.sharedDialog = self
+    }
+}
+
 extension NSObject {
     var className: String {
         return String(describing: type(of: self)).components(separatedBy: ".").last!
@@ -133,6 +147,11 @@ extension UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func setPresentedVcToDelegate() {
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.presentedVC = self
     }
 
 }

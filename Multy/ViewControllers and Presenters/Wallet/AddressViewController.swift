@@ -77,6 +77,7 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
                     }
                 }
             }
+            activityVC.setPresentedShareDialogToDelegate()
             self.present(activityVC, animated: true, completion: nil)
         })
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(shareWithChainTap)\(wallet!.chain)")
