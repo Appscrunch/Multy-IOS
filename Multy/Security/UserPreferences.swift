@@ -203,4 +203,75 @@ class UserPreferences : NSObject {
         }
     }
     
+    func writeChipheredBlockSeconds(seconds: Int) {
+        if aes == nil {
+            return
+        }
+        
+        let cipheredAttempts = try! aes!.encrypt(Array("\(seconds)".utf8))
+        let cipheredData = cipheredAttempts.nsData
+        
+        UserDefaults.standard.set(cipheredData, forKey: "wrongAttempts")
+    }
+    
+    func getAndDecryptBlockSeconds(completion: @escaping (_ seconds: Int?, _ error: Error?) -> ()) {
+        let cipheredData = UserDefaults.standard.data(forKey: "wrongAttempts")
+        if cipheredData == nil {
+            completion(nil, nil)
+            return
+        }
+        let originalData = try! aes?.decrypt(cipheredData!.bytes)
+        if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
+            completion(Int(decipheredString as String), nil)
+        } else {
+            completion(nil, nil)
+        }
+    }
+    
+    
+    func writeStartBlockTime(time: Date) {
+        if aes == nil {
+            return
+        }
+        let timeString = Date.blockDateFormatter().string(from: time)
+        
+        let cipheredAttempts = try! aes!.encrypt(Array(timeString.utf8))
+        let cipheredData = cipheredAttempts.nsData
+        UserDefaults.standard.set(cipheredData, forKey: "startBlockTime")
+    }
+    
+    func getAndDecryptStartBlockTime(completion: @escaping(_ time: Date?, _ error: Error?) -> ()) {
+        let cipheredData = UserDefaults.standard.data(forKey: "startBlockTime")
+        if cipheredData == nil {
+            completion(nil, nil)
+            return
+        }
+        let originalData = try! aes?.decrypt(cipheredData!.bytes)
+        if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
+            completion(decipheredString.toDateTime() as Date, nil)
+        } else {
+            completion(nil, nil)
+        }
+    }
+    
+    func getAndDecryptMaxEnterPinTries() -> Int {
+        if aes == nil {
+            return 0
+        }
+        let cipheredTries = try! aes!.encrypt(Array("\(5)".utf8))
+        let cipheredData = cipheredTries.nsData
+        UserDefaults.standard.set(cipheredData, forKey: "maxPinTries")
+     
+        
+        let cipheredDataToEncrypt = UserDefaults.standard.data(forKey: "maxPinTries")
+        if cipheredDataToEncrypt == nil {
+            return 0
+        }
+        let originalData = try! aes?.decrypt(cipheredDataToEncrypt!.bytes)
+        if let decipheredString = String(bytes: originalData!, encoding: .utf8) {
+            return Int(decipheredString)!
+        } else {
+            return 0
+        }
+    }
 }

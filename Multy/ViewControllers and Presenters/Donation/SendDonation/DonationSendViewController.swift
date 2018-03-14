@@ -86,7 +86,11 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         //update send button constraint
         scrollView.contentInset = .zero
         
-        if screenHeight > scrollView.contentSize.height + 20 && scrollView.contentSize.height > 0 {
+        
+        
+        if screenHeight == heightOfX {
+            sendButtonContraint.constant = 140
+        } else if screenHeight > scrollView.contentSize.height + 20 && scrollView.contentSize.height > 0 {
             sendButtonContraint.constant = 30 + (screenHeight - scrollView.contentSize.height - 20)
         }
     }

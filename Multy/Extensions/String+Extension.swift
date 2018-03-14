@@ -128,4 +128,19 @@ extension String {
     func convertToFiatAmountString() -> String {
         return self.toStringWithZeroes(precision: 2)
     }
+    
+    func toDateTime() -> NSDate {
+        //Create Date Formatter
+//        let dateFormatter = DateFormatter()
+//
+//        //Specify Format of String to Parse
+//        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss xxxxx"
+//        dateFormatter.locale = NSLocale(localeIdentifier: "ru_RU") as Locale!
+//
+        //Parse into NSDate
+        let dateFromString = Date.blockDateFormatter().date(from: self)! as NSDate
+        
+        //Return Parsed Date
+        return dateFromString
+    }
 }
