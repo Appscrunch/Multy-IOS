@@ -558,26 +558,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func cancelAction() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
-            if wallets == nil {
-                let message = "You don`t have any wallets yet."
-                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-                return
-            }
-            for wallet in wallets! {
-                if wallet.availableAmount() > 0 {
-                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
-                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
-                    break
-                } else { // empty wallet
-                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
-                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
-                    break
-                }
-            }
-            //            self.donateOrAlert()
-        }
+        presentDonationVCorAlert()
     }
     
     func presentNoInternet() {
@@ -595,7 +576,8 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
-extension AssetsViewController : UICollectionViewDelegateFlowLayout {
+private typealias CollectionViewDelegateFlowLayout = AssetsViewController
+extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -616,7 +598,8 @@ extension AssetsViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension AssetsViewController : UICollectionViewDelegate {
+private typealias CollectionViewDelegate = AssetsViewController
+extension CollectionViewDelegate : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
@@ -634,7 +617,8 @@ extension AssetsViewController : UICollectionViewDelegate {
     }
 }
 
-extension AssetsViewController: UIScrollViewDelegate {
+private typealias ScrollViewDelegate = AssetsViewController
+extension ScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
         changePageControl(currentpage: pageNumber)

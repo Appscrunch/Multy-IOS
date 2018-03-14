@@ -257,7 +257,7 @@ let screenDonationSuccessWith_  = "Screen_Donation_Success_"//+FEATURE_ID
 //featues code
 let donationWithTransaction     = 20000
 
-let donationForBTCLighting      = 20100 //
+let donationForBTCLighting      = 20100
 let donationForETH              = 20101
 let donationForGOLOS            = 20102
 let donationForSTEEMIT          = 20103
@@ -267,19 +267,19 @@ let donationForLTC              = 20106
 let donationForDSH              = 20107
 let donationForETC              = 20108
 let donationForERC20Token       = 20109
-let donationForEUR              = 20110 //
-let donationForEstimationETH    = 20111 //
+let donationForEUR              = 20110
+let donationForEstimationETH    = 20111
 
-let donationForActivitySC       = 20200 //
-let donationForContactSC        = 20201 //
-let donationForPortfolioSC      = 20202 //
-let donationForChartsSC         = 20203 //
+let donationForActivitySC       = 20200
+let donationForContactSC        = 20201
+let donationForPortfolioSC      = 20202
+let donationForChartsSC         = 20203
 
-let donationForImportWallet     = 20300 //
-let donationForExchangeFUNC     = 20301 //
-let donationForWirelessScanFUNC = 20302 //
+let donationForImportWallet     = 20300
+let donationForExchangeFUNC     = 20301
+let donationForWirelessScanFUNC = 20302
 
-let donationForBinanceStock     = 20400 //
+let donationForBinanceStock     = 20400
 let donationForOKExStock        = 20401
 let donationForHuobiStock       = 20402
 let donationForUpbitStock       = 20403

@@ -7,7 +7,6 @@ import RealmSwift
 
 class CoreLibManager: NSObject {
     static let shared = CoreLibManager()
-    var btcMainNetDonationAddress = ""
     
     func mnemonicAllWords() -> Array<String> {
         let mnemonicArrayPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
@@ -448,7 +447,7 @@ class CoreLibManager: NSObject {
             let donationDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
             transaction_add_destination(transactionPointer.pointee, donationDestination)
             
-            let currentChainDonationAddress = wallet.chainType.uint32Value == 0 ? btcMainNetDonationAddress : Constants.CoreLibrary.btcTestnetDonationAddress
+            let currentChainDonationAddress = DataManager.shared.getBTCDonationAddress(netType: wallet.chainType.uint32Value)
             
             setStringValue(key: "address", value: currentChainDonationAddress, pointer: donationDestination.pointee!)
             setAmountValue(key: "amount", value: String(convertBTCStringToSatoshi(sum: donationAmount)), pointer: donationDestination.pointee!)
@@ -563,189 +562,6 @@ class CoreLibManager: NSObject {
         
         
         return (str, feeInBTCAmount)
-    }
-    
-    ////////////////////////////////////
-    func startSwiftTest() {
-        let mnemo = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        let entropySource = EntropySource.init(data: nil, fill_entropy: { (data, length, entropy) in
-            guard entropy != nil else {
-                return 0
-            }
-            
-            let errorInt = SecRandomCopyBytes(kSecRandomDefault, length / 2, entropy!)
-            
-            if errorInt == errSecSuccess {
-                return length / 2
-            } else {
-                return 0
-            }
-        })
-        
-        let mm = make_mnemonic(entropySource, mnemo)
-        
-        //MAKE: check nil
-        print("make_mnemonic: \(mm)")
-        
-        let phrase = String(cString: mnemo.pointee!)
-        
-        print("seed phrase: \(phrase)")
-        
-        let stringPointer = phrase.UTF8CStringPointer
-        let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
-        
-        let ms = make_seed(stringPointer, nil, binaryDataPointer)
-        
-        print("make_seed: \(ms)")
-        
-        let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let extendedKeyPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
-        var mmk = make_master_key(binaryDataPointer.pointee, masterKeyPointer)
-        print("make_master_key: \(String(describing: mmk))")
-        
-        var mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
-        print("make_key_id: \(String(describing: mki))")
-        
-        let extendedKey = String(cString: extendedKeyPointer.pointee!)
-        print("extended key: \(extendedKey)")
-        
-        //HD Account
-        
-        let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        
-        //New address
-        let newAddressPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let newAddressStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
-        //Private
-        let addressPrivateKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
-        //Public
-        let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
-        let blockchain = createBlockchainType(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
-        let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, UInt32(0), newAccountPointer)
-        print("make_hd_account: \(mHDa)")
-        
-        if mHDa != nil {
-            let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
-        }
-        
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee!, ADDRESS_INTERNAL, UInt32(0), newAddressPointer)
-//        make_hd_leaf_account(OpaquePointer!, AddressType, UInt32, UnsafeMutablePointer<OpaquePointer?>!)
-        if mHDla != nil {
-            let _ = returnErrorString(opaquePointer: mHDla!, mask: "make_hd_leaf_account")
-        }
-        
-        //Create wallet
-        
-        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
-        var addressString : String? = nil
-        if gaas != nil {
-            let _ = returnErrorString(opaquePointer: gaas!, mask: "account_get_address_string")
-        } else {
-            addressString = String(cString: newAddressStringPointer.pointee!)
-            print("addressString: \(addressString!)")
-        }
-        
-        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
-        let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
-        
-        let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
-        let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
-        
-        print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
-        
-        
-        let currencyPointer = UnsafeMutablePointer<BlockchainType>.allocate(capacity: 1)
-        let gac = account_get_blockchain_type(newAddressPointer.pointee, currencyPointer)
-        print("gac: \(gac)")
-        
-        let currency : BlockchainType = currencyPointer.pointee
-        print("another currency: \(currency)")
-        
-        //create transaction
-        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        
-        
-        let mt = make_transaction(newAddressPointer.pointee, transactionPointer)
-        if mt != nil {
-            let _ = returnErrorString(opaquePointer: mt!, mask: "make_hd_account")
-        }
-        
-        print("END")
-        
-        defer {
-            mnemo.deallocate(capacity: 1)
-//            stringPointer.deallocate(capacity: 1)
-            binaryDataPointer.deallocate(capacity: 1)
-            masterKeyPointer.deallocate(capacity: 1)
-            extendedKeyPointer.deallocate(capacity: 1)
-            newAccountPointer.deallocate(capacity: 1)
-            newAddressPointer.deallocate(capacity: 1)
-            newAddressStringPointer.deallocate(capacity: 1)
-            
-            //Private
-            addressPrivateKeyPointer.deallocate(capacity: 1)
-            privateKeyStringPointer.deallocate(capacity: 1)
-            
-            //Public
-            addressPublicKeyPointer.deallocate(capacity: 1)
-            publicKeyStringPointer.deallocate(capacity: 1)
-            
-            currencyPointer.deallocate(capacity: 1)
-            
-            transactionPointer.deallocate(capacity: 1)
-            transactionSource.deallocate(capacity: 1)
-        }
-        
-        //creating tx
-        //Check if exist wallet by walletID
-        DataManager.shared.realmManager.getWallet(walletID: 1) { (wallet) in
-            let addressData = self.createAddress(currencyID:    wallet!.chain.uint32Value,
-                                                 walletID:      wallet!.walletID.uint32Value,
-                                                 addressID:     UInt32(wallet!.addresses.count),
-                                                 binaryData:    &binaryDataPointer.pointee!.pointee)
-            
-            let data = self.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                              sendAddress: Constants.CoreLibrary.btcTestnetDonationAddress,
-                                              sendAmountString: "0,001",
-                                              feePerByteAmount: "2",
-                                              isDonationExists: false,
-                                              donationAmount: "0",
-                                              isPayCommission: true,
-                                              wallet: wallet!,
-                                              binaryData: &binaryDataPointer.pointee!.pointee,
-                                              inputs: wallet!.addresses)
-            print("tx: \(data.0)")
-        }
-    }
-    
-    func testUserPreferences() {
-        //user prefs test
-        let userPrefs = UserPreferences.shared
-        
-        userPrefs.getAndDecryptPin { (string, error) in
-            print("pin string: \(String(describing: string)) - error: \(String(describing: error))")
-        }
-        
-        userPrefs.getAndDecryptBiometric { (isOn, error) in
-            print("biometric: \(String(describing: isOn)) - error: \(String(describing: error))")
-        }
-        
-        userPrefs.getAndDecryptCipheredMode { (isOn, error) in
-            print("ciphered mode: \(String(describing: isOn)) - error: \(String(describing: error))")
-        }
-        
-        userPrefs.getAndDecryptDatabasePassword { (dataPass, error) in
-            print("ciphered mode: \(String(describing: dataPass)) - error: \(String(describing: error))")
-        }
-        
-        print("\n\n---===The end of the user's prefs test===---\n\n")
     }
     
     func setAmountValue(key: String, value: String, pointer: OpaquePointer) {
@@ -896,5 +712,191 @@ class CoreLibManager: NSObject {
     
     func createBlockchainType(currencyID: UInt32, netType: UInt32) -> BlockchainType {
         return BlockchainType.init(blockchain: Blockchain.init(currencyID), net_type: Int(netType))
+    }
+}
+
+////////////////////////////////////
+private typealias TestCoreLibManager = CoreLibManager
+extension TestCoreLibManager {
+    func startSwiftTest() {
+        let mnemo = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        let entropySource = EntropySource.init(data: nil, fill_entropy: { (data, length, entropy) in
+            guard entropy != nil else {
+                return 0
+            }
+            
+            let errorInt = SecRandomCopyBytes(kSecRandomDefault, length / 2, entropy!)
+            
+            if errorInt == errSecSuccess {
+                return length / 2
+            } else {
+                return 0
+            }
+        })
+        
+        let mm = make_mnemonic(entropySource, mnemo)
+        
+        //MAKE: check nil
+        print("make_mnemonic: \(mm)")
+        
+        let phrase = String(cString: mnemo.pointee!)
+        
+        print("seed phrase: \(phrase)")
+        
+        let stringPointer = phrase.UTF8CStringPointer
+        let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        
+        let ms = make_seed(stringPointer, nil, binaryDataPointer)
+        
+        print("make_seed: \(ms)")
+        
+        let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let extendedKeyPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        var mmk = make_master_key(binaryDataPointer.pointee, masterKeyPointer)
+        print("make_master_key: \(String(describing: mmk))")
+        
+        var mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
+        print("make_key_id: \(String(describing: mki))")
+        
+        let extendedKey = String(cString: extendedKeyPointer.pointee!)
+        print("extended key: \(extendedKey)")
+        
+        //HD Account
+        
+        let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        //New address
+        let newAddressPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let newAddressStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        //Private
+        let addressPrivateKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        //Public
+        let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let blockchain = createBlockchainType(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
+        let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, UInt32(0), newAccountPointer)
+        print("make_hd_account: \(mHDa)")
+        
+        if mHDa != nil {
+            let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
+        }
+        
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee!, ADDRESS_INTERNAL, UInt32(0), newAddressPointer)
+        //        make_hd_leaf_account(OpaquePointer!, AddressType, UInt32, UnsafeMutablePointer<OpaquePointer?>!)
+        if mHDla != nil {
+            let _ = returnErrorString(opaquePointer: mHDla!, mask: "make_hd_leaf_account")
+        }
+        
+        //Create wallet
+        
+        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        var addressString : String? = nil
+        if gaas != nil {
+            let _ = returnErrorString(opaquePointer: gaas!, mask: "account_get_address_string")
+        } else {
+            addressString = String(cString: newAddressStringPointer.pointee!)
+            print("addressString: \(addressString!)")
+        }
+        
+        let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        
+        let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
+        let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
+        
+        print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
+        
+        
+        let currencyPointer = UnsafeMutablePointer<BlockchainType>.allocate(capacity: 1)
+        let gac = account_get_blockchain_type(newAddressPointer.pointee, currencyPointer)
+        print("gac: \(gac)")
+        
+        let currency : BlockchainType = currencyPointer.pointee
+        print("another currency: \(currency)")
+        
+        //create transaction
+        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        
+        let mt = make_transaction(newAddressPointer.pointee, transactionPointer)
+        if mt != nil {
+            let _ = returnErrorString(opaquePointer: mt!, mask: "make_hd_account")
+        }
+        
+        print("END")
+        
+        defer {
+            mnemo.deallocate(capacity: 1)
+            //            stringPointer.deallocate(capacity: 1)
+            binaryDataPointer.deallocate(capacity: 1)
+            masterKeyPointer.deallocate(capacity: 1)
+            extendedKeyPointer.deallocate(capacity: 1)
+            newAccountPointer.deallocate(capacity: 1)
+            newAddressPointer.deallocate(capacity: 1)
+            newAddressStringPointer.deallocate(capacity: 1)
+            
+            //Private
+            addressPrivateKeyPointer.deallocate(capacity: 1)
+            privateKeyStringPointer.deallocate(capacity: 1)
+            
+            //Public
+            addressPublicKeyPointer.deallocate(capacity: 1)
+            publicKeyStringPointer.deallocate(capacity: 1)
+            
+            currencyPointer.deallocate(capacity: 1)
+            
+            transactionPointer.deallocate(capacity: 1)
+            transactionSource.deallocate(capacity: 1)
+        }
+        
+        //creating tx
+        //Check if exist wallet by walletID
+        DataManager.shared.realmManager.getWallet(walletID: 1) { (wallet) in
+            let addressData = self.createAddress(currencyID:    wallet!.chain.uint32Value,
+                                                 walletID:      wallet!.walletID.uint32Value,
+                                                 addressID:     UInt32(wallet!.addresses.count),
+                                                 binaryData:    &binaryDataPointer.pointee!.pointee)
+            
+            let data = self.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                              sendAddress: Constants.DataManager.btcTestnetDonationAddress,
+                                              sendAmountString: "0,001",
+                                              feePerByteAmount: "2",
+                                              isDonationExists: false,
+                                              donationAmount: "0",
+                                              isPayCommission: true,
+                                              wallet: wallet!,
+                                              binaryData: &binaryDataPointer.pointee!.pointee,
+                                              inputs: wallet!.addresses)
+            print("tx: \(data.0)")
+        }
+    }
+    
+    func testUserPreferences() {
+        //user prefs test
+        let userPrefs = UserPreferences.shared
+        
+        userPrefs.getAndDecryptPin { (string, error) in
+            print("pin string: \(String(describing: string)) - error: \(String(describing: error))")
+        }
+        
+        userPrefs.getAndDecryptBiometric { (isOn, error) in
+            print("biometric: \(String(describing: isOn)) - error: \(String(describing: error))")
+        }
+        
+        userPrefs.getAndDecryptCipheredMode { (isOn, error) in
+            print("ciphered mode: \(String(describing: isOn)) - error: \(String(describing: error))")
+        }
+        
+        userPrefs.getAndDecryptDatabasePassword { (dataPass, error) in
+            print("ciphered mode: \(String(describing: dataPass)) - error: \(String(describing: error))")
+        }
+        
+        print("\n\n---===The end of the user's prefs test===---\n\n")
     }
 }

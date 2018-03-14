@@ -36,14 +36,17 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         self.customFee = UInt64(firstValue)
         self.mainVC?.tableView.reloadData()
         self.mainVC?.makeSendAvailable(isAvailable: true)
-//        sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
+    }
+    
+    func getAddress() {
+        let addresses = DataManager.shared.getBTCDonationAddressesFromUserDerfaults()
+        donationAddress = addresses[DataManager.shared.donationCode]!
     }
     
     func getWallets() {
         self.mainVC?.view.isUserInteractionEnabled = false
-        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
+        DataManager.shared.realmManager.fetchBTCWallets(isTestNet: true) { (wallets) in
             self.mainVC?.view.isUserInteractionEnabled = true
-//            let walletsArr = Array(wallets!.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
             self.walletPayFrom = wallets?.first
             self.maxAvailable = (self.walletPayFrom?.sumInCrypto)!
             self.mainVC?.updateUIWithWallet()

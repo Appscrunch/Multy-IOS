@@ -73,7 +73,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
                 state = 1
             }
         }
-        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.chainId)", eventName: "\(screenTransactionWithChain)\(presenter.chainId)_\(state)")
+        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.blockchainType.blockchain.rawValue)", eventName: "\(screenTransactionWithChain)\(presenter.blockchainType.blockchain.rawValue)_\(state)")
     }
     
     func checkForSendOrReceive() {
@@ -84,17 +84,6 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             self.makeBackColor(color: self.presenter.sendBackColor)
             self.titleLbl.text = "Transaction Info"
             self.transactionImg.image = #imageLiteral(resourceName: "sendBigIcon")
-//            self.transctionSumLbl.text = "-\(self.sumInCripto)"
-//            self.transactionCurencyLbl.text = self.cryptoName.uppercased()
-//            self.sumInFiatLbl.text = "-\(self.fiatSum) \(self.fiatName)"
-//            self.constraintNoteFiatSum.constant = 15 // make check of note
-
-//            self.walletFromAddressLbl.text = "" //Set address from here
-//            self.blockchainImg.image // Set blockchain image here
-//            self.personNameLbl.text = ""  // Set name from address book
-//            self.walletToAddressLbl.text = "" // Set address to here
-//            self.numberOfConfirmationLbl.text = "" // Set information from sockets here
-            
         }
     }
     
@@ -133,31 +122,22 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         } else {
             self.transctionSumLbl.text = "-\(cryptoSumInBTC.fixedFraction(digits: 8))"
             self.sumInFiatLbl.text = "-\((cryptoSumInBTC * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
-            if let donatAddress = UserDefaults.standard.string(forKey: "BTCDonationAddress") {
-                if arrOfOutputsAddresses.contains(donatAddress) {
-                    let donatOutPutObj = getDonationTxOutput(address: donatAddress)
-                    if donatOutPutObj == nil {
-                        return
-                    }
-                    let btcDonation = convertSatoshiToBTC(sum: donatOutPutObj?.amount as! UInt64)
-                    self.donationView.isHidden = false
-                    self.constraintDonationHeight.constant = 283
-                    self.donationCryptoSum.text = btcDonation.fixedFraction(digits: 8)
-                    self.donationCryptoName.text = " BTC"
-                    self.donationFiatSumAndName.text = "\((btcDonation * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+            
+            if let donationAddress = arrOfOutputsAddresses.getDonationAddress(blockchainType: presenter.blockchainType) {
+                let donatOutPutObj = presenter.histObj.getDonationTxOutput(address: donationAddress)
+                if donatOutPutObj == nil {
+                    return
                 }
+                
+                let btcDonation = convertSatoshiToBTC(sum: donatOutPutObj?.amount as! UInt64)
+                self.donationView.isHidden = false
+                self.constraintDonationHeight.constant = 283
+                self.donationCryptoSum.text = btcDonation.fixedFraction(digits: 8)
+                self.donationCryptoName.text = " BTC"
+                self.donationFiatSumAndName.text = "\((btcDonation * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
             }
-        }
-    }
-    
-    func getDonationTxOutput(address: String) -> TxHistoryRLM? {
-        for output in presenter.histObj.txOutputs {
-            if output.address == address {
-                return output
-            }
-        }
 
-        return nil
+        }
     }
     
     func makeBackColor(color: UIColor) {
@@ -167,14 +147,15 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func closeAction() {
         self.navigationController?.popViewController(animated: true)
-        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.chainId)", eventName: "\(closeWithChainTap)\(presenter.chainId)")
+        let blockchainTypeUInt32 = presenter.blockchainType.blockchain.rawValue
+        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(blockchainTypeUInt32)", eventName: "\(closeWithChainTap)\(blockchainTypeUInt32)")
     }
     
     @IBAction func viewInBlockchainAction(_ sender: Any) {
         self.performSegue(withIdentifier: "viewInBlockchain", sender: nil)
-        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(presenter.chainId)", eventName: "\(viewInBlockchainWithTxStatus)\(presenter.chainId)_\(state)")
+        let blockchainTypeUInt32 = presenter.blockchainType.blockchain.rawValue
+        sendAnalyticsEvent(screenName: "\(screenTransactionWithChain)\(blockchainTypeUInt32)", eventName: "\(viewInBlockchainWithTxStatus)\(blockchainTypeUInt32)_\(state)")
     }
-    
     
     func makeConfirmationText() -> String {
         var textForConfirmations = ""

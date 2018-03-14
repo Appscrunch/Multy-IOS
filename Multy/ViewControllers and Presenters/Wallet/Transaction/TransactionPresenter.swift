@@ -11,7 +11,7 @@ class TransactionPresenter: NSObject {
     let sendBackColor = UIColor(red: 0/255, green: 183/255, blue: 255/255, alpha: 1.0)
     
     var histObj = HistoryRLM()
-    var chainId = 0
+    var blockchainType = BlockchainType.init(blockchain: BLOCKCHAIN_BITCOIN, net_type: -1)
     
     func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
         var sum = UInt64(0)

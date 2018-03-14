@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2903DBF32668295CED1C9139 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7304C17824311A19240183E0 /* Pods_Multy.framework */; };
 		440AD8D22020D1220015AEF1 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */; };
+		444066D0205926D400342046 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066CF205926D400342046 /* UIApplication+Extension.swift */; };
+		444066D22059277F00342046 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D12059277F00342046 /* UIAlertController+Extension.swift */; };
+		444066D4205927B900342046 /* UIActivityViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D3205927B900342046 /* UIActivityViewController+Extension.swift */; };
+		444066D62059281200342046 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D52059281200342046 /* NSObject+Extension.swift */; };
+		444066D82059342E00342046 /* Bool+Extantion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D72059342E00342046 /* Bool+Extantion.swift */; };
 		444B3B6020455489008129B8 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B5F20455489008129B8 /* BigInt.swift */; };
 		444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B642045723C008129B8 /* BigInt+Extension.swift */; };
 		447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447ECAD220330C2C0085C26D /* TransactionDTO.swift */; };
@@ -104,7 +109,7 @@
 		45A949541FC6D1E1003C3A23 /* TransactionFeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A949521FC6D1E1003C3A23 /* TransactionFeeTableViewCell.xib */; };
 		45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949551FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift */; };
 		45A949581FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A949561FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib */; };
-		45A9495A1FC6E785003C3A23 /* ExtensionsUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */; };
+		45A9495A1FC6E785003C3A23 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949591FC6E785003C3A23 /* UIViewController+Extension.swift */; };
 		45A9495D1FC70F2F003C3A23 /* SendAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495C1FC70F2F003C3A23 /* SendAmountViewController.swift */; };
 		45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */; };
 		45A949621FC766BE003C3A23 /* SendFinishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */; };
@@ -252,6 +257,11 @@
 /* Begin PBXFileReference section */
 		2A100BE42F31871FFE847169 /* Pods-MultyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultyTests/Pods-MultyTests.release.xcconfig"; sourceTree = "<group>"; };
 		440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		444066CF205926D400342046 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		444066D12059277F00342046 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		444066D3205927B900342046 /* UIActivityViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityViewController+Extension.swift"; sourceTree = "<group>"; };
+		444066D52059281200342046 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		444066D72059342E00342046 /* Bool+Extantion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extantion.swift"; sourceTree = "<group>"; };
 		444B3B5F20455489008129B8 /* BigInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigInt.swift; sourceTree = "<group>"; };
 		444B3B642045723C008129B8 /* BigInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		447ECAD220330C2C0085C26D /* TransactionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDTO.swift; sourceTree = "<group>"; };
@@ -357,7 +367,7 @@
 		45A949521FC6D1E1003C3A23 /* TransactionFeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionFeeTableViewCell.xib; sourceTree = "<group>"; };
 		45A949551FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTrasanctionFeeTableViewCell.swift; sourceTree = "<group>"; };
 		45A949561FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTrasanctionFeeTableViewCell.xib; sourceTree = "<group>"; };
-		45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIViewController.swift; sourceTree = "<group>"; };
+		45A949591FC6E785003C3A23 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		45A9495C1FC70F2F003C3A23 /* SendAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountViewController.swift; sourceTree = "<group>"; };
 		45A9495E1FC70F4A003C3A23 /* SendAmountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountPresenter.swift; sourceTree = "<group>"; };
 		45A949611FC766BE003C3A23 /* SendFinishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFinishPresenter.swift; sourceTree = "<group>"; };
@@ -823,20 +833,25 @@
 		4583ACA11FBCAC37001991AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				444066D52059281200342046 /* NSObject+Extension.swift */,
+				45A949591FC6E785003C3A23 /* UIViewController+Extension.swift */,
 				4583ACA21FBCAC60001991AA /* UIView+Extension.swift */,
+				444066D12059277F00342046 /* UIAlertController+Extension.swift */,
+				444066D3205927B900342046 /* UIActivityViewController+Extension.swift */,
+				444066CF205926D400342046 /* UIApplication+Extension.swift */,
+				FA8C87842010B44300F8D5D9 /* UITableViewCell+Extension.swift */,
 				FA4D43E01FC5895D003C7117 /* String+Extension.swift */,
 				444B3B642045723C008129B8 /* BigInt+Extension.swift */,
-				45A949591FC6E785003C3A23 /* ExtensionsUIViewController.swift */,
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
 				FAFCDA871FD7DD7A0056DD64 /* Request+Extension.swift */,
-				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 				FA58DF601FDC400C00C45303 /* UIColor+Extension.swift */,
 				FA4E559E1FE00F63000FA1A1 /* Double+Extension.swift */,
 				FA6226F01FE7D1C60033CCCE /* Data+Extension.swift */,
 				44C06FC8203D832B008CBA9D /* Array+Extension.swift */,
 				FA8C8782200E65E900F8D5D9 /* Date+Extension.swift */,
-				FA8C87842010B44300F8D5D9 /* UITableViewCell+Extension.swift */,
 				440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */,
+				444066D72059342E00342046 /* Bool+Extantion.swift */,
+				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 				45D2D6DE203463FB00751ED4 /* AnalyticsConstants.swift */,
 			);
 			path = Extensions;
@@ -1780,6 +1795,7 @@
 				45AC163020484F1900E75BD6 /* BlockchainsPresenter.swift in Sources */,
 				45E215DB1FD15D5F0078945A /* DonationDTO.swift in Sources */,
 				451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */,
+				444066D82059342E00342046 /* Bool+Extantion.swift in Sources */,
 				45A949571FC6DF5F003C3A23 /* CustomTrasanctionFeeTableViewCell.swift in Sources */,
 				45C738C320358D56005AB761 /* AnalyticsProtocol.swift in Sources */,
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
@@ -1831,7 +1847,7 @@
 				4575693C1FBDC3A800FDEE20 /* SeedPhraseWordViewController.swift in Sources */,
 				4583AC921FBC7122001991AA /* PortfolioTableViewCell.swift in Sources */,
 				45E148AC204553E4006BD4D1 /* DonationSendViewController.swift in Sources */,
-				45A9495A1FC6E785003C3A23 /* ExtensionsUIViewController.swift in Sources */,
+				45A9495A1FC6E785003C3A23 /* UIViewController+Extension.swift in Sources */,
 				FA4E559F1FE00F63000FA1A1 /* Double+Extension.swift in Sources */,
 				45A949441FC5C0F4003C3A23 /* SendAddressProtocol.swift in Sources */,
 				45B9CB071FBB51AE00AA2A31 /* WalletTableViewCell.swift in Sources */,
@@ -1870,6 +1886,8 @@
 				45B0B0F01FEBF30C005BB1C0 /* SettingsViewController.swift in Sources */,
 				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
 				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
+				444066D0205926D400342046 /* UIApplication+Extension.swift in Sources */,
+				444066D4205927B900342046 /* UIActivityViewController+Extension.swift in Sources */,
 				45A9495F1FC70F4A003C3A23 /* SendAmountPresenter.swift in Sources */,
 				45409454203348CA00603DB5 /* EntranceSettingsViewController.swift in Sources */,
 				459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */,
@@ -1908,6 +1926,7 @@
 				45D083701FCEF94C0066F1CD /* SendWalletProtocol.swift in Sources */,
 				4585BD2B20496E14004542AE /* CreateWalletProtocol.swift in Sources */,
 				45B5CCA41FDA90FE0069BD46 /* NoInternetConnetctionPresenter.swift in Sources */,
+				444066D62059281200342046 /* NSObject+Extension.swift in Sources */,
 				45DCF9D31FE16874005A9896 /* WalletAddresessPresenter.swift in Sources */,
 				45A949401FC5A566003C3A23 /* SendStartPresenter.swift in Sources */,
 				4585BD2620496216004542AE /* CreatingWalletActionsViewController.swift in Sources */,
@@ -1932,6 +1951,7 @@
 				45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */,
 				455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */,
 				FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */,
+				444066D22059277F00342046 /* UIAlertController+Extension.swift in Sources */,
 				45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */,
 				456F20F2203F149000098405 /* EnterPinViewController.swift in Sources */,
 				456F20F3203F149000098405 /* EnterPinPresenter.swift in Sources */,

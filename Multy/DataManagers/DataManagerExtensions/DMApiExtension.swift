@@ -62,7 +62,7 @@ extension DataManager {
                     
                     let encodedData = NSKeyedArchiver.archivedData(withRootObject: donateFeatureAndAddressDict)
                     
-                    self.coreLibManager.btcMainNetDonationAddress = donateFeatureAndAddressDict[donationWithTransaction]!
+                    self.btcMainNetDonationAddress = donateFeatureAndAddressDict[donationWithTransaction]!
                     userDefaults.set(encodedData, forKey: Constants.UserDefaults.btcDonationAddressesKey)
                 }
                 

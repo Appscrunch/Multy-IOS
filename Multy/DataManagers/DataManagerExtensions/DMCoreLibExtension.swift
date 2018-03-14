@@ -82,27 +82,20 @@ extension DataManager {
         
         DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
             print("---------\(dict)")
-            //FIXME: create messages in bad cases
             
+            //FIXME: create messages in bad cases
             if error != nil {
-//                self.presentAlert()
-                
                 print("sendHDTransaction Error: \(error)")
-//                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
                 completion(nil, nil)
                 
                 return
             }
             
             if dict!["code"] as! Int == 200 {
-//                self.performSegue(withIdentifier: "sendingAnimationVC", sender: sender)
                 completion("good", nil)
             } else {
                 completion(nil, nil)
-//                self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
-//                self.presentAlert()
             }
         }
     }
-    
 }
