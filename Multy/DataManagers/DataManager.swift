@@ -16,6 +16,7 @@ class DataManager: NSObject {
     var seedWordsArray = [String]()
     
     var donationCode = 0
+    var btcMainNetDonationAddress = String()
     
     override init() {
         super.init()
@@ -23,7 +24,11 @@ class DataManager: NSObject {
         seedWordsArray = coreLibManager.mnemonicAllWords()
     }
     
-    func getDonationAddressesFromUserDerfaults() -> Dictionary<Int, String> {
+    func getBTCDonationAddress(netType: UInt32) -> String {
+        return netType == 0 ? btcMainNetDonationAddress : Constants.DataManager.btcTestnetDonationAddress
+    }
+    
+    func getBTCDonationAddressesFromUserDerfaults() -> Dictionary<Int, String> {
         let donationData  = UserDefaults.standard.object(forKey: Constants.UserDefaults.btcDonationAddressesKey) as! Data
         let decodedDonationAddresses = NSKeyedUnarchiver.unarchiveObject(with: donationData) as! Dictionary<Int, String>
         
@@ -42,54 +47,6 @@ class DataManager: NSObject {
     func findPrefixes(prefix: String) -> [String] {
         return seedWordsArray.filter{ $0.hasPrefix(prefix) }
     }
-    
-    //MARK: ApiManager Functions
-    //DMApiExtension
-    
-    //MARK: RealmManager
-    //DMRealmExtension Functions
-    
-    //MARK: SocketManager
-    //DMSocketExtension Functions
-    
-    //MARK: CoreLibManager
-    //DMCoreLibExtension Functions
-    
-//    func getExchangeCourse(completion: @escaping (_ error: Error?) -> ()) {
-//        DataManager.shared.realmManager.getAccount { (acc, err) in
-//            if err == nil {
-//                DataManager.shared.apiManager.getExchangePrice(acc!.token, direction: "") { (dict, error) in
-//                    if dict == nil {
-//                        completion(error)
-//                        
-//                        return
-//                    }
-//                    
-//                    if dict!["USD"] != nil {
-//                        exchangeCourse = dict!["USD"] as! Double
-//                        completion(nil)
-//                    } else {
-//                        completion(nil)
-//                    }
-//                }
-//            } else {
-//                completion(nil)
-//            }
-//        }
-//    }
-    
-//    func getHistoryOfWalletAndSaveToDB(token: String, currencyID: NSNumber, walletID: NSNumber, completion: @escaping(_ historyArr: List<HistoryRLM>?,_ error: Error?) -> ()) {
-//        DataManager.shared.getTransactionHistory(token: token, currencyID: currencyID, walletID: walletID) { (historyList, err) in
-//            if err != nil || historyList == nil {
-//                //do something with it
-//                return
-//            }
-//            DataManager.shared.realmManager.saveHistoryForWallet(historyArr: historyList!, completion: { (histList) in
-//                completion(histList, nil)
-//            })
-//            
-//        }
-//    }
     
     func checkIsFirstLaunch() -> Bool {
         if let isFirst = UserDefaults.standard.value(forKey: "isFirstLaunch") {

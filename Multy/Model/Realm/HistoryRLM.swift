@@ -145,4 +145,14 @@ class HistoryRLM: Object {
     func isIncoming() -> Bool {
         return self.txStatus.intValue == TxStatus.MempoolIncoming.rawValue || self.txStatus.intValue == TxStatus.BlockIncoming.rawValue || self.txStatus.intValue == TxStatus.BlockConfirmedIncoming.rawValue
     }
+    
+    func getDonationTxOutput(address: String) -> TxHistoryRLM? {
+        for output in self.txOutputs {
+            if output.address == address {
+                return output
+            }
+        }
+        
+        return nil
+    }
 }

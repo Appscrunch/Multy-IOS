@@ -8,7 +8,6 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var donatView: UIView!
     
-    var isHaveNotEmpty = false
     var message = ""
     
     override func viewDidLoad() {
@@ -70,37 +69,10 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     
     func cancelAction() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
-            if wallets == nil {
-                self.message = "You don`t have any wallets yet."
-                self.donateOrAlert()
-                return
-            }
-            for wallet in wallets! {
-                if wallet.availableAmount() > 0 {
-                    self.isHaveNotEmpty = true
-                    break
-//                    return
-                }
-            }
-            self.message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
-            self.donateOrAlert()
-        }
+        presentDonationVCorAlert()
     }
     
     func presentNoInternet() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-    }
-    
-    func donateOrAlert() {
-        if self.isHaveNotEmpty {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
-            self.navigationController?.pushViewController(donatSendVC, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
     }
 }

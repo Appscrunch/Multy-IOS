@@ -128,4 +128,28 @@ extension String {
     func convertToFiatAmountString() -> String {
         return self.toStringWithZeroes(precision: 2)
     }
+    
+    func getDonationAddress(blockchainType: BlockchainType) -> String? {
+        if blockchainType.blockchain.rawValue != 0 {
+            return nil
+        } else {
+            if blockchainType.net_type == 0 {
+                let donationArray = DataManager.shared.getBTCDonationAddressesFromUserDerfaults().values
+                
+                for address in donationArray {
+                    if self.contains(address) {
+                        return address
+                    }
+                }
+                
+                return nil
+            } else if blockchainType.net_type == 1 {
+                let donationAddress = Constants.DataManager.btcTestnetDonationAddress
+                
+                return self.contains(donationAddress) ? donationAddress : nil
+            } else {
+                return nil
+            }
+        }
+    }
 }

@@ -16,7 +16,6 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
     @IBOutlet weak var emptyArrowImg: UIImageView!
     
     @IBOutlet weak var headerView: UIView!
-    
 
     var backupView : UIView?
 
@@ -24,7 +23,6 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
     
     var presenter = WalletPresenter()
-    var even = true
     
     var isBackupOnScreen = true
     let progressHUD = ProgressHUD(text: "Getting Wallet...")
@@ -334,9 +332,7 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "transactionVC" {
-            let transactionVc = segue.destination as! TransactionViewController
-            transactionVc.isForReceive = self.even
-            
+//            let transactionVC = segue.destination as! TransactionViewController
         } else if segue.identifier == "settingsVC" {
             let settingsVC = segue.destination as! WalletSettingsViewController
             settingsVC.presenter.wallet = self.presenter.wallet
@@ -344,29 +340,39 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
     }
     
     func cancelAction() {
-        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
-            if wallets == nil {
-                let message = "You don`t have any wallets yet."
-                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
-                return
-            }
-            for wallet in wallets! {
-                if wallet.availableAmount() > 0 {
-                    let message = ""  // no money no honey
-                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
-                    break
-                } else { // empty wallet
-                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
-                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
-                    break
-                }
-            }
-            //            self.donateOrAlert()
-        }
+        presentDonationVCorAlert()
     }
     
     func presentNoInternet() {
         
+    }
+    
+    func hideEmptyLbls() {
+        self.emptyFirstLbl.isHidden = true
+        self.emptySecondLbl.isHidden = true
+        self.emptyArrowImg.isHidden = true
+    }
+    
+    func fixForiPad() {
+        if screenHeight == heightOfiPad {
+            hideEmptyLbls()
+        }
+    }
+    
+    func fixForX() {
+        if screenHeight == heightOfX {
+            self.heightOfBottomBar.constant = 83
+        }
+    }
+    
+    func fixForPlus() {
+        if screenHeight == heightOfPlus {
+            self.bottomTableConstraint.constant = -50
+        }
+    }
+    
+    func updateUI() {
+        self.tableView.reloadData()
     }
 }
 
@@ -380,24 +386,6 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         // else return some empty cells
         let countOfHistObjects = self.presenter.numberOfTransactions()
         if countOfHistObjects > 0 {
-//            if countOfHistObjects < visibleCells {
-//                self.tableView.isScrollEnabled = false
-//                if screenHeight == 480 {   //ipad
-//                    self.tableView.isScrollEnabled = true
-//                    return countOfHistObjects + 1
-//                }
-//
-//                return 10
-//            } else {
-//                self.tableView.isScrollEnabled = true
-//
-//                if screenHeight == 736 && countOfHistObjects <= 5 { // 6 plus screen
-//                    self.tableView.isScrollEnabled = false
-//                    return 7
-//                }
-//
-//                return countOfHistObjects + 1
-//            }
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 7 {
                 return 7
@@ -458,38 +446,6 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 return walletCell
             }
-            
-//            if indexPath == [0,1] {
-//                walletCell.setCorners()
-//                walletCell.backgroundView?.backgroundColor = .red
-//                walletCell.backgroundView?.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                                      UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                                        gradientOrientation: .topRightBottomLeft)
-//            }
-        }
-    }
-    
-    func hideEmptyLbls() {
-        self.emptyFirstLbl.isHidden = true
-        self.emptySecondLbl.isHidden = true
-        self.emptyArrowImg.isHidden = true
-    }
-    
-    func fixForiPad() {
-        if screenHeight == heightOfiPad {
-            hideEmptyLbls()
-        }
-    }
-    
-    func fixForX() {
-        if screenHeight == heightOfX {
-            self.heightOfBottomBar.constant = 83
-        }
-    }
-    
-    func fixForPlus() {
-        if screenHeight == heightOfPlus {
-            self.bottomTableConstraint.constant = -50
         }
     }
     
@@ -505,7 +461,8 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
-        transactionVC.presenter.chainId = presenter.wallet?.chain as! Int
+        transactionVC.presenter.blockchainType = DataManager.shared.coreLibManager.createBlockchainType(currencyID: presenter.wallet!.chain.uint32Value,
+                                                                                          netType: presenter.wallet!.chainType.uint32Value)
         self.navigationController?.pushViewController(transactionVC, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
     }
@@ -533,10 +490,6 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath == [0, 1] {
 //            cell.setCorners()
         }
-    }
-    
-    func updateUI() {
-        self.tableView.reloadData()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
