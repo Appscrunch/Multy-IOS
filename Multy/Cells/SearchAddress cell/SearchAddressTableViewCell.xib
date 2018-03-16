@@ -30,17 +30,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-Ez-HYz">
                                 <rect key="frame" x="0.0" y="31" width="100.5" height="85"/>
                                 <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment>
-                                            <string key="content">Contacts
- </string>
-                                            <attributes>
-                                                <color key="NSColor" red="0.52941000000000005" green="0.63136999999999999" blue="0.77254999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="addressBookAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JkG-gz-yJO"/>
@@ -49,24 +39,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xx2-LV-Ws9">
                                 <rect key="frame" x="202.5" y="31" width="100.5" height="85"/>
                                 <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment>
-                                            <string key="content">Scan
- QR</string>
-                                            <attributes>
-                                                <color key="NSColor" red="0.52941000000000005" green="0.63136999999999999" blue="0.77254999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="scanQrAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OEY-iI-2vR"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrIconGray" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-Zq-zuj">
-                                <rect key="frame" x="241.5" y="51" width="22" height="22"/>
+                                <rect key="frame" x="241.5" y="52" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="MLB-Hp-TXN"/>
                                     <constraint firstAttribute="height" constant="22" id="Tnd-gj-Ehs"/>
@@ -89,24 +69,22 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qrm-4B-BZS">
                                 <rect key="frame" x="101" y="31" width="100" height="85"/>
                                 <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment>
-                                            <string key="content">Wireless
-Scan</string>
-                                            <attributes>
-                                                <color key="NSColor" red="0.52941000000000005" green="0.63136999999999999" blue="0.77254999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="12" name="AvenirNext-Medium"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="wirelessScanAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mmn-fl-29r"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-8F-kKp">
+                                <rect key="frame" x="126.5" y="80" width="50" height="33"/>
+                                <string key="text">Wireless 
+Scan</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Yk-X6-nsl">
-                                <rect key="frame" x="38" y="51" width="25" height="24"/>
+                                <rect key="frame" x="38" y="49" width="25" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="saZ-1X-J2n"/>
                                     <constraint firstAttribute="width" constant="25" id="t2p-Pk-Knv"/>
@@ -131,28 +109,48 @@ Scan</string>
                                 <color key="textColor" red="0.92299705740000004" green="0.08180250973" blue="0.2317947149" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYY-Pk-EAu">
+                                <rect key="frame" x="26" y="80" width="49" height="16.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TeX-eS-0iw">
+                                <rect key="frame" x="239" y="80" width="27" height="33"/>
+                                <string key="text">Scan
+QR</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="height" secondItem="RM9-Ez-HYz" secondAttribute="height" id="2OF-GZ-SNR"/>
-                            <constraint firstItem="YjI-Zq-zuj" firstAttribute="top" secondItem="Xx2-LV-Ws9" secondAttribute="top" constant="20" id="5a6-KK-JTJ"/>
-                            <constraint firstItem="2Yk-X6-nsl" firstAttribute="top" secondItem="RM9-Ez-HYz" secondAttribute="top" constant="20" id="5dh-Z9-3Se"/>
+                            <constraint firstItem="2Yk-X6-nsl" firstAttribute="top" secondItem="RM9-Ez-HYz" secondAttribute="top" constant="18" id="5dh-Z9-3Se"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="leading" secondItem="RM9-Ez-HYz" secondAttribute="trailing" constant="1" id="6bW-6N-i2s"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="width" secondItem="RM9-Ez-HYz" secondAttribute="width" id="8vv-rq-cIF"/>
                             <constraint firstItem="Fcx-Dp-aHk" firstAttribute="top" secondItem="qrm-4B-BZS" secondAttribute="bottom" constant="-7" id="Abd-cm-Mec"/>
+                            <constraint firstItem="TeX-eS-0iw" firstAttribute="top" secondItem="lYY-Pk-EAu" secondAttribute="top" id="CHU-7m-0pi"/>
                             <constraint firstAttribute="bottom" secondItem="RM9-Ez-HYz" secondAttribute="bottom" constant="10" id="D3b-lo-GRV"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="leading" secondItem="mmw-l9-T1m" secondAttribute="trailing" constant="-0.5" id="H2s-hx-KHD"/>
+                            <constraint firstItem="lYY-Pk-EAu" firstAttribute="top" secondItem="2Yk-X6-nsl" secondAttribute="bottom" constant="7" id="IMH-Z1-zeV"/>
+                            <constraint firstItem="ahY-8F-kKp" firstAttribute="centerX" secondItem="jjT-YK-w8c" secondAttribute="centerX" id="IzJ-zV-XY4"/>
                             <constraint firstItem="qrm-4B-BZS" firstAttribute="centerY" secondItem="RM9-Ez-HYz" secondAttribute="centerY" id="JOj-2c-xu0"/>
                             <constraint firstItem="YjI-Zq-zuj" firstAttribute="centerX" secondItem="Xx2-LV-Ws9" secondAttribute="centerX" id="O2N-af-tAv"/>
                             <constraint firstItem="jjT-YK-w8c" firstAttribute="centerX" secondItem="qrm-4B-BZS" secondAttribute="centerX" id="RXz-qc-pIG"/>
                             <constraint firstItem="RM9-Ez-HYz" firstAttribute="leading" secondItem="C8a-FN-qsG" secondAttribute="leading" id="SMj-gB-lTD"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="leading" secondItem="qrm-4B-BZS" secondAttribute="trailing" constant="1" id="UPL-Tu-PZJ"/>
+                            <constraint firstItem="ahY-8F-kKp" firstAttribute="top" secondItem="lYY-Pk-EAu" secondAttribute="top" id="VVb-RN-kjb"/>
                             <constraint firstItem="Fcx-Dp-aHk" firstAttribute="centerX" secondItem="qrm-4B-BZS" secondAttribute="centerX" id="Whh-yq-VCp"/>
-                            <constraint firstItem="jjT-YK-w8c" firstAttribute="top" secondItem="qrm-4B-BZS" secondAttribute="top" constant="18" id="c2N-cz-drE"/>
+                            <constraint firstItem="ahY-8F-kKp" firstAttribute="top" secondItem="jjT-YK-w8c" secondAttribute="bottom" constant="7" id="cPp-SC-OuH"/>
                             <constraint firstItem="2Yk-X6-nsl" firstAttribute="centerX" secondItem="RM9-Ez-HYz" secondAttribute="centerX" id="dRU-uH-2UF"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="centerY" secondItem="RM9-Ez-HYz" secondAttribute="centerY" id="dcB-gc-LaC"/>
                             <constraint firstItem="mmw-l9-T1m" firstAttribute="leading" secondItem="RM9-Ez-HYz" secondAttribute="trailing" constant="0.5" id="fWt-2I-L6I"/>
+                            <constraint firstItem="jjT-YK-w8c" firstAttribute="top" secondItem="2Yk-X6-nsl" secondAttribute="top" id="iUh-WL-p6f"/>
                             <constraint firstAttribute="bottom" secondItem="i2K-a1-cdT" secondAttribute="bottom" constant="18" id="jYr-Dy-tZw"/>
+                            <constraint firstItem="YjI-Zq-zuj" firstAttribute="top" secondItem="2Yk-X6-nsl" secondAttribute="top" constant="3" id="jra-Uc-j4m"/>
+                            <constraint firstItem="lYY-Pk-EAu" firstAttribute="centerX" secondItem="2Yk-X6-nsl" secondAttribute="centerX" id="mC9-j2-9RN"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="height" secondItem="RM9-Ez-HYz" secondAttribute="height" id="mh4-oY-JZ9"/>
                             <constraint firstItem="H6i-ex-qnj" firstAttribute="top" secondItem="RM9-Ez-HYz" secondAttribute="bottom" constant="-7" id="nZ0-hd-KAC"/>
                             <constraint firstItem="H6i-ex-qnj" firstAttribute="centerX" secondItem="RM9-Ez-HYz" secondAttribute="centerX" id="ouq-li-tVG"/>
@@ -161,6 +159,7 @@ Scan</string>
                             <constraint firstAttribute="height" constant="126" id="u2L-Ql-L2k"/>
                             <constraint firstItem="Xx2-LV-Ws9" firstAttribute="leading" secondItem="i2K-a1-cdT" secondAttribute="trailing" id="vsp-oC-d2w"/>
                             <constraint firstAttribute="trailing" secondItem="Xx2-LV-Ws9" secondAttribute="trailing" id="x7c-wm-v5l"/>
+                            <constraint firstItem="TeX-eS-0iw" firstAttribute="centerX" secondItem="YjI-Zq-zuj" secondAttribute="centerX" id="zTw-tm-fSA"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

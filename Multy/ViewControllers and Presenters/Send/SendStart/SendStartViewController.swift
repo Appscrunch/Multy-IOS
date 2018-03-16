@@ -53,7 +53,9 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
             return
         }
         
-        modifyNextButtonMode()
+        if !checkTVisEmpty() {
+            modifyNextButtonMode()
+        }
         view.endEditing(true)
     }
     
@@ -186,15 +188,15 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row > 1 {
-            let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
-            let selectedCell = self.tableView.cellForRow(at: indexPath) as! RecentAddressTableViewCell
-            searchCell.addressTV.text = selectedCell.addressLbl.text
-            searchCell.addressInTfLlb.text = selectedCell.addressLbl.text
-            self.presenter.transactionDTO.sendAddress = selectedCell.addressLbl.text!
-            self.tableView.deselectRow(at: indexPath, animated: true)
-            self.modifyNextButtonMode()
-        }
+//        if indexPath.row > 1 {
+//            let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
+//            let selectedCell = self.tableView.cellForRow(at: indexPath) as! RecentAddressTableViewCell
+//            searchCell.addressTV.text = selectedCell.addressLbl.text
+//            searchCell.addressInTfLlb.text = selectedCell.addressLbl.text
+//            self.presenter.transactionDTO.sendAddress = selectedCell.addressLbl.text!
+//            self.tableView.deselectRow(at: indexPath, animated: true)
+//            self.modifyNextButtonMode()
+//        }
     }
     
     func updateUI() {
@@ -205,5 +207,10 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
         if screenHeight == heightOfiPad {
             self.middleConstraint.constant = 80
         }
+    }
+    
+    func checkTVisEmpty() -> Bool {
+        let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
+        return searchCell.addressTV.text.isEmpty
     }
 }

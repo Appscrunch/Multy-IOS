@@ -42,6 +42,7 @@
 		4540945B203352CC00603DB5 /* PinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540945A203352CC00603DB5 /* PinCodeViewController.swift */; };
 		454A9D7C20067E530035966F /* HistoryRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A9D7B20067E530035966F /* HistoryRLM.swift */; };
 		455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455126BB1FE04AAD0026A892 /* AddressViewController.swift */; };
+		45539BD1205ABBA5008AD36E /* WrongPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45539BD0205ABBA5008AD36E /* WrongPinViewController.swift */; };
 		455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */; };
 		455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCF01FC833C700EA5ACE /* SendingAnimationPresenter.swift */; };
 		455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCF81FC8535C00EA5ACE /* CreateWalletPresenter.swift */; };
@@ -300,6 +301,7 @@
 		4540945A203352CC00603DB5 /* PinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeViewController.swift; sourceTree = "<group>"; };
 		454A9D7B20067E530035966F /* HistoryRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRLM.swift; sourceTree = "<group>"; };
 		455126BB1FE04AAD0026A892 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
+		45539BD0205ABBA5008AD36E /* WrongPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPinViewController.swift; sourceTree = "<group>"; };
 		455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingAnimationViewController.swift; sourceTree = "<group>"; };
 		455CDCF01FC833C700EA5ACE /* SendingAnimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingAnimationPresenter.swift; sourceTree = "<group>"; };
 		455CDCF81FC8535C00EA5ACE /* CreateWalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletPresenter.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 			children = (
 				456F20F0203F149000098405 /* EnterPinViewController.swift */,
 				456F20F1203F149000098405 /* EnterPinPresenter.swift */,
+				45539BD0205ABBA5008AD36E /* WrongPinViewController.swift */,
 			);
 			path = EnterPin;
 			sourceTree = "<group>";
@@ -1921,6 +1924,7 @@
 				4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */,
 				45A9493E1FC5A557003C3A23 /* SendStartViewController.swift in Sources */,
 				45DCF9D11FE16859005A9896 /* WalletAddresessViewController.swift in Sources */,
+				45539BD1205ABBA5008AD36E /* WrongPinViewController.swift in Sources */,
 				FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */,
 				457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */,
 				45D083701FCEF94C0066F1CD /* SendWalletProtocol.swift in Sources */,

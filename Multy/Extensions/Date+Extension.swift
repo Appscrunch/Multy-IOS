@@ -18,4 +18,13 @@ extension Date {
         
         return dateFormatter
     }
+    
+    static func blockDateFormatter() -> DateFormatter {
+        let dateFormatter = DateFormatter()
+        //        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateFormat = "dd-MMM-yyyy HH:mm:ssZZZZ"
+        
+        return dateFormatter
+    }
 }

@@ -3,3 +3,7 @@
 //See LICENSE for details
 
 import Foundation
+
+class EnterPinPresenter: NSObject {
+
+}
