@@ -216,15 +216,6 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func countDownString() -> String {
-        var minutes: Int
-        var seconds: Int
-        minutes = (counterOfTimer % 3600) / 60
-        seconds = (counterOfTimer % 3600) % 60
-        
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-    
     @objc func decrease() {
         if (counterOfTimer > 0) {
             self.wrongPinVC?.timeLbl.text = makeTimeString()
