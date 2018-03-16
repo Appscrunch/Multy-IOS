@@ -66,7 +66,7 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //MAKE: first launch
 //        let _ = DataManager.shared
         
-        DataManager.shared.startCoreTest()
+//        DataManager.shared.startCoreTest()
         
         //MARK: test
 //        progressHUD.show()

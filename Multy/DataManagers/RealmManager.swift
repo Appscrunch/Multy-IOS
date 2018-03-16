@@ -63,7 +63,10 @@ class RealmManager: NSObject {
                                                         self.migrateFrom13To14(with: migration)
                                                     }
                                                     if oldSchemaVersion < 15 {
-                                                        self.migrateFrom13To14(with: migration)
+                                                        self.migrateFrom14To15(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 16 {
+                                                        self.migrateFrom15To16(with: migration)
                                                     }
             })
             
@@ -191,7 +194,10 @@ class RealmManager: NSObject {
                     
                     //MARK: create topIndexes for all currencies
                     if accountRLM.topIndexes.count == 0 {
-                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 0, topIndex: 0))
+                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 0, networkID: 0, topIndex: 0))
+                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 0, networkID: 1, topIndex: 0))
+                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 60, networkID: 0, topIndex: 0))
+                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 60, networkID: 4, topIndex: 0))//RINKEBY
                     }
                     
                     if accountDict["wallets"] != nil && !(accountDict["wallets"] is NSNull) {
@@ -465,69 +471,6 @@ class RealmManager: NSObject {
         self.account = nil
     }
     
-    // MARK: - Migrations
-    func migrateFrom6To7(with migration: Migration) {
-        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendOut) in
-            newSpendOut?["addressID"] = NSNumber(value: 0)
-        }
-    }
-    
-    func migrateFrom7To8(with migration: Migration) {
-        migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
-            newAccount?["backupSeedPhrase"] = ""
-        }
-    }
-    
-    func migrateFrom8To9(with migration: Migration) {
-        migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
-            newAccount?["topIndex"] = NSNumber(value: 0)
-        }
-    }
-    
-    func migrateFrom9To10(with migration: Migration) {
-        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendableOutput) in
-            newSpendableOutput?["txStatus"] = ""
-        }
-    }
-    
-    func migrateFrom10To11(with migration: Migration) {
-        migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
-            newHistoryRLM?["walletIndex"] = NSNumber(value: oldHistoryRLM?["walletIndex"] as? Int ?? 0)
-        }
-        
-        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (oldOutput, newOutput) in
-            newOutput?["transactionStatus"] = oldOutput?["txStatus"]
-        }
-    }
-    
-    func migrateFrom11To12(with migration: Migration) {
-        migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
-            if let intStatus = Int(oldHistoryRLM?["txStatus"] as! String) {
-                newHistoryRLM?["txStatus"] = NSNumber(value: intStatus)
-            } else {
-                newHistoryRLM?["txStatus"] = NSNumber(value: 0)
-            }
-        }
-    }
-    
-    func migrateFrom12To13(with migration: Migration) {
-        migration.enumerateObjects(ofType: AddressRLM.className()) { (_, newAddress) in
-            newAddress?["lastActionDate"] = Date()
-        }
-    }
-    
-    func migrateFrom13To14(with migration: Migration) {
-        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
-            newWallet?["chainType"] = NSNumber(value: 0)
-        }
-    }
-    
-    func migrateFrom14To15(with migration: Migration) {
-        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
-            newWallet?["isTherePendingTx"] = NSNumber(booleanLiteral: false)
-        }
-    }
-    
     //Greedy algorithm
     func spendableOutput(addresses: List<AddressRLM>) -> [SpendableOutputRLM] {
         let ouputs = List<SpendableOutputRLM>()
@@ -679,6 +622,77 @@ class RealmManager: NSObject {
                 
                 completion(walletsArr)
             }
+        }
+    }
+}
+
+private typealias RealmMigrationManager = RealmManager
+extension RealmMigrationManager {
+    func migrateFrom6To7(with migration: Migration) {
+        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendOut) in
+            newSpendOut?["addressID"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom7To8(with migration: Migration) {
+        migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
+            newAccount?["backupSeedPhrase"] = ""
+        }
+    }
+    
+    func migrateFrom8To9(with migration: Migration) {
+        migration.enumerateObjects(ofType: AccountRLM.className()) { (_, newAccount) in
+            newAccount?["topIndex"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom9To10(with migration: Migration) {
+        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendableOutput) in
+            newSpendableOutput?["txStatus"] = ""
+        }
+    }
+    
+    func migrateFrom10To11(with migration: Migration) {
+        migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
+            newHistoryRLM?["walletIndex"] = NSNumber(value: oldHistoryRLM?["walletIndex"] as? Int ?? 0)
+        }
+        
+        migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (oldOutput, newOutput) in
+            newOutput?["transactionStatus"] = oldOutput?["txStatus"]
+        }
+    }
+    
+    func migrateFrom11To12(with migration: Migration) {
+        migration.enumerateObjects(ofType: HistoryRLM.className()) { (oldHistoryRLM, newHistoryRLM) in
+            if let intStatus = Int(oldHistoryRLM?["txStatus"] as! String) {
+                newHistoryRLM?["txStatus"] = NSNumber(value: intStatus)
+            } else {
+                newHistoryRLM?["txStatus"] = NSNumber(value: 0)
+            }
+        }
+    }
+    
+    func migrateFrom12To13(with migration: Migration) {
+        migration.enumerateObjects(ofType: AddressRLM.className()) { (_, newAddress) in
+            newAddress?["lastActionDate"] = Date()
+        }
+    }
+    
+    func migrateFrom13To14(with migration: Migration) {
+        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+            newWallet?["chainType"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom14To15(with migration: Migration) {
+        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+            newWallet?["isTherePendingTx"] = NSNumber(booleanLiteral: false)
+        }
+    }
+    
+    func migrateFrom15To16(with migration: Migration) {
+        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+            newWallet?["networkID"] = NSNumber(value: 0)
         }
     }
 }

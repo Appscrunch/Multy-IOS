@@ -6,7 +6,6 @@ import Foundation
 import SystemConfiguration
 
 public class ConnectionCheck {
-    
     class func isConnectedToNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in()

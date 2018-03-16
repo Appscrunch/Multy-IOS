@@ -8,11 +8,13 @@ import Firebase
 class CreateWalletPresenter: NSObject {
     weak var mainVC: CreateWalletViewController?
     var account : AccountRLM?
+    var blockchainType = BlockchainType.create(currencyID: 0, netType: 0)
 //
     func makeAuth(completion: @escaping (_ answer: String) -> ()) {
         if self.account != nil {
             return
         }
+        
         DataManager.shared.auth(rootKey: nil) { (account, error) in
 //            self.assetsVC?.view.isUserInteractionEnabled = true
 //            self.assetsVC?.progressHUD.hide()
@@ -40,14 +42,24 @@ class CreateWalletPresenter: NSObject {
     func create() {
         var binData : BinaryData = account!.binaryDataString.createBinaryData()!
         //MARK: topIndex
-        let dict = DataManager.shared.createNewWallet(for: &binData, BLOCKCHAIN_BITCOIN.rawValue, walletID: account!.topIndexes[0].topIndex.uint32Value)
+        let currencyID = blockchainType.blockchain.rawValue
+        let networkID = blockchainType.net_type
+        let currentTopIndex = account!.topIndexes.filter("currencyID = \(currencyID) AND networkID == \(networkID)").first
+        
+        if currentTopIndex == nil {
+            mainVC?.presentAlert(with: "TopIndex error data!")
+            
+            return
+        }
+        
+        let dict = DataManager.shared.createNewWallet(for: &binData, currencyID + 60, walletID: currentTopIndex!.topIndex.uint32Value + 1)
         let cell = mainVC?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
         let params = [
-            "currencyID"  : dict!["currency"] as! UInt32,
-            "address"   : dict!["address"] as! String,
-            "addressIndex" : dict!["addressID"] as! UInt32,
-            "walletIndex" : dict!["walletID"] as! UInt32,
-            "walletName"      : cell.walletNameTF.text ?? "Wallet"
+            "currencyID"    : dict!["currency"] as! UInt32,
+            "address"       : dict!["address"] as! String,
+            "addressIndex"  : dict!["addressID"] as! UInt32,
+            "walletIndex"   : dict!["walletID"] as! UInt32,
+            "walletName"    : cell.walletNameTF.text ?? "Wallet"
             ] as [String : Any]
         
         DataManager.shared.addWallet(params: params) { (dict, error) in
@@ -56,18 +68,8 @@ class CreateWalletPresenter: NSObject {
                 self.mainVC?.cancleAction(UIButton())
             } else {
                 self.mainVC?.progressHUD.hide()
-                self.presentAlert()
+                self.mainVC?.presentAlert(with: "Error while creating wallet!")
             }
         }
-    }
-    
-    func presentAlert() {
-        let message = "Error while creating wallet!"
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-            
-        }))
-        
-        mainVC?.present(alert, animated: true, completion: nil)
     }
 }

@@ -14,5 +14,4 @@ class TransactionRLM: Object {
     @objc dynamic var fiatName = String()
     @objc dynamic var fiatSymbol = String()
     @objc dynamic var numberOfBlocks = Int()
-    
 }
