@@ -137,25 +137,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     }
     
     func cancelAction() {
-        DataManager.shared.realmManager.fetchAllWallets { (wallets) in
-            if wallets == nil {
-                let message = "You don`t have any wallets yet."
-                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
-                return
-            }
-            for wallet in wallets! {
-                if wallet.availableAmount() > 0 {
-                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
-                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
-                    break
-                } else { // empty wallet
-                    let message = "You have nothing to donate.\nTop up any of your wallets first."  // no money no honey
-                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
-                    break
-                }
-            }
-            //            self.donateOrAlert()
-        }
+        presentDonationVCorAlert()
     }
     
     func presentNoInternet() {

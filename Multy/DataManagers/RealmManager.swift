@@ -608,10 +608,7 @@ class RealmManager: NSObject {
                         //add checking for repeated tx and updated status
                         let repeatedObj = oldHistoryObjects.filter("txHash = \(obj.txHash)").first
                         if repeatedObj != nil {
-                            if shouldUpdate(fromStatus: repeatedObj!.txStatus.intValue,
-                                            toStatus: obj.txStatus.intValue) {
-                                realm.add(obj, update: true)
-                            }
+                            realm.add(obj, update: true)
                         } else {
                             realm.add(obj, update: true)
                         }
@@ -674,10 +671,10 @@ class RealmManager: NSObject {
         }
     }
     
-    func fetchAllWallets(completion: @escaping(_ wallets: [UserWalletRLM]?) -> ()) {
+    func fetchBTCWallets(isTestNet: Bool, completion: @escaping(_ wallets: [UserWalletRLM]?) -> ()) {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
-                let wallets = realm.objects(UserWalletRLM.self)
+                let wallets = realm.objects(UserWalletRLM.self).filter("chainType = \(isTestNet.intValue)")
                 let walletsArr = Array(wallets.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
                 
                 completion(walletsArr)

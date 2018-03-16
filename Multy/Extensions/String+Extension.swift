@@ -129,18 +129,34 @@ extension String {
         return self.toStringWithZeroes(precision: 2)
     }
     
+
     func toDateTime() -> NSDate {
-        //Create Date Formatter
-//        let dateFormatter = DateFormatter()
-//
-//        //Specify Format of String to Parse
-//        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss xxxxx"
-//        dateFormatter.locale = NSLocale(localeIdentifier: "ru_RU") as Locale!
-//
-        //Parse into NSDate
         let dateFromString = Date.blockDateFormatter().date(from: self)! as NSDate
         
-        //Return Parsed Date
         return dateFromString
+    }
+        
+    func getDonationAddress(blockchainType: BlockchainType) -> String? {
+        if blockchainType.blockchain.rawValue != 0 {
+            return nil
+        } else {
+            if blockchainType.net_type == 0 {
+                let donationArray = DataManager.shared.getBTCDonationAddressesFromUserDerfaults().values
+                
+                for address in donationArray {
+                    if self.contains(address) {
+                        return address
+                    }
+                }
+                
+                return nil
+            } else if blockchainType.net_type == 1 {
+                let donationAddress = Constants.DataManager.btcTestnetDonationAddress
+                
+                return self.contains(donationAddress) ? donationAddress : nil
+            } else {
+                return nil
+            }
+        }
     }
 }

@@ -19,50 +19,6 @@ private let swizzling: (AnyClass, Selector, Selector) -> () = { forClass, origin
     }
 }
 
-extension UIApplication {
-    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return topViewController(base: nav.visibleViewController)
-        }
-        
-        if let tab = base as? UITabBarController {
-            if let selected = tab.selectedViewController {
-                return topViewController(base: selected)
-            }
-        }
-        
-        if let presented = base?.presentedViewController {
-            return topViewController(base: presented)
-        }
-        
-        return base
-    }
-}
-
-extension UIAlertController {
-    func setPresentedAlertToDelegate() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.openedAlert = self
-    }
-}
-
-extension UIActivityViewController {
-    func setPresentedShareDialogToDelegate() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.sharedDialog = self
-    }
-}
-
-extension NSObject {
-    var className: String {
-        return String(describing: type(of: self)).components(separatedBy: ".").last!
-    }
-    
-    class var className: String {
-        return String(describing: self).components(separatedBy: ".").last!
-    }
-}
-
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -136,6 +92,29 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentDonationVCorAlert() {
+        DataManager.shared.realmManager.fetchBTCWallets(isTestNet: false) { (wallets) in
+            if wallets == nil || wallets?.count == 0 {
+                let message = "You don`t have any Bitcoin wallets yet."
+                self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                
+                return
+            }
+            
+            for wallet in wallets! {
+                if wallet.availableAmount() > 0 {
+                    let message = "You have nothing to donate.\nRecharge your balance for any of your BTC wallets."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
+                    break
+                } else { // empty wallet
+                    let message = "You have nothing to donate.\nRecharge your balance for any of your BTC wallets."  // no money no honey
+                    self.donateOrAlert(isHaveNotEmptyWallet: false, message: message)
+                    break
+                }
+            }
+        }
+    }
+    
     func donateOrAlert(isHaveNotEmptyWallet: Bool, message: String) {
         if isHaveNotEmptyWallet {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -152,5 +131,4 @@ extension UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.presentedVC = self
     }
-
 }

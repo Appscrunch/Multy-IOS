@@ -5,7 +5,6 @@
 import Foundation
 
 extension Dictionary {
-    
     static func createTopIndexes(indexesDict: Array<Dictionary<String, UInt32>>) -> Dictionary<UInt32, UInt32> {
         var indexes = Dictionary<UInt32, UInt32>()
         

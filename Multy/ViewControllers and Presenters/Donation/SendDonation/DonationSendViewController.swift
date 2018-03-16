@@ -55,12 +55,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         
         sendDonationScreenPresentedAnalytics()
         
-        getAddresses()
-    }
-    
-    func getAddresses() {
-        let addresses = DataManager.shared.getDonationAddressesFromUserDerfaults()
-        presenter.donationAddress = addresses[DataManager.shared.donationCode]!
+        presenter.getAddress()
     }
     
     override func viewWillAppear(_ animated: Bool) {

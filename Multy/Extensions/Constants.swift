@@ -35,7 +35,7 @@ struct Constants {
         static let btcDonationAddressesKey =  "donationAddresses"
     }
     
-    struct CoreLibrary {
+    struct DataManager {
         static let btcTestnetDonationAddress =  "mnUtMQcs3s8kSkSRXpREVtJamgUCWpcFj4"
     }
 }
@@ -64,10 +64,6 @@ let upperSizes : [CGFloat] = [0, 35, 79, 107, 151, 183, 218, 253]
 let downSizes : [CGFloat] = [0, 23, 40, 53, 81, 136, 153, 197, 249]
 
 let statuses = ["createdTx", "fromSocketTx", "incoming in mempool", "spend in mempool", "incoming in block", "spend in block", "in block confirmed", "rejected block"]
-
-func shouldUpdate(fromStatus: Int, toStatus: Int) -> Bool {
-    return true
-}
 
 //var exchangeCourse: Double = 10000.0
 var exchangeCourse: Double = 1.0 {
