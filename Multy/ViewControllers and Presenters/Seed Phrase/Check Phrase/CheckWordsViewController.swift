@@ -35,7 +35,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.swipeToBack()
         self.view.addSubview(progressHUD)
         progressHUD.hide()
         

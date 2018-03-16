@@ -12,6 +12,7 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.registerCell()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.presenter.walletChoooseVC = self
@@ -92,6 +93,10 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         
         self.presenter.selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)
+//        let storyboard = UIStoryboard(name: "Send", bundle: nil)   //need to send transactionDTO
+//        let ethDetailsVC = storyboard.instantiateViewController(withIdentifier: "EthSendDetails")
+//        self.navigationController?.pushViewController(ethDetailsVC, animated: true)
+        
         sendAnalyticsEvent(screenName: screenSendFrom, eventName: "\(walletWithChainTap)\(presenter.walletsArr[indexPath.row].chain)")
     }
     

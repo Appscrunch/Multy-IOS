@@ -30,6 +30,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.presenter.receiveAllDetailsVC = self
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)")

@@ -15,6 +15,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.presenter.sendStartVC = self
         self.registerCells()
         self.tabBarController?.tabBar.isHidden = true

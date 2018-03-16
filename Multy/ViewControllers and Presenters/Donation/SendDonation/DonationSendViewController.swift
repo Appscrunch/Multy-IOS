@@ -38,6 +38,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.view.addSubview(progressHud)
         self.progressHud.hide()
         self.hideKeyboardWhenTappedAround()

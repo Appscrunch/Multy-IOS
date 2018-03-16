@@ -131,4 +131,8 @@ extension UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.presentedVC = self
     }
+    
+    func swipeToBack() {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
 }

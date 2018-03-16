@@ -13,6 +13,7 @@ class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.presenter.addressesVC = self
         self.registerCell()
         
