@@ -36,6 +36,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         presenter.sendAmountVC = self
         numberFormatter.numberStyle = .decimal
         

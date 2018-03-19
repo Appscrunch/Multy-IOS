@@ -14,7 +14,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.swipeToBack()
         progressHUD.backgroundColor = .gray
         view.addSubview(progressHUD)
         progressHUD.hide()

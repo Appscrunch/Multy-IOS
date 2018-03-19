@@ -13,6 +13,7 @@ class ViewInBlockchainViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.presenter.blockchainVC = self
         self.loadPage(txId: presenter.txId!)
         self.webView.delegate = self
