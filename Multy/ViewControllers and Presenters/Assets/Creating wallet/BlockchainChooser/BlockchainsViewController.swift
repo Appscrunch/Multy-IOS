@@ -4,11 +4,18 @@
 
 import UIKit
 
-class BlockchainsViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
+private typealias AnalyticsDelegate = BlockchainsViewController
+private typealias CancelDelegate = BlockchainsViewController
+private typealias TableViewDelegate = BlockchainsViewController
+private typealias TableViewDataSource = BlockchainsViewController
+
+class BlockchainsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     let presenter = BlockchainsPresenter()
+    
+    var delegate: ChooseBlockchainProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +30,12 @@ class BlockchainsViewController: UIViewController, CancelProtocol, AnalyticsProt
         self.tableView.register(blockchainCell, forCellReuseIdentifier: "blockchainCell")
     }
     
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension CancelDelegate: CancelProtocol {
     func cancelAction() {
         presentDonationVCorAlert()
     }
@@ -30,19 +43,16 @@ class BlockchainsViewController: UIViewController, CancelProtocol, AnalyticsProt
     func presentNoInternet() {
         
     }
-    
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+}
+
+extension AnalyticsDelegate: AnalyticsProtocol {
+    func logAnalytics(indexPath: IndexPath) {
+        let eventCode = donationForBTCLighting + indexPath.row
+        sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
 }
 
-
-extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
+extension TableViewDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
         header.frame = CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 46.0)
@@ -68,31 +78,6 @@ extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource 
         return 46.0
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return 10
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let chainCell = self.tableView.dequeueReusableCell(withIdentifier: "blockchainCell") as! BlockchainCellTableViewCell
-        if indexPath.section == 0 {
-            let btc = CurrencyObj()
-            btc.currencyImgName = "BTC_medium_icon"
-            btc.currencyShortName = "BTC"
-            btc.currencyFullName = "Bitcoin"
-            chainCell.fillFromArr(curObj: btc)
-            chainCell.makeNotAvailable(isAvailable: true)
-//            chainCell.fillFromArr(curObj: self.presenter.arr[indexPath.row])
-        } else {
-            chainCell.fillFromArr(curObj: self.presenter.arr[indexPath.row])
-            chainCell.makeNotAvailable(isAvailable: false)
-        }
-        return chainCell
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         
@@ -106,6 +91,8 @@ extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource 
             
             logAnalytics(indexPath: indexPath)
         } else {
+            let currencyObj = presenter.availableBlockchainArray[indexPath.row]
+            delegate?.setBlockchain(blockchain: currencyObj.currencyBlockchain)
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -113,9 +100,32 @@ extension BlockchainsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
+}
+
+extension TableViewDataSource: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     
-    func logAnalytics(indexPath: IndexPath) {
-        let eventCode = donationForBTCLighting + indexPath.row
-        sendDonationAlertScreenPresentedAnalytics(code: eventCode)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return presenter.availableBlockchainArray.count
+        } else {
+            return presenter.donateBlockchainArray.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let chainCell = self.tableView.dequeueReusableCell(withIdentifier: "blockchainCell") as! BlockchainCellTableViewCell
+        if indexPath.section == 0 {
+            let currencyObj = presenter.availableBlockchainArray[indexPath.row]
+            chainCell.fillFromArr(curObj: currencyObj)
+            chainCell.updateIconsVisibility(isAvailable: true, isChecked: currencyObj.currencyBlockchain == presenter.selectedBlockchain)
+        } else {
+            chainCell.fillFromArr(curObj: presenter.donateBlockchainArray[indexPath.row])
+            chainCell.updateIconsVisibility(isAvailable: false, isChecked: false)
+        }
+        
+        return chainCell
     }
 }

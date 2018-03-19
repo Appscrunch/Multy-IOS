@@ -4,7 +4,7 @@
 
 import UIKit
 
-class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
+class WalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -339,14 +339,6 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
         }
     }
     
-    func cancelAction() {
-        presentDonationVCorAlert()
-    }
-    
-    func presentNoInternet() {
-        
-    }
-    
     func hideEmptyLbls() {
         self.emptyFirstLbl.isHidden = true
         self.emptySecondLbl.isHidden = true
@@ -376,7 +368,87 @@ class WalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol 
     }
 }
 
-extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
+private typealias CancelDelegate = WalletViewController
+extension CancelDelegate : CancelProtocol {
+    func cancelAction() {
+        presentDonationVCorAlert()
+    }
+    
+    func presentNoInternet() {
+        
+    }
+}
+
+private typealias TableViewDelegate = WalletViewController
+extension TableViewDelegate: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.presenter.numberOfTransactions() == 0 {
+            return
+        }
+        let countOfHistObjs = self.presenter.numberOfTransactions()
+        if indexPath.row > countOfHistObjs && countOfHistObjs <= visibleCells {
+            return
+        }
+        
+        let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
+        let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
+        transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
+        transactionVC.presenter.blockchainType = BlockchainType.create(currencyID: presenter.wallet!.chain.uint32Value,
+                                                                       netType: presenter.wallet!.chainType.uint32Value)
+        self.navigationController?.pushViewController(transactionVC, animated: true)
+        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == [0,0] {
+            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 272.0 : 332.0
+            
+            backUpView(height: heightForFirstCell)
+            if heightForFirstCell == 332 {
+                setGradientBackground()
+            }
+            
+            return heightForFirstCell /* (screenWidth / 375.0)*/
+        } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
+            if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
+                return 135
+            } else {
+                return 70
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == [0, 1] {
+//            cell.setCorners()
+        }
+    }
+}
+
+private typealias ScrollViewDelegate = WalletViewController
+extension ScrollViewDelegate: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentY = scrollView.contentOffset.y
+        let currentBottomY = scrollView.frame.size.height + currentY
+        if currentY <= lastY {
+            //"scrolling down"
+            tableView.bounces = true
+        } else {
+            //"scrolling up"
+            // Check that we are not in bottom bounce
+            if currentBottomY < scrollView.contentSize.height + scrollView.contentInset.bottom {
+                tableView.bounces = false
+            }
+        }
+        
+        if scrollView.contentOffset.y >= 0 {
+            lastY = scrollView.contentOffset.y
+        }
+    }
+}
+
+private typealias TableViewDataSource = WalletViewController
+extension TableViewDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -448,71 +520,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.presenter.numberOfTransactions() == 0 {
-            return
-        }
-        let countOfHistObjs = self.presenter.numberOfTransactions()
-        if indexPath.row > countOfHistObjs && countOfHistObjs <= visibleCells {
-            return
-        }
-        
-        let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
-        let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
-        transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
-        transactionVC.presenter.blockchainType = BlockchainType.create(currencyID: presenter.wallet!.chain.uint32Value,
-                                                                       netType: presenter.wallet!.chainType.uint32Value)
-        self.navigationController?.pushViewController(transactionVC, animated: true)
-        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == [0,0] {
-            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 272.0 : 332.0
-            
-            backUpView(height: heightForFirstCell)
-            if heightForFirstCell == 332 {
-                setGradientBackground()
-            }
-            
-            return heightForFirstCell /* (screenWidth / 375.0)*/
-        } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
-            if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
-                return 135
-            } else {
-                return 70
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath == [0, 1] {
-//            cell.setCorners()
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentY = scrollView.contentOffset.y
-        let currentBottomY = scrollView.frame.size.height + currentY
-        if currentY <= lastY {
-            //"scrolling down"
-            tableView.bounces = true
-        } else {
-            //"scrolling up"
-            // Check that we are not in bottom bounce
-            if currentBottomY < scrollView.contentSize.height + scrollView.contentInset.bottom {
-                tableView.bounces = false
-            }
-        }
-        
-        if scrollView.contentOffset.y >= 0 {
-            lastY = scrollView.contentOffset.y
-        }
-    }
 }
 
-extension WalletViewController : UICollectionViewDelegateFlowLayout {
+private typealias CollectionViewDelegateFlowLayout = WalletViewController
+extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

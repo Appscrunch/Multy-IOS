@@ -12,7 +12,7 @@ class NewWalletTableViewCell: UITableViewCell {
 //    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var content: UIView!
     
-    var delegate: OpenCtreatingSheet?
+    var delegate: OpenCreatingSheet?
     
     override func awakeFromNib() {
         super.awakeFromNib()

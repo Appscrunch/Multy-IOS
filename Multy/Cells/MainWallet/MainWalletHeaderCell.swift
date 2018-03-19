@@ -63,8 +63,6 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     @IBAction func settingsAction(_ sender: Any) {
         (self.mainVC as! WalletViewController).settingssAction(Any.self)
     }
-    
-    
 }
 
 extension MainWalletHeaderCell: UICollectionViewDataSource {

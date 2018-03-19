@@ -8,7 +8,7 @@ import Firebase
 class CreateWalletPresenter: NSObject {
     weak var mainVC: CreateWalletViewController?
     var account : AccountRLM?
-    var blockchainType = BlockchainType.create(currencyID: 0, netType: 0)
+    var selectedBlockchainType = BlockchainType.create(currencyID: 0, netType: 0)
 //
     func makeAuth(completion: @escaping (_ answer: String) -> ()) {
         if self.account != nil {
@@ -42,8 +42,8 @@ class CreateWalletPresenter: NSObject {
     func create() {
         var binData : BinaryData = account!.binaryDataString.createBinaryData()!
         //MARK: topIndex
-        let currencyID = blockchainType.blockchain.rawValue
-        let networkID = blockchainType.net_type
+        let currencyID = selectedBlockchainType.blockchain.rawValue
+        let networkID = selectedBlockchainType.net_type
         let currentTopIndex = account!.topIndexes.filter("currencyID = \(currencyID) AND networkID == \(networkID)").first
         
         if currentTopIndex == nil {

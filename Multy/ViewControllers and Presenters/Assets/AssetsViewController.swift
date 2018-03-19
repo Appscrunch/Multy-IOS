@@ -8,9 +8,13 @@ import Alamofire
 import CryptoSwift
 //import BiometricAuthentication
 
+private typealias ScrollViewDelegate = AssetsViewController
+private typealias CollectionViewDelegate = AssetsViewController
+private typealias CollectionViewDelegateFlowLayout = AssetsViewController
+private typealias TableViewDelegate = AssetsViewController
+private typealias TableViewDataSource = AssetsViewController
 
-
-class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenCtreatingSheet, AnalyticsProtocol, CancelProtocol, CreateWalletProtocol {
+class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtocol, CancelProtocol, CreateWalletProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -290,182 +294,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let createOrRestoreCell = UINib.init(nibName: "CreateOrRestoreBtnTableViewCell", bundle: nil)
         self.tableView.register(createOrRestoreCell, forCellReuseIdentifier: "createOrRestoreCell")
     }
-
-    //MARK: Table view delegates
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.presenter.account != nil {
-            if presenter.isWalletExist() {
-                return 2 + presenter.account!.wallets.count  // logo - new wallet - wallets
-            } else {
-                return 3                                     // logo - new wallet - text cell
-            }
-        } else {
-            return 4                                         // logo - empty cell - create wallet - restore
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath {
-        case [0,0]:         // PORTFOLIO CELL  or LOGO
-            if presenter.account == nil {
-                let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
-                return logoCell
-            } else {
-                let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
-                portfolioCell.mainVC = self
-                portfolioCell.delegate = self
-                
-                return portfolioCell
-            }
-        case [0,1]:        // !!!NEW!!! WALLET CELL
-            let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
-            newWalletCell.delegate = self
-            
-            if presenter.account == nil {
-                newWalletCell.hideAll(flag: true)
-            } else {
-                newWalletCell.hideAll(flag: false)
-            }
-            
-            return newWalletCell
-        case [0,2]:
-            if self.presenter.account != nil {
-                //MARK: change logiv
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: self.tabBarController!.viewControllers![0].childViewControllers.count != 1)
-                
-                if presenter.isWalletExist() {
-                    let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-//                    walletCell.makeshadow()
-                    walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
-                    walletCell.fillInCell()
-                    
-                    return walletCell
-                } else {
-                    let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
-                    return textCell
-                }
-            } else {   // acc == nil
-                let createCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-                
-                return createCell
-            }
-        case [0,3]:
-            if self.presenter.account != nil {
-                let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-//                walletCell.makeshadow()
-                walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
-                walletCell.fillInCell()
-                
-                return walletCell
-            } else {
-                let restoreCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
-                restoreCell.makeRestoreCell()
-                
-                return restoreCell
-            }
-        default:
-            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-//            walletCell.makeshadow()
-            walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
-            walletCell.fillInCell()
-            
-            return walletCell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.tappedIndexPath = indexPath
- 
-        if indexPath != [0, 1] && indexPath != [0, 0] {
-            if self.presenter.isWalletExist() {
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-            }
-        }
-        
-        switch indexPath {
-        case [0,0]:
-            sendAnalyticsEvent(screenName: screenMain, eventName: logoTap)
-            break
-        case [0,1]:
-            break
-//            if self.presenter.account == nil {
-//                break
-//            }
-//            self.present(actionSheet, animated: true, completion: nil)
-        case [0,2]:
-            if self.presenter.account == nil {
-//                progressHUD.show()
-//                presenter.guestAuth(completion: { (answer) in
-                    sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: createFirstWalletTap)
-                    self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
-//                })
-            } else {
-                if self.presenter.isWalletExist() {
-                    goToWalletVC(indexPath: indexPath)
-                } else {
-                    break
-                }
-            }
-        case [0,3]:
-            if self.presenter.account == nil {
-                sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: restoreMultyTap)
-                let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-                let backupSeedVC = storyboard.instantiateViewController(withIdentifier: "backupSeed") as! CheckWordsViewController
-                backupSeedVC.isRestore = true
-                self.navigationController?.pushViewController(backupSeedVC, animated: true)
-            } else {
-                if self.presenter.isWalletExist() {
-                    goToWalletVC(indexPath: indexPath)
-                }
-            }
-        default:
-            if self.presenter.isWalletExist() {
-                goToWalletVC(indexPath: indexPath)
-            }
-        }
-        //проверить авторизацию
-//        if indexPath == [0, 1] {
-//            
-//        
-//        } else if indexPath == [0, 2] {
-//            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-//            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-//            self.navigationController?.pushViewController(vc, animated: true)
-//
-////            let storyboard = UIStoryboard(name: "Receive", bundle: nil)
-////            let initialViewController = storyboard.instantiateViewController(withIdentifier: "ReceiveStart")
-////            self.navigationController?.pushViewController(initialViewController, animated: true)
-////        } else {//if indexPath == [0, 3] {
-////            let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-////            let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-////            self.navigationController?.pushViewController(vc, animated: true)
-////        } else if indexPath == [0, 4] {
-//            
-//        } else if indexPath == [0, 3] {
-//            switch presenter.account {
-//            case nil:
-//                
-//            default: break
-//            }
-//        } else {
-//            if self.presenter.isWalletExist() {
-////                let securevc = SecureViewController()
-////                self.present(securevc, animated: true, completion: nil)
-//                
-//                let stroryboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
-//                let vc = stroryboard.instantiateViewController(withIdentifier: "seedAbout")
-//                self.navigationController?.pushViewController(vc, animated: true)
-//
-//                
-//            }
-//        }
-    }
     
     func goToWalletVC(indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
@@ -476,45 +304,6 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         sendAnalyticsEvent(screenName: screenMain, eventName: "\(walletOpenWithChainTap)\(wallet!.chain)")
         self.navigationController?.pushViewController(walletVC, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == [0,0] {
-//            return 283  //portfolio height
-            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
-                if self.presenter.account != nil {
-                    if screenHeight == heightOfX {
-                        //                    return 255 //logo height
-                        return 360
-                    } else {
-                        //                    return 245
-                        return 350
-                    }
-                }else {
-                    if screenHeight == heightOfX {
-                        return 255 //logo height
-                    } else {
-                        return 245
-                    }
-                }
-            } else {
-                if self.presenter.account != nil {
-//                                return 220  //logo
-                    return 300
-                } else {
-                    return 220  //logo
-                }
-            }
-        } else if indexPath == [0, 1] {
-            return 75
-        } else {
-            return 104   // wallet height
-//            return 100
-        }
-    }
-    
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        targetContentOffset.pointee.y = max(targetContentOffset.pointee.y + 1, 1)
-//    }
     
     func updateUI() {
         self.tableView.reloadData()
@@ -576,7 +365,183 @@ class AssetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
-private typealias CollectionViewDelegateFlowLayout = AssetsViewController
+extension TableViewDelegate : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.tappedIndexPath = indexPath
+        
+        if indexPath != [0, 1] && indexPath != [0, 0] {
+            if self.presenter.isWalletExist() {
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            }
+        }
+        
+        switch indexPath {
+        case [0,0]:
+            sendAnalyticsEvent(screenName: screenMain, eventName: logoTap)
+            break
+        case [0,1]:
+            break
+            //            if self.presenter.account == nil {
+            //                break
+            //            }
+        //            self.present(actionSheet, animated: true, completion: nil)
+        case [0,2]:
+            if self.presenter.account == nil {
+                //                progressHUD.show()
+                //                presenter.guestAuth(completion: { (answer) in
+                sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: createFirstWalletTap)
+                self.performSegue(withIdentifier: "createWalletVC", sender: Any.self)
+                //                })
+            } else {
+                if self.presenter.isWalletExist() {
+                    goToWalletVC(indexPath: indexPath)
+                } else {
+                    break
+                }
+            }
+        case [0,3]:
+            if self.presenter.account == nil {
+                sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: restoreMultyTap)
+                let storyboard = UIStoryboard(name: "SeedPhrase", bundle: nil)
+                let backupSeedVC = storyboard.instantiateViewController(withIdentifier: "backupSeed") as! CheckWordsViewController
+                backupSeedVC.isRestore = true
+                self.navigationController?.pushViewController(backupSeedVC, animated: true)
+            } else {
+                if self.presenter.isWalletExist() {
+                    goToWalletVC(indexPath: indexPath)
+                }
+            }
+        default:
+            if self.presenter.isWalletExist() {
+                goToWalletVC(indexPath: indexPath)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == [0,0] {
+            //            return 283  //portfolio height
+            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+                if self.presenter.account != nil {
+                    if screenHeight == heightOfX {
+                        //                    return 255 //logo height
+                        return 360
+                    } else {
+                        //                    return 245
+                        return 350
+                    }
+                }else {
+                    if screenHeight == heightOfX {
+                        return 255 //logo height
+                    } else {
+                        return 245
+                    }
+                }
+            } else {
+                if self.presenter.account != nil {
+                    //                                return 220  //logo
+                    return 300
+                } else {
+                    return 220  //logo
+                }
+            }
+        } else if indexPath == [0, 1] {
+            return 75
+        } else {
+            return 104   // wallet height
+            //            return 100
+        }
+    }
+}
+
+extension TableViewDataSource : UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.presenter.account != nil {
+            if presenter.isWalletExist() {
+                return 2 + presenter.account!.wallets.count  // logo - new wallet - wallets
+            } else {
+                return 3                                     // logo - new wallet - text cell
+            }
+        } else {
+            return 4                                         // logo - empty cell - create wallet - restore
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath {
+        case [0,0]:         // PORTFOLIO CELL  or LOGO
+            if presenter.account == nil {
+                let logoCell = self.tableView.dequeueReusableCell(withIdentifier: "logoCell") as! LogoTableViewCell
+                return logoCell
+            } else {
+                let portfolioCell = self.tableView.dequeueReusableCell(withIdentifier: "portfolioCell") as! PortfolioTableViewCell
+                portfolioCell.mainVC = self
+                portfolioCell.delegate = self
+                
+                return portfolioCell
+            }
+        case [0,1]:        // !!!NEW!!! WALLET CELL
+            let newWalletCell = self.tableView.dequeueReusableCell(withIdentifier: "newWalletCell") as! NewWalletTableViewCell
+            newWalletCell.delegate = self
+            
+            if presenter.account == nil {
+                newWalletCell.hideAll(flag: true)
+            } else {
+                newWalletCell.hideAll(flag: false)
+            }
+            
+            return newWalletCell
+        case [0,2]:
+            if self.presenter.account != nil {
+                //MARK: change logiv
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: self.tabBarController!.viewControllers![0].childViewControllers.count != 1)
+                
+                if presenter.isWalletExist() {
+                    let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+                    //                    walletCell.makeshadow()
+                    walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                    walletCell.fillInCell()
+                    
+                    return walletCell
+                } else {
+                    let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
+                    return textCell
+                }
+            } else {   // acc == nil
+                let createCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+                
+                return createCell
+            }
+        case [0,3]:
+            if self.presenter.account != nil {
+                let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+                //                walletCell.makeshadow()
+                walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                walletCell.fillInCell()
+                
+                return walletCell
+            } else {
+                let restoreCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
+                restoreCell.makeRestoreCell()
+                
+                return restoreCell
+            }
+        default:
+            let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
+            //            walletCell.makeshadow()
+            walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+            walletCell.fillInCell()
+            
+            return walletCell
+        }
+    }
+}
+
 extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -598,7 +563,6 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
     }
 }
 
-private typealias CollectionViewDelegate = AssetsViewController
 extension CollectionViewDelegate : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -617,7 +581,6 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
     }
 }
 
-private typealias ScrollViewDelegate = AssetsViewController
 extension ScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))

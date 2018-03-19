@@ -37,6 +37,25 @@ struct Constants {
     
     struct DataManager {
         static let btcTestnetDonationAddress =  "mnUtMQcs3s8kSkSRXpREVtJamgUCWpcFj4"
+        
+        static let availableBlockchains = [
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: 4),//RINKEBY
+        ]
+        
+        static let donationBlockchains = [
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_CASH.rawValue,     netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_LITECOIN.rawValue,         netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_DASH.rawValue,             netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM_CLASSIC.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+        ]
     }
 }
 
