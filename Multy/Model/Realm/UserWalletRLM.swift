@@ -127,7 +127,9 @@ class UserWalletRLM: Object {
             self.name = name as! String
         }
         
-        self.cryptoName = "BTC"
+        let blockchainType = BlockchainType.create(wallet: self)
+        
+        self.cryptoName = blockchainType.shortName
         self.fiatName = "USD"
         self.fiatSymbol = "$"
     }

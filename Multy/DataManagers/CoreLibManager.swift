@@ -142,7 +142,7 @@ class CoreLibManager: NSObject {
             publicKeyStringPointer.deallocate(capacity: 1)
         }
 
-        let blockchain = createBlockchainType(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
+        let blockchain = BlockchainType.create(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
             let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
@@ -227,7 +227,7 @@ class CoreLibManager: NSObject {
             addressPrivateKeyPointer.deallocate(capacity: 1)
         }
         
-        let blockchain = createBlockchainType(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
+        let blockchain = BlockchainType.create(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
             let _ = returnErrorString(opaquePointer: mHDa!, mask: "mHDa")
@@ -292,7 +292,7 @@ class CoreLibManager: NSObject {
             publicKeyStringPointer.deallocate(capacity: 1)
         }
         
-        let blockchain = createBlockchainType(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
+        let blockchain = BlockchainType.create(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
             let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
@@ -689,7 +689,7 @@ class CoreLibManager: NSObject {
     func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
         let addressUTF8 = address.UTF8CStringPointer
         //FIXME: Blockchain values
-        let blockchainType = createBlockchainType(currencyID: wallet.chain.uint32Value, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
+        let blockchainType = BlockchainType.create(currencyID: wallet.chain.uint32Value, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let error = validate_address(blockchainType, addressUTF8)
         
         defer {
@@ -708,10 +708,6 @@ class CoreLibManager: NSObject {
         } else {
             return (true, nil)
         }
-    }
-    
-    func createBlockchainType(currencyID: UInt32, netType: UInt32) -> BlockchainType {
-        return BlockchainType.init(blockchain: Blockchain.init(currencyID), net_type: Int(netType))
     }
 }
 
@@ -778,7 +774,7 @@ extension TestCoreLibManager {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let blockchain = createBlockchainType(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
+        let blockchain = BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, UInt32(0), newAccountPointer)
         print("make_hd_account: \(mHDa)")
         

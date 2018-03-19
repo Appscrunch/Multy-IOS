@@ -33,7 +33,6 @@ class WalletTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    
 //    func makeshadow() {
 //        self.backView.dropShadow(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), opacity: 1.0, offSet: CGSize(width: -1, height: 1), radius: 4, scale: true)
 //    }
@@ -56,13 +55,12 @@ class WalletTableViewCell: UITableViewCell {
     }
     
     func fillInCell() {
-//        if self.wallet?.cryptoName == "BTC" {
-            self.tokenImage.image = #imageLiteral(resourceName: "btcIconBig")
-//        }
+        let blockchainType = BlockchainType.create(wallet: wallet!)
+        self.tokenImage.image = UIImage(named: blockchainType.iconString)
         let sumInFiat = (self.wallet!.sumInCrypto * exchangeCourse).fixedFraction(digits: 2)
         self.walletNameLbl.text = self.wallet!.name
         self.cryptoSumLbl.text  = self.wallet!.sumInCrypto.fixedFraction(digits: 8)
-        self.cryptoNameLbl.text = self.wallet!.cryptoName
+        self.cryptoNameLbl.text = blockchainType.shortName
         self.fiatSumLbl.text = "\(sumInFiat) \(self.wallet!.fiatSymbol)"
         
         if wallet != nil {

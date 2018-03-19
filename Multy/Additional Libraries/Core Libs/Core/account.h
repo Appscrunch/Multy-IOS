@@ -25,8 +25,19 @@ struct Key;
 // See: https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 enum Blockchain
 {
-    BLOCKCHAIN_BITCOIN = 0x00,
-    BLOCKCHAIN_ETHEREUM = 0x3c,
+    BLOCKCHAIN_BITCOIN =            0x00,
+    BLOCKCHAIN_LITECOIN =           0x02,
+    BLOCKCHAIN_DASH =               0x05,
+    BLOCKCHAIN_ETHEREUM =           0x3c,
+    BLOCKCHAIN_ETHEREUM_CLASSIC =   0x3d,
+    BLOCKCHAIN_STEEM =              0x87,
+    BLOCKCHAIN_BITCOIN_CASH =       0x99,
+    
+    //not available in bip44
+    BLOCKCHAIN_BITCOIN_LIGHTNING =  0x9900,
+    BLOCKCHAIN_GOLOS =              0x9901,
+    BLOCKCHAIN_BITSHARES =          0x9902,
+    BLOCKCHAIN_ERC20 =              0x9903
 };
 
 enum BlockchainNetType

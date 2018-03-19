@@ -23,12 +23,12 @@ class BlockchainCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func makeNotAvailable(isAvailable: Bool) {
+    func updateIconsVisibility(isAvailable: Bool, isChecked: Bool) {
         if isAvailable {
             self.chainImg.alpha = 1.0
             self.chainShortNameLbl.alpha = 1.0
             self.chainFullNameLbl.alpha = 1.0
-            self.checkmarkImg.isHidden = false
+            self.checkmarkImg.isHidden = !isChecked
             self.donatImg.isHidden = true
         } else {
             self.chainImg.alpha = 0.5

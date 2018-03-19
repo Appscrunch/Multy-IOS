@@ -584,7 +584,7 @@
                                                     <outlet property="walletNameTF" destination="yYM-Z4-2M4" id="x0b-vu-t75"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" id="f64-Os-lmQ">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" id="f64-Os-lmQ" customClass="CreateWalletBlockchainTableViewCell" customModule="Multy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="92" width="375" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f64-Os-lmQ" id="vFh-bf-vvj">
@@ -622,6 +622,9 @@
                                                         <constraint firstItem="y1b-vh-UxL" firstAttribute="centerY" secondItem="vFh-bf-vvj" secondAttribute="centerY" id="x65-vC-By0"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="blockchainLabel" destination="aVq-ZB-lDs" id="L3M-hE-WDM"/>
+                                                </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell4" id="Zve-XD-o6l">
                                                 <rect key="frame" x="0.0" y="156" width="375" height="64"/>

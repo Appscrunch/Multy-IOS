@@ -5,6 +5,11 @@
 import UIKit
 import ZFRippleButton
 
+private typealias TableViewDataSource = CreateWalletViewController
+private typealias TableViewDelegate = CreateWalletViewController
+private typealias TextFieldDelegate = CreateWalletViewController
+private typealias ChooseBlockchainDelegate = CreateWalletViewController
+
 class CreateWalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
@@ -81,7 +86,11 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
     
     func goToChains() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let chainsVC = storyboard.instantiateViewController(withIdentifier: "chainsVC")
+        let chainsVC = storyboard.instantiateViewController(withIdentifier: "chainsVC") as! BlockchainsViewController
+        
+        chainsVC.presenter.selectedBlockchain = presenter.selectedBlockchainType
+        chainsVC.delegate = self
+        
         self.navigationController?.pushViewController(chainsVC, animated: true)
     }
     
@@ -105,8 +114,13 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
     }
 }
 
+extension ChooseBlockchainDelegate: ChooseBlockchainProtocol {
+    func setBlockchain(blockchain: BlockchainType) {
+        presenter.selectedBlockchainType = blockchain
+        updateBlockchainCell(blockchainCell: nil)    }
+}
 
-extension CreateWalletViewController: UITableViewDataSource {
+extension TableViewDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -119,24 +133,35 @@ extension CreateWalletViewController: UITableViewDataSource {
         if indexPath == [0,0] {
             let cell1 = self.tableView.dequeueReusableCell(withIdentifier: "cell1") as! CreateWalletNameTableViewCell
             cell1.walletNameTF.becomeFirstResponder()
+            
             return cell1
         } else if indexPath == [0,1] {
-            let cell2 = self.tableView.dequeueReusableCell(withIdentifier: "cell2")
-            return cell2!
+            let blockchainCell = self.tableView.dequeueReusableCell(withIdentifier: "cell2") as! CreateWalletBlockchainTableViewCell
+            updateBlockchainCell(blockchainCell: blockchainCell)
+            
+            return blockchainCell
         } else {//if indexPath == [0,2] {
             let cell4 = self.tableView.dequeueReusableCell(withIdentifier: "cell4")
+            
             return cell4!
-            //        } else { //if indexPath == [0,3] {
-            //            let cell3 = self.tableView.dequeueReusableCell(withIdentifier: "cell3")
-            //            return cell3!
-
         }
     }
     
+    fileprivate func updateBlockchainCell(blockchainCell: CreateWalletBlockchainTableViewCell?) {
+        let cell2 = blockchainCell == nil ? self.tableView.dequeueReusableCell(withIdentifier: "cell2") as! CreateWalletBlockchainTableViewCell : blockchainCell!
+        cell2.blockchainLabel.text = presenter.selectedBlockchainType.fullName + " ∙ " + presenter.selectedBlockchainType.shortName
+        
+        if presenter.selectedBlockchainType.net_type != 0 {
+            cell2.blockchainLabel.text! += "  Testnet"
+        }
+        
+        if blockchainCell == nil {
+            tableView.reloadRows(at: [[0, 1]], with: .none)
+        }
+    }
 }
 
-
-extension CreateWalletViewController: UITableViewDelegate {
+extension TableViewDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
     }
@@ -152,8 +177,7 @@ extension CreateWalletViewController: UITableViewDelegate {
     }
 }
 
-
-extension CreateWalletViewController: UITextFieldDelegate {
+extension TextFieldDelegate: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.dismissKeyboard()
         return true
