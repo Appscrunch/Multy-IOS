@@ -129,6 +129,13 @@ extension String {
         return self.toStringWithZeroes(precision: 2)
     }
     
+
+    func toDateTime() -> NSDate {
+        let dateFromString = Date.blockDateFormatter().date(from: self)! as NSDate
+        
+        return dateFromString
+    }
+        
     func getDonationAddress(blockchainType: BlockchainType) -> String? {
         if blockchainType.blockchain.rawValue != 0 {
             return nil

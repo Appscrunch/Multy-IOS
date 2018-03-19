@@ -20,6 +20,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: screenSecuritySettings)
 //        self.entranceView.alpha = opacityForNotImplementedView
 //        self.entranceView.isUserInteractionEnabled = false

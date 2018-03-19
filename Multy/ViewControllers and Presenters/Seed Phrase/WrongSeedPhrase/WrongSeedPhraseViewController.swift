@@ -10,7 +10,7 @@ class WrongSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         presenter.mainVC = self
         sendAnalyticsEvent(screenName: screenFailRestore, eventName: screenFailRestore)
         sendAnalyticsEvent(screenName: screenFailRestore, eventName: seedBackupFailed)

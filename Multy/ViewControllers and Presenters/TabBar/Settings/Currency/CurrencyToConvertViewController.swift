@@ -10,6 +10,7 @@ class CurrencyToConvertViewController: UIViewController, CancelProtocol, Analyti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.swipeToBack()
         self.registerCell()
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)

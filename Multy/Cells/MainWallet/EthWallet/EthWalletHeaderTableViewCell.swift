@@ -1,42 +1,40 @@
-//Copyright 2017 Idealnaya rabota LLC
+//Copyright 2018 Idealnaya rabota LLC
 //Licensed under Multy.io license.
 //See LICENSE for details
 
 import UIKit
-import RealmSwift
 
-class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
+class EthWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var pageControll: UIPageControl!
     @IBOutlet weak var titleLbl: UILabel!
-    
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     var mainVC: UIViewController?
+    
+    var blockedAmount = UInt64()
     
     var wallet: UserWalletRLM? {
         didSet {
             self.setupUI()
         }
-     }
-    
-    var blockedAmount = UInt64()
+    }
     
     weak var delegate : UICollectionViewDelegate? {
         didSet {
             self.collectionView.delegate = delegate
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.selectionStyle = .none
         
-        let headerCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
-        self.collectionView.register(headerCollectionCell, forCellWithReuseIdentifier: "MainWalletCollectionViewCellID")
+        let collectionHeaderCell = UINib.init(nibName: "EthWalletHeaderCollectionViewCell", bundle: nil)
+        self.collectionView.register(collectionHeaderCell, forCellWithReuseIdentifier: "ethCollectionWalletCell")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,19 +43,10 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
         // Configure the view for the selected state
     }
     
-    func setupPageControl() {
-//        self.pageControll.numberOfPages = 2
-        
-    }
-    
     func setupUI() {
-        if wallet != nil {
-            self.titleLbl.text = wallet?.name
-            self.collectionView.reloadData()
-            if screenHeight == heightOfX {
-                self.topConstraint.constant = 40
-            }
-//            self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
+        self.bottomView.roundCorners(corners: [.topLeft, .topRight], radius: 20)
+        if screenHeight == heightOfX {
+            self.topConstraint.constant = 40
         }
     }
     
@@ -68,27 +57,31 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     @IBAction func settingsAction(_ sender: Any) {
         (self.mainVC as! WalletViewController).settingssAction(Any.self)
     }
+    
 }
 
-extension MainWalletHeaderCell: UICollectionViewDataSource {
+
+extension EthWalletHeaderTableViewCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return (self.wallet?.addresses.count)!
+        //        return (self.wallet?.addresses.count)!
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! MainWalletCollectionViewCell
-        cell.mainVC = self.mainVC
-        cell.wallet = self.wallet
-        cell.blockedAmount = self.blockedAmount
-        cell.fillInCell()
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "ethCollectionWalletCell", for: indexPath) as! EthWalletHeaderCollectionViewCell
+//        cell.mainVC = self.mainVC
+//        cell.wallet = self.wallet
+//        cell.blockedAmount = self.blockedAmount
+//        cell.fillInCell()
         
         return cell
     }
+    
+    
     
     func updateUI() {
         self.collectionView.reloadData()

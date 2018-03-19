@@ -21,7 +21,7 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.swipeToBack()
         self.hideKeyboardWhenTappedAround()
         
         self.view.addSubview(progressHUD)
