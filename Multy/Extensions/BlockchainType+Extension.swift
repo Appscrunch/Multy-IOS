@@ -128,29 +128,6 @@ extension BlockchainType {
         return fullName
     }
     
-    static func getAvailableBlockchain(index: UInt32) -> BlockchainType {
-        switch index {
-        case 0:
-            return BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
-        case 1:
-            return BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
-        default:
-            return BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
-        }
-    }
-    
-    static func getDonationBlockchain(index: UInt32) -> BlockchainType {
-        let mainnetType = BLOCKCHAIN_NET_TYPE_MAINNET.rawValue
-        switch index {
-        case 0:
-            return BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: mainnetType)
-        case 1:
-            return BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: mainnetType)
-        default:
-            return BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: mainnetType)
-        }
-    }
-    
     static func create(wallet: UserWalletRLM) -> BlockchainType {
         return BlockchainType.create(currencyID: wallet.chain.uint32Value, netType: wallet.chainType.uint32Value)
     }
