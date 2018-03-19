@@ -410,8 +410,8 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
-        transactionVC.presenter.blockchainType = DataManager.shared.coreLibManager.createBlockchainType(currencyID: presenter.wallet!.chain.uint32Value,
-                                                                                                        netType: presenter.wallet!.chainType.uint32Value)
+        transactionVC.presenter.blockchainType = BlockchainType.create(currencyID: presenter.wallet!.chain.uint32Value,
+                                                                       netType: presenter.wallet!.chainType.uint32Value)
         self.navigationController?.pushViewController(transactionVC, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
     }
