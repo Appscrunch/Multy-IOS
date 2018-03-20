@@ -163,7 +163,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 //        self.tableView.reloadData()
 //        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
         
-        let firstCell = self.tableView.cellForRow(at: [0,0]) as? MainWalletHeaderCell
+        let firstCell = self.tableView.cellForRow(at: [0,0]) as? BTCWalletHeaderTableViewCell
         firstCell?.updateUI()
 //        self.tableView.reloadData()
     }
@@ -476,7 +476,7 @@ extension TableViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {         // Main Wallet Header Cell
-            let headerCell = self.tableView.dequeueReusableCell(withIdentifier: "MainWalletHeaderCellID") as! MainWalletHeaderCell
+            let headerCell = self.tableView.dequeueReusableCell(withIdentifier: "MainWalletHeaderCellID") as! BTCWalletHeaderTableViewCell
             headerCell.selectionStyle = .none
             headerCell.mainVC = self
             headerCell.delegate = self

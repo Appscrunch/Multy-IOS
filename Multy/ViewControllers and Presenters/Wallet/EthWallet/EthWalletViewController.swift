@@ -125,7 +125,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @objc func updateExchange() {
-        let firstCell = self.tableView.cellForRow(at: [0,0]) as? MainWalletHeaderCell
+        let firstCell = self.tableView.cellForRow(at: [0,0]) as? BTCWalletHeaderTableViewCell
         firstCell?.updateUI()
     }
     

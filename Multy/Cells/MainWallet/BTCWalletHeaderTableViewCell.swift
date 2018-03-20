@@ -5,7 +5,7 @@
 import UIKit
 import RealmSwift
 
-class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
+class BTCWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backView: UIView!
@@ -70,7 +70,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     }
 }
 
-extension MainWalletHeaderCell: UICollectionViewDataSource {
+extension BTCWalletHeaderTableViewCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -81,7 +81,7 @@ extension MainWalletHeaderCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! MainWalletCollectionViewCell
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! BTCWalletHeaderCollectionViewCell
         cell.mainVC = self.mainVC
         cell.wallet = self.wallet
         cell.blockedAmount = self.blockedAmount

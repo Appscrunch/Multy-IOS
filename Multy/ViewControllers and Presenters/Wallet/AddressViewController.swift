@@ -17,9 +17,15 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var thirdConstraint: NSLayoutConstraint!
     @IBOutlet weak var fourthConstraint: NSLayoutConstraint!
     
-    var wallet: UserWalletRLM?
+    var wallet: UserWalletRLM? {
+        didSet {
+            if wallet != nil {
+                qrBlockchainString = BlockchainType.create(wallet: wallet!).qrBlockchainString
+            }
+        }
+    }
     var addressIndex: Int?
-    
+    var qrBlockchainString = String()
     var qrcodeImage: CIImage!
     
     override func viewDidLoad() {
@@ -91,9 +97,8 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
     func branchDict() -> NSDictionary {
         //check for blockchain
         //if bitcoin - address: "\(chainName):\(presenter.walletAddress)"
-        let chainName = "bitcoin"
         let dict: NSDictionary = ["$og_title" : "Multy",
-                                  "address"   : "\(chainName):\(makeStringWithAddress())",
+                                  "address"   : "\(qrBlockchainString):\(makeStringWithAddress())",
                                   "amount"    : 0.0]
 
         return dict
@@ -108,7 +113,7 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
     }
     
     func makeQRCode() {
-        let data = self.makeStringForQRWithSumAndAdress(cryptoName: "bitcoin").data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let data = self.makeStringForQRWithSumAndAdress(cryptoName: qrBlockchainString).data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(data, forKey: "inputMessage")
         filter?.setValue("Q", forKey: "inputCorrectionLevel")
@@ -118,7 +123,7 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
     }
     
     func makeQrWithSum() {
-        let walletData = self.makeStringForQRWithSumAndAdress(cryptoName: "bitcoin").data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let walletData = self.makeStringForQRWithSumAndAdress(cryptoName: qrBlockchainString).data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(walletData, forKey: "inputMessage")
         filter?.setValue("Q", forKey: "inputCorrectionLevel")

@@ -5,7 +5,7 @@
 import UIKit
 import RealmSwift
 
-class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
+class BTCWalletHeaderCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
 
     @IBOutlet weak var showAddressesButton : UIButton!
     @IBOutlet weak var cryptoAmountLabel : UILabel!
@@ -46,6 +46,7 @@ class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
     func fillInCell() {
         let sumInFiat = ((self.wallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
         self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0")"
+        //FIXME: BLOCKCHAIN
         let blockchain = BlockchainType.create(wallet: wallet!)
         self.cryptoNameLabel.text = blockchain.shortName // "\(wallet?.cryptoName ?? "")"
         self.fiatAmountLabel.text = sumInFiat
@@ -70,7 +71,7 @@ class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
             
             
             //some strange info from server
-            //MARK: FIX THIS
+            //FIXME: FIX THIS
             var sum = UInt64(0)
             if convertBTCStringToSatoshi(sum: wallet!.sumInCrypto.fixedFraction(digits: 8)) >= blockedAmount {
                 sum = convertBTCStringToSatoshi(sum: wallet!.sumInCrypto.fixedFraction(digits: 8)) - blockedAmount
