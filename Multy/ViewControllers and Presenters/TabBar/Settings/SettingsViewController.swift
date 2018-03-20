@@ -7,6 +7,10 @@ import UIKit
 class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var pinSwitch: UISwitch!
+     
+    @IBOutlet weak var copyBtn: UIButton!
+    @IBOutlet weak var topVersionLbl: UILabel!
+    @IBOutlet weak var botVersionLbl: UILabel!
     
     @IBOutlet weak var pushView: UIView!
     @IBOutlet weak var securityView: UIView!
@@ -22,8 +26,11 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     let opacityForNotImplementedView: CGFloat = 0.5  // not implemented features
     
+    let infoDictionary = Bundle.main.infoDictionary!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.makeVersion()
         self.presenter.settingsVC = self
         setupForNotImplementedViews()
         sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
@@ -81,6 +88,33 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
                 self.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    @IBAction func showOrHideCopy(_ sender: Any) {
+        if self.copyBtn.alpha == 0.0 {
+            showCopy()
+        } else {
+            hideCopy()
+        }
+    }
+    
+    func showCopy() {
+        self.copyBtn.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 0.5) {
+            self.copyBtn.alpha = 1.0
+        }
+    }
+    
+    func hideCopy() {
+        self.copyBtn.isUserInteractionEnabled = false
+        UIView.animate(withDuration: 0.5) {
+            self.copyBtn.alpha = 0
+        }
+    }
+    
+    @IBAction func copyAction(_ sender: Any) {
+        hideCopy()
+        UIPasteboard.general.string = "\(self.topVersionLbl.text!)\n\(self.botVersionLbl.text!)"
     }
     
     @IBAction func goToSecuritySettingsAction(_ sender: Any) {
@@ -150,5 +184,34 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         let secureSettingsVC = storyboard.instantiateViewController(withIdentifier: "securitySettings") as! SecuritySettingsViewController
         secureSettingsVC.resetDelegate = self
         self.navigationController?.pushViewController(secureSettingsVC, animated: true)
+    }
+    
+    func appVersion() -> String {
+        return infoDictionary["CFBundleShortVersionString"] as! String
+    }
+    
+    func buildVersion() -> String {
+        return infoDictionary["CFBundleVersion"] as! String
+    }
+    
+    func getGitTag() -> String {
+        return infoDictionary["GIT_TAG_NAME"] as! String
+    }
+    
+    func getGitBranch() -> String {
+        return infoDictionary["GIT_BRANCH_NAME"] as! String
+    }
+    
+    func getGitCommitHash() -> String {
+        return infoDictionary["GIT_COMMIT_HASH"] as! String
+    }
+    
+    func getCoreLibVersion() -> String {
+        return CoreLibManager.shared.getCoreLibVersion()
+    }
+    
+    func makeVersion() {
+        self.topVersionLbl.text = "Multy Ctypto Wallet v.\(appVersion()).\(buildVersion())"
+        self.botVersionLbl.text = "Git tag: \(getGitTag())\nGit branch name: \(getGitBranch())\nGit commit hash: \(getGitCommitHash())\n\nCore version: \(getCoreLibVersion())\n\nEnviroment: \(apiUrl)"
     }
 }
