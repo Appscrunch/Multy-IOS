@@ -46,7 +46,8 @@ class MainWalletCollectionViewCell: UICollectionViewCell, AnalyticsProtocol {
     func fillInCell() {
         let sumInFiat = ((self.wallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
         self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0")"
-        self.cryptoNameLabel.text = "\(wallet?.cryptoName ?? "")"
+        let blockchain = BlockchainType.create(wallet: wallet!)
+        self.cryptoNameLabel.text = blockchain.shortName // "\(wallet?.cryptoName ?? "")"
         self.fiatAmountLabel.text = sumInFiat
         self.fiatNameLabel.text = "\(wallet?.fiatName ?? "")"
         self.addressLabel.text = "\(wallet?.address ?? "")"

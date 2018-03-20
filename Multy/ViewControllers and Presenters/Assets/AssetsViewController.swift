@@ -296,12 +296,7 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
     }
     
     func goToWalletVC(indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
-        let walletVC = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! WalletViewController
-        let wallet = self.presenter.account?.wallets[indexPath.row - 2]
-        walletVC.presenter.wallet = wallet
-        walletVC.presenter.account = self.presenter.account
-        sendAnalyticsEvent(screenName: screenMain, eventName: "\(walletOpenWithChainTap)\(wallet!.chain)")
+        let walletVC = presenter.getWalletViewController(indexPath: indexPath)
         self.navigationController?.pushViewController(walletVC, animated: true)
     }
     

@@ -14,7 +14,7 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    var mainVC: UIViewController?
+    var mainVC: BTCWalletViewController?
     
     var wallet: UserWalletRLM? {
         didSet {
@@ -62,11 +62,11 @@ class MainWalletHeaderCell: UITableViewCell, UICollectionViewDelegate {
     }
     
     @IBAction func closeAction(_ sender: Any) {
-        (self.mainVC as! WalletViewController).closeAction()
+        self.mainVC?.closeAction()
     }
     
     @IBAction func settingsAction(_ sender: Any) {
-        (self.mainVC as! WalletViewController).settingssAction(Any.self)
+        self.mainVC?.settingsAction(Any.self)
     }
 }
 

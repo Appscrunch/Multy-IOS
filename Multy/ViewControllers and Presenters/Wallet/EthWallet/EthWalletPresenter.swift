@@ -6,6 +6,9 @@ import UIKit
 
 class EthWalletPresenter: NSObject {
     var mainVC : EthWalletViewController?
+    
+    var topCellHeight = CGFloat(0)
+    
     var blockedAmount = UInt64(0)
     var wallet : UserWalletRLM? {
         didSet {

@@ -4,7 +4,12 @@
 
 import UIKit
 
-class WalletViewController: UIViewController, AnalyticsProtocol {
+private typealias TableViewDelegate = BTCWalletViewController
+private typealias ScrollViewDelegate = BTCWalletViewController
+private typealias TableViewDataSource = BTCWalletViewController
+private typealias CollectionViewDelegateFlowLayout = BTCWalletViewController
+
+class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -22,7 +27,7 @@ class WalletViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var heightOfBottomBar: NSLayoutConstraint!
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
     
-    var presenter = WalletPresenter()
+    var presenter = BTCWalletPresenter()
     
     var isBackupOnScreen = true
     let progressHUD = ProgressHUD(text: "Getting Wallet...")
@@ -244,7 +249,7 @@ class WalletViewController: UIViewController, AnalyticsProtocol {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func settingssAction(_ sender: Any) {
+    @IBAction func settingsAction(_ sender: Any) {
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(settingsWithChainTap)\(presenter.wallet!.chain)")
         self.performSegue(withIdentifier: "settingsVC", sender: sender)
     }
@@ -369,7 +374,7 @@ class WalletViewController: UIViewController, AnalyticsProtocol {
     }
 }
 
-private typealias CancelDelegate = WalletViewController
+private typealias CancelDelegate = BTCWalletViewController
 extension CancelDelegate : CancelProtocol {
     func cancelAction() {
         presentDonationVCorAlert()
@@ -380,7 +385,6 @@ extension CancelDelegate : CancelProtocol {
     }
 }
 
-private typealias TableViewDelegate = WalletViewController
 extension TableViewDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.presenter.numberOfTransactions() == 0 {
@@ -426,7 +430,6 @@ extension TableViewDelegate: UITableViewDelegate {
     }
 }
 
-private typealias ScrollViewDelegate = WalletViewController
 extension ScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentY = scrollView.contentOffset.y
@@ -448,7 +451,6 @@ extension ScrollViewDelegate: UIScrollViewDelegate {
     }
 }
 
-private typealias TableViewDataSource = WalletViewController
 extension TableViewDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -523,14 +525,13 @@ extension TableViewDataSource: UITableViewDataSource {
     }
 }
 
-private typealias CollectionViewDelegateFlowLayout = WalletViewController
 extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 190.0 : 250.0
         
-        return CGSize(width: screenWidth, height: heightForFirstCell /* (screenWidth / 375.0)*/)
+        return CGSize(width: screenWidth, height: heightForFirstCell)
     }
     
     func collectionView(_ collectionView: UICollectionView,

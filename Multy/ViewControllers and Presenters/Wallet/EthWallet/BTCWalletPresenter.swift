@@ -6,8 +6,8 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class WalletPresenter: NSObject {
-    var mainVC : WalletViewController?
+class BTCWalletPresenter: NSObject {
+    var mainVC : BTCWalletViewController?
     var blockedAmount = UInt64(0)
     var wallet : UserWalletRLM? {
         didSet {

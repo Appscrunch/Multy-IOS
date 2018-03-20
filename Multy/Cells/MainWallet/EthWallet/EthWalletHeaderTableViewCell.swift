@@ -13,7 +13,7 @@ class EthWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    var mainVC: UIViewController?
+    var mainVC: EthWalletViewController?
     
     var blockedAmount = UInt64()
     
@@ -48,18 +48,21 @@ class EthWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
         if screenHeight == heightOfX {
             self.topConstraint.constant = 40
         }
+        
+        if wallet != nil {
+            self.titleLbl.text = wallet?.name
+            self.collectionView.reloadData()
+        }
     }
     
     @IBAction func closeAction(_ sender: Any) {
-        (self.mainVC as! WalletViewController).closeAction()
+        self.mainVC?.closeAction()
     }
     
     @IBAction func settingsAction(_ sender: Any) {
-        (self.mainVC as! WalletViewController).settingssAction(Any.self)
+        self.mainVC?.settingssAction(Any.self)
     }
-    
 }
-
 
 extension EthWalletHeaderTableViewCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -73,15 +76,13 @@ extension EthWalletHeaderTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "ethCollectionWalletCell", for: indexPath) as! EthWalletHeaderCollectionViewCell
-//        cell.mainVC = self.mainVC
-//        cell.wallet = self.wallet
-//        cell.blockedAmount = self.blockedAmount
-//        cell.fillInCell()
+        cell.mainVC = self.mainVC
+        cell.wallet = self.wallet
+        cell.blockedAmount = self.blockedAmount
+        cell.fillInCell()
         
         return cell
     }
-    
-    
     
     func updateUI() {
         self.collectionView.reloadData()
