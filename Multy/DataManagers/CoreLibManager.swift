@@ -5,6 +5,8 @@
 import UIKit
 import RealmSwift
 
+private typealias TestCoreLibManager = CoreLibManager
+
 class CoreLibManager: NSObject {
     static let shared = CoreLibManager()
     
@@ -105,7 +107,7 @@ class CoreLibManager: NSObject {
         return extendedKey
     }
     
-    func createWallet(from binaryData: inout BinaryData, currencyID: UInt32, walletID: UInt32) -> Dictionary<String, Any>? {
+    func createWallet(from binaryData: inout BinaryData, blockchain: BlockchainType, walletID: UInt32) -> Dictionary<String, Any>? {
         let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
@@ -142,7 +144,6 @@ class CoreLibManager: NSObject {
             publicKeyStringPointer.deallocate(capacity: 1)
         }
 
-        let blockchain = BlockchainType.create(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
             let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
@@ -159,7 +160,7 @@ class CoreLibManager: NSObject {
         
         //Create wallet
         var walletDict = Dictionary<String, Any>()
-        walletDict["currency"] = currencyID
+        walletDict["currency"] = blockchain.blockchain.rawValue
         walletDict["walletID"] = walletID
         walletDict["addressID"] = UInt32(0)
         
@@ -202,7 +203,7 @@ class CoreLibManager: NSObject {
         return walletDict
     }
     
-    func createPrivateKey(currencyID: UInt32, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> OpaquePointer? {
+    func createPrivateKey(blockchain: BlockchainType, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> OpaquePointer? {
         let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
@@ -227,7 +228,6 @@ class CoreLibManager: NSObject {
             addressPrivateKeyPointer.deallocate(capacity: 1)
         }
         
-        let blockchain = BlockchainType.create(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
             let _ = returnErrorString(opaquePointer: mHDa!, mask: "mHDa")
@@ -257,7 +257,7 @@ class CoreLibManager: NSObject {
         }
     }
     
-    func createAddress(currencyID: UInt32, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> Dictionary<String, Any>? {
+    func createAddress(blockchain: BlockchainType, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> Dictionary<String, Any>? {
         let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
@@ -292,7 +292,6 @@ class CoreLibManager: NSObject {
             publicKeyStringPointer.deallocate(capacity: 1)
         }
         
-        let blockchain = BlockchainType.create(currencyID: currencyID, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
             let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
@@ -309,7 +308,7 @@ class CoreLibManager: NSObject {
         
         //Create wallet
         var addressDict = Dictionary<String, Any>()
-        addressDict["currencyID"] = currencyID
+        addressDict["currencyID"] = blockchain.blockchain.rawValue
         addressDict["walletIndex"] = walletID
         addressDict["addressIndex"] = addressID
         addressDict["addressPointer"] = newAddressPointer.pointee
@@ -367,6 +366,7 @@ class CoreLibManager: NSObject {
                            wallet: UserWalletRLM,
                            binaryData: inout BinaryData,
                            inputs: List<AddressRLM>) -> (String, Double) {
+        let blockchain = BlockchainType.create(wallet: wallet)
         let inputs = DataManager.shared.realmManager.spendableOutput(addresses: inputs)
         let inputSum = DataManager.shared.spendableOutputSum(outputs: inputs)
         
@@ -411,7 +411,7 @@ class CoreLibManager: NSObject {
                                value: input.transactionOutScript,
                                pointer: transactionSource.pointee!)
             
-            let privateKey = createPrivateKey(currencyID: wallet.chain.uint32Value,
+            let privateKey = createPrivateKey(blockchain: blockchain,
                                               walletID: wallet.walletID.uint32Value,
                                               addressID: input.addressID.uint32Value,
                                               binaryData: &binaryData)
@@ -457,7 +457,7 @@ class CoreLibManager: NSObject {
         
         //change
         //MARK: UInt32(wallet.addresses.count)
-        let dict = createAddress(currencyID: wallet.chain.uint32Value,
+        let dict = createAddress(blockchain: blockchain,
                                  walletID: wallet.walletID.uint32Value,
                                  addressID: UInt32(wallet.addresses.count),
                                  binaryData: &binaryData)
@@ -736,7 +736,6 @@ class CoreLibManager: NSObject {
 }
 
 ////////////////////////////////////
-private typealias TestCoreLibManager = CoreLibManager
 extension TestCoreLibManager {
     func startSwiftTest() {
         let mnemo = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
@@ -878,7 +877,7 @@ extension TestCoreLibManager {
         //creating tx
         //Check if exist wallet by walletID
         DataManager.shared.realmManager.getWallet(walletID: 1) { (wallet) in
-            let addressData = self.createAddress(currencyID:    wallet!.chain.uint32Value,
+            let addressData = self.createAddress(blockchain:    blockchain,
                                                  walletID:      wallet!.walletID.uint32Value,
                                                  addressID:     UInt32(wallet!.addresses.count),
                                                  binaryData:    &binaryDataPointer.pointee!.pointee)

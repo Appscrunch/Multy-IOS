@@ -44,18 +44,18 @@ class CreateWalletPresenter: NSObject {
         //MARK: topIndex
         let currencyID = selectedBlockchainType.blockchain.rawValue
         let networkID = selectedBlockchainType.net_type
-        let currentTopIndex = account!.topIndexes.filter("currencyID = \(currencyID) AND networkID == \(networkID)").first
+        var currentTopIndex = account!.topIndexes.filter("currencyID = \(currencyID) AND networkID == \(networkID)").first
         
         if currentTopIndex == nil {
-            mainVC?.presentAlert(with: "TopIndex error data!")
-            
-            return
+//            mainVC?.presentAlert(with: "TopIndex error data!")
+            currentTopIndex = TopIndexRLM.createDefaultIndex(currencyID: NSNumber(value: currencyID), networkID: NSNumber(value: networkID), topIndex: NSNumber(value: 0))
         }
         
-        let dict = DataManager.shared.createNewWallet(for: &binData, currencyID + 60, walletID: currentTopIndex!.topIndex.uint32Value + 1)
+        let dict = DataManager.shared.createNewWallet(for: &binData, blockchain: selectedBlockchainType, walletID: currentTopIndex!.topIndex.uint32Value)
         let cell = mainVC?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
         let params = [
-            "currencyID"    : dict!["currency"] as! UInt32,
+            "currencyID"    : currencyID,
+            "networkID"     : networkID,
             "address"       : dict!["address"] as! String,
             "addressIndex"  : dict!["addressID"] as! UInt32,
             "walletIndex"   : dict!["walletID"] as! UInt32,

@@ -95,12 +95,11 @@ class EthWalletPresenter: NSObject {
     
     
     func getHistoryAndWallet() {
-        DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID) { (wallet, error) in
+        DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: BlockchainType.create(wallet: wallet!)) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
             }
         }
-        
         
         DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, walletID: wallet!.walletID) { (histList, err) in
             if err == nil && histList != nil {

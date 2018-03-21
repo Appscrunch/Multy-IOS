@@ -271,7 +271,7 @@ class ApiManager: NSObject, RequestRetrier {
         }
     }
     
-    func getOneWalletVerbose(walletID: NSNumber, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func getOneWalletVerbose(walletID: NSNumber, blockchain: BlockchainType, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -279,7 +279,7 @@ class ApiManager: NSObject, RequestRetrier {
         ]
         
         //MARK: add chain ID
-        requestManager.request("\(apiUrl)api/v1/wallet/\(walletID)/verbose/0", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet/\(walletID)/verbose/\(blockchain.blockchain.rawValue)/\(blockchain.net_type)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -370,7 +370,7 @@ class ApiManager: NSObject, RequestRetrier {
         }
     }
     
-    func changeWalletName(currencyID: NSNumber, walletID: NSNumber, newName: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func changeWalletName(currencyID: NSNumber, chainType: NSNumber, walletID: NSNumber, newName: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -380,7 +380,8 @@ class ApiManager: NSObject, RequestRetrier {
         let params = [
             "walletname"    : newName,
             "currencyID"    : currencyID.intValue,
-            "walletIndex"   : walletID.intValue
+            "walletIndex"   : walletID.intValue,
+            "networkID"     : chainType.intValue
             ] as [String : Any]
         
         requestManager.request("\(apiUrl)api/v1/wallet/name", method: .post, parameters: params, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in

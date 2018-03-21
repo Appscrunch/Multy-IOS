@@ -83,6 +83,10 @@ class UserWalletRLM: Object {
             wallet.chain = NSNumber(value: chain as! UInt32)
         }
         
+        if let chainType = walletInfo["networkid"]  {
+            wallet.chainType = NSNumber(value: chainType as! UInt32)
+        }
+        
         //parse addition info for each chain
         wallet.updateSpecificInfo(from: walletInfo)
         
@@ -107,7 +111,7 @@ class UserWalletRLM: Object {
         //MARK: server BUG: WalletIndex and walletindex
         //No data from server
         if walletInfo["walletindex"] != nil || walletInfo["WalletIndex"] != nil {
-            wallet.id = generateWalletPrimaryKey(currencyID: 0, walletID: wallet.walletID.uint32Value)
+            wallet.id = generateWalletPrimaryKey(currencyID: wallet.chain.uint32Value, networkID: wallet.chainType.uint32Value, walletID: wallet.walletID.uint32Value)
         }
         
         wallet.updateWalletWithInfo(walletInfo: walletInfo)
