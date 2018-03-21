@@ -2,7 +2,7 @@
 
 Multi cryptocurrency and assets open-source wallet
 
-To conrtibute please check **Build instraction**
+To conrtibute please check **Build instruction**
 
 [Multy](http://multy.io)
 
