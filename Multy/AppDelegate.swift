@@ -51,7 +51,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            })
         }
         
-        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
+        DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
+            if currencyExchange != nil {
+                DataManager.shared.currencyExchange.update(currencyExchangeRLM: currencyExchange!)
+            }
+        }
+        
+//        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
         
         //FOR TEST NOT MAIN STRORYBOARD
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -60,16 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = initialViewController
 //        self.window?.makeKeyAndVisible()
         
-        
-//        let branch: Branch = Branch.getInstance()
-//        branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: {params, error in
-//            if error == nil {
-//                // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
-//                // params will be empty if no data found
-//                // ... insert custom logic here ...
-//                print("params: %@", params as? [String: AnyObject] ?? {})
-//            }
-//        })
         // for debug and development only
         Branch.getInstance().setDebug()
         // listener for Branch Deep Link data
@@ -169,7 +165,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
+        DataManager.shared.realmManager.updateCurrencyExchangeRLM(curExchange: DataManager.shared.currencyExchange)
+//        UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -178,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         self.closePresented()
         isActiveFirstTime = true
-        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
+//        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -194,12 +191,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             isActiveFirstTime = false
         }
-        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
+//        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        DataManager.shared.realmManager.updateCurrencyExchangeRLM(curExchange: DataManager.shared.currencyExchange)
+//        UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
         DataManager.shared.finishRealmSession()
-        UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     

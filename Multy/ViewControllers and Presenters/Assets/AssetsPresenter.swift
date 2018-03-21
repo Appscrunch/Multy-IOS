@@ -199,4 +199,27 @@ class AssetsPresenter: NSObject {
             }
         }
     }
+    
+    func getWalletViewController(indexPath: IndexPath) -> UIViewController {
+        let wallet = account?.wallets[indexPath.row - 2]
+        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+        assetsVC?.sendAnalyticsEvent(screenName: screenMain, eventName: "\(walletOpenWithChainTap)\(wallet!.chain)")
+        
+        switch wallet!.chain.uint32Value {
+        case BLOCKCHAIN_BITCOIN.rawValue:
+            let vc = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! BTCWalletViewController
+            vc.presenter.wallet = wallet
+            vc.presenter.account = account
+            
+            return vc
+        case BLOCKCHAIN_ETHEREUM.rawValue:
+            let vc = storyboard.instantiateViewController(withIdentifier: "EthWalletID") as! EthWalletViewController
+            vc.presenter.wallet = wallet
+            vc.presenter.account = account
+            
+            return vc
+        default:
+            return UIViewController()
+        }
+    }
 }

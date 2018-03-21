@@ -112,6 +112,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     }
     
     func updateUIWithWallet() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: self.presenter.walletPayFrom!))
         let cryptoStr = "\(self.presenter.walletPayFrom?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(self.presenter.walletPayFrom?.cryptoName ?? "BTC")"
         let fiatSum = "\(((self.presenter.walletPayFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)) \(self.presenter.walletPayFrom?.fiatName ?? "USD")"
         
@@ -259,6 +260,8 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.row != 2 {
             let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
             transactionCell.feeRate = self.presenter.feeRate
+            // FIXME: add blocchains type (transactionDTO.blockchainType)
+            transactionCell.blockchainType = BlockchainType.create(currencyID: 0, netType: 0)  // only BTC!!
             if indexPath.row == 0 {
                 transactionCell.makeCellBy(indexPath: [0, 3])  //Slow
                 

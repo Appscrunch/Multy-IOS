@@ -1,10 +1,6 @@
-//
-//  StockExchangeRates.swift
-//  Multy
-//
-//  Created by MacBook on 24.01.2018.
-//Copyright © 2018 Idealnaya rabota. All rights reserved.
-//
+//Copyright 2018 Idealnaya rabota LLC
+//Licensed under Multy.io license.
+//See LICENSE for details
 
 import Foundation
 import RealmSwift

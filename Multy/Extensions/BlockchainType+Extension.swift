@@ -12,6 +12,9 @@ extension BlockchainTypeEquatable: Equatable {
     }
 }
 
+// MARK: MUST READ
+// for every new blockchain entity we have to update all calculated properties:
+// iconString, shortName, fullName, qrBlockchainString
 extension BlockchainType {
     var iconString : String {
         var iconString = ""
@@ -121,6 +124,40 @@ extension BlockchainType {
             fullName = "BitShares"
         case BLOCKCHAIN_ERC20:
             fullName = "ERC20 Tokens"
+        default:
+            fullName = ""
+        }
+        
+        return fullName
+    }
+    
+    var qrBlockchainString : String {
+        var fullName = ""
+        
+        switch self.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            //https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
+            fullName = "bitcoin"
+        case BLOCKCHAIN_LITECOIN:
+            fullName = "litecoin"
+        case BLOCKCHAIN_DASH:
+            fullName = "dash"
+        case BLOCKCHAIN_ETHEREUM:
+            fullName = "ethereum"
+        case BLOCKCHAIN_ETHEREUM_CLASSIC:
+            fullName = ""
+        case BLOCKCHAIN_STEEM:
+            fullName = ""
+        case BLOCKCHAIN_BITCOIN_CASH:
+            fullName = ""
+        case BLOCKCHAIN_BITCOIN_LIGHTNING:
+            fullName = ""
+        case BLOCKCHAIN_GOLOS:
+            fullName = ""
+        case BLOCKCHAIN_BITSHARES:
+            fullName = ""
+        case BLOCKCHAIN_ERC20:
+            fullName = ""
         default:
             fullName = ""
         }

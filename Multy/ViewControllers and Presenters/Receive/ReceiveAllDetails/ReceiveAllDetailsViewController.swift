@@ -24,8 +24,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     let presenter = ReceiveAllDetailsPresenter()
     
-//    var testWallet = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K"
-//    var testWallet = "bitcoin:3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K?amount=0.005"
     var qrcodeImage: CIImage!
     
     override func viewDidLoad() {
@@ -84,9 +82,8 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     func branchDict() -> NSDictionary {
         //check for blockchain
         //if bitcoin - address: "\(chainName):\(presenter.walletAddress)"
-        let chainName = "bitcoin"
         let dict: NSDictionary = ["$og_title" : "Multy",
-                                  "address"   : "\(chainName):\(presenter.walletAddress)",
+                                  "address"   : "\(presenter.qrBlockchainString):\(presenter.walletAddress)",
                                   "amount"    : presenter.cryptoSum?.fixedFraction(digits: 8) ?? "0.0"]
         
         return dict
@@ -165,10 +162,12 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: changeWalletTap)
     }
     
-    
     func updateUIWithWallet() {
         self.walletNameLbl.text = self.presenter.wallet?.name
-        self.walletCryptoSumBtn.setTitle("\((self.presenter.wallet?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.presenter.wallet?.cryptoName ?? "")", for: .normal)
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: presenter.wallet! ))
+        //FIXME: BLOCKCHAIN
+        let blockchain = BlockchainType.create(wallet: presenter.wallet!)
+        self.walletCryptoSumBtn.setTitle("\((self.presenter.wallet?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(blockchain.shortName /*self.presenter.wallet?.cryptoName ?? ""*/)", for: .normal)
         let sum = (presenter.wallet!.sumInCrypto * exchangeCourse).fixedFraction(digits: 2)
         self.walletFiatSumLbl.text = "\(sum) \(self.presenter.wallet?.fiatSymbol ?? "")"
         self.presenter.walletAddress = (self.presenter.wallet?.address)!
@@ -182,7 +181,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
 // MARK: QRCode Activity
     func makeQRCode() {
-        let data = self.makeStringForQRWithSumAndAdress(cryptoName: "bitcoin").data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let data = self.makeStringForQRWithSumAndAdress(cryptoName: presenter.qrBlockchainString).data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(data, forKey: "inputMessage")
         filter?.setValue("Q", forKey: "inputCorrectionLevel")
@@ -192,7 +191,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     func makeQrWithSum() {
-        let walletData = self.makeStringForQRWithSumAndAdress(cryptoName: "bitcoin").data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let walletData = self.makeStringForQRWithSumAndAdress(cryptoName: presenter.qrBlockchainString).data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setValue(walletData, forKey: "inputMessage")
         filter?.setValue("Q", forKey: "inputCorrectionLevel")
@@ -224,7 +223,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.fiatNameLbl.isHidden = false
         
         self.sumValueLbl.text = "\((self.presenter.cryptoSum ?? 0.0).fixedFraction(digits: 8))"
-        self.cryptoNameLbl.text = self.presenter.cryptoName
+        
+        //FIXME: BLOCKCHAIN
+        let blockchain = BlockchainType.create(wallet: presenter.wallet!)
+        self.cryptoNameLbl.text = blockchain.shortName// self.presenter.cryptoName
+        
         self.fiatSumLbl.text = "\((self.presenter.fiatSum ?? 0.0).fixedFraction(digits: 2))"
         self.fiatNameLbl.text = self.presenter.fiatName
         
@@ -243,6 +246,9 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         if segue.identifier == "receiveAmount" {
             let destVC = segue.destination as! ReceiveAmountViewController
             destVC.delegate = self.presenter
+            destVC.blockchain = BlockchainType.create(wallet: presenter.wallet!)
+            destVC.presenter.wallet = self.presenter.wallet
+            
             if self.presenter.cryptoSum != nil {
                 destVC.sumInCrypto = self.presenter.cryptoSum!
                 destVC.cryptoName = self.presenter.cryptoName!

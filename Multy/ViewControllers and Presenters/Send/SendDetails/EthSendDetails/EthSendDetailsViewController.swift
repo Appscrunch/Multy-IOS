@@ -53,6 +53,8 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         if screenHeight == heightOfX {
             bottomBtnConstraint.constant = 0
             topButtonConstraint.constant = 70
+        } else if screenHeight == heightOfPlus {
+            topButtonConstraint.constant = 58
         }
     }
     
@@ -124,6 +126,7 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
         if indexPath.row != 5 {
             let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
             transactionCell.feeRate = self.presenter.feeRate
+            transactionCell.blockchainType = self.presenter.transactionDTO.blockchainType
             transactionCell.makeCellBy(indexPath: indexPath)
             
             return transactionCell

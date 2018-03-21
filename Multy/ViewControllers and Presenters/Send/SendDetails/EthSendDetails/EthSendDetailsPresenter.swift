@@ -13,7 +13,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         didSet {
             self.blockedAmount = calculateBlockedAmount()
             availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
-            availableSumInFiat = availableSumInCrypto! * exchangeCourse
+            availableSumInFiat = availableSumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         }
     }
     
@@ -34,6 +34,9 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     let transactionObj = TransactionRLM()
     
     var customFee = UInt64(20)
+    
+    var cusomtGasPrice: Int?
+    var cusomtGasLimit: Int?
     
     var feeRate: NSDictionary? {
         didSet {
@@ -80,6 +83,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createTransaction(index: Int) {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         switch index {
         case 0:
             self.transactionObj.speedName = "Very Fast"
@@ -152,15 +156,17 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         
     }
     
-    func customFeeData(firstValue: Double, secValue: Double) {
+    func customFeeData(firstValue: Int?, secValue: Int?) {
         print(firstValue)
         if selectedIndexOfSpeed != 5 {
             selectedIndexOfSpeed = 5
         }
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
-        cell.value = firstValue
-        cell.setupUIForBtc()
-        self.customFee = UInt64(firstValue)
+//        cell.value = firstValue
+        self.cusomtGasPrice = firstValue
+        self.cusomtGasLimit = secValue
+        cell.setupUIFor(gasPrice: cusomtGasPrice, gasLimit: cusomtGasLimit)
+//        self.customFee = UInt64(firstValue)
         self.sendDetailsVC?.tableView.reloadData()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
     }
@@ -211,5 +217,5 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
         
         return sum
-    }
+    } 
 }

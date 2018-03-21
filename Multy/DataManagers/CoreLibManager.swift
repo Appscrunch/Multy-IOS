@@ -689,7 +689,7 @@ class CoreLibManager: NSObject {
     func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
         let addressUTF8 = address.UTF8CStringPointer
         //FIXME: Blockchain values
-        let blockchainType = BlockchainType.create(currencyID: wallet.chain.uint32Value, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
+        let blockchainType = BlockchainType.create(wallet: wallet)
         let error = validate_address(blockchainType, addressUTF8)
         
         defer {
@@ -713,9 +713,15 @@ class CoreLibManager: NSObject {
     func getCoreLibVersion() -> String {
         let versionFromCoreLib = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         let err = make_version_string(versionFromCoreLib)
-        
+        defer {
+            versionFromCoreLib.deallocate(capacity: 1)
+            free_error(err)
+        }
         if err != nil {
             let pointer = UnsafeMutablePointer<CustomError>(err)
+            defer {
+                pointer?.deallocate(capacity: 1)
+            }
             let errrString = String(cString: pointer!.pointee.message)
             defer { pointer?.deallocate(capacity: 1) }
             print("setStringValue: \(errrString))")

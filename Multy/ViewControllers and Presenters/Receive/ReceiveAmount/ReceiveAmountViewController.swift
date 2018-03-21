@@ -22,6 +22,12 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     var sumInCrypto = 0.0
     var sumInFiat = 0.0
     
+    var blockchain = BlockchainType.create(currencyID: 0, netType: 0) {
+        didSet {
+            cryptoName = blockchain.shortName
+        }
+    }
+    
     var isCrypto = true
     
     var fiatName = "USD"
@@ -125,6 +131,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
                 return false
             }
         case false:
+            let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchain)
             if ((self.amountTF.text! + string) as NSString).doubleValue/exchangeCourse > self.presenter.getMaxValueOfChain(curency: BLOCKCHAIN_BITCOIN) {
                 self.presentWarning(message: "You can`t enter sum more than chain have")
                 return false
@@ -181,11 +188,13 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             }
             self.saveTfValue()
         }
+        
         return newLength <= self.maxLengthForSum
     }
     
     
     func saveTfValue() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchain)
         if self.isCrypto {
             self.sumInCrypto = self.sumLbl.text!.convertStringWithCommaToDouble()
             self.sumInFiat = self.sumInCrypto * exchangeCourse

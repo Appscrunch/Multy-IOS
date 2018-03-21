@@ -95,7 +95,6 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         }
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
@@ -126,7 +125,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @objc func updateExchange() {
-        let firstCell = self.tableView.cellForRow(at: [0,0]) as? MainWalletHeaderCell
+        let firstCell = self.tableView.cellForRow(at: [0,0]) as? BTCWalletHeaderTableViewCell
         firstCell?.updateUI()
     }
     
@@ -418,15 +417,14 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 272.0 : 332.0
+            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight - (presenter.blockedAmount == 0 ? Constants.ETHWalletScreen.blockedCellDifference : 0)
             
-            backUpView(height: heightForFirstCell)
-            if heightForFirstCell == 332 {
+            backUpView(height: presenter.topCellHeight)
+            if presenter.blockedAmount == 0 {
                 setGradientBackground()
             }
             
-//            return heightForFirstCell /* (screenWidth / 375.0)*/
-            return 375
+            return presenter.topCellHeight
         } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
             if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
                 return 135
@@ -460,17 +458,13 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
             lastY = scrollView.contentOffset.y
         }
     }
-
 }
 
 extension EthWalletViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 190.0 : 250.0
-        
-//        return CGSize(width: screenWidth, height: heightForFirstCell /* (screenWidth / 375.0)*/)
-        return CGSize(width: screenWidth, height: 250)
+        return CGSize(width: screenWidth, height: presenter.topCellHeight - Constants.ETHWalletScreen.collectionCellDifference)
     }
     
     func collectionView(_ collectionView: UICollectionView,

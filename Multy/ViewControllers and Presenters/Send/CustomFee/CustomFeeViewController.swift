@@ -61,7 +61,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             
             self.present(alert, animated: true, completion: nil)
         } else {
-            self.delegate?.customFeeData(firstValue: (self.topPriceTF.text! as NSString).doubleValue, secValue: (self.botLimitTf.text! as NSString).doubleValue)
+            self.delegate?.customFeeData(firstValue: (self.topPriceTF.text! as NSString).integerValue, secValue: (self.botLimitTf.text! as NSString).integerValue)
             self.navigationController?.popViewController(animated: true)
         }
     }

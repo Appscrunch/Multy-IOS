@@ -47,9 +47,9 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         if presenter.transactionDTO.choosenWallet != nil && presenter.isTappedDisabledNextButton(gesture: gesture) {
             let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
             
-            if !isValidDTO.0 {
-                presenter.presentAlert(message: isValidDTO.1!)
-            }
+//            if !isValidDTO.0 {
+//                presenter.presentAlert(message: isValidDTO.1!)
+//            }
             
             return
         }
@@ -86,7 +86,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         if self.presenter.transactionDTO.choosenWallet == nil {
             self.performSegue(withIdentifier: "chooseWalletVC", sender: sender)
         } else {
-            self.performSegue(withIdentifier: "transactionDetail", sender: sender)
+            self.performSegue(withIdentifier: presenter.destinationSegueString(), sender: sender)
         }
     }
     
@@ -107,7 +107,6 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
                 }
             }
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -118,10 +117,14 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         case "qrCamera"?:
             let qrScanerVC = segue.destination as! QrScannerViewController
             qrScanerVC.qrDelegate = self.presenter
-        case "transactionDetail"?:
+        case "sendBTCDetailsVC"?:
             let sendDetailsVC = segue.destination as! SendDetailsViewController
             sendDetailsVC.presenter.transactionDTO = presenter.transactionDTO
-        default: break
+        case "sendETHDetailsVC"?:
+            let sendDetailsVC = segue.destination as! EthSendDetailsViewController
+            sendDetailsVC.presenter.transactionDTO = presenter.transactionDTO
+        default:
+            break
         }
     }
     

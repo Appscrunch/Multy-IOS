@@ -15,6 +15,7 @@ class SendAmountPresenter: NSObject {
                 sumInCrypto = transactionDTO.sendAmount!
             }
             transactionObj = transactionDTO.transaction!.transactionRLM
+            cryptoName = transactionDTO.blockchainType.shortName
         }
     }
     var account = DataManager.shared.realmManager.account
@@ -29,6 +30,7 @@ class SendAmountPresenter: NSObject {
     
     var blockedAmount           : UInt64? {
         didSet {
+            let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
             availableSumInCrypto = transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
             availableSumInFiat = availableSumInCrypto! * exchangeCourse
         }
@@ -115,12 +117,14 @@ class SendAmountPresenter: NSObject {
     }
     
     func cryptoToUsd() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         self.sumInFiat = self.sumInCrypto * exchangeCourse
         self.sumInFiat = Double(round(100 * self.sumInFiat)/100)
         self.sendAmountVC?.bottomSumLbl.text = "\(self.sumInFiat.fixedFraction(digits: 2)) "
     }
     
     func usdToCrypto() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         self.sumInCrypto = self.sumInFiat/exchangeCourse
         self.sumInCrypto = Double(round(100000000 * self.sumInCrypto)/100000000)
         if self.sumInCrypto > self.availableSumInCrypto! {
@@ -140,6 +144,7 @@ class SendAmountPresenter: NSObject {
     
     func getNextBtnSum() -> Double {
         let satoshiAmount = UInt64(sumInCrypto * pow(10, 8))
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         
         if satoshiAmount == 0 {
             return 0
@@ -224,6 +229,7 @@ class SendAmountPresenter: NSObject {
     }
     
     func saveTfValue() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         if self.isCrypto {
             self.sumInCrypto = self.sendAmountVC!.topSumLbl.text!.convertStringWithCommaToDouble()
             self.sumInFiat = self.sumInCrypto * exchangeCourse

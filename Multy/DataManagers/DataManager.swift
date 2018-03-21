@@ -18,6 +18,8 @@ class DataManager: NSObject {
     var donationCode = 0
     var btcMainNetDonationAddress = String()
     
+    var currencyExchange = CurrencyExchange()
+    
     override init() {
         super.init()
         
@@ -55,5 +57,19 @@ class DataManager: NSObject {
 //            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
             return true
         }
+    }
+    
+    func makeExchangeFor(blockchainType: BlockchainType) -> Double {
+        let exchange = 0.0
+        switch blockchainType.blockchain {
+        case BLOCKCHAIN_BITCOIN :
+            return self.currencyExchange.btcToUSD
+        case BLOCKCHAIN_ETHEREUM:
+            return self.currencyExchange.ethToUSD
+        default: break
+            
+        }
+        
+        return exchange
     }
 }

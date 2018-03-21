@@ -25,6 +25,7 @@ class WalletAddressTableViewCell: UITableViewCell {
     }
     
     func fillInCell(index: Int) {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: wallet!))
         let address = self.wallet?.addresses[index]
         
         if address == nil {
@@ -44,6 +45,7 @@ class WalletAddressTableViewCell: UITableViewCell {
     }
     
     func updateExchange() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: wallet!))
         sumInFiat = sumInCrypto * exchangeCourse
         self.sumLbl.text = "\(sumInCrypto.fixedFraction(digits: 8)) \(self.wallet?.cryptoName ?? "") / \(sumInFiat.fixedFraction(digits: 2)) \(self.wallet?.fiatName ?? "")"
     }
