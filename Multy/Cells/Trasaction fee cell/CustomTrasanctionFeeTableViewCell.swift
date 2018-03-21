@@ -12,7 +12,11 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
     @IBOutlet weak var valuelbl: UILabel!
     @IBOutlet weak var checkImg: UIImageView!
     
-    var value = 0.0
+    @IBOutlet weak var gasPriceValueLbl: UILabel!
+    @IBOutlet weak var gasLimitValueLbl: UILabel!
+    @IBOutlet weak var customTopConstraint: NSLayoutConstraint!
+    
+    var value = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,16 +27,22 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupUIForBtc() {
+    func setupUIFor(gasPrice: Int?, gasLimit: Int?) {
 //        self.middleLbl.isHidden = true
         self.checkImg.isHidden = false
 //        self.toplbl.isHidden = false
 //        self.valuelbl.isHidden = false
+        if gasLimit != nil && gasPrice != nil {
+            gasLimitValueLbl.text = "\(gasLimit!)"
+            gasPriceValueLbl.text = "\(gasPrice!)"
+            customTopConstraint.constant = 12
+        }
         
 //        self.valuelbl.text = "\(Int(self.value))"
     }
     
     func reloadUI() {
+        self.customTopConstraint.constant = 20
         self.middleLbl.isHidden = false
         self.checkImg.isHidden = true
         self.toplbl.isHidden = true

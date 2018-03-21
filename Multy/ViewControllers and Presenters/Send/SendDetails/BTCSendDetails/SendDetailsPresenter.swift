@@ -13,7 +13,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         didSet {
             self.blockedAmount = calculateBlockedAmount()
             availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
-            availableSumInFiat = availableSumInCrypto! * exchangeCourse
+            availableSumInFiat = availableSumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         }
     }
     
@@ -85,6 +85,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createTransaction(index: Int) {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         switch index {
         case 0:
             self.transactionObj.speedName = "Very Fast"
@@ -140,6 +141,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createDonation() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
         self.donationObj.sumInCrypto = self.donationInCrypto
         self.donationObj.cryptoName = self.cryptoName
         self.donationObj.sumInFiat = Double(round(100*self.donationInCrypto!*exchangeCourse/100))
@@ -183,15 +185,15 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
     }
     
-    func customFeeData(firstValue: Double, secValue: Double) {
+    func customFeeData(firstValue: Int?, secValue: Int?) {
         print(firstValue)
         if selectedIndexOfSpeed != 5 {
            selectedIndexOfSpeed = 5
         }
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
-        cell.value = firstValue
-        cell.setupUIForBtc()
-        self.customFee = UInt64(firstValue)
+        cell.value = (firstValue)!
+        cell.setupUIFor(gasPrice: nil, gasLimit: nil)
+        self.customFee = UInt64(firstValue!)
         self.sendDetailsVC?.tableView.reloadData()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
     }

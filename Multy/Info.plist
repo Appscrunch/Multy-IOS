@@ -32,9 +32,9 @@
 	<key>CFBundleVersion</key>
 	<string>27</string>
 	<key>GIT_BRANCH_NAME</key>
-	<string>MUL-934_AppVersion</string>
+	<string>MUL-842_SocketUpdate</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>2ad2506</string>
+	<string>d96d923</string>
 	<key>GIT_TAG_NAME</key>
 	<string>Release-26-dirty</string>
 	<key>LSRequiresIPhoneOS</key>

@@ -164,7 +164,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     func updateUIWithWallet() {
         self.walletNameLbl.text = self.presenter.wallet?.name
-        
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: presenter.wallet! ))
         //FIXME: BLOCKCHAIN
         let blockchain = BlockchainType.create(wallet: presenter.wallet!)
         self.walletCryptoSumBtn.setTitle("\((self.presenter.wallet?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(blockchain.shortName /*self.presenter.wallet?.cryptoName ?? ""*/)", for: .normal)
@@ -247,6 +247,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             let destVC = segue.destination as! ReceiveAmountViewController
             destVC.delegate = self.presenter
             destVC.blockchain = BlockchainType.create(wallet: presenter.wallet!)
+            destVC.presenter.wallet = self.presenter.wallet
             
             if self.presenter.cryptoSum != nil {
                 destVC.sumInCrypto = self.presenter.cryptoSum!

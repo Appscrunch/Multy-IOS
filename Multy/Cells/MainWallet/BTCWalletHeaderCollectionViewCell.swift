@@ -44,6 +44,7 @@ class BTCWalletHeaderCollectionViewCell: UICollectionViewCell, AnalyticsProtocol
     }
     
     func fillInCell() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: wallet!))
         let sumInFiat = ((self.wallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
         self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0")"
         //FIXME: BLOCKCHAIN

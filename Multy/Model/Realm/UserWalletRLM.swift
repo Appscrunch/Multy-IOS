@@ -21,7 +21,8 @@ class UserWalletRLM: Object {
     @objc dynamic var cryptoName = String()  //like BTC
     @objc dynamic var sumInCrypto: Double = 0.0 {
         didSet {
-            sumInFiat = sumInCrypto * exchangeCourse
+            let blockchain = BlockchainType.create(wallet: self)
+            sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchain)
         }
     }
     

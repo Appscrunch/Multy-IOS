@@ -8,6 +8,7 @@ class ReceiveAmountPresenter: NSObject {
 
     var receiveAmountVC: ReceiveAmountViewController?
     
+    var wallet: UserWalletRLM?
     
     func getMaxValueOfChain(curency: Blockchain) -> Double {
         switch curency {

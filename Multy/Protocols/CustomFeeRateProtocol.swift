@@ -5,5 +5,5 @@
 import Foundation
 
 protocol CustomFeeRateProtocol {
-    func customFeeData(firstValue: Double, secValue: Double)
+    func customFeeData(firstValue: Int?, secValue: Int?)
 }
