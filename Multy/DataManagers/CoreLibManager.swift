@@ -709,6 +709,24 @@ class CoreLibManager: NSObject {
             return (true, nil)
         }
     }
+    
+    func getCoreLibVersion() -> String {
+        let versionFromCoreLib = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        let err = make_version_string(versionFromCoreLib)
+        
+        if err != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(err)
+            let errrString = String(cString: pointer!.pointee.message)
+            defer { pointer?.deallocate(capacity: 1) }
+            print("setStringValue: \(errrString))")
+            
+            return ""
+        } else {
+            let pointer = String(cString: versionFromCoreLib.pointee!)
+            
+            return pointer
+        }
+    }
 }
 
 ////////////////////////////////////

@@ -1576,6 +1576,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 452290631FBB18D30024B550 /* Build configuration list for PBXNativeTarget "Multy" */;
 			buildPhases = (
+				45498F8F2061211400130B94 /* ShellScript */,
 				3FF7FD1FA878408871620F12 /* [CP] Check Pods Manifest.lock */,
 				4522904D1FBB18D30024B550 /* Sources */,
 				4522904E1FBB18D30024B550 /* Frameworks */,
@@ -1737,6 +1738,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		45498F8F2061211400130B94 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "tag=$(git describe --tags --abbrev=0 --dirty)\nbranch=$(git rev-parse --abbrev-ref HEAD)\ncommitHash=$(git log -1 --format=%h)\n#curdate     =$(date +\"%d.%m.%y\")\n\n#if [ ${CONFIGURATION} == \"Release\" ]; then\n#buildNumber=$(git log -1 --format=%h)\n\n/usr/libexec/PlistBuddy -c \"Set :GIT_TAG_NAME $tag\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n/usr/libexec/PlistBuddy -c \"Set :GIT_BRANCH_NAME $branch\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n/usr/libexec/PlistBuddy -c \"Set :GIT_COMMIT_HASH $commitHash\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
 		};
 		45A7DAC077A4AF85F649A1B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
