@@ -24,16 +24,16 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         }
     }
     
-    func customFeeData(firstValue: Double, secValue: Double) {
+    func customFeeData(firstValue: Int?, secValue: Int?) {
         print(firstValue)
         if selectedIndexOfSpeed != 5 {
             selectedIndexOfSpeed = 2
         }
         let cell = self.mainVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
-        cell.value = firstValue
-        cell.setupUIForBtc()
+        cell.value = (firstValue)!
+        cell.setupUIFor(gasPrice: nil, gasLimit: nil)
         self.mainVC?.isTransactionSelected = true
-        self.customFee = UInt64(firstValue)
+        self.customFee = UInt64(firstValue!)
         self.mainVC?.tableView.reloadData()
         self.mainVC?.makeSendAvailable(isAvailable: true)
     }
@@ -59,6 +59,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     }
     
     func makeFiatDonat() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: walletPayFrom!))
         let cryptoDonat = self.mainVC?.donationTF.text //string
         let cryptoDonatWithDot = cryptoDonat?.replacingOccurrences(of: ",", with: ".") as NSString?
         let fiatDonat = (cryptoDonatWithDot!.doubleValue) * exchangeCourse

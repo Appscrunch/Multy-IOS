@@ -12,8 +12,7 @@ class DonationCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
+        self.setupUIfor(view: botView)
     }
     
     func makeCellBy(index: Int) {
@@ -28,11 +27,11 @@ class DonationCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setupUI() {
-        botView.layer.shadowColor = UIColor.black.cgColor
-        botView.layer.shadowOpacity = 1
-        botView.layer.shadowOffset = CGSize.zero
-        botView.layer.shadowRadius = 15
+    func setupUIfor(view: UIView) {
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 1
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 5
     }
 
 }

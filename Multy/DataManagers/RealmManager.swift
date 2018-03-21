@@ -624,6 +624,35 @@ class RealmManager: NSObject {
             }
         }
     }
+    
+    func updateCurrencyExchangeRLM(curExchange: CurrencyExchange) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+//                let currencyExchange = realm.object(ofType: CurrencyExchangeRLM.self, forPrimaryKey: 1)
+                let curRlm = CurrencyExchangeRLM()
+                curRlm.createCurrencyExchange(currencyExchange: curExchange)
+                try! realm.write {
+//                    curRlm.btcToUSD = DataManager.shared.currencyExchange.btcToUSD
+//                    curRlm.btcToUSD = DataManager.shared.currencyExchange.ethToUSD
+                    realm.add(curRlm, update: true)
+                }
+            } else {
+                print("Error fetching realm:\(#function)")
+            }
+        }
+    }
+    
+    func fetchCurrencyExchange(completion: @escaping(_ curExhange: CurrencyExchangeRLM?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                let currencyExchange = realm.object(ofType: CurrencyExchangeRLM.self, forPrimaryKey: 1)
+                completion(currencyExchange)
+            } else {
+                print("Error fetching realm:\(#function)")
+                completion(nil)
+            }
+        }
+    }
 }
 
 private typealias RealmMigrationManager = RealmManager

@@ -71,6 +71,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
     
     func setupDonationUI() {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
         self.donationTF.text = "\((self.presenter.donationInCrypto ?? 0.0).fixedFraction(digits: 8))"
         self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
         self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat?.fixedFraction(digits: 2) ?? "0.00")"
@@ -148,6 +149,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     //MARK: donationSwitch actions
     @IBAction func switchDonationAction(_ sender: Any) {
         var offset = scrollView.contentOffset
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
         
         if !self.isDonateAvailableSW.isOn {
             self.donationTF.resignFirstResponder()
@@ -249,6 +251,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
     
     func saveDonationSum(string: String) {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
         if string == "" && self.donationTF.text == "" {
             self.presenter.donationInCrypto = 0.0
             self.presenter.donationInFiat = 0.0
@@ -290,6 +293,7 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row != 5 {
             let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
             transactionCell.feeRate = self.presenter.feeRate
+            transactionCell.blockchainType = self.presenter.transactionDTO.blockchainType
             transactionCell.makeCellBy(indexPath: indexPath)
             
             return transactionCell

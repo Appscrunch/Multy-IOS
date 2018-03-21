@@ -49,10 +49,12 @@ class Socket: NSObject {
 //                print("-----exchangeUpdate: \(data)")
                 if !(data is NSNull) {
                     //MARK: uncomment
-                    let course = ((data[0] as! NSDictionary)["btc_usd"] as! NSNumber).doubleValue
-                    if course > 0 {
-                        exchangeCourse = course
-                    }
+                    DataManager.shared.currencyExchange.update(exchangeDict: data[0] as! NSDictionary)
+                    
+//                    let course = ((data[0] as! NSDictionary)["btc_usd"] as! NSNumber).doubleValue
+//                    if course > 0 {
+//                        exchangeCourse = course
+//                    }
                 }//"BTCtoUSD"
             }
             

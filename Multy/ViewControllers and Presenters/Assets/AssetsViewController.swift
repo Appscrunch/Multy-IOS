@@ -548,7 +548,7 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(10, 20, 0, 20)
+        return UIEdgeInsetsMake(10, 10, 0, 10)
     }
     
     func collectionView(_ collectionView: UICollectionView,
