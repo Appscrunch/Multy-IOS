@@ -84,7 +84,7 @@ class SendAmountPresenter: NSObject {
         let wallet = transactionDTO.choosenWallet!
         binaryData = account!.binaryDataString.createBinaryData()!
         
-        addressData = core.createAddress(currencyID:    wallet.chain.uint32Value,
+        addressData = core.createAddress(blockchain:    transactionDTO.blockchainType,
                                          walletID:      wallet.walletID.uint32Value,
                                          addressID:     UInt32(wallet.addresses.count),
                                          binaryData:    &binaryData!)

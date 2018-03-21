@@ -388,7 +388,7 @@ class RealmManager: NSObject {
                     let newWallets = List<UserWalletRLM>()
                     
                     for wallet in arrOfWallets {
-                        let modifiedWallet = accWallets.filter("walletID = \(wallet.walletID)").first
+                        let modifiedWallet = accWallets.filter("walletID = \(wallet.walletID) AND chain = \(wallet.chain) AND chainType = \(wallet.chainType)").first
                         
                         try! realm.write {
                             if modifiedWallet != nil {
@@ -592,7 +592,7 @@ class RealmManager: NSObject {
     func getWallet(walletID: NSNumber, completion: @escaping(_ wallet: UserWalletRLM?) -> ()) {
         getRealm { (realmOpt, error) in
             if let realm = realmOpt {
-                let primaryKey = generateWalletPrimaryKey(currencyID: 0, walletID: walletID.uint32Value)
+                let primaryKey = generateWalletPrimaryKey(currencyID: 0, networkID: 0, walletID: walletID.uint32Value)
                 let wallet = realm.object(ofType: UserWalletRLM.self, forPrimaryKey: primaryKey)
                 
                 completion(wallet)

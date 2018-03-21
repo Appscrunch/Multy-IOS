@@ -100,11 +100,12 @@ var exchangeCourse: Double = 1.0 {
 var isNeedToAutorise = false
 var isViewPresented = false
 
-func generateWalletPrimaryKey(currencyID: UInt32, walletID: UInt32) -> String {
+func generateWalletPrimaryKey(currencyID: UInt32, networkID: UInt32, walletID: UInt32) -> String {
     let currencyString = String(currencyID).sha3(.sha256)
     let walletString = String(walletID).sha3(.sha256)
+    let networkString = String(networkID).sha3(.sha256)
     
-    return ("\(currencyString)" + "\(walletString)").sha3(.sha256)
+    return ("\(currencyString)" + "\(walletString) +\(networkString)").sha3(.sha256)
 }
 
 func convertSatoshiToBTC(sum: UInt64) -> Double {    

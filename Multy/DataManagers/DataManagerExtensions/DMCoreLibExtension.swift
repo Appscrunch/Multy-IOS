@@ -37,8 +37,8 @@ extension DataManager {
 //        
 //    }
     
-    func createNewWallet(for binaryData: inout BinaryData, _ currencyID: UInt32, walletID: UInt32) -> Dictionary<String, Any>? {
-        return coreLibManager.createWallet(from: &binaryData, currencyID: currencyID, walletID: walletID)
+    func createNewWallet(for binaryData: inout BinaryData, blockchain: BlockchainType, walletID: UInt32) -> Dictionary<String, Any>? {
+        return coreLibManager.createWallet(from: &binaryData,blockchain: blockchain, walletID: walletID)
     }
     
     func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
@@ -51,7 +51,7 @@ extension DataManager {
         var binaryData = DataManager.shared.realmManager.account!.binaryDataString.createBinaryData()!
         
         
-        let addressData = core.createAddress(currencyID: transactionDTO.choosenWallet!.chain.uint32Value,
+        let addressData = core.createAddress(blockchain: transactionDTO.blockchainType,
                                              walletID: transactionDTO.choosenWallet!.walletID.uint32Value,
                                              addressID: UInt32(transactionDTO.choosenWallet!.addresses.count),
                                              binaryData: &binaryData)

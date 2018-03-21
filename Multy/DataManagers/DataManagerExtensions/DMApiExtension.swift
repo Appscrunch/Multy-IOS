@@ -205,8 +205,8 @@ extension DataManager {
         }
     }
     
-    func getOneWalletVerbose(walletID: NSNumber, completion: @escaping (_ answer: UserWalletRLM?,_ error: Error?) -> ()) {
-        apiManager.getOneWalletVerbose(walletID: walletID) { (dict, error) in
+    func getOneWalletVerbose(walletID: NSNumber, blockchain: BlockchainType, completion: @escaping (_ answer: UserWalletRLM?,_ error: Error?) -> ()) {
+        apiManager.getOneWalletVerbose(walletID: walletID, blockchain: blockchain) { (dict, error) in
             if dict != nil && dict!["wallet"] != nil && !(dict!["wallet"] is NSNull) {
                 let wallet = UserWalletRLM.initWithInfo(walletInfo: (dict!["wallet"] as! NSArray)[0] as! NSDictionary)
 //                let addressesInfo = ((dict!["wallet"] as! NSArray)[0] as! NSDictionary)["addresses"]!
@@ -255,8 +255,8 @@ extension DataManager {
         }
     }
     
-    func changeWalletName(currencyID: NSNumber, walletID: NSNumber, newName: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
-        apiManager.changeWalletName(currencyID: currencyID, walletID: walletID, newName: newName) { (answer, error) in
+    func changeWalletName(currencyID: NSNumber, chainType: NSNumber, walletID: NSNumber, newName: String, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.changeWalletName(currencyID: currencyID, chainType: chainType, walletID: walletID, newName: newName) { (answer, error) in
             if error == nil {
                 if answer != nil {
                     
