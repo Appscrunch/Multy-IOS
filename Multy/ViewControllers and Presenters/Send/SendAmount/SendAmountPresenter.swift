@@ -15,6 +15,7 @@ class SendAmountPresenter: NSObject {
                 sumInCrypto = transactionDTO.sendAmount!
             }
             transactionObj = transactionDTO.transaction!.transactionRLM
+            cryptoName = transactionDTO.blockchainType.shortName
         }
     }
     var account = DataManager.shared.realmManager.account

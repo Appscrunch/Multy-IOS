@@ -558,6 +558,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4443978E20625CD700C9F4BF /* BTCSendDetails */ = {
+			isa = PBXGroup;
+			children = (
+				45A9494C1FC5D972003C3A23 /* SendDetailsViewController.swift */,
+				45A9494E1FC6BDF3003C3A23 /* SendDetailsPresenter.swift */,
+			);
+			path = BTCSendDetails;
+			sourceTree = "<group>";
+		};
+		4443978F2062643400C9F4BF /* BTCWallet */ = {
+			isa = PBXGroup;
+			children = (
+				FA4D43F81FC5D8B0003C7117 /* BTCWalletViewController.swift */,
+				FA4D43FA1FC6C760003C7117 /* BTCWalletPresenter.swift */,
+			);
+			path = BTCWallet;
+			sourceTree = "<group>";
+		};
 		4491513E2049764D0028195F /* MultyUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1054,9 +1072,8 @@
 		45A9494B1FC5D94F003C3A23 /* SendDetails */ = {
 			isa = PBXGroup;
 			children = (
+				4443978E20625CD700C9F4BF /* BTCSendDetails */,
 				45A87830205FC7110071D6F1 /* EthSendDetails */,
-				45A9494C1FC5D972003C3A23 /* SendDetailsViewController.swift */,
-				45A9494E1FC6BDF3003C3A23 /* SendDetailsPresenter.swift */,
 			);
 			path = SendDetails;
 			sourceTree = "<group>";
@@ -1241,8 +1258,6 @@
 		45D4D16A205C1DC7008B1F0B /* EthWallet */ = {
 			isa = PBXGroup;
 			children = (
-				FA4D43F81FC5D8B0003C7117 /* BTCWalletViewController.swift */,
-				FA4D43FA1FC6C760003C7117 /* BTCWalletPresenter.swift */,
 				45D4D16B205C1DC7008B1F0B /* EthWalletViewController.swift */,
 				45D4D16C205C1DC7008B1F0B /* EthWalletPresenter.swift */,
 			);
@@ -1397,6 +1412,7 @@
 		FA4D43E81FC5C305003C7117 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				4443978F2062643400C9F4BF /* BTCWallet */,
 				45D4D16A205C1DC7008B1F0B /* EthWallet */,
 				455126BB1FE04AAD0026A892 /* AddressViewController.swift */,
 				4522361D1FCD6B6E004BA490 /* Transaction */,

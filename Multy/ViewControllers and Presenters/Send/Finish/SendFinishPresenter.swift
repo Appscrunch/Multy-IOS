@@ -9,7 +9,7 @@ class SendFinishPresenter: NSObject {
     var sendFinishVC: SendFinishViewController?
     var transactionDTO = TransactionDTO() {
         didSet {
-            cryptoName = transactionDTO.choosenWallet!.cryptoName
+            cryptoName = transactionDTO.blockchainType.shortName
         }
     }
     

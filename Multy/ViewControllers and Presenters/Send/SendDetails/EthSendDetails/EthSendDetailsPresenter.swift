@@ -211,5 +211,5 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
         
         return sum
-    }
+    } 
 }
