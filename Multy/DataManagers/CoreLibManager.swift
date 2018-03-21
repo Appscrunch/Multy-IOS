@@ -689,7 +689,7 @@ class CoreLibManager: NSObject {
     func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
         let addressUTF8 = address.UTF8CStringPointer
         //FIXME: Blockchain values
-        let blockchainType = BlockchainType.create(currencyID: wallet.chain.uint32Value, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue)
+        let blockchainType = BlockchainType.create(wallet: wallet)
         let error = validate_address(blockchainType, addressUTF8)
         
         defer {

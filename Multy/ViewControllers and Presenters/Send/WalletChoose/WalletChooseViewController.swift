@@ -32,7 +32,7 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sendDetailsVC" {
+        if segue.identifier == "sendBTCDetailsVC" {
             let detailsVC = segue.destination as! SendDetailsViewController
             presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
             detailsVC.presenter.transactionDTO = presenter.transactionDTO
@@ -92,7 +92,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
 
         
         self.presenter.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "sendDetailsVC", sender: Any.self)
+        self.performSegue(withIdentifier: "sendBTCDetailsVC", sender: Any.self)
 //        let storyboard = UIStoryboard(name: "Send", bundle: nil)   //need to send transactionDTO
 //        let ethDetailsVC = storyboard.instantiateViewController(withIdentifier: "EthSendDetails")
 //        self.navigationController?.pushViewController(ethDetailsVC, animated: true)

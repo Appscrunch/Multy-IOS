@@ -21,7 +21,7 @@
         <!--Wallet View Controller-->
         <scene sceneID="muM-pO-AFj">
             <objects>
-                <viewController storyboardIdentifier="WalletMainID" id="Asu-Y0-uVx" customClass="WalletViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletMainID" id="Asu-Y0-uVx" customClass="BTCWalletViewController" customModule="Multy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u23-f6-FDu"/>
                         <viewControllerLayoutGuide type="bottom" id="sck-xy-UOK"/>
@@ -71,7 +71,7 @@
                                     <constraint firstAttribute="width" constant="50" id="nha-zs-Jyd"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="settingssAction:" destination="Asu-Y0-uVx" eventType="touchUpInside" id="hnT-Jt-bpE"/>
+                                    <action selector="settingsAction:" destination="Asu-Y0-uVx" eventType="touchUpInside" id="hnT-Jt-bpE"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to create funds request." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJt-Qg-K3r">
@@ -1443,11 +1443,12 @@ By donating you help us to bring blockchain technology one step closer to ordina
                         <outlet property="tableView" destination="n6F-QX-YIO" id="UZK-FD-uBh"/>
                         <outlet property="tableViewTopConstraint" destination="B8P-sF-hJY" id="H5j-LT-Xcq"/>
                         <outlet property="titleLbl" destination="Son-ag-7Ns" id="vHy-hE-eiU"/>
+                        <segue destination="CB9-uM-FAg" kind="show" identifier="settingsVC" id="Wmz-Ze-lTe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttP-ZT-N7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-367" y="-618"/>
+            <point key="canvasLocation" x="-1052" y="119"/>
         </scene>
     </scenes>
     <resources>
@@ -1462,4 +1463,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="sendIconTabbar" width="26" height="26"/>
         <image name="settings" width="25" height="20"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Wmz-Ze-lTe"/>
+    </inferredMetricsTieBreakers>
 </document>

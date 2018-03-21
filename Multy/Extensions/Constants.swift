@@ -13,6 +13,12 @@ struct Constants {
         static let cancelString = "Cancel"
     }
     
+    struct ETHWalletScreen {
+        static let topCellHeight = CGFloat(375)
+        static let blockedCellDifference = CGFloat(60) // difference in table cell sizes in case existing/non existing blocked amount on wallet
+        static let collectionCellDifference = CGFloat(137) // difference in sizes btw table cell and collection cell
+    }
+    
     //Scurity strings
     struct Security {
         static let jailbrokenDeviceWarningString = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."

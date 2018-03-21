@@ -21,6 +21,8 @@
 		449151402049764D0028195F /* MultyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4491513F2049764D0028195F /* MultyUITests.swift */; };
 		4491514E204976600028195F /* MultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4491514D204976600028195F /* MultyTests.swift */; };
 		44A3DF93205AA1F300FE9955 /* BlockchainType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3DF92205AA1F300FE9955 /* BlockchainType+Extension.swift */; };
+		44BCBDB520601AD0001611A5 /* BTCWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BCBDB420601AD0001611A5 /* BTCWallet.swift */; };
+		44BCBDB720601AE3001611A5 /* ETHWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BCBDB620601AE3001611A5 /* ETHWallet.swift */; };
 		44C06FC9203D832B008CBA9D /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FC8203D832B008CBA9D /* Array+Extension.swift */; };
 		44C06FCB203D9021008CBA9D /* LoggingPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FCA203D9020008CBA9D /* LoggingPrint.swift */; };
 		44DCC201205A9D34001080FB /* TopIndexRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DCC200205A9D34001080FB /* TopIndexRLM.swift */; };
@@ -201,12 +203,12 @@
 		FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43E01FC5895D003C7117 /* String+Extension.swift */; };
 		FA4D43E51FC590F6003C7117 /* SeedPhraseRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */; };
 		FA4D43E71FC5C2A6003C7117 /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43E61FC5C2A6003C7117 /* Wallet.storyboard */; };
-		FA4D43EC1FC5CEE0003C7117 /* MainWalletHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43EA1FC5CEE0003C7117 /* MainWalletHeaderCell.swift */; };
+		FA4D43EC1FC5CEE0003C7117 /* BTCWalletHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43EA1FC5CEE0003C7117 /* BTCWalletHeaderTableViewCell.swift */; };
 		FA4D43ED1FC5CEE0003C7117 /* MainWalletHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43EB1FC5CEE0003C7117 /* MainWalletHeaderCell.xib */; };
-		FA4D43F61FC5D019003C7117 /* MainWalletCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43F41FC5D019003C7117 /* MainWalletCollectionViewCell.swift */; };
+		FA4D43F61FC5D019003C7117 /* BTCWalletHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43F41FC5D019003C7117 /* BTCWalletHeaderCollectionViewCell.swift */; };
 		FA4D43F71FC5D019003C7117 /* MainWalletCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43F51FC5D019003C7117 /* MainWalletCollectionViewCell.xib */; };
-		FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43F81FC5D8B0003C7117 /* WalletViewController.swift */; };
-		FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FA1FC6C760003C7117 /* WalletPresenter.swift */; };
+		FA4D43F91FC5D8B0003C7117 /* BTCWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43F81FC5D8B0003C7117 /* BTCWalletViewController.swift */; };
+		FA4D43FB1FC6C760003C7117 /* BTCWalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FA1FC6C760003C7117 /* BTCWalletPresenter.swift */; };
 		FA4D43FE1FC6D058003C7117 /* TransactionWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */; };
 		FA4D43FF1FC6D058003C7117 /* TransactionWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */; };
 		FA4D44011FC71B6D003C7117 /* AccountRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4D44001FC71B6D003C7117 /* AccountRLM.swift */; };
@@ -286,6 +288,8 @@
 		4491514D204976600028195F /* MultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultyTests.swift; sourceTree = "<group>"; };
 		4491514F204976600028195F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44A3DF92205AA1F300FE9955 /* BlockchainType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockchainType+Extension.swift"; sourceTree = "<group>"; };
+		44BCBDB420601AD0001611A5 /* BTCWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCWallet.swift; sourceTree = "<group>"; };
+		44BCBDB620601AE3001611A5 /* ETHWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHWallet.swift; sourceTree = "<group>"; };
 		44C06FC8203D832B008CBA9D /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		44C06FCA203D9020008CBA9D /* LoggingPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingPrint.swift; sourceTree = "<group>"; };
 		44DCC200205A9D34001080FB /* TopIndexRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopIndexRLM.swift; sourceTree = "<group>"; };
@@ -475,12 +479,12 @@
 		FA4D43E01FC5895D003C7117 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPhraseRLM.swift; sourceTree = "<group>"; };
 		FA4D43E61FC5C2A6003C7117 /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
-		FA4D43EA1FC5CEE0003C7117 /* MainWalletHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletHeaderCell.swift; sourceTree = "<group>"; };
+		FA4D43EA1FC5CEE0003C7117 /* BTCWalletHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCWalletHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		FA4D43EB1FC5CEE0003C7117 /* MainWalletHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletHeaderCell.xib; sourceTree = "<group>"; };
-		FA4D43F41FC5D019003C7117 /* MainWalletCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWalletCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA4D43F41FC5D019003C7117 /* BTCWalletHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCWalletHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA4D43F51FC5D019003C7117 /* MainWalletCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWalletCollectionViewCell.xib; sourceTree = "<group>"; };
-		FA4D43F81FC5D8B0003C7117 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
-		FA4D43FA1FC6C760003C7117 /* WalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPresenter.swift; sourceTree = "<group>"; };
+		FA4D43F81FC5D8B0003C7117 /* BTCWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCWalletViewController.swift; sourceTree = "<group>"; };
+		FA4D43FA1FC6C760003C7117 /* BTCWalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCWalletPresenter.swift; sourceTree = "<group>"; };
 		FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionWalletCell.swift; sourceTree = "<group>"; };
 		FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionWalletCell.xib; sourceTree = "<group>"; };
 		FA4D44001FC71B6D003C7117 /* AccountRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRLM.swift; sourceTree = "<group>"; };
@@ -554,6 +558,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4443978E20625CD700C9F4BF /* BTCSendDetails */ = {
+			isa = PBXGroup;
+			children = (
+				45A9494C1FC5D972003C3A23 /* SendDetailsViewController.swift */,
+				45A9494E1FC6BDF3003C3A23 /* SendDetailsPresenter.swift */,
+			);
+			path = BTCSendDetails;
+			sourceTree = "<group>";
+		};
+		4443978F2062643400C9F4BF /* BTCWallet */ = {
+			isa = PBXGroup;
+			children = (
+				FA4D43F81FC5D8B0003C7117 /* BTCWalletViewController.swift */,
+				FA4D43FA1FC6C760003C7117 /* BTCWalletPresenter.swift */,
+			);
+			path = BTCWallet;
+			sourceTree = "<group>";
+		};
 		4491513E2049764D0028195F /* MultyUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +592,15 @@
 				4491514F204976600028195F /* Info.plist */,
 			);
 			path = MultyTests;
+			sourceTree = "<group>";
+		};
+		44BCBDB320601A24001611A5 /* Wallets */ = {
+			isa = PBXGroup;
+			children = (
+				44BCBDB420601AD0001611A5 /* BTCWallet.swift */,
+				44BCBDB620601AE3001611A5 /* ETHWallet.swift */,
+			);
+			path = Wallets;
 			sourceTree = "<group>";
 		};
 		4506F1721FD9A2B700D575BA /* Wallet settings */ = {
@@ -1041,9 +1072,8 @@
 		45A9494B1FC5D94F003C3A23 /* SendDetails */ = {
 			isa = PBXGroup;
 			children = (
+				4443978E20625CD700C9F4BF /* BTCSendDetails */,
 				45A87830205FC7110071D6F1 /* EthSendDetails */,
-				45A9494C1FC5D972003C3A23 /* SendDetailsViewController.swift */,
-				45A9494E1FC6BDF3003C3A23 /* SendDetailsPresenter.swift */,
 			);
 			path = SendDetails;
 			sourceTree = "<group>";
@@ -1217,10 +1247,10 @@
 		45D4D160205C12DC008B1F0B /* EthWallet */ = {
 			isa = PBXGroup;
 			children = (
-				45D4D161205C12DC008B1F0B /* EthWalletHeaderTableViewCell.xib */,
 				45D4D164205C12DC008B1F0B /* EthWalletHeaderTableViewCell.swift */,
-				45D4D162205C12DC008B1F0B /* EthWalletHeaderCollectionViewCell.xib */,
+				45D4D161205C12DC008B1F0B /* EthWalletHeaderTableViewCell.xib */,
 				45D4D163205C12DC008B1F0B /* EthWalletHeaderCollectionViewCell.swift */,
+				45D4D162205C12DC008B1F0B /* EthWalletHeaderCollectionViewCell.xib */,
 			);
 			path = EthWallet;
 			sourceTree = "<group>";
@@ -1362,6 +1392,7 @@
 		FA4D43E31FC590DC003C7117 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				44BCBDB320601A24001611A5 /* Wallets */,
 				FA4D43E41FC590F6003C7117 /* SeedPhraseRLM.swift */,
 				FA4D44001FC71B6D003C7117 /* AccountRLM.swift */,
 				44DCC200205A9D34001080FB /* TopIndexRLM.swift */,
@@ -1381,9 +1412,8 @@
 		FA4D43E81FC5C305003C7117 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				4443978F2062643400C9F4BF /* BTCWallet */,
 				45D4D16A205C1DC7008B1F0B /* EthWallet */,
-				FA4D43F81FC5D8B0003C7117 /* WalletViewController.swift */,
-				FA4D43FA1FC6C760003C7117 /* WalletPresenter.swift */,
 				455126BB1FE04AAD0026A892 /* AddressViewController.swift */,
 				4522361D1FCD6B6E004BA490 /* Transaction */,
 				4506F1721FD9A2B700D575BA /* Wallet settings */,
@@ -1396,9 +1426,9 @@
 			isa = PBXGroup;
 			children = (
 				45D4D160205C12DC008B1F0B /* EthWallet */,
-				FA4D43EA1FC5CEE0003C7117 /* MainWalletHeaderCell.swift */,
+				FA4D43EA1FC5CEE0003C7117 /* BTCWalletHeaderTableViewCell.swift */,
 				FA4D43EB1FC5CEE0003C7117 /* MainWalletHeaderCell.xib */,
-				FA4D43F41FC5D019003C7117 /* MainWalletCollectionViewCell.swift */,
+				FA4D43F41FC5D019003C7117 /* BTCWalletHeaderCollectionViewCell.swift */,
 				FA4D43F51FC5D019003C7117 /* MainWalletCollectionViewCell.xib */,
 				FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */,
 				FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */,
@@ -1879,7 +1909,7 @@
 				45C738C320358D56005AB761 /* AnalyticsProtocol.swift in Sources */,
 				4575694B1FBDEDE300FDEE20 /* BackupFinishViewController.swift in Sources */,
 				FA8C8783200E65E900F8D5D9 /* Date+Extension.swift in Sources */,
-				FA4D43EC1FC5CEE0003C7117 /* MainWalletHeaderCell.swift in Sources */,
+				FA4D43EC1FC5CEE0003C7117 /* BTCWalletHeaderTableViewCell.swift in Sources */,
 				45E7A8A620065455005D2D6E /* StockExchanges.swift in Sources */,
 				FA58DF661FDC403E00C45303 /* WrongSeedPhraseViewController.swift in Sources */,
 				45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */,
@@ -1941,6 +1971,7 @@
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,
 				455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */,
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
+				44BCBDB520601AD0001611A5 /* BTCWallet.swift in Sources */,
 				45AC1634204850AC00E75BD6 /* BlockchainCellTableViewCell.swift in Sources */,
 				458FD4C71FE3C2CB001C25BA /* SpendableOutputRLM.swift in Sources */,
 				FA4D43E51FC590F6003C7117 /* SeedPhraseRLM.swift in Sources */,
@@ -1964,12 +1995,13 @@
 				45D4D167205C12DC008B1F0B /* EthWalletHeaderCollectionViewCell.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
 				45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */,
+				44BCBDB720601AE3001611A5 /* ETHWallet.swift in Sources */,
 				45A949531FC6D1E1003C3A23 /* TransactionFeeTableViewCell.swift in Sources */,
 				FA869D121FD6C17900C815C3 /* ExchangePriceRLM.swift in Sources */,
 				457569461FBDDD0F00FDEE20 /* CheckWordsPresenter.swift in Sources */,
 				45DCF9D71FE19AFD005A9896 /* CustomFeePresenter.swift in Sources */,
 				45B0B0F01FEBF30C005BB1C0 /* SettingsViewController.swift in Sources */,
-				FA4D43F91FC5D8B0003C7117 /* WalletViewController.swift in Sources */,
+				FA4D43F91FC5D8B0003C7117 /* BTCWalletViewController.swift in Sources */,
 				FAFCDA881FD7DD7A0056DD64 /* Request+Extension.swift in Sources */,
 				444066D0205926D400342046 /* UIApplication+Extension.swift in Sources */,
 				444066D4205927B900342046 /* UIActivityViewController+Extension.swift in Sources */,
@@ -1993,7 +2025,7 @@
 				4585BD3D2049C0DD004542AE /* DonationProtocol.swift in Sources */,
 				444B3B6020455489008129B8 /* BigInt.swift in Sources */,
 				45E215E41FD179100078945A /* QrDataProtocol.swift in Sources */,
-				FA4D43F61FC5D019003C7117 /* MainWalletCollectionViewCell.swift in Sources */,
+				FA4D43F61FC5D019003C7117 /* BTCWalletHeaderCollectionViewCell.swift in Sources */,
 				455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */,
 				45B9CAFE1FBB4A8700AA2A31 /* AssetsViewController.swift in Sources */,
 				4575693A1FBDC38A00FDEE20 /* SeedPhraseWordPresenter.swift in Sources */,
@@ -2040,7 +2072,7 @@
 				45C8D143200780CF00F5994E /* SplashViewController.swift in Sources */,
 				45B5CCA21FDA90DF0069BD46 /* NoInternetConnectionViewController.swift in Sources */,
 				455EA8761FD842610093F69D /* CustomTabBarViewController.swift in Sources */,
-				FA4D43FB1FC6C760003C7117 /* WalletPresenter.swift in Sources */,
+				FA4D43FB1FC6C760003C7117 /* BTCWalletPresenter.swift in Sources */,
 				444066D22059277F00342046 /* UIAlertController+Extension.swift in Sources */,
 				45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */,
 				456F20F2203F149000098405 /* EnterPinViewController.swift in Sources */,

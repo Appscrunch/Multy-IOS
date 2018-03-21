@@ -90,7 +90,8 @@ This feature will be in the next update.</string>
                         <outlet property="tableView" destination="H94-7K-Etr" id="6mf-E7-FlG"/>
                         <segue destination="3gL-lZ-1hN" kind="show" identifier="chooseWalletVC" id="o35-7A-1Zt"/>
                         <segue destination="Tfc-aA-5T8" kind="show" identifier="qrCamera" id="FRo-Sp-aVY"/>
-                        <segue destination="Can-YJ-fx8" kind="show" identifier="transactionDetail" id="EUD-ex-a5v"/>
+                        <segue destination="Can-YJ-fx8" kind="show" identifier="sendBTCDetailsVC" id="EUD-ex-a5v"/>
+                        <segue destination="bre-UG-ufg" kind="show" identifier="sendETHDetailsVC" id="Y3u-nO-qs1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uor-oM-Mbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -235,7 +236,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQR-rq-k4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="1120"/>
+            <point key="canvasLocation" x="1705" y="1496"/>
         </scene>
         <!--Wallet Choose View Controller-->
         <scene sceneID="HO5-Ha-KfH">
@@ -314,12 +315,13 @@ This feature will be in the next update.</string>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="JAJ-uD-tG4" id="3Xg-4G-SMh"/>
-                        <segue destination="Can-YJ-fx8" kind="show" identifier="sendDetailsVC" id="RTX-aa-bzX"/>
+                        <segue destination="Can-YJ-fx8" kind="show" identifier="sendBTCDetailsVC" id="RTX-aa-bzX"/>
+                        <segue destination="bre-UG-ufg" kind="show" identifier="sendETHDetailsVC" id="TSe-kF-31L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q7b-f1-wOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863" y="-36"/>
+            <point key="canvasLocation" x="1506" y="-36"/>
         </scene>
         <!--Send Details View Controller-->
         <scene sceneID="Oor-NV-a9i">
@@ -595,7 +597,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b0-WR-NmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1696.8" y="118.74062968515743"/>
+            <point key="canvasLocation" x="2409" y="535"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Wn-fo-Rxe">
@@ -933,7 +935,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbg-JX-sJz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2557.5999999999999" y="-36.431784107946029"/>
+            <point key="canvasLocation" x="3506" y="-36"/>
         </scene>
         <!--Send Finish View Controller-->
         <scene sceneID="2Jx-1f-JIK">
@@ -1251,7 +1253,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmy-Xf-KB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420" y="-36.431784107946029"/>
+            <point key="canvasLocation" x="4268" y="-36"/>
         </scene>
         <!--Sending Animation View Controller-->
         <scene sceneID="pQ1-vc-SFR">
@@ -1321,7 +1323,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSG-mW-PMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4324" y="-36"/>
+            <point key="canvasLocation" x="5156" y="-36"/>
         </scene>
         <!--Eth Send Details View Controller-->
         <scene sceneID="Vl6-EN-tmI">
@@ -1344,6 +1346,9 @@ This feature will be in the next update.</string>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cancelAction:" destination="bre-UG-ufg" eventType="touchUpInside" id="nkZ-N1-KrF"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZI-tj-Idl">
                                         <rect key="frame" x="127" y="13" width="121.5" height="24"/>
@@ -1406,6 +1411,9 @@ This feature will be in the next update.</string>
                                                 <color key="value" red="0.0" green="0.69813299179999999" blue="0.99816983940000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="nextAction:" destination="bre-UG-ufg" eventType="touchUpInside" id="3vY-HX-fTo"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGrey" translatesAutoresizingMaskIntoConstraints="NO" id="Prb-W8-CQZ">
                                         <rect key="frame" x="16" y="13" width="13" height="21"/>
@@ -1416,6 +1424,9 @@ This feature will be in the next update.</string>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sZ-5Q-nDH">
                                         <rect key="frame" x="0.0" y="13" width="59" height="30"/>
+                                        <connections>
+                                            <action selector="backAction:" destination="bre-UG-ufg" eventType="touchUpInside" id="sfb-P9-uK0"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee Rate affects how fast your transaction is going to be accepted in the blockchain." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n95-In-KXo">
                                         <rect key="frame" x="16" y="563" width="343" height="33"/>
@@ -1474,7 +1485,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jk2-MJ-vOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="-815"/>
+            <point key="canvasLocation" x="2410" y="-548"/>
         </scene>
     </scenes>
     <resources>
@@ -1484,6 +1495,7 @@ This feature will be in the next update.</string>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TSe-kF-31L"/>
         <segue reference="UUp-vr-5BV"/>
         <segue reference="EUD-ex-a5v"/>
     </inferredMetricsTieBreakers>

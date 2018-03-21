@@ -12,9 +12,12 @@ class TransactionDTO: NSObject {
         didSet {
             if choosenWallet != nil {
                 currencyID = choosenWallet?.chain
+                blockchainType = BlockchainType.create(wallet: choosenWallet!)
             }
         }
     }
+    
+    var blockchainType = BlockchainType.create(currencyID: 0, netType: 0)
     
     var currencyID : NSNumber? {
         didSet {

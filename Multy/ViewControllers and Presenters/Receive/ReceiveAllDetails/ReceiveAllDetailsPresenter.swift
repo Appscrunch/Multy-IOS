@@ -15,9 +15,15 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     
     var walletAddress = ""
     
-    var wallet: UserWalletRLM?
+    var wallet: UserWalletRLM? {
+        didSet {
+            if wallet != nil {
+                qrBlockchainString = BlockchainType.create(wallet: wallet!).qrBlockchainString
+            }
+        }
+    }
     
-    
+    var qrBlockchainString = String()
     
     func transferSum(cryptoAmount: Double, cryptoCurrency: String, fiatAmount: Double, fiatName: String) {
         self.cryptoSum = cryptoAmount

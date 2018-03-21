@@ -22,6 +22,12 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     var sumInCrypto = 0.0
     var sumInFiat = 0.0
     
+    var blockchain = BlockchainType.create(currencyID: 0, netType: 0) {
+        didSet {
+            cryptoName = blockchain.shortName
+        }
+    }
+    
     var isCrypto = true
     
     var fiatName = "USD"
@@ -181,6 +187,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             }
             self.saveTfValue()
         }
+        
         return newLength <= self.maxLengthForSum
     }
     

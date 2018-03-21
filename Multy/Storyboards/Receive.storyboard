@@ -556,7 +556,7 @@ Options</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ehy-SB-2yj">
-                                <rect key="frame" x="164" y="491" width="47" height="22"/>
+                                <rect key="frame" x="164" y="491" width="48" height="22"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpJ-0B-C3z">
                                         <rect key="frame" x="0.0" y="0.0" width="14" height="22"/>
@@ -564,8 +564,17 @@ Options</string>
                                         <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBS-bB-1y6">
+                                        <rect key="frame" x="14" y="0.0" width="1" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="1" id="iCf-a0-jkj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-Pg-fzt">
-                                        <rect key="frame" x="14" y="0.0" width="33" height="22"/>
+                                        <rect key="frame" x="15" y="0.0" width="33" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -632,16 +641,16 @@ Options</string>
                                     <action selector="cancelAction:" destination="ci5-kk-bB9" eventType="touchUpInside" id="iEh-yf-4IV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0n-7y-x9F">
-                                <rect key="frame" x="224" y="416" width="30.5" height="22"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0.0" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="eGl-ZA-fcR">
-                                <rect key="frame" x="151.5" y="379.5" width="72.5" height="68.5"/>
+                                <rect key="frame" x="151" y="379" width="72.5" height="68.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="50"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0n-7y-x9F">
+                                <rect key="frame" x="225.5" y="416" width="30.5" height="22"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -672,7 +681,7 @@ Options</string>
                             <constraint firstAttribute="trailing" secondItem="roV-FV-zns" secondAttribute="trailing" id="dw5-Os-kox"/>
                             <constraint firstItem="lXp-WU-5ec" firstAttribute="centerX" secondItem="Ehy-SB-2yj" secondAttribute="centerX" id="elb-Xo-Glo"/>
                             <constraint firstItem="Egj-4Y-5Va" firstAttribute="top" secondItem="hbS-jX-vva" secondAttribute="bottom" constant="13" id="ixx-p4-Tof"/>
-                            <constraint firstItem="F0n-7y-x9F" firstAttribute="leading" secondItem="eGl-ZA-fcR" secondAttribute="trailing" id="kEo-qG-zoz"/>
+                            <constraint firstItem="F0n-7y-x9F" firstAttribute="leading" secondItem="eGl-ZA-fcR" secondAttribute="trailing" constant="2" id="kEo-qG-zoz"/>
                             <constraint firstItem="1L7-H1-E5D" firstAttribute="leading" secondItem="h8C-J7-PWy" secondAttribute="leading" constant="16" id="ln2-QI-ab3"/>
                             <constraint firstItem="lXp-WU-5ec" firstAttribute="trailing" secondItem="VeI-na-O7A" secondAttribute="trailing" constant="30" id="n16-cL-JQf"/>
                             <constraint firstItem="Egj-4Y-5Va" firstAttribute="trailing" secondItem="1L7-H1-E5D" secondAttribute="trailing" constant="50" id="uAv-xr-zVb"/>

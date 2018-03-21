@@ -5,6 +5,8 @@
 import Foundation
 import RealmSwift
 
+private typealias WalletUpdateRLM = UserWalletRLM
+
 class UserWalletRLM: Object {
     @objc dynamic var id = String()    //
     @objc dynamic var chain = NSNumber(value: 0)    //UInt32
@@ -39,6 +41,9 @@ class UserWalletRLM: Object {
     @objc dynamic var historyAddress : AddressRLM?
     
     @objc dynamic var isTherePendingTx = NSNumber(value: 0)
+    
+    var ethWallet = ETHWallet()
+    var btcWallet = BTCWallet()
     
     var addresses = List<AddressRLM>() {
         didSet {
@@ -77,6 +82,9 @@ class UserWalletRLM: Object {
             wallet.chain = NSNumber(value: chain as! UInt32)
         }
         
+        //parse addition info for each chain
+        wallet.updateSpecificInfo(from: walletInfo)
+        
         //MARK: to be deleted
         if let walletID = walletInfo["WalletIndex"]  {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
@@ -107,7 +115,6 @@ class UserWalletRLM: Object {
     }
     
     public func updateWalletWithInfo(walletInfo: NSDictionary) {
-        
         //MARK: to be deleted
         if let addresses = walletInfo["Adresses"] {
             self.addresses = AddressRLM.initWithArray(addressesInfo: addresses as! NSArray)
@@ -246,4 +253,28 @@ class UserWalletRLM: Object {
 //        self.fiatName = "USD"
 //        self.fiatSymbol = "$"
 //    }
+}
+
+extension WalletUpdateRLM {
+    func updateSpecificInfo(from infoDict: NSDictionary) {
+        switch self.chain.uint32Value {
+        case BLOCKCHAIN_BITCOIN.rawValue:
+            break
+        case BLOCKCHAIN_ETHEREUM.rawValue:
+            updateETHWallet(from: infoDict)
+        default:
+            break
+        }
+    }
+    
+    
+    func updateBTCWallet(from infoDict: NSDictionary) {
+        
+    }
+    
+    func updateETHWallet(from infoDict: NSDictionary) {
+        if let nonce = infoDict["nonce"] as? NSNumber {
+            self.ethWallet.nonce = nonce
+        }
+    }
 }
