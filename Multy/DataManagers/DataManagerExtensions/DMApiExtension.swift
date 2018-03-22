@@ -162,8 +162,8 @@ extension DataManager {
         }
     }
     
-    func getFeeRate(currencyID: UInt32, completion: @escaping (_ feeRateDict: NSDictionary?,_ error: Error?) -> ()) {
-        apiManager.getFeeRate(currencyID: currencyID) { (answer, error) in
+    func getFeeRate(currencyID: UInt32, networkID: UInt32, completion: @escaping (_ feeRateDict: NSDictionary?,_ error: Error?) -> ()) {
+        apiManager.getFeeRate(currencyID: currencyID, networkID: networkID) { (answer, error) in
             if error != nil || (answer!["code"] as! NSNumber).intValue != 200  {
                 completion(nil, error)
             } else {
@@ -228,8 +228,8 @@ extension DataManager {
         }
     }
     
-    func getTransactionHistory(currencyID: NSNumber, walletID: NSNumber, completion: @escaping(_ historyArr: List<HistoryRLM>?,_ error: Error?) ->()) {
-        apiManager.getTransactionHistory(currencyID: currencyID, walletID: walletID) { (answer, err) in
+    func getTransactionHistory(currencyID: NSNumber, networkID: NSNumber, walletID: NSNumber, completion: @escaping(_ historyArr: List<HistoryRLM>?,_ error: Error?) ->()) {
+        apiManager.getTransactionHistory(currencyID: currencyID, networkID: networkID, walletID: walletID) { (answer, err) in
             switch err {
             case nil:
                 if answer!["code"] as! Int == 200 {
