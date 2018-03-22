@@ -85,6 +85,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         
         let params = [
             "currencyid": wallet.chain,
+            "networkid" : wallet.chainType,
             "payload"   : newAddressParams
             ] as [String : Any]
         

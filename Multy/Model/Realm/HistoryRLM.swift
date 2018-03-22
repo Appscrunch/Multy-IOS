@@ -123,12 +123,13 @@ class HistoryRLM: Object {
             hist.txStatus = txstatus as! NSNumber
         }
         
+        //FIXME: add more parameters
         if let walletindex = historyDict["walletindex"] {
             hist.walletIndex = walletindex as! NSNumber
         }
         
-        if let walletIndex = historyDict["walletsinput"] as? NSArray {
-            hist.walletInput = UserWalletRLM.initWithArray(walletsInfo: walletIndex)
+        if let walletsinput = historyDict["walletsinput"] as? NSArray {
+            hist.walletInput = UserWalletRLM.initWithArray(walletsInfo: walletsinput)
         }
         
         if let walletOutput = historyDict["walletsoutput"] as? NSArray{

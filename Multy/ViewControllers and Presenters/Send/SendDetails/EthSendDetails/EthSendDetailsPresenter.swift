@@ -53,7 +53,9 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
                 return
             }
             
-            DataManager.shared.getTransactionHistory(currencyID: self.transactionDTO.choosenWallet!.chain, walletID: self.transactionDTO.choosenWallet!.walletID) { (histList, err) in
+            DataManager.shared.getTransactionHistory(currencyID: self.transactionDTO.choosenWallet!.chain,
+                                                     networkID:self.transactionDTO.choosenWallet!.chainType,
+                                                     walletID: self.transactionDTO.choosenWallet!.walletID) { (histList, err) in
                 if err == nil && histList != nil {
                     self.historyArray = histList!
                 }
@@ -73,7 +75,9 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func requestFee() {
-        DataManager.shared.getFeeRate(currencyID: transactionDTO.choosenWallet!.chain.uint32Value, completion: { (dict, error) in
+        DataManager.shared.getFeeRate(currencyID: transactionDTO.choosenWallet!.chain.uint32Value,
+                                      networkID: transactionDTO.choosenWallet!.chainType.uint32Value,
+                                      completion: { (dict, error) in
             if dict != nil {
                 self.feeRate = dict
             } else {
