@@ -91,22 +91,22 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     }
     
     func modifyNextButtonMode() {
-        if presenter.transactionDTO.sendAddress != nil && presenter.isValidCryptoAddress() {
+//        if presenter.transactionDTO.sendAddress != nil && presenter.isValidCryptoAddress() {
             if !nextBtn.isEnabled {
                 self.nextBtn.isEnabled = true
                 self.nextBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                          UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                            gradientOrientation: .horizontal)
             }
-        } else {
-            if nextBtn.isEnabled {
-                nextBtn.isEnabled = false
-                nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
-                if nextBtn.layer.sublayers?.count == 3 {
-                    nextBtn.layer.sublayers?.first?.removeFromSuperlayer()
-                }
-            }
-        }
+//        } else {
+//            if nextBtn.isEnabled {
+//                nextBtn.isEnabled = false
+//                nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
+//                if nextBtn.layer.sublayers?.count == 3 {
+//                    nextBtn.layer.sublayers?.first?.removeFromSuperlayer()
+//                }
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

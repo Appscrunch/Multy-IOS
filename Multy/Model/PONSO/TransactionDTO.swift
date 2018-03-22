@@ -48,6 +48,7 @@ class BaseTransactionDTO {
     var rawTransaction: String?
     var newChangeAddress: String?
     var endSum: Double?
+    var customGAS: EthereumGASinfo?
 }
 
 class BTCTransactionDTO: BaseTransactionDTO {

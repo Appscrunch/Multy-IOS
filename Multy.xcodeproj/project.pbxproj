@@ -38,6 +38,7 @@
 		4522905A1FBB18D30024B550 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452290581FBB18D30024B550 /* Main.storyboard */; };
 		4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4522905B1FBB18D30024B550 /* Assets.xcassets */; };
 		4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */; };
+		45310D0F2063B9F500105532 /* EthereumGASinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45310D0E2063B9F500105532 /* EthereumGASinfo.swift */; };
 		4540944A2031EEFD00603DB5 /* SecuritySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */; };
 		4540944C2031EF1600603DB5 /* SecuritySettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */; };
 		4540944E2032E92F00603DB5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4540944D2032E92F00603DB5 /* Settings.storyboard */; };
@@ -313,6 +314,7 @@
 		4522905E1FBB18D30024B550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		452290601FBB18D30024B550 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4526F8DD2015383D00D2E491 /* Multy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Multy.entitlements; sourceTree = "<group>"; };
+		45310D0E2063B9F500105532 /* EthereumGASinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumGASinfo.swift; sourceTree = "<group>"; };
 		454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsViewController.swift; sourceTree = "<group>"; };
 		4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsPresenter.swift; sourceTree = "<group>"; };
 		4540944D2032E92F00603DB5 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -1331,6 +1333,7 @@
 				45AC162A2048380700E75BD6 /* CurrencyObj.swift */,
 				4585BD3A2049B035004542AE /* ExchangeStockObj.swift */,
 				45498F922061662A00130B94 /* CurrencyExchange.swift */,
+				45310D0E2063B9F500105532 /* EthereumGASinfo.swift */,
 			);
 			path = PONSO;
 			sourceTree = "<group>";
@@ -1899,6 +1902,7 @@
 			files = (
 				45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */,
 				FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */,
+				45310D0F2063B9F500105532 /* EthereumGASinfo.swift in Sources */,
 				454A9D7C20067E530035966F /* HistoryRLM.swift in Sources */,
 				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
 				45E148AE204553FB006BD4D1 /* DonationSendPresenter.swift in Sources */,

@@ -27,18 +27,26 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupUIFor(gasPrice: Int?, gasLimit: Int?) {
+    func setupUI() {
 //        self.middleLbl.isHidden = true
         self.checkImg.isHidden = false
 //        self.toplbl.isHidden = false
 //        self.valuelbl.isHidden = false
+//        self.valuelbl.text = "\(Int(self.value))"
+    }
+    
+    func setupUIFor(gasPrice: Int?, gasLimit: Int?) {
+        //        self.middleLbl.isHidden = true
+        self.checkImg.isHidden = false
+        //        self.toplbl.isHidden = false
+        //        self.valuelbl.isHidden = false
         if gasLimit != nil && gasPrice != nil {
             gasLimitValueLbl.text = "\(gasLimit!)"
             gasPriceValueLbl.text = "\(gasPrice!)"
             customTopConstraint.constant = 12
         }
         
-//        self.valuelbl.text = "\(Int(self.value))"
+        //        self.valuelbl.text = "\(Int(self.value))"
     }
     
     func reloadUI() {

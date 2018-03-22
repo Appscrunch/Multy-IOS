@@ -98,4 +98,18 @@ extension DataManager {
             }
         }
     }
+    
+    func createEtherTx(binaryData: inout BinaryData, wallet: UserWalletRLM, sendAddress: String, sendAmountString: String, gasPriceString: String, gasLimitString: String) {
+        let blockchain = BlockchainType.create(wallet: wallet)
+        let addressData = self.coreLibManager.createAddress(blockchain: blockchain, walletID: wallet.walletID.uint32Value, addressID: wallet.addressID.uint32Value, binaryData: &binaryData)
+        
+        let _ = self.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                           sendAddress: sendAddress,
+                                                           sendAmountString: sendAmountString,
+                                                           nonce: wallet.ethWallet.nonce.intValue,
+                                                           balanceAmount: "\(wallet.availableAmount())",
+                                                           ethereumChainID: UInt32(4), //RINKEBY
+                                                           gasPrice: gasPriceString,
+                                                           gasLimit: gasLimitString)
+    }
 }
