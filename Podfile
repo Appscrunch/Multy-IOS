@@ -19,7 +19,7 @@ target 'Multy' do
   pod 'Socket.IO-Client-Swift'
   pod 'RevealingSplashView'
   pod 'RAMAnimatedTabBarController'
-  pod 'Firebase/Core'
+  pod 'Firebase'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Branch'
@@ -33,5 +33,14 @@ target 'Multy' do
       pod 'Quick'
       pod 'Nimble'
   end
-
+  
+  target 'MultyUITests' do
+      inherit! :complete
+      
+      # Pods for testing
+      pod 'Quick'
+      pod 'Nimble'
+      pod 'Firebase'
+      
+  end
 end

@@ -480,6 +480,9 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gnZ-8i-54O" secondAttribute="trailing" id="4x3-Vu-xkO"/>
                             <constraint firstItem="TCg-eh-Ffb" firstAttribute="top" secondItem="gnZ-8i-54O" secondAttribute="bottom" id="B0q-2T-Uiy"/>

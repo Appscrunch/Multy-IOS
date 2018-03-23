@@ -37,6 +37,8 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.accessibilityIdentifier = "AssetsTableView"
         self.view.isUserInteractionEnabled = false
         self.registerCells()
         self.presenter.assetsVC = self
@@ -499,6 +501,7 @@ extension TableViewDataSource : UITableViewDataSource {
                     let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
                     //                    walletCell.makeshadow()
                     walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                    walletCell.accessibilityIdentifier = "\(indexPath.row - 2)"
                     walletCell.fillInCell()
                     
                     return walletCell
@@ -517,6 +520,7 @@ extension TableViewDataSource : UITableViewDataSource {
                 let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
                 //                walletCell.makeshadow()
                 walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                walletCell.accessibilityIdentifier = "\(indexPath.row - 2)"
                 walletCell.fillInCell()
                 
                 return walletCell
@@ -528,8 +532,9 @@ extension TableViewDataSource : UITableViewDataSource {
             }
         default:
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
-            //            walletCell.makeshadow()
+            
             walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+            walletCell.accessibilityIdentifier = "\(indexPath.row - 2)"
             walletCell.fillInCell()
             
             return walletCell
