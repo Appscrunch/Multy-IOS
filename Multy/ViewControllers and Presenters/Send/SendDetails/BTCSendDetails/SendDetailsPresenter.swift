@@ -196,7 +196,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
         cell.value = (firstValue)!
-        cell.setupUIFor(gasPrice: nil, gasLimit: nil)
+        cell.setupUI()
         self.customFee = UInt64(firstValue!)
         self.sendDetailsVC?.tableView.reloadData()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)

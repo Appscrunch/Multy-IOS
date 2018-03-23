@@ -25,7 +25,7 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         self.swipeToBack()
         self.presenter.sendDetailsVC = self
         self.registerCells()
-        
+        self.presenter.makeCryptoName()
 //        presenter.requestFee()
         
         presenter.getWalletVerbose()
@@ -67,7 +67,6 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func backAction(_ sender: Any) {
-        presenter.transactionDTO.transaction!.donationDTO = nil
         presenter.transactionDTO.transaction!.transactionRLM = nil
         presenter.transactionDTO.transaction!.historyArray = nil
         presenter.transactionDTO.transaction!.customFee = nil
@@ -83,14 +82,14 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
     @IBAction func nextAction(_ sender: Any) {
         self.view.endEditing(true)
         
-        if self.presenter.selectedIndexOfSpeed != nil {
-            self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
+//        if self.presenter.selectedIndexOfSpeed != nil {
+//            self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.presenter.checkMaxAvailable()
-        } else {
-            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+//        } else {
+//            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
     }
     
     
@@ -106,7 +105,7 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
             
             presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj
             presenter.transactionDTO.transaction!.historyArray = presenter.historyArray
-            presenter.transactionDTO.transaction!.customFee = presenter.customFee
+            presenter.transactionDTO.transaction!.customGAS = presenter.customGas
             
             sendAmountVC.presenter.transactionDTO = presenter.transactionDTO
         }
@@ -179,7 +178,7 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
             customVC.presenter.chainId = self.presenter.transactionDTO.choosenWallet!.chain
             customVC.delegate = self.presenter
-            customVC.rate = Int(self.presenter.customFee)
+            
             self.presenter.selectedIndexOfSpeed = indexPath.row
             self.navigationController?.pushViewController(customVC, animated: true)
             
@@ -197,3 +196,5 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
         return 75
     }
 }
+
+

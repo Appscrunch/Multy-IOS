@@ -6,6 +6,7 @@ import UIKit
 import RealmSwift
 
 private typealias TestCoreLibManager = CoreLibManager
+private typealias EthereumCoreLibManager = CoreLibManager
 
 class CoreLibManager: NSObject {
     static let shared = CoreLibManager()
@@ -917,5 +918,73 @@ extension TestCoreLibManager {
         }
         
         print("\n\n---===The end of the user's prefs test===---\n\n")
+    }
+}
+
+
+//////////////////////////
+extension EthereumCoreLibManager {
+    func createEtherTransaction(addressPointer: OpaquePointer,
+                                sendAddress: String,
+                                sendAmountString: String,
+                                nonce: Int,
+                                balanceAmount: String,
+                                ethereumChainID: UInt32,
+                                gasPrice: String,
+                                gasLimit: String) -> String {
+        
+        //create transaction
+        let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        
+        let mt = make_transaction(addressPointer, transactionPointer)
+        if mt != nil {
+            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
+        }
+        
+        //properties
+        let accountProperties = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgp = transaction_get_properties(transactionPointer.pointee!, accountProperties)
+        
+        setAmountValue(key: "nonce", value: "\(nonce)", pointer: accountProperties.pointee!)
+        setIntValue(key: "chain_id", value: ethereumChainID, pointer: accountProperties.pointee!)
+        
+        //balance
+        let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tas = transaction_add_source(transactionPointer.pointee, transactionSource)
+        setAmountValue(key: "amount", value: balanceAmount, pointer: transactionSource.pointee!)
+        
+        //destination
+        let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tas2 = transaction_add_destination(transactionPointer.pointee, transactionDestination)
+        setAmountValue(key: "amount", value: sendAmountString, pointer: transactionDestination.pointee!) //10^15 wei
+        setBinaryDataValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
+        
+        //fee
+        let feeProperties = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        let tgpfp = transaction_get_fee(transactionPointer.pointee!, feeProperties)
+        setAmountValue(key: "gas_price", value: gasPrice, pointer: feeProperties.pointee!)
+        setAmountValue(key: "gas_limit", value: gasLimit, pointer: feeProperties.pointee!)
+        
+        //final
+        let serializedTransaction = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
+        
+        if tSer != nil {
+            let pointer = UnsafeMutablePointer<CustomError>(tSer)
+            let errrString = String(cString: pointer!.pointee.message)
+            
+            print("tSer: \(errrString))")
+            
+            defer { pointer?.deallocate(capacity: 1) }
+            
+            return errrString
+        }
+        
+        let data = serializedTransaction.pointee!.pointee.convertToData()
+        let str = data.hexEncodedString()
+        
+        print("end transaction: \(str)")
+        
+        return str
     }
 }

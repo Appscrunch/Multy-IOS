@@ -315,7 +315,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendFinishVC" {
             let sendFinishVC = segue.destination as! SendFinishViewController
-            sendFinishVC.presenter.isCrypto =       presenter.isCrypto
+            sendFinishVC.presenter.isCrypto = presenter.isCrypto
             
             presenter.transactionDTO.sendAmount = presenter.sumInCrypto
             presenter.transactionDTO.transaction?.newChangeAddress = presenter.addressData!["address"] as? String

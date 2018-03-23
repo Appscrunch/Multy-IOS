@@ -398,7 +398,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.presenter.numberOfTransactions() == 0 {
+        if self.presenter.numberOfTransactions() == 0 || indexPath.row == 0 {
             return
         }
         let countOfHistObjs = self.presenter.numberOfTransactions()

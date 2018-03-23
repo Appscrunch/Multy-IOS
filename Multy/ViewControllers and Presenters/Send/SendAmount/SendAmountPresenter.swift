@@ -92,20 +92,35 @@ class SendAmountPresenter: NSObject {
     }
     
     func estimateTransaction() -> Double {
-        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
-                                                                         sendAddress: transactionDTO.sendAddress!,
-                                                                         sendAmountString: self.sumInCrypto.fixedFraction(digits: 8),
-                                                                         feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
-                                                                         isDonationExists: transactionDTO.transaction!.donationDTO!.sumInCrypto != 0.0,
-                                                                         donationAmount: transactionDTO.transaction!.donationDTO!.sumInCrypto!.fixedFraction(digits: 8),
-                                                                         isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
-                                                                         wallet: transactionDTO.choosenWallet!,
-                                                                         binaryData: &binaryData!,
-                                                                         inputs: transactionDTO.choosenWallet!.addresses)
-        
-        self.rawTransaction = trData.0
-        
-        return trData.1
+        if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
+            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                                             sendAddress: transactionDTO.sendAddress!,
+                                                                             sendAmountString: self.sumInCrypto.fixedFraction(digits: 8),
+                                                                             feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
+                                                                             isDonationExists: transactionDTO.transaction!.donationDTO!.sumInCrypto != 0.0,
+                                                                             donationAmount: transactionDTO.transaction!.donationDTO!.sumInCrypto!.fixedFraction(digits: 8),
+                                                                             isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
+                                                                             wallet: transactionDTO.choosenWallet!,
+                                                                             binaryData: &binaryData!,
+                                                                             inputs: transactionDTO.choosenWallet!.addresses)
+            
+            self.rawTransaction = trData.0
+            
+            return trData.1
+        } else { // if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
+            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+                                                                                  sendAddress: transactionDTO.sendAddress!,
+                                                                                  sendAmountString: self.sumInCrypto.fixedFraction(digits: 18),
+                                                                                  nonce: transactionDTO.choosenWallet!.ethWallet.nonce.intValue,
+                                                                                  balanceAmount: "\(transactionDTO.choosenWallet?.availableAmount())",
+                                                                                  ethereumChainID: BLOCKCHAIN_ETHEREUM.rawValue,
+                                                                                  gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
+                                                                                  gasLimit: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
+            
+            self.rawTransaction = trData
+            //FIXME: retrun something
+            return 0
+        }
     }
     
     func setAmountFromQr() {
