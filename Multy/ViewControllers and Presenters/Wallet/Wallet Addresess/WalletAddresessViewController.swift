@@ -3,6 +3,7 @@
 //See LICENSE for details
 
 import UIKit
+import Alamofire
 
 class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
     
@@ -74,5 +75,38 @@ extension WalletAddresessViewController: UITableViewDelegate, UITableViewDataSou
         self.present(adressVC, animated: true, completion: nil)
         self.tableView.deselectRow(at: indexPath, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(addressWithChainTap)\(presenter.wallet!.chain)")
+        
+//        addAddress()
+    }
+    
+    func addAddress() {
+        var params : Parameters = [ : ]
+        
+        DataManager.shared.getAccount { (account, error) in
+            if error != nil {
+                return
+            }
+            
+            var binaryData = account!.binaryDataString.createBinaryData()!
+            
+            let data = DataManager.shared.coreLibManager.createAddress(blockchain: BlockchainType.create(wallet: self.presenter.wallet!),
+                                                                       walletID: self.presenter.wallet!.walletID.uint32Value,
+                                                                       addressID: UInt32(self.presenter.wallet!.addresses.count),
+                                                                       binaryData: &binaryData)
+            
+            params["walletIndex"] = self.presenter.wallet!.walletID
+            params["address"] = data!["address"] as! String
+            params["addressIndex"] = self.presenter.wallet!.addresses.count
+            params["networkID"] = self.presenter.wallet!.chainType
+            params["currencyID"] = self.presenter.wallet!.chain
+            
+            DataManager.shared.addAddress(params: params) { (dict, error) in
+                DataManager.shared.getOneWalletVerbose(walletID: self.presenter.wallet!.walletID,
+                                                       blockchain: BlockchainType.create(wallet: self.presenter.wallet!), completion: { (wallet, error) in
+                                                        self.presenter.wallet = wallet
+                                                        self.tableView.reloadData()
+                })
+            }
+        }
     }
 }

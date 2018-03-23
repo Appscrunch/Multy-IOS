@@ -617,7 +617,7 @@ class RealmManager: NSObject {
     func fetchBTCWallets(isTestNet: Bool, completion: @escaping(_ wallets: [UserWalletRLM]?) -> ()) {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
-                let wallets = realm.objects(UserWalletRLM.self).filter("chainType = \(isTestNet.intValue)")
+                let wallets = realm.objects(UserWalletRLM.self).filter("chainType = \(isTestNet.intValue) AND chain = 0")
                 let walletsArr = Array(wallets.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
                 
                 completion(walletsArr)

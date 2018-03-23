@@ -350,23 +350,23 @@ class SendAmountPresenter: NSObject {
             return sum
         }
         
-        if transactionDTO.transaction?.historyArray?.count == 0 {
-            return sum
+//        if transactionDTO.transaction?.historyArray?.count == 0 {
+//            return sum
+//        }
+        
+        for address in transactionDTO.choosenWallet!.addresses {
+            for out in address.spendableOutput {
+                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+                    sum += out.transactionOutAmount.uint64Value
+                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+//                    out.
+                }
+            }
         }
         
-        //        for address in wallet!.addresses {
-        //            for out in address.spendableOutput {
-        //                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-        //                    sum += out.transactionOutAmount.uint64Value
-        //                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-        //                    out.
-        //                }
-        //            }
-        //        }
-        
-        for history in transactionDTO.transaction!.historyArray! {
-            sum += blockedAmount(for: history)
-        }
+//        for history in transactionDTO.transaction!.historyArray! {
+//            sum += blockedAmount(for: history)
+//        }
         
         return sum
     }
