@@ -179,6 +179,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         walletsVC.sendWalletDelegate = self.presenter
         walletsVC.titleText = "Send Donation From"
         walletsVC.whereFrom = self
+        walletsVC.presenter.walletsArr = presenter.btcWallets
         self.navigationController?.pushViewController(walletsVC, animated: true)
     }
     

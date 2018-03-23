@@ -17,6 +17,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     var maxAvailable = 0.0
     
     var donationAddress = ""
+    var btcWallets = [UserWalletRLM]()
     
     var feeRate: NSDictionary? {
         didSet {
@@ -45,7 +46,10 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     
     func getWallets() {
         self.mainVC?.view.isUserInteractionEnabled = false
-        DataManager.shared.realmManager.fetchBTCWallets(isTestNet: true) { (wallets) in
+        DataManager.shared.realmManager.fetchBTCWallets(isTestNet: false) { (wallets) in
+            if wallets != nil {
+                self.btcWallets = wallets!
+            }
             self.mainVC?.view.isUserInteractionEnabled = true
             self.walletPayFrom = wallets?.first
             self.maxAvailable = (self.walletPayFrom?.sumInCrypto)!

@@ -29,7 +29,9 @@ class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
         self.presenter.receiveStartVC = self
         self.registerCells()
 //        self.presenter.createWallets()
-        self.presenter.getWallets()
+        if presenter.walletsArr.count == 0 {
+            self.presenter.getWallets()
+        }
         sendAnalyticsEvent(screenName: screenReceive, eventName: screenReceive)
     }
     
