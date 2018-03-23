@@ -239,6 +239,9 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="RHH-jh-E3C" firstAttribute="top" secondItem="iJt-Qg-K3r" secondAttribute="bottom" constant="16" id="2rf-Qy-4v3"/>
                             <constraint firstAttribute="trailing" secondItem="3MT-QQ-iCn" secondAttribute="trailing" constant="17" id="6Fx-VE-Kt4"/>
@@ -284,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NuT-6v-twX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-366" y="120"/>
+            <point key="canvasLocation" x="-350" y="-339"/>
         </scene>
         <!--Transaction View Controller-->
         <scene sceneID="jGO-jn-49b">
@@ -813,7 +816,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QrC-Eg-OVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-302" y="927"/>
+            <point key="canvasLocation" x="-1622" y="715"/>
         </scene>
         <!--Wallet Settings View Controller-->
         <scene sceneID="VJu-1U-isP">
@@ -924,6 +927,9 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Personal" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ygK-hr-LcL">
                                                 <rect key="frame" x="20" y="31" width="339" height="25"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" keyboardKey="YES"/>
+                                                </accessibility>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -1094,6 +1100,9 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="FT0-h6-feB" secondAttribute="trailing" id="GhF-Kr-o6y"/>
                             <constraint firstItem="wEY-fz-Mtq" firstAttribute="top" secondItem="FT0-h6-feB" secondAttribute="bottom" id="Ix7-Kp-arl"/>
@@ -1107,7 +1116,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHR-vM-u9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="636" y="928.78560719640188"/>
+            <point key="canvasLocation" x="-716" y="715"/>
         </scene>
         <!--Wallet Addresess View Controller-->
         <scene sceneID="UHs-XP-Pw1">
@@ -1181,7 +1190,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfQ-Lc-gr1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="927"/>
+            <point key="canvasLocation" x="343" y="715"/>
         </scene>
         <!--Eth Wallet View Controller-->
         <scene sceneID="OO5-Bs-lQf">
@@ -1448,7 +1457,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttP-ZT-N7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1052" y="119"/>
+            <point key="canvasLocation" x="-1138" y="-340"/>
         </scene>
     </scenes>
     <resources>
@@ -1464,6 +1473,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wmz-Ze-lTe"/>
+        <segue reference="zfl-Te-0xX"/>
     </inferredMetricsTieBreakers>
 </document>

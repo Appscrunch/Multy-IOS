@@ -15,6 +15,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
+        walletNameTF.accessibilityIdentifier = "nameField"
         progressHUD.backgroundColor = .gray
         view.addSubview(progressHUD)
         progressHUD.hide()

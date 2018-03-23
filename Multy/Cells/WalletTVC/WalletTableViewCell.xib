@@ -78,6 +78,9 @@
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstItem="bGK-TI-pDK" firstAttribute="centerY" secondItem="srv-bR-zld" secondAttribute="centerY" id="0Ym-P2-81O"/>
                                     <constraint firstAttribute="trailing" secondItem="Vd1-0D-jGB" secondAttribute="trailing" constant="13" id="2Ov-Ph-ySE"/>
@@ -103,6 +106,9 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="srv-bR-zld" firstAttribute="top" secondItem="N4e-sp-CyH" secondAttribute="top" constant="6" id="G10-OS-B7q"/>
                             <constraint firstItem="srv-bR-zld" firstAttribute="leading" secondItem="N4e-sp-CyH" secondAttribute="leading" constant="16" id="Gtk-5N-ZGx"/>
@@ -118,6 +124,9 @@
                     <constraint firstItem="N4e-sp-CyH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="m9Z-TK-Wo8"/>
                 </constraints>
             </tableViewCellContentView>
+            <accessibility key="accessibilityConfiguration">
+                <bool key="isElement" value="YES"/>
+            </accessibility>
             <connections>
                 <outlet property="arrowImage" destination="Vd1-0D-jGB" id="RYb-7g-dGS"/>
                 <outlet property="backView" destination="srv-bR-zld" id="GGo-Cl-nqM"/>

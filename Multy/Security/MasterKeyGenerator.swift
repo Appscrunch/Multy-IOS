@@ -6,7 +6,7 @@ import UIKit
 import CryptoSwift
 import FirebaseInstanceID
 
-class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
+class MasterKeyGenerator : NSObject {
     static let shared = MasterKeyGenerator()
     
     fileprivate var localPasswordString : String = ""
@@ -123,30 +123,30 @@ class MasterKeyGenerator : NSObject, GGLInstanceIDDelegate {
 //    }
     
     //asynch version
-    fileprivate func generateInstanceID() {
-        let instanceIDConfig = GGLInstanceIDConfig.default()
-        instanceIDConfig?.delegate = self
-        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
-        
-        let iidInstance = GGLInstanceID.sharedInstance()
-        
-        let handler : (String?, Error?) -> Void = { (identity, error) in
-            if let iid = identity {
-//                self.instanceIDToken = iid
-//                print("instanceIDToken: \(iid)")
-                
-                DispatchQueue.main.async {
-                    //                    if !self.devicePushToken.isEmpty {
-                    self.asyncGenerateMasterKeyFromTokens(instanceToken: iid)
-                    //                    }
-                }
-            } else {
-                print(error ?? "empty error")
-            }
-        }
-        
-        iidInstance?.getWithHandler(handler)
-    }
+//    fileprivate func generateInstanceID() {
+//        let instanceIDConfig = GGLInstanceIDConfig.default()
+//        instanceIDConfig?.delegate = self
+//        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
+//        
+//        let iidInstance = GGLInstanceID.sharedInstance()
+//        
+//        let handler : (String?, Error?) -> Void = { (identity, error) in
+//            if let iid = identity {
+////                self.instanceIDToken = iid
+////                print("instanceIDToken: \(iid)")
+//                
+//                DispatchQueue.main.async {
+//                    //                    if !self.devicePushToken.isEmpty {
+//                    self.asyncGenerateMasterKeyFromTokens(instanceToken: iid)
+//                    //                    }
+//                }
+//            } else {
+//                print(error ?? "empty error")
+//            }
+//        }
+//        
+//        iidInstance?.getWithHandler(handler)
+//    }
     
     //synch version
 //    fileprivate func generateMasterKeyFromTokens() -> Data? {

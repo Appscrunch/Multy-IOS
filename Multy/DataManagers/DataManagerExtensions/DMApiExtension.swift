@@ -240,6 +240,7 @@ extension DataManager {
                     }
                     if answer!["history"] as? NSArray != nil {
                         let historyArr = answer!["history"] as! NSArray
+                        print("getTransactionHistory:\n\(historyArr)")
                         let initializedArr = HistoryRLM.initWithArray(historyArr: historyArr)
                         
 //                        self.realmManager.saveHistoryForWallet(historyArr: initializedArr, completion: { (histList) in

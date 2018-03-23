@@ -32,9 +32,9 @@
 	<key>CFBundleVersion</key>
 	<string>27</string>
 	<key>GIT_BRANCH_NAME</key>
-	<string>Update_creating_eth_transaction</string>
+	<string>MUL-980</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>e288a15</string>
+	<string>ae51367</string>
 	<key>GIT_TAG_NAME</key>
 	<string>Release-26-dirty</string>
 	<key>LSRequiresIPhoneOS</key>
