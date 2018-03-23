@@ -101,7 +101,7 @@ class EthWalletPresenter: NSObject {
             }
         }
         
-        DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, walletID: wallet!.walletID) { (histList, err) in
+        DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
             if err == nil && histList != nil {
                 self.mainVC!.refreshControl.endRefreshing()
                 self.mainVC!.tableView.isUserInteractionEnabled = true

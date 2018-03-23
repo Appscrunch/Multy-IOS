@@ -193,11 +193,11 @@ class ApiManager: NSObject, RequestRetrier {
         }
     }
     
-    func deleteWallet(currencyID: NSNumber, walletIndex: NSNumber, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func deleteWallet(currencyID: NSNumber, networkID: NSNumber, walletIndex: NSNumber, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         let header: HTTPHeaders = [
             "Authorization" : "Bearer \(self.token)"
         ]
-        requestManager.request("\(apiUrl)api/v1/wallet/\(currencyID)/\(walletIndex)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallet/\(currencyID)/\(networkID)/\(walletIndex)", method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -231,7 +231,7 @@ class ApiManager: NSObject, RequestRetrier {
         }
     }
     
-    func getFeeRate(currencyID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func getFeeRate(currencyID: UInt32, networkID: UInt32, completion: @escaping (_ answer: NSDictionary?,_ error: Error?) -> ()) {
         
         let header: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -239,7 +239,7 @@ class ApiManager: NSObject, RequestRetrier {
         ]
         
         //MARK: USD
-        requestManager.request("\(apiUrl)api/v1/transaction/feerate/\(currencyID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/transaction/feerate/\(currencyID)/\(networkID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
@@ -352,12 +352,12 @@ class ApiManager: NSObject, RequestRetrier {
         }
     }
     
-    func getTransactionHistory(currencyID: NSNumber, walletID: NSNumber, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
+    func getTransactionHistory(currencyID: NSNumber, networkID: NSNumber, walletID: NSNumber, completion: @escaping(_ answer: NSDictionary?,_ error: Error?) -> ()) {
         let header: HTTPHeaders = [
             "Authorization" : "Bearer \(self.token)"
         ]
         
-        requestManager.request("\(apiUrl)api/v1/wallets/transactions/\(currencyID)/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)api/v1/wallets/transactions/\(currencyID)/\(networkID)/\(walletID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().debugLog().responseJSON { (response: DataResponse<Any>) in
             switch response.result {
             case .success(_):
                 if response.result.value != nil {

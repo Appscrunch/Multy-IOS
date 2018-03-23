@@ -27,7 +27,10 @@ class WalletSettingsPresenter: NSObject {
                 return
             }
             
-            DataManager.shared.apiManager.deleteWallet(currencyID: self.wallet!.chain, walletIndex: self.wallet!.walletID, completion: { (answer, err) in
+            DataManager.shared.apiManager.deleteWallet(currencyID:  self.wallet!.chain,
+                                                       networkID:   self.wallet!.chainType,
+                                                       walletIndex: self.wallet!.walletID,
+                                                       completion: { (answer, err) in
                 self.walletSettingsVC?.progressHUD.hide()
                 self.walletSettingsVC?.navigationController?.popToRootViewController(animated: true)
             })

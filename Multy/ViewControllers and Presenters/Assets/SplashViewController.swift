@@ -24,7 +24,6 @@ class SplashViewController: UIViewController {
         }
     }
     
-    
     func jailAlert() {
         let message = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."
         let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
