@@ -33,7 +33,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     let transactionObj = TransactionRLM()
     
-    let customGas = EthereumGASinfo()
+    let customGas = EthereumGasInfo()
     
     var cusomtGasPrice: Int?
     var cusomtGasLimit: Int?
@@ -46,6 +46,9 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     
     //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
+    func makeCryptoName() {
+        self.cryptoName = transactionDTO.choosenWallet!.cryptoName
+    }
     
     func getData() {
         DataManager.shared.getAccount { (account, error) in

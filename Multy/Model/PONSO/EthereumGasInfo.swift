@@ -4,7 +4,7 @@
 
 import UIKit
 
-class EthereumGASinfo: NSObject {
+class EthereumGasInfo: NSObject {
     
     var gasPrice = 0
     var gasLimit = 0
