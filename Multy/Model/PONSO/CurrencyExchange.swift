@@ -6,7 +6,7 @@ import UIKit
 
 class CurrencyExchange: NSObject {
     
-    static let shared = CurrencyExchange()
+//    static let shared = CurrencyExchange()
     
 //    var exchangeCourse: Double = 1.0 {
 //        didSet {
@@ -18,6 +18,7 @@ class CurrencyExchange: NSObject {
     var ethToUSD: Double = 1.0
     
     func update(exchangeDict: NSDictionary) {
+        NotificationCenter.default.post(name: NSNotification.Name("exchageUpdated"), object: nil)
         if let btcUsd = exchangeDict["btc_usd"] as? Double {
             btcToUSD = btcUsd
         }

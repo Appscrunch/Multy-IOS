@@ -23,7 +23,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var selectedIndexOfSpeed: Int?
     
-    var cryptoName = "BTC"
+    var cryptoName = "ETH"
     var fiatName = "USD"
     
     //    var addressToStr: String?
@@ -33,7 +33,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     let transactionObj = TransactionRLM()
     
-    var customFee = UInt64(20)
+    let customGas = EthereumGasInfo()
     
     var cusomtGasPrice: Int?
     var cusomtGasLimit: Int?
@@ -46,6 +46,9 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     
     //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
+    func makeCryptoName() {
+        self.cryptoName = transactionDTO.choosenWallet!.cryptoName
+    }
     
     func getData() {
         DataManager.shared.getAccount { (account, error) in
@@ -94,7 +97,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.speedTimeString = "∙ 10 minutes"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
+            self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 6
         case 1:
@@ -102,7 +105,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.speedTimeString = "∙ 6 hour"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
+            self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 10
         case 2:
@@ -110,7 +113,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.speedTimeString = "∙ 5 days"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
+            self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 20
         case 3:
@@ -118,7 +121,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.speedTimeString = "∙ 1 week"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
+            self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 50
         case 4:
@@ -126,15 +129,15 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.speedTimeString = "∙ 2 weeks"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
+            self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 70
         case 5:
             self.transactionObj.speedName = "Custom"
             self.transactionObj.speedTimeString = ""
-            self.transactionObj.sumInCrypto = convertSatoshiToBTC(sum: self.customFee)
+//            self.transactionObj.sumInCrypto = convertSatoshiToBTC(sum: self.customFee)
             self.transactionObj.sumInFiat = 0.0
-            self.transactionObj.cryptoName = "BTC"
+            self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 0
         default:
@@ -148,15 +151,15 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func checkMaxAvailable() {
-        if self.availableSumInCrypto == nil || availableSumInCrypto! < 0.0 {
-            self.sendDetailsVC?.presentWarning(message: "Wrong wallet data. Please download wallet data again.")
-            
-            return
-        }
+//        if self.availableSumInCrypto == nil || availableSumInCrypto! < 0.0 {
+//            self.sendDetailsVC?.presentWarning(message: "Wrong wallet data. Please download wallet data again.")
+//            
+//            return
+//        }
         
-        self.maxAllowedToSpend = self.availableSumInCrypto!
+//        self.maxAllowedToSpend = self.availableSumInCrypto!
         
-        self.sendDetailsVC?.performSegue(withIdentifier: "sendAmountVC", sender: Any.self)
+        self.sendDetailsVC?.performSegue(withIdentifier: "sendEthVC", sender: Any.self)
         
     }
     
@@ -167,9 +170,9 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
 //        cell.value = firstValue
-        self.cusomtGasPrice = firstValue
-        self.cusomtGasLimit = secValue
-        cell.setupUIFor(gasPrice: cusomtGasPrice, gasLimit: cusomtGasLimit)
+        self.customGas.gasPrice = firstValue!
+        self.customGas.gasLimit = secValue!
+        cell.setupUIFor(gasPrice: firstValue!, gasLimit: secValue!)
 //        self.customFee = UInt64(firstValue)
         self.sendDetailsVC?.tableView.reloadData()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)

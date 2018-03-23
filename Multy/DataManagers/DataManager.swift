@@ -60,16 +60,14 @@ class DataManager: NSObject {
     }
     
     func makeExchangeFor(blockchainType: BlockchainType) -> Double {
-        let exchange = 0.0
         switch blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN :
+            print("\n\n\n\\\\\\\\\\\\\\\\\\")
+            print(self.currencyExchange.btcToUSD * 0.975)
             return self.currencyExchange.btcToUSD
         case BLOCKCHAIN_ETHEREUM:
             return self.currencyExchange.ethToUSD
-        default: break
-            
+        default: return 1.0
         }
-        
-        return exchange
     }
 }
