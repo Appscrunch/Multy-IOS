@@ -8,7 +8,12 @@ import RealmSwift
 class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var sendDetailsVC: SendDetailsViewController?
-    var transactionDTO = TransactionDTO()
+    var transactionDTO = TransactionDTO() {
+        didSet {
+            availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
+            availableSumInFiat = availableSumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        }
+    }
     var historyArray : List<HistoryRLM>? {
         didSet {
             self.blockedAmount = calculateBlockedAmount()
@@ -215,19 +220,19 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             return sum
         }
         
-        //        for address in wallet!.addresses {
-        //            for out in address.spendableOutput {
-        //                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-        //                    sum += out.transactionOutAmount.uint64Value
-        //                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-        //                    out.
-        //                }
-        //            }
-        //        }
-        
-        for history in historyArray! {
-            sum += blockedAmount(for: history)
+        for address in transactionDTO.choosenWallet!.addresses {
+            for out in address.spendableOutput {
+                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+                    sum += out.transactionOutAmount.uint64Value
+                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+//                    out.
+                }
+            }
         }
+        
+//        for history in historyArray! {
+//            sum += blockedAmount(for: history)
+//        }
         
         return sum
     }
