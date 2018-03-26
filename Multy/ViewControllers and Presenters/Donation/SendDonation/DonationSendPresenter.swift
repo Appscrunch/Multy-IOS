@@ -71,7 +71,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         self.mainVC?.fiatDonationLbl.text = "\(fiatDonat.fixedFraction(digits: 2)) USD"
     }
     
-    func makeTransaction() {
+    func createAndSendTransaction() {
         let transaction = TransactionDTO()
         transaction.choosenWallet = self.walletPayFrom
         transaction.sendAddress = donationAddress
