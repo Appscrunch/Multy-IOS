@@ -142,12 +142,12 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         self.touchMe.authenticateUser { (message) in
             if let message = message {
                 self.tabBarController?.tabBar.isUserInteractionEnabled = false
-                let alert = UIAlertController(title: "Access Denied", message: "Something went wrong. Try enter pin", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-
-                }))
-                alert.setPresentedAlertToDelegate()
-                self.present(alert, animated: true, completion: nil)
+//                let alert = UIAlertController(title: "Access Denied", message: "Something went wrong. Try enter pin", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+//
+//                }))
+//                alert.setPresentedAlertToDelegate()
+//                self.present(alert, animated: true, completion: nil)
                 //                appDel.openedAlert = alert
             } else {
                 self.cancelDelegate?.presentNoInternet()
