@@ -52,8 +52,14 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
             tabBarOnPreviousVC.isLocked = true
         }
         
-        self.checkAttempts()
-        
+        self.checkAttempts { (isTimerPresent) in
+            if !isTimerPresent {
+                self.checkForBiometic()
+            }
+        }
+    }
+    
+    func checkForBiometic() {
         UserPreferences.shared.getAndDecryptBiometric(completion: { (isBiometricOn, err) in
             if isBiometricOn != nil && !isBiometricOn! {
                 return
@@ -169,7 +175,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func checkAttempts() {
+    func checkAttempts(completion: @escaping (_ presentTimer: Bool) -> ()) {
         UserPreferences.shared.getAndDecryptBlockSeconds { (seconds, err) in
             if seconds != nil && seconds != 0 {
                 UserPreferences.shared.getAndDecryptStartBlockTime { (blockDate, err) in
@@ -178,9 +184,16 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                         if seconds! > Int(difference) {
                             self.counterOfTimer = seconds!
                             self.showAlert()
+                            completion(true)
+                        } else {
+                            completion(false)
                         }
+                    } else {
+                        completion(false)
                     }
                 }
+            } else {
+                completion(false)
             }
         }
     }
@@ -194,7 +207,9 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                 }
                 UserPreferences.shared.writeChipheredBlockSeconds(seconds: self.defTime)
                 UserPreferences.shared.writeStartBlockTime(time: Date())
-                self.checkAttempts()
+                self.checkAttempts(completion: { (isTimerPresent) in
+                    //callback is needed for viewWillAppear
+                })
                 self.defTime *= 2
             }
         }
@@ -220,7 +235,9 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         if (counterOfTimer > 0) {
             self.wrongPinVC?.timeLbl.text = makeTimeString()
         } else {
-            self.wrongPinVC?.dismiss(animated: true, completion: nil)
+            self.wrongPinVC?.dismiss(animated: true, completion: {
+                self.checkForBiometic()
+            })
             timer!.invalidate()
         }
     }

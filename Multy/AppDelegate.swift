@@ -36,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
+            DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
+                if currencyExchange != nil {
+                    DataManager.shared.currencyExchange.update(currencyExchangeRLM: currencyExchange!)
+                }
+            }
             isNeedToAutorise = acc != nil
 
             //MAKR: Check here isPin option from NSUserDefaults
@@ -45,18 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.authorization(isNeedToPresentBiometric: true)
                 }
             })
-            
-//            UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
-//
-//            })
         }
-        
-        DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
-            if currencyExchange != nil {
-                DataManager.shared.currencyExchange.update(currencyExchangeRLM: currencyExchange!)
-            }
-        }
-        
 //        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
         
         //FOR TEST NOT MAIN STRORYBOARD
