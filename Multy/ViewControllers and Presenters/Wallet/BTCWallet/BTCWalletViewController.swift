@@ -39,6 +39,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     var lastY: CGFloat = 0.0
     
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
@@ -64,7 +65,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
-        self.fixForPlus()
+//        self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
@@ -73,6 +74,10 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 //        self.view.addSubview(progressHUD)
 //        self.presenter.getHistory()
         
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     @objc func updateWalletAfterSockets() {
@@ -372,6 +377,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func updateUI() {
         self.tableView.reloadData()
     }
+
 }
 
 private typealias CancelDelegate = BTCWalletViewController
@@ -431,6 +437,8 @@ extension TableViewDelegate: UITableViewDelegate {
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentY = scrollView.contentOffset.y
         let currentBottomY = scrollView.frame.size.height + currentY
@@ -469,7 +477,9 @@ extension TableViewDataSource: UITableViewDataSource {
             }
         } else {
             self.tableView.isScrollEnabled = false
-            
+            if screenHeight == heightOfX {
+                return 13
+            }
             return 10
         }
     }
