@@ -105,6 +105,7 @@ extension CurrencyToConvertViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func logAnalytics(indexPath: IndexPath) {
+        //FIXME: add switch if here will be changing //see BlockchainsViewController
         let eventCode = donationForEUR + indexPath.row
         sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
