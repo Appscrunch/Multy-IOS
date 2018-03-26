@@ -76,6 +76,7 @@ extension WalletAddresessViewController: UITableViewDelegate, UITableViewDataSou
         self.tableView.deselectRow(at: indexPath, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(addressWithChainTap)\(presenter.wallet!.chain)")
         
+        //FIXME: adding adresses to wallet//remove
 //        addAddress()
     }
     

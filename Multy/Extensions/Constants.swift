@@ -47,11 +47,12 @@ struct Constants {
         static let availableBlockchains = [
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: 4),//RINKEBY
+//            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: 4),//RINKEBY
         ]
         
         static let donationBlockchains = [
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
             BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
             BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),

@@ -47,7 +47,17 @@ extension CancelDelegate: CancelProtocol {
 
 extension AnalyticsDelegate: AnalyticsProtocol {
     func logAnalytics(indexPath: IndexPath) {
-        let eventCode = donationForBTCLighting + indexPath.row
+        var eventCode = donationForBTCLighting//see AnalyticsConstants
+        
+        switch indexPath.row {
+        case 0:
+            eventCode += 1
+        case 1:
+            eventCode += 0
+        default:
+            eventCode += indexPath.row
+        }
+        
         sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
 }
