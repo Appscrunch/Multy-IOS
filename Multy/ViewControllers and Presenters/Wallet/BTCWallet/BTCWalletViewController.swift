@@ -412,7 +412,7 @@ extension TableViewDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 272.0 : 332.0
+            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 296.0 : 352.0   //value for X
             
             backUpView(height: heightForFirstCell)
             if heightForFirstCell == 332 {
@@ -471,6 +471,10 @@ extension TableViewDataSource: UITableViewDataSource {
         if countOfHistObjects > 0 {
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 7 {
+                if screenHeight == heightOfX {
+                    self.tableView.isScrollEnabled = false
+                    return 8
+                }
                 return 7
             } else {
                 return countOfHistObjects + 1
@@ -483,6 +487,7 @@ extension TableViewDataSource: UITableViewDataSource {
             return 10
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {         // Main Wallet Header Cell

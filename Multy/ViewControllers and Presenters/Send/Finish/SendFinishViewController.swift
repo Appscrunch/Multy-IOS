@@ -41,6 +41,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func setupUI() {
+        self.cryptoImage.image = UIImage(named: presenter.transactionDTO.blockchainType.iconString)
         let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
         self.cryptoSumLbl.text = "\(presenter.transactionDTO.sendAmount?.fixedFraction(digits: 8) ?? "0.0")"
         self.cryptoNamelbl.text = "\(self.presenter.cryptoName ?? "BTC")"
@@ -58,6 +59,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
             self.btnTopConstraint.constant = 105
         }
     }
+    
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
