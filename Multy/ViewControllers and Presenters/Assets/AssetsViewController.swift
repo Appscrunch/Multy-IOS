@@ -357,8 +357,8 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
     }
     
     func changePageControl(currentpage: Int) {
-        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
-        headerCell?.changePageControl(currentPage: currentpage)
+//        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
+//        headerCell?.changePageControl(currentPage: currentpage)
     }
 }
 
@@ -422,10 +422,10 @@ extension TableViewDelegate : UITableViewDelegate {
                 if self.presenter.account != nil {
                     if screenHeight == heightOfX {
                         //                    return 255 //logo height
-                        return 360
+                        return 400
                     } else {
                         //                    return 245
-                        return 350
+                        return 390
                     }
                 }else {
                     if screenHeight == heightOfX {
@@ -437,7 +437,7 @@ extension TableViewDelegate : UITableViewDelegate {
             } else {
                 if self.presenter.account != nil {
                     //                                return 220  //logo
-                    return 300
+                    return 340
                 } else {
                     return 220  //logo
                 }
@@ -547,19 +547,19 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: screenWidth - 40, height: 230 /* (screenWidth / 375.0)*/)
+        return CGSize(width: screenWidth, height: 277 /* (screenWidth / 375.0)*/)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(10, 10, 0, 10)
+        return UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 0
     }
 }
 
@@ -579,11 +579,16 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
         let eventCode = indexPath.row == 0 ? donationForPortfolioSC : donationForChartsSC
         sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
+        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = indexPath.row
+    }
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
-        changePageControl(currentpage: pageNumber)
+//        let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
+//        changePageControl(currentpage: pageNumber)
     }
 }

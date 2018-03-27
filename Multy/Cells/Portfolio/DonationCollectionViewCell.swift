@@ -28,10 +28,10 @@ class DonationCollectionViewCell: UICollectionViewCell {
     }
     
     func setupUIfor(view: UIView) {
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = UIColor.gray.cgColor
         view.layer.shadowOpacity = 1
         view.layer.shadowOffset = CGSize.zero
-        view.layer.shadowRadius = 5
+        view.layer.shadowRadius = 10
     }
 
 }
