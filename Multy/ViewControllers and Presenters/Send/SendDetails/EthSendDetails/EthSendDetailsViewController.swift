@@ -68,7 +68,6 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func backAction(_ sender: Any) {
         presenter.transactionDTO.transaction!.transactionRLM = nil
-        presenter.transactionDTO.transaction!.historyArray = nil
         presenter.transactionDTO.transaction!.customFee = nil
         
         self.navigationController?.popViewController(animated: true)
@@ -104,7 +103,6 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
             let sendAmountVC = segue.destination as! SendAmountViewController
             
             presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj
-            presenter.transactionDTO.transaction!.historyArray = presenter.historyArray
             presenter.transactionDTO.transaction!.customGAS = presenter.customGas
             
             sendAmountVC.presenter.transactionDTO = presenter.transactionDTO

@@ -62,12 +62,18 @@ class DataManager: NSObject {
     func makeExchangeFor(blockchainType: BlockchainType) -> Double {
         switch blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN :
-            print("\n\n\n\\\\\\\\\\\\\\\\\\")
-            print(self.currencyExchange.btcToUSD * 0.975)
             return self.currencyExchange.btcToUSD
         case BLOCKCHAIN_ETHEREUM:
             return self.currencyExchange.ethToUSD
         default: return 1.0
         }
+    }
+    
+    func generateWalletPrimaryKey(currencyID: UInt32, networkID: UInt32, walletID: UInt32) -> String {
+        let currencyString = String(currencyID).sha3(.sha256)
+        let walletString = String(walletID).sha3(.sha256)
+        let networkString = String(networkID).sha3(.sha256)
+        
+        return ("\(currencyString)" + "\(walletString) +\(networkString)").sha3(.sha256)
     }
 }

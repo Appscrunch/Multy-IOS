@@ -8,6 +8,7 @@
 #define MULTY_CORE_ACCOUNT_H
 
 #include "api.h"
+#include "blockchain.h"
 
 #include <stddef.h>
 #include <stdint.h>
@@ -21,36 +22,6 @@ struct Account;
 struct Error;
 struct ExtendedKey;
 struct Key;
-
-// See: https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-enum Blockchain
-{
-    BLOCKCHAIN_BITCOIN =            0x00,
-    BLOCKCHAIN_LITECOIN =           0x02,
-    BLOCKCHAIN_DASH =               0x05,
-    BLOCKCHAIN_ETHEREUM =           0x3c,
-    BLOCKCHAIN_ETHEREUM_CLASSIC =   0x3d,
-    BLOCKCHAIN_STEEM =              0x87,
-    BLOCKCHAIN_BITCOIN_CASH =       0x99,
-    
-    //not available in bip44
-    BLOCKCHAIN_BITCOIN_LIGHTNING =  0x9900,
-    BLOCKCHAIN_GOLOS =              0x9901,
-    BLOCKCHAIN_BITSHARES =          0x9902,
-    BLOCKCHAIN_ERC20 =              0x9903
-};
-
-enum BlockchainNetType
-{
-    BLOCKCHAIN_NET_TYPE_MAINNET = 0,
-    BLOCKCHAIN_NET_TYPE_TESTNET = 1,
-};
-
-struct BlockchainType
-{
-    enum Blockchain blockchain;
-    size_t net_type; // blockchain-specific net type, 0 for MAINNET.
-};
 
 enum AddressType
 {
@@ -97,7 +68,7 @@ MULTY_CORE_API struct Error* make_hd_leaf_account(
  * free_account().
  */
 MULTY_CORE_API struct Error* make_account(
-        enum Blockchain Blockchain,
+        enum Blockchain blockchain,
         const char* serialized_private_key,
         struct Account** new_account);
 
@@ -138,16 +109,6 @@ MULTY_CORE_API struct Error* account_get_address_path(
 MULTY_CORE_API struct Error* account_get_blockchain_type(
         const struct Account* account,
         struct BlockchainType* out_blockchain_type);
-
-// TODO: move to blockchain header, with blockchain_get_string()
-/** Validate an address for given blockchain
- *  @param address - address
- *  @param blockchain_type - Blockchain to use address for.
- *  @return null ptr if address is valid, Error if it is not.
- */
-MULTY_CORE_API struct Error* validate_address(
-        struct BlockchainType blockchain,
-        const char* address);
 
 /** Frees HDAccount instance, can accept nullptr. **/
 MULTY_CORE_API void free_hd_account(struct HDAccount*);

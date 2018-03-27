@@ -14,25 +14,11 @@ class BTCWalletPresenter: NSObject {
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
             blockedAmount = wallet!.calculateBlockedAmount()
-//            updateWalletInfo()
         }
     }
     var account : AccountRLM?
-    
-    var transactionsArray = [TransactionRLM]()
-    
-    func updateWalletInfo() {
-//        mainVC?.titleLbl.text = wallet?.name
-//        mainVC?.updateUI()
-//        mainVC?.updateExchange()
-//        mainVC?.updateHistory()
-    }
-    
     var historyArray = [HistoryRLM]() {
         didSet {
-//            blockedAmount = calculateBlockedAmount()
-//            updateWalletInfo()
-//            mainVC?.updateHistory()
             reloadTableView()
         }
     }
@@ -100,20 +86,15 @@ class BTCWalletPresenter: NSObject {
             }
         }
         
-        
         DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
             if err == nil && histList != nil {
                 self.mainVC!.refreshControl.endRefreshing()
                 self.mainVC!.tableView.isUserInteractionEnabled = true
                 self.mainVC!.tableView.contentOffset.y = 0
-//                self.mainVC!.tableView.contentOffset = 
                 self.historyArray = histList!.sorted(by: { $0.blockTime > $1.blockTime })
                 print("transaction history:\n\(histList)")
                 self.mainVC!.isSocketInitiateUpdating = false
             }
-            
-//            self.mainVC?.progressHUD.hide()
-//            self.mainVC?.updateUI()
         }
     }
 }

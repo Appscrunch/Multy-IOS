@@ -57,8 +57,7 @@ class WalletTableViewCell: UITableViewCell {
     func fillInCell() {
         let blockchainType = BlockchainType.create(wallet: wallet!)
         self.tokenImage.image = UIImage(named: blockchainType.iconString)
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
-        let sumInFiat = (self.wallet!.sumInCrypto * exchangeCourse).fixedFraction(digits: 2)
+        let sumInFiat = wallet!.sumInFiat.fixedFraction(digits: 2)
         self.walletNameLbl.text = self.wallet!.name
         self.cryptoSumLbl.text  = self.wallet!.sumInCrypto.fixedFraction(digits: 8)
         self.cryptoNameLbl.text = blockchainType.shortName

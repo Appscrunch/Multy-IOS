@@ -28,7 +28,7 @@ class SendFinishPresenter: NSObject {
         switch self.isCrypto {
         case true:
             self.sumInCrypto = transactionDTO.transaction?.endSum
-            self.sumInFiat = self.sumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+            self.sumInFiat = self.sumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
         case false:
             self.sumInFiat = transactionDTO.transaction?.endSum
             self.sumInCrypto = self.sumInFiat!

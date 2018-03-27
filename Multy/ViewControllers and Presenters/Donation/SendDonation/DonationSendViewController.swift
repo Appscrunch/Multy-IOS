@@ -112,7 +112,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     }
     
     func updateUIWithWallet() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: self.presenter.walletPayFrom!))
+        let exchangeCourse = presenter.walletPayFrom!.exchangeCourse
         let cryptoStr = "\(self.presenter.walletPayFrom?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(self.presenter.walletPayFrom?.cryptoName ?? "BTC")"
         let fiatSum = "\(((self.presenter.walletPayFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)) \(self.presenter.walletPayFrom?.fiatName ?? "USD")"
         

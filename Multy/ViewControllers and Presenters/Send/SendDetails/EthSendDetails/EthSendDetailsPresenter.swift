@@ -12,8 +12,8 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     var historyArray : List<HistoryRLM>? {
         didSet {
             self.blockedAmount = calculateBlockedAmount()
-            availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
-            availableSumInFiat = availableSumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+            availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - calculateBlockedAmount().btcValue
+            availableSumInFiat = availableSumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
         }
     }
     
@@ -90,7 +90,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createTransaction(index: Int) {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         switch index {
         case 0:
             self.transactionObj.speedName = "Very Fast"

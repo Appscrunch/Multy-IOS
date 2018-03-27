@@ -5,6 +5,9 @@
 import UIKit
 import ZFRippleButton
 
+private typealias TableViewDelegate = SendDetailsViewController
+private typealias TableViewDataSource = SendDetailsViewController
+
 class SendDetailsViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -71,7 +74,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
     
     func setupDonationUI() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
+        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
         self.donationTF.text = "\((self.presenter.donationInCrypto ?? 0.0).fixedFraction(digits: 8))"
         self.presenter.donationInFiat = self.presenter.donationInCrypto! * exchangeCourse
         self.donationFiatSumLbl.text = "\(self.presenter.donationInFiat?.fixedFraction(digits: 2) ?? "0.00")"
@@ -88,7 +91,6 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     @IBAction func backAction(_ sender: Any) {
         presenter.transactionDTO.transaction!.donationDTO = nil
         presenter.transactionDTO.transaction!.transactionRLM = nil
-        presenter.transactionDTO.transaction!.historyArray = nil
         presenter.transactionDTO.transaction!.customFee = nil
         
         self.navigationController?.popViewController(animated: true)
@@ -149,7 +151,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     //MARK: donationSwitch actions
     @IBAction func switchDonationAction(_ sender: Any) {
         var offset = scrollView.contentOffset
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
+        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
         
         if !self.isDonateAvailableSW.isOn {
             self.donationTF.resignFirstResponder()
@@ -251,7 +253,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
     
     func saveDonationSum(string: String) {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
+        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
         if string == "" && self.donationTF.text == "" {
             self.presenter.donationInCrypto = 0.0
             self.presenter.donationInFiat = 0.0
@@ -272,7 +274,6 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
             
             presenter.transactionDTO.transaction!.donationDTO = presenter.donationObj
             presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj
-            presenter.transactionDTO.transaction!.historyArray = presenter.historyArray
             presenter.transactionDTO.transaction!.customFee = presenter.customFee
             
             sendAmountVC.presenter.transactionDTO = presenter.transactionDTO
@@ -280,28 +281,9 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
 }
 
-extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row != 5 {
-            let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
-            transactionCell.feeRate = self.presenter.feeRate
-            transactionCell.blockchainType = self.presenter.transactionDTO.blockchainType
-            transactionCell.makeCellBy(indexPath: indexPath)
-            
-            return transactionCell
-        } else {
-            let customFeeCell = self.tableView.dequeueReusableCell(withIdentifier: "customFeeCell") as! CustomTrasanctionFeeTableViewCell
-            
-            return customFeeCell
-        }
+extension TableViewDelegate: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -359,8 +341,29 @@ extension SendDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         }
         
     }
+}
+
+extension TableViewDataSource: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row != 5 {
+            let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
+            transactionCell.feeRate = self.presenter.feeRate
+            transactionCell.blockchainType = self.presenter.transactionDTO.blockchainType
+            transactionCell.makeCellBy(indexPath: indexPath)
+            
+            return transactionCell
+        } else {
+            let customFeeCell = self.tableView.dequeueReusableCell(withIdentifier: "customFeeCell") as! CustomTrasanctionFeeTableViewCell
+            
+            return customFeeCell
+        }
     }
 }
