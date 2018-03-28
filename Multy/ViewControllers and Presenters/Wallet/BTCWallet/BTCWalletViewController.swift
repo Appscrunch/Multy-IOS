@@ -40,6 +40,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     var lastY: CGFloat = 0.0
     
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
@@ -62,10 +63,14 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
-        self.fixForPlus()
+//        self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     @objc func updateWalletAfterSockets() {
@@ -322,6 +327,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func updateUI() {
         self.tableView.reloadData()
     }
+
 }
 
 
@@ -356,7 +362,7 @@ extension TableViewDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 272.0 : 332.0
+            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 296.0 : 352.0   //value for X
             
             backUpView(height: heightForFirstCell)
             if heightForFirstCell == 332 {
@@ -381,6 +387,8 @@ extension TableViewDelegate: UITableViewDelegate {
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentY = scrollView.contentOffset.y
         let currentBottomY = scrollView.frame.size.height + currentY
@@ -413,16 +421,23 @@ extension TableViewDataSource: UITableViewDataSource {
         if countOfHistObjects > 0 {
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 7 {
+                if screenHeight == heightOfX {
+                    self.tableView.isScrollEnabled = false
+                    return 8
+                }
                 return 7
             } else {
                 return countOfHistObjects + 1
             }
         } else {
             self.tableView.isScrollEnabled = false
-            
+            if screenHeight == heightOfX {
+                return 13
+            }
             return 10
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {         // Main Wallet Header Cell

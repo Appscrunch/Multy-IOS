@@ -20,7 +20,7 @@ class SendFinishPresenter: NSObject {
     var sumInCrypto: Double?
     var sumInFiat: Double?
     var cryptoName: String?
-    var fiatName: String = "USD"//MARK: get from settingds
+    var fiatName: String = "USD"//MARK: get from settings
     
     var isCrypto = true
     

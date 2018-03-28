@@ -335,7 +335,8 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
             self.constraintSpendableViewBottom.constant = 0
             self.constraintForTitletoBtn.constant = 10
         } else if screenHeight == heightOfX {
-            self.constraintForTitletoBtn.constant = 175
+            self.constraintForTitletoBtn.constant = 160
+            self.constraintTop.constant = 53
         } else if screenHeight == heightOfPlus {
             self.constraintForTitletoBtn.constant = 165
         } else if screenHeight == heightOfFive {

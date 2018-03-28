@@ -33,7 +33,7 @@ class PortfolioTableViewCell: UITableViewCell, UIScrollViewDelegate {
         
         switch pageControl.currentPage {
         case 1:
-            x = screenWidth - 30
+            x = screenWidth
         default:
             x = 0
         }
@@ -41,10 +41,11 @@ class PortfolioTableViewCell: UITableViewCell, UIScrollViewDelegate {
         collectionView.setContentOffset(CGPoint(x: x,y :0), animated: true)
     }
     
-    func changePageControl(currentPage: Int) {
-        self.pageControl.currentPage = currentPage
-        self.pageControl.updateCurrentPageDisplay()
-    }
+//    func changePageControl(currentPage: Int) {
+//        self.pageControl.currentPage = currentPage
+//        self.pageControl.defersCurrentPageDisplay = true
+//        self.pageControl.updateCurrentPageDisplay()
+//    }
 }
 
 extension PortfolioTableViewCell: UICollectionViewDataSource {
@@ -63,5 +64,7 @@ extension PortfolioTableViewCell: UICollectionViewDataSource {
         
         return donatCell
     }
+    
+    
 }
 

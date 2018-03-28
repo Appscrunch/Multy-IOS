@@ -774,6 +774,7 @@
 			isa = PBXGroup;
 			children = (
 				45B0B0E41FEBEDC3005BB1C0 /* Activity */,
+				455EA8771FD8514F0093F69D /* Fast Operations */,
 				45B0B0E91FEBF29D005BB1C0 /* Contacts */,
 				45B0B0EE1FEBF2F2005BB1C0 /* Settings */,
 				455EA8751FD842610093F69D /* CustomTabBarViewController.swift */,
@@ -1233,7 +1234,6 @@
 				45B9CB011FBB4AC200AA2A31 /* Assets */,
 				455EA8721FD841FF0093F69D /* TabBar */,
 				FA4D43E81FC5C305003C7117 /* Wallet */,
-				455EA8771FD8514F0093F69D /* Fast Operations */,
 				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 				45A9491D1FC2DF03003C3A23 /* Receive */,
 				45A9493C1FC5A4FB003C3A23 /* Send */,
