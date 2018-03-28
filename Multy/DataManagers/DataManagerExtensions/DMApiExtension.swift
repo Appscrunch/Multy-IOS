@@ -129,6 +129,10 @@ extension DataManager {
                     })
                 }
                 
+                guard let _ =  params["userID"] as? String else {
+                    fatalError("userID should not be empty")
+                }
+                
                 self.apiManager.auth(with: params, completion: { (dict, error) in
                     if dict != nil {
                         self.realmManager.updateAccount(dict!, completion: { (account, error) in

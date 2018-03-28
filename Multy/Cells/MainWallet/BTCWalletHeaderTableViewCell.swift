@@ -66,7 +66,7 @@ class BTCWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
     }
     
     @IBAction func settingsAction(_ sender: Any) {
-        self.mainVC?.settingsAction(Any.self)
+        self.mainVC?.settingsAction(sender)
     }
 }
 

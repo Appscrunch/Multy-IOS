@@ -36,6 +36,7 @@ class CheckWordsPresenter: NSObject {
         }
         
         self.checkWordsVC?.view.isUserInteractionEnabled = false
+        let seedString2 = "sister chuckle rocket segment together open elder length word story chair settle goddess twelve spend"
         if let errString = DataManager.shared.getRootString(from: seedString).1 {
 //            let alert = UIAlertController(title: "Warning", message: errString, preferredStyle: .alert)
 //            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in

@@ -16,7 +16,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     let presenter = CustomFeePresenter()
     
-    var delegate: CustomFeeRateProtocol?
+    weak var delegate: CustomFeeRateProtocol?
     
     var rate = 0
     

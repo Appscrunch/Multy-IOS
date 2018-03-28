@@ -89,11 +89,11 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         if transactionDTO.sendAddress != nil && transactionDTO.choosenWallet != nil {
             let isValidDTO = DataManager.shared.isAddressValid(address: transactionDTO.sendAddress!, for: transactionDTO.choosenWallet!)
             
-            if !isValidDTO.0 {
+            if !isValidDTO.isValid {
 //                presentAlert(message: isValidDTO.1!)
             }
             
-            return isValidDTO.0
+            return isValidDTO.isValid
         } else {
             return transactionDTO.choosenWallet == nil
         }

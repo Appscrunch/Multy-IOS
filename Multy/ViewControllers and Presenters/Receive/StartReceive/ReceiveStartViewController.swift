@@ -12,7 +12,7 @@ class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
     
     let presenter = ReceiveStartPresenter()
     
-    var sendWalletDelegate: SendWalletProtocol?
+    weak var sendWalletDelegate: SendWalletProtocol?
     
     var titleText = "Receive"
     

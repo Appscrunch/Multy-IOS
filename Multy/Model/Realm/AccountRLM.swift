@@ -34,6 +34,11 @@ class AccountRLM: Object {
         }
     }
     
+    func isSeedPhraseSaved() -> Bool {
+        return seedPhrase == ""
+    }
+
+    
     override class func primaryKey() -> String? {
         return "id"
     }

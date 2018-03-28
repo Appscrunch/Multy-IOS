@@ -6,12 +6,11 @@ import UIKit
 
 class CreatingWalletActionsViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
 
-    var cancelDelegate: CancelProtocol?
-    var createProtocol: CreateWalletProtocol?
+    weak var cancelDelegate: CancelProtocol?
+    weak var createProtocol: CreateWalletProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)

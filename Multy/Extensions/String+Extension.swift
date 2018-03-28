@@ -19,10 +19,14 @@ extension String {
 
     func createBinaryData() -> BinaryData? {
         let pointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        defer {
+//            free_binarydata(pointer.pointee)
+            pointer.deallocate(capacity: 1)
+        }
         let mbdfh = make_binary_data_from_hex(self.UTF8CStringPointer, pointer)
         
         if mbdfh != nil {
-            DataManager.shared.coreLibManager.returnErrorString(opaquePointer: mbdfh!, mask: "make_binary_data_from_hex")
+            _ = DataManager.shared.coreLibManager.errorString(from: mbdfh!, mask: "make_binary_data_from_hex")
             
             return nil
         } else {

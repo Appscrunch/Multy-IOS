@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //executes after screenshot
         }
         
-        self.performFirstEnterFlow()
+        performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
                 if currencyExchange != nil {
@@ -44,10 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             isNeedToAutorise = acc != nil
 
             //MAKR: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
+            UserPreferences.shared.getAndDecryptPin(completion: { [weak self] (code, err) in
                 if code != nil && code != "" {
                     isNeedToAutorise = true
-                    self.authorization(isNeedToPresentBiometric: true)
+                    self!.authorization(isNeedToPresentBiometric: true)
                 }
             })
         }
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // for debug and development only
         Branch.getInstance().setDebug()
         // listener for Branch Deep Link data
-        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+        Branch.getInstance().initSession(launchOptions: launchOptions) { [weak self] (params, error) in
             // do stuff with deep link data (nav to page, display content, etc)
 //            print(params as? [String: AnyObject] ?? {})
             if error == nil {
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
                         sendStartVC.presenter.transactionDTO.sendAddress = "\(addressFromLink ?? "")"
                         sendStartVC.presenter.transactionDTO.sendAmount = amountFromLink
-                        ((self.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
+                        ((self!.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
                         sendStartVC.performSegue(withIdentifier: "chooseWalletVC", sender: (Any).self)
                     })
 //                    self.window?.rootViewController?.navigationController?.pushViewController(sendStartVC, animated: false)
@@ -215,6 +215,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if err != nil || buildVersion > hardVersion! {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
+                    assetVC.viewWillAppear(false)
                     let _ = UserPreferences.shared
                     self.saveMkVersion()
                 } else {

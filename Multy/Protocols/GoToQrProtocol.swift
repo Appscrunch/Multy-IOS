@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol GoToQrProtocol {
+protocol GoToQrProtocol: class {
     func goToScanQr()
 }

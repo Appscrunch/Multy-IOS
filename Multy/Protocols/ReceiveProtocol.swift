@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol ReceiveSumTransferProtocol {
+protocol ReceiveSumTransferProtocol: class {
     func transferSum(cryptoAmount: Double, cryptoCurrency: String, fiatAmount: Double, fiatName: String)
 }

@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol QrDataProtocol {
+protocol QrDataProtocol: class {
     func qrData(string: String)
 }
