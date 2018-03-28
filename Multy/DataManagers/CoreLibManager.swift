@@ -520,7 +520,7 @@ class CoreLibManager: NSObject {
         
         let amountString = String(cString: amountStringPointer.pointee!)
         let feeInSatoshiAmount = UInt64(amountString)!
-        let feeInBTCAmount = convertSatoshiToBTC(sum: feeInSatoshiAmount)
+        let feeInBTCAmount = feeInSatoshiAmount.btcValue
         
         //checking sums
         
@@ -798,7 +798,7 @@ extension TestCoreLibManager {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let blockchain = BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
+        let blockchain = BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BITCOIN_NET_TYPE_MAINNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, UInt32(0), newAccountPointer)
         print("make_hd_account: \(mHDa)")
         

@@ -77,7 +77,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
         NotificationCenter.default.removeObserver(self)
     }
     
-    
     @IBAction func backAction(_ sender: Any) {
         presenter.transactionDTO.sendAmount = 0.0
         presenter.transactionDTO.transaction?.newChangeAddress = nil
@@ -105,9 +104,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
         }
         self.presenter.setMaxAllowed()
     }
-    
-    
-    
     
     @IBAction func changeAction(_ sender: Any) {
         if self.presenter.isCrypto {
@@ -163,7 +159,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
         
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: switchTap)
     }
-    
     
     @objc func hideKeyboard() {
 //        self.amountTF.resignFirstResponder()

@@ -19,20 +19,19 @@ class UserWalletRLM: Object {
     
     @objc dynamic var name = String()
     @objc dynamic var cryptoName = String()  //like BTC
-    @objc dynamic var sumInCrypto: Double = 0.0 {
-        didSet {
-            let blockchain = BlockchainType.create(wallet: self)
-            sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchain)
-        }
-    }
+    @objc dynamic var sumInCrypto: Double = 0.0
     
     var availableSumInCrypto: Double {
         get {
-            return convertSatoshiToBTC(sum: availableAmount())
+            return availableAmount().btcValue
         }
     }
     
-    @objc dynamic var sumInFiat: Double = 0.0
+    var sumInFiat: Double {
+        get {
+            return sumInCrypto * exchangeCourse
+        }
+    }
     
     @objc dynamic var fiatName = String()
     @objc dynamic var fiatSymbol = String()
@@ -45,21 +44,24 @@ class UserWalletRLM: Object {
     
     var ethWallet = ETHWallet()
     var btcWallet = BTCWallet()
+        
+    var exchangeCourse: Double {
+        get {
+            return DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: self))
+        }
+    }
     
     var addresses = List<AddressRLM>() {
         didSet {
             var sum : UInt64 = 0
             
             for address in addresses {
-//                for out in address.spendableOutput {
-//                    sum += out.transactionOutAmount.uint32Value
-//                }
                 for out in address.spendableOutput {
                     sum += out.transactionOutAmount.uint64Value
                 }
             }
             
-            sumInCrypto = convertSatoshiToBTC(sum: sum)
+            sumInCrypto = sum.btcValue
             
             address = addresses.last?.address ?? ""
         }
@@ -103,15 +105,15 @@ class UserWalletRLM: Object {
             wallet.name = walletName as! String
         }
         
-        if let isTherePendingTx = walletInfo["pending"] {
-            wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx as! Bool)
+        if let isTherePendingTx = walletInfo["pending"] as? Bool {
+            wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx)
         }
         
         //MARK: temporary only 0-currency
         //MARK: server BUG: WalletIndex and walletindex
         //No data from server
         if walletInfo["walletindex"] != nil || walletInfo["WalletIndex"] != nil {
-            wallet.id = generateWalletPrimaryKey(currencyID: wallet.chain.uint32Value, networkID: wallet.chainType.uint32Value, walletID: wallet.walletID.uint32Value)
+            wallet.id = DataManager.shared.generateWalletPrimaryKey(currencyID: wallet.chain.uint32Value, networkID: wallet.chainType.uint32Value, walletID: wallet.walletID.uint32Value)
         }
         
         wallet.updateWalletWithInfo(walletInfo: walletInfo)

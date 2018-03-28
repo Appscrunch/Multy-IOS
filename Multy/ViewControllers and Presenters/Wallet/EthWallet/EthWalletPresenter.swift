@@ -15,25 +15,14 @@ class EthWalletPresenter: NSObject {
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
             blockedAmount = wallet!.calculateBlockedAmount()
-            //            updateWalletInfo()
         }
     }
     var account : AccountRLM?
     
     var transactionsArray = [TransactionRLM]()
     
-    func updateWalletInfo() {
-        //        mainVC?.titleLbl.text = wallet?.name
-        //        mainVC?.updateUI()
-        //        mainVC?.updateExchange()
-        //        mainVC?.updateHistory()
-    }
-    
     var historyArray = [HistoryRLM]() {
         didSet {
-            //            blockedAmount = calculateBlockedAmount()
-            //            updateWalletInfo()
-            //            mainVC?.updateHistory()
             reloadTableView()
         }
     }

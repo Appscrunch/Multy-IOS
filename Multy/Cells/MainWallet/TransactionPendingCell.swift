@@ -28,8 +28,8 @@ class TransactionPendingCell: UITableViewCell {
         }
         self.addressLabel.text = histObj.txInputs[0].address
         
-        self.cryptoAmountLabel.text = "\(convertSatoshiToBTC(sum: histObj.txOutAmount.uint64Value).fixedFraction(digits: 8)) BTC"
-        self.fiatAmountLabel.text = "\((convertSatoshiToBTC(sum: histObj.txOutAmount.uint64Value) * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
+        self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
         
         
 //        if histObj.txStatus.intValue == TxStatus.BlockIncoming.rawValue {
@@ -40,7 +40,7 @@ class TransactionPendingCell: UITableViewCell {
 //        }
         
         let amount = blockedAmount()
-        let amountInDouble = convertSatoshiToBTC(sum: amount)
+        let amountInDouble = amount.btcValue
         lockedCryptoAmountLabel.text = "\(amountInDouble.fixedFraction(digits: 8)) BTC"
         lockedFiatAmountLabel.text = "\((amountInDouble * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
     }

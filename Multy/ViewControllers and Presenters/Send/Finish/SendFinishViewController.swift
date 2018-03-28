@@ -42,7 +42,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     
     func setupUI() {
         self.cryptoImage.image = UIImage(named: presenter.transactionDTO.blockchainType.iconString)
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: presenter.transactionDTO.blockchainType)
+        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
         self.cryptoSumLbl.text = "\(presenter.transactionDTO.sendAmount?.fixedFraction(digits: 8) ?? "0.0")"
         self.cryptoNamelbl.text = "\(self.presenter.cryptoName ?? "BTC")"
         self.fiatSumAndCurrancyLbl.text = "\(self.presenter.sumInFiat?.fixedFraction(digits: 2) ?? "0.0") \(self.presenter.fiatName ?? "USD")"

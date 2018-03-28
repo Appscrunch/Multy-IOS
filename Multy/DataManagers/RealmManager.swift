@@ -394,6 +394,7 @@ class RealmManager: NSObject {
                             if modifiedWallet != nil {
                                 modifiedWallet?.name = wallet.name
                                 modifiedWallet!.addresses = wallet.addresses
+                                modifiedWallet!.isTherePendingTx = wallet.isTherePendingTx
 
                                 for (index,address) in wallet.addresses.enumerated() {
 //                                    modifiedWallet!.addresses[index].spendableOutput.removeAll()
@@ -592,7 +593,7 @@ class RealmManager: NSObject {
     func getWallet(walletID: NSNumber, completion: @escaping(_ wallet: UserWalletRLM?) -> ()) {
         getRealm { (realmOpt, error) in
             if let realm = realmOpt {
-                let primaryKey = generateWalletPrimaryKey(currencyID: 0, networkID: 0, walletID: walletID.uint32Value)
+                let primaryKey = DataManager.shared.generateWalletPrimaryKey(currencyID: 0, networkID: 0, walletID: walletID.uint32Value)
                 let wallet = realm.object(ofType: UserWalletRLM.self, forPrimaryKey: primaryKey)
                 
                 completion(wallet)
@@ -617,7 +618,7 @@ class RealmManager: NSObject {
     func fetchBTCWallets(isTestNet: Bool, completion: @escaping(_ wallets: [UserWalletRLM]?) -> ()) {
         getRealm { (realmOpt, err) in
             if let realm = realmOpt {
-                let wallets = realm.objects(UserWalletRLM.self).filter("chainType = \(isTestNet.intValue) AND chain = 0")
+                let wallets = realm.objects(UserWalletRLM.self).filter("chainType = \(isTestNet.intValue) AND chain = \(BLOCKCHAIN_BITCOIN.rawValue)")
                 let walletsArr = Array(wallets.sorted(by: {$0.availableSumInCrypto > $1.availableSumInCrypto}))
                 
                 completion(walletsArr)
