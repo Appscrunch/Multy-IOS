@@ -28,23 +28,6 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientForWallet" translatesAutoresizingMaskIntoConstraints="NO" id="V9a-Am-ouD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="331.5"/>
                     </imageView>
-                    <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rya-sD-JBP">
-                        <rect key="frame" x="168" y="294.5" width="39" height="37"/>
-                    </pageControl>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oci-Q7-YYq">
-                        <rect key="frame" x="0.0" y="64" width="375" height="245.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fns-tf-KmS">
-                            <size key="itemSize" width="375" height="210"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <connections>
-                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="7p8-ov-IQY"/>
-                            <outlet property="delegate" destination="KGk-i7-Jjw" id="A4D-K1-nqy"/>
-                        </connections>
-                    </collectionView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="SDL-hS-0qY">
                         <rect key="frame" x="333" y="30" width="25" height="20"/>
                         <constraints>
@@ -87,6 +70,23 @@
                             <action selector="closeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="t90-fR-NgE"/>
                         </connections>
                     </button>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oci-Q7-YYq">
+                        <rect key="frame" x="0.0" y="64" width="375" height="245.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fns-tf-KmS">
+                            <size key="itemSize" width="375" height="210"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <connections>
+                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="7p8-ov-IQY"/>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="A4D-K1-nqy"/>
+                        </connections>
+                    </collectionView>
+                    <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Rya-sD-JBP">
+                        <rect key="frame" x="168" y="294" width="39" height="37"/>
+                    </pageControl>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -100,18 +100,17 @@
                     <constraint firstItem="57B-xg-IGV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bew-sY-tZZ" secondAttribute="trailing" constant="5" id="EZu-UV-x4o"/>
                     <constraint firstItem="prT-1y-lyc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FPP-iW-WVh"/>
                     <constraint firstItem="57B-xg-IGV" firstAttribute="top" secondItem="bew-sY-tZZ" secondAttribute="top" id="Hrf-hE-XZh"/>
-                    <constraint firstItem="Rya-sD-JBP" firstAttribute="top" secondItem="oci-Q7-YYq" secondAttribute="bottom" constant="-15" id="PSk-jr-XJ2"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Poa-UB-qZs"/>
                     <constraint firstAttribute="bottom" secondItem="V9a-Am-ouD" secondAttribute="bottom" id="Ppe-Vi-YiX"/>
                     <constraint firstAttribute="trailing" secondItem="oci-Q7-YYq" secondAttribute="trailing" id="R4B-1h-vCr"/>
                     <constraint firstItem="lJD-xx-pmJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="UiK-dq-Og4"/>
-                    <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="64" id="VZY-yx-uG7"/>
+                    <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="lJD-xx-pmJ" secondAttribute="bottom" constant="10.5" id="VKc-9i-aIe"/>
                     <constraint firstItem="Rya-sD-JBP" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YNr-Eq-xVI"/>
-                    <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="bew-sY-tZZ" secondAttribute="bottom" constant="10" id="Yhj-yo-x1g"/>
                     <constraint firstItem="V9a-Am-ouD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ahM-MU-HTm"/>
                     <constraint firstItem="oci-Q7-YYq" firstAttribute="top" secondItem="prT-1y-lyc" secondAttribute="bottom" constant="-2" id="apt-5e-8jh"/>
                     <constraint firstItem="bew-sY-tZZ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gPX-6n-bH0"/>
                     <constraint firstItem="prT-1y-lyc" firstAttribute="top" secondItem="bew-sY-tZZ" secondAttribute="top" id="hqt-6e-F72"/>
+                    <constraint firstAttribute="bottom" secondItem="oci-Q7-YYq" secondAttribute="bottom" constant="22" id="i3B-bs-UMP"/>
                     <constraint firstAttribute="trailing" secondItem="57B-xg-IGV" secondAttribute="trailing" id="iUM-j6-ut7"/>
                     <constraint firstItem="SDL-hS-0qY" firstAttribute="top" secondItem="bew-sY-tZZ" secondAttribute="top" id="okS-gq-TAn"/>
                     <constraint firstAttribute="trailing" secondItem="V9a-Am-ouD" secondAttribute="trailing" id="sQo-Lh-nVX"/>
