@@ -23,7 +23,12 @@ class ViewInBlockchainViewController: UIViewController, UIWebViewDelegate {
     func loadPage(txId: String) {
         self.webView.scalesPageToFit = true
         self.webView.contentMode = .scaleAspectFit
-        self.webView.loadRequest(URLRequest(url: URL(string: "https://testnet.blockchain.info/tx/\(txId)")!))
+        
+        //FIXME:
+        //Work for bitcoin only
+        let subUrl = presenter.blockchainType!.net_type == 0 ? "" : "testnet."
+        
+        self.webView.loadRequest(URLRequest(url: URL(string: "https://\(subUrl)blockchain.info/tx/\(txId)")!))
     }
 
     @IBAction func backAction(_ sender: Any) {

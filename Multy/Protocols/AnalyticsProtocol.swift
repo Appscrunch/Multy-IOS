@@ -5,7 +5,7 @@
 import Foundation
 import Firebase
 
-protocol AnalyticsProtocol {
+protocol AnalyticsProtocol: class {
     func sendAnalyticsEvent(screenName: String, eventName: String)
 }
 

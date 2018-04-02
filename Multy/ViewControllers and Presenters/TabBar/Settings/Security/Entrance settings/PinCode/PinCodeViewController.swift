@@ -37,14 +37,14 @@ class PinCodeViewController: UIViewController, UITextFieldDelegate, AnalyticsPro
             paintCircleAt(position: counter)
             if isRepeat == false {
                 self.view.isUserInteractionEnabled = false
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.pinTextLbl.text = "Repeat your PIN-code"
                     self.firstPass = self.pinTF.text! + string
                     self.clearAllCircles()
                     self.counter = 0
                     self.isRepeat = true
                     self.view.isUserInteractionEnabled = true
-                }
+//                }
                 return false
             } else {
                 self.view.isUserInteractionEnabled = false

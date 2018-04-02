@@ -60,7 +60,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
         
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
 //        self.fixForPlus()
@@ -116,7 +115,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView(height: 272)
@@ -309,6 +307,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func fixForiPad() {
         if screenHeight == heightOfiPad {
             hideEmptyLbls()
+            self.bottomTableConstraint.constant = -50
         }
     }
     
@@ -354,8 +353,7 @@ extension TableViewDelegate: UITableViewDelegate {
         let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
-        transactionVC.presenter.blockchainType = BlockchainType.create(currencyID: presenter.wallet!.chain.uint32Value,
-                                                                       netType: presenter.wallet!.chainType.uint32Value)
+        transactionVC.presenter.blockchainType = BlockchainType.create(wallet: presenter.wallet!)
         self.navigationController?.pushViewController(transactionVC, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
     }

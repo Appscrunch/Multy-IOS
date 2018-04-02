@@ -16,6 +16,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var cryptoNameLbl: UILabel!
     @IBOutlet weak var fiatSumLbl: UILabel!
     @IBOutlet weak var fiatNameLbl: UILabel!
+    @IBOutlet weak var viewForShadow: UIView!
     
     @IBOutlet weak var walletNameLbl: UILabel!
     @IBOutlet weak var walletCryptoSumBtn: UIButton! //set title with sum here
@@ -32,6 +33,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.presenter.receiveAllDetailsVC = self
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)")
+        self.viewForShadow.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
     }
     
     override func viewWillAppear(_ animated: Bool) {

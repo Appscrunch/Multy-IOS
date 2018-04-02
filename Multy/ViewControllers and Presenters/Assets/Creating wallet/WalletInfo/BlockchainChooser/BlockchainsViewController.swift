@@ -15,7 +15,7 @@ class BlockchainsViewController: UIViewController {
     
     let presenter = BlockchainsPresenter()
     
-    var delegate: ChooseBlockchainProtocol?
+    weak var delegate: ChooseBlockchainProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +97,6 @@ extension TableViewDelegate: UITableViewDelegate {
             donatAlert.modalPresentationStyle = .overCurrentContext
             donatAlert.cancelDelegate = self
             self.present(donatAlert, animated: true, completion: nil)
-            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
             
             logAnalytics(indexPath: indexPath)
         } else {

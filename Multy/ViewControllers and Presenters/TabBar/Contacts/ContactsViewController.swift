@@ -7,25 +7,35 @@ import UIKit
 class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var donatView: UIView!
+    @IBOutlet weak var donationTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupView()
+        ipadFix()
         sendAnalyticsEvent(screenName: screenContacts, eventName: screenContacts)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            self.donationTopConstraint.constant = 0
+        }
     }
     
     @IBAction func donatAction(_ sender: Any) {
@@ -49,7 +59,6 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     }
     
     func cancelAction() {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         presentDonationVCorAlert()
     }
     

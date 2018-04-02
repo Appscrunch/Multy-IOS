@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-DemiBold</string>
-            <string>AvenirNext-Medium</string>
-            <string>AvenirNext-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Security Settings View Controller-->
         <scene sceneID="XHL-DI-PH7">
@@ -172,7 +165,7 @@ You should keep it secret!</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQ9-bg-RHh">
-                                        <rect key="frame" x="0.0" y="279.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="279" width="375" height="64"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUe-DC-XWF" userLabel="LineView1">
                                                 <rect key="frame" x="0.0" y="63" width="375" height="1"/>
@@ -215,13 +208,13 @@ You should keep it secret!</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set up additional step for accessing your Multy application." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTZ-vM-ZUC">
-                                        <rect key="frame" x="14" y="242.5" width="346" height="17"/>
+                                        <rect key="frame" x="14" y="242.5" width="346" height="16.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TC-xY-HA9">
-                                        <rect key="frame" x="19" y="353.5" width="337" height="49.5"/>
+                                        <rect key="frame" x="19" y="353" width="337" height="49.5"/>
                                         <string key="text">This function return the application to the initial state. 
 All information will be permanently removed. 
 Make sure that Seed Phrase backup was successfully done!</string>
@@ -966,6 +959,7 @@ Make sure that Seed Phrase backup was successfully done!</string>
                     </view>
                     <connections>
                         <outlet property="cancelBtn" destination="jvC-aj-crZ" id="yov-bS-4xv"/>
+                        <outlet property="heightConstraint" destination="zSH-4A-pbl" id="NFN-GQ-vxL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMe-01-nTs" userLabel="First Responder" sceneMemberID="firstResponder"/>

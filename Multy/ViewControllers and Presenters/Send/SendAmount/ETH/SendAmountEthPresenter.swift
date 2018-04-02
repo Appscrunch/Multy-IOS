@@ -1,12 +1,12 @@
-//Copyright 2017 Idealnaya rabota LLC
+//Copyright 2018 Idealnaya rabota LLC
 //Licensed under Multy.io license.
 //See LICENSE for details
 
 import UIKit
 import RealmSwift
 
-class SendAmountPresenter: NSObject {
-    var sendAmountVC: SendAmountViewController?
+class SendAmountEthPresenter: NSObject {
+    var sendAmountVC: SendAmountEthViewController?
     var transactionDTO = TransactionDTO() {
         didSet {
             blockedAmount = transactionDTO.choosenWallet!.calculateBlockedAmount()
@@ -47,7 +47,7 @@ class SendAmountPresenter: NSObject {
     
     var rawTransaction: String?
     
-//    var customFee : UInt64?
+    //    var customFee : UInt64?
     
     //for creating transaction
     var binaryData : BinaryData?
@@ -70,29 +70,29 @@ class SendAmountPresenter: NSObject {
     
     func estimateTransaction() -> Double {
         if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
-            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                              sendAddress: transactionDTO.sendAddress!,
                                                                              sendAmountString: self.sumInCrypto.fixedFraction(digits: 8),
                                                                              feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
-                                                                             isDonationExists: transactionDTO.transaction!.donationDTO!.sumInCrypto != 0.0,
-                                                                             donationAmount: transactionDTO.transaction!.donationDTO!.sumInCrypto!.fixedFraction(digits: 8),
-                                                                             isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
-                                                                             wallet: transactionDTO.choosenWallet!,
-                                                                             binaryData: &binaryData!,
-                                                                             inputs: transactionDTO.choosenWallet!.addresses)
+                isDonationExists: transactionDTO.transaction!.donationDTO!.sumInCrypto != 0.0,
+                donationAmount: transactionDTO.transaction!.donationDTO!.sumInCrypto!.fixedFraction(digits: 8),
+                isPayCommission: self.sendAmountVC!.commissionSwitch.isOn,
+                wallet: transactionDTO.choosenWallet!,
+                binaryData: &binaryData!,
+                inputs: transactionDTO.choosenWallet!.addresses)
             
             self.rawTransaction = trData.0
             
             return trData.1
         } else { // if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
-            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                                   sendAddress: transactionDTO.sendAddress!,
                                                                                   sendAmountString: self.sumInCrypto.fixedFraction(digits: 18),
                                                                                   nonce: transactionDTO.choosenWallet!.ethWallet.nonce.intValue,
                                                                                   balanceAmount: "\(transactionDTO.choosenWallet?.availableAmount())",
-                                                                                  ethereumChainID: BLOCKCHAIN_ETHEREUM.rawValue,
-                                                                                  gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
-                                                                                  gasLimit: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
+                ethereumChainID: BLOCKCHAIN_ETHEREUM.rawValue,
+                gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
+                gasLimit: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
             
             self.rawTransaction = trData
             //FIXME: retrun something
@@ -244,7 +244,7 @@ class SendAmountPresenter: NSObject {
             self.sendAmountVC?.bottomCurrencyLbl.text = self.cryptoName
         }
     }
-   
+    
     func checkMaxEntered() {
         if self.isCrypto {
             switch self.sendAmountVC?.commissionSwitch.isOn {
@@ -317,22 +317,4 @@ class SendAmountPresenter: NSObject {
         }
         return message
     }
-    
-//    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
-//        var sum = UInt64(0)
-//
-//        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-//            sum += transaction.txOutAmount.uint64Value
-//        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-//            let addresses = transactionDTO.choosenWallet!.fetchAddresses()
-//
-//            for tx in transaction.txOutputs {
-//                if addresses.contains(tx.address) {
-//                    sum += tx.amount.uint64Value
-//                }
-//            }
-//        }
-//
-//        return sum
-//    }
 }

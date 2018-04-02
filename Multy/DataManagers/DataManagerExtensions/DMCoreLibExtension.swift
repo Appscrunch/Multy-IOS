@@ -41,7 +41,7 @@ extension DataManager {
         return coreLibManager.createWallet(from: &binaryData,blockchain: blockchain, walletID: walletID)
     }
     
-    func isAddressValid(address: String, for wallet: UserWalletRLM) -> (Bool, String?) {
+    func isAddressValid(address: String, for wallet: UserWalletRLM) -> (isValid: Bool, message: String?) {
         return coreLibManager.isAddressValid(address: address, for: wallet)
     }
     
@@ -56,7 +56,7 @@ extension DataManager {
                                              addressID: UInt32(transactionDTO.choosenWallet!.addresses.count),
                                              binaryData: &binaryData)
         
-        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                          sendAddress: transactionDTO.sendAddress!,
                                                                          sendAmountString: transactionDTO.sendAmount!.fixedFraction(digits: 8),
                                                                          feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
@@ -103,7 +103,7 @@ extension DataManager {
         let blockchain = BlockchainType.create(wallet: wallet)
         let addressData = self.coreLibManager.createAddress(blockchain: blockchain, walletID: wallet.walletID.uint32Value, addressID: wallet.addressID.uint32Value, binaryData: &binaryData)
         
-        let _ = self.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+        let _ = self.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                            sendAddress: sendAddress,
                                                            sendAmountString: sendAmountString,
                                                            nonce: wallet.ethWallet.nonce.intValue,

@@ -19,7 +19,7 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
         newsView.layer.shadowRadius = 10
-        
+        ipadFix()
         setupView()
     }
     
@@ -27,18 +27,26 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         self.donatView.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 0.9994150996, alpha: 1)
         self.donatView.layer.borderWidth = 1
     }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            donatView.isHidden = true
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)   
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        super.viewWillAppear(animated)
+        
+        (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     @IBAction func goToAction(_ sender: Any) {
@@ -68,7 +76,6 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     }
     
     func cancelAction() {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         presentDonationVCorAlert()
     }
     

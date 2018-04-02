@@ -7,5 +7,6 @@ import UIKit
 class ViewInBlockchainPresenter: NSObject {
 
     var blockchainVC: ViewInBlockchainViewController?
+    var blockchainType: BlockchainType?
     var txId: String?
 }

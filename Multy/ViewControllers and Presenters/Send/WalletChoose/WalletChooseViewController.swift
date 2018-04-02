@@ -84,12 +84,11 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         
         let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: self.presenter.walletsArr[indexPath.row])
         
-        if !isValidDTO.0 {
-            presenter.presentAlert(message: isValidDTO.1!)
+        if !isValidDTO.isValid {
+            presenter.presentAlert(message: isValidDTO.message!)
             
             return
         }
-
         
         self.presenter.selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "sendBTCDetailsVC", sender: Any.self)

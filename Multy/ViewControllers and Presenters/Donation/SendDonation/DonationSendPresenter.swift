@@ -91,6 +91,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
             
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let sendSuccessVC = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC") as! SendingAnimationViewController
+            sendSuccessVC.indexForTabBar = self.mainVC?.selectedTabIndex
             sendSuccessVC.chainId = transaction.choosenWallet?.chain as? Int
             self.mainVC?.navigationController?.pushViewController(sendSuccessVC, animated: true)
         }

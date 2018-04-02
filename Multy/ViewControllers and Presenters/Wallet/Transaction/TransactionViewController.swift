@@ -177,6 +177,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         if segue.identifier == "viewInBlockchain" {
             let blockchainVC = segue.destination as! ViewInBlockchainViewController
             blockchainVC.presenter.txId = presenter.histObj.txId
+            blockchainVC.presenter.blockchainType = presenter.blockchainType
         }
     }
     

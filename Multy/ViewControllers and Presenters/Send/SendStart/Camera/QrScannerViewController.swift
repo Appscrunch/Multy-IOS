@@ -13,7 +13,7 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
     
-    var qrDelegate: QrDataProtocol?
+    weak var qrDelegate: QrDataProtocol?
     
     let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                               AVMetadataObject.ObjectType.code39,

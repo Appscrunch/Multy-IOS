@@ -13,8 +13,11 @@ private typealias CollectionViewDelegate = AssetsViewController
 private typealias CollectionViewDelegateFlowLayout = AssetsViewController
 private typealias TableViewDelegate = AssetsViewController
 private typealias TableViewDataSource = AssetsViewController
+private typealias PresentingSheetDelegate = AssetsViewController
+private typealias CancelDelegate = AssetsViewController
+private typealias CreateWalletDelegate = AssetsViewController
 
-class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtocol, CancelProtocol, CreateWalletProtocol {
+class AssetsViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -33,10 +36,13 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
     
     var isInsetCorrect = false
     
-    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.presenter.account != nil {
+            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
+        }
+        self.backUpView()
         
         tableView.accessibilityIdentifier = "AssetsTableView"
         self.view.isUserInteractionEnabled = false
@@ -44,13 +50,7 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
         self.presenter.assetsVC = self
         self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
-        
-        self.createAlert()
 
-        sendAnalyticsEvent(screenName: screenMain, eventName: screenMain)
         guard isFlowPassed else {
             self.view.isUserInteractionEnabled = true
             return
@@ -62,6 +62,10 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
             self.view.isUserInteractionEnabled = true
             return
         }
+        
+        sendAnalyticsEvent(screenName: screenMain, eventName: screenMain)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
         
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
         
@@ -78,31 +82,32 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
 //        progressHUD.show()
         presenter.auth()
         
-        
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        }
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = .never
+//        }
         
 //        DataManager.shared.coreLibManager.startSwiftTest()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         if self.presenter.isJailed {
             self.presentWarningAlert(message: Constants.Security.jailbrokenDeviceWarningString)
         }
-        
-        fixBottomOffset()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        self.isInsetCorrect = true
+//        self.isInsetCorrect = true
+//        presenter.contentOffset = tableView.contentOffset
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if self.presenter.account != nil {
+            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
+        }
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         
         if !self.isFirstLaunch {
             self.presenter.updateWalletsInfo()
@@ -111,10 +116,15 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
         guard isFlowPassed == true else {
             return
         }
-        
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
+
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         
+        //FIXME: PROBABLE for the best solution
+        //here fixed hiding table botton behind tabbar
+//
+//        if tableView.contentOffset.y + screenHeight > tableView.contentSize.height {
+//            tableView.contentOffset = CGPoint(x: 0, y: tableView.contentSize.height - screenHeight)
+//        }
 //        if presenter.account != nil && tableView.numberOfRows(inSection: 0) > presenter.tappedIndexPath.row {
 //            tableView.reloadData()
 //            tableView.scrollToRow(at: presenter.tappedIndexPath, at: .bottom, animated: true)
@@ -122,18 +132,11 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
     }
     
     override func viewDidLayoutSubviews() {
-        if isInsetCorrect {
-            self.tableView.contentInset.bottom = 0
-        } else {
-            self.tableView.contentInset.bottom = 49
-        }
-    }
-    
-    func fixBottomOffset() {
-        //fix table offset
-        if (tableView.contentSize.height > tableView.bounds.height) && (tableView.contentSize.height - tableView.bounds.origin.y < tableView.bounds.height) {
-            tableView.contentOffset = CGPoint(x: 0.0, y: tableView.contentSize.height - tableView.bounds.height)
-        }
+//        if isInsetCorrect {
+//            self.tableView.contentInset.bottom = 0
+//        } else {
+//            self.tableView.contentInset.bottom = 49
+//        }
     }
     
     @objc func updateExchange() {
@@ -168,38 +171,25 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
         }
     }
     
-    func createAlert() {
-        if actionSheet.actions.count == 0 {
-            actionSheet.addAction(
-                UIAlertAction(title: Constants.AssetsScreen.createWalletString,
-                              style: .default,
-                              handler: { (result : UIAlertAction) -> Void in
-                                self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID,
-                                                  sender: Any.self)
-                }))
-            //            actionSheet.addAction(UIAlertAction(title: "Import wallet", style: .default, handler: { (result: UIAlertAction) -> Void in
-            //                //go to import wallet
-            //            }))
-            actionSheet.addAction(UIAlertAction(title: Constants.AssetsScreen.cancelString,
-                                                style: UIAlertActionStyle.cancel,
-                                                handler: nil))
-        }
-    }
-    
     func backUpView() {
-        if self.isSeedBackupOnScreen {
-            if self.presenter.account?.seedPhrase == nil || self.presenter.account?.seedPhrase == "" {
-                backupView?.removeFromSuperview()
-                isSeedBackupOnScreen = false
-            }
-            
+//        if isSeedBackupOnScreen {
+//            if presenter.account!.isSeedPhraseSaved() {
+//                backupView?.removeFromSuperview()
+//                isSeedBackupOnScreen = false
+//            }
+//
+//            return
+//        }
+        
+        if backupView != nil {
             return
         }
+        
         let view = UIView()
         if screenHeight == heightOfX {
-            view.frame = CGRect(x: 16, y: 35, width: screenWidth - 32, height: 44)
+            view.frame = CGRect(x: 16, y: 35, width: screenWidth - 32, height: Constants.AssetsScreen.backupButtonHeight)
         } else {
-            view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: 44)
+            view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: Constants.AssetsScreen.backupButtonHeight)
         }
         
         view.layer.cornerRadius = 20
@@ -209,9 +199,9 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 10
         
-        if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+//        if !presenter.account!.isSeedPhraseSaved() {
             view.isHidden = false
-            self.isSeedBackupOnScreen = true
+//            isSeedBackupOnScreen = true
             let image = UIImageView()
             image.image = #imageLiteral(resourceName: "warninngBigWhite")
             image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
@@ -228,9 +218,11 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
             view.addSubview(image)
             backupView = view
             self.view.addSubview(backupView!)
-        } else {
             view.isHidden = true
-        }
+            view.isUserInteractionEnabled = false
+//        } else {
+//            view.isHidden = true
+//        }
     }
     
     @objc func goToSeed() {
@@ -321,12 +313,36 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createWalletVC" {
+        if segue.identifier == Constants.Storyboard.createWalletVCSegueID {
             let createVC = segue.destination as! CreateWalletViewController
             createVC.presenter.account = presenter.account
         }
     }
     
+    func changePageControl(currentpage: Int) {
+//        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
+//        headerCell?.changePageControl(currentPage: currentpage)
+    }
+}
+
+extension CreateWalletDelegate: CreateWalletProtocol {
+    func goToCreateWallet() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID, sender: Any.self)
+    }
+}
+
+extension CancelDelegate: CancelProtocol {
+    func cancelAction() {
+        presentDonationVCorAlert()
+    }
+    
+    func presentNoInternet() {
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
+    }
+}
+
+extension PresentingSheetDelegate: OpenCreatingSheet {
     //MARK: CreateNewWalletProtocol
     func openNewWalletSheet() {
         if self.presenter.account == nil {
@@ -341,36 +357,11 @@ class AssetsViewController: UIViewController, OpenCreatingSheet, AnalyticsProtoc
         creatingVC.modalPresentationStyle = .overCurrentContext
         self.present(creatingVC, animated: true, completion: nil)
     }
-    
-    func cancelAction() {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-        presentDonationVCorAlert()
-    }
-    
-    func presentNoInternet() {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-    }
-    
-    func goToCreateWallet() {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-        self.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID, sender: Any.self)
-    }
-    
-    func changePageControl(currentpage: Int) {
-//        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
-//        headerCell?.changePageControl(currentPage: currentpage)
-    }
 }
 
 extension TableViewDelegate : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.tappedIndexPath = indexPath
-        
-        if indexPath != [0, 1] && indexPath != [0, 0] {
-            if self.presenter.isWalletExist() {
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-            }
-        }
         
         switch indexPath {
         case [0,0]:
@@ -416,38 +407,114 @@ extension TableViewDelegate : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == [0,0] {
-            //            return 283  //portfolio height
-            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
-                if self.presenter.account != nil {
-                    if screenHeight == heightOfX {
-                        //                    return 255 //logo height
-                        return 400
-                    } else {
-                        //                    return 245
-                        return 390
-                    }
-                }else {
-                    if screenHeight == heightOfX {
-                        return 255 //logo height
-                    } else {
-                        return 245
-                    }
-                }
+//        if indexPath == [0,0] {
+//            //            return 283  //portfolio height
+//            if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
+//                if self.presenter.account != nil {
+//                    if screenHeight == heightOfX {
+//                        //                    return 255 //logo height
+//                        return 400
+//                    } else {
+//                        //                    return 245
+//                        return 390
+//                    }
+//                }else {
+//                    if screenHeight == heightOfX {
+//                        return 255 //logo height
+//                    } else {
+//                        return 245
+//                    }
+//                }
+//            } else {
+//                if self.presenter.account != nil {
+//                    //                                return 220  //logo
+//                    return 340
+//                } else {
+//                    return 220  //logo
+//                }
+//            }
+//        } else if indexPath == [0, 1] {
+//            return 75
+//        } else {
+//            return 104   // wallet height
+//            //            return 100
+//        }
+        
+        switch indexPath {
+        case [0,0]:         // PORTFOLIO CELL  or LOGO
+            if presenter.account == nil {
+                return 220
             } else {
-                if self.presenter.account != nil {
-                    //                                return 220  //logo
+                if presenter.account!.isSeedPhraseSaved() {
                     return 340
                 } else {
-                    return 220  //logo
+                    return 340 + Constants.AssetsScreen.backupButtonHeight
                 }
             }
-        } else if indexPath == [0, 1] {
+        case [0,1]:        // !!!NEW!!! WALLET CELL
             return 75
-        } else {
-            return 104   // wallet height
-            //            return 100
+        case [0,2]:
+            if self.presenter.account != nil {
+                if presenter.isWalletExist() {
+                    return 104
+                } else {
+                    return 121
+                }
+            } else {   // acc == nil
+                return 100
+            }
+        case [0,3]:
+            if self.presenter.account != nil {
+                return 104
+            } else {
+                return 100
+            }
+        default:
+            return 104
         }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath {
+        case [0,0]:         // PORTFOLIO CELL  or LOGO
+            if presenter.account == nil {
+                return 220
+            } else {
+                if presenter.account!.isSeedPhraseSaved() {
+                    return 340
+                } else {
+                    return 340 + Constants.AssetsScreen.backupButtonHeight
+                }
+            }
+        case [0,1]:        // !!!NEW!!! WALLET CELL
+            return 75
+        case [0,2]:
+            if self.presenter.account != nil {
+                if presenter.isWalletExist() {
+                    return 104
+                } else {
+                    return 121
+                }
+            } else {   // acc == nil
+                return 100
+            }
+        case [0,3]:
+            if self.presenter.account != nil {
+                return 104
+            } else {
+                return 100
+            }
+        default:
+            return 104
+        }
+    }
+    
+    override var preferredContentSize: CGSize {
+        get {
+            self.tableView.layoutIfNeeded()
+            return self.tableView.contentSize
+        }
+        set { }
     }
 }
 
@@ -459,12 +526,12 @@ extension TableViewDataSource : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.presenter.account != nil {
             if presenter.isWalletExist() {
-                return 2 + presenter.account!.wallets.count  // logo - new wallet - wallets
+                return 2 + presenter.account!.wallets.count  // logo / new wallet /wallets
             } else {
-                return 3                                     // logo - new wallet - text cell
+                return 3                                     // logo / new wallet / text cell
             }
         } else {
-            return 4                                         // logo - empty cell - create wallet - restore
+            return 4                                         // logo / empty cell / create wallet / restore
         }
     }
     
@@ -495,7 +562,6 @@ extension TableViewDataSource : UITableViewDataSource {
         case [0,2]:
             if self.presenter.account != nil {
                 //MARK: change logiv
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: self.tabBarController!.viewControllers![0].childViewControllers.count != 1)
                 
                 if presenter.isWalletExist() {
                     let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
@@ -507,11 +573,11 @@ extension TableViewDataSource : UITableViewDataSource {
                     return walletCell
                 } else {
                     let textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell") as! TextTableViewCell
+                    
                     return textCell
                 }
             } else {   // acc == nil
                 let createCell = self.tableView.dequeueReusableCell(withIdentifier: "createOrRestoreCell") as! CreateOrRestoreBtnTableViewCell
-                (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
                 
                 return createCell
             }

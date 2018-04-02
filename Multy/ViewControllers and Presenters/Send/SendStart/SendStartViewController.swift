@@ -45,9 +45,9 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         presenter.transactionDTO.sendAddress = searchCell.addressTV.text
         
         if presenter.transactionDTO.choosenWallet != nil && presenter.isTappedDisabledNextButton(gesture: gesture) {
-            let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
+//            let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
             
-//            if !isValidDTO.0 {
+//            if !isValidDTO.isValid {
 //                presenter.presentAlert(message: isValidDTO.1!)
 //            }
             

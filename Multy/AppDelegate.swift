@@ -5,7 +5,10 @@
 import UIKit
 import RealmSwift
 import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
 import Branch
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //executes after screenshot
         }
         
-        self.performFirstEnterFlow()
+        performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
                 if currencyExchange != nil {
@@ -44,10 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             isNeedToAutorise = acc != nil
 
             //MAKR: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
+            UserPreferences.shared.getAndDecryptPin(completion: { [weak self] (code, err) in
                 if code != nil && code != "" {
                     isNeedToAutorise = true
-                    self.authorization(isNeedToPresentBiometric: true)
+                    self!.authorization(isNeedToPresentBiometric: true)
                 }
             })
         }
@@ -63,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // for debug and development only
         Branch.getInstance().setDebug()
         // listener for Branch Deep Link data
-        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+        Branch.getInstance().initSession(launchOptions: launchOptions) { [weak self] (params, error) in
             // do stuff with deep link data (nav to page, display content, etc)
 //            print(params as? [String: AnyObject] ?? {})
             if error == nil {
@@ -73,15 +76,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if acc == nil {
                             return
                         }
+                        var amountFromLink = 0.0
+                        
                         let chainNameFromLink = (dictFormLink["address"] as! String).split(separator: ":").first
                         let addressFromLink = (dictFormLink["address"] as! String).split(separator: ":").last
-                        let amountFromLink = (dictFormLink["amount"] as! NSString).doubleValue
+                        if let amount = dictFormLink["amount"] as? NSString {
+                            amountFromLink = amount.doubleValue
+                        } else if let number = dictFormLink["amount"] as? NSNumber {
+                            amountFromLink = number.doubleValue
+                        } else {
+                            print("\n\n\nAmount from deepLink not parsed!\n\n\n")
+                        }
                         
                         let storyboard = UIStoryboard(name: "Send", bundle: nil)
                         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
                         sendStartVC.presenter.transactionDTO.sendAddress = "\(addressFromLink ?? "")"
                         sendStartVC.presenter.transactionDTO.sendAmount = amountFromLink
-                        ((self.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
+                        ((self!.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
                         sendStartVC.performSegue(withIdentifier: "chooseWalletVC", sender: (Any).self)
                     })
 //                    self.window?.rootViewController?.navigationController?.pushViewController(sendStartVC, animated: false)
@@ -95,6 +106,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let filePath = filePathOpt, let options = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: options)
         }
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            // For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
         
         return true
     }
@@ -215,6 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if err != nil || buildVersion > hardVersion! {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
+                    assetVC.viewWillAppear(false)
                     let _ = UserPreferences.shared
                     self.saveMkVersion()
                 } else {
@@ -285,5 +314,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        )
 //        Realm.Configuration.defaultConfiguration = config
 //    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print(remoteMessage.appData)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
+    }
 }
 

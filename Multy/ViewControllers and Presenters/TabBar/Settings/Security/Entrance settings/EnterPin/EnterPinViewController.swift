@@ -12,7 +12,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var viewWithCircles: UIView!
     @IBOutlet weak var pinTF: UITextField!
     
-    var cancelDelegate: CancelProtocol?
+    weak var cancelDelegate: CancelProtocol?
     
     var counter = 0
     

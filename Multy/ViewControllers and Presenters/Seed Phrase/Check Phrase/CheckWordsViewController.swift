@@ -57,7 +57,6 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard(_:)), name: Notification.Name("hideKeyboard"), object: nil)
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
-        self.tabBarController?.tabBar.frame = CGRect.zero
         sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: screenRestoreSeed)
     }
     
