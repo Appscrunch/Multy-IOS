@@ -70,7 +70,7 @@ class SendAmountPresenter: NSObject {
     
     func estimateTransaction() -> Double {
         if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
-            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                              sendAddress: transactionDTO.sendAddress!,
                                                                              sendAmountString: self.sumInCrypto.fixedFraction(digits: 8),
                                                                              feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
@@ -85,7 +85,7 @@ class SendAmountPresenter: NSObject {
             
             return trData.1
         } else { // if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
-            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                                   sendAddress: transactionDTO.sendAddress!,
                                                                                   sendAmountString: self.sumInCrypto.fixedFraction(digits: 18),
                                                                                   nonce: transactionDTO.choosenWallet!.ethWallet.nonce.intValue,
@@ -335,4 +335,9 @@ class SendAmountPresenter: NSObject {
 //
 //        return sum
 //    }
+    deinit {
+        let accountPointer = addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>
+        free_account(accountPointer.pointee)
+        accountPointer.deallocate(capacity: 1)
+    }
 }

@@ -73,7 +73,7 @@ class TransactionWalletCell: UITableViewCell {
         
         self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
         
-        self.fiatAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
     }
     
 //    func setCorners() {

@@ -11,6 +11,7 @@ struct Constants {
         static let createWalletString = "Create wallet"
         static let createOrImportWalletString = "Create or Import New Wallet"
         static let cancelString = "Cancel"
+        static let backupButtonHeight = CGFloat(44)
     }
     
     struct ETHWalletScreen {
@@ -134,9 +135,9 @@ enum TxStatus : Int {
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "stage.multy.io"
+let shortURL = "test.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"
-let apiUrlTest = "http://192.168.0.125:8080/"
+let apiUrlTest = "http://192.168.0.123:6778/"
 let nonLocalURL = "http://88.198.47.112:7778/"

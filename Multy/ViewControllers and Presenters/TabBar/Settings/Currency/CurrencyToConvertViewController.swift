@@ -12,7 +12,12 @@ class CurrencyToConvertViewController: UIViewController, CancelProtocol, Analyti
         super.viewDidLoad()
         self.swipeToBack()
         self.registerCell()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
@@ -30,7 +35,7 @@ class CurrencyToConvertViewController: UIViewController, CancelProtocol, Analyti
     }
     
     func presentNoInternet() {
-//        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+
     }
 }
 
@@ -92,7 +97,6 @@ extension CurrencyToConvertViewController: UITableViewDelegate, UITableViewDataS
             donatAlert.modalPresentationStyle = .overCurrentContext
             donatAlert.cancelDelegate = self
             self.present(donatAlert, animated: true, completion: nil)
-            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
             
             logAnalytics(indexPath: indexPath)
         } else {

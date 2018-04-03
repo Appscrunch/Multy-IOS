@@ -27,16 +27,13 @@ class BackupSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
-//        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
-//        self.tabBarController?.tabBar.frame = CGRect.zero
         self.fixForiPad()
         sendAnalyticsEvent(screenName: screenViewPhrase, eventName: screenViewPhrase)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
-        self.tabBarController?.tabBar.frame = CGRect.zero
+
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.uiForRestore()
     }

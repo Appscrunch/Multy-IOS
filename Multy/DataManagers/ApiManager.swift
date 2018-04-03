@@ -65,7 +65,7 @@ class ApiManager: NSObject, RequestRetrier {
 //    }
     
     public func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
-        print("\n\n\n\n\n\nretrier\n\n\n\n\n\n")
+        print("\n\n\n\n\n\nretrier: \(request.request?.urlRequest?.url?.absoluteString)\n\n\n\n\n\n")
         
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             
@@ -74,11 +74,11 @@ class ApiManager: NSObject, RequestRetrier {
             }
             
             var params : Parameters = [ : ]
+            
             params["userID"] = userID
             params["deviceID"] = "iOS \(UIDevice.current.name)"
             params["deviceType"] = 1
             params["pushToken"] = UUID().uuidString
-            
             
             self.auth(with: params, completion: { (dict, error) in
                 completion(true, 0.2) // retry after 0.2 second
@@ -108,14 +108,16 @@ class ApiManager: NSObject, RequestRetrier {
             "Content-Type": "application/json"
         ]
         
-        requestManager.request("\(apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { (response: DataResponse<Any>) in
+        requestManager.request("\(apiUrl)auth", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header).debugLog().responseJSON { [weak self] (response: DataResponse<Any>) in
             
             print("----------------------AUTH")
             
             switch response.result {
             case .success(_):
                 if response.result.value != nil {
-                    self.token = (response.result.value as! NSDictionary)["token"] as! String
+                    if let token = (response.result.value as! NSDictionary)["token"] as? String {
+                        self!.token = token
+                    }
                     completion((response.result.value as! NSDictionary), nil)
                 }
             case .failure(_):

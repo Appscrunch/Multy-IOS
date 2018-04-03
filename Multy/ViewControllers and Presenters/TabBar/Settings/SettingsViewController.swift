@@ -37,11 +37,11 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = false
+        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.getPassFromUserDef()
@@ -52,7 +52,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        
         NotificationCenter.default.removeObserver(self)
     }
     

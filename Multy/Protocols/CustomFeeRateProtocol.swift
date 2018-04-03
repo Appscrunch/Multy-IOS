@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol CustomFeeRateProtocol {
+protocol CustomFeeRateProtocol: class {
     func customFeeData(firstValue: Int?, secValue: Int?)
 }

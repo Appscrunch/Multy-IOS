@@ -5,6 +5,8 @@
 import UIKit
 import RealmSwift
 
+private typealias RealmMigrationManager = RealmManager
+
 class RealmManager: NSObject {
     static let shared = RealmManager()
     
@@ -28,7 +30,7 @@ class RealmManager: NSObject {
             return
         }
         
-        UserPreferences.shared.getAndDecryptDatabasePassword { (pass, error) in
+        UserPreferences.shared.getAndDecryptDatabasePassword { [weak self] (pass, error) in
             guard pass != nil else {
                 completion(nil, nil)
                 
@@ -36,43 +38,43 @@ class RealmManager: NSObject {
             }
             
             let realmConfig = Realm.Configuration(encryptionKey: pass,
-                                                  schemaVersion: self.schemaVersion,
+                                                  schemaVersion: self!.schemaVersion,
                                                   migrationBlock: { migration, oldSchemaVersion in
                                                     if oldSchemaVersion < 7 {
-                                                        self.migrateFrom6To7(with: migration)
+                                                        self!.migrateFrom6To7(with: migration)
                                                     }
                                                     if oldSchemaVersion < 8 {
-                                                        self.migrateFrom7To8(with: migration)
+                                                        self!.migrateFrom7To8(with: migration)
                                                     }
                                                     if oldSchemaVersion < 9 {
-                                                        self.migrateFrom8To9(with: migration)
+                                                        self!.migrateFrom8To9(with: migration)
                                                     }
                                                     if oldSchemaVersion < 10 {
-                                                        self.migrateFrom9To10(with: migration)
+                                                        self!.migrateFrom9To10(with: migration)
                                                     }
                                                     if oldSchemaVersion < 11 {
-                                                        self.migrateFrom10To11(with: migration)
+                                                        self!.migrateFrom10To11(with: migration)
                                                     }
                                                     if oldSchemaVersion < 12 {
-                                                        self.migrateFrom11To12(with: migration)
+                                                        self!.migrateFrom11To12(with: migration)
                                                     }
                                                     if oldSchemaVersion < 13 {
-                                                        self.migrateFrom12To13(with: migration)
+                                                        self!.migrateFrom12To13(with: migration)
                                                     }
                                                     if oldSchemaVersion < 14 {
-                                                        self.migrateFrom13To14(with: migration)
+                                                        self!.migrateFrom13To14(with: migration)
                                                     }
                                                     if oldSchemaVersion < 15 {
-                                                        self.migrateFrom14To15(with: migration)
+                                                        self!.migrateFrom14To15(with: migration)
                                                     }
                                                     if oldSchemaVersion < 16 {
-                                                        self.migrateFrom15To16(with: migration)
+                                                        self!.migrateFrom15To16(with: migration)
                                                     }
             })
             
             do {
                 let realm = try Realm(configuration: realmConfig)
-                self.realm = realm
+                self!.realm = realm
                 
                 completion(realm, nil)
             } catch let error as NSError {
@@ -144,7 +146,7 @@ class RealmManager: NSObject {
     }
     
     public func updateAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
-        getRealm { (realmOpt, error) in
+        getRealm { [weak self] (realmOpt, error) in
             if let realm = realmOpt {
                 let account = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
                 
@@ -187,17 +189,10 @@ class RealmManager: NSObject {
                     if accountDict["topindexes"] != nil {
                         let newTopIndexes = TopIndexRLM.initWithArray(indexesArray: accountDict["topindexes"] as! NSArray)
                         accountRLM.topIndexes.removeAll()
+                        self!.deleteTopIndexes(from: realm)
                         for newIndex in newTopIndexes {
                             accountRLM.topIndexes.append(newIndex)
                         }
-                    }
-                    
-                    //MARK: create topIndexes for all currencies
-                    if accountRLM.topIndexes.count == 0 {
-                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 0, networkID: 0, topIndex: 0))
-                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 0, networkID: 1, topIndex: 0))
-                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 60, networkID: 0, topIndex: 0))
-                        accountRLM.topIndexes.append(TopIndexRLM.createDefaultIndex(currencyID: 60, networkID: 4, topIndex: 0))//RINKEBY
                     }
                     
                     if accountDict["wallets"] != nil && !(accountDict["wallets"] is NSNull) {
@@ -217,7 +212,7 @@ class RealmManager: NSObject {
                     }
                     
                     realm.add(accountRLM, update: true)
-                    self.account = accountRLM
+                    self!.account = accountRLM
                     
                     completion(accountRLM, nil)
                     
@@ -229,10 +224,6 @@ class RealmManager: NSObject {
             }
         }
     }
-//     public func updateAccount(_ accountDict: NSDictionary, completion: @escaping (_ account : AccountRLM?, _ error: NSError?) -> ()) {
-//    public func updateAccountWallets(_ wallets) {
-//        
-//    }
     
     public func createWallet(_ walletDict: Dictionary<String, Any>, completion: @escaping (_ account : UserWalletRLM?, _ error: NSError?) -> ()) {
         getRealm { (realmOpt, error) in
@@ -290,11 +281,11 @@ class RealmManager: NSObject {
     }
     
     public func getAccount(completion: @escaping (_ account: AccountRLM?, _ error: NSError?) -> ()) {
-        getRealm { (realmOpt, err) in
+        getRealm { [weak self] (realmOpt, err) in
             if let realm = realmOpt {
                 let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
                 if acc != nil {
-                    self.account = acc!
+                    self!.account = acc!
                     completion(acc!, nil)
                 } else {
                     completion(nil, nil)
@@ -319,7 +310,7 @@ class RealmManager: NSObject {
     }
     
     public func createOrUpdateAccount(accountInfo: NSArray, completion: @escaping(_ account: AccountRLM?, _ error: NSError?)->()) {
-        getRealm { (realmOpt, err) in
+        getRealm { [weak self] (realmOpt, err) in
             guard let realm = realmOpt else {
                 completion(nil, nil)
                 
@@ -372,7 +363,7 @@ class RealmManager: NSObject {
                 //                        acc!.wallets = newWallets
                 //                        acc?.wallets = arrOfWallets
                 
-                self.account = account
+                self!.account = account
                 
                 completion(account, nil)
             }
@@ -380,7 +371,7 @@ class RealmManager: NSObject {
     }
     
     public func updateWalletsInAcc(arrOfWallets: List<UserWalletRLM>, completion: @escaping(_ account: AccountRLM?, _ error: NSError?)->()) {
-        getRealm { (realmOpt, err) in
+        getRealm { [weak self] (realmOpt, err) in
             if let realm = realmOpt {
                 let acc = realm.object(ofType: AccountRLM.self, forPrimaryKey: 1)
                 if acc != nil {
@@ -431,6 +422,7 @@ class RealmManager: NSObject {
                         for wallet in newWallets {
                             acc!.wallets.append(wallet)
                             
+                            self!.deleteAddressesAndSpendableInfo(acc!.wallets.last!.addresses, from: realm)
                             acc!.wallets.last!.addresses.removeAll()
                             //MARK: CHECK THIS    deleting addresses    Check addressID and delete existing
                             for address in wallet.addresses {
@@ -469,7 +461,7 @@ class RealmManager: NSObject {
             
         }
         
-        self.account = nil
+        account = nil
     }
     
     //Greedy algorithm
@@ -654,9 +646,20 @@ class RealmManager: NSObject {
             }
         }
     }
+    
+    func deleteTopIndexes(from realm: Realm) {
+        let topIndexObjects = realm.objects(TopIndexRLM.self)
+        realm.delete(topIndexObjects)
+    }
+
+    func deleteAddressesAndSpendableInfo(_ addresses: List<AddressRLM>,  from realm: Realm) {
+        for address in addresses {
+            realm.delete(address.spendableOutput)
+            realm.delete(address)
+        }
+    }
 }
 
-private typealias RealmMigrationManager = RealmManager
 extension RealmMigrationManager {
     func migrateFrom6To7(with migration: Migration) {
         migration.enumerateObjects(ofType: SpendableOutputRLM.className()) { (_, newSpendOut) in

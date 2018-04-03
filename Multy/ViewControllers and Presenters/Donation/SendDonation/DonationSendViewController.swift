@@ -62,6 +62,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.registerNotificationFromKeyboard()
+        
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

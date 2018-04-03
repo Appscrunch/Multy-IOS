@@ -14,7 +14,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     var isNeedToBackup: Bool?
     
-    var resetDelegate: CancelProtocol?
+    weak var resetDelegate: CancelProtocol?
     
     let opacityForNotImplementedView: CGFloat = 0.5  // not implemented features
     
@@ -28,7 +28,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.detectingSeed()

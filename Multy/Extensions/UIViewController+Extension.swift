@@ -117,10 +117,13 @@ extension UIViewController {
     
     func donateOrAlert(isHaveNotEmptyWallet: Bool, message: String) {
         if isHaveNotEmptyWallet {
+            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
             self.navigationController?.pushViewController(donatSendVC, animated: true)
         } else {
+            self.viewWillAppear(false)
             let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -134,5 +137,9 @@ extension UIViewController {
     
     func swipeToBack() {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
+    func isVCVisible() -> Bool {
+        return isViewLoaded && view.window != nil
     }
 }

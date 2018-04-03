@@ -14,6 +14,8 @@ class AssetsPresenter: NSObject {
     var isJailed = false
     var tappedIndexPath = IndexPath(row: 0, section: 0)
     
+    var contentOffset = CGPoint.zero
+    
     var account : AccountRLM? {
         didSet {
             print("")
@@ -21,8 +23,13 @@ class AssetsPresenter: NSObject {
 //            getTransInfo()
 //            getWalletVerbose()
 //            getWalletOutputs()
-            self.assetsVC?.backUpView()
-
+            
+            backupActivity()
+            
+            if self.assetsVC!.isVisible() {
+                (self.assetsVC!.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: account == nil)
+            }
+            
             self.assetsVC?.view.isUserInteractionEnabled = true
             if !assetsVC!.isSocketInitiateUpdating && self.assetsVC!.tabBarController!.viewControllers![0].childViewControllers.count == 1 {
                 assetsVC?.tableView.reloadData()
@@ -30,9 +37,13 @@ class AssetsPresenter: NSObject {
         }
     }
     
+    func backupActivity() {
+        self.assetsVC?.backupView?.isHidden = account!.isSeedPhraseSaved()
+        self.assetsVC?.backupView?.isUserInteractionEnabled = !account!.isSeedPhraseSaved()
+    }
+    
     func auth() {
         //MARK: need refactoring
-        
         self.assetsVC?.view.isUserInteractionEnabled = false
         assetsVC?.progressHUD.show()
         DataManager.shared.getAccount { (acc, err) in

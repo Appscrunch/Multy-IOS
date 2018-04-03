@@ -4,7 +4,7 @@
 
 import Foundation
 
-protocol DonationProtocol {
+protocol DonationProtocol: class {
     func donate()
     func cancelDonation()
 }
