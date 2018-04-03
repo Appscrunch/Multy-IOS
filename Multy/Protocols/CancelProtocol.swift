@@ -4,7 +4,7 @@
 
 import Foundation
 
-protocol CancelProtocol {
+protocol CancelProtocol: class {
     func cancelAction()
     func presentNoInternet()
 }

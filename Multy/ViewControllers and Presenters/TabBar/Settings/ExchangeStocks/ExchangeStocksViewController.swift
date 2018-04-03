@@ -17,7 +17,12 @@ class ExchangeStocksViewController: UIViewController, CancelProtocol, AnalyticsP
         
         self.presenter.createStocks()
         self.registerCell()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -102,13 +107,13 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
             donatAlert.modalPresentationStyle = .overCurrentContext
             donatAlert.cancelDelegate = self
             self.present(donatAlert, animated: true, completion: nil)
-            (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
             
             logAnalytics(indexPath: indexPath)
         }
     }
     
     func logAnalytics(indexPath: IndexPath) {
+        //FIXME: add switch if here will be changing //see BlockchainsViewController
         let eventCode = donationForBinanceStock + indexPath.row
         sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }

@@ -26,7 +26,6 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     }
     
     func customFeeData(firstValue: Int?, secValue: Int?) {
-        print(firstValue)
         if selectedIndexOfSpeed != 5 {
             selectedIndexOfSpeed = 2
         }
@@ -63,7 +62,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
     }
     
     func makeFiatDonat() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: walletPayFrom!))
+        let exchangeCourse = walletPayFrom!.exchangeCourse
         let cryptoDonat = self.mainVC?.donationTF.text //string
         let cryptoDonatWithDot = cryptoDonat?.replacingOccurrences(of: ",", with: ".") as NSString?
         let fiatDonat = (cryptoDonatWithDot!.doubleValue) * exchangeCourse
@@ -71,7 +70,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         self.mainVC?.fiatDonationLbl.text = "\(fiatDonat.fixedFraction(digits: 2)) USD"
     }
     
-    func makeTransaction() {
+    func createAndSendTransaction() {
         let transaction = TransactionDTO()
         transaction.choosenWallet = self.walletPayFrom
         transaction.sendAddress = donationAddress

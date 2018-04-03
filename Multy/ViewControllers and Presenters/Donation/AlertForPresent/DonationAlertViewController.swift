@@ -8,7 +8,7 @@ class DonationAlertViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
     
-    var cancelDelegate: CancelProtocol?
+    weak var cancelDelegate: CancelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

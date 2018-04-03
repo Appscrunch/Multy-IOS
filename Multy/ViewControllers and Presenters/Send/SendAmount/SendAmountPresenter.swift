@@ -6,11 +6,10 @@ import UIKit
 import RealmSwift
 
 class SendAmountPresenter: NSObject {
-    
     var sendAmountVC: SendAmountViewController?
     var transactionDTO = TransactionDTO() {
         didSet {
-            blockedAmount = calculateBlockedAmount()
+            blockedAmount = transactionDTO.choosenWallet!.calculateBlockedAmount()
             if transactionDTO.sendAmount != nil {
                 sumInCrypto = transactionDTO.sendAmount!
             }
@@ -19,19 +18,10 @@ class SendAmountPresenter: NSObject {
         }
     }
     var account = DataManager.shared.realmManager.account
-    
-    //MARK: fix addresses in wallet and delete second ivar
-//    var wallet: UserWalletRLM?
-//    var historyArray : List<HistoryRLM>? {
-//        didSet {
-//            self.blockedAmount = calculateBlockedAmount()
-//        }
-//    }
-    
     var blockedAmount           : UInt64? {
         didSet {
-            let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
-            availableSumInCrypto = transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
+            let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
+            availableSumInCrypto = transactionDTO.choosenWallet!.sumInCrypto - blockedAmount!.btcValue
             availableSumInFiat = availableSumInCrypto! * exchangeCourse
         }
     }
@@ -39,9 +29,6 @@ class SendAmountPresenter: NSObject {
     var availableSumInFiat      : Double?
     
     var transactionObj: TransactionRLM?
-//    var donationObj: DonationDTO?
-    
-//    var addressToStr: String?
     
     var sumInCrypto = Double(0.0)
     var sumInFiat = Double(0.0)
@@ -67,17 +54,7 @@ class SendAmountPresenter: NSObject {
     var addressData : Dictionary<String, Any>?
     
     func getData() {
-//        DataManager.shared.getAccount { (account, error) in
-//            self.account = account
-//
-            self.createPreliminaryData()
-//
-//            DataManager.shared.getTransactionHistory(currencyID: self.wallet!.chain, walletID: self.wallet!.walletID) { (histList, err) in
-//                if err == nil && histList != nil {
-//                    self.historyArray = histList!
-//                }
-//            }
-//        }
+        self.createPreliminaryData()
     }
     
     func createPreliminaryData() {
@@ -93,7 +70,7 @@ class SendAmountPresenter: NSObject {
     
     func estimateTransaction() -> Double {
         if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
-            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                              sendAddress: transactionDTO.sendAddress!,
                                                                              sendAmountString: self.sumInCrypto.fixedFraction(digits: 8),
                                                                              feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
@@ -108,7 +85,7 @@ class SendAmountPresenter: NSObject {
             
             return trData.1
         } else { // if transactionDTO.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
-            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                                   sendAddress: transactionDTO.sendAddress!,
                                                                                   sendAmountString: self.sumInCrypto.fixedFraction(digits: 18),
                                                                                   nonce: transactionDTO.choosenWallet!.ethWallet.nonce.intValue,
@@ -132,14 +109,13 @@ class SendAmountPresenter: NSObject {
     }
     
     func cryptoToUsd() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
-        self.sumInFiat = self.sumInCrypto * exchangeCourse
+        self.sumInFiat = transactionDTO.choosenWallet!.sumInFiat
         self.sumInFiat = Double(round(100 * self.sumInFiat)/100)
         self.sendAmountVC?.bottomSumLbl.text = "\(self.sumInFiat.fixedFraction(digits: 2)) "
     }
     
     func usdToCrypto() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         self.sumInCrypto = self.sumInFiat/exchangeCourse
         self.sumInCrypto = Double(round(100000000 * self.sumInCrypto)/100000000)
         if self.sumInCrypto > self.availableSumInCrypto! {
@@ -159,7 +135,7 @@ class SendAmountPresenter: NSObject {
     
     func getNextBtnSum() -> Double {
         let satoshiAmount = UInt64(sumInCrypto * pow(10, 8))
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         
         if satoshiAmount == 0 {
             return 0
@@ -244,7 +220,7 @@ class SendAmountPresenter: NSObject {
     }
     
     func saveTfValue() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         if self.isCrypto {
             self.sumInCrypto = self.sendAmountVC!.topSumLbl.text!.convertStringWithCommaToDouble()
             self.sumInFiat = self.sumInCrypto * exchangeCourse
@@ -269,7 +245,6 @@ class SendAmountPresenter: NSObject {
         }
     }
    
-    
     func checkMaxEntered() {
         if self.isCrypto {
             switch self.sendAmountVC?.commissionSwitch.isOn {
@@ -343,49 +318,26 @@ class SendAmountPresenter: NSObject {
         return message
     }
     
-    func calculateBlockedAmount() -> UInt64 {
-        var sum = UInt64(0)
-        
-        if transactionDTO.choosenWallet == nil {
-            return sum
-        }
-        
-//        if transactionDTO.transaction?.historyArray?.count == 0 {
-//            return sum
+//    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
+//        var sum = UInt64(0)
+//
+//        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+//            sum += transaction.txOutAmount.uint64Value
+//        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+//            let addresses = transactionDTO.choosenWallet!.fetchAddresses()
+//
+//            for tx in transaction.txOutputs {
+//                if addresses.contains(tx.address) {
+//                    sum += tx.amount.uint64Value
+//                }
+//            }
 //        }
-        
-        for address in transactionDTO.choosenWallet!.addresses {
-            for out in address.spendableOutput {
-                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-                    sum += out.transactionOutAmount.uint64Value
-                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-//                    out.
-                }
-            }
-        }
-        
-//        for history in transactionDTO.transaction!.historyArray! {
-//            sum += blockedAmount(for: history)
-//        }
-        
-        return sum
-    }
-    
-    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
-        var sum = UInt64(0)
-        
-        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += transaction.txOutAmount.uint64Value
-        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-            let addresses = transactionDTO.choosenWallet!.fetchAddresses()
-            
-            for tx in transaction.txOutputs {
-                if addresses.contains(tx.address) {
-                    sum += tx.amount.uint64Value
-                }
-            }
-        }
-        
-        return sum
+//
+//        return sum
+//    }
+    deinit {
+        let accountPointer = addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>
+        free_account(accountPointer.pointee)
+        accountPointer.deallocate(capacity: 1)
     }
 }

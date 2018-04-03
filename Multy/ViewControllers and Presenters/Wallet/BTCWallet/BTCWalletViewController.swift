@@ -8,6 +8,7 @@ private typealias TableViewDelegate = BTCWalletViewController
 private typealias ScrollViewDelegate = BTCWalletViewController
 private typealias TableViewDataSource = BTCWalletViewController
 private typealias CollectionViewDelegateFlowLayout = BTCWalletViewController
+private typealias CancelDelegate = BTCWalletViewController
 
 class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 
@@ -39,6 +40,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     var lastY: CGFloat = 0.0
     
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
@@ -54,25 +56,20 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         
         presenter.fixConstraints()
         presenter.registerCells()
-        
-//        DataManager.shared.getOneWalletVerbose(presenter.account!.token,
-//                                               walletID: presenter.wallet!.walletID) { (dict, error) in
-//            print("\n\nok\n\n")
-//        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
-        self.fixForPlus()
+//        self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
-//        progressHUD.backgroundColor = .gray
-//        progressHUD.show()
-//        self.view.addSubview(progressHUD)
-//        self.presenter.getHistory()
-        
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     @objc func updateWalletAfterSockets() {
@@ -99,27 +96,18 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = self.headerView.bounds
         
-//        self.headerView.layer.insertSublayer(gradientLayer)
-//        self.headerView.alpha = 0.5
         self.headerView.layer.insertSublayer(gradientLayer, at: 0)
-//
+
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
             if self.tableView.cellForRow(at: [0,0]) == nil {
                 return
             }
-//            let headerCell = self.tableView.cellForRow(at: [0,0]) as! MainWalletHeaderCell
-//            headerCell.backView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "gradientForWallet"))
-//            headerCell.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                     gradientOrientation: .topRightBottomLeft)
-//            headerCell.backgroundColor = .red
         } else {
             self.tableView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                          gradientOrientation: .topRightBottomLeft)
         }
-//        self.tableView.backgroundColor = .red
     }
     
     
@@ -127,23 +115,11 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView(height: 272)
         
-//        progressHUD.show()
         self.presenter.getHistoryAndWallet()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        if tableView.setContentOffset(CGPoint.zero, animated: false)
-        
-//        if tableView.contentOffset.y + screenHeight > tableView.contentSize.height {
-//            tableView.scrollToRow(at: [0, tableView.numberOfRows(inSection: 0) - 1], at: .middle, animated: false)
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -159,13 +135,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @objc func updateExchange() {
-//        let offsetBeforeUpdate = self.tableView.contentOffset
-//        self.tableView.reloadData()
-//        self.tableView.setContentOffset(offsetBeforeUpdate, animated: false)
-        
         let firstCell = self.tableView.cellForRow(at: [0,0]) as? BTCWalletHeaderTableViewCell
         firstCell?.updateUI()
-//        self.tableView.reloadData()
     }
     
     func updateHistory() {
@@ -263,25 +234,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                          gradientOrientation: .topRightBottomLeft)
         }
-//
-//        self.view.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                     gradientOrientation: .topRightBottomLeft)
-//
-//
-//        self.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                  UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                    gradientOrientation: .topRightBottomLeft)
         
-//        let headerCell = tableView.cellForRow(at:IndexPath(row: 0, section: 0)) as! MainWalletHeaderCell
-        
-//        headerCell.backView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                          gradientOrientation: .topRightBottomLeft)
-//        headerCell.backView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "gradientForWallet"))
-//        headerCell.podlojkaView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-//                                                            UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-//                                              gradientOrientation: .topRightBottomLeft)
         setGradientBackground()
     }
     
@@ -372,9 +325,10 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func updateUI() {
         self.tableView.reloadData()
     }
+
 }
 
-private typealias CancelDelegate = BTCWalletViewController
+
 extension CancelDelegate : CancelProtocol {
     func cancelAction() {
         presentDonationVCorAlert()
@@ -398,15 +352,14 @@ extension TableViewDelegate: UITableViewDelegate {
         let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
-        transactionVC.presenter.blockchainType = BlockchainType.create(currencyID: presenter.wallet!.chain.uint32Value,
-                                                                       netType: presenter.wallet!.chainType.uint32Value)
+        transactionVC.presenter.blockchainType = BlockchainType.create(wallet: presenter.wallet!)
         self.navigationController?.pushViewController(transactionVC, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 272.0 : 332.0
+            let heightForFirstCell : CGFloat = presenter.blockedAmount == 0 ? 296.0 : 352.0   //value for X
             
             backUpView(height: heightForFirstCell)
             if heightForFirstCell == 332 {
@@ -431,6 +384,8 @@ extension TableViewDelegate: UITableViewDelegate {
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentY = scrollView.contentOffset.y
         let currentBottomY = scrollView.frame.size.height + currentY
@@ -457,22 +412,29 @@ extension TableViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //check number of transactions
+        // check number of transactions
         // else return some empty cells
         let countOfHistObjects = self.presenter.numberOfTransactions()
         if countOfHistObjects > 0 {
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 7 {
+                if screenHeight == heightOfX {
+                    self.tableView.isScrollEnabled = false
+                    return 8
+                }
                 return 7
             } else {
                 return countOfHistObjects + 1
             }
         } else {
             self.tableView.isScrollEnabled = false
-            
+            if screenHeight == heightOfX {
+                return 13
+            }
             return 10
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath == [0, 0] {         // Main Wallet Header Cell

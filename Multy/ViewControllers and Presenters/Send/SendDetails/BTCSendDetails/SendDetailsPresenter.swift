@@ -10,15 +10,10 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     var sendDetailsVC: SendDetailsViewController?
     var transactionDTO = TransactionDTO() {
         didSet {
-            availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
-            availableSumInFiat = availableSumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
-        }
-    }
-    var historyArray : List<HistoryRLM>? {
-        didSet {
-            self.blockedAmount = calculateBlockedAmount()
-            availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - convertSatoshiToBTC(sum: calculateBlockedAmount())
-            availableSumInFiat = availableSumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+            self.blockedAmount = transactionDTO.choosenWallet?.calculateBlockedAmount()
+            availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - self.blockedAmount!.btcValue
+            availableSumInFiat = availableSumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
+            cryptoName = transactionDTO.blockchainType.shortName
         }
     }
     
@@ -39,10 +34,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     var maxAllowedToSpend = 0.0
     
     let transactionObj = TransactionRLM()
-    
     let donationObj = DonationDTO()
-    
-
     var customFee = UInt64(20)
     
     var feeRate: NSDictionary? {
@@ -50,7 +42,6 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             sendDetailsVC?.tableView.reloadData()
         }
     }
-
     
 //    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
     
@@ -60,13 +51,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
                 return
             }
             
-            DataManager.shared.getTransactionHistory(currencyID: self.transactionDTO.choosenWallet!.chain,
-                                                     networkID: self.transactionDTO.choosenWallet!.chainType,
-                                                     walletID: self.transactionDTO.choosenWallet!.walletID) { (histList, err) in
-                if err == nil && histList != nil {
-                    self.historyArray = histList!
-                }
-            }
+            
         }
     }
     
@@ -94,55 +79,55 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createTransaction(index: Int) {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         switch index {
         case 0:
             self.transactionObj.speedName = "Very Fast"
             self.transactionObj.speedTimeString = "∙ 10 minutes"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
-            self.transactionObj.fiatName = "USD"
+            self.transactionObj.cryptoName = cryptoName
+            self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 6
         case 1:
             self.transactionObj.speedName = "Fast"
             self.transactionObj.speedTimeString = "∙ 6 hour"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
-            self.transactionObj.fiatName = "USD"
+            self.transactionObj.cryptoName = cryptoName
+            self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 10
         case 2:
             self.transactionObj.speedName = "Normal"
             self.transactionObj.speedTimeString = "∙ 5 days"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
-            self.transactionObj.fiatName = "USD"
+            self.transactionObj.cryptoName = cryptoName
+            self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 20
         case 3:
             self.transactionObj.speedName = "Slow"
             self.transactionObj.speedTimeString = "∙ 1 week"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
-            self.transactionObj.fiatName = "USD"
+            self.transactionObj.cryptoName = cryptoName
+            self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 50
         case 4:
             self.transactionObj.speedName = "Very Slow"
             self.transactionObj.speedTimeString = "∙ 2 weeks"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
-            self.transactionObj.cryptoName = "BTC"
-            self.transactionObj.fiatName = "USD"
+            self.transactionObj.cryptoName = cryptoName
+            self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 70
         case 5:
             self.transactionObj.speedName = "Custom"
             self.transactionObj.speedTimeString = ""
-            self.transactionObj.sumInCrypto = convertSatoshiToBTC(sum: self.customFee)
+            self.transactionObj.sumInCrypto = self.customFee.btcValue
             self.transactionObj.sumInFiat = 0.0
-            self.transactionObj.cryptoName = "BTC"
-            self.transactionObj.fiatName = "USD"
+            self.transactionObj.cryptoName = cryptoName
+            self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 0
         default:
             return
@@ -150,7 +135,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createDonation() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+        let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         self.donationObj.sumInCrypto = self.donationInCrypto
         self.donationObj.cryptoName = self.cryptoName
         self.donationObj.sumInFiat = Double(round(100*self.donationInCrypto!*exchangeCourse/100))
@@ -205,53 +190,5 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         self.customFee = UInt64(firstValue!)
         self.sendDetailsVC?.tableView.reloadData()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
-    }
-    
-    //==============================
-    
-    func calculateBlockedAmount() -> UInt64 {
-        var sum = UInt64(0)
-        
-        if transactionDTO.choosenWallet == nil {
-            return sum
-        }
-        
-        if historyArray?.count == 0 {
-            return sum
-        }
-        
-        for address in transactionDTO.choosenWallet!.addresses {
-            for out in address.spendableOutput {
-                if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-                    sum += out.transactionOutAmount.uint64Value
-                } else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-//                    out.
-                }
-            }
-        }
-        
-//        for history in historyArray! {
-//            sum += blockedAmount(for: history)
-//        }
-        
-        return sum
-    }
-    
-    func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
-        var sum = UInt64(0)
-        
-        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += transaction.txOutAmount.uint64Value
-        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-            let addresses = transactionDTO.choosenWallet!.fetchAddresses()
-            
-            for tx in transaction.txOutputs {
-                if addresses.contains(tx.address) {
-                    sum += tx.amount.uint64Value
-                }
-            }
-        }
-        
-        return sum
     }
 }

@@ -11,6 +11,7 @@ struct Constants {
         static let createWalletString = "Create wallet"
         static let createOrImportWalletString = "Create or Import New Wallet"
         static let cancelString = "Cancel"
+        static let backupButtonHeight = CGFloat(44)
     }
     
     struct ETHWalletScreen {
@@ -45,22 +46,23 @@ struct Constants {
         static let btcTestnetDonationAddress =  "mnUtMQcs3s8kSkSRXpREVtJamgUCWpcFj4"
         
         static let availableBlockchains = [
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_TESTNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: 4),//RINKEBY
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BITCOIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BITCOIN_NET_TYPE_TESTNET.rawValue),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: ETHEREUM_CHAIN_ID_MAINNET.rawValue),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: ETHEREUM_CHAIN_ID_RINKEBY.rawValue),
         ]
         
         static let donationBlockchains = [
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_CASH.rawValue,     netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_LITECOIN.rawValue,         netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_DASH.rawValue,             netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM_CLASSIC.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_CASH.rawValue,     netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_LITECOIN.rawValue,         netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_DASH.rawValue,             netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM_CLASSIC.rawValue, netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
         ]
     }
 }
@@ -90,27 +92,8 @@ let downSizes : [CGFloat] = [0, 23, 40, 53, 81, 136, 153, 197, 249]
 
 let statuses = ["createdTx", "fromSocketTx", "incoming in mempool", "spend in mempool", "incoming in block", "spend in block", "in block confirmed", "rejected block"]
 
-//var exchangeCourse: Double = 10000.0
-var exchangeCourse: Double = 1.0 {
-    didSet {
-        NotificationCenter.default.post(name: NSNotification.Name("exchageUpdated"), object: nil)
-    }
-}
-
 var isNeedToAutorise = false
 var isViewPresented = false
-
-func generateWalletPrimaryKey(currencyID: UInt32, networkID: UInt32, walletID: UInt32) -> String {
-    let currencyString = String(currencyID).sha3(.sha256)
-    let walletString = String(walletID).sha3(.sha256)
-    let networkString = String(networkID).sha3(.sha256)
-    
-    return ("\(currencyString)" + "\(walletString) +\(networkString)").sha3(.sha256)
-}
-
-func convertSatoshiToBTC(sum: UInt64) -> Double {    
-    return Double(sum) / pow(10, 8)
-}
 
 func convertSatoshiToBTCString(sum: UInt64) -> String {
     return (Double(sum) / pow(10, 8)).fixedFraction(digits: 8) + " BTC"
@@ -152,9 +135,9 @@ enum TxStatus : Int {
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "stage.multy.io"
+let shortURL = "test.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"
-let apiUrlTest = "http://192.168.0.125:8080/"
+let apiUrlTest = "http://192.168.0.123:6778/"
 let nonLocalURL = "http://88.198.47.112:7778/"

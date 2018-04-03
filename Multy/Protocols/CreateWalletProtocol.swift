@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol CreateWalletProtocol {
+protocol CreateWalletProtocol: class {
     func goToCreateWallet()
 }

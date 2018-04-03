@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol SendAddressProtocol {
+protocol SendAddressProtocol: class {
     func sendAddress(address: String)
 }

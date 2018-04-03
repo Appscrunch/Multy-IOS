@@ -93,7 +93,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm, d MMMM yyyy"
         
-        let cryptoSumInBTC = convertSatoshiToBTC(sum: UInt64(truncating: presenter.histObj.txOutAmount))
+        let cryptoSumInBTC = UInt64(truncating: presenter.histObj.txOutAmount).btcValue
         
         if presenter.histObj.txStatus.intValue == TxStatus.MempoolIncoming.rawValue ||
             presenter.histObj.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
@@ -130,7 +130,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
                     return
                 }
                 
-                let btcDonation = convertSatoshiToBTC(sum: donatOutPutObj?.amount as! UInt64)
+                let btcDonation = (donatOutPutObj?.amount as! UInt64).btcValue
                 self.donationView.isHidden = false
                 self.constraintDonationHeight.constant = 283
                 self.donationCryptoSum.text = btcDonation.fixedFraction(digits: 8)
@@ -177,6 +177,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         if segue.identifier == "viewInBlockchain" {
             let blockchainVC = segue.destination as! ViewInBlockchainViewController
             blockchainVC.presenter.txId = presenter.histObj.txId
+            blockchainVC.presenter.blockchainType = presenter.blockchainType
         }
     }
     

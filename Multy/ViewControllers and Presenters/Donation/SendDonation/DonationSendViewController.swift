@@ -62,6 +62,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.registerNotificationFromKeyboard()
+        
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,13 +108,13 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     @IBAction func sendAction(_ sender: Any) {
         self.view.isUserInteractionEnabled = false
         self.progressHud.show()
-        self.presenter.makeTransaction()
+        self.presenter.createAndSendTransaction()
         
         sendDonationScreenPressSendAnalytics()
     }
     
     func updateUIWithWallet() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: self.presenter.walletPayFrom!))
+        let exchangeCourse = presenter.walletPayFrom!.exchangeCourse
         let cryptoStr = "\(self.presenter.walletPayFrom?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(self.presenter.walletPayFrom?.cryptoName ?? "BTC")"
         let fiatSum = "\(((self.presenter.walletPayFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)) \(self.presenter.walletPayFrom?.fiatName ?? "USD")"
         

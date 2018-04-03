@@ -41,6 +41,7 @@ class CreateWalletPresenter: NSObject {
     
     func create() {
         var binData : BinaryData = account!.binaryDataString.createBinaryData()!
+        
         //MARK: topIndex
         let currencyID = selectedBlockchainType.blockchain.rawValue
         let networkID = selectedBlockchainType.net_type

@@ -4,7 +4,8 @@
 
 import Foundation
 
-protocol DonationProtocol: class {
-    func donate()
-    func cancelDonation()
+extension UInt64 {
+    var btcValue: Double {
+        return Double(self) / pow(10, 8)
+    }
 }

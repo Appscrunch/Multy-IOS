@@ -32,7 +32,7 @@ class EthWalletHeaderCollectionViewCell: UICollectionViewCell {
     }
 
     func fillInCell() {
-        let sumInFiat = ((self.wallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
+        let sumInFiat = wallet!.sumInFiat.fixedFraction(digits: 2)
         self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0")"
         let blockchain = BlockchainType.create(wallet: wallet!)
         //MARK: temporary code
@@ -67,8 +67,8 @@ class EthWalletHeaderCollectionViewCell: UICollectionViewCell {
                 sum = blockedAmount
             }
             
-            let availableCryptoAmount = convertSatoshiToBTC(sum: sum)
-            let availableFiatAmount = availableCryptoAmount * exchangeCourse
+            let availableCryptoAmount = sum.btcValue
+            let availableFiatAmount = availableCryptoAmount * wallet!.exchangeCourse
             
             lockedCryptoAmountLabel.text = availableCryptoAmount.fixedFraction(digits: 8)
             lockedFiatAmountLabel.text = availableFiatAmount.fixedFraction(digits: 2)

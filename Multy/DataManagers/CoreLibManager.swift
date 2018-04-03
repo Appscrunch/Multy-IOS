@@ -13,10 +13,10 @@ class CoreLibManager: NSObject {
     
     func mnemonicAllWords() -> Array<String> {
         let mnemonicArrayPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
         defer { mnemonicArrayPointer.deallocate(capacity: 1) }
         
-        mnemonic_get_dictionary(mnemonicArrayPointer)
+        let mgd = mnemonic_get_dictionary(mnemonicArrayPointer)
+        _ = errorString(from: mgd, mask: "mnemonic_get_dictionary")
         
         let mnemonicArrayString = String(cString: mnemonicArrayPointer.pointee!).trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -25,8 +25,10 @@ class CoreLibManager: NSObject {
     
     func createMnemonicPhraseArray() -> Array<String> {
         let mnemo = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
-        defer { mnemo.deallocate(capacity: 1) }
+        defer {
+            free_string(mnemo.pointee)
+            mnemo.deallocate(capacity: 1)
+        }
         
         let entropySource = EntropySource.init(data: nil, fill_entropy: { (data, length, entropy) in
             guard entropy != nil else {
@@ -43,9 +45,7 @@ class CoreLibManager: NSObject {
         })
         
         let mm = make_mnemonic(entropySource, mnemo)
-        
-        //MAKE: check nil
-        print(mm ?? "-11")
+        _ = errorString(from: mm, mask: "make_mnemonic")
         
         let phrase = String(cString: mnemo.pointee!)
         
@@ -59,18 +59,17 @@ class CoreLibManager: NSObject {
     func createSeedBinaryData(from phrase: String) -> BinaryData? {
         print("seed phrase: \(phrase)")
         let stringPointer = phrase.UTF8CStringPointer
-        let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
         
+        let binaryDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
         defer {
+//            free_binarydata(binaryDataPointer.pointee)
             binaryDataPointer.deallocate(capacity: 1)
-//            stringPointer.deallocate(capacity: 1)
         }
         
         let ms = make_seed(stringPointer, nil, binaryDataPointer)
         
         if ms != nil {
-            print("ms: \(String(describing: ms))")
-            let _ = returnErrorString(opaquePointer: ms!, mask: "make_seed")
+            _ = errorString(from: ms!, mask: "make_seed")
             
             return nil
         }
@@ -89,21 +88,20 @@ class CoreLibManager: NSObject {
         let extendedKeyPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
         defer {
+            free_extended_key(masterKeyPointer.pointee)
+            free_string(extendedKeyPointer.pointee)
             masterKeyPointer.deallocate(capacity: 1)
             extendedKeyPointer.deallocate(capacity: 1)
         }
         
-        var mmk = make_master_key(binaryDataPointer, masterKeyPointer)
-        print("mmk: \(String(describing: mmk))")
+        let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
+        _ = errorString(from: mmk, mask: "make_master_key")
         
-        var mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
-        print("mki: \(String(describing: mki))")
+        let mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
+        _ = errorString(from: mki, mask: "make_key_id")
         
         let extendedKey = String(cString: extendedKeyPointer.pointee!)
         print("extended key: \(extendedKey)")
-        
-        mmk = nil
-        mki = nil
         
         return extendedKey
     }
@@ -113,7 +111,7 @@ class CoreLibManager: NSObject {
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
-        print("mmk: \(String(describing: mmk))")
+        _ = errorString(from: mmk, mask: "make_master_key")
         
         //HD Account
         let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -130,11 +128,23 @@ class CoreLibManager: NSObject {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        //placed here since we have multiple return
+        //placed here since we have multiple returns
         defer {
-//            binaryDataPointer.deallocate(capacity: 1)
+            free_extended_key(masterKeyPointer.pointee)
+            free_hd_account(newAccountPointer.pointee)
+            
+            free_account(newAddressPointer.pointee)
+            free_string(newAddressStringPointer.pointee)
+            
+            free_key(addressPrivateKeyPointer.pointee)
+            free_string(privateKeyStringPointer.pointee)
+            
+            free_key(addressPublicKeyPointer.pointee)
+            free_string(publicKeyStringPointer.pointee)
+            
             masterKeyPointer.deallocate(capacity: 1)
             newAccountPointer.deallocate(capacity: 1)
+            
             newAddressPointer.deallocate(capacity: 1)
             newAddressStringPointer.deallocate(capacity: 1)
             
@@ -147,14 +157,14 @@ class CoreLibManager: NSObject {
 
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
-            let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
+            _ = errorString(from: mHDa, mask: "make_hd_account")
             
             return nil
         }
         
         let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddressPointer)
         if mHDla != nil {
-            let _ = returnErrorString(opaquePointer: mHDla!, mask: "make_hd_leaf_account")
+            _ = errorString(from: mHDla!, mask: "make_hd_leaf_account")
             
             return nil
         }
@@ -165,37 +175,39 @@ class CoreLibManager: NSObject {
         walletDict["walletID"] = walletID
         walletDict["addressID"] = UInt32(0)
         
-        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        let agas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil
-        if gaas != nil {
-            print("Cannot get address string: \(String(describing: gaas))")
+        if agas != nil {
+            _ = errorString(from: agas, mask: "account_get_address_string")
         } else {
             addressString = String(cString: newAddressStringPointer.pointee!)
-            print("addressString: \(addressString)")
+            print("addressString: \(addressString!)")
             
             walletDict["address"] = addressString!
         }
         
         let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        _ = errorString(from: gakPRIV, mask: "account_get_key:KEY_TYPE_PRIVATE")
         let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        _ = errorString(from: gakPUBL, mask: "account_get_key:KEY_TYPE_PUBLIC")
         
         let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
+        _ = errorString(from: ktsPRIV, mask: "key_to_string:KEY_TYPE_PRIVATE")
         let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
+        _ = errorString(from: ktsPUBL, mask: "key_to_string:KEY_TYPE_PUBLIC")
         
-        print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
-        
-        var privateKeyString : String? = nil
-        var publicKeyString : String? = nil
+        var privateKeyString : String?
+        var publicKeyString : String?
         
         if ktsPRIV != nil {
-            print("Cannot get private string: \(String(describing: gaas))")
+            return nil
         } else {
             privateKeyString = String(cString: privateKeyStringPointer.pointee!)
             walletDict["privateKey"] = privateKeyString
         }
         
         if ktsPUBL != nil {
-            print("Cannot get public string: \(String(describing: gaas))")
+            return nil
         } else {
             publicKeyString = String(cString: publicKeyStringPointer.pointee!)
             walletDict["publicKey"] = publicKeyString
@@ -204,12 +216,12 @@ class CoreLibManager: NSObject {
         return walletDict
     }
     
-    func createPrivateKey(blockchain: BlockchainType, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> OpaquePointer? {
+    func createPrivateKey(blockchain: BlockchainType, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> UnsafeMutablePointer<OpaquePointer?>? {
         let binaryDataPointer = UnsafeMutablePointer(mutating: &binaryData)
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
-        print("mmk: \(String(describing: mmk))")
+        _ = errorString(from: mmk, mask: "make_master_key")
         
         //HD Account
         let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -222,39 +234,37 @@ class CoreLibManager: NSObject {
 
         //placed here since we have multiple return
         defer {
-//            binaryDataPointer.deallocate(capacity: 1)
+            free_extended_key(masterKeyPointer.pointee)
+            free_hd_account(newAccountPointer.pointee)
+            free_account(newAddressPointer.pointee)
+            
             masterKeyPointer.deallocate(capacity: 1)
             newAccountPointer.deallocate(capacity: 1)
             newAddressPointer.deallocate(capacity: 1)
-            addressPrivateKeyPointer.deallocate(capacity: 1)
         }
         
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
-            let _ = returnErrorString(opaquePointer: mHDa!, mask: "mHDa")
+            _ = errorString(from: mHDa!, mask: "mHDa")
             
             return nil
         }
         
         let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, addressID, newAddressPointer)
         if mHDla != nil {
-            let _ = returnErrorString(opaquePointer: mHDla!, mask: "mHDla")
+            _ = errorString(from: mHDla!, mask: "mHDla")
             
             return nil
         }
         
         let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
         if gakPRIV != nil {
-            let _ = returnErrorString(opaquePointer: gakPRIV!, mask: "gakPRIV")
+            _ = errorString(from: gakPRIV!, mask: "gakPRIV")
             
             return nil
         } else {
-//            let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-//            let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee!, privateKeyStringPointer)
-//            let privateKeyString = String(cString: privateKeyStringPointer.pointee!)
-//            print(privateKeyString)
             
-            return addressPrivateKeyPointer.pointee
+            return addressPrivateKeyPointer
         }
     }
     
@@ -263,7 +273,7 @@ class CoreLibManager: NSObject {
         let masterKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
         let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
-        print("mmk: \(String(describing: mmk))")
+        _ = errorString(from: mmk, mask: "make_master_key")
         
         //HD Account
         let newAccountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -282,10 +292,22 @@ class CoreLibManager: NSObject {
         
         //placed here since we have multiple return
         defer {
-//            binaryDataPointer.deallocate(capacity: 1)
+            free_extended_key(masterKeyPointer.pointee)
+            free_hd_account(newAccountPointer.pointee)
+            
+            //will be free later
+//            free_account(newAddressPointer.pointee)
+            free_string(newAddressStringPointer.pointee)
+            
+            free_key(addressPrivateKeyPointer.pointee)
+            free_string(privateKeyStringPointer.pointee)
+            
+            free_key(addressPublicKeyPointer.pointee)
+            free_string(publicKeyStringPointer.pointee)
+            
             masterKeyPointer.deallocate(capacity: 1)
             newAccountPointer.deallocate(capacity: 1)
-            newAddressPointer.deallocate(capacity: 1)
+//            newAddressPointer.deallocate(capacity: 1)
             newAddressStringPointer.deallocate(capacity: 1)
             addressPrivateKeyPointer.deallocate(capacity: 1)
             privateKeyStringPointer.deallocate(capacity: 1)
@@ -295,14 +317,14 @@ class CoreLibManager: NSObject {
         
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, walletID, newAccountPointer)
         if mHDa != nil {
-            let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
+            _ = errorString(from: mHDa!, mask: "make_hd_account")
             
             return nil
         }
         
         let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, addressID, newAddressPointer)
         if mHDla != nil {
-            let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_leaf_account")
+            _ = errorString(from: mHDa!, mask: "make_hd_leaf_account")
             
             return nil
         }
@@ -312,52 +334,51 @@ class CoreLibManager: NSObject {
         addressDict["currencyID"] = blockchain.blockchain.rawValue
         addressDict["walletIndex"] = walletID
         addressDict["addressIndex"] = addressID
-        addressDict["addressPointer"] = newAddressPointer.pointee
+        addressDict["addressPointer"] = newAddressPointer
         
-        let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
-        var addressString : String? = nil
-        if gaas != nil {
-            print("Cannot get address string: \(String(describing: gaas))")
+        let agas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
+        var addressString : String?
+        if agas != nil {
+            _ = errorString(from: agas, mask: "account_get_address_string")
         } else {
             addressString = String(cString: newAddressStringPointer.pointee!)
-            print("addressString: \(addressString)")
+            print("addressString: \(addressString!)")
             
             addressDict["address"] = addressString!
         }
         
         let gakPRIV = account_get_key(newAddressPointer.pointee, KEY_TYPE_PRIVATE, addressPrivateKeyPointer)
+        _ = errorString(from: gakPRIV, mask: "account_get_key:KEY_TYPE_PRIVATE")
         let gakPUBL = account_get_key(newAddressPointer.pointee, KEY_TYPE_PUBLIC, addressPublicKeyPointer)
+        _ = errorString(from: gakPUBL, mask: "account_get_key:KEY_TYPE_PUBLIC")
         
         let ktsPRIV = key_to_string(addressPrivateKeyPointer.pointee, privateKeyStringPointer)
+        _ = errorString(from: ktsPRIV, mask: "key_to_string:KEY_TYPE_PRIVATE")
         let ktsPUBL = key_to_string(addressPublicKeyPointer.pointee, publicKeyStringPointer)
+        _ = errorString(from: ktsPUBL, mask: "key_to_string:KEY_TYPE_PUBLIC")
         
-        print("\(gakPRIV) - \(gakPUBL) - \(ktsPRIV) - \(ktsPUBL)")
-        
-        var privateKeyString : String? = nil
-        var publicKeyString : String? = nil
+        var privateKeyString : String?
+        var publicKeyString : String?
         
         if ktsPRIV != nil {
-            print("Cannot get private string: \(String(describing: gaas))")
+            return nil
         } else {
             privateKeyString = String(cString: privateKeyStringPointer.pointee!)
-            addressDict["privateKey"] = privateKeyString
-            
-            addressDict["addressPrivateKeyPointer"] = addressPublicKeyPointer.pointee
+            addressDict["privateKey"] = privateKeyString!
         }
         
         if ktsPUBL != nil {
-            print("Cannot get public string: \(String(describing: gaas))")
+            return nil
         } else {
             publicKeyString = String(cString: publicKeyStringPointer.pointee!)
-            addressDict["publicKey"] = publicKeyString
+            addressDict["publicKey"] = publicKeyString!
+            
         }
-        
-        defer {  }
         
         return addressDict
     }
     
-    func createTransaction(addressPointer: OpaquePointer,
+    func createTransaction(addressPointer: UnsafeMutablePointer<OpaquePointer?>,
                            sendAddress: String,
                            sendAmountString: String,
                            feePerByteAmount: String,
@@ -373,31 +394,44 @@ class CoreLibManager: NSObject {
         
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        defer {
+            free_transaction(transactionPointer.pointee)
+            transactionPointer.deallocate(capacity: 1)
+        }
         
-        let mt = make_transaction(addressPointer, transactionPointer)
+        let mt = make_transaction(addressPointer.pointee, transactionPointer)
+        
         if mt != nil {
-            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
+            return (errorString(from: mt, mask: "make_transaction")!, -1)
         }
         
         //fee
         let fee = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+        defer { fee.deallocate(capacity: 1) }
+        
         let tgf = transaction_get_fee(transactionPointer.pointee, fee)
         if tgf != nil {
-            let _ = returnErrorString(opaquePointer: tgf!, mask: "transaction_get_fee")
+            return (errorString(from: tgf, mask: "transaction_get_fee")!, -1)
         }
         
-        
         let maxFee = UInt64(feePerByteAmount)!
-//        let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
+        //let maxFeeString = String(maxFee + (maxFee / 5) + 1)// 20% error
+        
         //Amount
         setAmountValue(key: "amount_per_byte", value: feePerByteAmount, pointer: fee.pointee!)
-//        setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
+        //setAmountValue(key: "max_amount_per_byte", value: maxFeeString, pointer: fee.pointee!) // optional
 
         //spendable info
-        
         for input in inputs {
             let transactionSource = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+            defer {
+                transactionSource.deallocate(capacity: 1)
+            }
+            
             let tas = transaction_add_source(transactionPointer.pointee, transactionSource)
+            if tas != nil {
+                return (errorString(from: tas, mask: "transaction_add_source")!, -1)
+            }
             
             setAmountValue(key: "amount",
                            value: String(describing: input.transactionOutAmount),
@@ -416,21 +450,17 @@ class CoreLibManager: NSObject {
                                               walletID: wallet.walletID.uint32Value,
                                               addressID: input.addressID.uint32Value,
                                               binaryData: &binaryData)
-            setPrivateKeyValue(key: "private_key", value: privateKey!, pointer: transactionSource.pointee!)
+            //FIXME: check nil pointer
+            setPrivateKeyValue(key: "private_key", value: privateKey!.pointee!, pointer: transactionSource.pointee!)
             
-            defer { transactionSource.deallocate(capacity: 1) }
+            privateKey!.deallocate(capacity: 1)
         }
         
         var sendSum = UInt64(0)
         var changeSum = UInt64(0)
         let sendSumInSatoshi = convertBTCStringToSatoshi(sum: sendAmountString)
         let donationSumInSatoshi = convertBTCStringToSatoshi(sum: donationAmount)
-        
-        defer {
-            transactionPointer.deallocate(capacity: 1)
-            fee.deallocate(capacity: 1)
-        }
-        
+
         if sendSumInSatoshi < donationSumInSatoshi {
             return ("Sending amount (\(sendAmountString) BTC) must be greater then donation amount (\(donationAmount) BTC)", -2)
         }
@@ -439,21 +469,27 @@ class CoreLibManager: NSObject {
         
         //address
         let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        transaction_add_destination(transactionPointer.pointee, transactionDestination)
+        let tad = transaction_add_destination(transactionPointer.pointee, transactionDestination)
+        if tad != nil {
+            return (errorString(from: tad, mask: "transaction_add_destination")!, -1)
+        }
         
         setStringValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
 
         //donation
         if isDonationExists {
             let donationDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-            transaction_add_destination(transactionPointer.pointee, donationDestination)
+            defer { donationDestination.deallocate(capacity: 1) }
+            
+            let tad = transaction_add_destination(transactionPointer.pointee, donationDestination)
+            if tad != nil {
+                return (errorString(from: tad, mask: "transaction_add_destination")!, -1)
+            }
             
             let currentChainDonationAddress = DataManager.shared.getBTCDonationAddress(netType: wallet.chainType.uint32Value)
             
             setStringValue(key: "address", value: currentChainDonationAddress, pointer: donationDestination.pointee!)
             setAmountValue(key: "amount", value: String(convertBTCStringToSatoshi(sum: donationAmount)), pointer: donationDestination.pointee!)
-            
-            defer { donationDestination.deallocate(capacity: 1) }
         }
         
         //change
@@ -474,26 +510,24 @@ class CoreLibManager: NSObject {
             setAmountValue(key: "amount", value: String(sendSum), pointer: transactionDestination.pointee!)
             
             let changeDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-            transaction_add_destination(transactionPointer.pointee, changeDestination)
+            defer { changeDestination.deallocate(capacity: 1) }
+            
+            let tad = transaction_add_destination(transactionPointer.pointee, changeDestination)
+            if tad != nil {
+                return (errorString(from: tad, mask: "transaction_add_destination")!, -1)
+            }
             
             setIntValue(key: "is_change", value: UInt32(1), pointer: changeDestination.pointee!)
             setStringValue(key: "address", value: dict!["address"] as! String, pointer: changeDestination.pointee!)
             //        setAmountValue(key: "amount", value: String(changeSum), pointer: changeDestination.pointee!)
-            
-            defer { changeDestination.deallocate(capacity: 1) }
         }
         
         //final
         let serializedTransaction = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
         
         let tu = transaction_update(transactionPointer.pointee)
-        
         if tu != nil {
-            let errrString = returnErrorString(opaquePointer: tu!, mask: "transaction_get_fee")
-            
-//            defer { pointer?.deallocate(capacity: 1) }
-            
-            return (errrString, -1)
+            return (errorString(from: tu, mask: "transaction_update")!, -1)
         }
         
         
@@ -501,26 +535,30 @@ class CoreLibManager: NSObject {
         //modify sums after transaction update
         
         let totalSumPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+
         let tgtf = transaction_get_total_fee(transactionPointer.pointee, totalSumPointer)
-        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        
         defer {
-            transactionDestination.deallocate(capacity: 1)
-            serializedTransaction.deallocate(capacity: 1)
+            free_big_int(totalSumPointer.pointee)
             totalSumPointer.deallocate(capacity: 1)
-            amountStringPointer.deallocate(capacity: 1)
+        }
+        if tgtf != nil {
+            return (errorString(from: tgtf, mask: "transaction_get_total_fee")!, -1)
         }
         
-        let ats = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
-        if ats != nil {
-            let errrString = returnErrorString(opaquePointer: ats!, mask: "amount_to_string")
-            
-            return (errrString, -1)
+        
+        let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        defer {
+            free_string(amountStringPointer.pointee)
+        }
+        
+        let bits = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
+        if bits != nil {
+            return (errorString(from: bits, mask: "big_int_to_string")!, -1)
         }
         
         let amountString = String(cString: amountStringPointer.pointee!)
         let feeInSatoshiAmount = UInt64(amountString)!
-        let feeInBTCAmount = convertSatoshiToBTC(sum: feeInSatoshiAmount)
+        let feeInBTCAmount = feeInSatoshiAmount.btcValue
         
         //checking sums
         
@@ -550,17 +588,18 @@ class CoreLibManager: NSObject {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
-        
+        defer {
+            free_binarydata(serializedTransaction.pointee)
+            serializedTransaction.deallocate(capacity: 1)
+        }
         if tSer != nil {
-            let errrString = returnErrorString(opaquePointer: tSer!, mask: "transaction_serialize")
-            return (errrString, -1)
+            return (errorString(from: tSer, mask: "transaction_serialize")!, -1)
         }
         
         let data = serializedTransaction.pointee!.pointee.convertToData()
         let str = data.hexEncodedString()
         
         print("end transaction: \(str)")
-        
         
         return (str, feeInBTCAmount)
     }
@@ -570,48 +609,31 @@ class CoreLibManager: NSObject {
         let amountValue = value.UTF8CStringPointer
         
         let amountPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
-        let _ = make_big_int(amountValue, amountPointer)
-        
-        let psav = properties_set_big_int_value(pointer, amountKey, amountPointer.pointee)
-        
-        if psav != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(psav)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            defer { pointer?.deallocate(capacity: 1) }
-            
-            print("setAmountValue: \(errrString))")
-        }
-        
+        let mbi = make_big_int(amountValue, amountPointer)
         defer {
-//            amountKey.deallocate(capacity: 1)
-//            amountValue.deallocate(capacity: 1)
+            free_big_int(amountPointer.pointee)
             amountPointer.deallocate(capacity: 1)
         }
+        _ = errorString(from: mbi, mask: "make_big_int")
+        
+        let psav = properties_set_big_int_value(pointer, amountKey, amountPointer.pointee)
+        _ = errorString(from: psav, mask: "properties_set_big_int_value")
     }
     
     func setBinaryDataValue(key: String, value: String, pointer: OpaquePointer) {
         let binaryKey = key.UTF8CStringPointer
         let dataValue = value.UTF8CStringPointer
         
-        let binData = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
-        make_binary_data_from_hex(dataValue, binData)
-        
-        let psbdv = properties_set_binary_data_value(pointer, binaryKey, binData.pointee)
-        if psbdv != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(psbdv)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            defer { pointer?.deallocate(capacity: 1) }
-            
-            print("setBinaryDataValue: \(errrString))")
-        }
-        
+        let binDataPointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
+        let mbfh = make_binary_data_from_hex(dataValue, binDataPointer)
         defer {
-//            binaryKey.deallocate(capacity: 1)
-//            dataValue.deallocate(capacity: 1)
-            binData.deallocate(capacity: 1)
+            free_binarydata(binDataPointer.pointee)
+            binDataPointer.deallocate(capacity: 1)
         }
+        _ = errorString(from: mbfh, mask: "make_binary_data_from_hex")
+        
+        let psbdv = properties_set_binary_data_value(pointer, binaryKey, binDataPointer.pointee)
+        _ = errorString(from: psbdv, mask: "properties_set_binary_data_value")
     }
     
     func setIntValue(key: String, value: UInt32, pointer: OpaquePointer) {
@@ -619,19 +641,7 @@ class CoreLibManager: NSObject {
         let intValue = Int32(value)
 
         let psi = properties_set_int32_value(pointer, intKey, intValue)
-        
-        if psi != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(psi)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            defer { pointer?.deallocate(capacity: 1) }
-            
-            print("setIntValue: \(errrString))")
-        }
-        
-        defer {
-//            intKey.deallocate(capacity: 1)
-        }
+        _ = errorString(from: psi, mask: "setIntValue")
     }
     
     func setStringValue(key: String, value: String, pointer: OpaquePointer) {
@@ -639,50 +649,27 @@ class CoreLibManager: NSObject {
         let stringValue = value.UTF8CStringPointer
         
         let pstv = properties_set_string_value(pointer, stringKey, stringValue)
-        
-        if pstv != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(pstv)
-            let errrString = String(cString: pointer!.pointee.message)
-            
-            defer { pointer?.deallocate(capacity: 1) }
-            
-            print("setStringValue: \(errrString))")
-        }
-        
-        defer {
-//            stringKey.deallocate(capacity: 1)
-//            stringValue.deallocate(capacity: 1)
-        }
+        _ = errorString(from: pstv, mask: "setStringValue")
     }
     
     func setPrivateKeyValue(key: String, value: OpaquePointer, pointer: OpaquePointer) {
         let stringKey = key.UTF8CStringPointer
         
         let pspkv = properties_set_private_key_value(pointer, stringKey, value)
-        
-        if pspkv != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(pspkv)
-            let errorString = String(cString: pointer!.pointee.message)
-            
-            defer { pointer?.deallocate(capacity: 1) }
-            
-            print("setPrivateKeyValue: \(errorString))")
-        }
-        
-        defer {
-//            stringKey.deallocate(capacity: 1)
-        }
+        _ = errorString(from: pspkv, mask: "setPrivateKeyValue")
     }
     
-    func returnErrorString(opaquePointer: OpaquePointer, mask: String) -> String {
+    func errorString(from opaquePointer: OpaquePointer?, mask: String) -> String? {
+        guard let opaquePointer = opaquePointer else {
+            return nil
+        }
+        
+        defer { free_error(opaquePointer) }
+        
         let pointer = UnsafeMutablePointer<CustomError>(opaquePointer)
         let errorString = String(cString: pointer.pointee.message)
         
         print("\(mask): \(errorString))")
-        
-        defer {
-            pointer.deallocate(capacity: 1)
-        }
         
         return errorString
     }
@@ -693,45 +680,25 @@ class CoreLibManager: NSObject {
         let blockchainType = BlockchainType.create(wallet: wallet)
         let error = validate_address(blockchainType, addressUTF8)
         
-        defer {
-//            addressUTF8.deallocate(capacity: 1)
-        }
+        let errorString = self.errorString(from: error!, mask: "isAddressValid")
         
-        if error != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(error)
-            let errorString = String(cString: pointer!.pointee.message)
-
-            defer { pointer?.deallocate(capacity: 1) }
-            
-//            defer { pointer?.deallocate(capacity: 1) }
-            
-            return (false, errorString)
-        } else {
-            return (true, nil)
-        }
+        return (errorString == nil, errorString)
     }
     
     func getCoreLibVersion() -> String {
         let versionFromCoreLib = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
-        let err = make_version_string(versionFromCoreLib)
         defer {
             versionFromCoreLib.deallocate(capacity: 1)
-            free_error(err)
         }
-        if err != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(err)
-            defer {
-                pointer?.deallocate(capacity: 1)
-            }
-            let errrString = String(cString: pointer!.pointee.message)
-            defer { pointer?.deallocate(capacity: 1) }
-            print("setStringValue: \(errrString))")
+        
+        let error = make_version_string(versionFromCoreLib)
+        
+        if error == nil {
+            return String(cString: versionFromCoreLib.pointee!)
+        } else {
+            _ = errorString(from: error, mask: "coreLibVersion")
             
             return ""
-        } else {
-            let pointer = String(cString: versionFromCoreLib.pointee!)
-            
-            return pointer
         }
     }
 }
@@ -798,18 +765,18 @@ extension TestCoreLibManager {
         let addressPublicKeyPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let publicKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         
-        let blockchain = BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BLOCKCHAIN_NET_TYPE_MAINNET.rawValue)
+        let blockchain = BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BITCOIN_NET_TYPE_MAINNET.rawValue)
         let mHDa = make_hd_account(masterKeyPointer.pointee, blockchain, UInt32(0), newAccountPointer)
         print("make_hd_account: \(mHDa)")
         
         if mHDa != nil {
-            let _ = returnErrorString(opaquePointer: mHDa!, mask: "make_hd_account")
+            _ = errorString(from: mHDa!, mask: "make_hd_account")
         }
         
         let mHDla = make_hd_leaf_account(newAccountPointer.pointee!, ADDRESS_INTERNAL, UInt32(0), newAddressPointer)
         //        make_hd_leaf_account(OpaquePointer!, AddressType, UInt32, UnsafeMutablePointer<OpaquePointer?>!)
         if mHDla != nil {
-            let _ = returnErrorString(opaquePointer: mHDla!, mask: "make_hd_leaf_account")
+            _ = errorString(from: mHDla!, mask: "make_hd_leaf_account")
         }
         
         //Create wallet
@@ -817,7 +784,7 @@ extension TestCoreLibManager {
         let gaas = account_get_address_string(newAddressPointer.pointee, newAddressStringPointer)
         var addressString : String? = nil
         if gaas != nil {
-            let _ = returnErrorString(opaquePointer: gaas!, mask: "account_get_address_string")
+            _ = errorString(from: gaas!, mask: "account_get_address_string")
         } else {
             addressString = String(cString: newAddressStringPointer.pointee!)
             print("addressString: \(addressString!)")
@@ -845,8 +812,9 @@ extension TestCoreLibManager {
         
         
         let mt = make_transaction(newAddressPointer.pointee, transactionPointer)
+        defer { free_transaction(transactionPointer.pointee) }
         if mt != nil {
-            let _ = returnErrorString(opaquePointer: mt!, mask: "make_hd_account")
+            _ = errorString(from: mt!, mask: "make_hd_account")
         }
         
         print("END")
@@ -883,7 +851,7 @@ extension TestCoreLibManager {
                                                  addressID:     UInt32(wallet!.addresses.count),
                                                  binaryData:    &binaryDataPointer.pointee!.pointee)
             
-            let data = self.createTransaction(addressPointer: addressData!["addressPointer"] as! OpaquePointer,
+            let data = self.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                               sendAddress: Constants.DataManager.btcTestnetDonationAddress,
                                               sendAmountString: "0,001",
                                               feePerByteAmount: "2",
@@ -924,7 +892,7 @@ extension TestCoreLibManager {
 
 //////////////////////////
 extension EthereumCoreLibManager {
-    func createEtherTransaction(addressPointer: OpaquePointer,
+    func createEtherTransaction(addressPointer: UnsafeMutablePointer<OpaquePointer?>,
                                 sendAddress: String,
                                 sendAmountString: String,
                                 nonce: Int,
@@ -936,9 +904,10 @@ extension EthereumCoreLibManager {
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         
-        let mt = make_transaction(addressPointer, transactionPointer)
+        let mt = make_transaction(addressPointer.pointee, transactionPointer)
+        defer { free_transaction(transactionPointer.pointee) }
         if mt != nil {
-            let _ = returnErrorString(opaquePointer: mt!, mask: "make_transaction")
+            _ = errorString(from: mt!, mask: "make_transaction")
         }
         
         //properties

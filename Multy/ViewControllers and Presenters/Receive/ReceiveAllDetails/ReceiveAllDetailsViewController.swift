@@ -164,11 +164,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     func updateUIWithWallet() {
         self.walletNameLbl.text = self.presenter.wallet?.name
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: presenter.wallet! ))
+        
         //FIXME: BLOCKCHAIN
         let blockchain = BlockchainType.create(wallet: presenter.wallet!)
         self.walletCryptoSumBtn.setTitle("\((self.presenter.wallet?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(blockchain.shortName /*self.presenter.wallet?.cryptoName ?? ""*/)", for: .normal)
-        let sum = (presenter.wallet!.sumInCrypto * exchangeCourse).fixedFraction(digits: 2)
+        let sum = presenter.wallet!.sumInFiat.fixedFraction(digits: 2)
         self.walletFiatSumLbl.text = "\(sum) \(self.presenter.wallet?.fiatSymbol ?? "")"
         self.presenter.walletAddress = (self.presenter.wallet?.address)!
         self.addressLbl.text = self.presenter.walletAddress

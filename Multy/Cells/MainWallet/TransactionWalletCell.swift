@@ -71,9 +71,9 @@ class TransactionWalletCell: UITableViewCell {
             self.timeLabel.text = dateFormatter.string(from: histObj.blockTime)
         }
         
-        self.cryptoAmountLabel.text = "\(convertSatoshiToBTC(sum: histObj.txOutAmount.uint64Value).fixedFraction(digits: 8)) BTC"
+        self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
         
-        self.fiatAmountLabel.text = "\((convertSatoshiToBTC(sum: histObj.txOutAmount.uint64Value) * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
     }
     
 //    func setCorners() {

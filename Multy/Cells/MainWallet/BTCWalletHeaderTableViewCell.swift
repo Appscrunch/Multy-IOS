@@ -55,7 +55,7 @@ class BTCWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
             self.titleLbl.text = wallet?.name
             self.collectionView.reloadData()
             if screenHeight == heightOfX {
-                self.topConstraint.constant = 40
+                self.topConstraint.constant = 50
             }
 //            self.pageControll.numberOfPages = (self.wallet?.addresses.count)!
         }
@@ -66,7 +66,7 @@ class BTCWalletHeaderTableViewCell: UITableViewCell, UICollectionViewDelegate {
     }
     
     @IBAction func settingsAction(_ sender: Any) {
-        self.mainVC?.settingsAction(Any.self)
+        self.mainVC?.settingsAction(sender)
     }
 }
 

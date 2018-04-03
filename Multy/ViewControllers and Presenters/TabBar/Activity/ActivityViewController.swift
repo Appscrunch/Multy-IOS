@@ -29,16 +29,18 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)   
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        super.viewWillAppear(animated)
+        
+        (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     @IBAction func goToAction(_ sender: Any) {
@@ -68,7 +70,6 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     }
     
     func cancelAction() {
-        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         presentDonationVCorAlert()
     }
     

@@ -25,7 +25,7 @@ class WalletAddressTableViewCell: UITableViewCell {
     }
     
     func fillInCell(index: Int) {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: wallet!))
+        let exchangeCourse = wallet!.exchangeCourse
         let address = self.wallet?.addresses[index]
         
         if address == nil {
@@ -36,7 +36,7 @@ class WalletAddressTableViewCell: UITableViewCell {
         self.creationTimeLbl?.text = Date.walletAddressGMTDateFormatter().string(from: address!.lastActionDate)
         
         if self.wallet?.chain == 0 {
-            sumInCrypto = convertSatoshiToBTC(sum: UInt64(self.wallet!.addresses[index].amount.uint64Value))
+            sumInCrypto = UInt64(self.wallet!.addresses[index].amount.uint64Value).btcValue
         }
         sumInFiat = sumInCrypto * exchangeCourse
         
@@ -45,7 +45,7 @@ class WalletAddressTableViewCell: UITableViewCell {
     }
     
     func updateExchange() {
-        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: wallet!))
+        let exchangeCourse = wallet!.exchangeCourse
         sumInFiat = sumInCrypto * exchangeCourse
         self.sumLbl.text = "\(sumInCrypto.fixedFraction(digits: 8)) \(self.wallet?.cryptoName ?? "") / \(sumInFiat.fixedFraction(digits: 2)) \(self.wallet?.fiatName ?? "")"
     }

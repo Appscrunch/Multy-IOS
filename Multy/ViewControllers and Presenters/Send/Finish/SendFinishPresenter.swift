@@ -20,7 +20,7 @@ class SendFinishPresenter: NSObject {
     var sumInCrypto: Double?
     var sumInFiat: Double?
     var cryptoName: String?
-    var fiatName: String = "USD"//MARK: get from settingds
+    var fiatName: String = "USD"//MARK: get from settings
     
     var isCrypto = true
     
@@ -28,7 +28,7 @@ class SendFinishPresenter: NSObject {
         switch self.isCrypto {
         case true:
             self.sumInCrypto = transactionDTO.transaction?.endSum
-            self.sumInFiat = self.sumInCrypto! * DataManager.shared.makeExchangeFor(blockchainType: transactionDTO.blockchainType)
+            self.sumInFiat = self.sumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
         case false:
             self.sumInFiat = transactionDTO.transaction?.endSum
             self.sumInCrypto = self.sumInFiat!

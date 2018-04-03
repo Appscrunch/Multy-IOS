@@ -35,7 +35,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     
     var maxLengthForSum = 20
     
-    var delegate: ReceiveSumTransferProtocol?
+    weak var delegate: ReceiveSumTransferProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

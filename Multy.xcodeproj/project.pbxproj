@@ -26,6 +26,7 @@
 		44C06FC9203D832B008CBA9D /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FC8203D832B008CBA9D /* Array+Extension.swift */; };
 		44C06FCB203D9021008CBA9D /* LoggingPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FCA203D9020008CBA9D /* LoggingPrint.swift */; };
 		44DCC201205A9D34001080FB /* TopIndexRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DCC200205A9D34001080FB /* TopIndexRLM.swift */; };
+		44DFEF9F206A51AF0068769C /* UInt64+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DFEF9E206A51AF0068769C /* UInt64+Extension.swift */; };
 		44FB26C0205A6D5600F208EB /* ChooseBlockchainProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FB26BF205A6D5600F208EB /* ChooseBlockchainProtocol.swift */; };
 		4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */; };
 		4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */; };
@@ -298,6 +299,12 @@
 		44C06FC8203D832B008CBA9D /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		44C06FCA203D9020008CBA9D /* LoggingPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingPrint.swift; sourceTree = "<group>"; };
 		44DCC200205A9D34001080FB /* TopIndexRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopIndexRLM.swift; sourceTree = "<group>"; };
+		44DFEF9E206A51AF0068769C /* UInt64+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt64+Extension.swift"; sourceTree = "<group>"; };
+		44DFEFA0206A64ED0068769C /* binary_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = binary_data.h; sourceTree = "<group>"; };
+		44DFEFA1206A64ED0068769C /* blockchain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blockchain.h; sourceTree = "<group>"; };
+		44DFEFA2206A64ED0068769C /* bitcoin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bitcoin.h; sourceTree = "<group>"; };
+		44DFEFA3206A64ED0068769C /* ethereum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ethereum.h; sourceTree = "<group>"; };
+		44DFEFA4206A64ED0068769C /* golos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = golos.h; sourceTree = "<group>"; };
 		44FA86BE2035A75A00263C72 /* key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = key.h; sourceTree = "<group>"; };
 		44FA86BF2035A76400263C72 /* big_int.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = big_int.h; sourceTree = "<group>"; };
 		44FA86C02035A77100263C72 /* sha3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
@@ -767,6 +774,7 @@
 			isa = PBXGroup;
 			children = (
 				45B0B0E41FEBEDC3005BB1C0 /* Activity */,
+				455EA8771FD8514F0093F69D /* Fast Operations */,
 				45B0B0E91FEBF29D005BB1C0 /* Contacts */,
 				45B0B0EE1FEBF2F2005BB1C0 /* Settings */,
 				455EA8751FD842610093F69D /* CustomTabBarViewController.swift */,
@@ -924,6 +932,7 @@
 				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 				45D2D6DE203463FB00751ED4 /* AnalyticsConstants.swift */,
 				44A3DF92205AA1F300FE9955 /* BlockchainType+Extension.swift */,
+				44DFEF9E206A51AF0068769C /* UInt64+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1225,7 +1234,6 @@
 				45B9CB011FBB4AC200AA2A31 /* Assets */,
 				455EA8721FD841FF0093F69D /* TabBar */,
 				FA4D43E81FC5C305003C7117 /* Wallet */,
-				455EA8771FD8514F0093F69D /* Fast Operations */,
 				457569301FBDBB7500FDEE20 /* Seed Phrase */,
 				45A9491D1FC2DF03003C3A23 /* Receive */,
 				45A9493C1FC5A4FB003C3A23 /* Send */,
@@ -1485,15 +1493,20 @@
 		FA7406171FCC14C4003C538C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				44FA86C02035A77100263C72 /* sha3.h */,
-				44FA86BE2035A75A00263C72 /* key.h */,
-				FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */,
 				FA7406191FCC14C4003C538C /* account.h */,
-				FA74061A1FCC14C4003C538C /* mnemonic.h */,
 				FA74061B1FCC14C4003C538C /* api.h */,
+				44DFEFA0206A64ED0068769C /* binary_data.h */,
+				FAFCDA891FD7FD250056DD64 /* bip44_coin_types.h */,
+				44DFEFA2206A64ED0068769C /* bitcoin.h */,
+				44DFEFA1206A64ED0068769C /* blockchain.h */,
 				FA74061C1FCC14C4003C538C /* common.h */,
-				FA74061D1FCC14C4003C538C /* run_tests.h */,
 				FA869D081FD5AD9700C815C3 /* error.h */,
+				44DFEFA3206A64ED0068769C /* ethereum.h */,
+				44DFEFA4206A64ED0068769C /* golos.h */,
+				44FA86BE2035A75A00263C72 /* key.h */,
+				FA74061A1FCC14C4003C538C /* mnemonic.h */,
+				FA74061D1FCC14C4003C538C /* run_tests.h */,
+				44FA86C02035A77100263C72 /* sha3.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1622,7 +1635,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Idealnaya rabota";
 				TargetAttributes = {
 					4491513C2049764D0028195F = {
@@ -2075,6 +2088,7 @@
 				FAB0E6AA20189AE300EB53E2 /* StockExchangeRateRLM.swift in Sources */,
 				4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */,
 				45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */,
+				44DFEF9F206A51AF0068769C /* UInt64+Extension.swift in Sources */,
 				455CDCFB1FC8537200EA5ACE /* CreateWalletViewController.swift in Sources */,
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,
 				455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */,
@@ -2311,6 +2325,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2318,6 +2333,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2368,6 +2384,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2375,6 +2392,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2478,7 +2496,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Multy/Multy-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = arm64;
