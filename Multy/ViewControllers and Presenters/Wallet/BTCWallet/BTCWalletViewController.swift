@@ -33,7 +33,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     var isBackupOnScreen = true
     let progressHUD = ProgressHUD(text: "Getting Wallet...")
     
-    let visibleCells = 5  // iphone 6  height 667
+    var visibleCells = 5  // iphone 6  height 667
     let gradientLayer = CAGradientLayer()
     
     var isSocketInitiateUpdating = false
@@ -56,7 +56,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         
         presenter.fixConstraints()
         presenter.registerCells()
-
+        checkVisibleCellsWithHetight()
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
         
@@ -68,8 +68,12 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    func checkVisibleCellsWithHetight() {
+        if screenHeight == heightOfStandard {
+            visibleCells = 5
+        } else if screenHeight == heightOfPlus || screenHeight == heightOfX {
+            visibleCells = 7
+        }
     }
     
     @objc func updateWalletAfterSockets() {
@@ -368,7 +372,13 @@ extension TableViewDelegate: UITableViewDelegate {
             }
             
             return heightForFirstCell /* (screenWidth / 375.0)*/
-        } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
+        } else if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
+            if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
+                return 145
+            } else {
+                return 80
+            }
+        } else {
             if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
                 return 135
             } else {

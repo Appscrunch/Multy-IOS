@@ -34,12 +34,20 @@ class AssetsPresenter: NSObject {
             if !assetsVC!.isSocketInitiateUpdating && self.assetsVC!.tabBarController!.viewControllers![0].childViewControllers.count == 1 {
                 assetsVC?.tableView.reloadData()
             }
+            
+            if account != nil {
+                assetsVC!.tableView.frame.size.height = screenHeight - assetsVC!.tabBarController!.tabBar.frame.height
+            } else {
+                assetsVC!.tableView.frame.size.height = screenHeight
+            }
         }
     }
     
     func backupActivity() {
-        self.assetsVC?.backupView?.isHidden = account!.isSeedPhraseSaved()
-        self.assetsVC?.backupView?.isUserInteractionEnabled = !account!.isSeedPhraseSaved()
+        if account != nil {
+            self.assetsVC?.backupView?.isHidden = account!.isSeedPhraseSaved()
+            self.assetsVC?.backupView?.isUserInteractionEnabled = !account!.isSeedPhraseSaved()
+        }
     }
     
     func auth() {

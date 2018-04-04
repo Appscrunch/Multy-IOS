@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         setupForNotImplementedViews()
         
         sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +46,8 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
+        tabBarController?.tabBar.frame = presenter.tabBarFrame!
+//        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.getPassFromUserDef()
@@ -57,7 +59,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        hideCopy()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -103,16 +105,19 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         }
     }
     
-    @IBAction func showOrHideCopy(_ sender: Any) {
+    @IBAction func showOrHideCopy(_ sender: UIButton, event: UIEvent) {
         if self.copyBtn.alpha == 0.0 {
-            showCopy()
+            let event = event.touches(for: sender)?.first
+            let location = event?.location(in: sender)
+            showCopy(center: location!)
         } else {
             hideCopy()
         }
     }
     
-    func showCopy() {
-        self.copyBtn.isUserInteractionEnabled = true
+    func showCopy(center: CGPoint) {
+        copyBtn.center = center
+        copyBtn.isUserInteractionEnabled = true
         UIView.animate(withDuration: 0.5) {
             self.copyBtn.alpha = 1.0
         }
