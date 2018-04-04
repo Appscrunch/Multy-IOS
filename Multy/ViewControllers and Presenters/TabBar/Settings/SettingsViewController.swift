@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         setupForNotImplementedViews()
         
         sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +46,8 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
+        tabBarController?.tabBar.frame = presenter.tabBarFrame!
+//        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.getPassFromUserDef()

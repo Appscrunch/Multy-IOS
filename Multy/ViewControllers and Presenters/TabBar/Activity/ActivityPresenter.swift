@@ -5,6 +5,8 @@
 import UIKit
 
 class ActivityPresenter: NSObject {
+    var mainVC: ActivityViewController?
     
-
+    var tabBarFrame: CGRect?
+    
 }

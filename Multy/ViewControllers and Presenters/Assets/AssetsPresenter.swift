@@ -38,8 +38,10 @@ class AssetsPresenter: NSObject {
     }
     
     func backupActivity() {
-        self.assetsVC?.backupView?.isHidden = account!.isSeedPhraseSaved()
-        self.assetsVC?.backupView?.isUserInteractionEnabled = !account!.isSeedPhraseSaved()
+        if account != nil {
+            self.assetsVC?.backupView?.isHidden = account!.isSeedPhraseSaved()
+            self.assetsVC?.backupView?.isUserInteractionEnabled = !account!.isSeedPhraseSaved()
+        }
     }
     
     func auth() {

@@ -45,11 +45,11 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         self.backUpView()
         
         tableView.accessibilityIdentifier = "AssetsTableView"
-        self.view.isUserInteractionEnabled = false
-        self.registerCells()
-        self.presenter.assetsVC = self
-        self.presenter.tabBarFrame = self.tabBarController?.tabBar.frame
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        view.isUserInteractionEnabled = false
+        registerCells()
+        presenter.assetsVC = self
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
+        navigationController?.setNavigationBarHidden(true, animated: false)
 
         guard isFlowPassed else {
             self.view.isUserInteractionEnabled = true
@@ -69,9 +69,9 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
         
-        self.checkOSForConstraints()
+        checkOSForConstraints()
         
-        self.view.addSubview(progressHUD)
+        view.addSubview(progressHUD)
         
         //MAKE: first launch
 //        let _ = DataManager.shared
@@ -117,7 +117,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             return
         }
 
-        self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
+        tabBarController?.tabBar.frame = presenter.tabBarFrame!
         
         //FIXME: PROBABLE for the best solution
         //here fixed hiding table botton behind tabbar
@@ -187,7 +187,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         let view = UIView()
         if screenHeight == heightOfX {
-            view.frame = CGRect(x: 16, y: 35, width: screenWidth - 32, height: Constants.AssetsScreen.backupButtonHeight)
+            view.frame = CGRect(x: 16, y: 50, width: screenWidth - 32, height: Constants.AssetsScreen.backupButtonHeight)
         } else {
             view.frame = CGRect(x: 16, y: 25, width: screenWidth - 32, height: Constants.AssetsScreen.backupButtonHeight)
         }
@@ -448,7 +448,7 @@ extension TableViewDelegate : UITableViewDelegate {
                 if presenter.account!.isSeedPhraseSaved() {
                     return 340
                 } else {
-                    return 340 + Constants.AssetsScreen.backupButtonHeight
+                    return 340 + Constants.AssetsScreen.backupAssetsOffset
                 }
             }
         case [0,1]:        // !!!NEW!!! WALLET CELL
@@ -483,7 +483,7 @@ extension TableViewDelegate : UITableViewDelegate {
                 if presenter.account!.isSeedPhraseSaved() {
                     return 340
                 } else {
-                    return 340 + Constants.AssetsScreen.backupButtonHeight
+                    return 340 + Constants.AssetsScreen.backupAssetsOffset
                 }
             }
         case [0,1]:        // !!!NEW!!! WALLET CELL

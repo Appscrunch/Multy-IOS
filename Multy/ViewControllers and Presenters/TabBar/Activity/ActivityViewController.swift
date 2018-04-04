@@ -8,10 +8,15 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var donatView: UIView!
     
+    var presenter = ActivityPresenter()
+    
     var message = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.mainVC = self
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         sendAnalyticsEvent(screenName: screenActivity, eventName: screenActivity)
         
@@ -19,6 +24,9 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
         newsView.layer.shadowRadius = 10
+        
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
+        
         ipadFix()
         setupView()
     }
@@ -42,7 +50,8 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         super.viewWillAppear(animated)
         
         (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
-        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
+        tabBarController?.tabBar.frame = presenter.tabBarFrame!
+//        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

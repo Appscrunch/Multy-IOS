@@ -12,6 +12,7 @@ struct Constants {
         static let createOrImportWalletString = "Create or Import New Wallet"
         static let cancelString = "Cancel"
         static let backupButtonHeight = CGFloat(44)
+        static let backupAssetsOffset = CGFloat(25)
     }
     
     struct ETHWalletScreen {
