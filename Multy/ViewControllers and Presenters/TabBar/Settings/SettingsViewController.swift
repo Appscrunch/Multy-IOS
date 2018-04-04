@@ -8,6 +8,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
 
     @IBOutlet weak var pinSwitch: UISwitch!
      
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var copyBtn: UIButton!
     @IBOutlet weak var topVersionLbl: UILabel!
     @IBOutlet weak var botVersionLbl: UILabel!
@@ -18,6 +19,8 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var feedbackView: UIView!
     @IBOutlet weak var pushSwitch: UISwitch!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     let presenter = SettingsPresenter()
     let authVC = SecureViewController()
@@ -33,6 +36,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         self.makeVersion()
         self.presenter.settingsVC = self
         setupForNotImplementedViews()
+        
         sendAnalyticsEvent(screenName: screenSettings, eventName: screenSettings)
     }
     
@@ -45,6 +49,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.getPassFromUserDef()
+        ipadFix()
 //        UserPreferences.shared.getAndDecryptCipheredMode(completion: { (pinMode, error) in
 //            self.pinSwitch.isOn = (pinMode! as NSString).boolValue
 //        })
@@ -69,6 +74,14 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
 //        self.defFiatView.alpha = opacityForNotImplementedView
         self.aboutView.alpha = opacityForNotImplementedView
         self.feedbackView.alpha = opacityForNotImplementedView
+    }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            self.topConstraint.constant = -40
+            self.scrollView.scrollToTop()
+            self.bottomConstraint.constant = 0
+        }
     }
     
     @IBAction func onSwitch(_ sender: Any) {

@@ -307,6 +307,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func fixForiPad() {
         if screenHeight == heightOfiPad {
             hideEmptyLbls()
+            self.bottomTableConstraint.constant = -50
         }
     }
     

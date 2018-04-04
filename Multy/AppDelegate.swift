@@ -5,7 +5,10 @@
 import UIKit
 import RealmSwift
 import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
 import Branch
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -73,9 +76,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if acc == nil {
                             return
                         }
+                        var amountFromLink = 0.0
+                        
                         let chainNameFromLink = (dictFormLink["address"] as! String).split(separator: ":").first
                         let addressFromLink = (dictFormLink["address"] as! String).split(separator: ":").last
-                        let amountFromLink = (dictFormLink["amount"] as! NSString).doubleValue
+                        if let amount = dictFormLink["amount"] as? NSString {
+                            amountFromLink = amount.doubleValue
+                        } else if let number = dictFormLink["amount"] as? NSNumber {
+                            amountFromLink = number.doubleValue
+                        } else {
+                            print("\n\n\nAmount from deepLink not parsed!\n\n\n")
+                        }
                         
                         let storyboard = UIStoryboard(name: "Send", bundle: nil)
                         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
@@ -95,6 +106,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let filePath = filePathOpt, let options = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: options)
         }
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            // For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
         
         return true
     }
@@ -286,5 +314,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        )
 //        Realm.Configuration.defaultConfiguration = config
 //    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print(remoteMessage.appData)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
+    }
 }
 

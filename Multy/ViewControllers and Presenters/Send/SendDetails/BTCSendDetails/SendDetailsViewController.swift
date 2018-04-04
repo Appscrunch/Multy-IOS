@@ -12,6 +12,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewForShadow: UIView!
+    @IBOutlet weak var donationView: UIView!
     @IBOutlet weak var donationSeparatorView: UIView!
     @IBOutlet weak var donationTitleLbl: UILabel!
     @IBOutlet weak var donationTF: UITextField!
@@ -40,7 +42,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
         self.presenter.sendDetailsVC = self
         self.registerCells()
         self.registerNotificationFromKeyboard()
-        
+        self.setupShadow()
         self.setupDonationUI()
         
         presenter.requestFee()
@@ -71,6 +73,12 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
         if screenHeight == heightOfX {
             bottomBtnConstraint.constant = 0
         }
+    }
+    
+    func setupShadow() {
+        let myColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5)
+        viewForShadow.setShadow(with: myColor)
+        donationView.setShadow(with: myColor)
     }
     
     func setupDonationUI() {

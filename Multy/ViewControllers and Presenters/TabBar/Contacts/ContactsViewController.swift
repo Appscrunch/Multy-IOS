@@ -7,11 +7,13 @@ import UIKit
 class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var donatView: UIView!
+    @IBOutlet weak var donationTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupView()
+        ipadFix()
         sendAnalyticsEvent(screenName: screenContacts, eventName: screenContacts)
     }
     
@@ -28,6 +30,12 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            self.donationTopConstraint.constant = 0
+        }
     }
     
     @IBAction func donatAction(_ sender: Any) {

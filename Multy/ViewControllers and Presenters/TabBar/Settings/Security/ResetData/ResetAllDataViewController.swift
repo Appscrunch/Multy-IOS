@@ -7,6 +7,7 @@ import UIKit
 class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     weak var cancelDelegate: CancelProtocol?
     
@@ -15,12 +16,19 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
+        ipadFix()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         cancelBtn.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+    }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            self.heightConstraint.constant = 440
+        }
     }
     
     @IBAction func cancelAction(_ sender: Any) {

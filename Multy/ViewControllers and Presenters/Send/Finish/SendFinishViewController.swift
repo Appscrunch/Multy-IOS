@@ -6,6 +6,9 @@ import UIKit
 
 class SendFinishViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var middle: UIView!
+    @IBOutlet weak var bottom: UIView!
     @IBOutlet weak var cryptoImage: UIImageView!
     @IBOutlet weak var cryptoSumLbl: UILabel!
     @IBOutlet weak var cryptoNamelbl: UILabel!
@@ -41,6 +44,10 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func setupUI() {
+        let shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5)
+        self.topView.setShadow(with: shadowColor)
+        self.middle.setShadow(with: shadowColor)
+        self.bottom.setShadow(with: shadowColor)
         self.cryptoImage.image = UIImage(named: presenter.transactionDTO.blockchainType.iconString)
         let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
         self.cryptoSumLbl.text = "\(presenter.transactionDTO.sendAmount?.fixedFraction(digits: 8) ?? "0.0")"

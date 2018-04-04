@@ -20,7 +20,7 @@ class ActivityWebViewViewController: UIViewController, UIWebViewDelegate {
     func loadPage() {
         self.webView.scalesPageToFit = true
         self.webView.contentMode = .scaleAspectFit
-        self.webView.loadRequest(URLRequest(url: URL(string: "http://multy.io/donation_features")!))
+        self.webView.loadRequest(URLRequest(url: URL(string: "http://multy.io/index.php/feature-challenge/")!))
     }
     
     @IBAction func backAction(_ sender: Any) {

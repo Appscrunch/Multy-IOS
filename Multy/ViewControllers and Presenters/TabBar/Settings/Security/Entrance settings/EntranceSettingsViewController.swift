@@ -24,7 +24,7 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
         self.presenter.entranceVC = self
 //        backupView.isHidden = true
 //        topPassConstraint.constant = 20
-        
+        self.setupShadow()
         self.biometricView.alpha = closeAlpha
         sendAnalyticsEvent(screenName: screenBlockSettings, eventName: screenBlockSettings)
     }
@@ -32,6 +32,11 @@ class EntranceSettingsViewController: UIViewController, AnalyticsProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getAcc()
+    }
+    
+    func setupShadow() {
+        let myColor = #colorLiteral(red: 0.4156862745, green: 0.1490196078, blue: 0.168627451, alpha: 0.3034300086)
+        self.backupView.setShadow(with: myColor)
     }
     
     @IBAction func backAction(_ sender: Any) {

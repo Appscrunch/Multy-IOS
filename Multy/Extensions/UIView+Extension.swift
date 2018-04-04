@@ -19,6 +19,13 @@ extension UIView {
         self.layer.mask = mask
     }
     
+    func setShadow(with color: UIColor) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 10
+    }
+    
     // OUTPUT 1
     func dropShadow(scale: Bool = true) {
         self.layer.masksToBounds = false

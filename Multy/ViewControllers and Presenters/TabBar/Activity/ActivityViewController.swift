@@ -19,13 +19,19 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
         newsView.layer.shadowRadius = 10
-        
+        ipadFix()
         setupView()
     }
     
     func setupView() {
         self.donatView.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 0.9994150996, alpha: 1)
         self.donatView.layer.borderWidth = 1
+    }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            donatView.isHidden = true
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-Medium</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,6 +20,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deq-zO-08q">
+                        <rect key="frame" x="20" y="17" width="335" height="65.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gn8-OE-mGD">
                         <rect key="frame" x="16" y="4" width="343" height="91.5"/>
                         <subviews>
@@ -60,8 +64,12 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="gn8-OE-mGD" secondAttribute="bottom" constant="4" id="5TG-Us-sMH"/>
                     <constraint firstAttribute="trailing" secondItem="gn8-OE-mGD" secondAttribute="trailing" constant="16" id="Aww-uX-MTs"/>
+                    <constraint firstAttribute="bottom" secondItem="deq-zO-08q" secondAttribute="bottom" constant="17" id="CVJ-FS-h6g"/>
                     <constraint firstItem="gn8-OE-mGD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Ejp-sw-YSh"/>
+                    <constraint firstAttribute="trailing" secondItem="deq-zO-08q" secondAttribute="trailing" constant="20" id="IBW-T1-mbM"/>
                     <constraint firstItem="gn8-OE-mGD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="OLO-id-53H"/>
+                    <constraint firstItem="deq-zO-08q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Rmx-MW-ygk"/>
+                    <constraint firstItem="deq-zO-08q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="may-9d-0SF"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -70,6 +78,7 @@
                 <outlet property="content" destination="H2p-sc-9uM" id="EBb-t7-yIn"/>
                 <outlet property="leftImage" destination="45T-09-G6X" id="8d7-jE-rT0"/>
                 <outlet property="mainLabel" destination="h5z-tm-u38" id="R7y-3R-lxv"/>
+                <outlet property="shadowView" destination="deq-zO-08q" id="tsa-AL-8lB"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="139"/>
         </tableViewCell>
