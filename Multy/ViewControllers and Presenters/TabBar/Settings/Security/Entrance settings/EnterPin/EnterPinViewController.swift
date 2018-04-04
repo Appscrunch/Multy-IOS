@@ -29,11 +29,31 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     var wrongAttempts = 0
     
     //Alert + timer
-    var counterOfTimer:Int = 0
+//    var counterOfTimer:Int = 0
     var timer: Timer?
     var defTime = 60
     
     var wrongPinVC: WrongPinViewController?
+    var blockDate: Date? // start blocking
+    var blockDuration: Int? // blocking during
+    
+    var blockedScreenDuration : Int {
+        get {
+            return Int(Date().timeIntervalSince(blockDate!))
+        }
+    }
+    
+    var isBlockScreenOn: Bool {
+        get {
+            return blockedScreenDuration < blockDuration!
+        }
+    }
+    
+    var countdownSeconds: Int {
+        get {
+            return blockDuration! - blockedScreenDuration
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,13 +168,6 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         self.touchMe.authenticateUser { (message) in
             if let message = message {
                 self.tabBarController?.tabBar.isUserInteractionEnabled = false
-//                let alert = UIAlertController(title: "Access Denied", message: "Something went wrong. Try enter pin", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-//
-//                }))
-//                alert.setPresentedAlertToDelegate()
-//                self.present(alert, animated: true, completion: nil)
-                //                appDel.openedAlert = alert
             } else {
                 self.cancelDelegate?.presentNoInternet()
                 self.successDismiss()
@@ -176,13 +189,13 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     
     func checkAttempts(completion: @escaping (_ presentTimer: Bool) -> ()) {
-        UserPreferences.shared.getAndDecryptBlockSeconds { (seconds, err) in
+        UserPreferences.shared.getAndDecryptBlockSeconds { [unowned self] (seconds, err) in
             if seconds != nil && seconds != 0 {
+                self.blockDuration = seconds
                 UserPreferences.shared.getAndDecryptStartBlockTime { (blockDate, err) in
                     if blockDate != nil {
-                        let difference = Date().timeIntervalSince(blockDate!)
-                        if seconds! > Int(difference) {
-                            self.counterOfTimer = seconds!
+                        self.blockDate = blockDate
+                        if self.isBlockScreenOn {
                             self.showAlert()
                             completion(true)
                         } else {
@@ -205,6 +218,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                 if seconds != nil && seconds != 0 && self.defTime == 60 {
                     self.defTime = seconds! * 2
                 }
+                self.blockDuration = seconds
                 UserPreferences.shared.writeChipheredBlockSeconds(seconds: self.defTime)
                 UserPreferences.shared.writeStartBlockTime(time: Date())
                 self.checkAttempts(completion: { (isTimerPresent) in
@@ -218,27 +232,26 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     //Alert + timer
     func showAlert() {
-        self.checkBlockTime { (answer) in
+        self.checkBlockTime { [unowned self] (answer) in
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let wrongVC = storyBoard.instantiateViewController(withIdentifier: "wrongPinVC") as! WrongPinViewController
             wrongVC.setPresentedVcToDelegate()
             wrongVC.timeString = self.makeTimeString()
             self.wrongPinVC = wrongVC
-            self.present(wrongVC, animated: true) {
-                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.decrease), userInfo: nil, repeats: true)
-                RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
-            }
+            self.present(wrongVC, animated: true)
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.decrease), userInfo: nil, repeats: true)
+            RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
         }
     }
     
     @objc func decrease() {
-        if (counterOfTimer > 0) {
-            self.wrongPinVC?.timeLbl.text = makeTimeString()
+        if isBlockScreenOn {
+            self.wrongPinVC?.timeLbl?.text = makeTimeString()
         } else {
             self.wrongPinVC?.dismiss(animated: true, completion: {
                 self.checkForBiometic()
             })
-            timer!.invalidate()
+            timer?.invalidate()
         }
     }
     
@@ -246,8 +259,9 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         var minutes: Int
         var seconds: Int
         
-        if (counterOfTimer > 0) {
-            counterOfTimer -= 1
+        let counterOfTimer = countdownSeconds
+        
+        if (countdownSeconds >= 0) {
             print(counterOfTimer)  // Correct value in console
             minutes = (counterOfTimer % 3600) / 60
             seconds = (counterOfTimer % 3600) % 60
@@ -265,22 +279,20 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func resumeApp() {
-        self.checkBlockTime { (answer) in
-            //callback is need to func showAlert()
-        }
+//        self.checkBlockTime { (answer) in
+//        }
     }
     
     func checkBlockTime(completion: @escaping(_ answer: Int?) -> ()) {
-        UserPreferences.shared.getAndDecryptStartBlockTime { (blockDate, err) in
+        UserPreferences.shared.getAndDecryptStartBlockTime { [unowned self] (blockDate, err) in
             if blockDate == nil {
                 return
             }
-            let difference = Date().timeIntervalSince(blockDate!)
-            if self.counterOfTimer > Int(difference) {
-                self.counterOfTimer = self.counterOfTimer - Int(difference)
+            
+            self.blockDate = blockDate
+            if self.isBlockScreenOn {
                 completion(1)
             } else {
-                self.counterOfTimer = 0
                 completion(0)
             }
         }
