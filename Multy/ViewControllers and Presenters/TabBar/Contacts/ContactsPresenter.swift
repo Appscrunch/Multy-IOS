@@ -5,5 +5,7 @@
 import UIKit
 
 class ContactsPresenter: NSObject {
-
+    var mainVC: ContactsViewController?
+    
+    var tabBarFrame: CGRect?
 }

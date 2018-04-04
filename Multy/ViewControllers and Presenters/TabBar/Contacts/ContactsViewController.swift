@@ -7,12 +7,17 @@ import UIKit
 class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var donatView: UIView!
+    var presenter = ContactsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.mainVC = self
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupView()
         sendAnalyticsEvent(screenName: screenContacts, eventName: screenContacts)
+        
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -22,7 +27,8 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
+        tabBarController?.tabBar.frame = presenter.tabBarFrame!
+//        tabBarController?.tabBar.frame = CGRect(x: 0, y: screenHeight - 49, width: screenWidth, height: 49)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
     }
     

@@ -8,6 +8,7 @@ import LocalAuthentication
 class SettingsPresenter: NSObject {
 
     var settingsVC: SettingsViewController?
+    var tabBarFrame: CGRect?
     
     func canEvaluatePolicy() -> Bool {
         let context = LAContext()
