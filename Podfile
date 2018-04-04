@@ -20,6 +20,7 @@ target 'Multy' do
   pod 'RevealingSplashView'
   pod 'RAMAnimatedTabBarController'
   pod 'Firebase'
+  pod 'Firebase/Messaging'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Branch'

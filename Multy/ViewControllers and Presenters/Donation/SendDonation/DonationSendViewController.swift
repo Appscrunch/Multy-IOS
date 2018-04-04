@@ -20,6 +20,9 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     @IBOutlet weak var sendBtn: UIButton!
     
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var botView: UIView!
+    
     @IBOutlet weak var bottomBtnConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonContraint: NSLayoutConstraint!
     
@@ -36,6 +39,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     var isTransactionSelected = false
     var isDefaultValueSet = false
     
+    var selectedTabIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
@@ -45,11 +50,6 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.presenter.mainVC = self
         self.registerCells()
         
-        tableView.layer.shadowColor = UIColor.gray.cgColor
-        tableView.layer.shadowOpacity = 1
-        tableView.layer.shadowOffset = .zero
-        tableView.layer.shadowRadius = 10
-        
         self.presenter.getWallets()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissKeyboard), name: Notification.Name("hideKeyboard"), object: nil)
@@ -57,6 +57,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         sendDonationScreenPresentedAnalytics()
         
         presenter.getAddress()
+        topView.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 1, alpha: 0.5))
+        botView.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 1, alpha: 0.5))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +111,6 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         self.view.isUserInteractionEnabled = false
         self.progressHud.show()
         self.presenter.createAndSendTransaction()
-        
         sendDonationScreenPressSendAnalytics()
     }
     

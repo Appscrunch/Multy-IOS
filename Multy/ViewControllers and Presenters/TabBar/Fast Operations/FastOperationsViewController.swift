@@ -10,10 +10,13 @@ class FastOperationsViewController: UIViewController, AnalyticsProtocol {
     let presenter = FastOperationsPresenter()
     var acc = AccountRLM()
     
+    @IBOutlet weak var closeBtnImg: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sendAnalyticsEvent(screenName: screenFastOperation, eventName: screenFastOperation)
         self.presenter.fastOperationsVC = self
+        self.updateUI()
         
         DataManager.shared.realmManager.getAccount { (acc, err) in
             self.acc = acc!
@@ -26,6 +29,11 @@ class FastOperationsViewController: UIViewController, AnalyticsProtocol {
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.navigationController?.navigationBar.isHidden = true
         (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+    }
+    
+    func updateUI() {
+        let myColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        closeBtnImg.setShadow(with: myColor)
     }
     
     @IBAction func closeAction(_ sender: Any) {

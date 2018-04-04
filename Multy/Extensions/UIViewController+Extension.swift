@@ -121,6 +121,7 @@ extension UIViewController {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let donatSendVC = storyboard.instantiateViewController(withIdentifier: "donatSendVC") as! DonationSendViewController
+            donatSendVC.selectedTabIndex = self.tabBarController?.selectedIndex
             self.navigationController?.pushViewController(donatSendVC, animated: true)
         } else {
             self.viewWillAppear(false)

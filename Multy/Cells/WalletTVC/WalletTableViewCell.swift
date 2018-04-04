@@ -15,6 +15,8 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet weak var arrowImage: UIImageView!
     @IBOutlet weak var statusImage: UIImageView!
     
+    @IBOutlet weak var viewForShadow: UIView!
+    
     var isBorderOn = false
     
     var wallet: UserWalletRLM?
@@ -22,15 +24,19 @@ class WalletTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        
-        self.backView.layer.shadowColor = UIColor.black.cgColor
-        self.backView.layer.shadowOpacity = 0.1
-        self.backView.layer.shadowOffset = .zero
-        self.backView.layer.shadowRadius = 2
+        setupShadow()
+//        self.backView.layer.shadowColor = UIColor.black.cgColor
+//        self.backView.layer.shadowOpacity = 0.1
+//        self.backView.layer.shadowOffset = .zero
+//        self.backView.layer.shadowRadius = 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func setupShadow() {
+        viewForShadow.setShadow(with: UIColor.gray)
     }
     
 //    func makeshadow() {

@@ -9,6 +9,8 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
 //    @IBOutlet weak var addressTF: UITextField!
     @IBOutlet weak var addressInTfLlb: UILabel!
     @IBOutlet weak var addressTV: UITextView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var botView: UIView!
     
     var cancelDelegate: CancelProtocol?
     var sendAddressDelegate: SendAddressProtocol?
@@ -19,6 +21,7 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
         super.awakeFromNib()
         self.selectionStyle = .none
         self.addressTV.delegate = self
+        setupShadow()
 //        (self.addressTV.value(forKey: "textInputTraits") as AnyObject).setValue(UIColor.clear , forKey:"insertionPointColor")
     }
 
@@ -26,6 +29,12 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
         super.setSelected(selected, animated: animated)
     }
     
+    
+    func setupShadow() {
+        let myColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 1)
+        topView.setShadow(with: myColor)
+        botView.setShadow(with: myColor)
+    }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.cancelDelegate?.cancelAction()

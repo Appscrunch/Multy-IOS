@@ -16,6 +16,8 @@ class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
 
     var chainId: Int?
     
+    var indexForTabBar: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +40,13 @@ class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
     
     
     @IBAction func closeAction(_ sender: Any) {
-        self.tabBarController?.selectedIndex = 0
+        if indexForTabBar == nil {
+            self.tabBarController?.selectedIndex = 0
+        } else {
+            if let tbc = self.tabBarController as? CustomTabBarViewController {
+                tbc.setSelectIndex(from: indexForTabBar!, to: indexForTabBar!)
+            }
+        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     

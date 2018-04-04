@@ -7,6 +7,7 @@ import UIKit
 class DonationAlertViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     weak var cancelDelegate: CancelProtocol?
     
@@ -16,15 +17,19 @@ class DonationAlertViewController: UIViewController, AnalyticsProtocol {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
         
-        view.layer.shadowColor = UIColor.gray.cgColor
-        view.layer.shadowOpacity = 1
-        view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 10
+        view.setShadow(with: UIColor.gray)
+        ipadFix()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cancelBtn.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+    }
+    
+    func ipadFix() {
+        if screenHeight == heightOfiPad {
+            heightConstraint.constant = 400
+        }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
