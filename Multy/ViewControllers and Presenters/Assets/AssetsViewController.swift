@@ -448,7 +448,7 @@ extension TableViewDelegate : UITableViewDelegate {
                 if presenter.account!.isSeedPhraseSaved() {
                     return 340
                 } else {
-                    return 340 + Constants.AssetsScreen.backupButtonHeight
+                    return 340 + Constants.AssetsScreen.backupAssetsOffset
                 }
             }
         case [0,1]:        // !!!NEW!!! WALLET CELL
@@ -483,7 +483,7 @@ extension TableViewDelegate : UITableViewDelegate {
                 if presenter.account!.isSeedPhraseSaved() {
                     return 340
                 } else {
-                    return 340 + Constants.AssetsScreen.backupButtonHeight
+                    return 340 + Constants.AssetsScreen.backupAssetsOffset
                 }
             }
         case [0,1]:        // !!!NEW!!! WALLET CELL
