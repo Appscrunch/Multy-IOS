@@ -213,12 +213,32 @@ class UserWalletRLM: Object {
         return sum
     }
     
+    func outgoingAmount(for transaction: HistoryRLM) -> UInt64 {
+        var allSum = UInt64(0)
+        var sum = UInt64(0)
+        
+        let addresses = self.fetchAddresses()
+        
+        for tx in transaction.txInputs {
+            allSum += tx.amount.uint64Value
+        }
+        
+        for tx in transaction.txOutputs {
+            if addresses.contains(tx.address) {
+                sum += tx.amount.uint64Value
+            }
+        }
+        
+        return allSum - sum
+    }
+    
     func isTransactionPending(for transaction: HistoryRLM) -> Bool {
         if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
             return true
         } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
             return true
         }
+        
         return false
     }
     

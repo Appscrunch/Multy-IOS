@@ -121,8 +121,9 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             self.transctionSumLbl.text = "+\(cryptoSumInBTC.fixedFraction(digits: 8))"
             self.sumInFiatLbl.text = "+\((cryptoSumInBTC * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
         } else {
-            self.transctionSumLbl.text = "-\(cryptoSumInBTC.fixedFraction(digits: 8))"
-            self.sumInFiatLbl.text = "-\((cryptoSumInBTC * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+            let outgoingAmount = presenter.wallet.outgoingAmount(for: presenter.histObj).btcValue
+            self.transctionSumLbl.text = "-\(outgoingAmount.fixedFraction(digits: 8))"
+            self.sumInFiatLbl.text = "-\((outgoingAmount * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
             
             if let donationAddress = arrOfOutputsAddresses.getDonationAddress(blockchainType: presenter.blockchainType) {
                 let donatOutPutObj = presenter.histObj.getDonationTxOutput(address: donationAddress)

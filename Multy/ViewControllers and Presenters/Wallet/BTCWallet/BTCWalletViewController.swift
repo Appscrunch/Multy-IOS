@@ -11,7 +11,6 @@ private typealias CollectionViewDelegateFlowLayout = BTCWalletViewController
 private typealias CancelDelegate = BTCWalletViewController
 
 class BTCWalletViewController: UIViewController, AnalyticsProtocol {
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var backView: UIView!
@@ -39,7 +38,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     var isSocketInitiateUpdating = false
     
     var lastY: CGFloat = 0.0
-    
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -358,6 +356,7 @@ extension TableViewDelegate: UITableViewDelegate {
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
         transactionVC.presenter.blockchainType = BlockchainType.create(wallet: presenter.wallet!)
+        transactionVC.presenter.wallet = presenter.wallet!
         self.navigationController?.pushViewController(transactionVC, animated: true)
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(transactionWithChainTap)\(presenter.wallet!.chain)")
     }
@@ -480,6 +479,7 @@ extension TableViewDataSource: UITableViewDataSource {
                         walletCell.changeState(isEmpty: true)
                     } else {
                         walletCell.histObj = presenter.historyArray[indexPath.row - 1]
+                        walletCell.wallet = presenter.wallet!
                         walletCell.fillCell()
                         walletCell.changeState(isEmpty: false)
                         self.hideEmptyLbls()

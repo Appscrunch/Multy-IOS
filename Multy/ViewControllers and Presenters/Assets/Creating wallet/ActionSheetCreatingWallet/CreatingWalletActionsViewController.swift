@@ -27,13 +27,12 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
         self.cancelDelegate?.presentNoInternet()
     }
     
-    
     @IBAction func createAction(_ sender: Any) {
+        ((cancelDelegate! as! AssetsViewController).tabBarController! as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
         self.dismiss(animated: true) {
             self.createProtocol?.goToCreateWallet()
         }       
     }
-    
     
     @IBAction func importWalletAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -58,6 +57,5 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
     func presentNoInternet() {
         
     }
-    
 }
 

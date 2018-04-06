@@ -170,6 +170,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         let exchangeVC = storyboard.instantiateViewController(withIdentifier: "exchangeVC")
         self.navigationController?.pushViewController(exchangeVC, animated: true)
     }
+    
     func cancelAction() {
         RealmManager.shared.clearRealm { (ok, err) in
             DataManager.shared.finishRealmSession()

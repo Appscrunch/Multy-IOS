@@ -198,6 +198,9 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletVerboseForSockets(completion: @escaping (_ flag: Bool) -> ()) {
+        if account == nil {
+            return
+        }
         DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
             if err != nil {
                 return
