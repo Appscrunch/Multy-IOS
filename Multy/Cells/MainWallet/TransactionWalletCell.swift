@@ -63,7 +63,11 @@ class TransactionWalletCell: UITableViewCell {
             self.cryptoAmountLabel.textColor = .black
         }
         
-        self.addressLabel.text = histObj.txInputs[0].address
+        if histObj.isIncoming() {
+            self.addressLabel.text = histObj.txInputs[0].address
+        } else {
+            self.addressLabel.text = histObj.txOutputs[0].address
+        }
         
         if histObj.txStatus.intValue < 0 /* rejected tx*/ {
             self.timeLabel.text = "Unable to send transaction"
