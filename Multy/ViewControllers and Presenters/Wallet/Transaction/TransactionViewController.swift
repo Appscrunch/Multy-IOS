@@ -162,15 +162,12 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
     func makeConfirmationText() -> String {
         var textForConfirmations = ""
         switch presenter.histObj.confirmations {
-        case 0:
-            textForConfirmations = "Transaction In Mempool"
-        case 1-6:
-            textForConfirmations = "1-6 Confirmations"
-        case nil:
-            textForConfirmations = "Information not found"
+        case 1:
+            textForConfirmations = "1 Confirmation"
         default: // more than 6
-            textForConfirmations = "6+ Confirmations"
+            textForConfirmations = "\(presenter.histObj.confirmations) Confirmations"
         }
+        
         return textForConfirmations
     }
     
