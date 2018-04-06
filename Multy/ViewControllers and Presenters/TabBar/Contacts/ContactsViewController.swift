@@ -10,6 +10,7 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     var presenter = ContactsPresenter()
     @IBOutlet weak var donationTopConstraint: NSLayoutConstraint!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

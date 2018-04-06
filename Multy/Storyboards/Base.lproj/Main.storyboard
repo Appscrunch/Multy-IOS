@@ -2043,7 +2043,7 @@ correctly</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCH-h0-r4g">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="106.5"/>
                                         <connections>
-                                            <action selector="showOrHideCopy:" destination="iYV-U9-fj0" eventType="touchUpInside" id="dhn-ok-fpg"/>
+                                            <action selector="showOrHideCopy:event:" destination="iYV-U9-fj0" eventType="touchUpInside" id="oGl-7J-IHN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRx-hg-wDk">

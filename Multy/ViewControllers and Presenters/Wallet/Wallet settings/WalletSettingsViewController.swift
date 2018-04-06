@@ -16,7 +16,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
         super.viewDidLoad()
         self.swipeToBack()
         walletNameTF.accessibilityIdentifier = "nameField"
-        progressHUD.backgroundColor = .gray
+//        progressHUD.backgroundColor = .gray
         view.addSubview(progressHUD)
         progressHUD.hide()
         
@@ -62,6 +62,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     @IBAction func touchInTF(_ sender: Any) {
         sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(presenter.wallet!.chain)", eventName: "\(renameWithChainTap)\(presenter.wallet!.chain)")
     }
+    
     @IBAction func changeWalletName(_ sender: Any) {
         if walletNameTF.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             let message = "Wallet name should be non empty"

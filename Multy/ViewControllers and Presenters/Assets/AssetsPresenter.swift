@@ -34,6 +34,12 @@ class AssetsPresenter: NSObject {
             if !assetsVC!.isSocketInitiateUpdating && self.assetsVC!.tabBarController!.viewControllers![0].childViewControllers.count == 1 {
                 assetsVC?.tableView.reloadData()
             }
+            
+            if account != nil {
+                assetsVC!.tableView.frame.size.height = screenHeight - assetsVC!.tabBarController!.tabBar.frame.height
+            } else {
+                assetsVC!.tableView.frame.size.height = screenHeight
+            }
         }
     }
     
