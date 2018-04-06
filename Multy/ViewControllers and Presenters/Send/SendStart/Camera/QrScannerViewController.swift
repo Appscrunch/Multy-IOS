@@ -90,13 +90,14 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            videoPreviewLayer?.frame = view.layer.bounds
-            
-            view.layer.addSublayer(videoPreviewLayer!)
+            DispatchQueue.main.async {
+                self.videoPreviewLayer?.frame = self.view.layer.bounds
+                self.view.layer.addSublayer(self.videoPreviewLayer!)
+                self.addCancelBtn()
+            }
             
             // Start video capture.
             captureSession?.startRunning()
-            self.addCancelBtn()
         } catch {
             // If any error occurs, simply print it out and don't continue any more.
             print(error)

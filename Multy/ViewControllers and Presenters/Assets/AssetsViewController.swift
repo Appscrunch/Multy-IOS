@@ -39,9 +39,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.presenter.account != nil {
-            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
-        }
+        
         self.backUpView()
         
         tableView.accessibilityIdentifier = "AssetsTableView"
@@ -70,9 +68,11 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
         
         checkOSForConstraints()
-        
-        view.addSubview(progressHUD)
-        
+
+        self.view.addSubview(progressHUD)
+        if self.presenter.account != nil {
+            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
+        }
         //MAKE: first launch
 //        let _ = DataManager.shared
         
@@ -104,9 +104,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if self.presenter.account != nil {
-            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
-        }
+        
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         
         if !self.isFirstLaunch {
@@ -117,7 +115,11 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             return
         }
 
-        tabBarController?.tabBar.frame = presenter.tabBarFrame!
+
+        self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
+        if self.presenter.account != nil {
+            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
+        }
         
         //FIXME: PROBABLE for the best solution
         //here fixed hiding table botton behind tabbar

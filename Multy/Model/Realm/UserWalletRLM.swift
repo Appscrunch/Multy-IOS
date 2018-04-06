@@ -232,6 +232,16 @@ class UserWalletRLM: Object {
         return allSum - sum
     }
     
+    func isTransactionPending(for transaction: HistoryRLM) -> Bool {
+        if transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
+            return true
+        } else if transaction.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+            return true
+        }
+        
+        return false
+    }
+    
     func isTherePendingAmount() -> Bool {
         for address in self.addresses {
             for out in address.spendableOutput {
