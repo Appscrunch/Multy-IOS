@@ -24,6 +24,9 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
         newsView.layer.shadowRadius = 10
+        
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
+        
         ipadFix()
         presenter.tabBarFrame = tabBarController?.tabBar.frame
         setupView()

@@ -7,6 +7,7 @@ import UIKit
 class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var donatView: UIView!
+    var presenter = ContactsPresenter()
     @IBOutlet weak var donationTopConstraint: NSLayoutConstraint!
     var presenter = ContactsPresenter()
     

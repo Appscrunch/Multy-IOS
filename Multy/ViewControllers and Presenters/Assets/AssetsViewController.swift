@@ -68,7 +68,6 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
         
         checkOSForConstraints()
-        
 
         self.view.addSubview(progressHUD)
         if self.presenter.account != nil {
