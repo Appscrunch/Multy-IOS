@@ -28,10 +28,6 @@ class TransactionPendingCell: UITableViewCell {
         }
         self.addressLabel.text = histObj.txInputs[0].address
         
-        self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
-        self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
-        
-        
 //        if histObj.txStatus.intValue == TxStatus.BlockIncoming.rawValue {
 //            lockedCryptoAmountLabel.text = "\"
 //            lockedFiatAmountLabel.text = "\((amountInDouble * histObj.btcToUsd).fixedFraction(digits: 2))"
@@ -39,10 +35,21 @@ class TransactionPendingCell: UITableViewCell {
 //
 //        }
         
-        let amount = blockedAmount()
+        let amount = wallet!.blockedAmount(for: histObj)
         let amountInDouble = amount.btcValue
         lockedCryptoAmountLabel.text = "\(amountInDouble.fixedFraction(digits: 8)) BTC"
-        lockedFiatAmountLabel.text = "\((amountInDouble * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: BlockchainType.create(wallet: wallet!))
+        lockedFiatAmountLabel.text = "\((amountInDouble * exchangeCourse).fixedFraction(digits: 2)) USD"
+        
+        if histObj.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+            let outgoingAmount = wallet!.outgoingAmount(for: histObj).btcValue
+            
+            self.cryptoAmountLabel.text = "\(outgoingAmount.fixedFraction(digits: 8)) BTC"
+            self.fiatAmountLabel.text = "\((outgoingAmount * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        } else {
+            self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
+            self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        }
     }
     
     func calculateAmount(transactions: List<TxHistoryRLM>) -> UInt64 {
@@ -67,23 +74,5 @@ class TransactionPendingCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    func blockedAmount() -> UInt64 {
-        var sum = UInt64(0)
-        
-        if histObj.txStatus.intValue == TxStatus.MempoolIncoming.rawValue {
-            sum += histObj.txOutAmount.uint64Value
-        } else if histObj.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-            let addresses = wallet!.fetchAddresses()
-            
-            for tx in histObj.txOutputs {
-                if addresses.contains(tx.address) {
-                    sum += tx.amount.uint64Value
-                }
-            }
-        }
-        
-        return sum
     }
 }

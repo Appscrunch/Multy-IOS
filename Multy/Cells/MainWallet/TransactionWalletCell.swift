@@ -5,7 +5,6 @@
 import UIKit
 
 class TransactionWalletCell: UITableViewCell {
-    
     @IBOutlet weak var transactionImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var cryptoAmountLabel: UILabel!
@@ -17,6 +16,7 @@ class TransactionWalletCell: UITableViewCell {
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     var histObj = HistoryRLM()
+    var wallet = UserWalletRLM()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,9 +71,16 @@ class TransactionWalletCell: UITableViewCell {
             self.timeLabel.text = dateFormatter.string(from: histObj.blockTime)
         }
         
-        self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
-        
-        self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        if histObj.txStatus.intValue == TxStatus.BlockOutcoming.rawValue ||
+        histObj.txStatus.intValue == TxStatus.BlockConfirmedOutcoming.rawValue {
+            let outgoingAmount = wallet.outgoingAmount(for: histObj).btcValue
+            
+            self.cryptoAmountLabel.text = "\(outgoingAmount.fixedFraction(digits: 8)) BTC"
+            self.fiatAmountLabel.text = "\((outgoingAmount * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        } else {
+            self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
+            self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+        }
     }
     
 //    func setCorners() {

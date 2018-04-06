@@ -243,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if err != nil || buildVersion > hardVersion! {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
-                    assetVC.viewWillAppear(false)
+//                    assetVC.viewWillAppear(false)
                     let _ = UserPreferences.shared
                     self.saveMkVersion()
                 } else {

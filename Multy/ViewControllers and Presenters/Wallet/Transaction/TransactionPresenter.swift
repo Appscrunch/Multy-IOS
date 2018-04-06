@@ -12,6 +12,7 @@ class TransactionPresenter: NSObject {
     
     var histObj = HistoryRLM()
     var blockchainType = BlockchainType.init(blockchain: BLOCKCHAIN_BITCOIN, net_type: -1)
+    var wallet = UserWalletRLM()
     
     func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
         var sum = UInt64(0)
