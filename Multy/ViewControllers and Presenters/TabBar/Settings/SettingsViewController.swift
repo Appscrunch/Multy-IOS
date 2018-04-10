@@ -231,6 +231,6 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     func makeVersion() {
         self.topVersionLbl.text = "Multy Ctypto Wallet v.\(appVersion()).\(buildVersion())"
-        self.botVersionLbl.text = "Git tag: \(getGitTag())\nGit branch name: \(getGitBranch())\nGit commit hash: \(getGitCommitHash())\n\nCore version: \(getCoreLibVersion())\n\nEnviroment: \(apiUrl)"
+        self.botVersionLbl.text = "Git tag: \(getGitTag())\nGit branch name: \(getGitBranch())\nGit commit hash: \(getGitCommitHash())\n\nCore version: \(getCoreLibVersion())\n\nEnvironment: \(apiUrl)"
     }
 }
