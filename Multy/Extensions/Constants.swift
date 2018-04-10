@@ -54,16 +54,16 @@ struct Constants {
         ]
         
         static let donationBlockchains = [
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_CASH.rawValue,     netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_LITECOIN.rawValue,         netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_DASH.rawValue,             netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM_CLASSIC.rawValue, netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: UNAVAILABLE_COIN_NET_TYPE_MAINNET.rawValue),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_CASH.rawValue,     netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_LITECOIN.rawValue,         netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_DASH.rawValue,             netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM_CLASSIC.rawValue, netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: 0),
         ]
     }
 }

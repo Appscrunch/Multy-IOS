@@ -16,12 +16,6 @@ extern "C" {
 #endif
 
 struct Error;
-    
-enum BlockchainNetType
-{
-    UNAVAILABLE_COIN_NET_TYPE_MAINNET = 0,
-    UNAVAILABLE_COIN_NET_TYPE_TESTNET = 1,
-};
 
 // See: https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 // TODO: rename Blockchain to BlockchainType
@@ -40,7 +34,6 @@ enum Blockchain
     BLOCKCHAIN_BITCOIN_LIGHTNING =  0x9900,
     BLOCKCHAIN_BITSHARES =          0x9902,
     BLOCKCHAIN_ERC20 =              0x9903
-
 };
 
 // TODO: rename BlockchainType to BlockchainSpec
