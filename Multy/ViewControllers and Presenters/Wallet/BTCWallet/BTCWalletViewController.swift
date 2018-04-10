@@ -371,7 +371,7 @@ extension TableViewDelegate: UITableViewDelegate {
             }
             
             return heightForFirstCell /* (screenWidth / 375.0)*/
-        } else if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
+        } else if indexPath == [0,1] && self.presenter.numberOfTransactions() > 0 {
             if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
                 return 145
             } else {

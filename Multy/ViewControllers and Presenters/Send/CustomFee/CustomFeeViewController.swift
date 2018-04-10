@@ -35,11 +35,11 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         //FIXME: check chainID nullability
         switch self.presenter.chainId {
         case 0 as NSNumber:
-//            break
             self.botNameLbl.isHidden = true
             self.botLimitTf.isHidden = true
             self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
             
+            self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)))
             self.topNameLbl.text = "Satoshi per byte"
             self.topPriceTF.placeholder = "Enter Satohi per byte here"
             self.topPriceTF.placeholder = "0"
@@ -52,6 +52,10 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancelAction(_ sender: Any) {
         //for BTC
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func done() {
         if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < 2 {
             let message = "Fee rate can not be less then 2 satoshi per byte."
             let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)

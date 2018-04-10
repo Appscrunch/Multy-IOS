@@ -1172,7 +1172,7 @@ This feature will be in the next update.</string>
                                             <constraint firstAttribute="height" constant="64" id="xuq-26-gAf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                        <state key="normal" title="Slide to Send ">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -1185,28 +1185,51 @@ This feature will be in the next update.</string>
                                             <action selector="backAction:" destination="0GY-ag-sLU" eventType="touchUpInside" id="RDJ-DX-gm4"/>
                                         </connections>
                                     </button>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slideToSend1" translatesAutoresizingMaskIntoConstraints="NO" id="Sb8-Oh-C9y">
+                                        <rect key="frame" x="33" y="604" width="13" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="LTI-4l-IoQ"/>
+                                            <constraint firstAttribute="width" constant="13" id="P44-5W-sdN"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slideToSend2" translatesAutoresizingMaskIntoConstraints="NO" id="7XN-tj-ajb">
+                                        <rect key="frame" x="48" y="604" width="13" height="22"/>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slideToSend3" translatesAutoresizingMaskIntoConstraints="NO" id="Ec6-Mf-jjt">
+                                        <rect key="frame" x="63" y="604" width="13" height="22"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.91339319944381714" green="0.92108803987503052" blue="0.95803099870681763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Sia-Lf-ccw" firstAttribute="top" secondItem="nzU-CV-d25" secondAttribute="top" constant="8" id="0vG-ki-OVE"/>
                                     <constraint firstItem="Mk1-tu-7rf" firstAttribute="top" secondItem="nzU-CV-d25" secondAttribute="top" constant="13" id="1Db-03-ZPl"/>
                                     <constraint firstItem="iHg-A2-nCQ" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" constant="16" id="3bX-bg-ksa"/>
+                                    <constraint firstItem="Ec6-Mf-jjt" firstAttribute="centerY" secondItem="wl0-kD-24J" secondAttribute="centerY" id="4jF-xr-Boo"/>
+                                    <constraint firstItem="Ec6-Mf-jjt" firstAttribute="width" secondItem="Sb8-Oh-C9y" secondAttribute="width" id="5Rt-jz-Lew"/>
+                                    <constraint firstItem="7XN-tj-ajb" firstAttribute="centerY" secondItem="wl0-kD-24J" secondAttribute="centerY" id="7ed-9q-ekt"/>
+                                    <constraint firstItem="7XN-tj-ajb" firstAttribute="height" secondItem="Sb8-Oh-C9y" secondAttribute="height" id="7jP-fB-Oi5"/>
                                     <constraint firstItem="Mk1-tu-7rf" firstAttribute="centerX" secondItem="nzU-CV-d25" secondAttribute="centerX" id="8Wc-2E-k9b"/>
                                     <constraint firstItem="wl0-kD-24J" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" id="Bdz-6U-aV1"/>
                                     <constraint firstItem="b8x-RC-TUx" firstAttribute="top" secondItem="MIf-xQ-WjZ" secondAttribute="bottom" constant="16" id="CPo-BS-cu0"/>
+                                    <constraint firstItem="Ec6-Mf-jjt" firstAttribute="leading" secondItem="7XN-tj-ajb" secondAttribute="trailing" constant="2" id="D9s-mH-CDU"/>
                                     <constraint firstAttribute="trailing" secondItem="wl0-kD-24J" secondAttribute="trailing" id="EZa-iX-C5z"/>
                                     <constraint firstItem="UF8-xs-M2D" firstAttribute="trailing" secondItem="idk-lO-290" secondAttribute="trailing" constant="30" id="FX0-Ui-h1j"/>
                                     <constraint firstItem="idk-lO-290" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" constant="16" id="JC1-Dj-fld"/>
+                                    <constraint firstItem="Ec6-Mf-jjt" firstAttribute="height" secondItem="Sb8-Oh-C9y" secondAttribute="height" id="KRy-KL-1JY"/>
                                     <constraint firstItem="b8x-RC-TUx" firstAttribute="leading" secondItem="MIf-xQ-WjZ" secondAttribute="leading" id="OUu-YV-D1V"/>
+                                    <constraint firstItem="7XN-tj-ajb" firstAttribute="width" secondItem="Sb8-Oh-C9y" secondAttribute="width" id="PtR-8R-EA9"/>
+                                    <constraint firstItem="7XN-tj-ajb" firstAttribute="leading" secondItem="Sb8-Oh-C9y" secondAttribute="trailing" constant="2" id="QdG-vz-iA4"/>
                                     <constraint firstItem="RI9-ER-ncF" firstAttribute="top" secondItem="M7S-64-Prv" secondAttribute="bottom" constant="9" id="R4U-ld-eCg"/>
                                     <constraint firstItem="M7S-64-Prv" firstAttribute="centerX" secondItem="Mk1-tu-7rf" secondAttribute="centerX" id="X35-gJ-Ika"/>
                                     <constraint firstItem="MIf-xQ-WjZ" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" constant="36" id="YvV-z4-pPn"/>
                                     <constraint firstAttribute="trailing" secondItem="Sia-Lf-ccw" secondAttribute="trailing" constant="16" id="aca-DC-Zrf"/>
+                                    <constraint firstItem="wl0-kD-24J" firstAttribute="leading" secondItem="Sb8-Oh-C9y" secondAttribute="trailing" constant="-46" id="acy-CB-9IM"/>
                                     <constraint firstItem="UF8-xs-M2D" firstAttribute="top" secondItem="nzU-CV-d25" secondAttribute="top" constant="13" id="blJ-H1-bTs"/>
                                     <constraint firstItem="MIf-xQ-WjZ" firstAttribute="top" secondItem="iHg-A2-nCQ" secondAttribute="bottom" constant="-43" id="d1y-RQ-aWM"/>
                                     <constraint firstItem="iHg-A2-nCQ" firstAttribute="top" secondItem="Mk1-tu-7rf" secondAttribute="bottom" constant="48" id="e6N-KR-9Ch"/>
                                     <constraint firstAttribute="trailing" secondItem="iHg-A2-nCQ" secondAttribute="trailing" constant="16" id="fAO-VJ-3ph"/>
                                     <constraint firstItem="M7S-64-Prv" firstAttribute="top" secondItem="Mk1-tu-7rf" secondAttribute="bottom" constant="20" id="iET-7c-WN5"/>
+                                    <constraint firstItem="Sb8-Oh-C9y" firstAttribute="centerY" secondItem="wl0-kD-24J" secondAttribute="centerY" id="jXh-LG-bA7"/>
                                     <constraint firstAttribute="bottom" secondItem="wl0-kD-24J" secondAttribute="bottom" id="jZY-Cl-UUW"/>
                                     <constraint firstItem="wl0-kD-24J" firstAttribute="top" secondItem="b8x-RC-TUx" secondAttribute="bottom" constant="33.5" id="jt3-2l-KnY"/>
                                     <constraint firstItem="UF8-xs-M2D" firstAttribute="leading" secondItem="nzU-CV-d25" secondAttribute="leading" id="o1d-S1-abp"/>
@@ -1231,6 +1254,9 @@ This feature will be in the next update.</string>
                     </view>
                     <connections>
                         <outlet property="addressLbl" destination="j2L-wX-UIu" id="csh-tv-bhJ"/>
+                        <outlet property="arr1" destination="Sb8-Oh-C9y" id="gok-bP-Jts"/>
+                        <outlet property="arr2" destination="7XN-tj-ajb" id="skz-Bo-OnE"/>
+                        <outlet property="arr3" destination="Ec6-Mf-jjt" id="c2n-OV-bLr"/>
                         <outlet property="bottom" destination="b8x-RC-TUx" id="E3F-U4-pWi"/>
                         <outlet property="btnTopConstraint" destination="jt3-2l-KnY" id="SLk-pd-fEV"/>
                         <outlet property="cryptoImage" destination="M7S-64-Prv" id="hpi-S5-jDf"/>
@@ -1239,6 +1265,7 @@ This feature will be in the next update.</string>
                         <outlet property="fiatSumAndCurrancyLbl" destination="AkA-WX-ZNe" id="TMP-I6-o64"/>
                         <outlet property="middle" destination="MIf-xQ-WjZ" id="Agg-lW-wks"/>
                         <outlet property="noteTF" destination="b5c-CM-iki" id="J2w-at-hsA"/>
+                        <outlet property="sendBtn" destination="wl0-kD-24J" id="faK-pd-IwI"/>
                         <outlet property="topView" destination="iHg-A2-nCQ" id="Xgz-66-UIu"/>
                         <outlet property="transactionFeeCostLbl" destination="RhC-aH-HrF" id="wKG-bv-A88"/>
                         <outlet property="transactionSpeedNameLbl" destination="CAx-k6-U4B" id="OhB-A9-NKe"/>
@@ -1246,6 +1273,9 @@ This feature will be in the next update.</string>
                         <outlet property="walletCryptoSumAndCurrencyLbl" destination="ccP-jD-nTp" id="l0n-Pr-fQU"/>
                         <outlet property="walletFiatSumAndCurrencyLbl" destination="31h-f9-3fx" id="dey-eL-aL8"/>
                         <outlet property="walletNameLbl" destination="y3A-JK-Mp2" id="ksq-hq-A7p"/>
+                        <outletCollection property="arrCollection" destination="Sb8-Oh-C9y" collectionClass="NSMutableArray" id="R8B-dd-xaA"/>
+                        <outletCollection property="arrCollection" destination="7XN-tj-ajb" collectionClass="NSMutableArray" id="dhz-D9-AB9"/>
+                        <outletCollection property="arrCollection" destination="Ec6-Mf-jjt" collectionClass="NSMutableArray" id="nA8-FE-Cij"/>
                         <segue destination="UPV-t8-x0n" kind="show" identifier="sendingAnimationVC" id="Do7-LN-7I0"/>
                     </connections>
                 </viewController>
@@ -1782,6 +1812,9 @@ This feature will be in the next update.</string>
         <image name="backGrey" width="13" height="21"/>
         <image name="btcIconBig" width="58" height="58"/>
         <image name="loading" width="117" height="117"/>
+        <image name="slideToSend1" width="13" height="22"/>
+        <image name="slideToSend2" width="13" height="22"/>
+        <image name="slideToSend3" width="13" height="22"/>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

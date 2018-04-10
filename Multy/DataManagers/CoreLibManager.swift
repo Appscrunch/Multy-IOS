@@ -97,7 +97,7 @@ class CoreLibManager: NSObject {
         let mmk = make_master_key(binaryDataPointer, masterKeyPointer)
         _ = errorString(from: mmk, mask: "make_master_key")
         
-        let mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
+        let mki = make_user_id_from_master_key(masterKeyPointer.pointee, extendedKeyPointer)
         _ = errorString(from: mki, mask: "make_key_id")
         
         let extendedKey = String(cString: extendedKeyPointer.pointee!)
@@ -743,7 +743,7 @@ extension TestCoreLibManager {
         var mmk = make_master_key(binaryDataPointer.pointee, masterKeyPointer)
         print("make_master_key: \(String(describing: mmk))")
         
-        var mki = make_key_id(masterKeyPointer.pointee, extendedKeyPointer)
+        var mki = make_user_id_from_master_key(masterKeyPointer.pointee, extendedKeyPointer)
         print("make_key_id: \(String(describing: mki))")
         
         let extendedKey = String(cString: extendedKeyPointer.pointee!)
