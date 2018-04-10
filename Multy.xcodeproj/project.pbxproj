@@ -33,6 +33,8 @@
 		45090AE01FE95E7700019D00 /* BackupSeedPhraseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */; };
 		451B98631FD947A400DC64A5 /* FastOperationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */; };
 		451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */; };
+		451ED78F207CBCBF00542F00 /* PrivateKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451ED78E207CBCBF00542F00 /* PrivateKeyViewController.swift */; };
+		451ED791207CBCDF00542F00 /* PrivateKeyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451ED790207CBCDF00542F00 /* PrivateKeyPresenter.swift */; };
 		4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522361E1FCD6B94004BA490 /* TransactionViewController.swift */; };
 		452236211FCD6BA7004BA490 /* TransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452236201FCD6BA7004BA490 /* TransactionPresenter.swift */; };
 		452290551FBB18D30024B550 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452290541FBB18D30024B550 /* AppDelegate.swift */; };
@@ -317,6 +319,8 @@
 		45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSeedPhraseView.swift; sourceTree = "<group>"; };
 		451B98621FD947A400DC64A5 /* FastOperationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastOperationsPresenter.swift; sourceTree = "<group>"; };
 		451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarPresenter.swift; sourceTree = "<group>"; };
+		451ED78E207CBCBF00542F00 /* PrivateKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyViewController.swift; sourceTree = "<group>"; };
+		451ED790207CBCDF00542F00 /* PrivateKeyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyPresenter.swift; sourceTree = "<group>"; };
 		4522361E1FCD6B94004BA490 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		452236201FCD6BA7004BA490 /* TransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPresenter.swift; sourceTree = "<group>"; };
 		452290511FBB18D30024B550 /* Multy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Multy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -630,6 +634,7 @@
 		4506F1721FD9A2B700D575BA /* Wallet settings */ = {
 			isa = PBXGroup;
 			children = (
+				451ED78D207CBC2000542F00 /* Key VC */,
 				4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */,
 				4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */,
 			);
@@ -642,6 +647,15 @@
 				45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		451ED78D207CBC2000542F00 /* Key VC */ = {
+			isa = PBXGroup;
+			children = (
+				451ED78E207CBCBF00542F00 /* PrivateKeyViewController.swift */,
+				451ED790207CBCDF00542F00 /* PrivateKeyPresenter.swift */,
+			);
+			path = "Key VC";
 			sourceTree = "<group>";
 		};
 		4522361D1FCD6B6E004BA490 /* Transaction */ = {
@@ -2047,6 +2061,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451ED78F207CBCBF00542F00 /* PrivateKeyViewController.swift in Sources */,
 				45B0CB801FDAD80D007B38E4 /* CreateOrRestoreBtnTableViewCell.swift in Sources */,
 				FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */,
 				45310D0F2063B9F500105532 /* EthereumGasInfo.swift in Sources */,
@@ -2128,6 +2143,7 @@
 				44DFEF9F206A51AF0068769C /* UInt64+Extension.swift in Sources */,
 				455CDCFB1FC8537200EA5ACE /* CreateWalletViewController.swift in Sources */,
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,
+				451ED791207CBCDF00542F00 /* PrivateKeyPresenter.swift in Sources */,
 				455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */,
 				452290551FBB18D30024B550 /* AppDelegate.swift in Sources */,
 				44BCBDB520601AD0001611A5 /* BTCWallet.swift in Sources */,
