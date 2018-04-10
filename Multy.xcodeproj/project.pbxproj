@@ -35,6 +35,7 @@
 		451B98651FD94ADC00DC64A5 /* CustomTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */; };
 		451ED78F207CBCBF00542F00 /* PrivateKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451ED78E207CBCBF00542F00 /* PrivateKeyViewController.swift */; };
 		451ED791207CBCDF00542F00 /* PrivateKeyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451ED790207CBCDF00542F00 /* PrivateKeyPresenter.swift */; };
+		451ED793207CD88D00542F00 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451ED792207CD88D00542F00 /* UITextField+Extensions.swift */; };
 		4522361F1FCD6B94004BA490 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522361E1FCD6B94004BA490 /* TransactionViewController.swift */; };
 		452236211FCD6BA7004BA490 /* TransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452236201FCD6BA7004BA490 /* TransactionPresenter.swift */; };
 		452290551FBB18D30024B550 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452290541FBB18D30024B550 /* AppDelegate.swift */; };
@@ -321,6 +322,7 @@
 		451B98641FD94ADC00DC64A5 /* CustomTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarPresenter.swift; sourceTree = "<group>"; };
 		451ED78E207CBCBF00542F00 /* PrivateKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyViewController.swift; sourceTree = "<group>"; };
 		451ED790207CBCDF00542F00 /* PrivateKeyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyPresenter.swift; sourceTree = "<group>"; };
+		451ED792207CD88D00542F00 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		4522361E1FCD6B94004BA490 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		452236201FCD6BA7004BA490 /* TransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPresenter.swift; sourceTree = "<group>"; };
 		452290511FBB18D30024B550 /* Multy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Multy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -939,6 +941,7 @@
 				444066D3205927B900342046 /* UIActivityViewController+Extension.swift */,
 				444066CF205926D400342046 /* UIApplication+Extension.swift */,
 				FA8C87842010B44300F8D5D9 /* UITableViewCell+Extension.swift */,
+				451ED792207CD88D00542F00 /* UITextField+Extensions.swift */,
 				FA4D43E01FC5895D003C7117 /* String+Extension.swift */,
 				444B3B642045723C008129B8 /* BigInt+Extension.swift */,
 				FA74062A1FCC5D6A003C538C /* Constants.swift */,
@@ -2194,6 +2197,7 @@
 				4585BD322049A925004542AE /* ExchangeStocksViewController.swift in Sources */,
 				4540944A2031EEFD00603DB5 /* SecuritySettingsViewController.swift in Sources */,
 				45F6340C202388DF00C17A7C /* ViewInBlockchainViewController.swift in Sources */,
+				451ED793207CD88D00542F00 /* UITextField+Extensions.swift in Sources */,
 				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */,
