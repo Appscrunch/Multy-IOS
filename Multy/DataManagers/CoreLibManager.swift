@@ -162,7 +162,7 @@ class CoreLibManager: NSObject {
             return nil
         }
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, 0, newAddressPointer)
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_EXTERNAL, 0, newAddressPointer)
         if mHDla != nil {
             _ = errorString(from: mHDla!, mask: "make_hd_leaf_account")
             
@@ -250,7 +250,7 @@ class CoreLibManager: NSObject {
             return nil
         }
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, addressID, newAddressPointer)
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_EXTERNAL, addressID, newAddressPointer)
         if mHDla != nil {
             _ = errorString(from: mHDla!, mask: "mHDla")
             
@@ -266,6 +266,19 @@ class CoreLibManager: NSObject {
             
             return addressPrivateKeyPointer
         }
+    }
+    
+    func privateKeyString(blockchain: BlockchainType, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> String {
+        let privateKeyPointer = createPrivateKey(blockchain: blockchain, walletID: walletID, addressID: addressID, binaryData: &binaryData)
+        
+        let privateKeyStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
+        
+        let ktsPRIV = key_to_string(privateKeyPointer!.pointee, privateKeyStringPointer)
+        _ = errorString(from: ktsPRIV, mask: "key_to_string:KEY_TYPE_PRIVATE")
+        
+        let privateKeyString = String(cString: privateKeyStringPointer.pointee!)
+        
+        return privateKeyString
     }
     
     func createAddress(blockchain: BlockchainType, walletID: UInt32, addressID: UInt32, binaryData: inout BinaryData) -> Dictionary<String, Any>? {
@@ -322,7 +335,7 @@ class CoreLibManager: NSObject {
             return nil
         }
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_INTERNAL, addressID, newAddressPointer)
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee, ADDRESS_EXTERNAL, addressID, newAddressPointer)
         if mHDla != nil {
             _ = errorString(from: mHDa!, mask: "make_hd_leaf_account")
             
@@ -773,7 +786,7 @@ extension TestCoreLibManager {
             _ = errorString(from: mHDa!, mask: "make_hd_account")
         }
         
-        let mHDla = make_hd_leaf_account(newAccountPointer.pointee!, ADDRESS_INTERNAL, UInt32(0), newAddressPointer)
+        let mHDla = make_hd_leaf_account(newAccountPointer.pointee!, ADDRESS_EXTERNAL, UInt32(0), newAddressPointer)
         //        make_hd_leaf_account(OpaquePointer!, AddressType, UInt32, UnsafeMutablePointer<OpaquePointer?>!)
         if mHDla != nil {
             _ = errorString(from: mHDla!, mask: "make_hd_leaf_account")
