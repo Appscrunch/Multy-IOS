@@ -241,7 +241,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 
                 //MARK: change > to <
-                if err != nil || buildVersion > hardVersion! {
+                if err != nil || buildVersion >= hardVersion! {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
 //                    assetVC.viewWillAppear(false)
