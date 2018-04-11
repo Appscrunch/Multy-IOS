@@ -49,6 +49,10 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(progressHUD)
+        progressHUD.hide()
+        
         self.swipeToBack()
         presenter.mainVC = self
         

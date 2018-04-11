@@ -80,13 +80,15 @@ class BTCWalletPresenter: NSObject {
     
     
     func getHistoryAndWallet() {
+        mainVC?.progressHUD.blockUIandShowProgressHUD()
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: BlockchainType.create(wallet: wallet!)) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
             }
         }
         
-        DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
+        DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { [unowned self] (histList, err) in
+            self.mainVC?.progressHUD.unblockUIandHideProgressHUD()
             if err == nil && histList != nil {
                 self.mainVC!.refreshControl.endRefreshing()
                 self.mainVC!.tableView.isUserInteractionEnabled = true

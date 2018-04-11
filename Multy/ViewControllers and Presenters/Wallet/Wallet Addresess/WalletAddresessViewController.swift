@@ -78,7 +78,7 @@ extension WalletAddresessViewController: UITableViewDelegate, UITableViewDataSou
             sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(addressWithChainTap)\(presenter.wallet!.chain)")
             
             //FIXME: adding adresses to wallet//remove
-            addAddress()
+//            addAddress()
         } else {
             let privateKeyVC = storyboard.instantiateViewController(withIdentifier: "privateKey") as! PrivateKeyViewController
             privateKeyVC.modalPresentationStyle = .overCurrentContext
