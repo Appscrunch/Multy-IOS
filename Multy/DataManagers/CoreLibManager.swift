@@ -693,7 +693,7 @@ class CoreLibManager: NSObject {
         let blockchainType = BlockchainType.create(wallet: wallet)
         let error = validate_address(blockchainType, addressUTF8)
         
-        let errorString = self.errorString(from: error!, mask: "isAddressValid")
+        let errorString = self.errorString(from: error, mask: "isAddressValid")
         
         return (errorString == nil, errorString)
     }
