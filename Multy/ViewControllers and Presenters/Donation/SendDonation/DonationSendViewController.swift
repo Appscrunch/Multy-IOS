@@ -109,7 +109,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     @IBAction func sendAction(_ sender: Any) {
         self.view.isUserInteractionEnabled = false
-        self.progressHud.show()
+        self.progressHud.blockUIandShowProgressHUD()
         self.presenter.createAndSendTransaction()
         sendDonationScreenPressSendAnalytics()
     }
