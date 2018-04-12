@@ -120,7 +120,10 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         let fiatSum = "\(((self.presenter.walletPayFrom?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)) \(self.presenter.walletPayFrom?.fiatName ?? "USD")"
         
         let percentFromSum = 0.03
-        let sumForDonat = ((self.presenter.walletPayFrom?.sumInCrypto)! * percentFromSum)
+        var sumForDonat = ((self.presenter.walletPayFrom?.sumInCrypto)! * percentFromSum)
+        if sumForDonat.satoshiValue < UInt64(minSatoshiToDonate) {
+            sumForDonat = UInt64(minSatoshiToDonate).btcValue
+        }
         let fiatDonation = sumForDonat * exchangeCourse
         
         self.walletNameLbl.text = self.presenter.walletPayFrom?.name
