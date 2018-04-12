@@ -121,8 +121,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         
         let percentFromSum = 0.03
         var sumForDonat = ((self.presenter.walletPayFrom?.sumInCrypto)! * percentFromSum)
-        if sumForDonat.satoshiValue < UInt64(minSatoshiToDonate) {
-            sumForDonat = UInt64(minSatoshiToDonate).btcValue
+        if sumForDonat.satoshiValue < minSatoshiToDonate {
+            sumForDonat = minSatoshiToDonate.btcValue
         }
         let fiatDonation = sumForDonat * exchangeCourse
         
@@ -239,6 +239,11 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         
         if (self.donationTF.text! + string).convertStringWithCommaToDouble() > self.presenter.maxAvailable {
             self.presentWarning(message: "You trying to enter sum more then you have")
+            return false
+        }
+        
+        if (self.donationTF.text! + string).convertStringWithCommaToDouble() < minSatoshiToDonate.btcValue {
+            self.presentWarning(message: "Too low donation amount")
             return false
         }
         
