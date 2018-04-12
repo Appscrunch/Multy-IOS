@@ -32,7 +32,7 @@ class SeedPhraseAboutViewController: UIViewController, AnalyticsProtocol {
         sendAnalyticsEvent(screenName: screenViewPhrase, eventName: screenViewPhrase)
     }
     
-    override func viewWillAppear(_ animated: Bool) {ока
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
