@@ -67,6 +67,12 @@ extension DataManager {
                                                                          binaryData: &binaryData,
                                                                          inputs: transactionDTO.choosenWallet!.addresses)
         
+        if trData.1 < 0 {
+            completion(trData.0, NSError(domain: "", code: 400, userInfo: nil))
+            
+            return
+        }
+
         let newAddressParams = [
             "walletindex"   : wallet.walletID.intValue,
             "address"       : addressData!["address"] as! String,

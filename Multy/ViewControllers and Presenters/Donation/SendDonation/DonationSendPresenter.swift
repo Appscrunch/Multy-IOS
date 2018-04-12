@@ -81,8 +81,17 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         transaction.sendAmount = self.mainVC?.donationTF.text?.convertStringWithCommaToDouble()
         transaction.transaction?.customFee = self.customFee
         
-        DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { (answer, err) in
-            self.mainVC?.progressHud.hide()
+        DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { [unowned self] (answer, err) in
+            self.mainVC?.progressHud.unblockUIandHideProgressHUD()
+            
+            if err != nil {
+                if answer != nil {
+                    self.mainVC?.presentAlert(with: answer)
+                }
+                
+                return
+            }
+            
             self.mainVC?.view.isUserInteractionEnabled = true
             if err != nil {
                 let alert = UIAlertController(title: "Error", message: err.debugDescription, preferredStyle: .alert)
