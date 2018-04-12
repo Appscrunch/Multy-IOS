@@ -93,6 +93,11 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
                 self.mainVC!.sendDonationSuccessAnalytics()
             }
             
+            if transaction.sendAmount! < minSatoshiToDonate.btcValue {
+                self.mainVC!.presentWarning(message: "Too low donation amount")
+                return
+            }
+            
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let sendSuccessVC = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC") as! SendingAnimationViewController
             sendSuccessVC.indexForTabBar = self.mainVC?.selectedTabIndex
