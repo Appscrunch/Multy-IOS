@@ -242,14 +242,14 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
             return false
         }
         
-        if (self.donationTF.text! + string).convertStringWithCommaToDouble() < minSatoshiToDonate.btcValue {
-            self.presentWarning(message: "Too low donation amount")
-            return false
-        }
-        
         if string == "" {
             self.donationTF.text?.removeLast()
             self.presenter.makeFiatDonat()
+            return false
+        }
+        
+        if (self.donationTF.text! + string).convertStringWithCommaToDouble() < minSatoshiToDonate.btcValue {
+            self.presentWarning(message: "Too low donation amount")
             return false
         }
         self.donationTF.text?.append(string) // = return true
