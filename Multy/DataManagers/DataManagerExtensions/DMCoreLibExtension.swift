@@ -62,7 +62,7 @@ extension DataManager {
                                                                          feePerByteAmount: "\(transactionDTO.transaction!.customFee!)",
                                                                          isDonationExists: false,
                                                                          donationAmount: "0",
-                                                                         isPayCommission: false,
+                                                                         isPayCommission: true,
                                                                          wallet: transactionDTO.choosenWallet!,
                                                                          binaryData: &binaryData,
                                                                          inputs: transactionDTO.choosenWallet!.addresses)
