@@ -54,7 +54,7 @@ struct Constants {
         ]
         
         static let donationBlockchains = [
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: UInt32(ETHEREUM_CHAIN_ID_MAINNET.rawValue)),
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: 0),
