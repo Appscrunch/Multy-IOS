@@ -24,6 +24,7 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
         self.selectionStyle = .none
         self.addressTV.delegate = self
         setupShadow()
+        
 //        (self.addressTV.value(forKey: "textInputTraits") as AnyObject).setValue(UIColor.clear , forKey:"insertionPointColor")
     }
 
@@ -74,6 +75,7 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
 //        self.addressTF.textColor = .white
         self.addressTV.text = address
         self.addressInTfLlb.text = address
+        placeholderLabel.isHidden = !addressTV.text.isEmpty
     }
 }
 

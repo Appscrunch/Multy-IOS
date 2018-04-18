@@ -14,7 +14,7 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
         super.viewDidLoad()
         self.swipeToBack()
         self.registerCell()
-        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.presenter.walletChoooseVC = self
         self.presenter.getWallets()
         sendAnalyticsEvent(screenName: screenSendFrom, eventName: screenSendFrom)
