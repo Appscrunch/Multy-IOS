@@ -45,10 +45,10 @@ class TransactionPendingCell: UITableViewCell {
             let outgoingAmount = wallet!.outgoingAmount(for: histObj).btcValue
             
             self.cryptoAmountLabel.text = "\(outgoingAmount.fixedFraction(digits: 8)) BTC"
-            self.fiatAmountLabel.text = "\((outgoingAmount * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+            self.fiatAmountLabel.text = "\((outgoingAmount * histObj.fiatCourseExchange).fixedFraction(digits: 2)) USD"
         } else {
             self.cryptoAmountLabel.text = "\(histObj.txOutAmount.uint64Value.btcValue.fixedFraction(digits: 8)) BTC"
-            self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.btcToUsd).fixedFraction(digits: 2)) USD"
+            self.fiatAmountLabel.text = "\((histObj.txOutAmount.uint64Value.btcValue * histObj.fiatCourseExchange).fixedFraction(digits: 2)) USD"
         }
     }
     

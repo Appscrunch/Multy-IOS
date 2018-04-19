@@ -112,7 +112,7 @@ extension DataManager {
         let _ = self.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                            sendAddress: sendAddress,
                                                            sendAmountString: sendAmountString,
-                                                           nonce: wallet.ethWallet.nonce.intValue,
+                                                           nonce: wallet.ethWallet!.nonce.intValue,
                                                            balanceAmount: "\(wallet.availableAmount())",
                                                            ethereumChainID: UInt32(4), //RINKEBY
                                                            gasPrice: gasPriceString,

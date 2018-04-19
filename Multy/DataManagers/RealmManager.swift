@@ -386,9 +386,11 @@ class RealmManager: NSObject {
                         
                         try! realm.write {
                             if modifiedWallet != nil {
-                                modifiedWallet?.name = wallet.name
-                                modifiedWallet!.addresses = wallet.addresses
-                                modifiedWallet!.isTherePendingTx = wallet.isTherePendingTx
+                                modifiedWallet?.name =              wallet.name
+                                modifiedWallet!.addresses =         wallet.addresses
+                                modifiedWallet!.isTherePendingTx =  wallet.isTherePendingTx
+                                modifiedWallet!.btcWallet =         wallet.btcWallet
+                                modifiedWallet!.ethWallet =         wallet.ethWallet
 
                                 for (index,address) in wallet.addresses.enumerated() {
 //                                    modifiedWallet!.addresses[index].spendableOutput.removeAll()
@@ -426,20 +428,16 @@ class RealmManager: NSObject {
                             acc!.wallets.append(wallet)
                             
                             self!.deleteAddressesAndSpendableInfo(acc!.wallets.last!.addresses, from: realm)
+//                            self!.renewCustomWallets(in: acc!.wallets.last!, from: wallet, for: realm)
+                            
                             acc!.wallets.last!.addresses.removeAll()
+                            
                             //MARK: CHECK THIS    deleting addresses    Check addressID and delete existing
                             for address in wallet.addresses {
-//                                let modifiedAddress = wallet.address.filter("addressID = \(wallet.addressID)").first
-
                                 acc!.wallets.last!.addresses.append(address)
-//                                acc!.wallets.last!.addresses.last!.spendableOutput.removeAll()
-//                                for ouput in address.spendableOutput {
-//                                    acc?.wallets.last!.addresses.last!.spendableOutput.append(ouput)
-//                                }
                             }
                         }
-//                        acc!.wallets = newWallets
-//                        acc?.wallets = arrOfWallets
+
                         completion(acc, nil)
                     }
                 } else {
@@ -661,6 +659,27 @@ class RealmManager: NSObject {
             realm.delete(address)
         }
     }
+    
+    func renewCustomWallets(in wallet: UserWalletRLM, from newWallet: UserWalletRLM, for realm: Realm) {
+        if wallet.ethWallet != nil {
+            realm.delete(wallet.ethWallet!)
+        }
+        
+        if wallet.btcWallet != nil {
+            realm.delete(wallet.btcWallet!)
+        }
+        
+        if newWallet.btcWallet != nil {
+            realm.add(newWallet.btcWallet!)
+        }
+        
+        if newWallet.ethWallet != nil {
+            realm.add(newWallet.ethWallet!)
+        }
+        
+        wallet.ethWallet = newWallet.ethWallet
+        wallet.btcWallet = newWallet.btcWallet
+    }
 }
 
 extension RealmMigrationManager {
@@ -735,6 +754,20 @@ extension RealmMigrationManager {
     func migrateFrom16To17(with migration: Migration) {
         migration.enumerateObjects(ofType: AddressRLM.className()) { (_, newAddress) in
             newAddress?["amountString"] = String()
+        }
+        migration.enumerateObjects(ofType: ETHWallet.className()) { (_, newETHWallet) in
+            newETHWallet?["balance"] = String()
+        }
+        migration.enumerateObjects(ofType: HistoryRLM.className()) { (_, newHistoryRLM) in
+            newHistoryRLM?["gasLimit"] = NSNumber(value: 0)
+            newHistoryRLM?["gasPrice"] = NSNumber(value: 0)
+            newHistoryRLM?["txOutAmountString"] = String()
+        }
+    }
+    
+    func migrateFrom17To18(with migration: Migration) {
+        migration.enumerateObjects(ofType: StockExchangeRateRLM.className()) { (_, newRates) in
+            newRates?["btc2usd"] = NSNumber(value: 0)
         }
     }
 }

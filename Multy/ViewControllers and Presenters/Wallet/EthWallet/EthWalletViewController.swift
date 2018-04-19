@@ -379,6 +379,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
                         walletCell.changeState(isEmpty: true)
                     } else {
                         walletCell.histObj = presenter.historyArray[indexPath.row - 1]
+                        walletCell.wallet = presenter.wallet!
                         walletCell.fillCell()
                         walletCell.changeState(isEmpty: false)
                         self.hideEmptyLbls()

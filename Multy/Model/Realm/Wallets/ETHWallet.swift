@@ -7,4 +7,5 @@ import RealmSwift
 
 class ETHWallet: Object {
     @objc dynamic var nonce = NSNumber(value: 0)
+    @objc dynamic var balance = String()
 }
