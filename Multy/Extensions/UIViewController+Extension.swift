@@ -144,4 +144,13 @@ extension UIViewController {
     func isVCVisible() -> Bool {
         return isViewLoaded && view.window != nil
     }
+    
+    func presentDonationAlertVC(vc: CancelProtocol) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.modalTransitionStyle = .crossDissolve
+        donatAlert.cancelDelegate = vc
+        self.present(donatAlert, animated: true, completion: nil)
+    }
 }

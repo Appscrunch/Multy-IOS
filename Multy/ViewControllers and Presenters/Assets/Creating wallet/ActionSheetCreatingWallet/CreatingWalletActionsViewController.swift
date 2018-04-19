@@ -35,12 +35,8 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
     }
     
     @IBAction func importWalletAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-        donatAlert.modalPresentationStyle = .overCurrentContext
-        donatAlert.cancelDelegate = self
-        self.present(donatAlert, animated: true, completion: nil)
-        
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(vc: weakSelf)
         logAnalytics()
     }
     

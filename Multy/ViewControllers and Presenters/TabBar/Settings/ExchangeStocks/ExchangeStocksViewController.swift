@@ -102,12 +102,8 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
         if indexPath.section == 0 {
             self.navigationController?.popViewController(animated: true)
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-            donatAlert.modalPresentationStyle = .overCurrentContext
-            donatAlert.cancelDelegate = self
-            self.present(donatAlert, animated: true, completion: nil)
-            
+            unowned let weakSelf =  self
+            self.presentDonationAlertVC(vc: weakSelf)
             logAnalytics(indexPath: indexPath)
         }
     }

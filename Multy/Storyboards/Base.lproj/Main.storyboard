@@ -1606,6 +1606,7 @@ correctly</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="r8s-Om-7Nx" kind="relationship" relationship="viewControllers" id="Sgz-iY-1NU"/>
@@ -1799,16 +1800,16 @@ correctly</string>
                                                         </connections>
                                                     </switch>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsNotifications" translatesAutoresizingMaskIntoConstraints="NO" id="apD-ps-Wne">
-                                                        <rect key="frame" x="20" y="17" width="29" height="29"/>
+                                                        <rect key="frame" x="20" y="16" width="35" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="29" id="EDC-qG-1m5"/>
-                                                            <constraint firstAttribute="height" constant="29" id="tIp-Mn-rSC"/>
+                                                            <constraint firstAttribute="width" constant="35" id="EDC-qG-1m5"/>
+                                                            <constraint firstAttribute="height" constant="35" id="tIp-Mn-rSC"/>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E6X-rf-6eP" secondAttribute="trailing" constant="20" symbolic="YES" id="CYu-dq-1xh"/>
-                                                    <constraint firstItem="apD-ps-Wne" firstAttribute="centerY" secondItem="x4M-9u-Tco" secondAttribute="centerY" id="Gs7-3A-GHc"/>
+                                                    <constraint firstItem="apD-ps-Wne" firstAttribute="centerY" secondItem="x4M-9u-Tco" secondAttribute="centerY" constant="2" id="Gs7-3A-GHc"/>
                                                     <constraint firstItem="E6X-rf-6eP" firstAttribute="centerY" secondItem="x4M-9u-Tco" secondAttribute="centerY" id="Jno-Hw-4Z5"/>
                                                     <constraint firstAttribute="trailing" secondItem="2Cs-So-yJx" secondAttribute="trailing" constant="16" id="sSc-gz-6m6"/>
                                                     <constraint firstItem="apD-ps-Wne" firstAttribute="leading" secondItem="x4M-9u-Tco" secondAttribute="leading" constant="20" id="vK7-oa-0hJ"/>
@@ -1825,10 +1826,10 @@ correctly</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsSecurity" translatesAutoresizingMaskIntoConstraints="NO" id="rwV-I4-Kon">
-                                                        <rect key="frame" x="20" y="16.5" width="29" height="29"/>
+                                                        <rect key="frame" x="20" y="16" width="35" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="29" id="5w3-T8-zBI"/>
-                                                            <constraint firstAttribute="height" constant="29" id="xdY-x8-RUS"/>
+                                                            <constraint firstAttribute="width" constant="35" id="5w3-T8-zBI"/>
+                                                            <constraint firstAttribute="height" constant="35" id="xdY-x8-RUS"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="Hbl-ev-mTf">
@@ -1849,7 +1850,7 @@ correctly</string>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="Hbl-ev-mTf" secondAttribute="trailing" constant="16" id="5iL-6s-Phj"/>
                                                     <constraint firstItem="5kJ-Pl-Xr7" firstAttribute="top" secondItem="FxV-OV-cca" secondAttribute="top" id="6pC-WV-cJM"/>
-                                                    <constraint firstItem="rwV-I4-Kon" firstAttribute="centerY" secondItem="FxV-OV-cca" secondAttribute="centerY" id="9XI-Ha-DQG"/>
+                                                    <constraint firstItem="rwV-I4-Kon" firstAttribute="centerY" secondItem="FxV-OV-cca" secondAttribute="centerY" constant="2" id="9XI-Ha-DQG"/>
                                                     <constraint firstItem="5kJ-Pl-Xr7" firstAttribute="leading" secondItem="FxV-OV-cca" secondAttribute="leading" id="9zn-GN-csF"/>
                                                     <constraint firstAttribute="trailing" secondItem="5kJ-Pl-Xr7" secondAttribute="trailing" id="DEL-8J-MqP"/>
                                                     <constraint firstItem="0rb-aE-nDa" firstAttribute="centerY" secondItem="FxV-OV-cca" secondAttribute="centerY" id="IvG-Kb-NFN"/>
@@ -1869,10 +1870,10 @@ correctly</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsFiat" translatesAutoresizingMaskIntoConstraints="NO" id="reE-Iy-MyM">
-                                                        <rect key="frame" x="20" y="17" width="29" height="29"/>
+                                                        <rect key="frame" x="20" y="16" width="35" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="29" id="Z5l-GM-mG5"/>
-                                                            <constraint firstAttribute="height" constant="29" id="r0l-gL-lrb"/>
+                                                            <constraint firstAttribute="width" constant="35" id="Z5l-GM-mG5"/>
+                                                            <constraint firstAttribute="height" constant="35" id="r0l-gL-lrb"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US Dollars ∙ USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df5-ol-Doo">
@@ -1905,7 +1906,7 @@ correctly</string>
                                                     <constraint firstItem="Cj8-vj-UE0" firstAttribute="centerY" secondItem="LU1-QU-4a2" secondAttribute="centerY" id="RoM-w6-dSe"/>
                                                     <constraint firstAttribute="bottom" secondItem="Jjg-AW-GTU" secondAttribute="bottom" constant="2" id="V7q-M7-Hjz"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="df5-ol-Doo" secondAttribute="trailing" constant="20" symbolic="YES" id="Y3Y-ed-5ix"/>
-                                                    <constraint firstItem="reE-Iy-MyM" firstAttribute="centerY" secondItem="LU1-QU-4a2" secondAttribute="centerY" id="bAf-PT-g7k"/>
+                                                    <constraint firstItem="reE-Iy-MyM" firstAttribute="centerY" secondItem="LU1-QU-4a2" secondAttribute="centerY" constant="2" id="bAf-PT-g7k"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Cmf-Vv-6EE" secondAttribute="trailing" constant="20" symbolic="YES" id="pAF-kq-cXX"/>
                                                     <constraint firstAttribute="trailing" secondItem="Cj8-vj-UE0" secondAttribute="trailing" constant="16" id="pOE-OC-ARw"/>
                                                     <constraint firstItem="reE-Iy-MyM" firstAttribute="leading" secondItem="LU1-QU-4a2" secondAttribute="leading" constant="20" id="rW7-pk-8rj"/>
@@ -1921,10 +1922,10 @@ correctly</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsAbout" translatesAutoresizingMaskIntoConstraints="NO" id="VPI-rs-tdt">
-                                                        <rect key="frame" x="20" y="16.5" width="29" height="29"/>
+                                                        <rect key="frame" x="20" y="16" width="35" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="29" id="FIM-Cf-g7W"/>
-                                                            <constraint firstAttribute="width" constant="29" id="qQM-X0-Peb"/>
+                                                            <constraint firstAttribute="height" constant="35" id="FIM-Cf-g7W"/>
+                                                            <constraint firstAttribute="width" constant="35" id="qQM-X0-Peb"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="V98-sO-KVt">
@@ -1947,7 +1948,7 @@ correctly</string>
                                                     <constraint firstItem="xfR-da-DhP" firstAttribute="centerY" secondItem="sd1-gT-DhV" secondAttribute="centerY" id="mN7-OE-cEQ"/>
                                                     <constraint firstItem="VPI-rs-tdt" firstAttribute="leading" secondItem="sd1-gT-DhV" secondAttribute="leading" constant="20" id="tQZ-lE-oGs"/>
                                                     <constraint firstItem="n3D-po-IWE" firstAttribute="top" secondItem="sd1-gT-DhV" secondAttribute="top" id="thZ-sf-Eqv"/>
-                                                    <constraint firstItem="VPI-rs-tdt" firstAttribute="centerY" secondItem="sd1-gT-DhV" secondAttribute="centerY" id="ude-DE-fXq"/>
+                                                    <constraint firstItem="VPI-rs-tdt" firstAttribute="centerY" secondItem="sd1-gT-DhV" secondAttribute="centerY" constant="2" id="ude-DE-fXq"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xfR-da-DhP" secondAttribute="trailing" constant="20" symbolic="YES" id="wbk-ry-8b2"/>
                                                     <constraint firstAttribute="bottom" secondItem="n3D-po-IWE" secondAttribute="bottom" id="zjB-gq-cul"/>
                                                 </constraints>
@@ -1962,10 +1963,10 @@ correctly</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsFeedback" translatesAutoresizingMaskIntoConstraints="NO" id="BQR-Te-LkR">
-                                                        <rect key="frame" x="20" y="15" width="29" height="29"/>
+                                                        <rect key="frame" x="20" y="14.5" width="35" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="29" id="AXO-Oz-hmj"/>
-                                                            <constraint firstAttribute="width" constant="29" id="cyx-Da-ro8"/>
+                                                            <constraint firstAttribute="height" constant="35" id="AXO-Oz-hmj"/>
+                                                            <constraint firstAttribute="width" constant="35" id="cyx-Da-ro8"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="4IY-ke-zzD">
@@ -1979,7 +1980,7 @@ correctly</string>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="4IY-ke-zzD" secondAttribute="trailing" constant="16" id="1QT-Ez-0DP"/>
-                                                    <constraint firstItem="BQR-Te-LkR" firstAttribute="centerY" secondItem="b4Q-oK-RUx" secondAttribute="centerY" id="1rf-sX-uHU"/>
+                                                    <constraint firstItem="BQR-Te-LkR" firstAttribute="centerY" secondItem="b4Q-oK-RUx" secondAttribute="centerY" constant="2" id="1rf-sX-uHU"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cGT-gp-Wpw" secondAttribute="trailing" constant="20" symbolic="YES" id="K5F-45-c95"/>
                                                     <constraint firstItem="BQR-Te-LkR" firstAttribute="leading" secondItem="b4Q-oK-RUx" secondAttribute="leading" constant="20" id="KI6-SZ-jXg"/>
                                                     <constraint firstItem="cGT-gp-Wpw" firstAttribute="centerY" secondItem="b4Q-oK-RUx" secondAttribute="centerY" id="e4u-7M-d7F"/>
@@ -1990,10 +1991,10 @@ correctly</string>
                                                 <rect key="frame" x="0.0" y="192" width="375.5" height="63"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsChange" translatesAutoresizingMaskIntoConstraints="NO" id="kOc-pg-NHC">
-                                                        <rect key="frame" x="20" y="17" width="29" height="29"/>
+                                                        <rect key="frame" x="20" y="16" width="35" height="35"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="29" id="EdK-ik-yIg"/>
-                                                            <constraint firstAttribute="width" constant="29" id="jim-13-Jf9"/>
+                                                            <constraint firstAttribute="height" constant="35" id="EdK-ik-yIg"/>
+                                                            <constraint firstAttribute="width" constant="35" id="jim-13-Jf9"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qt-Qh-fw1">
@@ -2018,7 +2019,7 @@ correctly</string>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="kOc-pg-NHC" firstAttribute="centerY" secondItem="WQm-hc-ZY2" secondAttribute="centerY" id="6Sx-i1-n58"/>
+                                                    <constraint firstItem="kOc-pg-NHC" firstAttribute="centerY" secondItem="WQm-hc-ZY2" secondAttribute="centerY" constant="2" id="6Sx-i1-n58"/>
                                                     <constraint firstItem="KT9-lT-vrd" firstAttribute="centerY" secondItem="WQm-hc-ZY2" secondAttribute="centerY" id="8ua-eL-beC"/>
                                                     <constraint firstAttribute="trailing" secondItem="p9R-pD-dvh" secondAttribute="trailing" id="Nxq-fm-xaZ"/>
                                                     <constraint firstItem="p9R-pD-dvh" firstAttribute="top" secondItem="WQm-hc-ZY2" secondAttribute="top" id="byG-FO-u1A"/>
@@ -2163,20 +2164,40 @@ correctly</string>
                                                     <action selector="privacyAndTermsAction:" destination="iYV-U9-fj0" eventType="touchUpInside" id="Jkf-0G-qqP"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeC-JS-2k9" userLabel="LineView4">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="6oN-LY-ln8"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjL-0P-RnP" userLabel="LineView4">
+                                                <rect key="frame" x="0.0" y="128" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="OI8-dA-pWF"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="eBo-vK-VbE" firstAttribute="top" secondItem="4BO-WF-MtY" secondAttribute="bottom" id="2oI-v4-ngw"/>
                                             <constraint firstAttribute="trailing" secondItem="dk1-AS-aPV" secondAttribute="trailing" id="6k4-Vw-D5N"/>
                                             <constraint firstItem="eBo-vK-VbE" firstAttribute="centerY" secondItem="DjH-2M-k3l" secondAttribute="centerY" id="7fk-kT-Nw7"/>
+                                            <constraint firstAttribute="bottom" secondItem="VjL-0P-RnP" secondAttribute="bottom" id="9PY-ec-rjv"/>
+                                            <constraint firstItem="YeC-JS-2k9" firstAttribute="top" secondItem="DjH-2M-k3l" secondAttribute="top" id="Osq-A2-KZ3"/>
+                                            <constraint firstItem="VjL-0P-RnP" firstAttribute="leading" secondItem="DjH-2M-k3l" secondAttribute="leading" id="ROv-1J-Xl6"/>
+                                            <constraint firstAttribute="trailing" secondItem="YeC-JS-2k9" secondAttribute="trailing" id="YDG-y6-cGz"/>
                                             <constraint firstItem="4BO-WF-MtY" firstAttribute="leading" secondItem="eBo-vK-VbE" secondAttribute="leading" id="bbm-dw-B9W"/>
                                             <constraint firstItem="dk1-AS-aPV" firstAttribute="leading" secondItem="eBo-vK-VbE" secondAttribute="leading" id="brV-kA-8TS"/>
                                             <constraint firstAttribute="height" constant="129" id="e9B-tO-hFi"/>
                                             <constraint firstItem="4BO-WF-MtY" firstAttribute="top" secondItem="DjH-2M-k3l" secondAttribute="top" id="ndu-Sg-7JT"/>
                                             <constraint firstItem="dk1-AS-aPV" firstAttribute="top" secondItem="eBo-vK-VbE" secondAttribute="bottom" id="oP9-s4-wxl"/>
+                                            <constraint firstItem="YeC-JS-2k9" firstAttribute="leading" secondItem="DjH-2M-k3l" secondAttribute="leading" id="rLx-hb-B75"/>
                                             <constraint firstAttribute="trailing" secondItem="4BO-WF-MtY" secondAttribute="trailing" id="vXB-97-PKq"/>
                                             <constraint firstAttribute="bottom" secondItem="dk1-AS-aPV" secondAttribute="bottom" id="wX6-YP-KbO"/>
                                             <constraint firstAttribute="trailing" secondItem="eBo-vK-VbE" secondAttribute="trailing" id="yim-SC-DbC"/>
+                                            <constraint firstAttribute="trailing" secondItem="VjL-0P-RnP" secondAttribute="trailing" id="z32-eT-ylT"/>
                                         </constraints>
                                     </view>
                                 </subviews>
