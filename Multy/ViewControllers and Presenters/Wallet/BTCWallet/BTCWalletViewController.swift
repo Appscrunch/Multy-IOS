@@ -178,10 +178,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         backupView!.layer.cornerRadius = 20
         backupView!.backgroundColor = .white
         
-        backupView!.layer.shadowColor = UIColor.gray.cgColor
-        backupView!.layer.shadowOpacity = 1
-        backupView!.layer.shadowOffset = .zero
-        backupView!.layer.shadowRadius = 10
+        backupView!.setShadow(with: #colorLiteral(red: 0.1490196078, green: 0.2980392157, blue: 0.4156862745, alpha: 0.3))
         
         if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
             backupView!.isHidden = false
