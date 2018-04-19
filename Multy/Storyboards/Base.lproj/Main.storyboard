@@ -579,14 +579,24 @@
                                                                 <outlet property="delegate" destination="sUo-XC-rc3" id="e8i-FN-ErP"/>
                                                             </connections>
                                                         </textField>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i21-QL-5OE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                            <color key="backgroundColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="0.5" id="ah3-uc-gaN"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="yYM-Z4-2M4" firstAttribute="bottom" secondItem="5my-it-s2z" secondAttribute="bottomMargin" id="1JO-S2-Hh3"/>
                                                         <constraint firstItem="yYM-Z4-2M4" firstAttribute="leading" secondItem="TIE-mG-uUa" secondAttribute="leading" id="AE6-8H-hDf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="i21-QL-5OE" secondAttribute="trailing" id="J2F-yh-ZA2"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TIE-mG-uUa" secondAttribute="trailing" constant="20" symbolic="YES" id="Qbd-d5-Exg"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="yYM-Z4-2M4" secondAttribute="trailing" id="dlJ-Cu-WrW"/>
+                                                        <constraint firstItem="i21-QL-5OE" firstAttribute="top" secondItem="5my-it-s2z" secondAttribute="top" id="kXP-94-8a7"/>
                                                         <constraint firstItem="yYM-Z4-2M4" firstAttribute="top" secondItem="TIE-mG-uUa" secondAttribute="bottom" constant="2" id="oyf-rA-71b"/>
                                                         <constraint firstItem="TIE-mG-uUa" firstAttribute="leading" secondItem="5my-it-s2z" secondAttribute="leading" constant="20" id="p1O-80-xDC"/>
+                                                        <constraint firstItem="i21-QL-5OE" firstAttribute="leading" secondItem="5my-it-s2z" secondAttribute="leading" id="sHc-Pu-Ygp"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -673,6 +683,7 @@
                                                         <constraint firstItem="3Fj-XI-WIm" firstAttribute="centerY" secondItem="A8K-n0-YFg" secondAttribute="centerY" id="nQo-zO-yiW"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>

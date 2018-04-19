@@ -20,10 +20,10 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         sendAnalyticsEvent(screenName: screenActivity, eventName: screenActivity)
         
-        newsView.layer.shadowColor = UIColor.gray.cgColor
+        newsView.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3)
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
-        newsView.layer.shadowRadius = 10
+        newsView.layer.shadowRadius = 20
         
         presenter.tabBarFrame = tabBarController?.tabBar.frame
         

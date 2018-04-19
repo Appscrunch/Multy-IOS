@@ -26,6 +26,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var heightOfBottomBar: NSLayoutConstraint!
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
+    @IBOutlet weak var spaceBetweenLblConstant: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var presenter = BTCWalletPresenter()
     
@@ -320,6 +322,11 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func fixForX() {
         if screenHeight == heightOfX {
             self.heightOfBottomBar.constant = 83
+            self.spaceBetweenLblConstant.constant = 46
+            self.bottomConstraint.constant = 30
+        } else if screenHeight == heightOfStandard {
+            self.spaceBetweenLblConstant.constant = 100
+            self.bottomConstraint.constant = 30
         }
     }
     
