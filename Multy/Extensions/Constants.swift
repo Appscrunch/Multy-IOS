@@ -13,6 +13,7 @@ struct Constants {
         static let cancelString = "Cancel"
         static let backupButtonHeight = CGFloat(44)
         static let backupAssetsOffset = CGFloat(25)
+        static let leadingAndTrailingOffset = CGFloat(16)
     }
     
     struct ETHWalletScreen {

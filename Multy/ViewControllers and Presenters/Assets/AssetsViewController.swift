@@ -197,7 +197,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         view.layer.cornerRadius = 20
         view.backgroundColor = #colorLiteral(red: 0.9229970574, green: 0.08180250973, blue: 0.2317947149, alpha: 1)
-        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowColor = #colorLiteral(red: 0.4156862745, green: 0.1490196078, blue: 0.168627451, alpha: 0.6)
         view.layer.shadowOpacity = 1
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 10
@@ -208,7 +208,9 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             let image = UIImageView()
             image.image = #imageLiteral(resourceName: "warninngBigWhite")
             image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
-            
+        
+            let chevronImg = UIImageView(frame: CGRect(x: view.frame.width - 24, y: 15, width: 13, height: 13))
+            chevronImg.image = #imageLiteral(resourceName: "chevron__")
             let btn = UIButton()
             btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
             btn.setTitle("Backup is needed!", for: .normal)
@@ -219,6 +221,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             
             view.addSubview(btn)
             view.addSubview(image)
+            view.addSubview(chevronImg)
             backupView = view
             self.view.addSubview(backupView!)
             view.isHidden = true
@@ -357,7 +360,8 @@ extension PresentingSheetDelegate: OpenCreatingSheet {
         let creatingVC = storyboard.instantiateViewController(withIdentifier: "creatingVC") as! CreatingWalletActionsViewController
         creatingVC.cancelDelegate = self
         creatingVC.createProtocol = self
-        creatingVC.modalPresentationStyle = .overCurrentContext
+        creatingVC.modalPresentationStyle = .custom
+        creatingVC.modalTransitionStyle = .crossDissolve
         self.present(creatingVC, animated: true, completion: nil)
     }
 }
@@ -634,11 +638,8 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
 
 extension CollectionViewDelegate : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-        donatAlert.modalPresentationStyle = .overCurrentContext
-        donatAlert.cancelDelegate = self
-        present(donatAlert, animated: true, completion: nil)
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(from: weakSelf)
         (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         
         logAnalytics(indexPath: indexPath)

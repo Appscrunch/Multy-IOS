@@ -74,17 +74,17 @@
                                     <constraint firstAttribute="width" constant="129" id="nXZ-Yb-lNp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" red="0.31764705882352939" green="0.40784313725490196" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.69411764705882351" green="0.73333333333333328" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any transactions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aqo-BH-hPA">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any transactions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aqo-BH-hPA">
                                 <rect key="frame" x="112.5" y="410" width="150" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="D1a-OD-4Sx"/>
                                     <constraint firstAttribute="height" constant="56" id="DsX-qI-nTT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" red="0.31764705879999999" green="0.40784313729999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.67843137254901964" green="0.71764705882352942" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="RHH-jh-E3C">
@@ -265,12 +265,14 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="backView" destination="pbK-RX-Gb3" id="gmG-j3-GT5"/>
+                        <outlet property="bottomConstraint" destination="99l-6Q-6u7" id="81O-Jw-WE7"/>
                         <outlet property="bottomTableConstraint" destination="fnW-7u-jc0" id="EEm-mX-yy8"/>
                         <outlet property="emptyArrowImg" destination="RHH-jh-E3C" id="MvX-bc-HnW"/>
                         <outlet property="emptyFirstLbl" destination="Aqo-BH-hPA" id="Vzn-eb-Yzp"/>
                         <outlet property="emptySecondLbl" destination="iJt-Qg-K3r" id="ECa-jb-nGk"/>
                         <outlet property="headerView" destination="SyO-YX-XwO" id="xFC-MF-zrR"/>
                         <outlet property="heightOfBottomBar" destination="76Z-hx-iu8" id="tt5-dT-m78"/>
+                        <outlet property="spaceBetweenLblConstant" destination="T26-Ns-bse" id="aMX-VA-7gF"/>
                         <outlet property="tableView" destination="9Yy-Xk-shm" id="6qh-tR-nEL"/>
                         <outlet property="tableViewTopConstraint" destination="uHl-F6-APe" id="B3U-Pq-4YE"/>
                         <outlet property="titleLbl" destination="Puy-SH-843" id="2Re-KZ-cIJ"/>
@@ -1448,7 +1450,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any transactions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkK-EA-P5D">
-                                <rect key="frame" x="112.5" y="410" width="150" height="56"/>
+                                <rect key="frame" x="112.5" y="379" width="150" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="aWl-5e-GGx"/>
                                     <constraint firstAttribute="width" constant="150" id="aug-tD-hmh"/>
@@ -1626,7 +1628,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             <constraint firstItem="Son-ag-7Ns" firstAttribute="centerX" secondItem="ZLB-qZ-NPr" secondAttribute="centerX" id="qle-Oa-o7t"/>
                             <constraint firstItem="Son-ag-7Ns" firstAttribute="centerY" secondItem="l3R-2J-VZZ" secondAttribute="centerY" id="rME-df-hZT"/>
                             <constraint firstAttribute="trailing" secondItem="twS-VN-mmh" secondAttribute="trailing" id="tF3-dn-lLd"/>
-                            <constraint firstItem="xHJ-KF-fDv" firstAttribute="top" secondItem="IkK-EA-P5D" secondAttribute="bottom" constant="15" id="xr6-JY-Si6"/>
+                            <constraint firstItem="xHJ-KF-fDv" firstAttribute="top" secondItem="IkK-EA-P5D" secondAttribute="bottom" constant="46" id="xr6-JY-Si6"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -1664,6 +1666,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wmz-Ze-lTe"/>
+        <segue reference="zfl-Te-0xX"/>
     </inferredMetricsTieBreakers>
 </document>

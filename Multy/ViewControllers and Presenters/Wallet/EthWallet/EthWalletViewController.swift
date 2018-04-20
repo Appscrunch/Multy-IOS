@@ -52,7 +52,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
-        self.fixForPlus()
+//        self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
@@ -264,11 +264,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @IBAction func exchangeAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-        donatAlert.modalPresentationStyle = .overCurrentContext
-        donatAlert.cancelDelegate = self
-        self.present(donatAlert, animated: true, completion: nil)
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(from: weakSelf)
         //        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
         logAnalytics()
     }
