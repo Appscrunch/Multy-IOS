@@ -73,4 +73,16 @@ class EthWalletHeaderCollectionViewCell: UICollectionViewCell {
             lockedFiatAmountLabel.text = availableFiatAmount.fixedFraction(digits: 2)
         }
     }
+    
+    @IBAction func showAddressAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+        let adressVC = storyboard.instantiateViewController(withIdentifier: "walletAdressVC") as! AddressViewController
+        adressVC.modalPresentationStyle = .overCurrentContext
+        adressVC.modalTransitionStyle = .crossDissolve
+        adressVC.wallet = self.wallet
+        //        self.mainVC.present
+        self.mainVC?.present(adressVC, animated: true, completion: nil)
+//        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(wallet!.chain)", eventName: "\(addressWithChainTap)\(wallet!.chain)")
+    }
+    
 }
