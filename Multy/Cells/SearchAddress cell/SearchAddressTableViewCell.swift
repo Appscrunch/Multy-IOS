@@ -74,6 +74,7 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
 //        self.addressTF.textColor = .white
         self.addressTV.text = address
         self.addressInTfLlb.text = address
+        placeholderLabel.isHidden = !addressTV.text.isEmpty
     }
 }
 

@@ -18,9 +18,6 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         self.swipeToBack()
         self.presenter.sendStartVC = self
         self.registerCells()
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
         self.hideKeyboardWhenTappedAroundForSendStart()
         self.nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
         self.ipadFix()
@@ -29,6 +26,9 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        (self.tabBarController as! CustomTabBarViewController).menuButton.isHidden = true
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
 //        if self.presenter.addressSendTo != "" {
 //            self.modifyNextButtonMode()
 //        }
@@ -70,6 +70,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         if presenter.transactionDTO.sendAddress != nil && !presenter.transactionDTO.sendAddress!.isEmpty {
             self.modifyNextButtonMode()
         }
+        fixUI()
     }
     
     func registerCells() {
@@ -140,6 +141,12 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         
     }
     
+    
+    func fixUI() {
+        if screenHeight == heightOfX {
+            self.nextBtn.frame.origin = CGPoint(x: 0, y: 714)
+        }
+    }
 }
 
 extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
