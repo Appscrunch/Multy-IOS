@@ -212,6 +212,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     seedVC.wordTF.becomeFirstResponder()
                 } else if let seedVC = vcOnScren as? PinCodeViewController {
                     seedVC.pinTF.becomeFirstResponder()
+                } else if let receiveVC = vcOnScren as? ReceiveAmountViewController {
+                    receiveVC.amountTF.becomeFirstResponder()
                 }
             }
             isActiveFirstTime = false
