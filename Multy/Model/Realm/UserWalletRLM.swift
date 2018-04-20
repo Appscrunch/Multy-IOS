@@ -352,5 +352,9 @@ extension WalletUpdateRLM {
         if let nonce = infoDict["nonce"] as? NSNumber {
             self.ethWallet?.nonce = nonce
         }
+        
+        if let pendingBalance = infoDict["pendingbalance"] as? String {
+            self.ethWallet!.pendingWeiAmountString = pendingBalance
+        }
     }
 }
