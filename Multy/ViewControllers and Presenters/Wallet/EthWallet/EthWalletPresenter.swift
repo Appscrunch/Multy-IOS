@@ -12,9 +12,9 @@ class EthWalletPresenter: NSObject {
     var isTherePendingAmount = false
     var wallet : UserWalletRLM? {
         didSet {
+            isTherePendingAmount = wallet!.ethWallet?.pendingETHAmountString != "0,0"
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
-            isTherePendingAmount = wallet!.ethWallet?.pendingETHAmountString != "0"
         }
     }
     var account : AccountRLM?
