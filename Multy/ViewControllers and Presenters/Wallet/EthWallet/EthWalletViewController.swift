@@ -223,6 +223,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                          gradientOrientation: .topRightBottomLeft)
         }
+        
         setGradientBackground()
     }
     
@@ -320,6 +321,14 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     func updateUI() {
         self.tableView.reloadData()
+    }
+    
+    func fixFirstCell() {
+        let header = self.tableView.cellForRow(at: [0,0]) as! EthWalletHeaderTableViewCell
+        header.bottomView.backgroundColor = .white
+        if screenHeight == heightOfPlus {
+            header.bottomView.sizeToFit()
+        }
     }
 }
 
