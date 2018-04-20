@@ -52,7 +52,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
         self.tableView.addSubview(self.refreshControl)
         self.fixForX()
-        self.fixForPlus()
+//        self.fixForPlus()
         self.tableView.backgroundColor = #colorLiteral(red: 0.01194981113, green: 0.4769998789, blue: 0.9994105697, alpha: 1)
         self.tableView.bounces = false
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletWithChain)\(presenter.wallet!.chain)")
