@@ -83,7 +83,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         
         DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { [unowned self] (answer, err) in
             self.mainVC?.progressHud.unblockUIandHideProgressHUD()
-            let errMessage = "Can't send a donation. Please check donation sum, it is too small (> 5000 Satoshi) and wallet balance is sufficient."
+            let errMessage = "Can't send a donation. Please check that donation sum is not too small(< 5000 Satoshi) and wallet`s balance is sufficient."
             if err != nil {
                 if answer != nil {
                     self.mainVC?.presentAlert(with: errMessage)
