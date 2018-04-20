@@ -101,7 +101,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     func openDonat() {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(vc: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf)
     }
     
     func logAnalytics(code: Int) {

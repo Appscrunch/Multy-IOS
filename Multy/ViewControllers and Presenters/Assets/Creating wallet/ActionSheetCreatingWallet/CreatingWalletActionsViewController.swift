@@ -36,7 +36,7 @@ class CreatingWalletActionsViewController: UIViewController, CancelProtocol, Ana
     
     @IBAction func importWalletAction(_ sender: Any) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(vc: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf)
         logAnalytics()
     }
     

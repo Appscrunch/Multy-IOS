@@ -93,7 +93,7 @@ extension TableViewDelegate: UITableViewDelegate {
         
         if indexPath.section == 1 {
             unowned let weakSelf =  self
-            self.presentDonationAlertVC(vc: weakSelf)
+            self.presentDonationAlertVC(from: weakSelf)
             logAnalytics(indexPath: indexPath)
         } else {
             let currencyObj = presenter.availableBlockchainArray[indexPath.row]

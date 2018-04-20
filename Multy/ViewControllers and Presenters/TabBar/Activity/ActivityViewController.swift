@@ -68,7 +68,7 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     
     @IBAction func donatAction(_ sender: Any) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(vc: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         logAnalytics()
     }

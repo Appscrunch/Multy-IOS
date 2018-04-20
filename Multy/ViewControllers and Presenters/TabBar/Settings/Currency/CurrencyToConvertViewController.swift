@@ -93,7 +93,7 @@ extension CurrencyToConvertViewController: UITableViewDelegate, UITableViewDataS
         
         if indexPath.section == 1 {
             unowned let weakSelf =  self
-            self.presentDonationAlertVC(vc: weakSelf)
+            self.presentDonationAlertVC(from: weakSelf)
             logAnalytics(indexPath: indexPath)
         } else {
             self.navigationController?.popViewController(animated: true)

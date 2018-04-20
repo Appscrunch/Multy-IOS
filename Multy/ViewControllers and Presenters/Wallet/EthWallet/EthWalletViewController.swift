@@ -265,7 +265,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     @IBAction func exchangeAction(_ sender: Any) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(vc: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf)
         //        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
         logAnalytics()
     }

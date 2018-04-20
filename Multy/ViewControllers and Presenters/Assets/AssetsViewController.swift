@@ -639,7 +639,7 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
 extension CollectionViewDelegate : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(vc: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf)
         (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         
         logAnalytics(indexPath: indexPath)

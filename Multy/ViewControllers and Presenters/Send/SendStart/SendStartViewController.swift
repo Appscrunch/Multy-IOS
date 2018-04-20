@@ -122,7 +122,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     
     func donate() {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(vc: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf)
     }
     
     func cancelDonation() {

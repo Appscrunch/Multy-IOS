@@ -103,7 +103,7 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
             self.navigationController?.popViewController(animated: true)
         } else {
             unowned let weakSelf =  self
-            self.presentDonationAlertVC(vc: weakSelf)
+            self.presentDonationAlertVC(from: weakSelf)
             logAnalytics(indexPath: indexPath)
         }
     }
