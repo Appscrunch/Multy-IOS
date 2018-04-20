@@ -32,12 +32,11 @@ class EthWalletHeaderCollectionViewCell: UICollectionViewCell {
     }
 
     func fillInCell() {
-        let sumInFiat = wallet!.sumInFiat.fixedFraction(digits: 2)
-        self.cryptoAmountLabel.text = "\(wallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0")"
+        self.cryptoAmountLabel.text = wallet?.sumInCryptoString
         let blockchain = BlockchainType.create(wallet: wallet!)
         //MARK: temporary code
         self.cryptoNameLabel.text = blockchain.shortName //"\(wallet?.cryptoName ?? "")"
-        self.fiatAmountLabel.text = sumInFiat
+        self.fiatAmountLabel.text = wallet?.sumInFiatString
         self.fiatNameLabel.text = "\(wallet?.fiatName ?? "")"
         self.addressLabel.text = "\(wallet?.address ?? "")"
         
