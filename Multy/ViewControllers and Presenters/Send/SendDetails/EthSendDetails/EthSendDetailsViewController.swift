@@ -29,8 +29,9 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
 //        presenter.requestFee()
         
         presenter.getWalletVerbose()
+        presenter.requestFee()
         
-//        presenter.getData()
+        presenter.getData()
         
 //        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)")
 //        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: donationEnableTap)
@@ -82,7 +83,7 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         self.view.endEditing(true)
         
 //        if self.presenter.selectedIndexOfSpeed != nil {
-//            self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
+            self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.presenter.checkMaxAvailable()
 //        } else {
 //            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
@@ -100,7 +101,7 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendEthVC" {
-            let sendAmountVC = segue.destination as! SendAmountViewController
+            let sendAmountVC = segue.destination as! SendAmountEthViewController
             
             presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj
             presenter.transactionDTO.transaction!.customGAS = presenter.customGas

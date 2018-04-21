@@ -20,6 +20,11 @@ class EthWalletPresenter: NSObject {
     var account : AccountRLM?
     
     var transactionsArray = [TransactionRLM]()
+    var isThereAvailableAmount: Bool {
+        get {
+            return wallet!.ethWallet!.balance != "0"
+        }
+    }
     
     var historyArray = [HistoryRLM]() {
         didSet {

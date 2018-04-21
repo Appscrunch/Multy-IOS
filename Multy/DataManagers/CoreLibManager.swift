@@ -6,6 +6,7 @@ import UIKit
 import RealmSwift
 
 private typealias TestCoreLibManager = CoreLibManager
+private typealias BigIntCoreLibManager = CoreLibManager
 private typealias EthereumCoreLibManager = CoreLibManager
 
 class CoreLibManager: NSObject {
@@ -564,9 +565,9 @@ class CoreLibManager: NSObject {
             free_string(amountStringPointer.pointee)
         }
         
-        let bits = big_int_to_string(totalSumPointer.pointee, amountStringPointer)
-        if bits != nil {
-            return (errorString(from: bits, mask: "big_int_to_string")!, -1)
+        let bigv = big_int_get_value(totalSumPointer.pointee, amountStringPointer)
+        if bigv != nil {
+            return (errorString(from: bigv, mask: "big_int_to_string")!, -1)
         }
         
         let amountString = String(cString: amountStringPointer.pointee!)
@@ -679,7 +680,7 @@ class CoreLibManager: NSObject {
         
         defer { free_error(opaquePointer) }
         
-        let pointer = UnsafeMutablePointer<CustomError>(opaquePointer)
+        let pointer = UnsafeMutablePointer<MultyError>(opaquePointer)
         let errorString = String(cString: pointer.pointee.message)
         
         print("\(mask): \(errorString))")
@@ -716,6 +717,9 @@ class CoreLibManager: NSObject {
     }
 }
 
+extension BigIntCoreLibManager {
+    
+}
 ////////////////////////////////////
 extension TestCoreLibManager {
     func startSwiftTest() {
@@ -939,7 +943,8 @@ extension EthereumCoreLibManager {
         let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let tas2 = transaction_add_destination(transactionPointer.pointee, transactionDestination)
         setAmountValue(key: "amount", value: sendAmountString, pointer: transactionDestination.pointee!) //10^15 wei
-        setBinaryDataValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
+        setStringValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
+//        setBinaryDataValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
         
         //fee
         let feeProperties = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -952,7 +957,7 @@ extension EthereumCoreLibManager {
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
         
         if tSer != nil {
-            let pointer = UnsafeMutablePointer<CustomError>(tSer)
+            let pointer = UnsafeMutablePointer<MultyError>(tSer)
             let errrString = String(cString: pointer!.pointee.message)
             
             print("tSer: \(errrString))")
@@ -963,7 +968,7 @@ extension EthereumCoreLibManager {
         }
         
         let data = serializedTransaction.pointee!.pointee.convertToData()
-        let str = data.hexEncodedString()
+        let str = "0x" + data.hexEncodedString()
         
         print("end transaction: \(str)")
         

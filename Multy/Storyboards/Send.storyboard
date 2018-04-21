@@ -1542,6 +1542,9 @@ This feature will be in the next update.</string>
                                         <color key="value" red="0.0" green="0.69813299179999999" blue="0.99816983940000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextAction:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="vfi-I3-RPu"/>
+                                </connections>
                             </button>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZTX-ha-607">
                                 <rect key="frame" x="20" y="304" width="75" height="69"/>
@@ -1549,6 +1552,9 @@ This feature will be in the next update.</string>
                                 <color key="textColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jJt-Ap-KXa" id="heN-Gv-lw3"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-oK-MNU">
                                 <rect key="frame" x="168.5" y="613" width="39.5" height="25"/>
@@ -1577,6 +1583,9 @@ This feature will be in the next update.</string>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="1PE-yU-vh0"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="backAction:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="oYY-ti-ejW"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdm-sm-QZF">
                                         <rect key="frame" x="305" y="27" width="54" height="36"/>
@@ -1591,8 +1600,8 @@ This feature will be in the next update.</string>
                                         <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-ye-4hC">
-                                        <rect key="frame" x="203" y="192.5" width="30.5" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-ye-4hC">
+                                        <rect key="frame" x="203" y="192.5" width="31" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1669,8 +1678,8 @@ This feature will be in the next update.</string>
                                                 <rect key="frame" x="285" y="0.0" width="90" height="44"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1234 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bha-Kb-4Pk">
-                                                <rect key="frame" x="98.5" y="11" width="87.5" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1234 ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bha-Kb-4Pk">
+                                                <rect key="frame" x="98.5" y="11" width="88" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1711,7 +1720,7 @@ This feature will be in the next update.</string>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADe-ts-6QS">
-                                        <rect key="frame" x="173" y="161" width="60.5" height="53.5"/>
+                                        <rect key="frame" x="173" y="161" width="61" height="53.5"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-QF-gdr">
                                         <rect key="frame" x="164" y="264.5" width="47" height="15"/>
@@ -1818,7 +1827,7 @@ This feature will be in the next update.</string>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TSe-kF-31L"/>
+        <segue reference="Y3u-nO-qs1"/>
         <segue reference="kCF-Tq-Brv"/>
         <segue reference="EUD-ex-a5v"/>
     </inferredMetricsTieBreakers>

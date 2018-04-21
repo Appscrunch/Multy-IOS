@@ -241,7 +241,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @IBAction func sendAction(_ sender: Any) {
-        if presenter.wallet!.availableAmount() == 0 {
+        if presenter.isThereAvailableAmount == false {
             self.presentAlert(with: "You have no available funds")
             
             return

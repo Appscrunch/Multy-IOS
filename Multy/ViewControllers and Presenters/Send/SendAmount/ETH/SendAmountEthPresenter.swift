@@ -21,7 +21,7 @@ class SendAmountEthPresenter: NSObject {
     var blockedAmount           : UInt64? {
         didSet {
             let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
-            availableSumInCrypto = transactionDTO.choosenWallet!.sumInCrypto - blockedAmount!.btcValue
+            availableSumInCrypto = Double(BigInt(transactionDTO.choosenWallet!.ethWallet!.balance).ethValueString.replacingOccurrences(of: ",", with: "."))
             availableSumInFiat = availableSumInCrypto! * exchangeCourse
         }
     }
@@ -34,7 +34,7 @@ class SendAmountEthPresenter: NSObject {
     var sumInFiat = Double(0.0)
     
     var fiatName = "USD"
-    var cryptoName = "BTC"
+    var cryptoName = "ETH"
     
     var isCrypto = true
     var isMaxEntered = false
@@ -89,7 +89,7 @@ class SendAmountEthPresenter: NSObject {
                                                                                   sendAddress: transactionDTO.sendAddress!,
                                                                                   sendAmountString: self.sumInCrypto.fixedFraction(digits: 18),
                                                                                   nonce: transactionDTO.choosenWallet!.ethWallet!.nonce.intValue,
-                                                                                  balanceAmount: "\(transactionDTO.choosenWallet?.availableAmount())",
+                                                                                  balanceAmount: "\(transactionDTO.choosenWallet!.ethWallet!.balance)",
                 ethereumChainID: BLOCKCHAIN_ETHEREUM.rawValue,
                 gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
                 gasLimit: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
@@ -197,22 +197,14 @@ class SendAmountEthPresenter: NSObject {
     func setMaxAllowed() {
         switch self.isCrypto {
         case true:
-            if (self.sendAmountVC?.commissionSwitch.isOn)! {
-                if transactionDTO.transaction!.donationDTO != nil {
-                    self.maxAllowedToSpend = self.availableSumInCrypto! - self.transactionObj!.sumInCrypto - transactionDTO.transaction!.donationDTO!.sumInCrypto!
-                } else {
-                    self.maxAllowedToSpend = self.availableSumInCrypto! - self.transactionObj!.sumInCrypto
-                }
+            if self.sendAmountVC!.commissionSwitch.isOn {
+                self.maxAllowedToSpend = self.availableSumInCrypto! - self.transactionObj!.sumInCrypto
             } else {
                 self.maxAllowedToSpend = self.availableSumInCrypto!
             }
         case false:
-            if (self.sendAmountVC?.commissionSwitch.isOn)! {
-                if transactionDTO.transaction!.donationDTO != nil {
-                    self.maxAllowedToSpend = self.availableSumInFiat! - self.transactionObj!.sumInFiat - transactionDTO.transaction!.donationDTO!.sumInFiat!
-                } else {
-                    self.maxAllowedToSpend = self.availableSumInFiat! - self.transactionObj!.sumInFiat
-                }
+            if self.sendAmountVC!.commissionSwitch.isOn {
+                self.maxAllowedToSpend = self.availableSumInFiat! - self.transactionObj!.sumInFiat
             } else {
                 self.maxAllowedToSpend = (self.availableSumInFiat)!
             }
