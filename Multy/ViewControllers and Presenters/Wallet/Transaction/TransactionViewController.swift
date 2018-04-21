@@ -57,6 +57,11 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         self.updateUI()
         self.sendAnalyticOnStrart()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+    }
 
     func checkHeightForScrollAvailability() {
 //        if screenHeight >= 667 {
