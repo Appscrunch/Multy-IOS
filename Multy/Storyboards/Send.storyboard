@@ -1265,6 +1265,7 @@ This feature will be in the next update.</string>
                         <outlet property="fiatSumAndCurrancyLbl" destination="AkA-WX-ZNe" id="TMP-I6-o64"/>
                         <outlet property="middle" destination="MIf-xQ-WjZ" id="Agg-lW-wks"/>
                         <outlet property="noteTF" destination="b5c-CM-iki" id="J2w-at-hsA"/>
+                        <outlet property="scrollView" destination="nzU-CV-d25" id="YFR-PN-XXY"/>
                         <outlet property="sendBtn" destination="wl0-kD-24J" id="faK-pd-IwI"/>
                         <outlet property="topView" destination="iHg-A2-nCQ" id="Xgz-66-UIu"/>
                         <outlet property="transactionFeeCostLbl" destination="RhC-aH-HrF" id="wKG-bv-A88"/>

@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sharedDialog: UIActivityViewController?
     var selectedIndexOfTabBar = 0
     var isActiveFirstTime: Bool?
+    var enterPinVc: EnterPinViewController?
     
     override init() {
         super.init()
@@ -212,6 +213,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     seedVC.wordTF.becomeFirstResponder()
                 } else if let seedVC = vcOnScren as? PinCodeViewController {
                     seedVC.pinTF.becomeFirstResponder()
+                } else if let receiveVC = vcOnScren as? ReceiveAmountViewController {
+                    receiveVC.amountTF.becomeFirstResponder()
                 }
             }
             isActiveFirstTime = false
@@ -289,6 +292,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if self.presentedVC != nil {
             self.presentedVC?.dismiss(animated: true, completion: nil)
         }
+        
+        if self.enterPinVc != nil {
+            self.enterPinVc?.hideCancel()
+        }
+        
         if self.openedAlert != nil {
             self.openedAlert?.dismiss(animated: true, completion: nil)
         }

@@ -7,6 +7,7 @@ import AURUnlockSlider
 
 class SendFinishViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol, AURUnlockSliderDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var middle: UIView!
     @IBOutlet weak var bottom: UIView!

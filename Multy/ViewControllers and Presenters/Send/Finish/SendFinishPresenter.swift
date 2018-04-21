@@ -36,7 +36,7 @@ class SendFinishPresenter: NSObject {
     }
     
     func makeFrameForSlider() -> CGRect {
-        var y = self.sendFinishVC!.view.frame.height - 64
+        var y = self.sendFinishVC!.scrollView.contentSize.height - 64
         if screenHeight == heightOfX {
             y = 705.0
         }

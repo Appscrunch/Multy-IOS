@@ -61,6 +61,9 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
         self.clearAllCircles()
         self.getPass()
         
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.enterPinVc = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(pauseApp), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(resumeApp), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }

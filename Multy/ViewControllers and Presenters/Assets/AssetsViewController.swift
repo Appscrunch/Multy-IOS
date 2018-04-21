@@ -650,15 +650,25 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
         sendDonationAlertScreenPresentedAnalytics(code: eventCode)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
+//        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = indexPath.row
+//    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
-        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = indexPath.row
+        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
+        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 //        let pageNumber = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
 //        changePageControl(currentpage: pageNumber)
-    }
+//    }
 }
