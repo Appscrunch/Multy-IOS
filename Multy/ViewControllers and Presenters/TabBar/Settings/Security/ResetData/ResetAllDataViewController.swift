@@ -14,6 +14,9 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.presentedVC = self
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
         ipadFix()
