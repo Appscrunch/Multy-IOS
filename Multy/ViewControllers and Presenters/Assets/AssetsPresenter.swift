@@ -54,7 +54,7 @@ class AssetsPresenter: NSObject {
         //MARK: need refactoring
         self.blockUI()
         DataManager.shared.getAccount { (acc, err) in
-            self.assetsVC?.view.isUserInteractionEnabled = true
+            self.unlockUI()
             if acc == nil {
                 self.assetsVC?.progressHUD.show()
                 DataManager.shared.auth(rootKey: nil) { (account, error) in
