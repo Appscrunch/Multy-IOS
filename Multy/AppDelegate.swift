@@ -215,6 +215,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     seedVC.pinTF.becomeFirstResponder()
                 } else if let receiveVC = vcOnScren as? ReceiveAmountViewController {
                     receiveVC.amountTF.becomeFirstResponder()
+                } else if let amountVC = vcOnScren as? SendAmountViewController {
+                    amountVC.amountTF.becomeFirstResponder()
                 }
             }
             isActiveFirstTime = false
