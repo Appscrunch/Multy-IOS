@@ -79,6 +79,7 @@ class ApiManager: NSObject, RequestRetrier {
             params["deviceID"] = "iOS \(UIDevice.current.name)"
             params["deviceType"] = 1
             params["pushToken"] = UUID().uuidString
+            params["appVersion"] = ((infoPlist["CFBundleShortVersionString"] as! String) + (infoPlist["CFBundleVersion"] as! String))
             
             self.auth(with: params, completion: { (dict, error) in
                 completion(true, 0.2) // retry after 0.2 second

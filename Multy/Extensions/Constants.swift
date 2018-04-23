@@ -83,6 +83,8 @@ let heightOfFive     : CGFloat = 568.0
 let heightOfiPad     : CGFloat = 480.0
 //
 
+let infoPlist = Bundle.main.infoDictionary!
+
 //createWallet, WalletSettingd
 let maxNameLength = 25
 
