@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         let chainNameFromLink = (dictFormLink["address"] as! String).split(separator: ":").first
                         let addressFromLink = (dictFormLink["address"] as! String).split(separator: ":").last
-                        if let amount = dictFormLink["amount"] as? NSString {
+                        if let amount = dictFormLink["amount"] as? String {
                             amountFromLink = amount.doubleValue
                         } else if let number = dictFormLink["amount"] as? NSNumber {
                             amountFromLink = number.doubleValue
