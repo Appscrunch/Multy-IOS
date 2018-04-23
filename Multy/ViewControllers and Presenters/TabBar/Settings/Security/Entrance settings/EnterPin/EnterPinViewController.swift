@@ -118,7 +118,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
                     self.successDismiss()
                 } else {
                     shakeView(viewForShake: self.viewWithCircles)
-                    self.writeWrongAttempt()
+//                    self.writeWrongAttempt()
                     self.clearAllCircles()
                     self.counter = 0
                 }
