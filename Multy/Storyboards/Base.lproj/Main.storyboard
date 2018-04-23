@@ -2157,7 +2157,7 @@ correctly</string>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk1-AS-aPV">
                                                 <rect key="frame" x="66" y="64.5" width="309" height="64.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                <state key="normal" title="Terms of Use">
+                                                <state key="normal" title="Terms of Service">
                                                     <color key="titleColor" red="0.0" green="0.55294117647058827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
