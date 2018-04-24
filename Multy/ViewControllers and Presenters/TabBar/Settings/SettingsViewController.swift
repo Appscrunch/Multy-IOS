@@ -179,6 +179,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
                 let assetVC = self.tabBarController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
                 UserDefaults.standard.removeObject(forKey: "isFirstLaunch")
                 UserDefaults.standard.removeObject(forKey: "pin")
+                UserDefaults.standard.removeObject(forKey: "isTermsAccept")
                 assetVC.isFirstLaunch = true
                 assetVC.presenter.account = nil
                 exit(0)
