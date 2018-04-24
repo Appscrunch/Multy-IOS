@@ -265,6 +265,10 @@ class UserWalletRLM: Object {
             }
         }
         
+        if donationAddress.isEmpty == false {
+            return donationAddress
+        }
+        
         return arrOfOutputsAddresses[0]
     }
     
