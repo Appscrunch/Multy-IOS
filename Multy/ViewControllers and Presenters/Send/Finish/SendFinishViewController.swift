@@ -59,6 +59,9 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     override func viewDidLayoutSubviews() {
+        if self.scrollView.contentSize.height != 0.0 {
+            createSlideView()
+        }
         sendBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                             UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                               gradientOrientation: .horizontal)
@@ -86,11 +89,15 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         if self.view.frame.height == 736 {
             self.btnTopConstraint.constant = 105
         }
-        createSlideView()
+        
         animate()
     }
     
     func createSlideView() {
+//        if screenHeight == heightOfFive {
+//            self.sendBtn.setTitle("Send Transaction", for: .normal)
+//            return
+//        }
         let unlockSlider = AURUnlockSlider(frame: self.presenter.makeFrameForSlider())
         unlockSlider.delegate = self
         
@@ -107,7 +114,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         if self.view.subviews.contains(unlockSlider) {
             unlockSlider.removeFromSuperview()
         }
-        self.view.addSubview(unlockSlider)
+        self.scrollView.addSubview(unlockSlider) //view.addSubview(unlockSlider)
     }
     
     func animate() {
