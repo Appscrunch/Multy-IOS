@@ -325,9 +325,12 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         }
     }
     
-    func changePageControl(currentpage: Int) {
-//        let headerCell = tableView(tableView, cellForRowAt: [0, 0]) as? PortfolioTableViewCell
-//        headerCell?.changePageControl(currentPage: currentpage)
+    func presentTermsOfService() {
+        if DataManager.shared.checkTermsOfService() {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let termsVC = storyBoard.instantiateViewController(withIdentifier: "termsVC")
+            self.present(termsVC, animated: true, completion: nil)
+        }
     }
 }
 
