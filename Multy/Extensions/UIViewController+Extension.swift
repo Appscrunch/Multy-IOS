@@ -62,7 +62,7 @@ extension UIViewController {
                 tmvc!.className.hasPrefix("ActivityViewController") ||
                 tmvc!.className.hasPrefix("FastOperationsViewController") ||
                 tmvc!.className.hasPrefix("ContactsViewController") ||
-                tmvc!.className.hasPrefix("SettingsViewController")){
+                tmvc!.className.hasPrefix("SettingsViewController")) {
                 
             } else if tmvc != nil && tmvc!.shouldRemoveKeyboard() {
                 tmvc!.dismissKeyboard()
