@@ -199,6 +199,8 @@
 		45F42C841FDC081400210B1F /* IsJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F42C831FDC081400210B1F /* IsJailbroken.swift */; };
 		45F6340A202388C900C17A7C /* ViewInBlockchainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63409202388C900C17A7C /* ViewInBlockchainPresenter.swift */; };
 		45F6340C202388DF00C17A7C /* ViewInBlockchainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6340B202388DF00C17A7C /* ViewInBlockchainViewController.swift */; };
+		45F8CD47208F391B00DEB495 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8CD46208F391B00DEB495 /* TermsOfServiceViewController.swift */; };
+		45F8CD49208F393C00DEB495 /* TermsOfServicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8CD48208F393C00DEB495 /* TermsOfServicePresenter.swift */; };
 		50D1AA3CFDA9BDFA53D3B9D0 /* Pods_MultyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FFD5D1BF6159BB241CBFF9 /* Pods_MultyTests.framework */; };
 		BA3449F966752EDDC53A2B0D /* Pods_Multy_MultyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 572DB9D15F9362827245CF67 /* Pods_Multy_MultyUITests.framework */; };
 		FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0B618C1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift */; };
@@ -491,6 +493,8 @@
 		45F42C831FDC081400210B1F /* IsJailbroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsJailbroken.swift; sourceTree = "<group>"; };
 		45F63409202388C900C17A7C /* ViewInBlockchainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInBlockchainPresenter.swift; sourceTree = "<group>"; };
 		45F6340B202388DF00C17A7C /* ViewInBlockchainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInBlockchainViewController.swift; sourceTree = "<group>"; };
+		45F8CD46208F391B00DEB495 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
+		45F8CD48208F393C00DEB495 /* TermsOfServicePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServicePresenter.swift; sourceTree = "<group>"; };
 		4F755B7866B0879E2567D290 /* Pods-Multy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Multy/Pods-Multy.debug.xcconfig"; sourceTree = "<group>"; };
 		572DB9D15F9362827245CF67 /* Pods_Multy_MultyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy_MultyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		647A035491B0F1BEBEB72A55 /* Pods-MultyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultyTests/Pods-MultyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1265,6 +1269,7 @@
 		45B9CB011FBB4AC200AA2A31 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				45F8CD45208F38F600DEB495 /* TermsOfService */,
 				45B9CAFD1FBB4A8700AA2A31 /* AssetsViewController.swift */,
 				45B9CAFF1FBB4AB200AA2A31 /* AssetsPresenter.swift */,
 				455CDCF41FC848F700EA5ACE /* Creating wallet */,
@@ -1436,6 +1441,15 @@
 				45F63409202388C900C17A7C /* ViewInBlockchainPresenter.swift */,
 			);
 			path = ViewInBlockchain;
+			sourceTree = "<group>";
+		};
+		45F8CD45208F38F600DEB495 /* TermsOfService */ = {
+			isa = PBXGroup;
+			children = (
+				45F8CD46208F391B00DEB495 /* TermsOfServiceViewController.swift */,
+				45F8CD48208F393C00DEB495 /* TermsOfServicePresenter.swift */,
+			);
+			path = TermsOfService;
 			sourceTree = "<group>";
 		};
 		8F3AE4440B3A342D5B1B0AB7 /* Pods */ = {
@@ -2090,6 +2104,7 @@
 				45E148AE204553FB006BD4D1 /* DonationSendPresenter.swift in Sources */,
 				FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */,
 				FA58DF611FDC400C00C45303 /* UIColor+Extension.swift in Sources */,
+				45F8CD47208F391B00DEB495 /* TermsOfServiceViewController.swift in Sources */,
 				FA8835901FD854EC007694A2 /* AddressRLM.swift in Sources */,
 				4575693F1FBDD6C300FDEE20 /* BackupSeedPhraseViewController.swift in Sources */,
 				FA0B618D1FEBC1DD00ED0CE6 /* RecentAddressesRLM.swift in Sources */,
@@ -2119,6 +2134,7 @@
 				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
 				45AC162B2048380700E75BD6 /* CurrencyObj.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
+				45F8CD49208F393C00DEB495 /* TermsOfServicePresenter.swift in Sources */,
 				FA8C87852010B44300F8D5D9 /* UITableViewCell+Extension.swift in Sources */,
 				45409459203352B800603DB5 /* PinCodePresenter.swift in Sources */,
 				FADC004C1FC323A900182E45 /* Socket.swift in Sources */,

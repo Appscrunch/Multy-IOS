@@ -59,6 +59,15 @@ class DataManager: NSObject {
         }
     }
     
+    func checkTermsOfService() -> Bool {
+        if let isTerms = UserDefaults.standard.value(forKey: "isTermsAccept") {
+            return isTerms as! Bool
+        } else {
+            //            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+            return true
+        }
+    }
+    
     func makeExchangeFor(blockchainType: BlockchainType) -> Double {
         switch blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
