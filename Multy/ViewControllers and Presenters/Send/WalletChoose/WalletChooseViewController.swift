@@ -85,7 +85,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: self.presenter.walletsArr[indexPath.row])
         
         if !isValidDTO.isValid {
-            presenter.presentAlert(message: isValidDTO.message!)
+            presenter.presentAlert(message: "You entered not valid address for current blockchain.")
             
             return
         }

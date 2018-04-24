@@ -64,9 +64,11 @@ class TransactionWalletCell: UITableViewCell {
         }
         
         if histObj.isIncoming() {
-            self.addressLabel.text = histObj.txInputs[0].address
+//            self.addressLabel.text = histObj.txInputs[0].address
+            self.addressLabel.text = wallet.incomingTxAddress(for: histObj)
         } else {
-            self.addressLabel.text = histObj.txOutputs[0].address
+//            self.addressLabel.text = histObj.txOutputs[0].address
+            self.addressLabel.text = wallet.outcomingTxAddress(for: histObj)
         }
         
         if histObj.txStatus.intValue < 0 /* rejected tx*/ {
