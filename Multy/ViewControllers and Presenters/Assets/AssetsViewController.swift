@@ -140,6 +140,9 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
 //        } else {
 //            self.tableView.contentInset.bottom = 49
 //        }
+        if self.presenter.account != nil {
+            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
+        }
     }
     
     @objc func updateExchange() {
