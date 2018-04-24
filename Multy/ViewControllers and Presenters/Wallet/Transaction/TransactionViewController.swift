@@ -129,12 +129,21 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
                 }
                 let btcDonation = (donatOutPutObj?.amount as! UInt64).btcValue
                 self.donationView.isHidden = false
-                self.constraintDonationHeight.constant = 283
+                self.constraintDonationHeight.constant = makeDonationConstraint()
                 self.donationCryptoSum.text = btcDonation.fixedFraction(digits: 8)
                 self.donationCryptoName.text = " BTC"
                 self.donationFiatSumAndName.text = "\((btcDonation * presenter.histObj.btcToUsd).fixedFraction(digits: 2)) USD"
             }
         }
+    }
+    
+    func makeDonationConstraint() -> CGFloat {
+        var const: CGFloat = 0
+        switch screenHeight {
+        case heightOfFive: const = 323
+        default: const = 283
+        }
+        return const
     }
     
     func makeBackColor(color: UIColor) {

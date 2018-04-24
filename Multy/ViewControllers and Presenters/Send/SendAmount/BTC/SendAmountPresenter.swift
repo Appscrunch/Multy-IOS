@@ -109,8 +109,9 @@ class SendAmountPresenter: NSObject {
     }
     
     func cryptoToUsd() {
-        self.sumInFiat = transactionDTO.choosenWallet!.sumInFiat
-        self.sumInFiat = Double(round(100 * self.sumInFiat)/100)
+//        self.sumInFiat = transactionDTO.choosenWallet!.sumInFiat
+//        self.sumInFiat = Double(round(100 * self.sumInFiat)/100)
+        self.sumInFiat = Double(self.sendAmountVC!.topSumLbl.text!.replacingOccurrences(of: ",", with: "."))! * transactionDTO.choosenWallet!.exchangeCourse
         self.sendAmountVC?.bottomSumLbl.text = "\(self.sumInFiat.fixedFraction(digits: 2)) "
     }
     

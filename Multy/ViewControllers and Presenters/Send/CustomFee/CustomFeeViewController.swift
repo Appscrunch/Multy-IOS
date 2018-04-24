@@ -53,13 +53,15 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancelAction(_ sender: Any) {
         //for BTC
-        self.delegate?.setPreviousSelected(index: self.previousSelected)
+        if self.previousSelected != 5 {
+            self.delegate?.setPreviousSelected(index: self.previousSelected)
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func done() {
-        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < 2 {
-            let message = "Fee rate can not be less then 2 satoshi per byte."
+        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < 1 {
+            let message = "Fee rate can not be less then 1 satoshi per byte."
             let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                 self.topPriceTF.becomeFirstResponder()

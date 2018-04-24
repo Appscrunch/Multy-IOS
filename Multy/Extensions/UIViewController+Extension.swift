@@ -57,7 +57,12 @@ extension UIViewController {
                 tmvc!.className.hasPrefix("CustomFee") ||
                 tmvc!.className.hasPrefix("SendAmount") ||
                 tmvc!.className.hasPrefix("BackupSeedPhraseViewController") ||
-                tmvc!.className.hasPrefix("CheckWords")) {
+                tmvc!.className.hasPrefix("CheckWords") ||
+                tmvc!.className.hasPrefix("AssetsViewController") ||
+                tmvc!.className.hasPrefix("ActivityViewController") ||
+                tmvc!.className.hasPrefix("FastOperationsViewController") ||
+                tmvc!.className.hasPrefix("ContactsViewController") ||
+                tmvc!.className.hasPrefix("SettingsViewController")) {
                 
             } else if tmvc != nil && tmvc!.shouldRemoveKeyboard() {
                 tmvc!.dismissKeyboard()

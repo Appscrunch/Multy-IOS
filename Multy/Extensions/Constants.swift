@@ -83,6 +83,8 @@ let heightOfFive     : CGFloat = 568.0
 let heightOfiPad     : CGFloat = 480.0
 //
 
+let infoPlist = Bundle.main.infoDictionary!
+
 //createWallet, WalletSettingd
 let maxNameLength = 25
 
@@ -140,7 +142,7 @@ let minSatoshiToDonate: UInt64          = 5000  //5k minimum sum to donate
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "stage.multy.io"
+let shortURL = "api.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"
