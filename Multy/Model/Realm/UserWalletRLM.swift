@@ -289,6 +289,38 @@ class UserWalletRLM: Object {
         return false
     }
     
+    func outcomingTxAddress(for transaction: HistoryRLM) -> String {
+        let arrOfOutputsAddresses = transaction.txOutputs.map{ $0.address }//.joined(separator: "\n")
+        let donationAddress = arrOfOutputsAddresses.joined(separator: "\n").getDonationAddress(blockchainType: BlockchainType.create(wallet: self)) ?? ""
+        let walletAddresses = self.fetchAddresses()
+        
+        for address in arrOfOutputsAddresses {
+            if address != donationAddress && !walletAddresses.contains(address) {
+                return address
+            }
+        }
+        
+        if donationAddress.isEmpty == false {
+            return donationAddress
+        }
+        
+        return arrOfOutputsAddresses[0]
+    }
+    
+    func incomingTxAddress(for transaction: HistoryRLM) -> String {
+        let arrOfOutputsAddresses = transaction.txInputs.map{ $0.address }//.joined(separator: "\n")
+        let donationAddress = arrOfOutputsAddresses.joined(separator: "\n").getDonationAddress(blockchainType: BlockchainType.create(wallet: self)) ?? ""
+        let walletAddresses = self.fetchAddresses()
+        
+        for address in arrOfOutputsAddresses {
+            if address != donationAddress && !walletAddresses.contains(address) {
+                return address
+            }
+        }
+        
+        return arrOfOutputsAddresses[0]
+    }
+    
     override class func primaryKey() -> String? {
         return "id"
     }

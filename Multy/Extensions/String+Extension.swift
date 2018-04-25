@@ -16,6 +16,18 @@ extension String {
         
         return BigInt(0)
     }
+    
+    var stringWithDot: String {
+        get {
+            return  self.replacingOccurrences(of: ",", with: ".")
+        }
+    }
+    
+    var doubleValue: Double {
+        get {
+            return Double(self.stringWithDot)!
+        }
+    }
 
     func createBinaryData() -> BinaryData? {
         let pointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)

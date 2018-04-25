@@ -43,6 +43,7 @@ class SecuritySettingsViewController: UIViewController, AnalyticsProtocol, Cance
         let storyBoard = UIStoryboard(name: "Settings", bundle: nil)
         let resetVC = storyBoard.instantiateViewController(withIdentifier: "resetAllDataVC") as! ResetAllDataViewController
         resetVC.modalPresentationStyle = .overCurrentContext
+        resetVC.modalTransitionStyle = .crossDissolve
         resetVC.cancelDelegate = self
         self.present(resetVC, animated: true, completion: nil)
         sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: resetTap)

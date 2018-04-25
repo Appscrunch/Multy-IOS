@@ -78,6 +78,10 @@ extension DataManager {
         }
     }
     
+    func appVersion() -> String {
+        return ((infoPlist["CFBundleShortVersionString"] as! String) + (infoPlist["CFBundleVersion"] as! String))
+    }
+    
     func auth(rootKey: String?, completion: @escaping (_ account: AccountRLM?,_ error: Error?) -> ()) {
         realmManager.getRealm { (realmOpt, error) in
             if let realm = realmOpt {
@@ -90,6 +94,7 @@ extension DataManager {
                     params["deviceID"] = account?.deviceID
                     params["deviceType"] = account?.deviceType
                     params["pushToken"] = account?.pushToken
+                    params["appVersion"] = self.appVersion()
                     
                     self.apiManager.userID = account!.userID
                 } else {
@@ -101,6 +106,7 @@ extension DataManager {
                         params["deviceID"] = "iOS \(UIDevice.current.name)"
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
+                        params["appVersion"] = self.appVersion()
                         
                         paramsDict = NSMutableDictionary(dictionary: params)
                         
@@ -113,6 +119,7 @@ extension DataManager {
                         params["deviceID"] = "iOS \(UIDevice.current.name)"//UUID().uuidString
                         params["deviceType"] = 1
                         params["pushToken"] = UUID().uuidString
+                        params["appVersion"] = self.appVersion()
                         
                         paramsDict = NSMutableDictionary(dictionary: params)
                         

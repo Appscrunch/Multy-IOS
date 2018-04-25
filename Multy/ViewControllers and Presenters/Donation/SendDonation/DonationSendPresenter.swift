@@ -83,10 +83,10 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         
         DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { [unowned self] (answer, err) in
             self.mainVC?.progressHud.unblockUIandHideProgressHUD()
-            
+            let errMessage = "Can't send a donation. Please check that donation sum is not too small(> 5000 Satoshi) and wallet`s balance is sufficient."
             if err != nil {
                 if answer != nil {
-                    self.mainVC?.presentAlert(with: answer)
+                    self.mainVC?.presentAlert(with: errMessage)
                 }
                 
                 return
@@ -94,7 +94,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
             
             self.mainVC?.view.isUserInteractionEnabled = true
             if err != nil {
-                let alert = UIAlertController(title: "Error", message: err.debugDescription, preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: errMessage, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.mainVC?.present(alert, animated: true, completion: nil)
                 return

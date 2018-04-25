@@ -101,6 +101,9 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         self.amountTF.text = self.amountTF.text?.replacingOccurrences(of: ".", with: ",")
         self.bottomSumLbl.text = self.bottomSumLbl.text?.replacingOccurrences(of: ".", with: ",")
         self.sumLbl.text = self.sumLbl.text?.replacingOccurrences(of: ".", with: ",")
+        if self.amountTF.text!.contains(" ") {
+            self.amountTF.text = self.amountTF.text?.replacingOccurrences(of: " ", with: "")  //delete space after exchange action
+        }
         
         self.isCrypto = !self.isCrypto
     }
