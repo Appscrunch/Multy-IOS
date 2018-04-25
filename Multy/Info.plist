@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -30,11 +30,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>34</string>
+	<string>39</string>
 	<key>GIT_BRANCH_NAME</key>
 	<string>ETH_BETA_TEST</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>5f8be96</string>
+	<string>f749715</string>
 	<key>GIT_TAG_NAME</key>
 	<string>Release-26-dirty</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -63,7 +63,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) camera use</string>
+	<string>Multy needs to scan payment request QR code.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

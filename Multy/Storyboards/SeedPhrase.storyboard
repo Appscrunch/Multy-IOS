@@ -636,7 +636,7 @@ Seed Phrase!</string>
                                     <action selector="cancelAction:" destination="Q5h-s0-rmK" eventType="touchUpInside" id="TYw-jx-N19"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wrongPhraseSign" translatesAutoresizingMaskIntoConstraints="NO" id="abo-WQ-T1q">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="abo-WQ-T1q">
                                 <rect key="frame" x="135.5" y="281.5" width="103" height="103"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="abo-WQ-T1q" secondAttribute="height" multiplier="1:1" id="v7u-G8-XKe"/>
@@ -694,11 +694,11 @@ Seed Phrase!</string>
         <image name="01" width="271" height="31"/>
         <image name="06" width="271" height="31"/>
         <image name="done" width="133" height="133"/>
+        <image name="error" width="133" height="133"/>
         <image name="errorSeed" width="271" height="31"/>
         <image name="infoIconRed" width="24" height="24"/>
         <image name="snapShot" width="62" height="62"/>
         <image name="spyCam" width="62" height="62"/>
         <image name="spyIcon" width="62" height="62"/>
-        <image name="wrongPhraseSign" width="107" height="107"/>
     </resources>
 </document>

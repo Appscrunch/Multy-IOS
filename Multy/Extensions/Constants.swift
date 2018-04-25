@@ -13,10 +13,11 @@ struct Constants {
         static let cancelString = "Cancel"
         static let backupButtonHeight = CGFloat(44)
         static let backupAssetsOffset = CGFloat(25)
+        static let leadingAndTrailingOffset = CGFloat(16)
     }
     
     struct ETHWalletScreen {
-        static let topCellHeight = CGFloat(375)
+        static let topCellHeight = CGFloat(331)
         static let blockedCellDifference = CGFloat(60) // difference in table cell sizes in case existing/non existing blocked amount on wallet
         static let collectionCellDifference = CGFloat(137) // difference in sizes btw table cell and collection cell
     }
@@ -82,6 +83,8 @@ let heightOfFive     : CGFloat = 568.0
 let heightOfiPad     : CGFloat = 480.0
 //
 
+let infoPlist = Bundle.main.infoDictionary!
+
 //createWallet, WalletSettingd
 let maxNameLength = 25
 
@@ -139,7 +142,8 @@ let minSatoshiToDonate: UInt64          = 5000  //5k minimum sum to donate
 
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "test.multy.io"
+
+let shortURL = "stage.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"

@@ -9,6 +9,18 @@ extension String {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
     
+    var stringWithDot: String {
+        get {
+            return  self.replacingOccurrences(of: ",", with: ".")
+        }
+    }
+    
+    var doubleValue: Double {
+        get {
+            return Double(self.stringWithDot)!
+        }
+    }
+
     func createBinaryData() -> BinaryData? {
         let pointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)
         defer {

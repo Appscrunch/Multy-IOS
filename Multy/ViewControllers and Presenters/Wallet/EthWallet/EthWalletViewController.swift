@@ -223,6 +223,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
                                                        UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                          gradientOrientation: .topRightBottomLeft)
         }
+        
         setGradientBackground()
     }
     
@@ -264,11 +265,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @IBAction func exchangeAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-        donatAlert.modalPresentationStyle = .overCurrentContext
-        donatAlert.cancelDelegate = self
-        self.present(donatAlert, animated: true, completion: nil)
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(from: weakSelf)
         //        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
         logAnalytics()
     }
@@ -320,6 +318,14 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     func updateUI() {
         self.tableView.reloadData()
+    }
+    
+    func fixFirstCell() {
+        let header = self.tableView.cellForRow(at: [0,0]) as! EthWalletHeaderTableViewCell
+        header.bottomView.backgroundColor = .white
+        if screenHeight == heightOfPlus {
+            header.bottomView.sizeToFit()
+        }
     }
 }
 
