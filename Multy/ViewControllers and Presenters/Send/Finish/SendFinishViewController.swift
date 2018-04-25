@@ -41,6 +41,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     var timer: Timer?
     
     let label = UILabel(frame: CGRect(x: 33, y: 22, width: 50, height: 20))     //test
+    var unlockSlider: AURUnlockSlider?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,27 +95,23 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func createSlideView() {
-//        if screenHeight == heightOfFive {
-//            self.sendBtn.setTitle("Send Transaction", for: .normal)
-//            return
-//        }
-        let unlockSlider = AURUnlockSlider(frame: self.presenter.makeFrameForSlider())
-        unlockSlider.delegate = self
+        self.unlockSlider = AURUnlockSlider(frame: self.presenter.makeFrameForSlider())
+        unlockSlider!.delegate = self
         
-        unlockSlider.sliderText = "Slide to Send"
-        unlockSlider.sliderTextColor = UIColor.white
-        unlockSlider.sliderTextFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!
-        unlockSlider.sliderBackgroundColor = UIColor.clear
+        unlockSlider!.sliderText = "Slide to Send"
+        unlockSlider!.sliderTextColor = UIColor.white
+        unlockSlider!.sliderTextFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!
+        unlockSlider!.sliderBackgroundColor = UIColor.clear
         
         
         label.text = "ABC"  //test
         label.textColor = UIColor.white     //test
         
 //        unlockSlider.addSubview(label)
-        if self.view.subviews.contains(unlockSlider) {
-            unlockSlider.removeFromSuperview()
+        if self.view.subviews.contains(unlockSlider!) {
+            unlockSlider!.removeFromSuperview()
         }
-        self.scrollView.addSubview(unlockSlider) //view.addSubview(unlockSlider)
+        self.scrollView.addSubview(unlockSlider!) //view.addSubview(unlockSlider)
     }
     
     func animate() {
@@ -160,6 +157,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func unlockSliderDidUnlock(_ slider: AURUnlockSlider) {
+//        self.presentAlert()
         self.nextAction(Any.self)
     }
     
@@ -195,12 +193,20 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
             "payload"   : newAddressParams
             ] as [String : Any]
         
+        
         DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
             print("---------\(dict)")
             
             if error != nil {
-                self.presentAlert()
+                self.unlockSlider = nil
+                self.scrollView.subviews.last?.removeFromSuperview()
+                self.scrollView.reloadInputViews()
+                self.createSlideView()
+                self.scrollView.reloadInputViews()
+                self.view.reloadInputViews()
                 
+                self.presentAlert()
+//                self.unlockSlider.layoutSubviews()
                 print("sendHDTransaction Error: \(error)")
                 self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
                 return
