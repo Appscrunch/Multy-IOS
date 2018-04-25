@@ -28,13 +28,13 @@ class DonationCollectionViewCell: UICollectionViewCell {
     }
     
     func setupUIfor(view: UIView) {
-        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.6)
         view.layer.shadowOpacity = 1
         view.layer.shadowOffset = CGSize.zero
         view.layer.shadowRadius = 10
-        if screenHeight == heightOfiPad || screenHeight == heightOfFive {   // ipad fix
-            self.backgroundImg.contentMode = .scaleToFill
-        }
+//        if screenHeight == heightOfiPad || screenHeight == heightOfFive {   // ipad fix
+//            self.backgroundImg.contentMode = .scaleToFill
+//        }
     }
 
 }

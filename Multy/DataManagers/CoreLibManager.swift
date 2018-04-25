@@ -601,12 +601,14 @@ class CoreLibManager: NSObject {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
+
+        if tSer != nil {
+            return (errorString(from: tSer, mask: "transaction_serialize")!, -1)
+        }
+        
         defer {
             free_binarydata(serializedTransaction.pointee)
             serializedTransaction.deallocate()
-        }
-        if tSer != nil {
-            return (errorString(from: tSer, mask: "transaction_serialize")!, -1)
         }
         
         let data = serializedTransaction.pointee!.pointee.convertToData()

@@ -26,6 +26,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var heightOfBottomBar: NSLayoutConstraint!
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
+    @IBOutlet weak var spaceBetweenLblConstant: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var presenter = BTCWalletPresenter()
     
@@ -176,10 +178,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         backupView!.layer.cornerRadius = 20
         backupView!.backgroundColor = .white
         
-        backupView!.layer.shadowColor = UIColor.gray.cgColor
-        backupView!.layer.shadowOpacity = 1
-        backupView!.layer.shadowOffset = .zero
-        backupView!.layer.shadowRadius = 10
+        backupView!.setShadow(with: #colorLiteral(red: 0.1490196078, green: 0.2980392157, blue: 0.4156862745, alpha: 0.3))
         
         if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
             backupView!.isHidden = false
@@ -282,11 +281,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func exchangeAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-        donatAlert.modalPresentationStyle = .overCurrentContext
-        donatAlert.cancelDelegate = self
-        self.present(donatAlert, animated: true, completion: nil)
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(from: weakSelf)
 //        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
         logAnalytics()
     }
@@ -320,6 +316,11 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     func fixForX() {
         if screenHeight == heightOfX {
             self.heightOfBottomBar.constant = 83
+            self.spaceBetweenLblConstant.constant = 46
+            self.bottomConstraint.constant = 30
+        } else if screenHeight == heightOfStandard {
+            self.spaceBetweenLblConstant.constant = 100
+            self.bottomConstraint.constant = 30
         }
     }
     
