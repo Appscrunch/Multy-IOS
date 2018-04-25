@@ -9,14 +9,6 @@ extension String {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
     
-    var bigInt: BigInt {
-        if let bigIntValue = BigInt(self) {
-            return bigIntValue
-        }
-        
-        return BigInt(0)
-    }
-    
     var stringWithDot: String {
         get {
             return  self.replacingOccurrences(of: ",", with: ".")
@@ -81,7 +73,7 @@ extension String {
         self.insert(delimeter, at: self.index(self.endIndex, offsetBy: -atIndexFromEnd))
     }
     
-    private func toStringWithZeroes(precision: Int) -> String {
+    func toStringWithZeroes(precision: Int) -> String {
         let components = self.components(separatedBy: CharacterSet.init(charactersIn: "\(defaultDelimeter)"))
         
         if precision < 1 {

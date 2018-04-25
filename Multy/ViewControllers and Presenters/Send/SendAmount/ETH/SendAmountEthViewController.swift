@@ -33,7 +33,6 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     
     let numberFormatter = NumberFormatter()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
@@ -200,14 +199,14 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     
     
     @IBAction func nextAction(_ sender: Any) {
-        NSObject.cancelPreviousPerformRequests(withTarget: self)
-        changeSum()
-        
-        if self.presenter.sumInCrypto != 0.0 && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty && convertBTCStringToSatoshi(sum: amountTF.text!) != 0 {
+//        NSObject.cancelPreviousPerformRequests(withTarget: self)
+//        changeSum()
+//
+//        if self.presenter.sumInCrypto != 0.0 && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty && convertBTCStringToSatoshi(sum: amountTF.text!) != 0 {
             self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
-        } else {
-            self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
-        }
+//        } else {
+//            self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
+//        }
     }
     
     func presentWarning(message: String) {
@@ -218,7 +217,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.text == "" || (textField.text == "0" && string != "," && string != "." && !string.isEmpty) {
-            if string.convertStringWithCommaToDouble() > self.presenter.maxAllowedToSpend {
+            if Double(string)! > self.presenter.maxAllowedToSpend {
                 self.presentWarning(message: "You are trying to spend more then you have.")
                 
                 return false

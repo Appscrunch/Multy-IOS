@@ -242,7 +242,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @IBAction func sendAction(_ sender: Any) {
-        if presenter.wallet!.availableAmount() == 0 {
+        if presenter.isThereAvailableAmount == false {
             self.presentAlert(with: "You have no available funds")
             
             return
@@ -423,7 +423,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight - (presenter.isTherePendingAmount ? Constants.ETHWalletScreen.blockedCellDifference : 0)
+            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight - (presenter.isTherePendingAmount ? 0 : Constants.ETHWalletScreen.blockedCellDifference)
             
             backUpView(height: presenter.topCellHeight)
             if presenter.isTherePendingAmount {

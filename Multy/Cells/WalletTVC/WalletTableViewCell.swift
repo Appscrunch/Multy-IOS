@@ -72,7 +72,7 @@ class WalletTableViewCell: UITableViewCell {
         } else if blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
             let sumInCrypto = BigInt.init(wallet!.ethWallet!.balance)
             
-            self.cryptoSumLbl.text  = sumInCrypto!.ethString
+            self.cryptoSumLbl.text  = sumInCrypto.ethValueString
         }
     
         if wallet != nil {

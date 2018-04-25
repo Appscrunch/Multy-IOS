@@ -12,6 +12,7 @@ class EthWalletPresenter: NSObject {
     var isTherePendingAmount = false
     var wallet : UserWalletRLM? {
         didSet {
+            isTherePendingAmount = wallet!.ethWallet?.pendingETHAmountString != "0,0"
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
             mainVC?.fixFirstCell()
@@ -21,6 +22,11 @@ class EthWalletPresenter: NSObject {
     var account : AccountRLM?
     
     var transactionsArray = [TransactionRLM]()
+    var isThereAvailableAmount: Bool {
+        get {
+            return wallet!.ethWallet!.balance != "0"
+        }
+    }
     
     var historyArray = [HistoryRLM]() {
         didSet {
