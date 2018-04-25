@@ -214,17 +214,22 @@ class UserWalletRLM: Object {
     }
     
     func outgoingAmount(for transaction: HistoryRLM) -> UInt64 {
-        var sum = UInt64(0)
+        var allSum = UInt64(0)
+        var ourSum = UInt64(0)
+        
+        for tx in transaction.txInputs {
+            allSum += tx.amount.uint64Value
+        }
         
         let addresses = self.fetchAddresses()
         
         for tx in transaction.txOutputs {
-            if !addresses.contains(tx.address) {
-                sum += tx.amount.uint64Value
+            if addresses.contains(tx.address) {
+                ourSum += tx.amount.uint64Value
             }
         }
         
-        return sum
+        return allSum - ourSum
     }
     
     func isTransactionPending(for transaction: HistoryRLM) -> Bool {
@@ -247,6 +252,38 @@ class UserWalletRLM: Object {
         }
         
         return false
+    }
+    
+    func outcomingTxAddress(for transaction: HistoryRLM) -> String {
+        let arrOfOutputsAddresses = transaction.txOutputs.map{ $0.address }//.joined(separator: "\n")
+        let donationAddress = arrOfOutputsAddresses.joined(separator: "\n").getDonationAddress(blockchainType: BlockchainType.create(wallet: self)) ?? ""
+        let walletAddresses = self.fetchAddresses()
+        
+        for address in arrOfOutputsAddresses {
+            if address != donationAddress && !walletAddresses.contains(address) {
+                return address
+            }
+        }
+        
+        if donationAddress.isEmpty == false {
+            return donationAddress
+        }
+        
+        return arrOfOutputsAddresses[0]
+    }
+    
+    func incomingTxAddress(for transaction: HistoryRLM) -> String {
+        let arrOfOutputsAddresses = transaction.txInputs.map{ $0.address }//.joined(separator: "\n")
+        let donationAddress = arrOfOutputsAddresses.joined(separator: "\n").getDonationAddress(blockchainType: BlockchainType.create(wallet: self)) ?? ""
+        let walletAddresses = self.fetchAddresses()
+        
+        for address in arrOfOutputsAddresses {
+            if address != donationAddress && !walletAddresses.contains(address) {
+                return address
+            }
+        }
+        
+        return arrOfOutputsAddresses[0]
     }
     
     override class func primaryKey() -> String? {

@@ -11,17 +11,20 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
     @IBOutlet weak var addressTV: UITextView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var botView: UIView!
+    @IBOutlet weak var placeholderLabel: UILabel!
     
     var cancelDelegate: CancelProtocol?
     var sendAddressDelegate: SendAddressProtocol?
     var goToQrDelegate: GoToQrProtocol?
     var donationDelegate: DonationProtocol?
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         self.addressTV.delegate = self
         setupShadow()
+        
 //        (self.addressTV.value(forKey: "textInputTraits") as AnyObject).setValue(UIColor.clear , forKey:"insertionPointColor")
     }
 
@@ -29,9 +32,18 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
         super.setSelected(selected, animated: animated)
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            placeholderLabel.isHidden = !placeholderLabel.isHidden
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
+    }
     
     func setupShadow() {
-        let myColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 1)
+        let myColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3)
         topView.setShadow(with: myColor)
         botView.setShadow(with: myColor)
     }
@@ -63,6 +75,7 @@ class SearchAddressTableViewCell: UITableViewCell, AnalyticsProtocol {
 //        self.addressTF.textColor = .white
         self.addressTV.text = address
         self.addressInTfLlb.text = address
+        placeholderLabel.isHidden = !addressTV.text.isEmpty
     }
 }
 

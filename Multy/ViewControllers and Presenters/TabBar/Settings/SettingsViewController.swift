@@ -179,6 +179,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
                 let assetVC = self.tabBarController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
                 UserDefaults.standard.removeObject(forKey: "isFirstLaunch")
                 UserDefaults.standard.removeObject(forKey: "pin")
+                UserDefaults.standard.removeObject(forKey: "isTermsAccept")
                 assetVC.isFirstLaunch = true
                 assetVC.presenter.account = nil
                 exit(0)
@@ -204,6 +205,14 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         secureSettingsVC.resetDelegate = self
         self.navigationController?.pushViewController(secureSettingsVC, animated: true)
     }
+    
+    @IBAction func privacyAndTermsAction(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let webTextPage = storyboard.instantiateViewController(withIdentifier: "webText") as! WebTextPageViewController
+        webTextPage.tagForLoad = sender.tag
+        self.navigationController?.pushViewController(webTextPage, animated: true)
+    }
+    
     
     func appVersion() -> String {
         return infoDictionary["CFBundleShortVersionString"] as! String

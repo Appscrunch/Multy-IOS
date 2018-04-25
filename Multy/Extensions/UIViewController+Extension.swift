@@ -57,7 +57,12 @@ extension UIViewController {
                 tmvc!.className.hasPrefix("CustomFee") ||
                 tmvc!.className.hasPrefix("SendAmount") ||
                 tmvc!.className.hasPrefix("BackupSeedPhraseViewController") ||
-                tmvc!.className.hasPrefix("CheckWords")) {
+                tmvc!.className.hasPrefix("CheckWords") ||
+                tmvc!.className.hasPrefix("AssetsViewController") ||
+                tmvc!.className.hasPrefix("ActivityViewController") ||
+                tmvc!.className.hasPrefix("FastOperationsViewController") ||
+                tmvc!.className.hasPrefix("ContactsViewController") ||
+                tmvc!.className.hasPrefix("SettingsViewController")) {
                 
             } else if tmvc != nil && tmvc!.shouldRemoveKeyboard() {
                 tmvc!.dismissKeyboard()
@@ -102,7 +107,7 @@ extension UIViewController {
             }
             
             for wallet in wallets! {
-                if wallet.availableAmount() > 0 {
+                if wallet.availableAmount() > 0 && wallet.availableAmount() > minSatoshiInWalletForDonate {
                     let message = "You have nothing to donate.\nRecharge your balance for any of your BTC wallets."  // no money no honey
                     self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
                     break
@@ -143,5 +148,14 @@ extension UIViewController {
     
     func isVCVisible() -> Bool {
         return isViewLoaded && view.window != nil
+    }
+    
+    func presentDonationAlertVC(from cancelDelegate: CancelProtocol) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
+        donatAlert.modalPresentationStyle = .overCurrentContext
+        donatAlert.modalTransitionStyle = .crossDissolve
+        donatAlert.cancelDelegate = cancelDelegate
+        self.present(donatAlert, animated: true, completion: nil)
     }
 }

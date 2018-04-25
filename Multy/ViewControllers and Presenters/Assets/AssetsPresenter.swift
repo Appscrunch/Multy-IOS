@@ -52,14 +52,13 @@ class AssetsPresenter: NSObject {
     
     func auth() {
         //MARK: need refactoring
-        self.assetsVC?.view.isUserInteractionEnabled = false
-        assetsVC?.progressHUD.show()
+        self.blockUI()
         DataManager.shared.getAccount { (acc, err) in
-            self.assetsVC?.view.isUserInteractionEnabled = true
+            self.unlockUI()
             if acc == nil {
                 self.assetsVC?.progressHUD.show()
                 DataManager.shared.auth(rootKey: nil) { (account, error) in
-                    self.assetsVC?.progressHUD.hide()
+                    self.unlockUI()
                     guard account != nil else {
                         return
                     }
@@ -103,9 +102,9 @@ class AssetsPresenter: NSObject {
     }
     
     func updateWalletsInfo() {
-        assetsVC!.progressHUD.show()
+        self.blockUI()
         DataManager.shared.getAccount { (acc, err) in
-            self.assetsVC!.progressHUD.hide()
+            self.unlockUI()
             if acc != nil {
                 self.account = acc
                 self.getWalletsVerbose(completion: {_ in })
@@ -176,7 +175,9 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
+        blockUI()
         DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
+            self.unlockUI()
             if err != nil {
                 return
             } else {
@@ -243,5 +244,17 @@ class AssetsPresenter: NSObject {
         default:
             return UIViewController()
         }
+    }
+    
+    func blockUI() {
+        assetsVC!.progressHUD.blockUIandShowProgressHUD()
+        assetsVC?.tableView.isUserInteractionEnabled = false
+        assetsVC?.tabBarController?.view.isUserInteractionEnabled = false
+    }
+    
+    func unlockUI() {
+        assetsVC!.progressHUD.unblockUIandHideProgressHUD()
+        assetsVC?.tableView.isUserInteractionEnabled = true
+        assetsVC?.tabBarController?.view.isUserInteractionEnabled = true
     }
 }

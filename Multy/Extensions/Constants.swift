@@ -13,6 +13,7 @@ struct Constants {
         static let cancelString = "Cancel"
         static let backupButtonHeight = CGFloat(44)
         static let backupAssetsOffset = CGFloat(25)
+        static let leadingAndTrailingOffset = CGFloat(16)
     }
     
     struct ETHWalletScreen {
@@ -54,7 +55,7 @@ struct Constants {
         ]
         
         static let donationBlockchains = [
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: 0),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: UInt32(ETHEREUM_CHAIN_ID_MAINNET.rawValue)),
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: 0),
@@ -81,6 +82,8 @@ let heightOfStandard : CGFloat = 667.0
 let heightOfFive     : CGFloat = 568.0
 let heightOfiPad     : CGFloat = 480.0
 //
+
+let infoPlist = Bundle.main.infoDictionary!
 
 //createWallet, WalletSettingd
 let maxNameLength = 25
@@ -134,9 +137,12 @@ enum TxStatus : Int {
         BlockConfirmedOutcoming =   6
 }
 
+let minSatoshiInWalletForDonate: UInt64 = 10000 //10k minimun sum in wallet for available donation
+let minSatoshiToDonate: UInt64          = 5000  //5k minimum sum to donate
+
 //API REST constants
 //let apiUrl = "http://88.198.47.112:2278/"//"http://192.168.0.121:7778/"
-let shortURL = "stage.multy.io"
+let shortURL = "api.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
 //let socketUrl = "http://88.198.47.112:2280"

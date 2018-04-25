@@ -20,10 +20,10 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         sendAnalyticsEvent(screenName: screenActivity, eventName: screenActivity)
         
-        newsView.layer.shadowColor = UIColor.gray.cgColor
+        newsView.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3)
         newsView.layer.shadowOpacity = 1
         newsView.layer.shadowOffset = .zero
-        newsView.layer.shadowRadius = 10
+        newsView.layer.shadowRadius = 20
         
         presenter.tabBarFrame = tabBarController?.tabBar.frame
         
@@ -61,23 +61,15 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     
     @IBAction func goToAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-//        donatAlert.modalPresentationStyle = .overCurrentContext
-//        donatAlert.cancelDelegate = self
-//        self.present(donatAlert, animated: true, completion: nil)
         let webView = storyboard.instantiateViewController(withIdentifier: "ActivityWebViewVC")
         self.navigationController?.pushViewController(webView, animated: true)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
     
     @IBAction func donatAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
-        donatAlert.modalPresentationStyle = .overCurrentContext
-        donatAlert.cancelDelegate = self
-        self.present(donatAlert, animated: true, completion: nil)
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(from: weakSelf)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        
         logAnalytics()
     }
     

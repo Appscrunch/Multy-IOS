@@ -99,6 +99,7 @@ class BTCWalletHeaderCollectionViewCell: UICollectionViewCell, AnalyticsProtocol
         let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
         let adressVC = storyboard.instantiateViewController(withIdentifier: "walletAdressVC") as! AddressViewController
         adressVC.modalPresentationStyle = .overCurrentContext
+        adressVC.modalTransitionStyle = .crossDissolve
         adressVC.wallet = self.wallet
 //        self.mainVC.present
         self.mainVC?.present(adressVC, animated: true, completion: nil)

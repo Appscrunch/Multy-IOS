@@ -81,16 +81,30 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         transaction.sendAmount = self.mainVC?.donationTF.text?.convertStringWithCommaToDouble()
         transaction.transaction?.customFee = self.customFee
         
-        DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { (answer, err) in
-            self.mainVC?.progressHud.hide()
+        DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { [unowned self] (answer, err) in
+            self.mainVC?.progressHud.unblockUIandHideProgressHUD()
+            let errMessage = "Can't send a donation. Please check that donation sum is not too small(> 5000 Satoshi) and wallet`s balance is sufficient."
+            if err != nil {
+                if answer != nil {
+                    self.mainVC?.presentAlert(with: errMessage)
+                }
+                
+                return
+            }
+            
             self.mainVC?.view.isUserInteractionEnabled = true
             if err != nil {
-                let alert = UIAlertController(title: "Error", message: err.debugDescription, preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: errMessage, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.mainVC?.present(alert, animated: true, completion: nil)
                 return
             } else {
                 self.mainVC!.sendDonationSuccessAnalytics()
+            }
+            
+            if transaction.sendAmount! < minSatoshiToDonate.btcValue {
+                self.mainVC!.presentWarning(message: "Too low donation amount")
+                return
             }
             
             let storyboard = UIStoryboard(name: "Send", bundle: nil)

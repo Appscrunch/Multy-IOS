@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sharedDialog: UIActivityViewController?
     var selectedIndexOfTabBar = 0
     var isActiveFirstTime: Bool?
+    var enterPinVc: EnterPinViewController?
+    var application: UIApplication?
     
     override init() {
         super.init()
@@ -25,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        self.application = application
         // check for screenshot
         NotificationCenter.default.addObserver(
             forName: .UIApplicationUserDidTakeScreenshot,
@@ -78,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         let chainNameFromLink = (dictFormLink["address"] as! String).split(separator: ":").first
                         let addressFromLink = (dictFormLink["address"] as! String).split(separator: ":").last
-                        if let amount = dictFormLink["amount"] as? NSString {
+                        if let amount = dictFormLink["amount"] as? String {
                             amountFromLink = amount.doubleValue
                         } else if let number = dictFormLink["amount"] as? NSNumber {
                             amountFromLink = number.doubleValue
@@ -104,23 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let filePath = filePathOpt, let options = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: options)
         }
-        
-        if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            // For iOS 10 data message (sent via FCM
-            Messaging.messaging().delegate = self
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
-        
-        application.registerForRemoteNotifications()
         
         return true
     }
@@ -210,6 +195,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 if let seedVC = vcOnScren as? CheckWordsViewController {
                     seedVC.wordTF.becomeFirstResponder()
+                } else if let seedVC = vcOnScren as? PinCodeViewController {
+                    seedVC.pinTF.becomeFirstResponder()
+                } else if let receiveVC = vcOnScren as? ReceiveAmountViewController {
+                    receiveVC.amountTF.becomeFirstResponder()
+                } else if let amountVC = vcOnScren as? SendAmountViewController {
+                    amountVC.amountTF.becomeFirstResponder()
                 }
             }
             isActiveFirstTime = false
@@ -244,12 +235,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if err != nil || buildVersion >= hardVersion! {
                     assetVC.isFlowPassed = true
                     assetVC.viewDidLoad()
+                    assetVC.presentTermsOfService()
 //                    assetVC.viewWillAppear(false)
                     let _ = UserPreferences.shared
                     self.saveMkVersion()
                 } else {
                     assetVC.presentUpdateAlert()
                 }
+                
             }
         }
     }
@@ -287,6 +280,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if self.presentedVC != nil {
             self.presentedVC?.dismiss(animated: true, completion: nil)
         }
+        
+        if self.enterPinVc != nil {
+            self.enterPinVc?.hideCancel()
+        }
+        
         if self.openedAlert != nil {
             self.openedAlert?.dismiss(animated: true, completion: nil)
         }
@@ -326,6 +324,24 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         let token = Messaging.messaging().fcmToken
         print("FCM token: \(token ?? "")")
+    }
+    
+    func registerPush() {
+        if #available(iOS 10.0, *) {
+//             For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+//             For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            self.application!.registerUserNotificationSettings(settings)
+        }
+        self.application!.registerForRemoteNotifications()
     }
 }
 
