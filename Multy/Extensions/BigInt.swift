@@ -4,92 +4,192 @@
 
 import Foundation
 
-struct BigInt {
+enum BigIntOperation {
+    case add, subtract, multiply, divide
+}
+
+class BigInt: NSObject {
     // main stored value
-    var bigInt = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
+    var valuePointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
     
     init(_ stringValue: String) {
-        let mbi = make_big_int(stringValue.UTF8CStringPointer, bigInt)
+        super.init()
         
+        let mbi = make_big_int(stringValue.UTF8CStringPointer, valuePointer)
         let _ = DataManager.shared.coreLibManager.errorString(from: mbi, mask: "\n\ninit big int\n\n")
     }
     
+    override convenience init() {
+        self.init("0")
+    }
+    
     func setBigInt(string: String) {
-        let bisv = big_int_set_value(bigInt.pointee, string.UTF8CStringPointer)
+        let bisv = big_int_set_value(valuePointer.pointee, string.UTF8CStringPointer)
         
         let _ = DataManager.shared.coreLibManager.errorString(from: bisv, mask: "\n\nbig int: set value\n\n")
     }
     
+    func cloneBigInt() -> BigInt {
+        let newBigInt = BigInt()
+        let mbic = make_big_int_clone(self.valuePointer.pointee, newBigInt.valuePointer)
+        let _ = DataManager.shared.coreLibManager.errorString(from: mbic, mask: "\n\nbig int: make_big_int_clone\n\n")
+        
+        return newBigInt
+    }
+    
     // arithmetic methods
-    func add(by right: BigInt) -> BigInt {
-        let bia = big_int_add(bigInt.pointee, right.bigInt.pointee)
+    func modify<T>(with operation: BigIntOperation, by right: T) -> BigInt {
+        let newSelf = self.cloneBigInt()
+        var error: OpaquePointer?
         
-        let _ = DataManager.shared.coreLibManager.errorString(from: bia, mask: "\n\nbig int: add\n\n")
+        switch operation {
+        case .add:
+            if let right = right as? BigInt {
+                error = big_int_add(newSelf.valuePointer.pointee, right.valuePointer.pointee)
+            } else if let right = right as? Int64 {
+                error = big_int_add_int64(newSelf.valuePointer.pointee, right)
+            } else if let right = right as? Double {
+                error = big_int_add_double(newSelf.valuePointer.pointee, right)
+            } else {
+                precondition(true, "You are comparing inapropriate types")
+            }
+        case .subtract:
+            if let right = right as? BigInt {
+                error = big_int_sub(newSelf.valuePointer.pointee, right.valuePointer.pointee)
+            } else if let right = right as? Int64 {
+                error = big_int_sub_int64(newSelf.valuePointer.pointee, right)
+            } else if let right = right as? Double {
+                error = big_int_sub_double(newSelf.valuePointer.pointee, right)
+            } else {
+                precondition(true, "You are comparing inapropriate types")
+            }
+        case .multiply:
+            if let right = right as? BigInt {
+                error  = big_int_mul(newSelf.valuePointer.pointee, right.valuePointer.pointee)
+            } else if let right = right as? Int64 {
+                error = big_int_mul_int64(newSelf.valuePointer.pointee, right)
+            } else if let right = right as? Double {
+                error = big_int_mul_double(newSelf.valuePointer.pointee, right)
+            } else {
+                precondition(true, "You are comparing inapropriate types")
+            }
+        case .divide:
+            if let right = right as? BigInt {
+                error  = big_int_div(newSelf.valuePointer.pointee, right.valuePointer.pointee)
+            } else if let right = right as? Int64 {
+                error = big_int_div_int64 (newSelf.valuePointer.pointee, right)
+            } else if let right = right as? Double {
+                error = big_int_div_double(newSelf.valuePointer.pointee, right)
+            } else {
+                precondition(true, "You are comparing inapropriate types")
+            }
+        }
         
-        return self
+        let _ = DataManager.shared.coreLibManager.errorString(from: error, mask: "\n\nbig int: \(operation)\n\n")
+        
+        return newSelf
     }
     
-    func subtract(by right: BigInt) -> BigInt {
-        let bis = big_int_sub(bigInt.pointee, right.bigInt.pointee)
-        
-        let _ = DataManager.shared.coreLibManager.errorString(from: bis, mask: "\n\nsubtract int: add\n\n")
-        
-        return self
+    func add<T>(by right: T) -> BigInt {
+        return modify(with: .add, by: right)
     }
     
-    func multiply(by right: BigInt) -> BigInt {
-        let bim = big_int_mul(bigInt.pointee, right.bigInt.pointee)
-        
-        let _ = DataManager.shared.coreLibManager.errorString(from: bim, mask: "\n\nbig int: multiply\n\n")
-        
-        return self
+    func subtract<T>(by right: T) -> BigInt {
+        return modify(with: .subtract, by: right)
     }
     
-    func divide(by right: BigInt) -> BigInt {
-        let bid = big_int_div(bigInt.pointee, right.bigInt.pointee)
-        
-        let _ = DataManager.shared.coreLibManager.errorString(from: bid, mask: "\n\nbig int: divide\n\n")
-        
-        return self
+    func multiply<T>(by right: T) -> BigInt {
+        return modify(with: .multiply, by: right)
     }
     
-    static func + (left: BigInt, right: BigInt) -> BigInt {
+    func divide<T>(by right: T) -> BigInt {
+        return modify(with: .divide, by: right)
+    }
+    
+    static func + <T>(left: BigInt, right: T) -> BigInt {
         return left.add(by: right)
     }
     
-    static func - (left: BigInt, right: BigInt) -> BigInt {
+    static func - <T>(left: BigInt, right: T) -> BigInt {
         return left.subtract(by: right)
     }
     
-    static func * (left: BigInt, right: BigInt) -> BigInt {
+    static func * <T>(left: BigInt, right: T) -> BigInt {
         return left.multiply(by: right)
     }
     
-    static func / (left: BigInt, right: BigInt) -> BigInt {
+    static func / <T>(left: BigInt, right: T) -> BigInt {
         return left.divide(by: right)
     }
     
-    // arithmetic methods
+    // comparing methods
+    func compare<T>(to right: T) -> Int32 {
+        let boolPointer = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
+        var bic: OpaquePointer?
+        
+        if let right = right as? BigInt {
+            bic = big_int_cmp(self.valuePointer.pointee, right.valuePointer.pointee, boolPointer)
+        } else if let right = right as? Int64 {
+            bic = big_int_cmp_int64(self.valuePointer.pointee, right, boolPointer)
+        } else if let right = right as? Double {
+            bic = big_int_cmp_double(self.valuePointer.pointee, right, boolPointer)
+        } else {
+            precondition(true, "You are comparing inapropriate types")
+        }
+        
+        let _ = DataManager.shared.coreLibManager.errorString(from: bic, mask: "\n\nbig int: compare BigInt\n\n")
+        
+        return boolPointer.pointee
+    }
+    
+    static func < <T>(left: BigInt, right: T) -> Bool {
+        return left.compare(to: right) < 0
+    }
+    
+    static func <= <T>(left: BigInt, right: T) -> Bool {
+        return left.compare(to: right) <= 0
+    }
+    
+    static func > <T>(left: BigInt, right: T) -> Bool {
+        return !(left <= right)
+    }
+    
+    static func >= <T>(left: BigInt, right: T) -> Bool {
+        return !(left < right)
+    }
+    
+    static func == <T>(left: BigInt, right: T) -> Bool {
+        return left.compare(to: right) == 0
+    }
+    
+    // auxillary methods
     var stringValue: String {
         let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
         defer {
             free_string(amountStringPointer.pointee)
         }
         
-        big_int_get_value(bigInt.pointee, amountStringPointer)
+        big_int_get_value(valuePointer.pointee, amountStringPointer)
         
         return String(cString: amountStringPointer.pointee!)
     }
     
-    var ethValueString: String {
-        return stringValue.appendDelimeter(at: 18)
+    func cryptoValueString(for blockchain: Blockchain) -> String {
+        var precision: Int = 0
+        
+        switch blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            precision = 8
+        case BLOCKCHAIN_ETHEREUM:
+            precision = 18
+        default:
+            precision = 0
+        }
+        
+        return stringValue.appendDelimeter(at: precision)
     }
     
-    var btcValueString: String {
-        return stringValue.appendDelimeter(at: 8)
-    }
-    
-    func freeBigIntSwift() {
-        free_big_int(bigInt.pointee)
+    deinit {
+        free_big_int(valuePointer.pointee)
     }
 }

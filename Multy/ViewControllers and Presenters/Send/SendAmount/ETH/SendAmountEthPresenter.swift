@@ -21,7 +21,7 @@ class SendAmountEthPresenter: NSObject {
     var blockedAmount           : UInt64? {
         didSet {
             let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
-            availableSumInCrypto = Double(BigInt(transactionDTO.choosenWallet!.ethWallet!.balance).ethValueString.replacingOccurrences(of: ",", with: "."))
+            availableSumInCrypto = Double(BigInt(transactionDTO.choosenWallet!.ethWallet!.balance).cryptoValueString(for: BLOCKCHAIN_ETHEREUM).replacingOccurrences(of: ",", with: "."))
             availableSumInFiat = availableSumInCrypto! * exchangeCourse
         }
     }
