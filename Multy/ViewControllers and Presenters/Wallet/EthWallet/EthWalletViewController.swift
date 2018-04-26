@@ -341,13 +341,19 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         if countOfHistObjects > 0 {
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 7 {
+                if screenHeight == heightOfX {
+                    self.tableView.isScrollEnabled = false
+                    return 8
+                }
                 return 7
             } else {
                 return countOfHistObjects + 1
             }
         } else {
             self.tableView.isScrollEnabled = false
-            
+            if screenHeight == heightOfX {
+                return 13
+            }
             return 10
         }
     }
@@ -414,6 +420,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         
         let storyBoard = UIStoryboard(name: "Wallet", bundle: nil)
         let transactionVC = storyBoard.instantiateViewController(withIdentifier: "transaction") as! TransactionViewController
+        transactionVC.presenter.wallet = presenter.wallet!
         transactionVC.presenter.histObj = presenter.historyArray[indexPath.row - 1]
         transactionVC.presenter.blockchainType = BlockchainType.create(currencyID: presenter.wallet!.chain.uint32Value,
                                                                        netType: presenter.wallet!.chainType.uint32Value)
@@ -423,14 +430,14 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight - (presenter.isTherePendingAmount ? 0 : Constants.ETHWalletScreen.blockedCellDifference)
+            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight //- (presenter.isTherePendingAmount ? 0 : Constants.ETHWalletScreen.blockedCellDifference)
             
             backUpView(height: presenter.topCellHeight)
             if presenter.isTherePendingAmount {
                 setGradientBackground()
             }
             
-            return presenter.topCellHeight
+            return presenter.topCellHeight - 90
         } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
             if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
                 return 135
@@ -470,7 +477,7 @@ extension EthWalletViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth, height: presenter.topCellHeight - Constants.ETHWalletScreen.collectionCellDifference)
+        return CGSize(width: screenWidth, height: presenter.topCellHeight - 60 - Constants.ETHWalletScreen.collectionCellDifference)
     }
     
     func collectionView(_ collectionView: UICollectionView,
