@@ -111,11 +111,11 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         if !self.isFirstLaunch {
             self.presenter.updateWalletsInfo()
         }
+        
         self.isFirstLaunch = false
         guard isFlowPassed == true else {
             return
         }
-
 
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         if self.presenter.account != nil {
