@@ -148,7 +148,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             self.noteLbl.text = "" // NOTE FROM HIST OBJ
             self.constraintNoteFiatSum.constant = 10
             
-            //        self.transactionCurencyLbl.text = presenter.histObj.     // check currencyID
+            self.transactionCurencyLbl.text = "ETH"     // check currencyID
             self.walletFromAddressLbl.text = presenter.histObj.addressesArray.first
             self.personNameLbl.text = ""   // before we don`t have address book    OR    Wallet Name
             
@@ -156,8 +156,9 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             self.numberOfConfirmationLbl.text = makeConfirmationText()
             self.blockchainImg.image = UIImage(named: presenter.blockchainType.iconString)
             if isIncoming {
-                self.transctionSumLbl.text = "+\(Double(presenter.histObj.txOutAmountString)! * pow(-10, 18))"
-                self.sumInFiatLbl.text = "+\((cryptoSumInBTC * presenter.histObj.fiatCourseExchange).fixedFraction(digits: 2)) USD"
+                let fiatAmountInWei = BigInt(presenter.histObj.txOutAmountString) * presenter.histObj.fiatCourseExchange
+                self.transctionSumLbl.text = "+" + BigInt(presenter.histObj.txOutAmountString).cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                self.sumInFiatLbl.text = "+" + fiatAmountInWei.fiatValueString() + " USD"
             } else {
                 let outgoingAmount = presenter.wallet.outgoingAmount(for: presenter.histObj).btcValue
                 self.transctionSumLbl.text = "-\(outgoingAmount.fixedFraction(digits: 8))"
@@ -211,6 +212,8 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             let blockchainVC = segue.destination as! ViewInBlockchainViewController
             blockchainVC.presenter.txId = presenter.histObj.txId
             blockchainVC.presenter.blockchainType = presenter.blockchainType
+            blockchainVC.presenter.blockchain = presenter.blockchain
+            blockchainVC.presenter.txHash = presenter.histObj.txHash
         }
     }
     
