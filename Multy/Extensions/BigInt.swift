@@ -189,6 +189,10 @@ class BigInt: NSObject {
         return stringValue.appendDelimeter(at: precision)
     }
     
+    func fiatValueString() -> String {
+        return (self / Double(10000000000000000)).stringValue.appendDelimeter(at: 2)
+    }
+    
     deinit {
         free_big_int(valuePointer.pointee)
     }
