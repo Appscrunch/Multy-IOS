@@ -57,6 +57,11 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         } else if screenHeight == heightOfPlus {
             topButtonConstraint.constant = 58
         }
+        
+        if self.presenter.selectedIndexOfSpeed == nil {
+            self.tableView.selectRow(at: [0,2], animated: false, scrollPosition: .none)
+            self.tableView.delegate?.tableView!(self.tableView, didSelectRowAt: [0,2])
+        }
     }
     
     func registerCells() {
@@ -82,14 +87,14 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
     @IBAction func nextAction(_ sender: Any) {
         self.view.endEditing(true)
         
-//        if self.presenter.selectedIndexOfSpeed != nil {
+        if self.presenter.selectedIndexOfSpeed != nil {
             self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.presenter.checkMaxAvailable()
-//        } else {
-//            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
+        } else {
+            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
