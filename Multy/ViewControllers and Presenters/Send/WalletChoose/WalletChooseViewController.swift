@@ -36,6 +36,10 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
             let detailsVC = segue.destination as! SendDetailsViewController
             presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
             detailsVC.presenter.transactionDTO = presenter.transactionDTO
+        } else if segue.identifier == "sendETHDetailsVC" {
+            let detailsVC = segue.destination as! EthSendDetailsViewController
+            presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
+            detailsVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
     
@@ -75,7 +79,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         if presenter.transactionDTO.sendAmount != nil {
-            if presenter.walletsArr[indexPath.row].sumInCrypto < presenter.transactionDTO.sendAmount! {
+            if Double(presenter.walletsArr[indexPath.row].availableAmount()) < presenter.transactionDTO.sendAmount! {
                 presenter.presentAlert(message: nil)
                 
                 return
@@ -91,7 +95,14 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         self.presenter.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "sendBTCDetailsVC", sender: Any.self)
+        switch self.presenter.walletsArr[indexPath.row].blockchain.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            self.performSegue(withIdentifier: "sendBTCDetailsVC", sender: Any.self)
+        case BLOCKCHAIN_ETHEREUM:
+            self.performSegue(withIdentifier: "sendETHDetailsVC", sender: Any.self)
+        default: break
+        }
+        
 //        let storyboard = UIStoryboard(name: "Send", bundle: nil)   //need to send transactionDTO
 //        let ethDetailsVC = storyboard.instantiateViewController(withIdentifier: "EthSendDetails")
 //        self.navigationController?.pushViewController(ethDetailsVC, animated: true)
