@@ -25,6 +25,8 @@ target 'Multy' do
   pod 'Crashlytics'
   pod 'Branch'
   pod 'AURUnlockSlider'
+
+  pod 'SwiftyStoreKit'
   
 #  pod 'BiometricAuthentication'
 
