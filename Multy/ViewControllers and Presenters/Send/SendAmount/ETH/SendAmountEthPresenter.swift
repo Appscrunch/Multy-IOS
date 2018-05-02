@@ -83,7 +83,7 @@ class SendAmountEthPresenter: NSObject {
                                                                               sendAmountString: sumInCrypto.stringValue,
                                                                               nonce: transactionDTO.choosenWallet!.ethWallet!.nonce.intValue,
                                                                               balanceAmount: "\(transactionDTO.choosenWallet!.ethWallet!.balance)",
-            ethereumChainID: BLOCKCHAIN_ETHEREUM.rawValue,
+            ethereumChainID: UInt32(transactionDTO.choosenWallet!.blockchain.net_type),
             gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
             gasLimit: "21000") // "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
         

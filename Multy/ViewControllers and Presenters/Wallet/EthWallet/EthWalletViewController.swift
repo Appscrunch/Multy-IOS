@@ -430,14 +430,14 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [0,0] {
-            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight //- (presenter.isTherePendingAmount ? 0 : Constants.ETHWalletScreen.blockedCellDifference)
+            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight - (presenter.isTherePendingAmount ? 0 : Constants.ETHWalletScreen.blockedCellDifference)
             
             backUpView(height: presenter.topCellHeight)
             if presenter.isTherePendingAmount {
                 setGradientBackground()
             }
             
-            return presenter.topCellHeight - 90
+            return presenter.topCellHeight
         } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
             if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
                 return 135
@@ -477,7 +477,7 @@ extension EthWalletViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth, height: presenter.topCellHeight - 60 - Constants.ETHWalletScreen.collectionCellDifference)
+        return CGSize(width: screenWidth, height: presenter.topCellHeight - Constants.ETHWalletScreen.collectionCellDifference)
     }
     
     func collectionView(_ collectionView: UICollectionView,
