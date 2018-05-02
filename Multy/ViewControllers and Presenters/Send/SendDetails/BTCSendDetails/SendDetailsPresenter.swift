@@ -13,7 +13,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.blockedAmount = transactionDTO.choosenWallet?.calculateBlockedAmount()
             availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - self.blockedAmount!.btcValue
             availableSumInFiat = availableSumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
-            cryptoName = transactionDTO.blockchainType.shortName
+            cryptoName = transactionDTO.blockchain!.shortName
         }
     }
     

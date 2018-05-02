@@ -105,56 +105,50 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     }
     
     @IBAction func changeAction(_ sender: Any) {
-        if self.presenter.isCrypto {
-            self.presenter.isCrypto = !self.presenter.isCrypto
-            self.presenter.makeMaxSumWithFeeAndDonate()
-            if self.presenter.sumInFiat > (self.presenter.availableSumInFiat)! {
-                self.amountTF.text = "\((self.presenter.availableSumInFiat ?? 0.0).fixedFraction(digits: 2))"
-                self.topSumLbl.text = "\((self.presenter.availableSumInFiat ?? 0.0).fixedFraction(digits: 2))"
+        if presenter.isCrypto {
+            presenter.isCrypto = !self.presenter.isCrypto
+            presenter.makeMaxSumWithFeeAndDonate()
+            if presenter.sumInFiat > presenter.availableSumInFiat {
+                amountTF.text = presenter.availableSumInFiat.fiatValueString
+                topSumLbl.text = presenter.availableSumInFiat.fiatValueString
             } else {
-                self.amountTF.text = "\((self.presenter.sumInFiat).fixedFraction(digits: 2))"
-                self.topSumLbl.text = "\((self.presenter.sumInFiat).fixedFraction(digits: 2))"
+                amountTF.text = presenter.sumInFiat.fiatValueString
+                topSumLbl.text = presenter.sumInFiat.fiatValueString
             }
-            if self.presenter.sumInCrypto > (self.presenter.availableSumInCrypto)! {
-                self.bottomSumLbl.text = "\((self.presenter.availableSumInCrypto ?? 0.0).fixedFraction(digits: 8)) "
+            if presenter.sumInCrypto > presenter.availableSumInCrypto {
+                bottomSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
             } else {
-                self.bottomSumLbl.text = "\((self.presenter.sumInCrypto).fixedFraction(digits: 8)) "
+                bottomSumLbl.text = presenter.sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
             }
-            self.bottomCurrencyLbl.text = "\(self.presenter.cryptoName)"
-            self.topCurrencyNameLbl.text = "\(self.presenter.fiatName)"
+            bottomCurrencyLbl.text = presenter.cryptoName
+            topCurrencyNameLbl.text = presenter.fiatName
         } else {
-            self.presenter.isCrypto = !self.presenter.isCrypto
-            self.presenter.makeMaxSumWithFeeAndDonate()
-            if self.presenter.sumInCrypto > (self.presenter.availableSumInCrypto)! || self.presenter.sumInCrypto > self.presenter.cryptoMaxSumWithFeeAndDonate {
-                switch self.commissionSwitch.isOn {
-                case true:
-                    self.amountTF.text = self.presenter.cryptoMaxSumWithFeeAndDonate.fixedFraction(digits: 8)
-                    self.topSumLbl.text = self.presenter.cryptoMaxSumWithFeeAndDonate.fixedFraction(digits: 8)
-                case false:
-                    self.amountTF.text = "\((self.presenter.availableSumInCrypto ?? 0.0).fixedFraction(digits: 8))"
-                    self.topSumLbl.text = "\((self.presenter.availableSumInCrypto ?? 0.0).fixedFraction(digits: 8))"
-                }
+            presenter.isCrypto = !presenter.isCrypto
+            presenter.makeMaxSumWithFeeAndDonate()
+            if presenter.sumInCrypto > presenter.availableSumInCrypto {
+                amountTF.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
+                topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
             } else {
-                self.amountTF.text = self.presenter.sumInCrypto.fixedFraction(digits: 8)
-                self.topSumLbl.text = self.presenter.sumInCrypto.fixedFraction(digits: 8)
+                amountTF.text = presenter.sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                topSumLbl.text = presenter.sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             }
             
-            if self.presenter.sumInFiat > (self.presenter.availableSumInFiat)! {
-                self.bottomSumLbl.text = "\((self.presenter.availableSumInFiat ?? 0.0).fixedFraction(digits: 2)) "
+            if presenter.sumInFiat > presenter.availableSumInFiat {
+                bottomSumLbl.text = presenter.availableSumInFiat.fiatValueString + " "
             } else {
-                self.bottomSumLbl.text = "\((self.presenter.sumInFiat).fixedFraction(digits: 2)) "
+                bottomSumLbl.text = presenter.sumInFiat.fiatValueString + " "
             }
-            self.topCurrencyNameLbl.text = self.presenter.cryptoName
-            self.bottomCurrencyLbl.text = self.presenter.fiatName
+            topCurrencyNameLbl.text = presenter.cryptoName
+            bottomCurrencyLbl.text = presenter.fiatName
         }
         
-        self.amountTF.text = self.amountTF.text?.replacingOccurrences(of: ".", with: ",")
-        self.bottomSumLbl.text = self.bottomSumLbl.text?.replacingOccurrences(of: ".", with: ",")
-        self.topSumLbl.text = self.topSumLbl.text?.replacingOccurrences(of: ".", with: ",")
+        amountTF.text = amountTF.text?.replacingOccurrences(of: ".", with: ",")
+        bottomSumLbl.text = bottomSumLbl.text?.replacingOccurrences(of: ".", with: ",")
+        topSumLbl.text = topSumLbl.text?.replacingOccurrences(of: ".", with: ",")
         
-        self.presenter.setSpendableAmountText()
-        self.presenter.setMaxAllowed()
-        self.setSumInNextBtn()
+        presenter.setSpendableAmountText()
+        presenter.setMaxAllowed()
+        setSumInNextBtn()
         
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: switchTap)
     }
@@ -175,22 +169,22 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     }
     
     @IBAction func maxAction(_ sender: Any) {
-        if self.presenter.isCrypto {
-            self.commissionSwitch.isOn = false
-            self.presenter.setMaxAllowed()
-            self.amountTF.text = "\((self.presenter.availableSumInCrypto ?? 0.0).fixedFraction(digits: 8))"
-            self.topSumLbl.text = "\((self.presenter.availableSumInCrypto ?? 0.0).fixedFraction(digits: 8))"
-            self.presenter.sumInCrypto = self.presenter.availableSumInCrypto ?? 0.0
-            self.presenter.cryptoToUsd()
-            self.setSumInNextBtn()
+        if presenter.isCrypto {
+            commissionSwitch.isOn = false
+            presenter.setMaxAllowed()
+            amountTF.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+            topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+            presenter.sumInCrypto = presenter.availableSumInCrypto
+            presenter.cryptoToUsd()
+            setSumInNextBtn()
         } else {
-            self.commissionSwitch.isOn = false
-            self.presenter.setMaxAllowed()
-            self.amountTF.text = "\((self.presenter.availableSumInFiat ?? 0.0).fixedFraction(digits: 2))"
-            self.topSumLbl.text = "\((self.presenter.availableSumInFiat ?? 0.0).fixedFraction(digits: 2))"
-            self.presenter.sumInFiat = self.presenter.availableSumInFiat ?? 0.0
-            self.presenter.usdToCrypto()
-            self.setSumInNextBtn()
+            commissionSwitch.isOn = false
+            presenter.setMaxAllowed()
+            amountTF.text = presenter.availableSumInFiat.fiatValueString
+            topSumLbl.text = presenter.availableSumInFiat.fiatValueString
+            presenter.sumInFiat = presenter.availableSumInFiat
+            presenter.usdToCrypto()
+            setSumInNextBtn()
         }
         self.presenter.saveTfValue()
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: payMaxTap)
@@ -217,7 +211,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.text == "" || (textField.text == "0" && string != "," && string != "." && !string.isEmpty) {
-            if Double(string)! > self.presenter.maxAllowedToSpend {
+            if self.presenter.maxAllowedToSpend < string.convertStringWithCommaToDouble()  {
                 self.presentWarning(message: "You are trying to spend more then you have.")
                 
                 return false
@@ -238,7 +232,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             }
         }
         
-        if (string != "," && string != ".") && (self.topSumLbl.text! + string).convertStringWithCommaToDouble() > self.presenter.maxAllowedToSpend {
+        if (string != "," && string != ".") && self.presenter.maxAllowedToSpend < (self.topSumLbl.text! + string).convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_ETHEREUM)  {
             if string != "" {
                 self.presentWarning(message: "You trying to enter sum more then you have")
                 return false
@@ -298,11 +292,11 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     }
     
     @objc func changeSum() {
-        let sumForBtn = self.presenter.getNextBtnSum()
-        if self.presenter.isCrypto {
-            self.btnSumLbl.text = "\(sumForBtn.fixedFraction(digits: 8)) \(self.presenter.cryptoName)"
+        let sumForBtn = presenter.getNextBtnSum()
+        if presenter.isCrypto {
+            btnSumLbl.text = sumForBtn.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " " + presenter.cryptoName
         } else {
-            self.btnSumLbl.text = "\(sumForBtn.fixedFraction(digits: 2)) \(self.presenter.fiatName)"
+            btnSumLbl.text = sumForBtn.fiatValueString + " " + presenter.fiatName
         }
     }
     
@@ -311,11 +305,11 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             let sendFinishVC = segue.destination as! SendFinishViewController
             sendFinishVC.presenter.isCrypto = presenter.isCrypto
             
-            presenter.transactionDTO.sendAmount = presenter.sumInCrypto
+            presenter.transactionDTO.sendAmountString = presenter.sumInCrypto.stringValue
             presenter.transactionDTO.transaction?.newChangeAddress = presenter.addressData!["address"] as? String
             presenter.transactionDTO.transaction?.rawTransaction = presenter.rawTransaction
             presenter.transactionDTO.transaction?.transactionRLM = presenter.transactionObj
-            presenter.transactionDTO.transaction?.endSum = presenter.getNextBtnSum()
+            presenter.transactionDTO.transaction?.endSumBigInt = presenter.getNextBtnSum()
             
             sendFinishVC.presenter.transactionDTO = presenter.transactionDTO
         }

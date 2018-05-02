@@ -70,25 +70,26 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     
     func setupUI() {
         let shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5)
-        self.topView.setShadow(with: shadowColor)
-        self.middle.setShadow(with: shadowColor)
-        self.bottom.setShadow(with: shadowColor)
-        self.cryptoImage.image = UIImage(named: presenter.transactionDTO.blockchainType.iconString)
-        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
-        self.cryptoSumLbl.text = "\(presenter.transactionDTO.sendAmount?.fixedFraction(digits: 8) ?? "0.0")"
-        self.cryptoNamelbl.text = "\(self.presenter.cryptoName ?? "BTC")"
-        self.fiatSumAndCurrancyLbl.text = "\(self.presenter.sumInFiat?.fixedFraction(digits: 2) ?? "0.0") \(self.presenter.fiatName ?? "USD")"
-        self.addressLbl.text = presenter.transactionDTO.sendAddress
-        self.walletNameLbl.text = presenter.transactionDTO.choosenWallet?.name
+        topView.setShadow(with: shadowColor)
+        middle.setShadow(with: shadowColor)
+        bottom.setShadow(with: shadowColor)
+        cryptoImage.image = UIImage(named: presenter.transactionDTO.blockchainType!.iconString)
         
-        self.walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet?.sumInCrypto.fixedFraction(digits: 8) ?? "0.0") \(presenter.transactionDTO.choosenWallet?.cryptoName ?? "")"
-        let fiatSum = ((presenter.transactionDTO.choosenWallet?.sumInCrypto)! * exchangeCourse).fixedFraction(digits: 2)
-        self.walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet?.fiatName ?? "")"
-        self.transactionFeeCostLbl.text = "\((presenter.transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(presenter.transactionDTO.transaction?.transactionRLM?.cryptoName ?? "")/\((presenter.transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(presenter.transactionDTO.transaction?.transactionRLM?.fiatName ?? "")"
-        self.transactionSpeedNameLbl.text = "\(presenter.transactionDTO.transaction?.transactionRLM?.speedName ?? "") "
-        self.transactionSpeedTimeLbl.text =  "\(presenter.transactionDTO.transaction?.transactionRLM?.speedTimeString ?? "")"
-        if self.view.frame.height == 736 {
-            self.btnTopConstraint.constant = 105
+        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
+        cryptoSumLbl.text = presenter.sumInCryptoString
+        cryptoNamelbl.text = "\(presenter.cryptoName ?? "BTC")"
+        fiatSumAndCurrancyLbl.text = "\(presenter.sumInFiatString) \(presenter.fiatName ?? "USD")"
+        addressLbl.text = presenter.transactionDTO.sendAddress
+        walletNameLbl.text = presenter.transactionDTO.choosenWallet?.name
+        
+        walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet!.sumInCryptoString) \(presenter.transactionDTO.choosenWallet!.cryptoName ?? "")"
+        let fiatSum = presenter.transactionDTO.choosenWallet?.sumInFiatString
+        walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet!.fiatName ?? "")"
+        transactionFeeCostLbl.text = "\((presenter.transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(presenter.transactionDTO.transaction?.transactionRLM?.cryptoName ?? "")/\((presenter.transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(presenter.transactionDTO.transaction?.transactionRLM?.fiatName ?? "")"
+        transactionSpeedNameLbl.text = "\(presenter.transactionDTO.transaction?.transactionRLM?.speedName ?? "") "
+        transactionSpeedTimeLbl.text =  "\(presenter.transactionDTO.transaction?.transactionRLM?.speedTimeString ?? "")"
+        if view.frame.height == 736 {
+            btnTopConstraint.constant = 105
         }
         
         animate()
@@ -179,12 +180,14 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     
     @IBAction func nextAction(_ sender: Any) {
         let wallet = presenter.transactionDTO.choosenWallet!
+        let newAddress = wallet.shouldCreateNewAddressAfterTransaction ? presenter.transactionDTO.transaction!.newChangeAddress! : ""
+        
         let newAddressParams = [
             "walletindex"   : wallet.walletID.intValue,
-            "address"       : presenter.transactionDTO.transaction!.newChangeAddress!,
+            "address"       : newAddress,
             "addressindex"  : wallet.addresses.count,
             "transaction"   : presenter.transactionDTO.transaction!.rawTransaction!,
-            "ishd"          : NSNumber(booleanLiteral: true)
+            "ishd"          : NSNumber(booleanLiteral: wallet.shouldCreateNewAddressAfterTransaction)
             ] as [String : Any]
         
         let params = [

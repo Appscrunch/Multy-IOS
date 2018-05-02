@@ -43,44 +43,8 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     }
   
     func qrData(string: String) {
-//        if sting.contains(":") {
-//            let separatedString = sting.components(separatedBy: ":")
-//            let blockchainName = separatedString[0]
-//            print(blockchainName)  // bitcoin
-//            if separatedString[1].contains("?") {
-//                let separatedAddress = separatedString[1].components(separatedBy: "?")[0]
-//                print(separatedAddress)  // wallet address
-//                let separatedAmount = separatedString[1].components(separatedBy: "?")[1]
-//                if separatedAmount.contains("amount") {
-//                    let sumInCrypto = separatedAmount.components(separatedBy: "=")[1]
-//                    print(sumInCrypto) // amount sum
-//                }
-//            } else {
-//                let separatedAddress = separatedString[1]
-//                print(separatedAddress) // wallet address
-//            }
-//        }
-        let array = string.components(separatedBy: CharacterSet(charactersIn: ":?="))
-        switch array.count {
-        case 1:                              // shit in qr
-            let messageFromQr = array[0]
-            self.transactionDTO.sendAddress = messageFromQr
-            print(messageFromQr)
-        case 2:                              // chain name + address
-//            let blockchainName = array[0]
-            let addressStr = array[1]
-//            print(blockchainName, addressStr)
-            self.transactionDTO.sendAddress = addressStr
-        case 4:                                // chain name + address + amount
-//            let blockchainName = array[0]
-            let addressStr = array[1]
-            let amount = array[3]
-//            print(blockchainName, addressStr, amount)
-            self.transactionDTO.sendAddress = addressStr
-            self.transactionDTO.sendAmount = (amount as NSString).doubleValue
-        default:
-            return
-        }
+        transactionDTO.update(from: string)
+        
         self.sendStartVC?.modifyNextButtonMode()
         self.sendStartVC?.updateUI()
     }
@@ -111,7 +75,7 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     }
     
     func destinationSegueString() -> String {
-        switch transactionDTO.blockchainType.blockchain {
+        switch transactionDTO.blockchainType!.blockchain {
         case BLOCKCHAIN_BITCOIN:
             return "sendBTCDetailsVC"
         case BLOCKCHAIN_ETHEREUM:

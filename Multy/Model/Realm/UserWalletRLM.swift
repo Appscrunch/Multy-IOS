@@ -55,15 +55,23 @@ class UserWalletRLM: Object {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInCrypto * exchangeCourse
             } else {
-                return Double(ethWallet!.balance.appendDelimeter(at: 18).replacingOccurrences(of: ",", with: "."))! * exchangeCourse
+                return Double((BigInt(ethWallet!.balance) * exchangeCourse).fiatValueString.replacingOccurrences(of: ",", with: "."))!
             }
         }
     }
     
     var sumInFiatString: String {
         get {
-            return sumInFiat.fixedFraction(digits: 2)
+            if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
+                return sumInFiat.fixedFraction(digits: 2)
+            } else {
+                return (BigInt(ethWallet!.balance) * exchangeCourse).fiatValueString
+            }
         }
+    }
+    
+    var shouldCreateNewAddressAfterTransaction: Bool {
+        return blockchain.blockchain  == BLOCKCHAIN_BITCOIN
     }
     
     @objc dynamic var fiatName = String()
@@ -208,6 +216,28 @@ class UserWalletRLM: Object {
         }
         
         return sum
+    }
+    
+    func isThereAvailableAmount() -> Bool {
+        switch blockchain.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return availableAmount() > 0
+        case BLOCKCHAIN_ETHEREUM:
+            return ethWallet!.isThereAvailableBalance
+        default:
+            return true
+        }
+    }
+    
+    func isThereEnoughAmount(_ amount: Double) -> Bool {
+        switch blockchain.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return sumInCrypto > amount
+        case BLOCKCHAIN_ETHEREUM:
+            return ethWallet!.availableBalance > (Constants.BigIntSwift.oneETHInWeiKey * amount)
+        default:
+            return true
+        }
     }
     
     func availableAmount() -> UInt64 {

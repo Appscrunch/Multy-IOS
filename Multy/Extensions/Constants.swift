@@ -67,6 +67,17 @@ struct Constants {
             BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: 0),
         ]
     }
+    
+    struct BigIntSwift {
+        static let oneETHInWeiKey = BigInt("1000000000000000000") // 1 ETH = 10^18 Wei
+        static let oneBTCInSatoshiKey = BigInt("100000000") // 1 BTC = 10^8 Satoshi
+        static let oneHundredFinney = Double(10000000000000000) // 10^{-2} ETH
+    }
+    
+    struct BlockchainString {
+        static let bitcoinKey = "bitcoin"
+        static let ethereumKey = "ethereum"
+    }
 }
 
 let defaultDelimeter = "," as Character

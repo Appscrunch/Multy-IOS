@@ -36,6 +36,10 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
             let detailsVC = segue.destination as! SendDetailsViewController
             presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
             detailsVC.presenter.transactionDTO = presenter.transactionDTO
+        } else if segue.identifier == "sendETHDetailsVC" {
+            let detailsVC = segue.destination as! EthSendDetailsViewController
+            presenter.transactionDTO.choosenWallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
+            detailsVC.presenter.transactionDTO = presenter.transactionDTO
         }
     }
     
@@ -68,14 +72,14 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.walletsArr[indexPath.row].availableAmount() == 0 {
+        if presenter.walletsArr[indexPath.row].isThereAvailableAmount() == false {
             presenter.presentAlert(message: "You have no available funds")
             
             return
         }
         
         if presenter.transactionDTO.sendAmount != nil {
-            if presenter.walletsArr[indexPath.row].sumInCrypto < presenter.transactionDTO.sendAmount! {
+            if presenter.walletsArr[indexPath.row].isThereEnoughAmount(presenter.transactionDTO.sendAmount!) == false {
                 presenter.presentAlert(message: nil)
                 
                 return
@@ -91,7 +95,8 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         self.presenter.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "sendBTCDetailsVC", sender: Any.self)
+        
+        self.performSegue(withIdentifier: presenter.destinationSegueString(), sender: Any.self)
 //        let storyboard = UIStoryboard(name: "Send", bundle: nil)   //need to send transactionDTO
 //        let ethDetailsVC = storyboard.instantiateViewController(withIdentifier: "EthSendDetails")
 //        self.navigationController?.pushViewController(ethDetailsVC, animated: true)

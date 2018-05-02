@@ -51,7 +51,7 @@ class BigInt: NSObject {
             } else if let right = right as? Double {
                 error = big_int_add_double(newSelf.valuePointer.pointee, right)
             } else {
-                precondition(true, "You are comparing inapropriate types")
+                precondition(true, "You are addiing inapropriate types")
             }
         case .subtract:
             if let right = right as? BigInt {
@@ -61,7 +61,7 @@ class BigInt: NSObject {
             } else if let right = right as? Double {
                 error = big_int_sub_double(newSelf.valuePointer.pointee, right)
             } else {
-                precondition(true, "You are comparing inapropriate types")
+                precondition(true, "You are subtracting inapropriate types")
             }
         case .multiply:
             if let right = right as? BigInt {
@@ -71,7 +71,7 @@ class BigInt: NSObject {
             } else if let right = right as? Double {
                 error = big_int_mul_double(newSelf.valuePointer.pointee, right)
             } else {
-                precondition(true, "You are comparing inapropriate types")
+                precondition(true, "You are multiplying inapropriate types")
             }
         case .divide:
             if let right = right as? BigInt {
@@ -81,7 +81,7 @@ class BigInt: NSObject {
             } else if let right = right as? Double {
                 error = big_int_div_double(newSelf.valuePointer.pointee, right)
             } else {
-                precondition(true, "You are comparing inapropriate types")
+                precondition(true, "You are dividing inapropriate types")
             }
         }
         
@@ -134,7 +134,7 @@ class BigInt: NSObject {
         } else if let right = right as? Double {
             bic = big_int_cmp_double(self.valuePointer.pointee, right, boolPointer)
         } else {
-            precondition(true, "You are comparing inapropriate types")
+            precondition(false, "You are comparing inapropriate types")
         }
         
         let _ = DataManager.shared.coreLibManager.errorString(from: bic, mask: "\n\nbig int: compare BigInt\n\n")
@@ -174,6 +174,10 @@ class BigInt: NSObject {
         return String(cString: amountStringPointer.pointee!)
     }
     
+    var fiatValueString: String {
+        return (self / Constants.BigIntSwift.oneHundredFinney).stringValue.appendDelimeter(at: 2)
+    }
+    
     func cryptoValueString(for blockchain: Blockchain) -> String {
         var precision: Int = 0
         
@@ -187,10 +191,6 @@ class BigInt: NSObject {
         }
         
         return stringValue.appendDelimeter(at: precision)
-    }
-    
-    func fiatValueString() -> String {
-        return (self / Double(10000000000000000)).stringValue.appendDelimeter(at: 2)
     }
     
     deinit {
