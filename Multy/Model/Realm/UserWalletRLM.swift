@@ -228,8 +228,8 @@ class UserWalletRLM: Object {
                 }
             }
         case BLOCKCHAIN_ETHEREUM:
-            let sumSting = BigInt(self.ethWallet!.balance).stringValue
-            sum = UInt64(sumSting)!
+            let sumString = BigInt(self.ethWallet!.balance).stringValue
+            sum = UInt64(sumString)!
         default: break
         }
     
