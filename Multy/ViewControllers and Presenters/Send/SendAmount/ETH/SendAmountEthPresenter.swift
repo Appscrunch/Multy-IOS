@@ -21,7 +21,8 @@ class SendAmountEthPresenter: NSObject {
                 feeAmount = BigInt("21000") * Int64(transactionDTO.transaction!.customGAS!.gasPrice)
             }
             
-            maxLengthForSum = transactionDTO.choosenWallet!.blockchain.blockchain .maxLengthForSum
+            maxLengthForSum = transactionDTO.choosenWallet!.blockchain.blockchain.maxLengthForSum
+            maxPrecision = transactionDTO.choosenWallet!.blockchain.blockchain.maxPrecision
         }
     }
     var account = DataManager.shared.realmManager.account
@@ -53,6 +54,7 @@ class SendAmountEthPresenter: NSObject {
     var isMaxEntered = false
     
     var maxLengthForSum = 0
+    var maxPrecision = 0
     
     var sumInNextBtn = BigInt("0")
     var maxAllowedToSpend = BigInt("0")

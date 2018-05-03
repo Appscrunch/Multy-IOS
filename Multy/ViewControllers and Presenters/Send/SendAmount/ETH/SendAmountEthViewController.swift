@@ -193,14 +193,14 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     
     
     @IBAction func nextAction(_ sender: Any) {
-//        NSObject.cancelPreviousPerformRequests(withTarget: self)
-//        changeSum()
-//
-//        if self.presenter.sumInCrypto != 0.0 && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty && convertBTCStringToSatoshi(sum: amountTF.text!) != 0 {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        changeSum()
+
+        if presenter.sumInCrypto != Int64(0) && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty {
             self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
-//        } else {
-//            self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
-//        }
+        } else {
+            self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")
+        }
     }
     
     func presentWarning(message: String) {
@@ -250,7 +250,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             if (self.amountTF.text?.contains(","))! && string != "" {
                 let strAfterDot: [String?] = (self.amountTF.text?.components(separatedBy: ","))!
                 if self.presenter.isCrypto {
-                    if strAfterDot[1]?.count == 8 {
+                    if strAfterDot[1]?.count == presenter.maxPrecision {
                         return false
                     } else {
                         self.topSumLbl.text = self.amountTF.text! + string

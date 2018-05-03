@@ -140,6 +140,39 @@ extension Blockchain {
         case BLOCKCHAIN_DASH:
             maxLenght = 0
         case BLOCKCHAIN_ETHEREUM:
+            maxLenght = 22
+        case BLOCKCHAIN_ETHEREUM_CLASSIC:
+            maxLenght = 0
+        case BLOCKCHAIN_STEEM:
+            maxLenght = 0
+        case BLOCKCHAIN_BITCOIN_CASH:
+            maxLenght = 0
+        case BLOCKCHAIN_BITCOIN_LIGHTNING:
+            maxLenght = 0
+        case BLOCKCHAIN_GOLOS:
+            maxLenght = 0
+        case BLOCKCHAIN_BITSHARES:
+            maxLenght = 0
+        case BLOCKCHAIN_ERC20:
+            maxLenght = 0
+        default:
+            maxLenght = 0
+        }
+        
+        return maxLenght
+    }
+    
+    var maxPrecision: Int {
+        var maxLenght = 0
+        
+        switch self {
+        case BLOCKCHAIN_BITCOIN:
+            maxLenght = 8
+        case BLOCKCHAIN_LITECOIN:
+            maxLenght = 0
+        case BLOCKCHAIN_DASH:
+            maxLenght = 0
+        case BLOCKCHAIN_ETHEREUM:
             maxLenght = 18
         case BLOCKCHAIN_ETHEREUM_CLASSIC:
             maxLenght = 0

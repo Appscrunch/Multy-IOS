@@ -162,6 +162,10 @@ class BigInt: NSObject {
         return left.compare(to: right) == 0
     }
     
+    static func != <T>(left: BigInt, right: T) -> Bool {
+        return left.compare(to: right) != 0
+    }
+    
     // auxillary methods
     var stringValue: String {
         let amountStringPointer = UnsafeMutablePointer<UnsafePointer<Int8>?>.allocate(capacity: 1)
