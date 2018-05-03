@@ -321,10 +321,10 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     func fixFirstCell() {
-        let header = self.tableView.cellForRow(at: [0,0]) as! EthWalletHeaderTableViewCell
-        header.bottomView.backgroundColor = .white
+        let header = self.tableView.cellForRow(at: [0,0]) as? EthWalletHeaderTableViewCell
+        header?.bottomView.backgroundColor = .white
         if screenHeight == heightOfPlus {
-            header.bottomView.sizeToFit()
+            header?.bottomView.sizeToFit()
         }
     }
 }

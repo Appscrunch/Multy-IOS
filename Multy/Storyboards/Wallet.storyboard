@@ -1281,6 +1281,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <constraint firstAttribute="trailing" secondItem="g5G-AX-W5l" secondAttribute="trailing" constant="20" id="R9i-fe-fnD"/>
                                     <constraint firstItem="g5G-AX-W5l" firstAttribute="leading" secondItem="kdd-iN-g0f" secondAttribute="leading" constant="20" id="TxS-N7-23Q"/>
                                     <constraint firstItem="tqL-rh-vBW" firstAttribute="top" secondItem="7m6-Qb-tpt" secondAttribute="bottom" constant="10" id="Yte-LJ-WUf"/>
+                                    <constraint firstItem="QPb-nk-2ek" firstAttribute="width" secondItem="kdd-iN-g0f" secondAttribute="width" id="b3v-Df-u4f"/>
                                     <constraint firstAttribute="trailing" secondItem="QPb-nk-2ek" secondAttribute="trailing" id="hW0-M8-euy"/>
                                     <constraint firstItem="QPb-nk-2ek" firstAttribute="height" secondItem="kdd-iN-g0f" secondAttribute="height" multiplier="336/513" id="seB-q7-vkU"/>
                                     <constraint firstItem="QPb-nk-2ek" firstAttribute="leading" secondItem="kdd-iN-g0f" secondAttribute="leading" id="uZv-ec-XJa"/>
@@ -1450,7 +1451,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any transactions." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkK-EA-P5D">
-                                <rect key="frame" x="112.5" y="395" width="150" height="56"/>
+                                <rect key="frame" x="112.5" y="364" width="150" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="aWl-5e-GGx"/>
                                     <constraint firstAttribute="width" constant="150" id="aug-tD-hmh"/>

@@ -918,7 +918,7 @@ extension EthereumCoreLibManager {
                                 balanceAmount: String,
                                 ethereumChainID: UInt32,
                                 gasPrice: String,
-                                gasLimit: String) -> String {
+                                gasLimit: String) -> (message: String, isTransactionCorrect: Bool) {
         
         //create transaction
         let transactionPointer = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
@@ -966,7 +966,7 @@ extension EthereumCoreLibManager {
             
             defer { pointer?.deallocate(capacity: 1) }
             
-            return errrString
+            return (errrString, false)
         }
         
         let data = serializedTransaction.pointee!.pointee.convertToData()
@@ -974,6 +974,6 @@ extension EthereumCoreLibManager {
         
         print("end transaction: \(str)")
         
-        return str
+        return (str, true)
     }
 }

@@ -132,9 +132,6 @@ class UserWalletRLM: Object {
             wallet.chainType = NSNumber(value: chainType as! UInt32)
         }
         
-        //parse addition info for each chain
-        wallet.updateSpecificInfo(from: walletInfo)
-        
         //MARK: to be deleted
         if let walletID = walletInfo["WalletIndex"]  {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
@@ -151,6 +148,9 @@ class UserWalletRLM: Object {
         if let isTherePendingTx = walletInfo["pending"] as? Bool {
             wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx)
         }
+        
+        //parse addition info for each chain
+        wallet.updateSpecificInfo(from: walletInfo)
         
         //MARK: temporary only 0-currency
         //MARK: server BUG: WalletIndex and walletindex
@@ -413,16 +413,20 @@ extension WalletUpdateRLM {
     
     func updateETHWallet(from infoDict: NSDictionary) {
         if let balance = infoDict["balance"] as? String {
-            self.ethWallet = ETHWallet()
-            self.ethWallet!.balance = balance
+            ethWallet = ETHWallet()
+            ethWallet!.balance = balance
         }
         
         if let nonce = infoDict["nonce"] as? NSNumber {
-            self.ethWallet?.nonce = nonce
+            ethWallet?.nonce = nonce
         }
         
         if let pendingBalance = infoDict["pendingbalance"] as? String {
-            self.ethWallet!.pendingWeiAmountString = pendingBalance
+            ethWallet!.pendingWeiAmountString = pendingBalance
+            
+            if ethWallet!.pendingWeiAmountString != "0" {
+                isTherePendingTx = NSNumber(booleanLiteral: true)
+            }
         }
     }
 }

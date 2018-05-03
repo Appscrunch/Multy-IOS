@@ -206,6 +206,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     receiveVC.amountTF.becomeFirstResponder()
                 } else if let amountVC = vcOnScren as? SendAmountViewController {
                     amountVC.amountTF.becomeFirstResponder()
+                } else if let amountVC = vcOnScren as? SendAmountEthViewController {
+                    amountVC.amountTF.becomeFirstResponder()
                 }
             }
             isActiveFirstTime = false

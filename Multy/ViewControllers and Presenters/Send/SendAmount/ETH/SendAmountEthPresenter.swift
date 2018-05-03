@@ -16,6 +16,12 @@ class SendAmountEthPresenter: NSObject {
             transactionObj = transactionDTO.transaction!.transactionRLM
             cryptoName = transactionDTO.blockchainType!.shortName
             exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
+            
+            if transactionDTO.transaction?.customGAS?.gasPrice != nil {
+                feeAmount = BigInt("21000") * Int64(transactionDTO.transaction!.customGAS!.gasPrice)
+            }
+            
+            maxLengthForSum = transactionDTO.choosenWallet!.blockchain.blockchain .maxLengthForSum
         }
     }
     var account = DataManager.shared.realmManager.account
@@ -24,13 +30,11 @@ class SendAmountEthPresenter: NSObject {
             availableSumInCrypto = transactionDTO.choosenWallet!.ethWallet!.availableBalance
         }
     }
-    var availableSumInCrypto = BigInt("0") {
-        didSet {
-            availableSumInFiat = availableSumInCrypto * exchangeCourse
-        }
-    }
-    var availableSumInFiat   = BigInt("0") // It is sum in crypto multiplyed by blockchain.multiplyerToMinimalUnits
+    var availableSumInCrypto = BigInt("0")
     
+    var availableSumInFiat: BigInt { // It is sum in crypto multiplyed by blockchain.multiplyerToMinimalUnits
+        return availableSumInCrypto * exchangeCourse
+    }
     var transactionObj: TransactionRLM?
     var exchangeCourse = Double(0.0)
     
@@ -48,11 +52,13 @@ class SendAmountEthPresenter: NSObject {
     var isCrypto = true
     var isMaxEntered = false
     
-    var maxLengthForSum = 12
+    var maxLengthForSum = 0
     
     var sumInNextBtn = BigInt("0")
     var maxAllowedToSpend = BigInt("0")
     var cryptoMaxSumWithFeeAndDonate = BigInt("0")
+    
+    var feeAmount = BigInt("0")
     
     var rawTransaction: String?
     
@@ -77,7 +83,7 @@ class SendAmountEthPresenter: NSObject {
                                          binaryData:    &binaryData!)
     }
     
-    func estimateTransaction() -> Double {
+    func estimateTransaction() -> Bool {
         let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                               sendAddress: transactionDTO.sendAddress!,
                                                                               sendAmountString: sumInCrypto.stringValue,
@@ -87,9 +93,9 @@ class SendAmountEthPresenter: NSObject {
             gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
             gasLimit: "21000") // "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
         
-        self.rawTransaction = trData
+        self.rawTransaction = trData.message
         
-        return 0
+        return trData.isTransactionCorrect
     }
     
     func setAmountFromQr() {
@@ -130,7 +136,7 @@ class SendAmountEthPresenter: NSObject {
         
         let estimate = estimateTransaction()
         
-        if estimate < 0 {
+        if estimate == false {
             let message = rawTransaction!
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in }))
@@ -145,15 +151,14 @@ class SendAmountEthPresenter: NSObject {
             
             return BigInt("-1") // error
         }
-        
-        self.transactionObj?.sumInCrypto = estimate
-        self.transactionObj?.sumInFiat = estimate * exchangeCourse
+
+        let fiatAmount = feeAmount * exchangeCourse
         
         switch self.isCrypto {
         case true:
-            sumInNextBtn = sumInCrypto
+            sumInNextBtn = sumInCrypto + feeAmount
         case false:
-            sumInNextBtn = sumInFiat
+            sumInNextBtn = sumInFiat + fiatAmount
             
             if sumInNextBtn > availableSumInFiat {
                 sumInNextBtn = availableSumInFiat
@@ -182,7 +187,7 @@ class SendAmountEthPresenter: NSObject {
             }
             sendAmountVC?.bottomCurrencyLbl.text = fiatName
         } else {
-            sumInFiat = Constants.BigIntSwift.oneETHInWeiKey * Double(sendAmountVC!.topSumLbl.text!) // fiat * 10^18
+            sumInFiat = Constants.BigIntSwift.oneETHInWeiKey * Double(sendAmountVC!.topSumLbl.text!.stringWithDot) // fiat * 10^18
             sumInCrypto = sumInFiat / exchangeCourse
             if sumInCrypto > availableSumInCrypto {
                 sendAmountVC?.bottomSumLbl.text = self.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "

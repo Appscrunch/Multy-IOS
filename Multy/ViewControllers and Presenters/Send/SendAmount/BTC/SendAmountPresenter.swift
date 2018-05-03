@@ -131,7 +131,7 @@ class SendAmountPresenter: NSObject {
             return 0
         }
         
-        let estimate = satoshiAmount == 0 ? 0.0 : estimateTransaction()
+        let estimate = estimateTransaction()
         
         if estimate < 0 {
             let message = rawTransaction!

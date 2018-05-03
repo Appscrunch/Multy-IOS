@@ -90,6 +90,10 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func createTransaction(index: Int) {
+        if feeRate == nil {
+            return
+        }
+        
         let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         switch index {
         case 0:

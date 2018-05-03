@@ -83,7 +83,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         walletNameLbl.text = presenter.transactionDTO.choosenWallet?.name
         
         walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet!.sumInCryptoString) \(presenter.transactionDTO.choosenWallet!.cryptoName ?? "")"
-        let fiatSum = presenter.transactionDTO.choosenWallet?.sumInFiatString
+        let fiatSum = presenter.transactionDTO.choosenWallet!.sumInFiatString
         walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet!.fiatName ?? "")"
         transactionFeeCostLbl.text = "\((presenter.transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(presenter.transactionDTO.transaction?.transactionRLM?.cryptoName ?? "")/\((presenter.transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(presenter.transactionDTO.transaction?.transactionRLM?.fiatName ?? "")"
         transactionSpeedNameLbl.text = "\(presenter.transactionDTO.transaction?.transactionRLM?.speedName ?? "") "

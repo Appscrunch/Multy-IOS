@@ -32,7 +32,8 @@ class ViewInBlockchainViewController: UIViewController, UIWebViewDelegate {
             let subUrl = presenter.blockchainType!.net_type == 0 ? "" : "testnet."
             url = "https://\(subUrl)blockchain.info/tx/\(txId)"
         case BLOCKCHAIN_ETHEREUM:
-            url = "https://rinkeby.etherscan.io/tx/\(presenter.txHash ?? "")"
+            let subUrl = presenter.blockchainType!.net_type == 1 ? "" : "rinkeby."
+            url = "https://\(subUrl)etherscan.io/tx/\(presenter.txHash ?? "")"
         default: break
         }
         
