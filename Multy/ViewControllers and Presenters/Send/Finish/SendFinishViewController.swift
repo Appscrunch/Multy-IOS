@@ -75,17 +75,16 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         bottom.setShadow(with: shadowColor)
         cryptoImage.image = UIImage(named: presenter.transactionDTO.blockchainType!.iconString)
         
-        let exchangeCourse = presenter.transactionDTO.choosenWallet!.exchangeCourse
         cryptoSumLbl.text = presenter.sumInCryptoString
-        cryptoNamelbl.text = "\(presenter.cryptoName ?? "BTC")"
-        fiatSumAndCurrancyLbl.text = "\(presenter.sumInFiatString) \(presenter.fiatName ?? "USD")"
+        cryptoNamelbl.text = presenter.cryptoName
+        fiatSumAndCurrancyLbl.text = "\(presenter.sumInFiatString) \(presenter.fiatName)"
         addressLbl.text = presenter.transactionDTO.sendAddress
         walletNameLbl.text = presenter.transactionDTO.choosenWallet?.name
         
-        walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet!.sumInCryptoString) \(presenter.transactionDTO.choosenWallet!.cryptoName ?? "")"
+        walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet!.sumInCryptoString) \(presenter.transactionDTO.choosenWallet!.cryptoName)"
         let fiatSum = presenter.transactionDTO.choosenWallet!.sumInFiatString
-        walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet!.fiatName ?? "")"
-        transactionFeeCostLbl.text = "\((presenter.transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(presenter.transactionDTO.transaction?.transactionRLM?.cryptoName ?? "")/\((presenter.transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(presenter.transactionDTO.transaction?.transactionRLM?.fiatName ?? "")"
+        walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet!.fiatName)"
+        transactionFeeCostLbl.text = "\(presenter.feeAmountInCryptoString) \(presenter.cryptoName)/\(presenter.feeAmountInFiatString) \(presenter.fiatName)"
         transactionSpeedNameLbl.text = "\(presenter.transactionDTO.transaction?.transactionRLM?.speedName ?? "") "
         transactionSpeedTimeLbl.text =  "\(presenter.transactionDTO.transaction?.transactionRLM?.speedTimeString ?? "")"
         if view.frame.height == 736 {

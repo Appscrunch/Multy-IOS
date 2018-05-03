@@ -9,7 +9,7 @@ class SendFinishPresenter: NSObject {
     var sendFinishVC: SendFinishViewController?
     var transactionDTO = TransactionDTO() {
         didSet {
-            cryptoName = transactionDTO.blockchainType?.shortName
+            cryptoName = transactionDTO.blockchainType!.shortName
         }
     }
     
@@ -21,8 +21,12 @@ class SendFinishPresenter: NSObject {
     var sumInCryptoString = String()
     var sumInFiat: Double?
     var sumInFiatString = String()
-    var cryptoName: String?
-    var fiatName: String = "USD" // MARK: get from settings
+    
+    var feeAmountInCryptoString = String()
+    var feeAmountInFiatString = String()
+    
+    var cryptoName = "BTC"
+    var fiatName = "USD" // MARK: get from settings
     
     var isCrypto = true
     
@@ -30,15 +34,22 @@ class SendFinishPresenter: NSObject {
         switch isCrypto {
         case true:
             if transactionDTO.choosenWallet!.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
-                sumInCrypto = transactionDTO.transaction?.endSum
+                sumInCrypto = transactionDTO.sendAmount
                 sumInCryptoString = sumInCrypto!.fixedFraction(digits: 8)
                 sumInFiat = sumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
                 sumInFiatString = sumInFiat!.fixedFraction(digits: 2)
+                
+                feeAmountInCryptoString = (transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)
+                feeAmountInFiatString = (transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)
             } else if transactionDTO.choosenWallet!.blockchain.blockchain == BLOCKCHAIN_ETHEREUM {
-                sumInCryptoString = transactionDTO.transaction!.endSumBigInt!.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                sumInCryptoString = transactionDTO.sendAmountString!
                 sumInFiatString = (transactionDTO.transaction!.endSumBigInt! * transactionDTO.choosenWallet!.exchangeCourse).fiatValueString
+                
+                let feeAmount = transactionDTO.transaction!.feeAmount
+                let feeAmountInWei = feeAmount * transactionDTO.choosenWallet!.exchangeCourse
+                feeAmountInCryptoString = feeAmount.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                feeAmountInFiatString = feeAmountInWei.fiatValueString
             }
-            
         case false:
             self.sumInFiat = transactionDTO.transaction?.endSum
             self.sumInCrypto = self.sumInFiat!

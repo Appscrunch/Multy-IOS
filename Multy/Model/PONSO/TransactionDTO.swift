@@ -77,6 +77,7 @@ class BaseTransactionDTO {
     var endSum: Double?
     var endSumBigInt: BigInt?
     var customGAS: EthereumGasInfo?
+    var feeAmount = BigInt("0")
 }
 
 class BTCTransactionDTO: BaseTransactionDTO {

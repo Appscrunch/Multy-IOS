@@ -305,11 +305,12 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             let sendFinishVC = segue.destination as! SendFinishViewController
             sendFinishVC.presenter.isCrypto = presenter.isCrypto
             
-            presenter.transactionDTO.sendAmountString = presenter.sumInCrypto.stringValue
+            presenter.transactionDTO.sendAmountString = presenter.sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             presenter.transactionDTO.transaction?.newChangeAddress = presenter.addressData!["address"] as? String
             presenter.transactionDTO.transaction?.rawTransaction = presenter.rawTransaction
             presenter.transactionDTO.transaction?.transactionRLM = presenter.transactionObj
             presenter.transactionDTO.transaction?.endSumBigInt = presenter.getNextBtnSum()
+            presenter.transactionDTO.transaction?.feeAmount = presenter.feeAmount
             
             sendFinishVC.presenter.transactionDTO = presenter.transactionDTO
         }
