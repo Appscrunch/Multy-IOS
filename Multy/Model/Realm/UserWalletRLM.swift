@@ -242,21 +242,27 @@ class UserWalletRLM: Object {
     
     func availableAmount() -> UInt64 {
         var sum = UInt64(0)
-        
-        for address in self.addresses {
-            for out in address.spendableOutput {
-                if out.transactionStatus.intValue == TxStatus.BlockIncoming.rawValue {
-                    sum += out.transactionOutAmount.uint64Value
-                }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-                 let addresses = self.fetchAddresses()
-                 
-                 if addresses.contains(address.address) {
-                 sum += out.transactionOutAmount.uint64Value
-                 }
-                 }*/
+        switch self.blockchain.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            for address in self.addresses {
+                for out in address.spendableOutput {
+                    if out.transactionStatus.intValue == TxStatus.BlockIncoming.rawValue {
+                        sum += out.transactionOutAmount.uint64Value
+                    }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+                     let addresses = self.fetchAddresses()
+                     
+                     if addresses.contains(address.address) {
+                     sum += out.transactionOutAmount.uint64Value
+                     }
+                     }*/
+                }
             }
+        case BLOCKCHAIN_ETHEREUM:
+            let sumString = BigInt(self.ethWallet!.balance).stringValue
+            sum = UInt64(sumString)!
+        default: break
         }
-        
+    
         return sum
     }
     

@@ -97,6 +97,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         self.presenter.selectedIndex = indexPath.row
         
         self.performSegue(withIdentifier: presenter.destinationSegueString(), sender: Any.self)
+        
 //        let storyboard = UIStoryboard(name: "Send", bundle: nil)   //need to send transactionDTO
 //        let ethDetailsVC = storyboard.instantiateViewController(withIdentifier: "EthSendDetails")
 //        self.navigationController?.pushViewController(ethDetailsVC, animated: true)

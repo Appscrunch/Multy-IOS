@@ -4,6 +4,7 @@
 
 import UIKit
 import SocketIO
+import AVFoundation
 
 class Socket: NSObject {
     static let shared = Socket()
@@ -62,6 +63,7 @@ class Socket: NSObject {
                 print("-----btcTransactionUpdate: \(data)")
                 
                 NotificationCenter.default.post(name: NSNotification.Name("transactionUpdated"), object: nil)
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
             
             self.socket.on("currentAmount") {data, ack in

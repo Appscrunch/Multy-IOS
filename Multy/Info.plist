@@ -34,9 +34,9 @@
 	<key>GIT_BRANCH_NAME</key>
 	<string>ETH_BETA_TEST</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>f749715</string>
+	<string>3f38ef8</string>
 	<key>GIT_TAG_NAME</key>
-	<string>Release-26-dirty</string>
+	<string>RELEASE_1.0.0-dirty</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

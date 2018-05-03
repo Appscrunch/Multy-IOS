@@ -95,7 +95,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 0:
             self.transactionObj.speedName = "Very Fast"
             self.transactionObj.speedTimeString = "∙ 10 minutes"
-            self.transactionObj.sumInCrypto = 0.000000005
+            self.transactionObj.sumInCrypto = feeRate?.object(forKey: "VeryFast") as! Double
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
@@ -103,7 +103,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 1:
             self.transactionObj.speedName = "Fast"
             self.transactionObj.speedTimeString = "∙ 6 hour"
-            self.transactionObj.sumInCrypto = 0.000000004
+            self.transactionObj.sumInCrypto = feeRate?.object(forKey: "Fast") as! Double
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
@@ -111,7 +111,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 2:
             self.transactionObj.speedName = "Normal"
             self.transactionObj.speedTimeString = "∙ 5 days"
-            self.transactionObj.sumInCrypto = 0.000000003
+            self.transactionObj.sumInCrypto = feeRate?.object(forKey: "Medium") as! Double
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
@@ -119,7 +119,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 3:
             self.transactionObj.speedName = "Slow"
             self.transactionObj.speedTimeString = "∙ 1 week"
-            self.transactionObj.sumInCrypto = 0.000000002
+            self.transactionObj.sumInCrypto = feeRate?.object(forKey: "Slow") as! Double
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
@@ -127,7 +127,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         case 4:
             self.transactionObj.speedName = "Very Slow"
             self.transactionObj.speedTimeString = "∙ 2 weeks"
-            self.transactionObj.sumInCrypto = 0.000000001
+            self.transactionObj.sumInCrypto = feeRate?.object(forKey: "VerySlow") as! Double
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
             self.transactionObj.cryptoName = "ETH"
             self.transactionObj.fiatName = "USD"
