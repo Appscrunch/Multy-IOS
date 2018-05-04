@@ -70,8 +70,7 @@ class WalletTableViewCell: UITableViewCell {
         if blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
             self.cryptoSumLbl.text  = self.wallet!.sumInCrypto.fixedFraction(digits: 8)
         } else if blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
-            let sumInCrypto = BigInt.init(wallet!.ethWallet!.balance)
-            
+            let sumInCrypto = wallet!.ethWallet!.allBalance
             self.cryptoSumLbl.text  = sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
         }
     

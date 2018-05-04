@@ -158,11 +158,11 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             if isIncoming {
                 let fiatAmountInWei = BigInt(presenter.histObj.txOutAmountString) * presenter.histObj.fiatCourseExchange
                 self.transctionSumLbl.text = "+" + BigInt(presenter.histObj.txOutAmountString).cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
-                self.sumInFiatLbl.text = "+" + fiatAmountInWei.fiatValueString() + " USD"
+                self.sumInFiatLbl.text = "+" + fiatAmountInWei.fiatValueString + " USD"
             } else {
-                let outgoingAmount = presenter.wallet.outgoingAmount(for: presenter.histObj).btcValue
-                self.transctionSumLbl.text = "-\(outgoingAmount.fixedFraction(digits: 8))"
-                self.sumInFiatLbl.text = "-\((outgoingAmount * presenter.histObj.fiatCourseExchange).fixedFraction(digits: 2)) USD"
+                let fiatAmountInWei = BigInt(presenter.histObj.txOutAmountString) * presenter.histObj.fiatCourseExchange
+                self.transctionSumLbl.text = "-" + BigInt(presenter.histObj.txOutAmountString).cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                self.sumInFiatLbl.text = "-" + fiatAmountInWei.fiatValueString + " USD"
                 
             }
         default: break

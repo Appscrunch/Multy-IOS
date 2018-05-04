@@ -27,7 +27,7 @@ class UserWalletRLM: Object {
             case BLOCKCHAIN_BITCOIN:
                 return sumInCrypto.fixedFraction(digits: 8)
             case BLOCKCHAIN_ETHEREUM:
-                return ethWallet!.balance.appendDelimeter(at: 18)
+                return ethWallet!.allBalance.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             default:
                 return ""
             }
@@ -55,15 +55,23 @@ class UserWalletRLM: Object {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInCrypto * exchangeCourse
             } else {
-                return Double(ethWallet!.balance.appendDelimeter(at: 18).replacingOccurrences(of: ",", with: "."))! * exchangeCourse
+                return Double((ethWallet!.allBalance * exchangeCourse).fiatValueString.replacingOccurrences(of: ",", with: "."))!
             }
         }
     }
     
     var sumInFiatString: String {
         get {
-            return sumInFiat.fixedFraction(digits: 2)
+            if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
+                return sumInFiat.fixedFraction(digits: 2)
+            } else {
+                return (ethWallet!.allBalance * exchangeCourse).fiatValueString
+            }
         }
+    }
+    
+    var shouldCreateNewAddressAfterTransaction: Bool {
+        return blockchain.blockchain  == BLOCKCHAIN_BITCOIN
     }
     
     @objc dynamic var fiatName = String()
@@ -124,9 +132,6 @@ class UserWalletRLM: Object {
             wallet.chainType = NSNumber(value: chainType as! UInt32)
         }
         
-        //parse addition info for each chain
-        wallet.updateSpecificInfo(from: walletInfo)
-        
         //MARK: to be deleted
         if let walletID = walletInfo["WalletIndex"]  {
             wallet.walletID = NSNumber(value: walletID as! UInt32)
@@ -143,6 +148,9 @@ class UserWalletRLM: Object {
         if let isTherePendingTx = walletInfo["pending"] as? Bool {
             wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx)
         }
+        
+        //parse addition info for each chain
+        wallet.updateSpecificInfo(from: walletInfo)
         
         //MARK: temporary only 0-currency
         //MARK: server BUG: WalletIndex and walletindex
@@ -208,6 +216,28 @@ class UserWalletRLM: Object {
         }
         
         return sum
+    }
+    
+    func isThereAvailableAmount() -> Bool {
+        switch blockchain.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return availableAmount() > 0
+        case BLOCKCHAIN_ETHEREUM:
+            return ethWallet!.isThereAvailableBalance
+        default:
+            return true
+        }
+    }
+    
+    func isThereEnoughAmount(_ amount: Double) -> Bool {
+        switch blockchain.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return sumInCrypto > amount
+        case BLOCKCHAIN_ETHEREUM:
+            return ethWallet!.availableBalance > (Constants.BigIntSwift.oneETHInWeiKey * amount)
+        default:
+            return true
+        }
     }
     
     func availableAmount() -> UInt64 {
@@ -383,16 +413,20 @@ extension WalletUpdateRLM {
     
     func updateETHWallet(from infoDict: NSDictionary) {
         if let balance = infoDict["balance"] as? String {
-            self.ethWallet = ETHWallet()
-            self.ethWallet!.balance = balance
+            ethWallet = ETHWallet()
+            ethWallet!.balance = balance
         }
         
         if let nonce = infoDict["nonce"] as? NSNumber {
-            self.ethWallet?.nonce = nonce
+            ethWallet?.nonce = nonce
         }
         
         if let pendingBalance = infoDict["pendingbalance"] as? String {
-            self.ethWallet!.pendingWeiAmountString = pendingBalance
+            ethWallet!.pendingWeiAmountString = pendingBalance
+            
+            if ethWallet!.pendingWeiAmountString != "0" {
+                isTherePendingTx = NSNumber(booleanLiteral: true)
+            }
         }
     }
 }

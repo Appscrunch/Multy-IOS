@@ -338,7 +338,7 @@ extension TableViewDelegate: UITableViewDelegate {
             self.isCustom = true
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
-            customVC.presenter.chainId = self.presenter.transactionDTO.choosenWallet!.chain
+            customVC.presenter.blockchainType = self.presenter.transactionDTO.choosenWallet!.blockchain
             customVC.delegate = self.presenter
             customVC.rate = Int(self.presenter.customFee)
             customVC.previousSelected = self.presenter.selectedIndexOfSpeed

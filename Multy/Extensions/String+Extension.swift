@@ -142,6 +142,10 @@ extension String {
         self = stringParts[0] + "\(defaultDelimeter)" + fractionString
     }
     
+    func convertCryptoAmountStringToMinimalUnits(in blockchain: Blockchain) -> BigInt {
+        return blockchain.multiplyerToMinimalUnits * (Double(self.stringWithDot) ?? 0)
+    }
+    
     func convertToSatoshiAmountString() -> String {
         return self.toStringWithZeroes(precision: 8)
     }

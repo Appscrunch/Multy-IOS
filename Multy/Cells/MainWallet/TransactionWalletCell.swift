@@ -85,17 +85,17 @@ class TransactionWalletCell: UITableViewCell {
     
     func fillEthereumCell() {
         if histObj.isIncoming() {
-            self.addressLabel.text = histObj.addressesArray.first
-        } else {
             self.addressLabel.text = histObj.addressesArray.last
+        } else {
+            self.addressLabel.text = histObj.addressesArray.first
         }
         
+        let ethAmountString = BigInt(histObj.txOutAmountString).cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+        let labelsCryproText = ethAmountString + " " + wallet.cryptoName
+        self.cryptoAmountLabel.text = labelsCryproText
         
-        // FIXME: BIG INT
-        let ethAmountString = histObj.txAmount(for: BlockchainType.create(wallet: wallet).blockchain)
-        self.cryptoAmountLabel.text = ethAmountString + " " + wallet.cryptoName
-        let fiatAmountString = (Double(ethAmountString.replacingOccurrences(of: ",", with: "."))! * histObj.fiatCourseExchange).fixedFraction(digits: 2)
-        self.fiatAmountLabel.text = fiatAmountString  + " " + wallet.fiatName
+        let fiatAmountString = (BigInt(histObj.txOutAmountString) * histObj.fiatCourseExchange).fiatValueString
+        fiatAmountLabel.text = fiatAmountString + " " + wallet.fiatName
     }
     
     func fillBitcoinCell() {

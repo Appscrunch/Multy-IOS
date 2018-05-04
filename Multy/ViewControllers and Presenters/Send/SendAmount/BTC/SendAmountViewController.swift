@@ -126,7 +126,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
         } else {
             self.presenter.isCrypto = !self.presenter.isCrypto
             self.presenter.makeMaxSumWithFeeAndDonate()
-            if self.presenter.sumInCrypto > (self.presenter.availableSumInCrypto)! || self.presenter.sumInCrypto > self.presenter.cryptoMaxSumWithFeeAndDonate {
+            if self.presenter.sumInCrypto > self.presenter.availableSumInCrypto! || self.presenter.sumInCrypto > self.presenter.cryptoMaxSumWithFeeAndDonate {
                 switch self.commissionSwitch.isOn {
                 case true:
                     self.amountTF.text = self.presenter.cryptoMaxSumWithFeeAndDonate.fixedFraction(digits: 8)

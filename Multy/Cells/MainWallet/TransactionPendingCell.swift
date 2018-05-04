@@ -40,12 +40,12 @@ class TransactionPendingCell: UITableViewCell {
             self.addressLabel.text = histObj.addressesArray.first
         }
         
-        let cryptoAmountString = histObj.txAmount(for: BlockchainType.create(wallet: wallet!).blockchain)
+        let cryptoAmountString = BigInt(histObj.txOutAmountString).cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
         let labelsCryproText = cryptoAmountString + " " + wallet!.cryptoName
         
         lockedCryptoAmountLabel.text = labelsCryproText
         
-        let fiatAmountString = (Double(cryptoAmountString.replacingOccurrences(of: ",", with: "."))! * histObj.fiatCourseExchange).fixedFraction(digits: 2)
+        let fiatAmountString = (BigInt(histObj.txOutAmountString) * histObj.fiatCourseExchange).fiatValueString
         lockedFiatAmountLabel.text = fiatAmountString + " " + wallet!.fiatName
         
         self.cryptoAmountLabel.text = lockedCryptoAmountLabel.text

@@ -28,6 +28,7 @@
 		44CD6B8F208B5018009C07F6 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6B8E208B5018009C07F6 /* BigInt.swift */; };
 		44DCC201205A9D34001080FB /* TopIndexRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DCC200205A9D34001080FB /* TopIndexRLM.swift */; };
 		44DFEF9F206A51AF0068769C /* UInt64+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DFEF9E206A51AF0068769C /* UInt64+Extension.swift */; };
+		44EFBE5B20923EAC0081EE3A /* Blockchain+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EFBE5A20923EAC0081EE3A /* Blockchain+Extension.swift */; };
 		44FB26C0205A6D5600F208EB /* ChooseBlockchainProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FB26BF205A6D5600F208EB /* ChooseBlockchainProtocol.swift */; };
 		4506F1741FD9A2E700D575BA /* WalletSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1731FD9A2E700D575BA /* WalletSettingsPresenter.swift */; };
 		4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1751FD9A30700D575BA /* WalletSettingsViewController.swift */; };
@@ -317,6 +318,7 @@
 		44DFEFA2206A64ED0068769C /* bitcoin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bitcoin.h; sourceTree = "<group>"; };
 		44DFEFA3206A64ED0068769C /* ethereum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ethereum.h; sourceTree = "<group>"; };
 		44DFEFA4206A64ED0068769C /* golos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = golos.h; sourceTree = "<group>"; };
+		44EFBE5A20923EAC0081EE3A /* Blockchain+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Blockchain+Extension.swift"; sourceTree = "<group>"; };
 		44FA86BE2035A75A00263C72 /* key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = key.h; sourceTree = "<group>"; };
 		44FA86BF2035A76400263C72 /* big_int.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = big_int.h; sourceTree = "<group>"; };
 		44FA86C02035A77100263C72 /* sha3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
@@ -975,6 +977,7 @@
 				45B5CCA51FDA94360069BD46 /* ConnectionCheck.swift */,
 				45D2D6DE203463FB00751ED4 /* AnalyticsConstants.swift */,
 				44A3DF92205AA1F300FE9955 /* BlockchainType+Extension.swift */,
+				44EFBE5A20923EAC0081EE3A /* Blockchain+Extension.swift */,
 				44C3F389207E5FAB00AC1BD4 /* ProgressHUD+Extension.swift */,
 				44CD6B8E208B5018009C07F6 /* BigInt.swift */,
 			);
@@ -2190,6 +2193,7 @@
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				44CD6B8F208B5018009C07F6 /* BigInt.swift in Sources */,
 				45D4D167205C12DC008B1F0B /* EthWalletHeaderCollectionViewCell.swift in Sources */,
+				44EFBE5B20923EAC0081EE3A /* Blockchain+Extension.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,
 				45B0B0EB1FEBF2BB005BB1C0 /* ContactsPresenter.swift in Sources */,
 				44BCBDB720601AE3001611A5 /* ETHWallet.swift in Sources */,

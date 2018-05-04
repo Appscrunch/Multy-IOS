@@ -51,7 +51,7 @@ extension DataManager {
         var binaryData = DataManager.shared.realmManager.account!.binaryDataString.createBinaryData()!
         
         
-        let addressData = core.createAddress(blockchain: transactionDTO.blockchainType,
+        let addressData = core.createAddress(blockchain: transactionDTO.blockchainType!,
                                              walletID: transactionDTO.choosenWallet!.walletID.uint32Value,
                                              addressID: UInt32(transactionDTO.choosenWallet!.addresses.count),
                                              binaryData: &binaryData)

@@ -30,7 +30,7 @@ class WalletChoosePresenter: NSObject {
     func presentAlert(message : String?) {
         var alertMessage = String()
         if message == nil {
-            alertMessage = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals \(transactionDTO.sendAmount!.fixedFraction(digits: 8)) \(transactionDTO.blockchainType.fullName)"
+            alertMessage = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals \(transactionDTO.sendAmount!.fixedFraction(digits: 8)) \(transactionDTO.blockchain!.fullName)"
         } else {
             alertMessage = message!
         }
@@ -41,5 +41,16 @@ class WalletChoosePresenter: NSObject {
         }))
         
         walletChoooseVC?.present(alert, animated: true, completion: nil)
+    }
+    
+    func destinationSegueString() -> String {
+        switch transactionDTO.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return "sendBTCDetailsVC"
+        case BLOCKCHAIN_ETHEREUM:
+            return "sendETHDetailsVC"
+        default:
+            return ""
+        }
     }
 }

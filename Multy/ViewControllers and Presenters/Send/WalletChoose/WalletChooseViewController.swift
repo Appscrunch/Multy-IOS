@@ -72,14 +72,14 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if presenter.walletsArr[indexPath.row].availableAmount() == 0 {
+        if presenter.walletsArr[indexPath.row].isThereAvailableAmount() == false {
             presenter.presentAlert(message: "You have no available funds")
             
             return
         }
         
         if presenter.transactionDTO.sendAmount != nil {
-            if Double(presenter.walletsArr[indexPath.row].availableAmount()) < presenter.transactionDTO.sendAmount! {
+            if presenter.walletsArr[indexPath.row].isThereEnoughAmount(presenter.transactionDTO.sendAmount!) == false {
                 presenter.presentAlert(message: nil)
                 
                 return
@@ -95,13 +95,8 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         self.presenter.selectedIndex = indexPath.row
-        switch self.presenter.walletsArr[indexPath.row].blockchain.blockchain {
-        case BLOCKCHAIN_BITCOIN:
-            self.performSegue(withIdentifier: "sendBTCDetailsVC", sender: Any.self)
-        case BLOCKCHAIN_ETHEREUM:
-            self.performSegue(withIdentifier: "sendETHDetailsVC", sender: Any.self)
-        default: break
-        }
+        
+        self.performSegue(withIdentifier: presenter.destinationSegueString(), sender: Any.self)
         
 //        let storyboard = UIStoryboard(name: "Send", bundle: nil)   //need to send transactionDTO
 //        let ethDetailsVC = storyboard.instantiateViewController(withIdentifier: "EthSendDetails")
