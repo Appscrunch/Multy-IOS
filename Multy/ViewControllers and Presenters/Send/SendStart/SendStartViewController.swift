@@ -124,7 +124,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     
     func donate(idOfInApp: String) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: idOfInApp)
         stingIdForInApp = idOfInApp
 
     }
@@ -140,6 +140,10 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     func cancelAction() {
 //        presentDonationVCorAlert()
         self.makePurchaseFor(productId: stingIdForInApp)
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
     }
     
     func presentNoInternet() {

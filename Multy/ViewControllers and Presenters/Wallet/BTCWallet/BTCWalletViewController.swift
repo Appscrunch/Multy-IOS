@@ -282,7 +282,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func exchangeAction(_ sender: Any) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.addingExchange50")
 //        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
         logAnalytics()
     }
@@ -341,6 +341,10 @@ extension CancelDelegate : CancelProtocol {
     func cancelAction() {
 //        presentDonationVCorAlert()
         self.makePurchaseFor(productId: "io.multy.addingExchange5")
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
     }
     
     func presentNoInternet() {
@@ -481,7 +485,7 @@ extension TableViewDataSource: UITableViewDataSource {
                 let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "TransactionWalletCellID") as! TransactionWalletCell
                 walletCell.selectionStyle = .none
                 if countOfHistObjs > 0 {
-                    if indexPath.row > countOfHistObjs && countOfHistObjs <= visibleCells {
+                    if indexPath.row > countOfHistObjs {
                         walletCell.changeState(isEmpty: true)
                     } else {
                         walletCell.histObj = presenter.historyArray[indexPath.row - 1]

@@ -152,12 +152,13 @@ extension UIViewController {
         return isViewLoaded && view.window != nil
     }
     
-    func presentDonationAlertVC(from cancelDelegate: CancelProtocol) {
+    func presentDonationAlertVC(from cancelDelegate: CancelProtocol, with idOfProduct: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
         donatAlert.modalPresentationStyle = .overCurrentContext
         donatAlert.modalTransitionStyle = .crossDissolve
         donatAlert.cancelDelegate = cancelDelegate
+        donatAlert.idOfProduct = idOfProduct
         self.present(donatAlert, animated: true, completion: nil)
     }
     
@@ -171,7 +172,7 @@ extension UIViewController {
                 print("Invalid product identifier: \(invalidProductId)")
                 completion(nil)
             } else {
-                print("Error: \(result.error ?? "Error!" as! Error)")
+                print("Error: \(result.error)")
                 completion(nil)
             }
         }
@@ -184,6 +185,7 @@ extension UIViewController {
         self.getAvailableInAppBy(stringId: productId) { (product) in
             if product == nil {
                 self.presentAlert(with: "Something went wrong. Try it later.")
+                progressHUD.unblockUIandHideProgressHUD()
                 return
             }
             SwiftyStoreKit.purchaseProduct(product!) { (result) in

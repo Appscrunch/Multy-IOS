@@ -18,6 +18,7 @@ class BlockchainsViewController: UIViewController {
     let presenter = BlockchainsPresenter()
     
     var stringInAppId = ""
+    var stringInAppIdBig = ""
     
     weak var delegate: ChooseBlockchainProtocol?
     
@@ -98,7 +99,7 @@ extension TableViewDelegate: UITableViewDelegate {
         if indexPath.section == 1 {
             self.makeStingIdForInApp(indexPath: indexPath)
             unowned let weakSelf =  self
-            self.presentDonationAlertVC(from: weakSelf)
+            self.presentDonationAlertVC(from: weakSelf, with: stringInAppIdBig)
             logAnalytics(indexPath: indexPath)
         } else {
             let currencyObj = presenter.availableBlockchainArray[indexPath.row]
@@ -119,6 +120,18 @@ extension TableViewDelegate: UITableViewDelegate {
         case 3: stringInAppId = "io.multy.addingLitecoin5"
         case 4: stringInAppId = "io.multy.addingDash5"
         case 5: stringInAppId = "io.multy.addingEthereumClassic5"
+        default: break
+        }
+    }
+    
+    func makeStingIdForBigInApp(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: stringInAppIdBig = "io.multy.addingEthereum50"
+        case 1: stringInAppIdBig = "io.multy.addingSteemit50"
+        case 2: stringInAppIdBig = "io.multy.addingBCH50"
+        case 3: stringInAppIdBig = "io.multy.addingLitecoin50"
+        case 4: stringInAppIdBig = "io.multy.addingDash50"
+        case 5: stringInAppIdBig = "io.multy.addingEthereumClassic50"
         default: break
         }
     }

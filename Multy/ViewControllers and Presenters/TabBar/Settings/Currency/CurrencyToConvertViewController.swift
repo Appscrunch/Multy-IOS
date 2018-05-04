@@ -35,6 +35,10 @@ class CurrencyToConvertViewController: UIViewController, CancelProtocol, Analyti
         self.makePurchaseFor(productId: "io.multy.estimationCurrencies5")
     }
     
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
+    }
+    
     func presentNoInternet() {
 
     }
@@ -94,7 +98,7 @@ extension CurrencyToConvertViewController: UITableViewDelegate, UITableViewDataS
         
         if indexPath.section == 1 {
             unowned let weakSelf =  self
-            self.presentDonationAlertVC(from: weakSelf)
+            self.presentDonationAlertVC(from: weakSelf, with: "io.multy.estimationCurrencie50")
             logAnalytics(indexPath: indexPath)
         } else {
             self.navigationController?.popViewController(animated: true)

@@ -37,6 +37,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     var isInsetCorrect = false
     
     var stringIdForInApp = ""
+    var stringIdForInAppBig = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -353,6 +354,11 @@ extension CancelDelegate: CancelProtocol {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
     }
     
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
+    }
+    
     func presentNoInternet() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
     }
@@ -649,9 +655,10 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
 extension CollectionViewDelegate : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
-        (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
+        makeIdForInAppBigBy(indexPath: indexPath)
         makeIdForInAppBy(indexPath: indexPath)
+        self.presentDonationAlertVC(from: weakSelf, with: stringIdForInAppBig)
+        (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         logAnalytics(indexPath: indexPath)
     }
     
@@ -659,6 +666,14 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
         switch indexPath.row {
         case 0: stringIdForInApp = "io.multy.addingPortfolio5"
         case 1: stringIdForInApp = "io.multy.addingCharts5"
+        default: break
+        }
+    }
+    
+    func makeIdForInAppBigBy(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: stringIdForInAppBig = "io.multy.addingPortfolio50"
+        case 1: stringIdForInAppBig = "io.multy.addingCharts50"
         default: break
         }
     }

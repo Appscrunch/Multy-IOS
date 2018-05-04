@@ -133,6 +133,12 @@ let idOfInapps = ["io.multy.addingActivity5", "io.multy.addingCharts5", "io.mult
                   "io.multy.addingPortfolio5", "io.multy.addingSteemit5", "io.multy.wirelessScan5",
                   "io.multy.addingBCH5", "io.multy.estimationCurrencies5", "io.multy.addingEthereum5"]
 
+let idOfInapps50 = ["io.multy.addingActivity50", "io.multy.addingCharts50", "io.multy.addingContacts50",
+                  "io.multy.addingDash50", "io.multy.addingEthereumClassic50", "io.multy.addingExchange50",
+                  "io.multy.exchangeStocks50", "io.multy.importWallet50", "io.multy.addingLitecoin50",
+                  "io.multy.addingPortfolio50", "io.multy.addingSteemit50", "io.multy.wirelessScan50",
+                  "io.multy.addingBCH50", "io.multy.estimationCurrencie50", "io.multy.addingEthereum50"]
+
 enum TxStatus : Int {
     case
         MempoolIncoming =           1,
