@@ -17,8 +17,8 @@ class SendAmountEthPresenter: NSObject {
             cryptoName = transactionDTO.blockchainType!.shortName
             exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
             
-            if transactionDTO.transaction?.customGAS?.gasPrice != nil {
-                feeAmount = BigInt("21000") * Int64(transactionDTO.transaction!.customGAS!.gasPrice)
+            if transactionDTO.transaction?.transactionRLM?.sumInCryptoBigInt != nil {
+                feeAmount = BigInt("21000") * transactionDTO.transaction!.transactionRLM?.sumInCryptoBigInt
                 feeAmountInFiat = feeAmount * exchangeCourse
             }
             
@@ -104,7 +104,7 @@ class SendAmountEthPresenter: NSObject {
                                                                               nonce: transactionDTO.choosenWallet!.ethWallet!.nonce.intValue,
                                                                               balanceAmount: "\(transactionDTO.choosenWallet!.ethWallet!.balance)",
             ethereumChainID: UInt32(transactionDTO.choosenWallet!.blockchain.net_type),
-            gasPrice: "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)",
+            gasPrice: transactionDTO.transaction?.transactionRLM?.sumInCryptoBigInt.stringValue ?? "0",
             gasLimit: "21000") // "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
         
         self.rawTransaction = trData.message

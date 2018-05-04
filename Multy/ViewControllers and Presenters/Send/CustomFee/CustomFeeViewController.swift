@@ -34,19 +34,25 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
 
     func setupUI() {
         //FIXME: check chainID nullability
-        switch self.presenter.chainId {
-        case 0 as NSNumber:
+        switch self.presenter.blockchainType?.blockchain {
+        case BLOCKCHAIN_BITCOIN:
             self.botNameLbl.isHidden = true
             self.botLimitTf.isHidden = true
             self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
             
-            self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)))
+            
             self.topNameLbl.text = "Satoshi per byte"
             self.topPriceTF.placeholder = "Enter Satohi per byte here"
             self.topPriceTF.placeholder = "0"
             if self.rate != 0 {
                 self.topPriceTF.text = "\(rate)"
             }
+        case BLOCKCHAIN_ETHEREUM:
+            self.botNameLbl.isHidden = true
+            self.botLimitTf.isHidden = true
+            self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
+            
+            self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)))
         default: return
         }
     }
@@ -61,13 +67,25 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     @objc func done() {
         if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < 1 {
-            let message = "Fee rate can not be less then 1 satoshi per byte."
-            let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                self.topPriceTF.becomeFirstResponder()
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
+            switch presenter.blockchainType!.blockchain {
+            case BLOCKCHAIN_BITCOIN:
+                let message = "Fee rate can not be less then 1 satoshi per byte."
+                let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                    self.topPriceTF.becomeFirstResponder()
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+            case BLOCKCHAIN_ETHEREUM:
+                let message = "Gas Price can not be less then 1 Gwei."
+                let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                    self.topPriceTF.becomeFirstResponder()
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+            default: return
+            }
         } else {
             self.delegate?.customFeeData(firstValue: (self.topPriceTF.text! as NSString).integerValue, secValue: (self.botLimitTf.text! as NSString).integerValue)
             self.navigationController?.popViewController(animated: true)

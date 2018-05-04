@@ -196,6 +196,8 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: payMaxTap)
     }
     
+    
+    
     @IBAction func nextAction(_ sender: Any) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         changeSum()

@@ -91,7 +91,7 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
             self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.presenter.checkMaxAvailable()
         } else {
-            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Please choose Gas Price.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -180,7 +180,7 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
             self.isCustom = true
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
-            customVC.presenter.chainId = self.presenter.transactionDTO.choosenWallet!.chain
+            customVC.presenter.blockchainType = self.presenter.transactionDTO.choosenWallet!.blockchain
             customVC.delegate = self.presenter
             
             self.presenter.selectedIndexOfSpeed = indexPath.row
