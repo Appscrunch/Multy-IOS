@@ -36,6 +36,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     var isInsetCorrect = false
     
+    var stringIdForInApp = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -346,7 +348,9 @@ extension CreateWalletDelegate: CreateWalletProtocol {
 
 extension CancelDelegate: CancelProtocol {
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: self.stringIdForInApp)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
     }
     
     func presentNoInternet() {
@@ -369,6 +373,7 @@ extension PresentingSheetDelegate: OpenCreatingSheet {
         creatingVC.modalPresentationStyle = .custom
         creatingVC.modalTransitionStyle = .crossDissolve
         self.present(creatingVC, animated: true, completion: nil)
+        self.stringIdForInApp = "io.multy.importWallet5"
     }
 }
 
@@ -570,7 +575,6 @@ extension TableViewDataSource : UITableViewDataSource {
             } else {
                 newWalletCell.hideAll(flag: false)
             }
-            
             return newWalletCell
         case [0,2]:
             if self.presenter.account != nil {
@@ -647,8 +651,16 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
         unowned let weakSelf =  self
         self.presentDonationAlertVC(from: weakSelf)
         (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        
+        makeIdForInAppBy(indexPath: indexPath)
         logAnalytics(indexPath: indexPath)
+    }
+    
+    func makeIdForInAppBy(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: stringIdForInApp = "io.multy.addingPortfolio5"
+        case 1: stringIdForInApp = "io.multy.addingCharts5"
+        default: break
+        }
     }
     
     func logAnalytics(indexPath: IndexPath) {

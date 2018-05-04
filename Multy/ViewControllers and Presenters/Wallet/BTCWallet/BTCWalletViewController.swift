@@ -339,7 +339,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 
 extension CancelDelegate : CancelProtocol {
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: "io.multy.addingExchange5")
     }
     
     func presentNoInternet() {

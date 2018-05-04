@@ -31,7 +31,8 @@ class CurrencyToConvertViewController: UIViewController, CancelProtocol, Analyti
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: "io.multy.estimationCurrencies5")
     }
     
     func presentNoInternet() {

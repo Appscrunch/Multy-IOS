@@ -9,6 +9,7 @@ class ExchangeStocksViewController: UIViewController, CancelProtocol, AnalyticsP
     @IBOutlet weak var tableView: UITableView!
     
     let presenter = ExchangeStocksPresenter()
+//    var stringIdForInApp = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,8 @@ class ExchangeStocksViewController: UIViewController, CancelProtocol, AnalyticsP
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: "io.multy.exchangeStocks")
     }
     
     func presentNoInternet() {

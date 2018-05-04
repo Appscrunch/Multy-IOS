@@ -78,7 +78,9 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: "io.multy.addingActivity5")
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
     }
     
     func presentNoInternet() {
