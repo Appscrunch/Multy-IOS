@@ -3,6 +3,8 @@
 //See LICENSE for details
 
 import UIKit
+import StoreKit
+import SwiftyStoreKit
 
 private typealias AnalyticsDelegate = BlockchainsViewController
 private typealias CancelDelegate = BlockchainsViewController
@@ -14,6 +16,8 @@ class BlockchainsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let presenter = BlockchainsPresenter()
+    
+    var stringInAppId = ""
     
     weak var delegate: ChooseBlockchainProtocol?
     
@@ -37,7 +41,7 @@ class BlockchainsViewController: UIViewController {
 
 extension CancelDelegate: CancelProtocol {
     func cancelAction() {
-        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: self.stringInAppId)
     }
     
     func presentNoInternet() {
@@ -92,6 +96,7 @@ extension TableViewDelegate: UITableViewDelegate {
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 1 {
+            self.makeStingIdForInApp(indexPath: indexPath)
             unowned let weakSelf =  self
             self.presentDonationAlertVC(from: weakSelf)
             logAnalytics(indexPath: indexPath)
@@ -104,6 +109,18 @@ extension TableViewDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
+    }
+    
+    func makeStingIdForInApp(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: stringInAppId = "io.multy.addingEthereum5"
+        case 1: stringInAppId = "io.multy.addingSteemit5"
+        case 2: stringInAppId = "io.multy.addingBCH5"
+        case 3: stringInAppId = "io.multy.addingLitecoin5"
+        case 4: stringInAppId = "io.multy.addingDash5"
+        case 5: stringInAppId = "io.multy.addingEthereumClassic5"
+        default: break
+        }
     }
 }
 

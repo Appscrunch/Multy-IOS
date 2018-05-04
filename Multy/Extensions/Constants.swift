@@ -127,6 +127,12 @@ func shakeView(viewForShake: UIView) {
 //    self.viewWithCircles.layer.add(animation, forKey: "position")
 }
 
+let idOfInapps = ["io.multy.addingActivity5", "io.multy.addingCharts5", "io.multy.addingContacts5",
+                  "io.multy.addingDash5", "io.multy.addingEthereumClassic5", "io.multy.addingExchange5",
+                  "io.multy.exchangeStocks", "io.multy.importWallet5", "io.multy.addingLitecoin5",
+                  "io.multy.addingPortfolio5", "io.multy.addingSteemit5", "io.multy.wirelessScan5",
+                  "io.multy.addingBCH5", "io.multy.estimationCurrencies5", "io.multy.addingEthereum5"]
+
 enum TxStatus : Int {
     case
         MempoolIncoming =           1,

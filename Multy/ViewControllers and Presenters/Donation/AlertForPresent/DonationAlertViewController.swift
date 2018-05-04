@@ -46,8 +46,8 @@ class DonationAlertViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func donateAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-//        self.cancelDelegate?.cancelAction()
-        self.cancelDelegate?.presentNoInternet()
+        self.cancelDelegate?.cancelAction()
+//        self.cancelDelegate?.presentNoInternet()
         sendDonationAlertScreenPressDonateAnalytics()
     }
 }
