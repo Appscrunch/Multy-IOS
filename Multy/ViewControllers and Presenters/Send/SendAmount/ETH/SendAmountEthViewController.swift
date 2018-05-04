@@ -125,9 +125,15 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         } else {
             presenter.isCrypto = !presenter.isCrypto
             presenter.makeMaxSumWithFeeAndDonate()
-            if presenter.sumInCrypto > presenter.availableSumInCrypto {
-                amountTF.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
-                topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
+            if presenter.sumInCrypto > presenter.availableSumInCrypto || presenter.sumInCrypto > presenter.cryptoMaxSumWithFeeAndDonate {
+                switch self.commissionSwitch.isOn {
+                case true:
+                    amountTF.text = presenter.cryptoMaxSumWithFeeAndDonate.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                    topSumLbl.text = presenter.cryptoMaxSumWithFeeAndDonate.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
+                case false:
+                    amountTF.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
+                    topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
+                }
             } else {
                 amountTF.text = presenter.sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
                 topSumLbl.text = presenter.sumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
@@ -169,8 +175,9 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     }
     
     @IBAction func maxAction(_ sender: Any) {
+        commissionSwitch.isOn = false
+        
         if presenter.isCrypto {
-            commissionSwitch.isOn = false
             presenter.setMaxAllowed()
             amountTF.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
@@ -178,7 +185,6 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             presenter.cryptoToUsd()
             setSumInNextBtn()
         } else {
-            commissionSwitch.isOn = false
             presenter.setMaxAllowed()
             amountTF.text = presenter.availableSumInFiat.fiatValueString
             topSumLbl.text = presenter.availableSumInFiat.fiatValueString
@@ -190,13 +196,11 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: payMaxTap)
     }
     
-    
-    
     @IBAction func nextAction(_ sender: Any) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         changeSum()
 
-        if presenter.sumInCrypto != Int64(0) && presenter.transactionDTO.transaction!.donationDTO != nil && !amountTF.text!.isEmpty {
+        if presenter.sumInCrypto != Int64(0) && !amountTF.text!.isEmpty {
             self.performSegue(withIdentifier: "sendFinishVC", sender: sender)
         } else {
             self.presentWarning(message: "You try to send 0.0 \(self.presenter.cryptoName).\nPlease enter the correct value")

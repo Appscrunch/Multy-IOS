@@ -19,6 +19,7 @@ class SendAmountEthPresenter: NSObject {
             
             if transactionDTO.transaction?.customGAS?.gasPrice != nil {
                 feeAmount = BigInt("21000") * Int64(transactionDTO.transaction!.customGAS!.gasPrice)
+                feeAmountInFiat = feeAmount * exchangeCourse
             }
             
             maxLengthForSum = transactionDTO.choosenWallet!.blockchain.blockchain.maxLengthForSum
@@ -40,12 +41,15 @@ class SendAmountEthPresenter: NSObject {
     var exchangeCourse = Double(0.0)
     
     // entered sum
-    var sumInCrypto = BigInt("0") {
-        didSet {
-            sumInFiat = sumInCrypto * exchangeCourse
+    var sumInCrypto = BigInt("0")
+    var sumInFiat: BigInt {
+        get {
+            return sumInCrypto * exchangeCourse
+        }
+        set {
+            self.sumInFiat = newValue
         }
     }
-    var sumInFiat = BigInt("0")
     
     var fiatName = "USD"
     var cryptoName = "ETH"
@@ -61,6 +65,7 @@ class SendAmountEthPresenter: NSObject {
     var cryptoMaxSumWithFeeAndDonate = BigInt("0")
     
     var feeAmount = BigInt("0")
+    var feeAmountInFiat = BigInt("0")
     
     var rawTransaction: String?
     
@@ -86,9 +91,16 @@ class SendAmountEthPresenter: NSObject {
     }
     
     func estimateTransaction() -> Bool {
+        var sendAmount = BigInt("0")
+        if sendAmountVC!.commissionSwitch.isOn {
+            sendAmount = sumInCrypto
+        } else {
+            sendAmount = sumInCrypto - feeAmount
+        }
+        
         let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                               sendAddress: transactionDTO.sendAddress!,
-                                                                              sendAmountString: sumInCrypto.stringValue,
+                                                                              sendAmountString: sendAmount.stringValue,
                                                                               nonce: transactionDTO.choosenWallet!.ethWallet!.nonce.intValue,
                                                                               balanceAmount: "\(transactionDTO.choosenWallet!.ethWallet!.balance)",
             ethereumChainID: UInt32(transactionDTO.choosenWallet!.blockchain.net_type),
@@ -158,9 +170,21 @@ class SendAmountEthPresenter: NSObject {
         
         switch self.isCrypto {
         case true:
-            sumInNextBtn = sumInCrypto + feeAmount
+            sumInNextBtn = sumInCrypto
+                
+            if sendAmountVC!.commissionSwitch.isOn {
+                sumInNextBtn = sumInNextBtn + feeAmount
+            }
+            
+            if sumInNextBtn > availableSumInCrypto {
+                sumInNextBtn = availableSumInCrypto
+            }
         case false:
-            sumInNextBtn = sumInFiat + fiatAmount
+            sumInNextBtn = sumInFiat
+            
+            if sendAmountVC!.commissionSwitch.isOn {
+                sumInNextBtn = sumInNextBtn + fiatAmount
+            }
             
             if sumInNextBtn > availableSumInFiat {
                 sumInNextBtn = availableSumInFiat
@@ -170,12 +194,20 @@ class SendAmountEthPresenter: NSObject {
         return self.sumInNextBtn
     }
     
-    func setMaxAllowed() {
+    func setMaxAllowed() {       
         switch self.isCrypto {
         case true:
-            maxAllowedToSpend = availableSumInCrypto
+            if sendAmountVC!.commissionSwitch.isOn {
+                maxAllowedToSpend = availableSumInCrypto - feeAmount
+            } else {
+                maxAllowedToSpend = availableSumInCrypto
+            }
         case false:
-            maxAllowedToSpend = self.availableSumInFiat
+            if sendAmountVC!.commissionSwitch.isOn {
+                maxAllowedToSpend = availableSumInFiat - feeAmountInFiat
+            } else {
+                maxAllowedToSpend = availableSumInFiat
+            }
         }
     }
     
@@ -241,9 +273,9 @@ class SendAmountEthPresenter: NSObject {
     
     func makeMaxSumWithFeeAndDonate() {
         if isCrypto {
-            cryptoMaxSumWithFeeAndDonate = availableSumInCrypto
+            cryptoMaxSumWithFeeAndDonate = availableSumInCrypto - feeAmount
         } else {
-            cryptoMaxSumWithFeeAndDonate = availableSumInFiat
+            cryptoMaxSumWithFeeAndDonate = availableSumInFiat - feeAmountInFiat
         }
     }
     

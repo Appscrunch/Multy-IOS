@@ -27,7 +27,7 @@ class UserWalletRLM: Object {
             case BLOCKCHAIN_BITCOIN:
                 return sumInCrypto.fixedFraction(digits: 8)
             case BLOCKCHAIN_ETHEREUM:
-                return ethWallet!.balance.appendDelimeter(at: 18)
+                return ethWallet!.allBalance.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             default:
                 return ""
             }
@@ -55,7 +55,7 @@ class UserWalletRLM: Object {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInCrypto * exchangeCourse
             } else {
-                return Double((BigInt(ethWallet!.balance) * exchangeCourse).fiatValueString.replacingOccurrences(of: ",", with: "."))!
+                return Double((ethWallet!.allBalance * exchangeCourse).fiatValueString.replacingOccurrences(of: ",", with: "."))!
             }
         }
     }
@@ -65,7 +65,7 @@ class UserWalletRLM: Object {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInFiat.fixedFraction(digits: 2)
             } else {
-                return (BigInt(ethWallet!.balance) * exchangeCourse).fiatValueString
+                return (ethWallet!.allBalance * exchangeCourse).fiatValueString
             }
         }
     }

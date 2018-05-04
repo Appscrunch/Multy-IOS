@@ -12,13 +12,13 @@ class ETHWallet: Object {
     
     var allBalance: BigInt {
         get {
-            return BigInt(balance)
+            return BigInt(balance) + pendingBalance
         }
     }
     
     var availableBalance: BigInt {
         get {
-            return BigInt(balance) - BigInt(pendingWeiAmountString)
+            return BigInt(balance)
         }
     }
     

@@ -1599,6 +1599,9 @@ This feature will be in the next update.</string>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cancelAction:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="kcG-B9-heX"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsy-Hb-OWB">
                                         <rect key="frame" x="134" y="33" width="107" height="23.5"/>
@@ -1650,7 +1653,7 @@ This feature will be in the next update.</string>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwY-HZ-OWp">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwY-HZ-OWp">
                                         <rect key="frame" x="82.5" y="301.5" width="210.5" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay for commission        " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW7-w3-CZx">
@@ -1659,9 +1662,12 @@ This feature will be in the next update.</string>
                                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Um-LH-7i2">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Um-LH-7i2">
                                                 <rect key="frame" x="161.5" y="0.0" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="payForCommisionAction:" destination="jJt-Ap-KXa" eventType="valueChanged" id="68t-Us-roI"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -1683,6 +1689,9 @@ This feature will be in the next update.</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgE-ox-ude">
                                                 <rect key="frame" x="285" y="0.0" width="90" height="44"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="maxAction:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="gEE-zV-QYq"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1234 ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bha-Kb-4Pk">
                                                 <rect key="frame" x="98.5" y="11" width="88" height="22"/>
@@ -1730,12 +1739,18 @@ This feature will be in the next update.</string>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADe-ts-6QS">
                                         <rect key="frame" x="173" y="161" width="61" height="53.5"/>
+                                        <connections>
+                                            <action selector="topBtn:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="rTO-bN-mcQ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsi-QF-gdr">
                                         <rect key="frame" x="164" y="264.5" width="47" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="Dsy-wI-6bJ"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="botBtn:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="4OU-rx-c6g"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

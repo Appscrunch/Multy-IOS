@@ -36,7 +36,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        if presenter.wallet?.sumInCrypto.fixedFraction(digits: 8) == "0" {
+        if presenter.wallet?.sumInCryptoString == "0" {
             let message = "Are you sure?"
             let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { (action) in
