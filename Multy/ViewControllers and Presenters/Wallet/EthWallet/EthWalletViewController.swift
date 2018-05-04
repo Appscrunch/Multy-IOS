@@ -387,7 +387,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
                 let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "TransactionWalletCellID") as! TransactionWalletCell
                 walletCell.selectionStyle = .none
                 if countOfHistObjs > 0 {
-                    if indexPath.row > countOfHistObjs && countOfHistObjs <= visibleCells {
+                    if indexPath.row > countOfHistObjs {
                         walletCell.changeState(isEmpty: true)
                     } else {
                         walletCell.histObj = presenter.historyArray[indexPath.row - 1]
