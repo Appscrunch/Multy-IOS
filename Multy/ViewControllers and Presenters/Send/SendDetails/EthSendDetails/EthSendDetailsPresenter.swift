@@ -180,10 +180,24 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
 //        self.customFee = UInt64(firstValue)
         self.sendDetailsVC?.tableView.reloadData()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
+        
+        
+        var cells = sendDetailsVC!.tableView.visibleCells
+        cells.removeLast()
+        let trueCells = cells as! [TransactionFeeTableViewCell]
+        for cell in trueCells {
+            cell.checkMarkImage.isHidden = true
+        }
+        if trueCells.count > 5 {
+            trueCells[5].checkMarkImage.isHidden = false
+            selectedIndexOfSpeed = 5
+        }
     }
     
-    func setPreviousSelected(index: Int?) {
-        
+    func setPreviousSelected(index: Int?) {      
+        self.sendDetailsVC?.tableView.selectRow(at: [0,index!], animated: false, scrollPosition: .none)
+        self.sendDetailsVC?.tableView.delegate?.tableView!(self.sendDetailsVC!.tableView, didSelectRowAt: [0,index!])
+        self.selectedIndexOfSpeed = index!
     }
     
     //==============================

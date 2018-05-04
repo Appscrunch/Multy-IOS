@@ -33,6 +33,8 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         
         presenter.getData()
         
+//        presenter.selectedIndexOfSpeed = 2
+        
 //        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)")
 //        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: donationEnableTap)
     }
@@ -178,12 +180,14 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
             self.presenter.selectedIndexOfSpeed = indexPath.row
         } else {
             self.isCustom = true
+            
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
             customVC.presenter.blockchainType = self.presenter.transactionDTO.choosenWallet!.blockchain
+            customVC.previousSelected = presenter.selectedIndexOfSpeed
             customVC.delegate = self.presenter
-            
             self.presenter.selectedIndexOfSpeed = indexPath.row
+            
             self.navigationController?.pushViewController(customVC, animated: true)
             
             var cells = self.tableView.visibleCells
