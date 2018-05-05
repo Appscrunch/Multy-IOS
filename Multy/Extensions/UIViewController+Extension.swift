@@ -3,6 +3,8 @@
 //See LICENSE for details
 
 import UIKit
+import StoreKit
+import SwiftyStoreKit
 
 private let swizzling: (AnyClass, Selector, Selector) -> () = { forClass, originalSelector, swizzledSelector in
     let originalMethod = class_getInstanceMethod(forClass, originalSelector)
@@ -150,12 +152,61 @@ extension UIViewController {
         return isViewLoaded && view.window != nil
     }
     
-    func presentDonationAlertVC(from cancelDelegate: CancelProtocol) {
+    func presentDonationAlertVC(from cancelDelegate: CancelProtocol, with idOfProduct: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let donatAlert = storyboard.instantiateViewController(withIdentifier: "donationAlert") as! DonationAlertViewController
         donatAlert.modalPresentationStyle = .overCurrentContext
         donatAlert.modalTransitionStyle = .crossDissolve
         donatAlert.cancelDelegate = cancelDelegate
+        donatAlert.idOfProduct = idOfProduct
         self.present(donatAlert, animated: true, completion: nil)
+    }
+    
+    func getAvailableInAppBy(stringId: String, completion: @escaping (SKProduct?) -> ()) {
+        SwiftyStoreKit.retrieveProductsInfo([stringId]) { result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+                completion(product)
+            } else if let invalidProductId = result.invalidProductIDs.first {
+                print("Invalid product identifier: \(invalidProductId)")
+                completion(nil)
+            } else {
+                print("Error: \(result.error)")
+                completion(nil)
+            }
+        }
+    }
+    
+    func makePurchaseFor(productId: String) {
+        let progressHUD = ProgressHUD(text: "Loading")
+        view.addSubview(progressHUD)
+        progressHUD.blockUIandShowProgressHUD()
+        self.getAvailableInAppBy(stringId: productId) { (product) in
+            if product == nil {
+                self.presentAlert(with: "Something went wrong. Try it later.")
+                progressHUD.unblockUIandHideProgressHUD()
+                return
+            }
+            SwiftyStoreKit.purchaseProduct(product!) { (result) in
+                progressHUD.unblockUIandHideProgressHUD()
+                switch result {
+                case .success(let purchase):
+                    print("Purchase Success: \(purchase.productId)")
+                case .error(let error):
+                    switch error.code {
+                    case .unknown: print("Unknown error. Please contact support")
+                    case .clientInvalid: print("Not allowed to make the payment")
+                    case .paymentCancelled: break
+                    case .paymentInvalid: print("The purchase identifier was invalid")
+                    case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                    case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                    case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                    case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                    case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                    }
+                }
+            }
+        }
     }
 }

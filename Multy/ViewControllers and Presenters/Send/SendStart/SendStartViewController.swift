@@ -12,6 +12,7 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
     @IBOutlet weak var middleConstraint: NSLayoutConstraint!
     
     let presenter = SendStartPresenter()
+    var stingIdForInApp = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,17 +121,29 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         }
     }
     
-    func donate() {
+    
+    func donate(idOfInApp: String) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: idOfInApp)
+        stingIdForInApp = idOfInApp
+
     }
+//    func donate() {
+//        unowned let weakSelf =  self
+//        self.presentDonationAlertVC(from: weakSelf)
+//    }
     
     func cancelDonation() {
-        
+        self.makePurchaseFor(productId: stingIdForInApp)
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: stingIdForInApp)
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
     }
     
     func presentNoInternet() {

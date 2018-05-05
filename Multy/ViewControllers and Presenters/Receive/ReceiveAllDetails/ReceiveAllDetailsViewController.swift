@@ -26,6 +26,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     let presenter = ReceiveAllDetailsPresenter()
     
     var qrcodeImage: CIImage!
+    var stringIdOfProduct: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,14 +70,16 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
-        self.openDonat()
+        self.openDonat(productID: "io.multy.wirelessScan50")
+        stringIdOfProduct = "io.multy.wirelessScan5"
 //        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: wirelessScanTap)
         
         logAnalytics(code: donationForWirelessScanFUNC)
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
-        self.openDonat()
+        self.openDonat(productID: "io.multy.addingContacts50")
+        stringIdOfProduct = "io.multy.addingContacts5"
 //        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressBookTap)
         logAnalytics(code: donationForContactSC)
     }
@@ -92,16 +95,21 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: stringIdOfProduct!)
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
     }
     
     func presentNoInternet() {
         
     }
     
-    func openDonat() {
+    func openDonat(productID: String) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: productID)
     }
     
     func logAnalytics(code: Int) {
