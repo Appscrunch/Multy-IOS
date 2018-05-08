@@ -135,6 +135,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         // handler for URI Schemes (depreciated in iOS 9.2+, but still used by some apps)
         Branch.getInstance().application(app, open: url, options: options)
+        
+        DataManager.shared.getAccount(completion: { (acc, err) in
+            if acc == nil {
+                return
+            }
+            var addressStr = ""
+            var amountFromQr = ""
+            let array = url.absoluteString.components(separatedBy: CharacterSet(charactersIn: ":?="))
+            switch array.count {
+            case 1:                              // shit in qr
+                let messageFromQr = array[0]
+                print(messageFromQr)
+            case 2:                              // chain name + address
+                addressStr = array[1]
+            case 4:                                // chain name + address + amount
+                addressStr = array[1]
+                amountFromQr = array[3]
+            default: break
+            }
+            
+            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+            let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
+            sendStartVC.presenter.transactionDTO.sendAddress = "\(addressStr)"
+            sendStartVC.presenter.transactionDTO.sendAmount = amountFromQr.doubleValue
+            ((self.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
+            sendStartVC.performSegue(withIdentifier: "chooseWalletVC", sender: (Any).self)
+        })
+        
+        
         return true
     }
     
