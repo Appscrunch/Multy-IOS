@@ -18,12 +18,6 @@ class AssetsPresenter: NSObject {
     
     var account : AccountRLM? {
         didSet {
-            print("")
-//            fetchTickets()
-//            getTransInfo()
-//            getWalletVerbose()
-//            getWalletOutputs()
-            
             backupActivity()
             
             if self.assetsVC!.isVisible() {
@@ -148,32 +142,7 @@ class AssetsPresenter: NSObject {
         let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
         self.assetsVC?.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
-    
-//    func updateExchangeCourse() {
-//        DataManager.shared.getExhanchgeCourse((account?.token)!) { (dict, err) in
-//            
-//        }
-//    }
-    
-    //////////////////////////////////////////////////////////////////////
-    //test
-    
-    func getTransInfo() {
-        DataManager.shared.apiManager.getTransactionInfo(transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
-                                                            guard transDict != nil else {
-                                                                return
-                                                            }
-                                                            
-                                                            print(transDict)
-        }
-    }
-    
-    func getWalletOutputs() {
-        DataManager.shared.getWalletOutputs(currencyID: 0, address: account!.wallets[0].address) { (dict, error) in
-            print("getWalletOutputs: \(dict)")
-        }
-    }
-    
+
     func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
         blockUI()
         DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
@@ -185,14 +154,8 @@ class AssetsPresenter: NSObject {
                 print("afterVerbose:rawdata: \(walletsArrayFromApi)")
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
-                    
                     print("wallets: \(acc?.wallets)")
-                    
                     completion(true)
-                    
-//                    DataManager.shared.getAccount(completion: { (acc, err) in
-//                        print("afterVerbose: \(acc!)")
-//                    })
                 })
             }
         }
@@ -210,11 +173,8 @@ class AssetsPresenter: NSObject {
                 print("afterVerboseForSockets:rawdata: \(walletsArrayFromApi)")
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
-                    
                     print("wallets: \(acc?.wallets)")
-                    
                     completion(true)
-                    
                     DataManager.shared.getAccount(completion: { (acc, err) in
                         print("afterVerbose: \(acc!)")
                     })
