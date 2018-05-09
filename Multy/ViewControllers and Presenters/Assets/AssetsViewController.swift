@@ -39,7 +39,6 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.backUpView()
         
         tableView.accessibilityIdentifier = "AssetsTableView"
@@ -52,6 +51,10 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         guard isFlowPassed else {
             self.view.isUserInteractionEnabled = true
             return
+        }
+        
+        if !self.isFirstLaunch {
+            self.presenter.updateWalletsInfo()
         }
         
         let isFirst = DataManager.shared.checkIsFirstLaunch()

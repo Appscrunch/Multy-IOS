@@ -96,12 +96,13 @@ class AssetsPresenter: NSObject {
     }
     
     func updateWalletsInfo() {
-        self.blockUI()
         DataManager.shared.getAccount { (acc, err) in
-            self.unlockUI()
             if acc != nil {
+                self.blockUI()
                 self.account = acc
-                self.getWalletsVerbose(completion: {_ in })
+                self.getWalletsVerbose(completion: { (_) in
+                    self.unlockUI()
+                })
             }
         }
     }

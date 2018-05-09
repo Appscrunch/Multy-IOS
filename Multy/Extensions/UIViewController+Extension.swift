@@ -158,4 +158,17 @@ extension UIViewController {
         donatAlert.cancelDelegate = cancelDelegate
         self.present(donatAlert, animated: true, completion: nil)
     }
+    
+    func showHud(text: String) -> UIView {
+        let hud = ProgressHUD(text: text)
+        hud.tag = 999
+        self.view.addSubview(hud)
+        hud.blockUIandShowProgressHUD()
+        return hud
+    }
+    
+    func hideHud(view: ProgressHUD?) {
+        view?.unblockUIandHideProgressHUD()
+    }
+    
 }
