@@ -73,10 +73,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if acc == nil {
                             return
                         }
-                        var amountFromLink = 0.0
                         
-                        let chainNameFromLink = (dictFormLink["address"] as! String).split(separator: ":").first
-                        let addressFromLink = (dictFormLink["address"] as! String).split(separator: ":").last
+                        //FIXME: amountFromLink pass as String
+                        var amountFromLink = 0.0
+                        let deepLinkAddressInfoArray = (dictFormLink["address"] as! String).split(separator: ":")
+                        
+                        let chainNameFromLink = deepLinkAddressInfoArray.first
+                        let addressFromLink = deepLinkAddressInfoArray.last
                         if let amount = dictFormLink["amount"] as? String {
                             amountFromLink = amount.doubleValue
                         } else if let number = dictFormLink["amount"] as? NSNumber {
@@ -157,11 +160,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    
-    
-    
-    
 
     func applicationWillResignActive(_ application: UIApplication) {
         DataManager.shared.finishRealmSession()
@@ -233,7 +231,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager.shared.finishRealmSession()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
     
     func performFirstEnterFlow() {
         guard self.window != nil && self.window?.rootViewController != nil else {
