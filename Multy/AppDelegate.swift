@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //executes after screenshot
         }
         
-        performFirstEnterFlow()
+        self.performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
                 if currencyExchange != nil {
@@ -64,11 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.makeKeyAndVisible()
         
         // for debug and development only
-        Branch.getInstance().setDebug()
-        // listener for Branch Deep Link data
+//        Branch.getInstance().setDebug()
         Branch.getInstance().initSession(launchOptions: launchOptions) { [weak self] (params, error) in
-            // do stuff with deep link data (nav to page, display content, etc)
-//            print(params as? [String: AnyObject] ?? {})
             if error == nil {
                 let dictFormLink = params! as NSDictionary
                 if (dictFormLink["address"] != nil) {
@@ -100,9 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         ((self!.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
                         sendStartVC.performSegue(withIdentifier: "chooseWalletVC", sender: (Any).self)
                     })
-//                    self.window?.rootViewController?.navigationController?.pushViewController(sendStartVC, animated: false)
-//                    let chooseWalletVC = WalletChoooseViewController()
-//                    self.window?.rootViewController?.navigationController?.pushViewController(chooseWalletVC, animated: true)
                 }
             }
         }
@@ -118,23 +112,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Respond to URI scheme links
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        // pass the url to the handle deep link call
-//        let branchHandled = Branch.getInstance().application(application,
-//                                                             open: url,
-//                                                             sourceApplication: sourceApplication,
-//                                                             annotation: annotation
-//        )
-//        if (!branchHandled) {
-//            // If not handled by Branch, do other deep link routing for the Facebook SDK, Pinterest SDK, etc
-//        }
-//
-//        // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         // handler for URI Schemes (depreciated in iOS 9.2+, but still used by some apps)
         Branch.getInstance().application(app, open: url, options: options)
+        
+        DataManager.shared.getAccount(completion: { (acc, err) in
+            if acc == nil {
+                return
+            }
+            var addressStr = ""
+            var amountFromQr = ""
+            let array = url.absoluteString.components(separatedBy: CharacterSet(charactersIn: ":?="))
+            switch array.count {
+            case 1:                              // shit in qr
+                let messageFromQr = array[0]
+                print(messageFromQr)
+            case 2:                              // chain name + address
+                addressStr = array[1]
+            case 4:                                // chain name + address + amount
+                addressStr = array[1]
+                amountFromQr = array[3]
+            default: break
+            }
+            
+            let storyboard = UIStoryboard(name: "Send", bundle: nil)
+            let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
+            sendStartVC.presenter.transactionDTO.sendAddress = "\(addressStr)"
+            sendStartVC.presenter.transactionDTO.sendAmount = amountFromQr.doubleValue
+            ((self.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
+            sendStartVC.performSegue(withIdentifier: "chooseWalletVC", sender: (Any).self)
+        })
+        
+        
         return true
     }
     
@@ -177,7 +189,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DataManager.shared.realmManager.updateCurrencyExchangeRLM(curExchange: DataManager.shared.currencyExchange)
 //        UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is ter4minated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
@@ -234,7 +246,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             assetVC.presenter.isJailed = true
         case false:
             assetVC.presenter.isJailed = false
+            let hud = assetVC.showHud(text: "Checking version")
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
+                assetVC.hideHud(view: hud as? ProgressHUD)
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 

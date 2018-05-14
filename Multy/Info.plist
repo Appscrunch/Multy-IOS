@@ -22,9 +22,11 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>Multy</string>
+			<string>io.multy</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>ethereum</string>
+				<string>bitcoin</string>
 				<string>multy</string>
 			</array>
 		</dict>
@@ -32,9 +34,9 @@
 	<key>CFBundleVersion</key>
 	<string>39</string>
 	<key>GIT_BRANCH_NAME</key>
-	<string>ETH_BETA_TEST</string>
+	<string>Refactor_AssetVC</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>3f38ef8</string>
+	<string>7896d2c</string>
 	<key>GIT_TAG_NAME</key>
 	<string>RELEASE_1.0.0-dirty</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -64,6 +66,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Multy needs to scan payment request QR code.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Needs to authorize user</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

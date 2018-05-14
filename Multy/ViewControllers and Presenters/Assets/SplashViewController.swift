@@ -39,7 +39,7 @@ class SplashViewController: UIViewController {
         let message = "Please update Multy from App Store"
         let alert = UIAlertController(title: "We have update!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Go to update", style: .cancel, handler: { (action) in
-            if let url = URL(string: "itms-apps://itunes.apple.com/"), //"itms-apps://itunes.apple.com/app/id1024941703"
+            if let url = URL(string: "itms-apps://itunes.apple.com/us/app/multy-blockchain-wallet/id1328551769"), //"itms-apps://itunes.apple.com/app/id1024941703"
                 UIApplication.shared.canOpenURL(url){
                 UIApplication.shared.openURL(url)
                 exit(0)

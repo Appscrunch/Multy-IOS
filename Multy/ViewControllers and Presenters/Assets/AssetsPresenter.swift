@@ -18,12 +18,6 @@ class AssetsPresenter: NSObject {
     
     var account : AccountRLM? {
         didSet {
-            print("")
-//            fetchTickets()
-//            getTransInfo()
-//            getWalletVerbose()
-//            getWalletOutputs()
-            
             backupActivity()
             
             if self.assetsVC!.isVisible() {
@@ -65,7 +59,7 @@ class AssetsPresenter: NSObject {
                     
                     DispatchQueue.main.async {
                         self.account = account
-                        DataManager.shared.socketManager.start()
+                        
                         self.getWalletsVerbose(completion: {_ in })
                     }
                 }
@@ -75,11 +69,11 @@ class AssetsPresenter: NSObject {
                     if acc != nil {
                         self.account = acc
                         self.getWalletsVerbose(completion: {_ in})
-                        DataManager.shared.socketManager.start()
+//                        DataManager.shared.socketManager.start()
                     }
                 })
             }
-            
+            DataManager.shared.socketManager.start()
             self.assetsVC?.progressHUD.hide()
         }
     }
@@ -102,40 +96,19 @@ class AssetsPresenter: NSObject {
     }
     
     func updateWalletsInfo() {
-        self.blockUI()
         DataManager.shared.getAccount { (acc, err) in
-            self.unlockUI()
             if acc != nil {
+                self.blockUI()
                 self.account = acc
-                self.getWalletsVerbose(completion: {_ in })
+                self.getWalletsVerbose(completion: { (_) in
+                    self.unlockUI()
+                })
             }
         }
     }
     
     func isWalletExist() -> Bool {
         return !(account == nil || account?.wallets.count == 0)
-    }
-    
-    func openCreateWalletPopup() {
-        let actionSheet = UIAlertController(title: Constants.AssetsScreen.createOrImportWalletString,
-                                            message: nil,
-                                            preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: Constants.AssetsScreen.createWalletString,
-                                            style: .default,
-                                            handler: { (result : UIAlertAction) -> Void in
-            self.assetsVC?.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID,
-                                        sender: Any.self)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Import wallet",
-                                            style: .default,
-                                            handler: { (result: UIAlertAction) -> Void in
-            //go to import wallet
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.assetsVC?.present(actionSheet, animated: true, completion: nil)
     }
     
     func registerCells() {
@@ -148,32 +121,7 @@ class AssetsPresenter: NSObject {
         let newWalletCell = UINib.init(nibName: "NewWalletTableViewCell", bundle: nil)
         self.assetsVC?.tableView.register(newWalletCell, forCellReuseIdentifier: "newWalletCell")
     }
-    
-//    func updateExchangeCourse() {
-//        DataManager.shared.getExhanchgeCourse((account?.token)!) { (dict, err) in
-//            
-//        }
-//    }
-    
-    //////////////////////////////////////////////////////////////////////
-    //test
-    
-    func getTransInfo() {
-        DataManager.shared.apiManager.getTransactionInfo(transactionString: "d83a5591585f05dc367d5e68579ece93240a6b4646133a38106249cadea53b77") { (transDict, error) in
-                                                            guard transDict != nil else {
-                                                                return
-                                                            }
-                                                            
-                                                            print(transDict)
-        }
-    }
-    
-    func getWalletOutputs() {
-        DataManager.shared.getWalletOutputs(currencyID: 0, address: account!.wallets[0].address) { (dict, error) in
-            print("getWalletOutputs: \(dict)")
-        }
-    }
-    
+
     func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
         blockUI()
         DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
@@ -185,14 +133,8 @@ class AssetsPresenter: NSObject {
                 print("afterVerbose:rawdata: \(walletsArrayFromApi)")
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
-                    
                     print("wallets: \(acc?.wallets)")
-                    
                     completion(true)
-                    
-//                    DataManager.shared.getAccount(completion: { (acc, err) in
-//                        print("afterVerbose: \(acc!)")
-//                    })
                 })
             }
         }
@@ -210,11 +152,8 @@ class AssetsPresenter: NSObject {
                 print("afterVerboseForSockets:rawdata: \(walletsArrayFromApi)")
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
-                    
                     print("wallets: \(acc?.wallets)")
-                    
                     completion(true)
-                    
                     DataManager.shared.getAccount(completion: { (acc, err) in
                         print("afterVerbose: \(acc!)")
                     })

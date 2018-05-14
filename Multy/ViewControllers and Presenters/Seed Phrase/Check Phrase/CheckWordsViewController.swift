@@ -245,16 +245,5 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
             wrongVC.presenter.prevVC = self
         }
     }
-    
-    func presentAlert() {
-        let message = "You entered wrong word!"
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-            
-        }))
-        
-        let rootViewController: UIViewController = UIApplication.shared.windows.last!.rootViewController!
-        rootViewController.present(alert, animated: true, completion: nil)
-    }
 }
 
