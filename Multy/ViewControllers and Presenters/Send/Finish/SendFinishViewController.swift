@@ -241,7 +241,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     
     func fixUIForX() {
         if screenHeight == heightOfX {
-            self.btnTopConstraint.constant = 110
+            self.btnTopConstraint.constant = 100
         }
     }
     

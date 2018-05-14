@@ -76,6 +76,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         if self.presenter.account != nil {
             tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
         }
+        DataManager.shared.socketManager.start()
     }
     
     override func viewDidAppear(_ animated: Bool) {

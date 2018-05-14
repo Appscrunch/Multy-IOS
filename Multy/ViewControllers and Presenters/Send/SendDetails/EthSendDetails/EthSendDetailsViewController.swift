@@ -26,17 +26,12 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         self.presenter.sendDetailsVC = self
         self.registerCells()
         self.presenter.makeCryptoName()
-//        presenter.requestFee()
         
         presenter.getWalletVerbose()
         presenter.requestFee()
         
         presenter.getData()
         
-//        presenter.selectedIndexOfSpeed = 2
-        
-//        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)")
-//        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: donationEnableTap)
     }
     
     override func viewDidLayoutSubviews() {

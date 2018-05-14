@@ -975,7 +975,7 @@ This feature will be in the next update.</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIf-xQ-WjZ">
                                         <rect key="frame" x="36" y="223.5" width="303" height="90"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+ Add Note" textAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="b5c-CM-iki">
+                                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+ Add Note" textAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="b5c-CM-iki">
                                                 <rect key="frame" x="0.0" y="43" width="303" height="47"/>
                                                 <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
@@ -1056,10 +1056,10 @@ This feature will be in the next update.</string>
                                             <constraint firstItem="Ed2-gG-ZRs" firstAttribute="top" secondItem="Cba-NB-csm" secondAttribute="bottom" constant="12" id="Ku1-DL-ECB"/>
                                             <constraint firstItem="AkA-WX-ZNe" firstAttribute="top" secondItem="Ycp-p1-sYK" secondAttribute="bottom" constant="10" id="PXE-Gl-2zx"/>
                                             <constraint firstItem="RI9-ER-ncF" firstAttribute="centerX" secondItem="iHg-A2-nCQ" secondAttribute="centerX" id="T1K-Cb-URs"/>
-                                            <constraint firstAttribute="height" constant="182" id="UUC-6y-W6n"/>
                                             <constraint firstItem="Ed2-gG-ZRs" firstAttribute="leading" secondItem="iHg-A2-nCQ" secondAttribute="leading" constant="16" id="X96-WL-Gru"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j2L-wX-UIu" secondAttribute="trailing" constant="16" id="ZX1-KZ-3dE"/>
                                             <constraint firstItem="j2L-wX-UIu" firstAttribute="top" secondItem="Cba-NB-csm" secondAttribute="bottom" constant="11" id="aL7-4U-yqm"/>
+                                            <constraint firstAttribute="bottom" secondItem="j2L-wX-UIu" secondAttribute="bottom" constant="13.5" id="brv-XA-5XI"/>
                                             <constraint firstItem="j2L-wX-UIu" firstAttribute="leading" secondItem="Ed2-gG-ZRs" secondAttribute="trailing" constant="5" id="mqu-O7-CGE"/>
                                             <constraint firstAttribute="trailing" secondItem="Cba-NB-csm" secondAttribute="trailing" id="oiz-Xu-gsg"/>
                                             <constraint firstItem="Cba-NB-csm" firstAttribute="leading" secondItem="iHg-A2-nCQ" secondAttribute="leading" id="uGn-f2-JhA"/>

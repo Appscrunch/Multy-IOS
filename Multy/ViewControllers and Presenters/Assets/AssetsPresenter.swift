@@ -59,7 +59,7 @@ class AssetsPresenter: NSObject {
                     
                     DispatchQueue.main.async {
                         self.account = account
-                        DataManager.shared.socketManager.start()
+                        
                         self.getWalletsVerbose(completion: {_ in })
                     }
                 }
@@ -69,11 +69,11 @@ class AssetsPresenter: NSObject {
                     if acc != nil {
                         self.account = acc
                         self.getWalletsVerbose(completion: {_ in})
-                        DataManager.shared.socketManager.start()
+//                        DataManager.shared.socketManager.start()
                     }
                 })
             }
-            
+            DataManager.shared.socketManager.start()
             self.assetsVC?.progressHUD.hide()
         }
     }
@@ -109,28 +109,6 @@ class AssetsPresenter: NSObject {
     
     func isWalletExist() -> Bool {
         return !(account == nil || account?.wallets.count == 0)
-    }
-    
-    func openCreateWalletPopup() {
-        let actionSheet = UIAlertController(title: Constants.AssetsScreen.createOrImportWalletString,
-                                            message: nil,
-                                            preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: Constants.AssetsScreen.createWalletString,
-                                            style: .default,
-                                            handler: { (result : UIAlertAction) -> Void in
-            self.assetsVC?.performSegue(withIdentifier: Constants.Storyboard.createWalletVCSegueID,
-                                        sender: Any.self)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Import wallet",
-                                            style: .default,
-                                            handler: { (result: UIAlertAction) -> Void in
-            //go to import wallet
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.assetsVC?.present(actionSheet, animated: true, completion: nil)
     }
     
     func registerCells() {
