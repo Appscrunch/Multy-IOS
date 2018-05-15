@@ -30,7 +30,7 @@ class WalletChoosePresenter: NSObject {
     func presentAlert(message : String?) {
         var alertMessage = String()
         if message == nil {
-            alertMessage = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals \(transactionDTO.sendAmount!.fixedFraction(digits: 8)) \(transactionDTO.blockchain!.fullName)"
+            alertMessage = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals \(transactionDTO.sendAmountString ?? "0,0") \(transactionDTO.blockchain!.fullName)"
         } else {
             alertMessage = message!
         }

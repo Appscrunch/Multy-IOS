@@ -62,7 +62,7 @@ class EthWalletHeaderCollectionViewCell: UICollectionViewCell {
             let availableFiatAmount = availableCryptoAmount * wallet!.exchangeCourse
             
             lockedCryptoAmountLabel.text = availableCryptoAmount.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
-            lockedFiatAmountLabel.text = availableFiatAmount.fiatValueString
+            lockedFiatAmountLabel.text = availableFiatAmount.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
         }
     }
     

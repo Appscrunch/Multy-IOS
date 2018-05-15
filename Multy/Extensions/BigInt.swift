@@ -178,23 +178,12 @@ class BigInt: NSObject {
         return String(cString: amountStringPointer.pointee!)
     }
     
-    var fiatValueString: String {
-        return (self / Constants.BigIntSwift.oneHundredFinney).stringValue.appendDelimeter(at: 2)
+    func fiatValueString(for blockchain: Blockchain) -> String {
+        return (self / blockchain.dividerFromCryptoToFiat).stringValue.appendDelimeter(at: 2)
     }
     
     func cryptoValueString(for blockchain: Blockchain) -> String {
-        var precision: Int = 0
-        
-        switch blockchain {
-        case BLOCKCHAIN_BITCOIN:
-            precision = 8
-        case BLOCKCHAIN_ETHEREUM:
-            precision = 18
-        default:
-            precision = 0
-        }
-        
-        return stringValue.appendDelimeter(at: precision)
+        return stringValue.appendDelimeter(at: blockchain.maxPrecision)
     }
     
     deinit {

@@ -45,7 +45,7 @@ class TransactionPendingCell: UITableViewCell {
         
         lockedCryptoAmountLabel.text = labelsCryproText
         
-        let fiatAmountString = (BigInt(histObj.txOutAmountString) * histObj.fiatCourseExchange).fiatValueString
+        let fiatAmountString = (BigInt(histObj.txOutAmountString) * histObj.fiatCourseExchange).fiatValueString(for: BLOCKCHAIN_ETHEREUM)
         lockedFiatAmountLabel.text = fiatAmountString + " " + wallet!.fiatName
         
         self.cryptoAmountLabel.text = lockedCryptoAmountLabel.text

@@ -55,7 +55,7 @@ class UserWalletRLM: Object {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInCrypto * exchangeCourse
             } else {
-                return Double((ethWallet!.allBalance * exchangeCourse).fiatValueString.replacingOccurrences(of: ",", with: "."))!
+                return Double((ethWallet!.allBalance * exchangeCourse).fiatValueString(for: BLOCKCHAIN_ETHEREUM).replacingOccurrences(of: ",", with: "."))!
             }
         }
     }
@@ -65,7 +65,7 @@ class UserWalletRLM: Object {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInFiat.fixedFraction(digits: 2)
             } else {
-                return (ethWallet!.allBalance * exchangeCourse).fiatValueString
+                return (ethWallet!.allBalance * exchangeCourse).fiatValueString(for: BLOCKCHAIN_ETHEREUM)
             }
         }
     }
@@ -229,12 +229,12 @@ class UserWalletRLM: Object {
         }
     }
     
-    func isThereEnoughAmount(_ amount: Double) -> Bool {
+    func isThereEnoughAmount(_ amount: String) -> Bool {
         switch blockchain.blockchain {
         case BLOCKCHAIN_BITCOIN:
-            return sumInCrypto > amount
+            return amount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN) < Constants.BigIntSwift.oneETHInWeiKey * sumInCrypto
         case BLOCKCHAIN_ETHEREUM:
-            return ethWallet!.availableBalance > (Constants.BigIntSwift.oneETHInWeiKey * amount)
+            return ethWallet!.availableBalance > (Constants.BigIntSwift.oneETHInWeiKey * amount.stringWithDot.doubleValue)
         default:
             return true
         }

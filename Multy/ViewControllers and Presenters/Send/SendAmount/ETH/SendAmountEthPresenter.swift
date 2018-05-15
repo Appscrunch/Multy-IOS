@@ -10,8 +10,8 @@ class SendAmountEthPresenter: NSObject {
     var transactionDTO = TransactionDTO() {
         didSet {
             blockedAmount = transactionDTO.choosenWallet!.ethWallet!.pendingBalance
-            if transactionDTO.sendAmount != nil {
-                sumInCrypto = Constants.BigIntSwift.oneETHInWeiKey * transactionDTO.sendAmount!
+            if transactionDTO.sendAmountString != nil {
+                sumInCrypto = Constants.BigIntSwift.oneETHInWeiKey * transactionDTO.sendAmountString!.stringWithDot.doubleValue
             }
             transactionObj = transactionDTO.transaction!.transactionRLM
             cryptoName = transactionDTO.blockchainType!.shortName
@@ -121,7 +121,7 @@ class SendAmountEthPresenter: NSObject {
     }
     
     func cryptoToUsd() {
-        self.sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString
+        self.sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
     }
     
     func usdToCrypto() {
@@ -137,7 +137,7 @@ class SendAmountEthPresenter: NSObject {
         if self.isCrypto {
             self.sendAmountVC?.spendableSumAndCurrencyLbl.text = self.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " " + self.cryptoName
         } else {
-            self.sendAmountVC?.spendableSumAndCurrencyLbl.text = self.availableSumInFiat.fiatValueString + " " + self.fiatName
+            self.sendAmountVC?.spendableSumAndCurrencyLbl.text = self.availableSumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM) + " " + self.fiatName
         }
     }
     
@@ -217,7 +217,7 @@ class SendAmountEthPresenter: NSObject {
             if sumInFiat > availableSumInFiat {
                 sendAmountVC?.bottomSumLbl.text = availableSumInFiat.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             } else {
-                sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString
+                sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
             }
             sendAmountVC?.bottomCurrencyLbl.text = fiatName
         } else {

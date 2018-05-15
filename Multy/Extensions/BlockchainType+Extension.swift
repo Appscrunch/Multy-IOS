@@ -89,15 +89,15 @@ extension BlockchainType {
     }
     
     var shortName : String {
-        return self.blockchain.shortName
+        return blockchain.shortName
     }
     
     var fullName : String {
-        return self.blockchain.fullName
+        return blockchain.fullName
     }
     
     var qrBlockchainString : String {
-        return self.blockchain.qrBlockchainString
+        return blockchain.qrBlockchainString
     }
     
     static func create(wallet: UserWalletRLM) -> BlockchainType {

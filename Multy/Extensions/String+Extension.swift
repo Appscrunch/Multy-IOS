@@ -154,6 +154,11 @@ extension String {
         return self.toStringWithZeroes(precision: 2)
     }
     
+    func fiatValueString(for blockchainType: BlockchainType) -> String {
+        let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
+        
+        return (convertCryptoAmountStringToMinimalUnits(in: blockchainType.blockchain) * exchangeCourse).fiatValueString(for: blockchainType.blockchain)
+    }
 
     func toDateTime() -> NSDate {
         let dateFromString = Date.blockDateFormatter().date(from: self)! as NSDate

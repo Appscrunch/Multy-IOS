@@ -75,15 +75,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         
                         //FIXME: amountFromLink pass as String
-                        var amountFromLink = 0.0
+                        var amountFromLink: String?
                         let deepLinkAddressInfoArray = (dictFormLink["address"] as! String).split(separator: ":")
                         
                         let chainNameFromLink = deepLinkAddressInfoArray.first
                         let addressFromLink = deepLinkAddressInfoArray.last
                         if let amount = dictFormLink["amount"] as? String {
-                            amountFromLink = amount.doubleValue
+                            amountFromLink = amount
                         } else if let number = dictFormLink["amount"] as? NSNumber {
-                            amountFromLink = number.doubleValue
+                            amountFromLink = "\(number)"
                         } else {
                             print("\n\n\nAmount from deepLink not parsed!\n\n\n")
                         }
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let storyboard = UIStoryboard(name: "Send", bundle: nil)
                         let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
                         sendStartVC.presenter.transactionDTO.sendAddress = "\(addressFromLink ?? "")"
-                        sendStartVC.presenter.transactionDTO.sendAmount = amountFromLink
+                        sendStartVC.presenter.transactionDTO.sendAmountString = amountFromLink
                         switch chainNameFromLink {
                         case "ethereum":
                             sendStartVC.presenter.transactionDTO.blockchainType?.blockchain = BLOCKCHAIN_ETHEREUM
@@ -127,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
             var addressStr = ""
-            var amountFromQr = ""
+            var amountFromQr: String?
             let array = url.absoluteString.components(separatedBy: CharacterSet(charactersIn: ":?="))
             switch array.count {
             case 1:                              // shit in qr
@@ -144,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
             sendStartVC.presenter.transactionDTO.sendAddress = "\(addressStr)"
-            sendStartVC.presenter.transactionDTO.sendAmount = amountFromQr.doubleValue
+            sendStartVC.presenter.transactionDTO.sendAmountString = amountFromQr
             ((self.window?.rootViewController as! CustomTabBarViewController).selectedViewController as! UINavigationController).pushViewController(sendStartVC, animated: false)
             sendStartVC.performSegue(withIdentifier: "chooseWalletVC", sender: (Any).self)
         })

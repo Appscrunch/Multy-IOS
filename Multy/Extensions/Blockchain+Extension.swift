@@ -28,7 +28,20 @@ extension Blockchain {
             }
         }
     }
-    
+
+    var dividerFromCryptoToFiat: BigInt {
+        get {
+            switch self {
+            case BLOCKCHAIN_BITCOIN:
+                return Constants.BigIntSwift.oneCentiBitcoinInSatoshiKey
+            case BLOCKCHAIN_ETHEREUM:
+                return Constants.BigIntSwift.oneHundredFinneyKey
+            default:
+                return BigInt("0")
+            }
+        }
+    }
+
     var shortName : String {
         var shortName = ""
         

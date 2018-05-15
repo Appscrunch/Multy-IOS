@@ -70,8 +70,10 @@ struct Constants {
     
     struct BigIntSwift {
         static let oneETHInWeiKey = BigInt("1000000000000000000") // 1 ETH = 10^18 Wei
+        static let oneHundredFinneyKey = BigInt("10000000000000000") // 10^{-2} ETH
+        
         static let oneBTCInSatoshiKey = BigInt("100000000") // 1 BTC = 10^8 Satoshi
-        static let oneHundredFinney = Double(10000000000000000) // 10^{-2} ETH
+        static let oneCentiBitcoinInSatoshiKey = BigInt("1000000") // 10^{-2} BTC
     }
     
     struct BlockchainString {

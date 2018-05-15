@@ -27,7 +27,6 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
         self.registerCells()
         self.presenter.makeCryptoName()
         
-        presenter.getWalletVerbose()
         presenter.requestFee()
         
         presenter.getData()
