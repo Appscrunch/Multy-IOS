@@ -256,7 +256,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             if (self.amountTF.text?.contains(","))! && string != "" {
                 let strAfterDot: [String?] = (self.amountTF.text?.components(separatedBy: ","))!
                 if self.presenter.isCrypto {
-                    if strAfterDot[1]?.count == presenter.maxPrecision {
+                    if strAfterDot[1]?.count == 8 /*presenter.maxPrecision*/ {
                         return false
                     } else {
                         self.topSumLbl.text = self.amountTF.text! + string

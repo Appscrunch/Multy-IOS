@@ -183,7 +183,7 @@ class BigInt: NSObject {
     }
     
     func cryptoValueString(for blockchain: Blockchain) -> String {
-        return stringValue.appendDelimeter(at: blockchain.maxPrecision)
+        return stringValue.appendDelimeter(at: blockchain.maxPrecision).showString(8)
     }
     
     deinit {

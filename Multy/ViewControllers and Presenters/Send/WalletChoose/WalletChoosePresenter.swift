@@ -11,7 +11,13 @@ class WalletChoosePresenter: NSObject {
     var transactionDTO = TransactionDTO()
     
     var walletsArr = List<UserWalletRLM>()
-    var selectedIndex: Int?
+    var selectedIndex: Int? {
+        didSet {
+            if selectedIndex != nil {
+                transactionDTO.choosenWallet = walletsArr[selectedIndex!]
+            }
+        }
+    }
     
     func numberOfWallets() -> Int {
         return self.walletsArr.count

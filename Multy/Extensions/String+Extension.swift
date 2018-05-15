@@ -97,12 +97,12 @@ extension String {
             
             switch secondComponent.count {
             case 0..<precision:
-                finalString = firstComponent + secondComponent + String(repeating: "0", count: precision - secondComponent.count)
+                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent + String(repeating: "0", count: precision - secondComponent.count)
             case precision:
-                finalString = firstComponent + secondComponent
+                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent
             case precision...LONG_MAX:
                 let index = secondComponent.index(secondComponent.startIndex, offsetBy: precision)
-                finalString = firstComponent + secondComponent[..<index]
+                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent[..<index]
             default:
                 return "0"
             }
@@ -158,6 +158,42 @@ extension String {
         let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
         
         return (convertCryptoAmountStringToMinimalUnits(in: blockchainType.blockchain) * exchangeCourse).fiatValueString(for: blockchainType.blockchain)
+    }
+    
+    func showString(_ precision: Int) -> String {
+        let components = self.components(separatedBy: CharacterSet.init(charactersIn: "\(defaultDelimeter)"))
+        
+        if precision < 1 {
+            if isEmpty {
+                return "0"
+            }
+            
+            return components.first!
+        }
+        
+        //two delimeters - wrong case
+        precondition(components.count < 3, "---===Wrong string===---")
+        
+        if components.count == 1 {
+            return self
+        } else {
+            let firstComponent = components.first!
+            let secondComponent = components.last!
+            
+            var finalString = String()
+            
+            switch secondComponent.count {
+            case 0...precision:
+                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent
+            case precision + 1...LONG_MAX:
+                let index = secondComponent.index(secondComponent.startIndex, offsetBy: precision)
+                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent[..<index]
+            default:
+                return "0"
+            }
+            
+            return finalString
+        }
     }
 
     func toDateTime() -> NSDate {

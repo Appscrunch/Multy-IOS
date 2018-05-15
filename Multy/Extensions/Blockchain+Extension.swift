@@ -153,7 +153,7 @@ extension Blockchain {
         case BLOCKCHAIN_DASH:
             maxLenght = 0
         case BLOCKCHAIN_ETHEREUM:
-            maxLenght = 22
+            maxLenght = 12
         case BLOCKCHAIN_ETHEREUM_CLASSIC:
             maxLenght = 0
         case BLOCKCHAIN_STEEM:

@@ -42,14 +42,7 @@ class SendAmountEthPresenter: NSObject {
     
     // entered sum
     var sumInCrypto = BigInt("0")
-    var sumInFiat: BigInt {
-        get {
-            return sumInCrypto * exchangeCourse
-        }
-        set {
-            self.sumInFiat = newValue
-        }
-    }
+    var sumInFiat = BigInt("0")
     
     var fiatName = "USD"
     var cryptoName = "ETH"
@@ -151,7 +144,12 @@ class SendAmountEthPresenter: NSObject {
         let estimate = estimateTransaction()
         
         if estimate == false {
-            let message = rawTransaction!
+            var message = rawTransaction!
+            
+            if message.hasPrefix("BigInt value is not representable as") {
+                message = "You entered too small amount!"
+            }
+            
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in }))
             sendAmountVC!.present(alert, animated: true, completion: nil)
@@ -214,6 +212,7 @@ class SendAmountEthPresenter: NSObject {
     func saveTfValue() {
         if isCrypto {
             sumInCrypto = sendAmountVC!.topSumLbl.text!.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_ETHEREUM)
+            sumInFiat = sumInCrypto * exchangeCourse
             if sumInFiat > availableSumInFiat {
                 sendAmountVC?.bottomSumLbl.text = availableSumInFiat.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
             } else {
