@@ -8,9 +8,9 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
 
     var receiveAllDetailsVC: ReceiveAllDetailsViewController?
     
-    var cryptoSum: Double?
+    var cryptoSum: String?
     var cryptoName: String?
-    var fiatSum: Double?
+    var fiatSum: String?
     var fiatName: String?
     
     var walletAddress = ""
@@ -25,7 +25,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     
     var qrBlockchainString = String()
     
-    func transferSum(cryptoAmount: Double, cryptoCurrency: String, fiatAmount: Double, fiatName: String) {
+    func transferSum(cryptoAmount: String, cryptoCurrency: String, fiatAmount: String, fiatName: String) {
         self.cryptoSum = cryptoAmount
         self.cryptoName = cryptoCurrency
         self.fiatSum = fiatAmount

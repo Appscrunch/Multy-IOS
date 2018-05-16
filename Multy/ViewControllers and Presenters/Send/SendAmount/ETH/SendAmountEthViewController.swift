@@ -109,11 +109,11 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             presenter.isCrypto = !self.presenter.isCrypto
             presenter.makeMaxSumWithFeeAndDonate()
             if presenter.sumInFiat > presenter.availableSumInFiat {
-                amountTF.text = presenter.availableSumInFiat.fiatValueString
-                topSumLbl.text = presenter.availableSumInFiat.fiatValueString
+                amountTF.text = presenter.availableSumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
+                topSumLbl.text = presenter.availableSumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
             } else {
-                amountTF.text = presenter.sumInFiat.fiatValueString
-                topSumLbl.text = presenter.sumInFiat.fiatValueString
+                amountTF.text = presenter.sumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
+                topSumLbl.text = presenter.sumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
             }
             if presenter.sumInCrypto > presenter.availableSumInCrypto {
                 bottomSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " "
@@ -140,9 +140,9 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             }
             
             if presenter.sumInFiat > presenter.availableSumInFiat {
-                bottomSumLbl.text = presenter.availableSumInFiat.fiatValueString + " "
+                bottomSumLbl.text = presenter.availableSumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM) + " "
             } else {
-                bottomSumLbl.text = presenter.sumInFiat.fiatValueString + " "
+                bottomSumLbl.text = presenter.sumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM) + " "
             }
             topCurrencyNameLbl.text = presenter.cryptoName
             bottomCurrencyLbl.text = presenter.fiatName
@@ -186,8 +186,8 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             setSumInNextBtn()
         } else {
             presenter.setMaxAllowed()
-            amountTF.text = presenter.availableSumInFiat.fiatValueString
-            topSumLbl.text = presenter.availableSumInFiat.fiatValueString
+            amountTF.text = presenter.availableSumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
+            topSumLbl.text = presenter.availableSumInFiat.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
             presenter.sumInFiat = presenter.availableSumInFiat
             presenter.usdToCrypto()
             setSumInNextBtn()
@@ -256,7 +256,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             if (self.amountTF.text?.contains(","))! && string != "" {
                 let strAfterDot: [String?] = (self.amountTF.text?.components(separatedBy: ","))!
                 if self.presenter.isCrypto {
-                    if strAfterDot[1]?.count == presenter.maxPrecision {
+                    if strAfterDot[1]?.count == 8 /*presenter.maxPrecision*/ {
                         return false
                     } else {
                         self.topSumLbl.text = self.amountTF.text! + string
@@ -302,7 +302,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         if presenter.isCrypto {
             btnSumLbl.text = sumForBtn.cryptoValueString(for: BLOCKCHAIN_ETHEREUM) + " " + presenter.cryptoName
         } else {
-            btnSumLbl.text = sumForBtn.fiatValueString + " " + presenter.fiatName
+            btnSumLbl.text = sumForBtn.fiatValueString(for: BLOCKCHAIN_ETHEREUM) + " " + presenter.fiatName
         }
     }
     

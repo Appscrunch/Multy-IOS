@@ -43,12 +43,12 @@ class SendFinishPresenter: NSObject {
                 feeAmountInFiatString = (transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)
             } else if transactionDTO.choosenWallet!.blockchain.blockchain == BLOCKCHAIN_ETHEREUM {
                 sumInCryptoString = transactionDTO.sendAmountString!
-                sumInFiatString = (transactionDTO.transaction!.endSumBigInt! * transactionDTO.choosenWallet!.exchangeCourse).fiatValueString
+                sumInFiatString = (transactionDTO.transaction!.endSumBigInt! * transactionDTO.choosenWallet!.exchangeCourse).fiatValueString(for: BLOCKCHAIN_ETHEREUM)
                 
                 let feeAmount = transactionDTO.transaction!.feeAmount
                 let feeAmountInWei = feeAmount * transactionDTO.choosenWallet!.exchangeCourse
                 feeAmountInCryptoString = feeAmount.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
-                feeAmountInFiatString = feeAmountInWei.fiatValueString
+                feeAmountInFiatString = feeAmountInWei.fiatValueString(for: BLOCKCHAIN_ETHEREUM)
             }
         case false:
             self.sumInFiat = transactionDTO.transaction?.endSum

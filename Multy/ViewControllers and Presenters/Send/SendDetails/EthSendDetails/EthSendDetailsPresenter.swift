@@ -55,26 +55,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             if error != nil {
                 return
             }
-            
-//            DataManager.shared.getTransactionHistory(currencyID: self.transactionDTO.choosenWallet!.chain,
-//                                                     networkID:self.transactionDTO.choosenWallet!.chainType,
-//                                                     walletID: self.transactionDTO.choosenWallet!.walletID) { (histList, err) in
-//                if err == nil && histList != nil {
-//                    self.historyArray = histList!
-//                }
-//            }
         }
-    }
-    
-    func getWalletVerbose() {
-        //MARK: implement changes
-        
-        //        DataManager.shared.getAccount { (account, err) in
-        //            DataManager.shared.getOneWalletVerbose(account!.token,
-        //                                                   walletID: self.choosenWallet!.walletID,
-        //                                                   completion: { (addresses, error) in
-        //            })
-        //        }
     }
     
     func requestFee() {
@@ -155,14 +136,6 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     }
     
     func checkMaxAvailable() {
-//        if self.availableSumInCrypto == nil || availableSumInCrypto! < 0.0 {
-//            self.sendDetailsVC?.presentWarning(message: "Wrong wallet data. Please download wallet data again.")
-//            
-//            return
-//        }
-        
-//        self.maxAllowedToSpend = self.availableSumInCrypto!
-        
         self.sendDetailsVC?.performSegue(withIdentifier: "sendEthVC", sender: Any.self)
         
     }

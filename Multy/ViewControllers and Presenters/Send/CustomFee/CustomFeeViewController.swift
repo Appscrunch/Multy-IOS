@@ -33,6 +33,9 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupUI() {
+        
+        self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)))
+        
         //FIXME: check chainID nullability
         switch self.presenter.blockchainType?.blockchain {
         case BLOCKCHAIN_BITCOIN:
@@ -51,8 +54,6 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             self.botNameLbl.isHidden = true
             self.botLimitTf.isHidden = true
             self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
-            
-            self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)))
         default: return
         }
     }

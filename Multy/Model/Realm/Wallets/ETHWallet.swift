@@ -30,7 +30,7 @@ class ETHWallet: Object {
     
     var isThereAvailableBalance: Bool {
         get {
-            return  availableBalance > Int64(0)
+            return availableBalance > Int64(0)
         }
     }
     

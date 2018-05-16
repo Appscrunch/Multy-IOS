@@ -94,7 +94,7 @@ class TransactionWalletCell: UITableViewCell {
         let labelsCryproText = ethAmountString + " " + wallet.cryptoName
         self.cryptoAmountLabel.text = labelsCryproText
         
-        let fiatAmountString = (BigInt(histObj.txOutAmountString) * histObj.fiatCourseExchange).fiatValueString
+        let fiatAmountString = (BigInt(histObj.txOutAmountString) * histObj.fiatCourseExchange).fiatValueString(for: BLOCKCHAIN_ETHEREUM)
         fiatAmountLabel.text = fiatAmountString + " " + wallet.fiatName
     }
     

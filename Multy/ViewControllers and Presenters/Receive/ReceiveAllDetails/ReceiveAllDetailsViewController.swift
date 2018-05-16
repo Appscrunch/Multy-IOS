@@ -86,7 +86,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         //if bitcoin - address: "\(chainName):\(presenter.walletAddress)"
         let dict: NSDictionary = ["$og_title" : "Multy",
                                   "address"   : "\(presenter.qrBlockchainString):\(presenter.walletAddress)",
-                                  "amount"    : presenter.cryptoSum?.fixedFraction(digits: 8) ?? "0.0"]
+                                  "amount"    : presenter.cryptoSum ?? "0.0"]
         
         return dict
     }
@@ -171,11 +171,15 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.walletFiatSumLbl.text = "\(sum) \(self.presenter.wallet?.fiatSymbol ?? "")"
         self.presenter.walletAddress = (self.presenter.wallet?.address)!
         self.addressLbl.text = self.presenter.walletAddress
+        
+        if sumValueLbl.isHidden == false {
+            setupUIWithAmounts()
+        }
     }
     
     
     func makeStringForQRWithSumAndAdress(cryptoName: String) -> String { // cryptoName = bitcoin
-        return "\(cryptoName):\(self.presenter.walletAddress)?amount=\((self.presenter.cryptoSum ?? 0.0).fixedFraction(digits: 8))"
+        return cryptoName + ":" + presenter.walletAddress + "?amount=" + (presenter.cryptoSum ?? "0.0")
     }
     
 // MARK: QRCode Activity
@@ -210,27 +214,28 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         let context:CIContext = CIContext.init(options: nil)
         let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
         let image:UIImage = UIImage.init(cgImage: cgImage)
+        
         return image
     }
     //
     
     func setupUIWithAmounts() {
-        self.requestSumBtn.titleLabel?.isHidden = true
-        self.sumValueLbl.isHidden = false
-        self.cryptoNameLbl.isHidden = false
-        self.fiatSumLbl.isHidden = false
-        self.fiatNameLbl.isHidden = false
+        requestSumBtn.titleLabel?.isHidden = true
         
-        self.sumValueLbl.text = "\((self.presenter.cryptoSum ?? 0.0).fixedFraction(digits: 8))"
+        sumValueLbl.isHidden = false
+        cryptoNameLbl.isHidden = false
+        fiatSumLbl.isHidden = false
+        fiatNameLbl.isHidden = false
         
-        //FIXME: BLOCKCHAIN
-        let blockchain = BlockchainType.create(wallet: presenter.wallet!)
-        self.cryptoNameLbl.text = blockchain.shortName// self.presenter.cryptoName
+        sumValueLbl.text = presenter.cryptoSum
         
-        self.fiatSumLbl.text = "\((self.presenter.fiatSum ?? 0.0).fixedFraction(digits: 2))"
-        self.fiatNameLbl.text = self.presenter.fiatName
+        let blockchainType = BlockchainType.create(wallet: presenter.wallet!)
+        cryptoNameLbl.text = blockchainType.shortName
         
-        self.makeQrWithSum()
+        fiatSumLbl.text = presenter.cryptoSum?.fiatValueString(for: blockchainType)
+        fiatNameLbl.text = presenter.fiatName
+        
+        makeQrWithSum()
     }
     
     func checkValuesAndSetupUI() {
@@ -245,14 +250,14 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         if segue.identifier == "receiveAmount" {
             let destVC = segue.destination as! ReceiveAmountViewController
             destVC.delegate = self.presenter
-            destVC.blockchain = BlockchainType.create(wallet: presenter.wallet!)
+            destVC.blockchainType = BlockchainType.create(wallet: presenter.wallet!)
             destVC.presenter.wallet = self.presenter.wallet
             
             if self.presenter.cryptoSum != nil {
-                destVC.sumInCrypto = self.presenter.cryptoSum!
+                destVC.sumInCryptoString = self.presenter.cryptoSum!
                 destVC.cryptoName = self.presenter.cryptoName!
                 destVC.fiatName = self.presenter.fiatName!
-                destVC.sumInFiat = self.presenter.fiatSum!
+                destVC.sumInFiatString = self.presenter.fiatSum!
             }
         }
     }
