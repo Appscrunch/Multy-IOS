@@ -18,8 +18,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     @IBOutlet weak var emptySecondLbl: UILabel!
     @IBOutlet weak var emptyArrowImg: UIImageView!
-    
-    @IBOutlet weak var headerView: UIView!
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -27,7 +25,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var heightOfBottomBar: NSLayoutConstraint!
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
-    @IBOutlet weak var spaceBetweenLblConstant: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var customHeader: UIView!

@@ -58,6 +58,9 @@ class EthWalletPresenter: NSObject {
         
         let transactionPendingCell = UINib.init(nibName: "TransactionPendingCell", bundle: nil)
         self.mainVC?.tableView.register(transactionPendingCell, forCellReuseIdentifier: "TransactionPendingCellID")
+        
+        let headerCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
+        self.mainVC?.collectionView.register(headerCollectionCell, forCellWithReuseIdentifier: "MainWalletCollectionViewCellID")
     }
     
     func fixConstraints() {
@@ -73,7 +76,7 @@ class EthWalletPresenter: NSObject {
     }
     
     func isTherePendingMoney(for indexPath: IndexPath) -> Bool {
-        let transaction = historyArray[indexPath.row - 1]
+        let transaction = historyArray[indexPath.row]
         
         return transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue
     }

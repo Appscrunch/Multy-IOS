@@ -54,7 +54,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         }
         
         if !self.isFirstLaunch {
-            self.presenter.updateWalletsInfo()
+//            self.presenter.updateWalletsInfo()
+            self.presenter.auth()
         }
         
         let isFirst = DataManager.shared.checkIsFirstLaunch()
