@@ -48,6 +48,9 @@ class BTCWalletPresenter: NSObject {
         
         let transactionPendingCell = UINib.init(nibName: "TransactionPendingCell", bundle: nil)
         self.mainVC?.tableView.register(transactionPendingCell, forCellReuseIdentifier: "TransactionPendingCellID")
+        
+        let headerCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
+        self.mainVC?.collectionView.register(headerCollectionCell, forCellWithReuseIdentifier: "MainWalletCollectionViewCellID")
     }
     
     func fixConstraints() {
@@ -63,7 +66,7 @@ class BTCWalletPresenter: NSObject {
     }
     
     func isTherePendingMoney(for indexPath: IndexPath) -> Bool {
-        return wallet!.blockedAmount(for: historyArray[indexPath.row - 1]) > 0
+        return wallet!.blockedAmount(for: historyArray[indexPath.row]) > 0
     }
     
     func getNumberOfPendingTransactions() -> Int {
