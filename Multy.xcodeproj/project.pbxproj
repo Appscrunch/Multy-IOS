@@ -1632,7 +1632,6 @@
 				4491513A2049764D0028195F /* Frameworks */,
 				4491513B2049764D0028195F /* Resources */,
 				B610E7A7228D4A231598207D /* [CP] Embed Pods Frameworks */,
-				55529265DC8135A8C0AA2DCD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1653,7 +1652,6 @@
 				44915148204976600028195F /* Frameworks */,
 				44915149204976600028195F /* Resources */,
 				45A7DAC077A4AF85F649A1B1 /* [CP] Embed Pods Frameworks */,
-				06F70B8615BAE25E450ED85A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1677,7 +1675,6 @@
 				FA86A7551FC2C9D7002826EC /* Embed Libraries */,
 				45EBB6A9200D35E500F81322 /* ShellScript */,
 				EBDF421DB4B309B4ED9833EB /* [CP] Embed Pods Frameworks */,
-				C5E1678375BE097B396B43D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1802,21 +1799,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06F70B8615BAE25E450ED85A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MultyTests/Pods-MultyTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3FF7FD1FA878408871620F12 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1881,21 +1863,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
-		55529265DC8135A8C0AA2DCD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Multy-MultyUITests/Pods-Multy-MultyUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B610E7A7228D4A231598207D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1952,21 +1919,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Multy-MultyUITests/Pods-Multy-MultyUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C5E1678375BE097B396B43D2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Multy/Pods-Multy-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC49810EB0FE66EC99D8282C /* [CP] Check Pods Manifest.lock */ = {
