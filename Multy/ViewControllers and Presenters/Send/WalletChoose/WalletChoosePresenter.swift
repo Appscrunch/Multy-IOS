@@ -11,16 +11,17 @@ class WalletChoosePresenter: NSObject {
     var transactionDTO = TransactionDTO()
     
     var walletsArr = List<UserWalletRLM>()
+    var filteredWalletArray = [UserWalletRLM]()
     var selectedIndex: Int? {
         didSet {
             if selectedIndex != nil {
-                transactionDTO.choosenWallet = walletsArr[selectedIndex!]
+                transactionDTO.choosenWallet = filteredWalletArray[selectedIndex!]
             }
         }
     }
     
     func numberOfWallets() -> Int {
-        return self.walletsArr.count
+        return filteredWalletArray.count
     }
     
     func getWallets() {
@@ -28,8 +29,17 @@ class WalletChoosePresenter: NSObject {
             if err == nil {
                 // MARK: check this
                 self.walletsArr = acc!.wallets
+                self.filterWallets()
                 self.walletChoooseVC?.updateUI()
             }
+        }
+    }
+    
+    func filterWallets() {
+        if transactionDTO.sendAddress != nil {
+            filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: transactionDTO.sendAddress!, for: $0).isValid }
+        } else {
+            filteredWalletArray = walletsArr.filter{ _ in true }
         }
     }
     
