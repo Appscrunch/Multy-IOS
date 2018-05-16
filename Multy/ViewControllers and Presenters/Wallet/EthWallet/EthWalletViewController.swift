@@ -386,6 +386,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
 }
 
 extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -423,9 +424,6 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
             pendingTrasactionCell.histObj = presenter.historyArray[indexPath.row]
             pendingTrasactionCell.wallet = presenter.wallet
             pendingTrasactionCell.fillCell()
-            if indexPath == [0,0] {
-                pendingTrasactionCell.tag = 12
-            }
             
             return pendingTrasactionCell
         } else {
@@ -447,10 +445,6 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 transactionCell.changeState(isEmpty: true)
                 fixForiPad()
-            }
-            
-            if indexPath == [0,0] {
-                transactionCell.tag = 12
             }
             
             return transactionCell
@@ -476,22 +470,11 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath == [0,0] {
-//            presenter.topCellHeight = Constants.ETHWalletScreen.topCellHeight - (presenter.isTherePendingAmount ? 0 : Constants.ETHWalletScreen.blockedCellDifference)
-//
-//            backUpView(height: presenter.topCellHeight)
-//            if presenter.isTherePendingAmount {
-//                setGradientBackground()
-//            }
-//
-//            return presenter.topCellHeight
-//        } else { //if indexPath == [0,1] || self.presenter.numberOfTransactions() > 0 {
             if indexPath.row < presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
                 return 135
             } else {
                 return 70
             }
-//        }
     }
     
     @IBAction func changeTableY(_ gestureRecognizer: UIPanGestureRecognizer) {

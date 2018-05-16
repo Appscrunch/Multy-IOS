@@ -416,19 +416,11 @@ extension TableViewDelegate: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath == [0,0] && self.presenter.numberOfTransactions() > 0 {
-//            if indexPath.row <= presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
-//                return 145
-//            } else {
-//                return 80
-//            }
-//        } else {
-            if indexPath.row < presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
-                return 135
-            } else {
-                return 70
-            }
-//        }
+        if indexPath.row < presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
+            return 135
+        } else {
+            return 70
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -475,19 +467,6 @@ extension TableViewDelegate: UITableViewDelegate {
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if (self.lastContentOffset < scrollView.contentOffset.y) {
-//            print("to bot")
-//        } else if (self.lastContentOffset > scrollView.contentOffset.y) {
-////            for cell in self.tableView.visibleCells {
-////                if cell.tag == 12 {
-//                    self.tableView.addGestureRecognizer(recog!)
-////                }
-////            }
-//        }
-    }
-    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.lastContentOffset = scrollView.contentOffset.y
     }
@@ -532,9 +511,6 @@ extension TableViewDataSource: UITableViewDataSource {
             pendingTrasactionCell.histObj = presenter.historyArray[indexPath.row]
             pendingTrasactionCell.wallet = presenter.wallet
             pendingTrasactionCell.fillCell()
-            if indexPath == [0,0] {
-                pendingTrasactionCell.tag = 12
-            }
             
             return pendingTrasactionCell
         } else {
@@ -556,10 +532,6 @@ extension TableViewDataSource: UITableViewDataSource {
             } else {
                 transactionCell.changeState(isEmpty: true)
                 fixForiPad()
-            }
-            
-            if indexPath == [0,0] {
-                transactionCell.tag = 12
             }
             
             return transactionCell
