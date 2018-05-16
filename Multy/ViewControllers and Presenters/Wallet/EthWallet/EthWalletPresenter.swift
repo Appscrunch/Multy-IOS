@@ -14,7 +14,7 @@ class EthWalletPresenter: NSObject {
         didSet {
             isTherePendingAmount = wallet!.ethWallet?.pendingWeiAmountString != "0"
             mainVC?.titleLbl.text = self.wallet?.name
-            mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
+            mainVC?.collectionView.reloadData()
             mainVC?.fixFirstCell()
         }
     }

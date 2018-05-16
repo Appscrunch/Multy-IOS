@@ -12,7 +12,7 @@ class BTCWalletPresenter: NSObject {
     var wallet : UserWalletRLM? {
         didSet {
             mainVC?.titleLbl.text = self.wallet?.name
-            mainVC?.tableView.reloadRows(at: [[0, 0]], with: .none)
+            mainVC?.collectionView.reloadData()
             blockedAmount = wallet!.calculateBlockedAmount()
         }
     }
