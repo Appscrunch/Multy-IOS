@@ -77,7 +77,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     }
     
     @IBAction func backAction(_ sender: Any) {
-        presenter.transactionDTO.sendAmount = 0.0
+        presenter.transactionDTO.sendAmountString = nil
         presenter.transactionDTO.transaction?.newChangeAddress = nil
         presenter.transactionDTO.transaction?.rawTransaction = nil
         presenter.transactionDTO.transaction?.endSum = nil

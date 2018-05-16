@@ -21,6 +21,12 @@ class UserWalletRLM: Object {
     @objc dynamic var cryptoName = String()  //like BTC
     @objc dynamic var sumInCrypto: Double = 0.0
     
+    var isEmpty: Bool {
+        get {
+            return sumInCryptoString == "0" || sumInCryptoString == "0,0"
+        }
+    }
+    
     var sumInCryptoString: String {
         get {
             switch blockchain.blockchain {
