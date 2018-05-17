@@ -205,13 +205,7 @@ class UserWalletRLM: Object {
             for out in address.spendableOutput {
                 if out.transactionStatus.intValue == TxStatus.MempoolIncoming.rawValue {
                     sum += out.transactionOutAmount.uint64Value
-                }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-                    let addresses = self.fetchAddresses()
-                    
-                    if addresses.contains(address.address) {
-                        sum += out.transactionOutAmount.uint64Value
-                    }
-                }*/
+                }
             }
         }
         
