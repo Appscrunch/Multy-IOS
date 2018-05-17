@@ -108,7 +108,9 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     func setupUI() {
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(changeTableY))
+        let gestureRecognizer2 = UIPanGestureRecognizer(target: self, action: #selector(changeTableY))
         self.tableView.addGestureRecognizer(gestureRecognizer)
+        self.customHeader.addGestureRecognizer(gestureRecognizer2)
         self.recog = gestureRecognizer
         self.startY = self.tableView.frame.origin.y
         
@@ -195,8 +197,6 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         
         presenter.getHistoryAndWallet()
     }
-    
-    
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         self.tableView.isUserInteractionEnabled = false
@@ -401,19 +401,14 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         //check number of transactions
         // else return some empty cells
         let countOfHistObjects = self.presenter.numberOfTransactions()
-        if countOfHistObjects > 0 {
+        if countOfHistObjects > 0 {9
 //            self.tableView.isScrollEnabled = true
             if countOfHistObjects < 10 {
-                if screenHeight == heightOfX {
-//                    self.tableView.isScrollEnabled = false
-                    return 10
-                }
-                return 7
+                return 10
             } else {
                 return countOfHistObjects
             }
         } else {
-//            self.tableView.isScrollEnabled = false
             if screenHeight == heightOfX {
                 return 13
             }
@@ -503,8 +498,10 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            gestureRecognizer.view!.frame.size.height = gestureRecognizer.view!.frame.size.height - translation.y
-            gestureRecognizer.view!.center = CGPoint(x: self.view.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+//            gestureRecognizer.view!.frame.size.height = gestureRecognizer.view!.frame.size.height - translation.y
+//            gestureRecognizer.view!.center = CGPoint(x: self.view.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            tableView.frame.size.height = tableView.frame.size.height - translation.y
+            tableView.center = CGPoint(x: self.view.center.x, y: self.tableView.center.y + translation.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
             self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
             self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
