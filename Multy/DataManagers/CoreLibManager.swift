@@ -401,7 +401,7 @@ class CoreLibManager: NSObject {
                            isPayCommission: Bool,
                            wallet: UserWalletRLM,
                            binaryData: inout BinaryData,
-                           inputs: List<AddressRLM>) -> (String, Double) {
+                           inputs: List<AddressRLM>) -> (String, Double, String) {
         let blockchain = BlockchainType.create(wallet: wallet)
         let inputs = DataManager.shared.realmManager.spendableOutput(addresses: inputs)
         let inputSum = DataManager.shared.spendableOutputSum(outputs: inputs)
@@ -416,7 +416,7 @@ class CoreLibManager: NSObject {
         let mt = make_transaction(addressPointer.pointee, transactionPointer)
         
         if mt != nil {
-            return (errorString(from: mt, mask: "make_transaction")!, -1)
+            return (errorString(from: mt, mask: "make_transaction")!, -1, "0")
         }
         
         //fee
@@ -425,7 +425,7 @@ class CoreLibManager: NSObject {
         
         let tgf = transaction_get_fee(transactionPointer.pointee, fee)
         if tgf != nil {
-            return (errorString(from: tgf, mask: "transaction_get_fee")!, -1)
+            return (errorString(from: tgf, mask: "transaction_get_fee")!, -1, "0")
         }
         
         let maxFee = UInt64(feePerByteAmount)!
@@ -444,7 +444,7 @@ class CoreLibManager: NSObject {
             
             let tas = transaction_add_source(transactionPointer.pointee, transactionSource)
             if tas != nil {
-                return (errorString(from: tas, mask: "transaction_add_source")!, -1)
+                return (errorString(from: tas, mask: "transaction_add_source")!, -1, "0")
             }
             
             setAmountValue(key: "amount",
@@ -476,7 +476,7 @@ class CoreLibManager: NSObject {
         let donationSumInSatoshi = convertBTCStringToSatoshi(sum: donationAmount)
 
         if sendSumInSatoshi < donationSumInSatoshi {
-            return ("Sending amount (\(sendAmountString) BTC) must be greater then donation amount (\(donationAmount) BTC)", -2)
+            return ("Sending amount (\(sendAmountString) BTC) must be greater then donation amount (\(donationAmount) BTC)", -2, "0")
         }
         
         sendSum = sendSumInSatoshi
@@ -485,7 +485,7 @@ class CoreLibManager: NSObject {
         let transactionDestination = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: 1)
         let tad = transaction_add_destination(transactionPointer.pointee, transactionDestination)
         if tad != nil {
-            return (errorString(from: tad, mask: "transaction_add_destination")!, -1)
+            return (errorString(from: tad, mask: "transaction_add_destination")!, -1, "0")
         }
         
         setStringValue(key: "address", value: sendAddress, pointer: transactionDestination.pointee!)
@@ -497,7 +497,7 @@ class CoreLibManager: NSObject {
             
             let tad = transaction_add_destination(transactionPointer.pointee, donationDestination)
             if tad != nil {
-                return (errorString(from: tad, mask: "transaction_add_destination")!, -1)
+                return (errorString(from: tad, mask: "transaction_add_destination")!, -1, "0")
             }
             
             let currentChainDonationAddress = DataManager.shared.getBTCDonationAddress(netType: wallet.chainType.uint32Value)
@@ -528,7 +528,7 @@ class CoreLibManager: NSObject {
             
             let tad = transaction_add_destination(transactionPointer.pointee, changeDestination)
             if tad != nil {
-                return (errorString(from: tad, mask: "transaction_add_destination")!, -1)
+                return (errorString(from: tad, mask: "transaction_add_destination")!, -1, "0")
             }
             
             setIntValue(key: "is_change", value: UInt32(1), pointer: changeDestination.pointee!)
@@ -541,7 +541,7 @@ class CoreLibManager: NSObject {
         
         let tu = transaction_update(transactionPointer.pointee)
         if tu != nil {
-            return (errorString(from: tu, mask: "transaction_update")!, -1)
+            return (errorString(from: tu, mask: "transaction_update")!, -1, "0")
         }
         
         
@@ -556,7 +556,7 @@ class CoreLibManager: NSObject {
             totalSumPointer.deallocate()
         }
         if tgtf != nil {
-            return (errorString(from: tgtf, mask: "transaction_get_total_fee")!, -1)
+            return (errorString(from: tgtf, mask: "transaction_get_total_fee")!, -1, "0")
         }
         
         
@@ -567,7 +567,7 @@ class CoreLibManager: NSObject {
         
         let bigv = big_int_get_value(totalSumPointer.pointee, amountStringPointer)
         if bigv != nil {
-            return (errorString(from: bigv, mask: "big_int_to_string")!, -1)
+            return (errorString(from: bigv, mask: "big_int_to_string")!, -1, "0")
         }
         
         let amountString = String(cString: amountStringPointer.pointee!)
@@ -579,14 +579,14 @@ class CoreLibManager: NSObject {
         if isPayCommission {
             sendSum = sendSumInSatoshi
             if inputSum < sendSum + donationSumInSatoshi + feeInSatoshiAmount {
-                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeInSatoshiAmount))) plus donation amount (\(donationAmount) BTC)", -2)
+                return ("Wallet amount (\(convertSatoshiToBTCString(sum: inputSum))) must be greater the send amount (\(convertSatoshiToBTCString(sum: sendSum))) plus fee amount (\(convertSatoshiToBTCString(sum: feeInSatoshiAmount))) plus donation amount (\(donationAmount) BTC)", -2, "0")
             } else {
                 //reamins just for checking all sums - automatically calculated in core library
                 changeSum = inputSum - (sendSum + donationSumInSatoshi + feeInSatoshiAmount)
             }
         } else {
             if sendSumInSatoshi < donationSumInSatoshi + feeInSatoshiAmount {
-                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeInSatoshiAmount))) plus donation (\(donationAmount) BTC)", -2)
+                return ("Sending amount (\(sendAmountString) BTC) must be greater then fee amount (\(convertSatoshiToBTCString(sum: feeInSatoshiAmount))) plus donation (\(donationAmount) BTC)", -2, "0")
             } else {
                 if sendSumInSatoshi != inputSum {
                     sendSum = sendSumInSatoshi - (donationSumInSatoshi + feeInSatoshiAmount)
@@ -604,7 +604,7 @@ class CoreLibManager: NSObject {
         let tSer = transaction_serialize(transactionPointer.pointee, serializedTransaction)
 
         if tSer != nil {
-            return (errorString(from: tSer, mask: "transaction_serialize")!, -1)
+            return (errorString(from: tSer, mask: "transaction_serialize")!, -1, "0")
         }
         
         defer {
@@ -617,7 +617,7 @@ class CoreLibManager: NSObject {
         
         print("end transaction: \(str)")
         
-        return (str, feeInBTCAmount)
+        return (str, feeInBTCAmount, amountString)
     }
     
     func setAmountValue(key: String, value: String, pointer: OpaquePointer) {
