@@ -15,6 +15,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var backView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var bottomView: UIView!
     
     @IBOutlet weak var emptySecondLbl: UILabel!
     @IBOutlet weak var emptyArrowImg: UIImageView!
@@ -29,11 +30,12 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     @IBOutlet weak var customHeader: UIView!
     @IBOutlet weak var backImage: UIImageView!
+    @IBOutlet weak var spiner: UIActivityIndicatorView!
     
     var presenter = BTCWalletPresenter()
     
     var isBackupOnScreen = true
-    let progressHUD = ProgressHUD(text: "Getting Wallet...")
+    let progressHUD = ProgressHUD(text: "Updating...")
     
     var visibleCells = 5  // iphone 6  height 667
     let gradientLayer = CAGradientLayer()
@@ -63,13 +65,11 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        spiner.stopAnimating()
         view.addSubview(progressHUD)
         progressHUD.hide()
-        
         self.swipeToBack()
         presenter.mainVC = self
-        
         presenter.fixConstraints()
         presenter.registerCells()
         checkVisibleCellsWithHetight()
@@ -107,6 +107,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             //                                                       UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
             //                                         gradientOrientation: .topRightBottomLeft)
         }
+        self.fixForX()
         self.startHeight = self.tableView.frame.size.height
         self.customHeader.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
@@ -125,7 +126,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         self.customHeader.isUserInteractionEnabled = true
         
         self.tableView.isScrollEnabled = false
-        self.tableView.addSubview(self.refreshControl)
         self.tableView.bounces = true
         self.collectionView.backgroundColor = .clear
         self.tableView.backgroundColor = .white
@@ -148,7 +148,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         UIView.animate(withDuration: 0.1) {
             self.customHeader.frame.origin.y = self.headerTopY
             self.backupView?.frame.origin.y = self.backupTopY
-            self.tableView.frame.size.height = self.view.frame.height - self.headerTopY - self.heightOfBottomBar.constant - 40
+            self.tableView.frame.size.height = self.view.frame.height - self.headerTopY - self.bottomView.frame.height - 30
             self.tableView.frame.origin.y = self.tableTopY
             self.tableView.isScrollEnabled = true
         }
@@ -170,9 +170,10 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             self.collectionView.frame.size.height = 305
             self.customHeader.frame.origin.y = 372
             self.tableView.frame.origin.y = 402
-            self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - heightOfBottomBar.constant
+            self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
             changeBackupY()
         }
+        self.fixForX()
         self.startY = self.backImage.frame.height
         self.startHeight = self.tableView.frame.size.height
     }
@@ -378,7 +379,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     func fixForX() {
         if screenHeight == heightOfX {
-            self.heightOfBottomBar.constant = 83
+            self.bottomView.frame.size.height = 83
+//            self.heightOfBottomBar.constant = 83
             self.bottomConstraint.constant = 30
 //        } else if screenHeight == heightOfStandard {
 
@@ -451,17 +453,18 @@ extension TableViewDelegate: UITableViewDelegate {
             } else {
                 self.setTableToTop()
 //                print("table on top")
-                if self.presenter.numberOfTransactions() > 9 {
+                if self.presenter.numberOfTransactions() > 5 {
                     self.tableView.removeGestureRecognizer(recog!)
                 } else {
                     return
                 }
             }
         }
-        if self.tableView.frame.origin.y + translation.y > self.startY {
-            self.setTableToBot()
-            return
-        }
+//        if self.tableView.frame.origin.y + translation.y > self.startY {
+//            self.setTableToBot()
+//            self.presenter.getHistoryAndWallet()
+//            return
+//        }
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
 //            gestureRecognizer.view!.frame.size.height = gestureRecognizer.view!.frame.size.height - translation.y
 //            gestureRecognizer.view!.center = CGPoint(x: self.view.center.x, y: gestureRecognizer.view!.center.y + translation.y)
@@ -475,6 +478,10 @@ extension TableViewDelegate: UITableViewDelegate {
         if gestureRecognizer.state == .ended {
             if self.tableView.frame.origin.y > (startY + tableTopY) / 2 {
                 self.setTableToBot()
+                if self.tableView.center.y > startY {
+                    spiner.startAnimating()
+                    presenter.getHistoryAndWallet()
+                }
             } else {
                self.setTableToTop()
             }
@@ -483,6 +490,12 @@ extension TableViewDelegate: UITableViewDelegate {
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= -10 {
+            self.tableView.addGestureRecognizer(recog!)
+        }
+    }
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.lastContentOffset = scrollView.contentOffset.y
     }
