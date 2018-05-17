@@ -55,6 +55,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(progressHUD)
+        self.progressHUD.hide()
         self.swipeToBack()
         presenter.mainVC = self
         
@@ -77,8 +79,6 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.titleLbl.text = self.presenter.wallet?.name
         self.backUpView(height: 272)
-        
-        //        progressHUD.show()
         self.presenter.getHistoryAndWallet()
     }
     

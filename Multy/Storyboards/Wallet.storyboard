@@ -1732,8 +1732,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="settingsAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="Sd2-yz-rTT"/>
-                                    <action selector="settingssAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="EHI-jM-c8F"/>
+                                    <action selector="settingssAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="dYp-mx-cBd"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oUJ-bR-gNX">
