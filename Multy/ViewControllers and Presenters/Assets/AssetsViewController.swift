@@ -45,40 +45,72 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         view.isUserInteractionEnabled = false
         registerCells()
         presenter.assetsVC = self
-        presenter.tabBarFrame = tabBarController?.tabBar.frame
         navigationController?.setNavigationBarHidden(true, animated: false)
-
-        guard isFlowPassed else {
-            self.view.isUserInteractionEnabled = true
-            return
+        
+        self.performFirstEnterFlow { (isUpToDate) in
+            guard self.isFlowPassed else {
+                self.view.isUserInteractionEnabled = true
+                return
+            }
+            
+            if !self.isFirstLaunch {
+                self.presenter.updateWalletsInfo()
+                //            self.presenter.auth()
+            }
+            
+            let isFirst = DataManager.shared.checkIsFirstLaunch()
+            if isFirst {
+                self.sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: screenFirstLaunch)
+                self.view.isUserInteractionEnabled = true
+                return
+            }
+            
+            self.sendAnalyticsEvent(screenName: screenMain, eventName: screenMain)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
+            
+            let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
+            
+            self.checkOSForConstraints()
+            
+            self.view.addSubview(self.progressHUD)
+            if self.presenter.account != nil {
+                self.tableView.frame.size.height = screenHeight - self.tabBarController!.tabBar.frame.height
+            }
+            DataManager.shared.socketManager.start()
         }
-        
-        if !self.isFirstLaunch {
-            self.presenter.updateWalletsInfo() 
-//            self.presenter.auth()
-        }
-        
-        let isFirst = DataManager.shared.checkIsFirstLaunch()
-        if isFirst {
-            sendAnalyticsEvent(screenName: screenFirstLaunch, eventName: screenFirstLaunch)
-            self.view.isUserInteractionEnabled = true
-            return
-        }
-        
-        sendAnalyticsEvent(screenName: screenMain, eventName: screenMain)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
-        
-        let _ = MasterKeyGenerator.shared.generateMasterKey{_,_, _ in }
-        
-        checkOSForConstraints()
-
-        self.view.addSubview(progressHUD)
-        if self.presenter.account != nil {
-            tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
-        }
-        DataManager.shared.socketManager.start()
     }
+    
+    
+    func performFirstEnterFlow(completion: @escaping(_ isUpToDate: Bool) -> ()) {
+        switch isDeviceJailbroken() {
+        case true:
+            self.presenter.isJailed = true
+            completion(false)
+        case false:
+            self.presenter.isJailed = false
+            let hud = self.showHud(text: "Checking version")
+            DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
+                self.hideHud(view: hud as? ProgressHUD)
+                let dictionary = Bundle.main.infoDictionary!
+                let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
+                
+                //MARK: change > to <
+                if err != nil || buildVersion >= hardVersion! {
+                    self.isFlowPassed = true
+                    self.presentTermsOfService()
+                    let _ = UserPreferences.shared
+                    AppDelegate().saveMkVersion()
+                    completion(true)
+                } else {
+                    self.presentUpdateAlert()
+                    completion(false)
+                }
+                
+            }
+        }
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if self.presenter.isJailed {
@@ -113,6 +145,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     }
     
     override func viewDidLayoutSubviews() {
+        presenter.tabBarFrame = tabBarController?.tabBar.frame
         if self.presenter.account != nil {
             tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
         }
