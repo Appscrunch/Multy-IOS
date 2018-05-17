@@ -51,7 +51,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     var headerTopY: CGFloat = 0.0
     var backupTopY: CGFloat = 0.0
     var tableTopY: CGFloat = 0.0
-    var coeficient: CGFloat = 1
     
     
     lazy var refreshControl: UIRefreshControl = {
@@ -108,7 +107,6 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             //                                                       UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
             //                                         gradientOrientation: .topRightBottomLeft)
         }
-        
         self.startHeight = self.tableView.frame.size.height
         self.customHeader.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
@@ -117,15 +115,15 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(changeTableY))
         self.tableView.addGestureRecognizer(gestureRecognizer)
         self.recog = gestureRecognizer
-        self.startY = self.tableView.frame.origin.y
         
         let tap = UITapGestureRecognizer()
         tap.addTarget(self, action: #selector(setTableToBot))
         self.backImage.addGestureRecognizer(tap)
         self.backImage.isUserInteractionEnabled = true
+        self.customHeader.isUserInteractionEnabled = true
         
+        self.tableView.isScrollEnabled = false
         self.tableView.addSubview(self.refreshControl)
-        
         self.tableView.bounces = true
         self.collectionView.backgroundColor = .clear
         self.tableView.backgroundColor = .white
@@ -133,10 +131,10 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @objc func setTableToBot() {
-        UIView.animate(withDuration: 0.7) {
-            self.customHeader.frame.origin.y = self.startY - 30
-            self.backupView?.frame.origin.y = self.startY - 50
-            self.tableView.frame.origin.y = self.startY
+        UIView.animate(withDuration: 0.1) {
+            self.customHeader.frame.origin.y = self.startY - 20
+            self.backupView?.frame.origin.y = self.startY - 40
+            self.tableView.frame.origin.y = self.startY + 10
             self.tableView.frame.size.height = self.startHeight
             self.tableView.scrollToTop()
             self.tableView.isScrollEnabled = false
@@ -145,7 +143,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @objc func setTableToTop() {
-        UIView.animate(withDuration: 0.7) {
+        UIView.animate(withDuration: 0.1) {
             self.customHeader.frame.origin.y = self.headerTopY
             self.backupView?.frame.origin.y = self.backupTopY
             self.tableView.frame.size.height = self.view.frame.height - self.headerTopY - self.heightOfBottomBar.constant - 40
@@ -160,12 +158,26 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             headerTopY = 100
             backupTopY = 80
             tableTopY = 130
-            coeficient = 2
         default:
             headerTopY = 80
             backupTopY = 70
             tableTopY = 110
-            coeficient = 1
+        }
+        if self.presenter.blockedAmount != 0 {
+            self.backImage.frame.size.height = 392
+            self.collectionView.frame.size.height = 305
+            self.customHeader.frame.origin.y = 372
+            self.tableView.frame.origin.y = 402
+            self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - heightOfBottomBar.constant
+            changeBackupY()
+        }
+        self.startY = self.backImage.frame.height
+        self.startHeight = self.tableView.frame.size.height
+    }
+    
+    func changeBackupY() {
+        if self.backupView != nil {
+            self.backupView?.frame.origin.y = self.customHeader.frame.origin.y - 10
         }
     }
     
@@ -229,13 +241,13 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     func backUpView(height: CGFloat) {
         if self.isBackupOnScreen == false {
-            if backupView != nil && backupView!.frame.origin.y + 20 != height {
-                backupView!.frame = CGRect(x: 16, y: startY - 50, width: screenWidth - 32, height: 40)
-            }
+//            if backupView != nil && backupView!.frame.origin.y + 20 != height {
+//                backupView!.frame = CGRect(x: 16, y: self.tableView.frame.origin.y - 40, width: screenWidth - 32, height: 40)
+//            }
             return
         }
         backupView = UIView()
-        backupView!.frame = CGRect(x: 16, y: startY - 50, width: screenWidth - 32, height: 40)
+        backupView!.frame = CGRect(x: 16, y: self.tableView.frame.origin.y - 40, width: screenWidth - 32, height: 40)
         backupView!.layer.cornerRadius = 20
         backupView!.backgroundColor = .white
         
@@ -457,7 +469,7 @@ extension TableViewDelegate: UITableViewDelegate {
         }
         //auto animation for go to top or bottom
         if gestureRecognizer.state == .ended {
-            if self.tableView.frame.origin.y > (self.view.frame.height - startY - tableTopY) / coeficient {
+            if self.tableView.frame.origin.y > (startY + tableTopY) / 2 {
                 self.setTableToBot()
             } else {
                self.setTableToTop()
@@ -485,7 +497,7 @@ extension TableViewDataSource: UITableViewDataSource {
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 10 {
                 if screenHeight == heightOfX {
-                    self.tableView.isScrollEnabled = false
+//                    self.tableView.isScrollEnabled = false
                     return 10
                 }
                 return 7
@@ -493,7 +505,7 @@ extension TableViewDataSource: UITableViewDataSource {
                 return countOfHistObjects
             }
         } else {
-            self.tableView.isScrollEnabled = false
+//            self.tableView.isScrollEnabled = false
             if screenHeight == heightOfX {
                 return 13
             }

@@ -14,6 +14,7 @@ class BTCWalletPresenter: NSObject {
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.collectionView.reloadData()
             blockedAmount = wallet!.calculateBlockedAmount()
+            mainVC?.makeConstantsForAnimation()
         }
     }
     var account : AccountRLM?
