@@ -15,7 +15,7 @@ class EthWalletPresenter: NSObject {
             isTherePendingAmount = wallet!.ethWallet?.pendingWeiAmountString != "0"
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.collectionView.reloadData()
-            mainVC?.fixFirstCell()
+            mainVC?.makeConstantsForAnimation()
         }
     }
     var account : AccountRLM?
@@ -59,7 +59,7 @@ class EthWalletPresenter: NSObject {
         let transactionPendingCell = UINib.init(nibName: "TransactionPendingCell", bundle: nil)
         self.mainVC?.tableView.register(transactionPendingCell, forCellReuseIdentifier: "TransactionPendingCellID")
         
-        let headerCollectionCell = UINib.init(nibName: "MainWalletCollectionViewCell", bundle: nil)
+        let headerCollectionCell = UINib.init(nibName: "EthWalletHeaderCollectionViewCell", bundle: nil)
         self.mainVC?.collectionView.register(headerCollectionCell, forCellWithReuseIdentifier: "MainWalletCollectionViewCellID")
     }
     
@@ -80,6 +80,8 @@ class EthWalletPresenter: NSObject {
         
         return transaction.txStatus.intValue == TxStatus.MempoolIncoming.rawValue
     }
+    
+    
     
     func getNumberOfPendingTransactions() -> Int {
         var count = 0

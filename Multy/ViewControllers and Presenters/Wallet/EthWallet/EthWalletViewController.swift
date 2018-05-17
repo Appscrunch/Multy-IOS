@@ -44,7 +44,6 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     var headerTopY: CGFloat = 0.0
     var backupTopY: CGFloat = 0.0
     var tableTopY: CGFloat = 0.0
-    var coeficient: CGFloat = 1
 
     
     lazy var refreshControl: UIRefreshControl = {
@@ -117,9 +116,10 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         tap.addTarget(self, action: #selector(setTableToBot))
         self.backImage.addGestureRecognizer(tap)
         self.backImage.isUserInteractionEnabled = true
+        self.customHeader.isUserInteractionEnabled = true
         
+        self.tableView.isScrollEnabled = false
         self.tableView.addSubview(self.refreshControl)
-        
         self.tableView.bounces = true
         self.collectionView.backgroundColor = .clear
         self.tableView.backgroundColor = .white
@@ -127,7 +127,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @objc func setTableToBot() {
-        UIView.animate(withDuration: 0.7) {
+        UIView.animate(withDuration: 0.1) {
             self.customHeader.frame.origin.y = self.startY - 30
             self.backupView?.frame.origin.y = self.startY - 50
             self.tableView.frame.origin.y = self.startY
@@ -139,7 +139,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     @objc func setTableToTop() {
-        UIView.animate(withDuration: 0.7) {
+        UIView.animate(withDuration: 0.1) {
             self.customHeader.frame.origin.y = self.headerTopY
             self.backupView?.frame.origin.y = self.backupTopY
             self.tableView.frame.size.height = self.view.frame.height - self.headerTopY - self.heightOfBottomBar.constant - 40
@@ -154,12 +154,25 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
             headerTopY = 100
             backupTopY = 80
             tableTopY = 130
-            coeficient = 2
         default:
             headerTopY = 80
             backupTopY = 70
             tableTopY = 110
-            coeficient = 1
+        }
+        if presenter.isTherePendingAmount && self.customHeader.frame.origin.y != self.headerTopY  {
+            self.collectionView.frame.size.height = 240
+            self.customHeader.frame.origin.y = backImage.frame.height - 20
+            self.tableView.frame.origin.y = backImage.frame.height
+            self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - heightOfBottomBar.constant
+            changeBackupY()
+        }
+        self.startY = self.backImage.frame.height - 60
+        self.startHeight = self.tableView.frame.size.height
+    }
+    
+    func changeBackupY() {
+        if self.backupView != nil {
+            self.backupView?.frame.origin.y = self.customHeader.frame.origin.y - 10
         }
     }
     
@@ -288,11 +301,11 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         let numberOfTransactions = presenter.numberOfTransactions()
         if screenHeight == heightOfPlus && numberOfTransactions < 5 {
             if numberOfPending > 2 {
-                self.tableView.isScrollEnabled = true
+//                self.tableView.isScrollEnabled = true
             }
         } else if screenHeight == heightOfStandard && numberOfTransactions < 5 {
             if numberOfPending > 1 {
-                self.tableView.isScrollEnabled = true
+//                self.tableView.isScrollEnabled = true
             }
         }
     }
@@ -376,13 +389,6 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         self.collectionView.reloadData()
     }
     
-    func fixFirstCell() {
-        let header = self.tableView.cellForRow(at: [0,0]) as? EthWalletHeaderTableViewCell
-        header?.bottomView.backgroundColor = .white
-        if screenHeight == heightOfPlus {
-            header?.bottomView.sizeToFit()
-        }
-    }
 }
 
 extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
@@ -396,10 +402,10 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         // else return some empty cells
         let countOfHistObjects = self.presenter.numberOfTransactions()
         if countOfHistObjects > 0 {
-            self.tableView.isScrollEnabled = true
+//            self.tableView.isScrollEnabled = true
             if countOfHistObjects < 10 {
                 if screenHeight == heightOfX {
-                    self.tableView.isScrollEnabled = false
+//                    self.tableView.isScrollEnabled = false
                     return 10
                 }
                 return 7
@@ -407,7 +413,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
                 return countOfHistObjects
             }
         } else {
-            self.tableView.isScrollEnabled = false
+//            self.tableView.isScrollEnabled = false
             if screenHeight == heightOfX {
                 return 13
             }
@@ -470,11 +476,11 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if indexPath.row < presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
-                return 135
-            } else {
-                return 70
-            }
+        if indexPath.row < presenter.numberOfTransactions() && presenter.isTherePendingMoney(for: indexPath) { // <= since we begins from 1
+            return 135
+        } else {
+            return 70
+        }
     }
     
     @IBAction func changeTableY(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -505,7 +511,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         }
         //auto animation for go to top or bottom
         if gestureRecognizer.state == .ended {
-            if self.tableView.frame.origin.y > (self.view.frame.height - startY - tableTopY) / coeficient {
+            if self.tableView.frame.origin.y > (startY + tableTopY) / 2 {
                 self.setTableToBot()
             } else {
                 self.setTableToTop()
@@ -521,7 +527,8 @@ extension EthWalletViewController : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return CGSize(width: screenWidth, height: presenter.topCellHeight - Constants.ETHWalletScreen.collectionCellDifference)
-        return CGSize(width: screenWidth, height: 190)
+        
+        return CGSize(width: screenWidth, height: presenter.isTherePendingAmount == false ? 140 : 190)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -548,7 +555,7 @@ extension EthWalletViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! BTCWalletHeaderCollectionViewCell
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MainWalletCollectionViewCellID", for: indexPath) as! EthWalletHeaderCollectionViewCell
         cell.wallet = self.presenter.wallet
 //        cell.blockedAmount = self.presenter.blockedAmount
         cell.mainVC = self
