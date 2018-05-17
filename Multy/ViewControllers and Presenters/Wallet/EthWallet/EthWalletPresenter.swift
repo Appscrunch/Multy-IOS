@@ -97,6 +97,7 @@ class EthWalletPresenter: NSObject {
     
     
     func getHistoryAndWallet() {
+        mainVC?.progressHUD.blockUIandShowProgressHUD()
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: BlockchainType.create(wallet: wallet!)) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
@@ -104,6 +105,7 @@ class EthWalletPresenter: NSObject {
         }
         
         DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
+            self.mainVC?.progressHUD.unblockUIandHideProgressHUD()
             if err == nil && histList != nil {
                 self.mainVC!.refreshControl.endRefreshing()
                 self.mainVC!.tableView.isUserInteractionEnabled = true
@@ -113,9 +115,6 @@ class EthWalletPresenter: NSObject {
                 print("transaction history:\n\(histList)")
                 self.mainVC!.isSocketInitiateUpdating = false
             }
-            
-            //            self.mainVC?.progressHUD.hide()
-            //            self.mainVC?.updateUI()
         }
     }
 }

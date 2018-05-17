@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //executes after screenshot
         }
         
-        self.performFirstEnterFlow()
         DataManager.shared.realmManager.getAccount { (acc, err) in
             DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
                 if currencyExchange != nil {
@@ -45,7 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             isNeedToAutorise = acc != nil
-
+            
+            DataManager.shared.apiManager.userID = acc == nil ? "" : acc!.userID
             //MAKR: Check here isPin option from NSUserDefaults
             UserPreferences.shared.getAndDecryptPin(completion: { [weak self] (code, err) in
                 if code != nil && code != "" {
@@ -54,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
         }
+        
 //        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
         
         //FOR TEST NOT MAIN STRORYBOARD
@@ -181,8 +182,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.authorization(isNeedToPresentBiometric: false)
                 }
             })
-
-            
         }
         
         DataManager.shared.realmManager.updateCurrencyExchangeRLM(curExchange: DataManager.shared.currencyExchange)
@@ -230,39 +229,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UserDefaults.standard.set(exchangeCourse, forKey: "exchangeCourse")
         DataManager.shared.finishRealmSession()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    func performFirstEnterFlow() {
-        guard self.window != nil && self.window?.rootViewController != nil else {
-            return
-        }
-        
-        let assetVC = self.window?.rootViewController?.childViewControllers[0].childViewControllers[0] as! AssetsViewController
-        switch isDeviceJailbroken() {
-        case true:
-            assetVC.presenter.isJailed = true
-        case false:
-            assetVC.presenter.isJailed = false
-            let hud = assetVC.showHud(text: "Checking version")
-            DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
-                assetVC.hideHud(view: hud as? ProgressHUD)
-                let dictionary = Bundle.main.infoDictionary!
-                let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
-                
-                //MARK: change > to <
-                if err != nil || buildVersion >= hardVersion! {
-                    assetVC.isFlowPassed = true
-                    assetVC.viewDidLoad()
-                    assetVC.presentTermsOfService()
-//                    assetVC.viewWillAppear(false)
-                    let _ = UserPreferences.shared
-                    self.saveMkVersion()
-                } else {
-                    assetVC.presentUpdateAlert()
-                }
-                
-            }
-        }
     }
     
     func saveMkVersion(){

@@ -98,7 +98,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 10
         case 2:
-            self.transactionObj.speedName = "Normal"
+            self.transactionObj.speedName = "Medium"
             self.transactionObj.speedTimeString = "∙ 5 days"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)

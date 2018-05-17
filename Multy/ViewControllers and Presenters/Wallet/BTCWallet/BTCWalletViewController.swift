@@ -113,7 +113,9 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     func setupUI() {
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(changeTableY))
+        let gestureRecognizer2 = UIPanGestureRecognizer(target: self, action: #selector(changeTableY))
         self.tableView.addGestureRecognizer(gestureRecognizer)
+        self.customHeader.addGestureRecognizer(gestureRecognizer2)
         self.recog = gestureRecognizer
         
         let tap = UITapGestureRecognizer()
@@ -461,8 +463,10 @@ extension TableViewDelegate: UITableViewDelegate {
             return
         }
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            gestureRecognizer.view!.frame.size.height = gestureRecognizer.view!.frame.size.height - translation.y
-            gestureRecognizer.view!.center = CGPoint(x: self.view.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+//            gestureRecognizer.view!.frame.size.height = gestureRecognizer.view!.frame.size.height - translation.y
+//            gestureRecognizer.view!.center = CGPoint(x: self.view.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            tableView.frame.size.height = tableView.frame.size.height - translation.y
+            tableView.center = CGPoint(x: self.view.center.x, y: self.tableView.center.y + translation.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
             self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
             self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
@@ -496,16 +500,11 @@ extension TableViewDataSource: UITableViewDataSource {
         if countOfHistObjects > 0 {
             self.tableView.isScrollEnabled = true
             if countOfHistObjects < 10 {
-                if screenHeight == heightOfX {
-//                    self.tableView.isScrollEnabled = false
-                    return 10
-                }
-                return 7
+                return 10
             } else {
                 return countOfHistObjects
             }
         } else {
-//            self.tableView.isScrollEnabled = false
             if screenHeight == heightOfX {
                 return 13
             }
