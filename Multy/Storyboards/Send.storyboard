@@ -276,9 +276,8 @@ This feature will be in the next update.</string>
                                     <outlet property="delegate" destination="3gL-lZ-1hN" id="ilz-vl-URX"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You don't have any wallets with BTC" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28l-xW-5E4">
-                                <rect key="frame" x="50" y="287" width="275" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any wallets with BTC" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28l-xW-5E4">
+                                <rect key="frame" x="46" y="374.5" width="283.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -296,6 +295,8 @@ This feature will be in the next update.</string>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="28l-xW-5E4" firstAttribute="leading" secondItem="49k-5Z-Dpw" secondAttribute="leading" constant="46" id="21L-e0-Kjg"/>
+                            <constraint firstItem="28l-xW-5E4" firstAttribute="centerY" secondItem="JAJ-uD-tG4" secondAttribute="centerY" id="3JH-cQ-ulX"/>
                             <constraint firstItem="Rcp-zA-Ubf" firstAttribute="top" secondItem="PrT-By-RHO" secondAttribute="bottom" constant="17" id="3zQ-ac-5Zs"/>
                             <constraint firstAttribute="trailing" secondItem="JAJ-uD-tG4" secondAttribute="trailing" id="6MM-Wo-Dro"/>
                             <constraint firstItem="Ghi-pi-5tj" firstAttribute="trailing" secondItem="mZy-c1-hSJ" secondAttribute="trailing" constant="30" id="PUg-GD-dFJ"/>
@@ -308,6 +309,7 @@ This feature will be in the next update.</string>
                             <constraint firstAttribute="trailing" secondItem="Lfo-SJ-k1k" secondAttribute="trailing" constant="16" id="oiu-fc-IqZ"/>
                             <constraint firstItem="JAJ-uD-tG4" firstAttribute="top" secondItem="Rcp-zA-Ubf" secondAttribute="bottom" constant="8" id="r8d-av-ntz"/>
                             <constraint firstItem="PrT-By-RHO" firstAttribute="centerX" secondItem="49k-5Z-Dpw" secondAttribute="centerX" id="rI8-Ad-37g"/>
+                            <constraint firstItem="28l-xW-5E4" firstAttribute="centerX" secondItem="JAJ-uD-tG4" secondAttribute="centerX" id="sHm-Gf-Fyq"/>
                             <constraint firstItem="Ghi-pi-5tj" firstAttribute="top" secondItem="9BJ-vZ-ZUf" secondAttribute="bottom" constant="13" id="tyd-kf-etv"/>
                             <constraint firstItem="mZy-c1-hSJ" firstAttribute="leading" secondItem="49k-5Z-Dpw" secondAttribute="leading" constant="16" id="w4o-kF-Kzy"/>
                             <constraint firstItem="Ghi-pi-5tj" firstAttribute="leading" secondItem="49k-5Z-Dpw" secondAttribute="leading" id="yyO-yL-vK5"/>
