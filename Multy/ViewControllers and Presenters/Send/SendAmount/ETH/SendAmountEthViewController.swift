@@ -39,6 +39,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         presenter.sendAmountVC = self
         numberFormatter.numberStyle = .decimal
         
+        topCurrencyNameLbl.text = presenter.cryptoName
         presenter.setAmountFromQr()
         presenter.cryptoToUsd()
         presenter.setSpendableAmountText()

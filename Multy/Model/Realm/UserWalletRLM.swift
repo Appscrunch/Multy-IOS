@@ -20,6 +20,20 @@ class UserWalletRLM: Object {
     @objc dynamic var name = String()
     @objc dynamic var cryptoName = String()  //like BTC
     @objc dynamic var sumInCrypto: Double = 0.0
+    @objc dynamic var lastActivityTimestamp = NSNumber(value: 0)
+    
+    var changeAddressIndex: UInt32 {
+        get {
+            switch blockchain.blockchain {
+            case BLOCKCHAIN_BITCOIN:
+                return UInt32(addresses.count)
+            case BLOCKCHAIN_ETHEREUM:
+                return 0
+            default:
+                return 0
+            }
+        }
+    }
     
     var isEmpty: Bool {
         get {
@@ -182,6 +196,10 @@ class UserWalletRLM: Object {
         
         if let isTherePendingTx = walletInfo["pending"] as? Bool {
             wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx)
+        }
+        
+        if let lastActivityTimestamp = walletInfo["lastactiontime"] as? Int {
+            wallet.lastActivityTimestamp = NSNumber(value: lastActivityTimestamp)
         }
         
         //parse addition info for each chain
