@@ -1123,6 +1123,10 @@ By donating you help us to bring blockchain technology one step closer to ordina
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bkQ-iH-aRb">
+                                <rect key="frame" x="0.0" y="332" width="375" height="280"/>
+                                <color key="backgroundColor" red="0.0078431372549019607" green="0.69411764705882351" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientForWallet" translatesAutoresizingMaskIntoConstraints="NO" id="9EX-hT-AHp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="332"/>
                             </imageView>
@@ -1349,14 +1353,19 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <constraint firstAttribute="width" constant="14" id="MGd-dK-hi7"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Lve-c4-v7z">
+                                <rect key="frame" x="169" y="57" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WKN-uW-JbA" firstAttribute="centerX" secondItem="5EX-aT-wMN" secondAttribute="centerX" id="1bo-0Z-68E"/>
                             <constraint firstItem="0Lw-Yi-fmA" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="1eP-Yg-aCs"/>
+                            <constraint firstAttribute="trailing" secondItem="bkQ-iH-aRb" secondAttribute="trailing" id="1wE-iD-LEA"/>
                             <constraint firstItem="uLU-Un-HPP" firstAttribute="top" secondItem="WKN-uW-JbA" secondAttribute="bottom" constant="16" id="3Tt-XD-iw1"/>
                             <constraint firstItem="bef-2T-KTp" firstAttribute="top" secondItem="N7r-9C-JPc" secondAttribute="top" id="8ab-Gh-oDg"/>
                             <constraint firstItem="N7r-9C-JPc" firstAttribute="centerX" secondItem="9EX-hT-AHp" secondAttribute="centerX" id="8fH-uO-gzY"/>
+                            <constraint firstItem="bkQ-iH-aRb" firstAttribute="top" secondItem="9EX-hT-AHp" secondAttribute="bottom" id="9fa-MQ-klp"/>
                             <constraint firstItem="wq1-i6-pqy" firstAttribute="top" secondItem="N7r-9C-JPc" secondAttribute="top" id="9no-Jk-vWt"/>
                             <constraint firstItem="lhA-QM-jnv" firstAttribute="top" secondItem="MgA-iF-fMH" secondAttribute="bottom" constant="-10" id="A0Q-ln-Dmc"/>
                             <constraint firstItem="vN6-GP-1bG" firstAttribute="top" secondItem="N7r-9C-JPc" secondAttribute="top" id="AO8-O8-zp4"/>
@@ -1365,14 +1374,17 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             <constraint firstAttribute="bottom" secondItem="g1E-he-hgC" secondAttribute="bottom" id="Fde-SH-tbB"/>
                             <constraint firstAttribute="trailing" secondItem="lhA-QM-jnv" secondAttribute="trailing" id="G2P-zM-lNb"/>
                             <constraint firstAttribute="trailing" secondItem="bef-2T-KTp" secondAttribute="trailing" constant="17" id="GnE-RW-b3j"/>
+                            <constraint firstItem="g1E-he-hgC" firstAttribute="top" secondItem="bkQ-iH-aRb" secondAttribute="bottom" id="Jnw-NI-fAC"/>
                             <constraint firstItem="lhA-QM-jnv" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="Kuu-77-xVP"/>
                             <constraint firstItem="g1E-he-hgC" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="Phc-o3-t75"/>
                             <constraint firstItem="MgA-iF-fMH" firstAttribute="top" secondItem="0Lw-Yi-fmA" secondAttribute="bottom" constant="9" id="QTL-EJ-8VR"/>
                             <constraint firstItem="N7r-9C-JPc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vN6-GP-1bG" secondAttribute="trailing" constant="6" id="QaC-nM-Re4"/>
                             <constraint firstItem="9EX-hT-AHp" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="RER-8n-f39"/>
                             <constraint firstItem="Pia-6P-nnE" firstAttribute="top" secondItem="N7r-9C-JPc" secondAttribute="top" id="SNO-x4-CYE"/>
+                            <constraint firstItem="bkQ-iH-aRb" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="Ssg-Hz-usA"/>
                             <constraint firstItem="Pia-6P-nnE" firstAttribute="top" secondItem="YPZ-je-hBM" secondAttribute="bottom" constant="13" id="bIC-qG-v9i"/>
                             <constraint firstItem="MgA-iF-fMH" firstAttribute="top" secondItem="9EX-hT-AHp" secondAttribute="bottom" constant="-20" id="cgX-3B-bfG"/>
+                            <constraint firstItem="Lve-c4-v7z" firstAttribute="top" secondItem="N7r-9C-JPc" secondAttribute="bottom" id="dwA-Or-pSP"/>
                             <constraint firstItem="vN6-GP-1bG" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="eFT-QM-h7a"/>
                             <constraint firstItem="9EX-hT-AHp" firstAttribute="top" secondItem="5EX-aT-wMN" secondAttribute="top" id="edg-14-FDH"/>
                             <constraint firstItem="MgA-iF-fMH" firstAttribute="leading" secondItem="5EX-aT-wMN" secondAttribute="leading" id="iWu-HC-BDc"/>
@@ -1383,6 +1395,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             <constraint firstItem="0Lw-Yi-fmA" firstAttribute="top" secondItem="N7r-9C-JPc" secondAttribute="bottom" id="ovi-5r-ZCM"/>
                             <constraint firstAttribute="trailing" secondItem="wq1-i6-pqy" secondAttribute="trailing" id="qGe-Lm-l2R"/>
                             <constraint firstItem="N7r-9C-JPc" firstAttribute="top" secondItem="YPZ-je-hBM" secondAttribute="bottom" constant="13" id="rsS-ju-Rat"/>
+                            <constraint firstItem="Lve-c4-v7z" firstAttribute="centerX" secondItem="9EX-hT-AHp" secondAttribute="centerX" id="stL-qO-rWm"/>
                             <constraint firstAttribute="trailing" secondItem="MgA-iF-fMH" secondAttribute="trailing" id="tuB-M1-mWY"/>
                             <constraint firstAttribute="trailing" secondItem="g1E-he-hgC" secondAttribute="trailing" id="vep-yQ-CmE"/>
                             <constraint firstItem="g1E-he-hgC" firstAttribute="top" secondItem="uLU-Un-HPP" secondAttribute="bottom" constant="30" id="ztt-uU-HNZ"/>
@@ -1394,11 +1407,12 @@ By donating you help us to bring blockchain technology one step closer to ordina
                         <outlet property="backView" destination="5EX-aT-wMN" id="NwP-e5-YzV"/>
                         <outlet property="bottomConstraint" destination="Fde-SH-tbB" id="vyH-ed-nnU"/>
                         <outlet property="bottomTableConstraint" destination="jhh-6t-eba" id="xQF-9T-v91"/>
+                        <outlet property="bottomView" destination="g1E-he-hgC" id="gPw-5F-pdV"/>
                         <outlet property="collectionView" destination="0Lw-Yi-fmA" id="7yJ-ni-UOe"/>
                         <outlet property="customHeader" destination="MgA-iF-fMH" id="Ylp-N2-PHw"/>
                         <outlet property="emptyArrowImg" destination="uLU-Un-HPP" id="k6Y-X3-0rR"/>
                         <outlet property="emptySecondLbl" destination="WKN-uW-JbA" id="GW4-qc-sDL"/>
-                        <outlet property="heightOfBottomBar" destination="b89-UY-6Xv" id="I6z-tw-0e6"/>
+                        <outlet property="spiner" destination="Lve-c4-v7z" id="g4x-pK-4O5"/>
                         <outlet property="tableView" destination="lhA-QM-jnv" id="MHM-Vx-QDo"/>
                         <outlet property="titleLbl" destination="N7r-9C-JPc" id="DPt-zX-IeZ"/>
                         <segue destination="CB9-uM-FAg" kind="show" identifier="settingsVC" id="bAg-Ts-2PT"/>
@@ -1687,6 +1701,10 @@ By donating you help us to bring blockchain technology one step closer to ordina
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04H-ww-PBS">
+                                <rect key="frame" x="0.0" y="332" width="375" height="280"/>
+                                <color key="backgroundColor" red="0.0078431372549019607" green="0.69411764705882351" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientForWallet" translatesAutoresizingMaskIntoConstraints="NO" id="hcq-Oc-Ccw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="332"/>
                             </imageView>
@@ -1697,7 +1715,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <constraint firstAttribute="height" constant="20" id="ZCa-bl-h2a"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC - Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ej0-MJ-fiE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH - Personal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ej0-MJ-fiE">
                                 <rect key="frame" x="131" y="33" width="113" height="24"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1913,11 +1931,16 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <constraint firstAttribute="width" constant="14" id="YKQ-xt-Wen"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VNx-R4-5av">
+                                <rect key="frame" x="169" y="57" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="04H-ww-PBS" firstAttribute="leading" secondItem="bck-YA-N5l" secondAttribute="leading" id="1KV-4d-wqG"/>
                             <constraint firstItem="hcq-Oc-Ccw" firstAttribute="top" secondItem="bck-YA-N5l" secondAttribute="top" id="4XP-pp-QLS"/>
                             <constraint firstItem="Do2-Kb-s2l" firstAttribute="leading" secondItem="bck-YA-N5l" secondAttribute="leading" id="4nN-3f-xwn"/>
+                            <constraint firstItem="1Fz-V4-uxe" firstAttribute="top" secondItem="04H-ww-PBS" secondAttribute="bottom" id="7nq-zY-G7g"/>
                             <constraint firstAttribute="trailing" secondItem="oUJ-bR-gNX" secondAttribute="trailing" id="9Oh-td-QL4"/>
                             <constraint firstAttribute="trailing" secondItem="1Fz-V4-uxe" secondAttribute="trailing" id="9v6-OT-6qw"/>
                             <constraint firstItem="qbu-hh-wml" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ej0-MJ-fiE" secondAttribute="trailing" constant="5" id="A9Z-1S-6BQ"/>
@@ -1937,6 +1960,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             <constraint firstItem="eaL-Cp-sF0" firstAttribute="top" secondItem="aIK-6b-cVZ" secondAttribute="bottom" constant="13" id="S8M-74-sx8"/>
                             <constraint firstItem="NmL-yQ-47h" firstAttribute="leading" secondItem="bck-YA-N5l" secondAttribute="leading" id="VI0-Vn-26g"/>
                             <constraint firstAttribute="bottom" secondItem="1Fz-V4-uxe" secondAttribute="bottom" id="Va6-wr-l3c"/>
+                            <constraint firstItem="VNx-R4-5av" firstAttribute="top" secondItem="ej0-MJ-fiE" secondAttribute="bottom" id="W0G-lN-a26"/>
                             <constraint firstItem="oUJ-bR-gNX" firstAttribute="top" secondItem="ej0-MJ-fiE" secondAttribute="bottom" id="XAG-tx-fKe"/>
                             <constraint firstItem="1Fz-V4-uxe" firstAttribute="top" secondItem="3Yh-8Y-DyC" secondAttribute="bottom" constant="30" id="XMT-qy-IZh"/>
                             <constraint firstItem="ej0-MJ-fiE" firstAttribute="centerX" secondItem="hcq-Oc-Ccw" secondAttribute="centerX" id="beO-6d-zlh"/>
@@ -1944,9 +1968,12 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             <constraint firstItem="hcq-Oc-Ccw" firstAttribute="leading" secondItem="bck-YA-N5l" secondAttribute="leading" id="eQu-cs-IBA"/>
                             <constraint firstItem="paw-pK-SZo" firstAttribute="centerX" secondItem="3Yh-8Y-DyC" secondAttribute="centerX" id="iPd-6i-bXl"/>
                             <constraint firstAttribute="trailing" secondItem="NmL-yQ-47h" secondAttribute="trailing" id="jJP-4j-Rto"/>
+                            <constraint firstAttribute="trailing" secondItem="04H-ww-PBS" secondAttribute="trailing" id="kG9-Cn-Syd"/>
+                            <constraint firstItem="VNx-R4-5av" firstAttribute="centerX" secondItem="hcq-Oc-Ccw" secondAttribute="centerX" id="kkY-tJ-RA5"/>
                             <constraint firstItem="oUJ-bR-gNX" firstAttribute="leading" secondItem="bck-YA-N5l" secondAttribute="leading" id="n6a-io-Ige"/>
                             <constraint firstItem="qbu-hh-wml" firstAttribute="top" secondItem="ej0-MJ-fiE" secondAttribute="top" id="nWy-dH-4cM"/>
                             <constraint firstItem="ej0-MJ-fiE" firstAttribute="top" secondItem="aIK-6b-cVZ" secondAttribute="bottom" constant="13" id="tfS-d7-OaL"/>
+                            <constraint firstItem="04H-ww-PBS" firstAttribute="top" secondItem="hcq-Oc-Ccw" secondAttribute="bottom" id="tgd-fZ-d3U"/>
                             <constraint firstItem="NmL-yQ-47h" firstAttribute="top" secondItem="jUF-mM-u86" secondAttribute="bottom" id="vHu-tV-C3a"/>
                             <constraint firstAttribute="trailing" secondItem="hcq-Oc-Ccw" secondAttribute="trailing" id="x1F-jc-YvU"/>
                             <constraint firstAttribute="trailing" secondItem="qbu-hh-wml" secondAttribute="trailing" id="xR4-hY-LzG"/>
@@ -1956,12 +1983,14 @@ By donating you help us to bring blockchain technology one step closer to ordina
                     <connections>
                         <outlet property="backImage" destination="hcq-Oc-Ccw" id="nQR-pf-K8a"/>
                         <outlet property="backView" destination="bck-YA-N5l" id="a61-z9-WMq"/>
+                        <outlet property="bottomConstraint" destination="Va6-wr-l3c" id="taK-dI-wxb"/>
                         <outlet property="bottomTableConstraint" destination="F29-9p-dkL" id="Ybh-NY-i9d"/>
+                        <outlet property="bottomView" destination="1Fz-V4-uxe" id="R8a-0o-dQO"/>
                         <outlet property="collectionView" destination="oUJ-bR-gNX" id="aIS-Hq-8M6"/>
                         <outlet property="customHeader" destination="jUF-mM-u86" id="SWJ-PL-LWd"/>
                         <outlet property="emptyArrowImg" destination="3Yh-8Y-DyC" id="vgL-cp-8kK"/>
                         <outlet property="emptySecondLbl" destination="paw-pK-SZo" id="wS8-p9-QMx"/>
-                        <outlet property="heightOfBottomBar" destination="auv-1J-B2o" id="jvt-tI-HJZ"/>
+                        <outlet property="spiner" destination="VNx-R4-5av" id="UAO-ol-pyf"/>
                         <outlet property="tableView" destination="NmL-yQ-47h" id="uNo-u4-lrK"/>
                         <outlet property="titleLbl" destination="ej0-MJ-fiE" id="FvS-eB-TGB"/>
                         <segue destination="CB9-uM-FAg" kind="show" identifier="settingsVC" id="pNd-qC-tRx"/>
@@ -1988,6 +2017,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pNd-qC-tRx"/>
+        <segue reference="bAg-Ts-2PT"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -93,6 +93,7 @@ class BTCWalletPresenter: NSObject {
         
         DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { [unowned self] (histList, err) in
             self.mainVC?.progressHUD.unblockUIandHideProgressHUD()
+            self.mainVC?.spiner.stopAnimating()
             if err == nil && histList != nil {
                 self.mainVC!.refreshControl.endRefreshing()
                 self.mainVC!.tableView.isUserInteractionEnabled = true
