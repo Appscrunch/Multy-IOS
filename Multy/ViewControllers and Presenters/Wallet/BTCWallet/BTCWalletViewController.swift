@@ -53,7 +53,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     var headerTopY: CGFloat = 0.0
     var backupTopY: CGFloat = 0.0
     var tableTopY: CGFloat = 0.0
-    
+    var collectionStartY: CGFloat = 0.0
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -109,6 +109,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         }
         self.fixForX()
         self.startHeight = self.tableView.frame.size.height
+        self.collectionStartY = self.collectionView.frame.origin.y
         self.customHeader.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
     
@@ -132,14 +133,15 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         makeConstantsForAnimation()
     }
     
-    @objc func setTableToBot() {
-        UIView.animate(withDuration: 0.1) {
+    @objc func setTableToBot(duration: Double) {
+        UIView.animate(withDuration: duration) {
             self.customHeader.frame.origin.y = self.startY - 20
             self.backupView?.frame.origin.y = self.startY - 40
             self.tableView.frame.origin.y = self.startY + 10
             self.tableView.frame.size.height = self.startHeight
             self.tableView.scrollToTop()
             self.tableView.isScrollEnabled = false
+            self.collectionView.frame.origin.y = self.collectionStartY
             self.checkrecogOnTable()
         }
     }
@@ -151,6 +153,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             self.tableView.frame.size.height = self.view.frame.height - self.headerTopY - self.bottomView.frame.height - 30
             self.tableView.frame.origin.y = self.tableTopY
             self.tableView.isScrollEnabled = true
+            self.tableView.removeGestureRecognizer(self.recog!)
         }
     }
     
@@ -166,12 +169,15 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             tableTopY = 110
         }
         if self.presenter.blockedAmount != 0 {
-            self.backImage.frame.size.height = 392
-            self.collectionView.frame.size.height = 305
-            self.customHeader.frame.origin.y = 372
-            self.tableView.frame.origin.y = 402
-            self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
-            changeBackupY()
+            UIView.animate(withDuration: 0.2) {
+                self.backImage.frame.size.height = 392
+                self.collectionView.frame.size.height = 305
+                self.collectionView.frame.origin.y = self.collectionStartY
+                self.customHeader.frame.origin.y = 372
+                self.tableView.frame.origin.y = 402
+                self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
+                self.changeBackupY()
+            }
         }
         self.fixForX()
         self.startY = self.backImage.frame.height
@@ -448,11 +454,11 @@ extension TableViewDelegate: UITableViewDelegate {
     @IBAction func changeTableY(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self.view)
         if self.customHeader.frame.origin.y + translation.y < 100 {
-            if self.customHeader.frame.origin.y + translation.y > 95 {
+            if self.customHeader.frame.origin.y + translation.y > 80 {
                 
             } else {
                 self.setTableToTop()
-//                print("table on top")
+                //                print("table on top")
                 if self.presenter.numberOfTransactions() > 5 {
                     self.tableView.removeGestureRecognizer(recog!)
                 } else {
@@ -460,39 +466,59 @@ extension TableViewDelegate: UITableViewDelegate {
                 }
             }
         }
-//        if self.tableView.frame.origin.y + translation.y > self.startY {
-//            self.setTableToBot()
-//            self.presenter.getHistoryAndWallet()
-//            return
-//        }
+        
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-//            gestureRecognizer.view!.frame.size.height = gestureRecognizer.view!.frame.size.height - translation.y
-//            gestureRecognizer.view!.center = CGPoint(x: self.view.center.x, y: gestureRecognizer.view!.center.y + translation.y)
-            tableView.frame.size.height = tableView.frame.size.height - translation.y
-            tableView.center = CGPoint(x: self.view.center.x, y: self.tableView.center.y + translation.y)
-            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-            self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
-            self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
+            if translation.y > 0 && self.tableView.frame.origin.y > self.startY {
+                UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: .curveEaseIn, animations: {
+                    let transY = translation.y > 200 ? translation.y : translation.y/2
+                    self.tableView.frame.size.height = self.tableView.frame.size.height - transY
+                    self.tableView.center = CGPoint(x: self.view.center.x, y: self.tableView.center.y + transY)
+                    gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                    self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
+                    self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
+                    if self.tableView.frame.origin.y > self.startY + 50 {
+                        self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height
+                        if self.tableView.frame.origin.y > (self.startY + self.tableTopY) / 2 {
+                            if self.tableView.frame.origin.y > screenHeight/2 + 50 {
+                                self.updateByPull()
+                            }
+                        }
+                    }
+                    
+                }) { (bool) in
+                    
+                }
+            } else {
+                tableView.frame.size.height = tableView.frame.size.height - translation.y
+                tableView.center = CGPoint(x: self.view.center.x, y: self.tableView.center.y + translation.y)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
+                self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
+            }
         }
+        
         //auto animation for go to top or bottom
         if gestureRecognizer.state == .ended {
             if self.tableView.frame.origin.y > (startY + tableTopY) / 2 {
-                self.setTableToBot()
-                if self.tableView.center.y > startY {
-                    spiner.startAnimating()
-                    presenter.getHistoryAndWallet()
-                }
+                self.setTableToBot(duration: 0.5)
             } else {
-               self.setTableToTop()
+                self.setTableToTop()
             }
         }
+    }
+    
+    func updateByPull() {
+        spiner.startAnimating()
+        presenter.getHistoryAndWallet()
+        tableView.removeGestureRecognizer(recog!)
     }
 }
 
 extension ScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= -10 {
-            self.tableView.addGestureRecognizer(recog!)
+        if scrollView.contentOffset.y <= -120 {
+            setTableToBot(duration: 0.2)
+            tableView.scrollToRow(at: [0,0], at: .top, animated: false)
         }
     }
     
