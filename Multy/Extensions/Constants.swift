@@ -22,6 +22,10 @@ struct Constants {
         static let collectionCellDifference = CGFloat(137) // difference in sizes btw table cell and collection cell
     }
     
+    struct ChooseWalletScreen {
+        static let emptyScreenPhraseKey = "You don't have any wallets with "
+    }
+    
     //Scurity strings
     struct Security {
         static let jailbrokenDeviceWarningString = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."

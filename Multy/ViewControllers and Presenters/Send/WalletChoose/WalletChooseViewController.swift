@@ -7,11 +7,15 @@ import UIKit
 class WalletChooseViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyDataSourceLabel: UILabel!
     
     let presenter = WalletChoosePresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emptyDataSourceLabel.text = Constants.ChooseWalletScreen.emptyScreenPhraseKey + presenter.transactionDTO.sendAddress!.addressBlockchainValue.shortName
+        
         self.swipeToBack()
         self.registerCell()
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
