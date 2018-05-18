@@ -587,7 +587,7 @@ This feature will be in the next update.</string>
                         <outlet property="scrollView" destination="MXS-yj-hGB" id="pAt-TD-38j"/>
                         <outlet property="tableView" destination="zLs-gO-YLW" id="kbh-as-AlA"/>
                         <outlet property="viewForShadow" destination="x0U-60-o5z" id="cN7-F2-baU"/>
-                        <segue destination="LFO-Fg-H8V" kind="show" identifier="sendAmountVC" id="CjW-kg-kEi"/>
+                        <segue destination="jJt-Ap-KXa" kind="show" identifier="sendEthVC" id="Bgz-R6-m6y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b0-WR-NmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1851,7 +1851,8 @@ This feature will be in the next update.</string>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TSe-kF-31L"/>
+        <segue reference="Bgz-R6-m6y"/>
+        <segue reference="Y3u-nO-qs1"/>
         <segue reference="pfe-aE-6Gg"/>
         <segue reference="EUD-ex-a5v"/>
     </inferredMetricsTieBreakers>

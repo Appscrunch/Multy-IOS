@@ -329,7 +329,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func sendAction(_ sender: Any) {
-        if presenter.wallet!.availableAmount() == 0 {
+        if presenter.wallet!.availableAmount.isZero {
             self.presentAlert(with: "You have no available funds")
             
             return

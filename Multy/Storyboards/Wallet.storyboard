@@ -1211,7 +1211,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6FX-FT-aJR">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="sendAction:" destination="RQm-hm-qjs" eventType="touchUpInside" id="4jL-Oe-qq9"/>
                                                     <action selector="sendAction:" destination="ArP-lC-npA" eventType="touchUpInside" id="lKx-2i-C86"/>
                                                 </connections>
                                             </button>
@@ -1248,7 +1247,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSi-UR-kWu">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="receiveAction:" destination="RQm-hm-qjs" eventType="touchUpInside" id="0so-aU-MeP"/>
                                                     <action selector="receiveAction:" destination="ArP-lC-npA" eventType="touchUpInside" id="gdw-Av-g3G"/>
                                                 </connections>
                                             </button>
@@ -1286,7 +1284,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
                                                 <connections>
                                                     <action selector="exchangeAction:" destination="ArP-lC-npA" eventType="touchUpInside" id="chS-wp-bBk"/>
-                                                    <action selector="exchangeAction:" destination="RQm-hm-qjs" eventType="touchUpInside" id="rXB-7Q-PZF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1750,7 +1747,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="settingssAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="dYp-mx-cBd"/>
+                                    <action selector="settingssAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="Ziy-fv-njx"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oUJ-bR-gNX">
@@ -1792,7 +1789,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUs-QQ-Q1A">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="sendAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="2iu-eG-pG8"/>
+                                                    <action selector="sendAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="Vdi-Gi-cNQ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1828,7 +1825,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaG-zR-2bb">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="receiveAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="3l5-p8-IoR"/>
+                                                    <action selector="receiveAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="yoQ-aW-1Ad"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1864,7 +1861,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0h-Fg-drP">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="45"/>
                                                 <connections>
-                                                    <action selector="exchangeAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="hk9-Ka-fzi"/>
+                                                    <action selector="exchangeAction:" destination="AaS-13-ZCZ" eventType="touchUpInside" id="2uM-v2-IUC"/>
                                                 </connections>
                                             </button>
                                         </subviews>

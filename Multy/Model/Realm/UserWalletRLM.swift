@@ -20,6 +20,26 @@ class UserWalletRLM: Object {
     @objc dynamic var name = String()
     @objc dynamic var cryptoName = String()  //like BTC
     @objc dynamic var sumInCrypto: Double = 0.0
+    @objc dynamic var lastActivityTimestamp = NSNumber(value: 0)
+    
+    var changeAddressIndex: UInt32 {
+        get {
+            switch blockchain.blockchain {
+            case BLOCKCHAIN_BITCOIN:
+                return UInt32(addresses.count)
+            case BLOCKCHAIN_ETHEREUM:
+                return 0
+            default:
+                return 0
+            }
+        }
+    }
+    
+    var isEmpty: Bool {
+        get {
+            return sumInCryptoString == "0" || sumInCryptoString == "0,0"
+        }
+    }
     
     var sumInCryptoString: String {
         get {
@@ -34,6 +54,35 @@ class UserWalletRLM: Object {
         }
     }
     
+    var blockedAmount: BigInt {
+        get {
+            switch blockchain.blockchain {
+            case BLOCKCHAIN_BITCOIN:
+                return BigInt("\(calculateBlockedAmount())")
+            case BLOCKCHAIN_ETHEREUM:
+                return ethWallet!.pendingBalance
+            default:
+                return BigInt("0")
+            }
+        }
+    }
+    
+    var availableAmount: BigInt {
+        get {
+            switch blockchain.blockchain {
+            case BLOCKCHAIN_BITCOIN:
+                return BigInt(sumInCryptoString.convertToSatoshiAmountString()) - blockedAmount
+            case BLOCKCHAIN_ETHEREUM:
+                return ethWallet!.availableBalance
+            default:
+                return BigInt("0")
+            }
+        }
+    }
+    
+    //////////////////////////////////////
+    //not unified
+    
     var blockchain: BlockchainType {
         get {
             return BlockchainType.create(wallet: self)
@@ -43,7 +92,7 @@ class UserWalletRLM: Object {
     var availableSumInCrypto: Double {
         get {
             if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
-                return availableAmount().btcValue
+                return availableAmount.cryptoValueString(for: BLOCKCHAIN_BITCOIN).stringWithDot.doubleValue
             } else {
                 return 0
             }
@@ -149,6 +198,10 @@ class UserWalletRLM: Object {
             wallet.isTherePendingTx = NSNumber(booleanLiteral: isTherePendingTx)
         }
         
+        if let lastActivityTimestamp = walletInfo["lastactiontime"] as? Int {
+            wallet.lastActivityTimestamp = NSNumber(value: lastActivityTimestamp)
+        }
+        
         //parse addition info for each chain
         wallet.updateSpecificInfo(from: walletInfo)
         
@@ -215,7 +268,7 @@ class UserWalletRLM: Object {
     func isThereAvailableAmount() -> Bool {
         switch blockchain.blockchain {
         case BLOCKCHAIN_BITCOIN:
-            return availableAmount() > 0
+            return availableAmount > Int64(0)
         case BLOCKCHAIN_ETHEREUM:
             return ethWallet!.isThereAvailableBalance
         default:
@@ -234,31 +287,31 @@ class UserWalletRLM: Object {
         }
     }
     
-    func availableAmount() -> UInt64 {
-        var sum = UInt64(0)
-        switch self.blockchain.blockchain {
-        case BLOCKCHAIN_BITCOIN:
-            for address in self.addresses {
-                for out in address.spendableOutput {
-                    if out.transactionStatus.intValue == TxStatus.BlockIncoming.rawValue {
-                        sum += out.transactionOutAmount.uint64Value
-                    }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
-                     let addresses = self.fetchAddresses()
-                     
-                     if addresses.contains(address.address) {
-                     sum += out.transactionOutAmount.uint64Value
-                     }
-                     }*/
-                }
-            }
-        case BLOCKCHAIN_ETHEREUM:
-            let sumString = BigInt(self.ethWallet!.balance).stringValue
-            sum = UInt64(sumString)!
-        default: break
-        }
-    
-        return sum
-    }
+//    func availableAmount() -> UInt64 {
+//        var sum = UInt64(0)
+//        switch self.blockchain.blockchain {
+//        case BLOCKCHAIN_BITCOIN:
+//            for address in self.addresses {
+//                for out in address.spendableOutput {
+//                    if out.transactionStatus.intValue == TxStatus.BlockIncoming.rawValue {
+//                        sum += out.transactionOutAmount.uint64Value
+//                    }/* else if out.transactionStatus.intValue == TxStatus.MempoolOutcoming.rawValue {
+//                     let addresses = self.fetchAddresses()
+//                     
+//                     if addresses.contains(address.address) {
+//                     sum += out.transactionOutAmount.uint64Value
+//                     }
+//                     }*/
+//                }
+//            }
+//        case BLOCKCHAIN_ETHEREUM:
+//            let sumString = BigInt(self.ethWallet!.balance).stringValue
+//            sum = UInt64(sumString)!
+//        default: break
+//        }
+//    
+//        return sum
+//    }
     
     func blockedAmount(for transaction: HistoryRLM) -> UInt64 {
         var sum = UInt64(0)
