@@ -35,6 +35,10 @@ class BigInt: NSObject {
         self.init("0")
     }
     
+    class func zero() -> BigInt {
+        return BigInt("0")
+    }
+    
     func setBigInt(string: String) {
         let bisv = big_int_set_value(valuePointer.pointee, string.UTF8CStringPointer)
         

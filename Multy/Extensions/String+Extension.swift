@@ -97,12 +97,12 @@ extension String {
             
             switch secondComponent.count {
             case 0..<precision:
-                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent + String(repeating: "0", count: precision - secondComponent.count)
+                finalString = firstComponent + secondComponent + String(repeating: "0", count: precision - secondComponent.count)
             case precision:
-                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent
+                finalString = firstComponent + secondComponent
             case precision...LONG_MAX:
                 let index = secondComponent.index(secondComponent.startIndex, offsetBy: precision)
-                finalString = firstComponent + "\(defaultDelimeter)" + secondComponent[..<index]
+                finalString = firstComponent + secondComponent[..<index]
             default:
                 return "0"
             }

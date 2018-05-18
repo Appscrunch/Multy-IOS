@@ -66,9 +66,9 @@ class SendAmountEthPresenter: NSObject {
     var feeAmount = BigInt("0")
     var feeAmountInFiat = BigInt("0")
     
-    var rawTransaction: String?
-    var rawTransactionEstimation: Double?
-    var rawTransactionBigIntEstimation: BigInt?
+    var rawTransaction = String()
+    var rawTransactionEstimation = 0.0
+    var rawTransactionBigIntEstimation = BigInt.zero()
     
     //    var customFee : UInt64?
     
@@ -139,7 +139,7 @@ class SendAmountEthPresenter: NSObject {
         let estimate = estimateTransactionAndValidation()
         
         if estimate == false {
-            var message = rawTransaction!
+            var message = rawTransaction
             
             if message.hasPrefix("BigInt value is not representable as") {
                 message = "You entered too small amount!"
@@ -331,19 +331,19 @@ extension CreateTransactionDelegate {
     }
     
     func finalBTCSum() -> BigInt {
-        transactionObj?.sumInCrypto = rawTransactionEstimation!
-        transactionObj?.sumInFiat = rawTransactionEstimation! * exchangeCourse
+        transactionObj?.sumInCrypto = rawTransactionEstimation
+        transactionObj?.sumInFiat = rawTransactionEstimation * exchangeCourse
         
-        let fiatEstimation = rawTransactionBigIntEstimation! * exchangeCourse
+        let fiatEstimation = rawTransactionBigIntEstimation * exchangeCourse
         
         switch isCrypto {
         case true:
             if sendAmountVC!.commissionSwitch.isOn {
                 if transactionDTO.transaction?.donationDTO != nil {
                     let donationBigIntValue = Constants.BigIntSwift.oneBTCInSatoshiKey * transactionDTO.transaction!.donationDTO!.sumInCrypto!
-                    sumInNextBtn = sumInCrypto + rawTransactionBigIntEstimation! + donationBigIntValue
+                    sumInNextBtn = sumInCrypto + rawTransactionBigIntEstimation + donationBigIntValue
                 } else {
-                    sumInNextBtn = sumInCrypto + rawTransactionBigIntEstimation!
+                    sumInNextBtn = sumInCrypto + rawTransactionBigIntEstimation
                 }
             } else {  //pay for commision off
                 sumInNextBtn = sumInCrypto
@@ -412,15 +412,15 @@ extension CreateTransactionDelegate {
                 if transactionDTO.transaction!.donationDTO != nil {
                     let donationCryptoValue = Constants.BigIntSwift.oneBTCInSatoshiKey * transactionDTO.transaction!.donationDTO!.sumInCrypto!
                     
-                    maxAllowedToSpend = availableSumInCrypto - rawTransactionBigIntEstimation! - donationCryptoValue
+                    maxAllowedToSpend = availableSumInCrypto - rawTransactionBigIntEstimation - donationCryptoValue
                 } else {
-                    maxAllowedToSpend = availableSumInCrypto - rawTransactionBigIntEstimation!
+                    maxAllowedToSpend = availableSumInCrypto - rawTransactionBigIntEstimation
                 }
             } else {
                 maxAllowedToSpend = availableSumInCrypto
             }
         case false:
-            let fiatEstimation = rawTransactionBigIntEstimation! * exchangeCourse
+            let fiatEstimation = rawTransactionBigIntEstimation * exchangeCourse
             
             if sendAmountVC!.commissionSwitch.isOn {
                 if transactionDTO.transaction!.donationDTO != nil {
@@ -459,12 +459,12 @@ extension CreateTransactionDelegate {
             if transactionDTO.transaction!.donationDTO != nil {
                 let donationCryptoValue = Constants.BigIntSwift.oneBTCInSatoshiKey * transactionDTO.transaction!.donationDTO!.sumInCrypto!
                 
-                cryptoMaxSumWithFeeAndDonate = availableSumInCrypto - rawTransactionBigIntEstimation! - donationCryptoValue
+                cryptoMaxSumWithFeeAndDonate = availableSumInCrypto - rawTransactionBigIntEstimation - donationCryptoValue
             } else {
-                cryptoMaxSumWithFeeAndDonate = availableSumInCrypto - rawTransactionBigIntEstimation!
+                cryptoMaxSumWithFeeAndDonate = availableSumInCrypto - rawTransactionBigIntEstimation
             }
         } else {
-            let fiatEstimation = rawTransactionBigIntEstimation! * exchangeCourse
+            let fiatEstimation = rawTransactionBigIntEstimation * exchangeCourse
             
             if transactionDTO.transaction!.donationDTO != nil {
                 let donationCryptoValue = Constants.BigIntSwift.oneBTCInSatoshiKey * transactionDTO.transaction!.donationDTO!.sumInCrypto!
@@ -488,7 +488,7 @@ extension CreateTransactionDelegate {
     func currentCryptoFeeAmountString() -> String {
         switch blockchain {
         case BLOCKCHAIN_BITCOIN:
-            return rawTransactionBigIntEstimation!.cryptoValueString(for: BLOCKCHAIN_BITCOIN)
+            return rawTransactionBigIntEstimation.cryptoValueString(for: BLOCKCHAIN_BITCOIN)
         case BLOCKCHAIN_ETHEREUM:
             return feeAmount.cryptoValueString(for: BLOCKCHAIN_ETHEREUM)
         default:
@@ -501,7 +501,7 @@ extension CreateTransactionDelegate {
         
         switch blockchain {
         case BLOCKCHAIN_BITCOIN:
-            fiatEstimation = rawTransactionBigIntEstimation!
+            fiatEstimation = rawTransactionBigIntEstimation
         case BLOCKCHAIN_ETHEREUM:
             fiatEstimation = feeAmount
         default:

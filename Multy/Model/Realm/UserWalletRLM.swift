@@ -57,7 +57,7 @@ class UserWalletRLM: Object {
         get {
             switch blockchain.blockchain {
             case BLOCKCHAIN_BITCOIN:
-                return BigInt(sumInCryptoString) - blockedAmount
+                return BigInt(sumInCryptoString.convertToSatoshiAmountString()) - blockedAmount
             case BLOCKCHAIN_ETHEREUM:
                 return ethWallet!.availableBalance
             default:
@@ -250,7 +250,7 @@ class UserWalletRLM: Object {
     func isThereAvailableAmount() -> Bool {
         switch blockchain.blockchain {
         case BLOCKCHAIN_BITCOIN:
-            return availableAmount > 0
+            return availableAmount > Int64(0)
         case BLOCKCHAIN_ETHEREUM:
             return ethWallet!.isThereAvailableBalance
         default:
