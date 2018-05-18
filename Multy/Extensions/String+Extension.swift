@@ -20,6 +20,17 @@ extension String {
             return Double(self.stringWithDot)!
         }
     }
+    
+    //temporaty usage // FIXME: address blockchain
+    var addressBlockchainValue: Blockchain {
+        get {
+            if hasPrefix("0x") {
+                return BLOCKCHAIN_ETHEREUM
+            } else {
+                return BLOCKCHAIN_BITCOIN
+            }
+        }
+    }
 
     func createBinaryData() -> BinaryData? {
         let pointer = UnsafeMutablePointer<UnsafeMutablePointer<BinaryData>?>.allocate(capacity: 1)

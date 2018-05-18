@@ -12,7 +12,7 @@ class ETHWallet: Object {
     
     var allBalance: BigInt {
         get {
-            return BigInt(balance) + pendingBalance
+            return BigInt(balance.isEmpty ? "0" : balance) + pendingBalance
         }
     }
     

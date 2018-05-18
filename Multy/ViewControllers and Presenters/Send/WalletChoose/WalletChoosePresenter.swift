@@ -41,6 +41,8 @@ class WalletChoosePresenter: NSObject {
         } else {
             filteredWalletArray = walletsArr.filter{ _ in true }
         }
+        
+        walletChoooseVC?.emptyDataSourceLabel.isHidden = (filteredWalletArray.count != 0)
     }
     
     func presentAlert(message : String?) {
