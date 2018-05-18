@@ -11,7 +11,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 16
+    let schemaVersion : UInt64 = 18
     
     var account: AccountRLM?
     
@@ -72,6 +72,12 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 17 {
                                                         self!.migrateFrom16To17(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 18 {
+                                                        self!.migrateFrom17To18(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 19 {
+                                                        self!.migrateFrom18To19(with: migration)
                                                     }
             })
             
@@ -768,6 +774,12 @@ extension RealmMigrationManager {
     func migrateFrom17To18(with migration: Migration) {
         migration.enumerateObjects(ofType: StockExchangeRateRLM.className()) { (_, newRates) in
             newRates?["btc2usd"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom18To19(with migration: Migration) {
+        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+            newWallet?["lastActivityTimestamp"] = NSNumber(value: 0)
         }
     }
 }

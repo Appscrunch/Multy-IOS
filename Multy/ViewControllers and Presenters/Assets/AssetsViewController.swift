@@ -459,7 +459,7 @@ extension TableViewDataSource : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.presenter.account != nil {
             if presenter.isWalletExist() {
-                return 2 + presenter.account!.wallets.count  // logo / new wallet /wallets
+                return 2 + presenter.wallets!.count  // logo / new wallet /wallets
             } else {
                 return 3                                     // logo / new wallet / text cell
             }
@@ -499,7 +499,7 @@ extension TableViewDataSource : UITableViewDataSource {
                 if presenter.isWalletExist() {
                     let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
                     //                    walletCell.makeshadow()
-                    walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                    walletCell.wallet = presenter.wallets?[indexPath.row - 2]
                     walletCell.accessibilityIdentifier = "\(indexPath.row - 2)"
                     walletCell.fillInCell()
                     
@@ -518,7 +518,7 @@ extension TableViewDataSource : UITableViewDataSource {
             if self.presenter.account != nil {
                 let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
                 //                walletCell.makeshadow()
-                walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+                walletCell.wallet = presenter.wallets?[indexPath.row - 2]
                 walletCell.accessibilityIdentifier = "\(indexPath.row - 2)"
                 walletCell.fillInCell()
                 
@@ -532,7 +532,7 @@ extension TableViewDataSource : UITableViewDataSource {
         default:
             let walletCell = self.tableView.dequeueReusableCell(withIdentifier: "walletCell") as! WalletTableViewCell
             
-            walletCell.wallet = presenter.account?.wallets[indexPath.row - 2]
+            walletCell.wallet = presenter.wallets?[indexPath.row - 2]
             walletCell.accessibilityIdentifier = "\(indexPath.row - 2)"
             walletCell.fillInCell()
             

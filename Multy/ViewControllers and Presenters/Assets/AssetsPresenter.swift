@@ -24,6 +24,8 @@ class AssetsPresenter: NSObject {
                 (self.assetsVC!.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: account == nil)
             }
             
+            wallets = account?.wallets.sorted(byKeyPath: "lastActivityTimestamp", ascending: false)
+            
             self.assetsVC?.view.isUserInteractionEnabled = true
             if !assetsVC!.isSocketInitiateUpdating && self.assetsVC!.tabBarController!.viewControllers![0].childViewControllers.count == 1 {
                 assetsVC?.tableView.reloadData()
@@ -36,6 +38,8 @@ class AssetsPresenter: NSObject {
             }
         }
     }
+    
+    var wallets: Results<UserWalletRLM>?
     
     func backupActivity() {
         if account != nil {
@@ -108,7 +112,7 @@ class AssetsPresenter: NSObject {
     }
     
     func isWalletExist() -> Bool {
-        return !(account == nil || account?.wallets.count == 0)
+        return !(account == nil || wallets?.count == 0)
     }
     
     func registerCells() {
@@ -163,7 +167,11 @@ class AssetsPresenter: NSObject {
     }
     
     func getWalletViewController(indexPath: IndexPath) -> UIViewController {
-        let wallet = account?.wallets[indexPath.row - 2]
+        if wallets == nil {
+            return UIViewController()
+        }
+        
+        let wallet = wallets?[indexPath.row - 2]
         let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
         assetsVC?.sendAnalyticsEvent(screenName: screenMain, eventName: "\(walletOpenWithChainTap)\(wallet!.chain)")
         
