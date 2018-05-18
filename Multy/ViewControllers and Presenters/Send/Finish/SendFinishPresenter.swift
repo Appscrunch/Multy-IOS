@@ -34,7 +34,7 @@ class SendFinishPresenter: NSObject {
         switch isCrypto {
         case true:
             if transactionDTO.choosenWallet!.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
-                sumInCrypto = transactionDTO.sendAmount
+                sumInCrypto = transactionDTO.sendAmountString?.stringWithDot.doubleValue
                 sumInCryptoString = sumInCrypto!.fixedFraction(digits: 8)
                 sumInFiat = sumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
                 sumInFiatString = sumInFiat!.fixedFraction(digits: 2)

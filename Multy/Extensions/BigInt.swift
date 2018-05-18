@@ -19,8 +19,24 @@ class BigInt: NSObject {
         let _ = DataManager.shared.coreLibManager.errorString(from: mbi, mask: "\n\ninit big int\n\n")
     }
     
+    var isNonZero: Bool {
+        get {
+            return self != BigInt("0")
+        }
+    }
+    
+    var isZero: Bool {
+        get {
+            return self == BigInt("0")
+        }
+    }
+    
     override convenience init() {
         self.init("0")
+    }
+    
+    class func zero() -> BigInt {
+        return BigInt("0")
     }
     
     func setBigInt(string: String) {

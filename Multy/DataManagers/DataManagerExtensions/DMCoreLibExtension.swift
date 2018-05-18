@@ -113,7 +113,7 @@ extension DataManager {
                                                            sendAddress: sendAddress,
                                                            sendAmountString: sendAmountString,
                                                            nonce: wallet.ethWallet!.nonce.intValue,
-                                                           balanceAmount: "\(wallet.availableAmount())",
+                                                           balanceAmount: "\(wallet.availableAmount)",
                                                            ethereumChainID: UInt32(4), //RINKEBY
                                                            gasPrice: gasPriceString,
                                                            gasLimit: gasLimitString)

@@ -261,6 +261,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
             self.saveDonationSum(string: string)
         }
         sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: donationChanged)
+        
         return newLength <= self.maxLengthForSum
     }
     
@@ -281,8 +282,8 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     //end
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "sendAmountVC" {
-            let sendAmountVC = segue.destination as! SendAmountViewController
+        if segue.identifier == "sendEthVC" {
+            let sendAmountVC = segue.destination as! SendAmountEthViewController
             
             presenter.transactionDTO.transaction!.donationDTO = presenter.donationObj
             presenter.transactionDTO.transaction!.transactionRLM = presenter.transactionObj

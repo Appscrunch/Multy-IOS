@@ -161,7 +161,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         }
         
         if !sendDetailsVC!.isDonateAvailableSW.isOn {
-            self.sendDetailsVC?.performSegue(withIdentifier: "sendAmountVC", sender: Any.self)
+            self.sendDetailsVC?.performSegue(withIdentifier: "sendEthVC", sender: Any.self)
             
             return
         }
@@ -175,7 +175,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         } else if self.donationObj.sumInCrypto! == self.maxAllowedToSpend {
             self.sendDetailsVC?.presentWarning(message: "Your donation is equal your wallet sum.\n\nDonation sum: \((self.donationObj.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName)\n Sum in Wallet: \((self.availableSumInCrypto ?? 0.0).fixedFraction(digits: 2)) \(self.cryptoName)")
         } else {
-            self.sendDetailsVC?.performSegue(withIdentifier: "sendAmountVC", sender: Any.self)
+            self.sendDetailsVC?.performSegue(withIdentifier: "sendEthVC", sender: Any.self)
         }
     }
     
