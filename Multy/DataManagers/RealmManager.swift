@@ -397,6 +397,7 @@ class RealmManager: NSObject {
                                 modifiedWallet!.isTherePendingTx =  wallet.isTherePendingTx
                                 modifiedWallet!.btcWallet =         wallet.btcWallet
                                 modifiedWallet!.ethWallet =         wallet.ethWallet
+                                modifiedWallet?.lastActivityTimestamp = wallet.lastActivityTimestamp
 
                                 for (index,address) in wallet.addresses.enumerated() {
 //                                    modifiedWallet!.addresses[index].spendableOutput.removeAll()
