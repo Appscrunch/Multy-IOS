@@ -178,6 +178,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
                 self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
                 self.changeBackupY()
             }
+        } else {
+            setTableToBot(duration: 0.2)
         }
         self.fixForX()
         self.startY = self.backImage.frame.height
@@ -479,7 +481,7 @@ extension TableViewDelegate: UITableViewDelegate {
                     if self.tableView.frame.origin.y > self.startY + 50 {
                         self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height
                         if self.tableView.frame.origin.y > (self.startY + self.tableTopY) / 2 {
-                            if self.tableView.frame.origin.y > screenHeight/2 + 50 {
+                            if self.tableView.center.y > screenHeight/2 + 50 {
                                 self.updateByPull()
                             }
                         }
