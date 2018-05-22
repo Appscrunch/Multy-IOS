@@ -304,7 +304,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func closeAction() {
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func settingsAction(_ sender: Any) {

@@ -73,7 +73,7 @@ class TransactionWalletCell: UITableViewCell {
             self.timeLabel.text = dateFormatter.string(from: histObj.blockTime)
         }
         
-        switch wallet.blockchain.blockchain {
+        switch wallet.blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
             fillBitcoinCell()
         case BLOCKCHAIN_ETHEREUM:

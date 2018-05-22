@@ -82,10 +82,9 @@ class BTCWalletPresenter: NSObject {
         return count
     }
     
-    
     func getHistoryAndWallet() {
         mainVC?.progressHUD.blockUIandShowProgressHUD()
-        DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: BlockchainType.create(wallet: wallet!)) { (wallet, error) in
+        DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: wallet!.blockchainType) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
             }

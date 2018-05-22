@@ -177,7 +177,7 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
             
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
-            customVC.presenter.blockchainType = self.presenter.transactionDTO.choosenWallet!.blockchain
+            customVC.presenter.blockchainType = self.presenter.transactionDTO.choosenWallet!.blockchainType
             customVC.previousSelected = presenter.selectedIndexOfSpeed
             customVC.delegate = self.presenter
             self.presenter.selectedIndexOfSpeed = indexPath.row

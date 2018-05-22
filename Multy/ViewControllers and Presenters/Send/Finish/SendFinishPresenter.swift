@@ -33,7 +33,7 @@ class SendFinishPresenter: NSObject {
     func makeEndSum() {
         switch isCrypto {
         case true:
-            if transactionDTO.choosenWallet!.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
+            if transactionDTO.choosenWallet!.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
                 sumInCrypto = transactionDTO.sendAmountString?.stringWithDot.doubleValue
                 sumInCryptoString = sumInCrypto!.fixedFraction(digits: 8)
                 sumInFiat = sumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
@@ -41,7 +41,7 @@ class SendFinishPresenter: NSObject {
                 
                 feeAmountInCryptoString = (transactionDTO.transaction?.transactionRLM?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)
                 feeAmountInFiatString = (transactionDTO.transaction?.transactionRLM?.sumInFiat ?? 0.0).fixedFraction(digits: 2)
-            } else if transactionDTO.choosenWallet!.blockchain.blockchain == BLOCKCHAIN_ETHEREUM {
+            } else if transactionDTO.choosenWallet!.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
                 sumInCryptoString = transactionDTO.sendAmountString!
                 sumInFiatString = (transactionDTO.transaction!.endSumBigInt! * transactionDTO.choosenWallet!.exchangeCourse).fiatValueString(for: BLOCKCHAIN_ETHEREUM)
                 
