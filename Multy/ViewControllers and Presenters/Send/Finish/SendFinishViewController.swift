@@ -195,7 +195,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
             "payload"   : newAddressParams
             ] as [String : Any]
         
-        
         DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
             print("---------\(dict)")
             

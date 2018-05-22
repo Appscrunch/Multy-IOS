@@ -99,7 +99,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         dateFormatter.dateFormat = "HH:mm, d MMMM yyyy"
         let cryptoSumInBTC = UInt64(truncating: presenter.histObj.txOutAmount).btcValue
         
-        switch self.presenter.wallet.blockchain.blockchain {
+        switch self.presenter.wallet.blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
             if presenter.histObj.txStatus.intValue == TxStatus.MempoolIncoming.rawValue ||
                 presenter.histObj.txStatus.intValue == TxStatus.MempoolOutcoming.rawValue {

@@ -14,7 +14,7 @@ class TransactionPresenter: NSObject {
     var blockchainType = BlockchainType.init(blockchain: BLOCKCHAIN_BITCOIN, net_type: -1)
     var wallet = UserWalletRLM() {
         didSet {
-            blockchain = wallet.blockchain.blockchain
+            blockchain = wallet.blockchainType.blockchain
         }
     }
     
