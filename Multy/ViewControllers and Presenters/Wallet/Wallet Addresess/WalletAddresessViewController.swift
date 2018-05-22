@@ -34,6 +34,11 @@ class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
         sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(closeWithChainTap)\(presenter.wallet!.chain)")
     }
     
+    @IBAction func addAdress(_ sender: Any) {
+        addAddress()
+    }
+    
+    
     @objc func updateExchange() {
         let cells = self.tableView.visibleCells
         for cell in cells {

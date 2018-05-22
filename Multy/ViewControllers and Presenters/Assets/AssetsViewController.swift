@@ -36,6 +36,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     var isInsetCorrect = false
     
+    var isInternet = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,7 +56,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             }
             
             if !self.isFirstLaunch {
-                self.presenter.updateWalletsInfo()
+                self.presenter.updateWalletsInfo(isInternet: self.isInternet)
                 //            self.presenter.auth()
             }
             
@@ -74,6 +76,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             self.checkOSForConstraints()
             
             self.view.addSubview(self.progressHUD)
+            self.progressHUD.hide()
             if self.presenter.account != nil {
                 self.tableView.frame.size.height = screenHeight - self.tabBarController!.tabBar.frame.height
             }
@@ -90,6 +93,13 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         case false:
             self.presenter.isJailed = false
             let hud = self.showHud(text: "Checking version")
+            if !(ConnectionCheck.isConnectedToNetwork()) {
+                self.isInternet = false
+                self.hideHud(view: hud as? ProgressHUD)
+                self.successLaunch()
+                completion(true)
+                return
+            }
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
                 self.hideHud(view: hud as? ProgressHUD)
                 let dictionary = Bundle.main.infoDictionary!
@@ -97,10 +107,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
                 
                 //MARK: change > to <
                 if err != nil || buildVersion >= hardVersion! {
-                    self.isFlowPassed = true
-                    self.presentTermsOfService()
-                    let _ = UserPreferences.shared
-                    AppDelegate().saveMkVersion()
+                    self.successLaunch()
                     completion(true)
                 } else {
                     self.presentUpdateAlert()
@@ -109,6 +116,13 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
                 
             }
         }
+    }
+    
+    func successLaunch() {
+        self.isFlowPassed = true
+        self.presentTermsOfService()
+        let _ = UserPreferences.shared
+        AppDelegate().saveMkVersion()
     }
     
     
@@ -129,8 +143,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         
-        if !self.isFirstLaunch {
-            self.presenter.updateWalletsInfo()
+        if !self.isFirstLaunch || !self.isInternet {
+            self.presenter.updateWalletsInfo(isInternet: isInternet)
         }
         
         self.isFirstLaunch = false
@@ -141,6 +155,9 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         self.tabBarController?.tabBar.frame = self.presenter.tabBarFrame!
         if self.presenter.account != nil {
             tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
+        }
+        if isInternet == false {
+            self.updateUI()
         }
     }
     

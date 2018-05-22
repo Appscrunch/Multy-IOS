@@ -1684,8 +1684,8 @@ This feature will be in the next update.</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puy-aI-Koq">
                                         <rect key="frame" x="0.0" y="342.5" width="375" height="44"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fn-W0-b7o">
-                                                <rect key="frame" x="325" y="11" width="37" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fn-W0-b7o">
+                                                <rect key="frame" x="300.5" y="11" width="61.5" height="22"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1697,7 +1697,7 @@ This feature will be in the next update.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgE-ox-ude">
-                                                <rect key="frame" x="285" y="0.0" width="90" height="44"/>
+                                                <rect key="frame" x="260.5" y="0.0" width="114.5" height="44"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="maxAction:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="gEE-zV-QYq"/>
@@ -1863,7 +1863,7 @@ This feature will be in the next update.</string>
     <inferredMetricsTieBreakers>
         <segue reference="Bgz-R6-m6y"/>
         <segue reference="TSe-kF-31L"/>
-        <segue reference="pfe-aE-6Gg"/>
+        <segue reference="kCF-Tq-Brv"/>
         <segue reference="RTX-aa-bzX"/>
     </inferredMetricsTieBreakers>
 </document>
