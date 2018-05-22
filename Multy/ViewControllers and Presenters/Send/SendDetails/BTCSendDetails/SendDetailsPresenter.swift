@@ -14,6 +14,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             availableSumInCrypto = self.transactionDTO.choosenWallet!.sumInCrypto - self.blockedAmount!.btcValue
             availableSumInFiat = availableSumInCrypto! * transactionDTO.choosenWallet!.exchangeCourse
             cryptoName = transactionDTO.blockchain!.shortName
+            customFee = transactionDTO.transaction?.customFee ?? UInt64(0)
         }
     }
     
@@ -49,8 +50,6 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             }
         }
     }
-    
-//    self.sumInFiat = Double(round(100*self.sumInFiat)/100)
     
     func getData() {
         DataManager.shared.getAccount { (account, error) in
@@ -183,7 +182,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
         cell.value = (firstValue)!
         cell.setupUI()
-        self.customFee = UInt64(firstValue!)
+        customFee = UInt64(firstValue!)
 //        self.sendDetailsVC?.tableView.reloadData()
         updateCellsVisibility()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)

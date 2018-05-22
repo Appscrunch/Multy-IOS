@@ -81,11 +81,6 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
         if screenHeight == heightOfX {
             bottomBtnConstraint.constant = 0
         }
-        
-//        if self.presenter.selectedIndexOfSpeed == nil {
-//            self.tableView.selectRow(at: [0,2], animated: false, scrollPosition: .none)
-//            self.tableView.delegate?.tableView!(self.tableView, didSelectRowAt: [0,2])
-//        }
     }
     
     func setupShadow() {
@@ -112,9 +107,10 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     @IBAction func backAction(_ sender: Any) {
         presenter.transactionDTO.transaction!.donationDTO = nil
         presenter.transactionDTO.transaction!.transactionRLM = nil
+        presenter.transactionDTO.transaction?.customFee = presenter.customFee
         
-        self.navigationController?.popViewController(animated: true)
-        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: closeTap)
+        navigationController?.popViewController(animated: true)
+        sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: closeTap)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -326,33 +322,19 @@ extension TableViewDelegate: UITableViewDelegate {
         }
         
         if indexPath.row != 5 {
-            let customCell = self.tableView.cellForRow(at: [0,5]) as! CustomTrasanctionFeeTableViewCell
-            customCell.hideCustomPrice()
-            
-            var cells = self.tableView.visibleCells
-            cells.removeLast()
-            let trueCells = cells as! [TransactionFeeTableViewCell]
-            if trueCells[indexPath.row].checkMarkImage.isHidden == false {
-                self.presenter.selectedIndexOfSpeed = nil
-                
-                return
-            }
-            
-            self.presenter.selectedIndexOfSpeed = indexPath.row
-            
+            presenter.selectedIndexOfSpeed = indexPath.row
             presenter.updateCellsVisibility()
         } else {
             isCustom = true
             let storyboard = UIStoryboard(name: "Send", bundle: nil)
             let customVC = storyboard.instantiateViewController(withIdentifier: "customVC") as! CustomFeeViewController
             customVC.presenter.blockchainType = self.presenter.transactionDTO.choosenWallet!.blockchainType
-            customVC.delegate = self.presenter
-            customVC.rate = Int(self.presenter.customFee)
-            customVC.previousSelected = self.presenter.selectedIndexOfSpeed
-            self.presenter.selectedIndexOfSpeed = indexPath.row
-            self.navigationController?.pushViewController(customVC, animated: true)
+            customVC.delegate = presenter
+            customVC.rate = Int(presenter.customFee)
+            customVC.previousSelected = presenter.selectedIndexOfSpeed
+            presenter.selectedIndexOfSpeed = indexPath.row
+            navigationController?.pushViewController(customVC, animated: true)
         }
-        
     }
 }
 
@@ -367,30 +349,18 @@ extension TableViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row != 5 {
-            let transactionCell = self.tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
-            transactionCell.feeRate = self.presenter.feeRate
+            let transactionCell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionFeeTableViewCell
+            transactionCell.feeRate = presenter.feeRate
             transactionCell.blockchainType = self.presenter.transactionDTO.blockchainType
             transactionCell.makeCellBy(indexPath: indexPath)
             
-            if indexPath.row == presenter.selectedIndexOfSpeed {
-                transactionCell.checkMarkImage.isHidden = false
-                transactionCell.alpha = 1.0
-            } else {
-                transactionCell.checkMarkImage.isHidden = true
-                transactionCell.alpha = 0.3
-            }
-            
             return transactionCell
         } else {
-            let customFeeCell = self.tableView.dequeueReusableCell(withIdentifier: "customFeeCell") as! CustomTrasanctionFeeTableViewCell
-            customFeeCell.blockchainType = self.presenter.transactionDTO.blockchainType
-            
-            if indexPath.row == presenter.selectedIndexOfSpeed {
-                customFeeCell.alpha = 1.0
-            } else {
-                customFeeCell.alpha = 0.3
-            }
-            
+            let customFeeCell = tableView.dequeueReusableCell(withIdentifier: "customFeeCell") as! CustomTrasanctionFeeTableViewCell
+            customFeeCell.blockchainType = presenter.transactionDTO.blockchainType
+            customFeeCell.value = Int(presenter.customFee)
+            customFeeCell.setupUI()
+
             return customFeeCell
         }
     }
