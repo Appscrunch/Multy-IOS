@@ -40,6 +40,22 @@ extension UIViewController {
         swizzling(UIViewController.self, originalSelector, swizzledSelector)
     }()
     
+    func presentNoInternetScreen() -> Bool {
+        if !(ConnectionCheck.isConnectedToNetwork()) {
+            if self.isKind(of: NoInternetConnectionViewController.self) || self.isKind(of: UIAlertController.self) {
+                return false
+            }
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "NoConnectionVC") as! NoInternetConnectionViewController
+            present(nextViewController, animated: true, completion: nil)
+            
+            return false
+        } else {
+            return true
+        }
+    }
+    
     @objc func proj_viewWillAppear(animated: Bool) {
         proj_viewWillAppear(animated: animated)
         if !(ConnectionCheck.isConnectedToNetwork()) {
