@@ -10,6 +10,8 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     var transactionDTO = TransactionDTO()
     var isFromWallet = false
     
+    var recentAddresses = [RecentAddressesRLM]() 
+    
     func cancelAction() {
         if self.isFromWallet {
             self.sendStartVC?.navigationController?.popViewController(animated: true)
@@ -44,9 +46,8 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
   
     func qrData(string: String) {
         transactionDTO.update(from: string)
-        
+        sendStartVC?.setTextToTV(address: transactionDTO.sendAddress!)
         self.sendStartVC?.modifyNextButtonMode()
-        self.sendStartVC?.updateUI()
     }
     
     func isValidCryptoAddress() -> Bool {
@@ -83,5 +84,30 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
         default:
             return ""
         }
+    }
+    
+    func getAddresses() {
+        if transactionDTO.choosenWallet == nil {
+            RealmManager.shared.getRecentAddresses(for: nil, netType: nil) { (addresses, err) in
+                if addresses?.count != 0 {
+                    let arr = Array(addresses!)
+                    self.recentAddresses = arr
+                }
+                self.sendStartVC?.updateUI()
+            }
+        } else {
+            RealmManager.shared.getRecentAddresses(for: (transactionDTO.choosenWallet?.blockchain.blockchain.rawValue)!,
+                                                   netType: (transactionDTO.choosenWallet?.blockchain.net_type)!) { (addresses, err) in
+                if addresses?.count != 0 {
+                    let arr = Array(addresses!)
+                    self.recentAddresses = arr
+                }
+                self.sendStartVC?.updateUI()
+            }
+        }
+    }
+    
+    func numberOfaddresses() -> Int {
+        return self.recentAddresses.count
     }
 }

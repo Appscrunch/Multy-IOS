@@ -11,7 +11,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 18
+    let schemaVersion : UInt64 = 19
     
     var account: AccountRLM?
     
@@ -78,6 +78,9 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 19 {
                                                         self!.migrateFrom18To19(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 20 {
+                                                        self!.migrateFrom19To20(with: migration)
                                                     }
             })
             
@@ -686,6 +689,38 @@ class RealmManager: NSObject {
         wallet.ethWallet = newWallet.ethWallet
         wallet.btcWallet = newWallet.btcWallet
     }
+    
+    func writeOrUpdateRecentAddress(blockchainType: BlockchainType, address: String, date: Date) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                try! realm.write {
+                    if let recentAddress = realm.object(ofType: RecentAddressesRLM.self, forPrimaryKey: address) {
+                        recentAddress.lastActionDate = date
+                        realm.add(recentAddress, update: true)
+                    } else {
+                        let newRecentAddress = RecentAddressesRLM.createRecentAddress(blockchainType: blockchainType, address: address, date: date)
+                        realm.add(newRecentAddress, update: false)
+                    }
+                }
+            }
+        }
+    }
+    
+    func getRecentAddresses(for chain: UInt32?, netType: Int?, completion: @escaping (_ addresses: Results<RecentAddressesRLM>?, _ error: NSError?) -> ()) {
+        getRealm { (realmOpt, error) in
+            if let realm = realmOpt {
+                if chain != nil && netType != nil {
+                    let addr = realm.objects(RecentAddressesRLM.self).filter("blockchain = \(chain!)").filter("blockchainNetType = \(netType!)").sorted(byKeyPath: "lastActionDate", ascending: false)
+                    completion(addr, nil)
+                } else {
+                    let addr = realm.objects(RecentAddressesRLM.self).sorted(byKeyPath: "lastActionDate", ascending: false)
+                    completion(addr, nil)
+                }
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
 }
 
 extension RealmMigrationManager {
@@ -780,6 +815,14 @@ extension RealmMigrationManager {
     func migrateFrom18To19(with migration: Migration) {
         migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
             newWallet?["lastActivityTimestamp"] = NSNumber(value: 0)
+        }
+    }
+    
+    func migrateFrom19To20(with migration: Migration) {
+        migration.enumerateObjects(ofType: RecentAddressesRLM.className()) { (_, newRecentAddress) in
+            newRecentAddress?["lastActionDate"] = Date()
+            newRecentAddress?["blockchain"] = NSNumber(value: 0)
+            newRecentAddress?["blockchainNetType"] = NSNumber(value: 0)
         }
     }
 }
