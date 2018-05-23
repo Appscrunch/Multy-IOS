@@ -56,13 +56,65 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         self.donationView.isHidden = true
         self.updateUI()
         self.sendAnalyticOnStrart()
+        
+        
+        let tapOnTo = UITapGestureRecognizer(target: self, action: #selector(tapOnToAddress))
+        walletToAddressLbl.isUserInteractionEnabled = true
+        walletToAddressLbl.addGestureRecognizer(tapOnTo)
+        
+        let tapOnFrom = UITapGestureRecognizer(target: self, action: #selector(tapOnFromAddress))
+        walletFromAddressLbl.isUserInteractionEnabled = true
+        walletFromAddressLbl.addGestureRecognizer(tapOnFrom)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
     }
+    
+    @objc func tapOnToAddress(recog: UITapGestureRecognizer) {
+        tapFunction(recog: recog, labelFor: walletToAddressLbl)
+    }
+    
+    @objc func tapOnFromAddress(recog: UITapGestureRecognizer) {
+        tapFunction(recog: recog, labelFor: walletFromAddressLbl)
+    }
 
+    func tapFunction(recog: UITapGestureRecognizer, labelFor: UILabel) {
+        let tapLocation = recog.location(in: labelFor)
+        var lineNumber = Double(tapLocation.y / 16.5)
+        lineNumber.round(.towardZero)
+        var title = ""
+        if labelFor == walletFromAddressLbl {
+            title = presenter.histObj.txInputs.map{ $0.address }[Int(lineNumber)]
+        } else { // if walletToAddressLbl
+            title = presenter.histObj.txOutputs.map{ $0.address }[Int(lineNumber)]
+        }
+        
+        let actionSheet = UIAlertController(title: "", message: title, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Copy to clipboard", style: .default, handler: { (action) in
+            UIPasteboard.general.string = title
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
+            let objectsToShare = [title]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                if !completed {
+                    // User canceled
+                    return
+                } else {
+                    if let appName = activityType?.rawValue {
+                        //                        self.sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(self.wallet!.chain)", eventName: "\(shareToAppWithChainTap)\(self.wallet!.chain)_\(appName)")
+                    }
+                }
+            }
+            activityVC.setPresentedShareDialogToDelegate()
+            self.present(activityVC, animated: true, completion: nil)
+        }))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
     func checkHeightForScrollAvailability() {
 //        if screenHeight >= 667 {
 //            self.scrollView.isScrollEnabled = false
