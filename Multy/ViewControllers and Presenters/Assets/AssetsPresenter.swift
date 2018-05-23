@@ -178,14 +178,14 @@ class AssetsPresenter: NSObject {
         let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
         assetsVC?.sendAnalyticsEvent(screenName: screenMain, eventName: "\(walletOpenWithChainTap)\(wallet!.chain)")
         
-        switch wallet!.chain.uint32Value {
-        case BLOCKCHAIN_BITCOIN.rawValue:
+        switch wallet!.blockchainType.blockchain {
+        case BLOCKCHAIN_BITCOIN:
             let vc = storyboard.instantiateViewController(withIdentifier: "WalletMainID") as! BTCWalletViewController
             vc.presenter.wallet = wallet
             vc.presenter.account = account
             
             return vc
-        case BLOCKCHAIN_ETHEREUM.rawValue:
+        case BLOCKCHAIN_ETHEREUM:
             let vc = storyboard.instantiateViewController(withIdentifier: "EthWalletID") as! EthWalletViewController
             vc.presenter.wallet = wallet
             vc.presenter.account = account

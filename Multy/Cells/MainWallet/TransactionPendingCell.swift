@@ -23,7 +23,7 @@ class TransactionPendingCell: UITableViewCell {
     }
     
     public func fillCell() {
-        switch wallet!.blockchain.blockchain {
+        switch wallet!.blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
             fillBitcoinCell()
         case BLOCKCHAIN_ETHEREUM:

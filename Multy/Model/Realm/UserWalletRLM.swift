@@ -24,7 +24,7 @@ class UserWalletRLM: Object {
     
     var changeAddressIndex: UInt32 {
         get {
-            switch blockchain.blockchain {
+            switch blockchainType.blockchain {
             case BLOCKCHAIN_BITCOIN:
                 return UInt32(addresses.count)
             case BLOCKCHAIN_ETHEREUM:
@@ -43,7 +43,7 @@ class UserWalletRLM: Object {
     
     var sumInCryptoString: String {
         get {
-            switch blockchain.blockchain {
+            switch blockchainType.blockchain {
             case BLOCKCHAIN_BITCOIN:
                 return sumInCrypto.fixedFraction(digits: 8)
             case BLOCKCHAIN_ETHEREUM:
@@ -56,7 +56,7 @@ class UserWalletRLM: Object {
     
     var blockedAmount: BigInt {
         get {
-            switch blockchain.blockchain {
+            switch blockchainType.blockchain {
             case BLOCKCHAIN_BITCOIN:
                 return BigInt("\(calculateBlockedAmount())")
             case BLOCKCHAIN_ETHEREUM:
@@ -69,7 +69,7 @@ class UserWalletRLM: Object {
     
     var availableAmount: BigInt {
         get {
-            switch blockchain.blockchain {
+            switch blockchainType.blockchain {
             case BLOCKCHAIN_BITCOIN:
                 return BigInt(sumInCryptoString.convertToSatoshiAmountString()) - blockedAmount
             case BLOCKCHAIN_ETHEREUM:
@@ -83,7 +83,7 @@ class UserWalletRLM: Object {
     //////////////////////////////////////
     //not unified
     
-    var blockchain: BlockchainType {
+    var blockchainType: BlockchainType {
         get {
             return BlockchainType.create(wallet: self)
         }
@@ -91,7 +91,7 @@ class UserWalletRLM: Object {
     
     var availableSumInCrypto: Double {
         get {
-            if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
+            if self.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
                 return availableAmount.cryptoValueString(for: BLOCKCHAIN_BITCOIN).stringWithDot.doubleValue
             } else {
                 return 0
@@ -101,7 +101,7 @@ class UserWalletRLM: Object {
     
     var sumInFiat: Double {
         get {
-            if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
+            if self.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInCrypto * exchangeCourse
             } else {
                 return Double((ethWallet!.allBalance * exchangeCourse).fiatValueString(for: BLOCKCHAIN_ETHEREUM).replacingOccurrences(of: ",", with: "."))!
@@ -111,7 +111,7 @@ class UserWalletRLM: Object {
     
     var sumInFiatString: String {
         get {
-            if self.blockchain.blockchain == BLOCKCHAIN_BITCOIN {
+            if self.blockchainType.blockchain == BLOCKCHAIN_BITCOIN {
                 return sumInFiat.fixedFraction(digits: 2)
             } else {
                 return (ethWallet!.allBalance * exchangeCourse).fiatValueString(for: BLOCKCHAIN_ETHEREUM)
@@ -120,7 +120,7 @@ class UserWalletRLM: Object {
     }
     
     var shouldCreateNewAddressAfterTransaction: Bool {
-        return blockchain.blockchain  == BLOCKCHAIN_BITCOIN
+        return blockchainType.blockchain  == BLOCKCHAIN_BITCOIN
     }
     
     @objc dynamic var fiatName = String()
@@ -137,7 +137,7 @@ class UserWalletRLM: Object {
         
     var exchangeCourse: Double {
         get {
-            return DataManager.shared.makeExchangeFor(blockchainType: blockchain)
+            return DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
         }
     }
     
@@ -266,7 +266,7 @@ class UserWalletRLM: Object {
     }
     
     func isThereAvailableAmount() -> Bool {
-        switch blockchain.blockchain {
+        switch blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
             return availableAmount > Int64(0)
         case BLOCKCHAIN_ETHEREUM:
@@ -277,7 +277,7 @@ class UserWalletRLM: Object {
     }
     
     func isThereEnoughAmount(_ amount: String) -> Bool {
-        switch blockchain.blockchain {
+        switch blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
             return amount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN) < Constants.BigIntSwift.oneETHInWeiKey * sumInCrypto
         case BLOCKCHAIN_ETHEREUM:

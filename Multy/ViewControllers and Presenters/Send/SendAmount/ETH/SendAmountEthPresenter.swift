@@ -28,8 +28,8 @@ class SendAmountEthPresenter: NSObject {
                 feeAmountInFiat = feeAmount * exchangeCourse
             }
             
-            maxLengthForSum = transactionDTO.choosenWallet!.blockchain.blockchain.maxLengthForSum
-            maxPrecision = transactionDTO.choosenWallet!.blockchain.blockchain.maxPrecision
+            maxLengthForSum = transactionDTO.choosenWallet!.blockchainType.blockchain.maxLengthForSum
+            maxPrecision = transactionDTO.choosenWallet!.blockchainType.blockchain.maxPrecision
         }
     }
     
@@ -312,7 +312,7 @@ extension CreateTransactionDelegate {
                                                                               sendAmountString: sendAmount.stringValue,
                                                                               nonce: transactionDTO.choosenWallet!.ethWallet!.nonce.intValue,
                                                                               balanceAmount: "\(transactionDTO.choosenWallet!.ethWallet!.balance)",
-            ethereumChainID: UInt32(transactionDTO.choosenWallet!.blockchain.net_type),
+            ethereumChainID: UInt32(transactionDTO.choosenWallet!.blockchainType.net_type),
             gasPrice: transactionDTO.transaction?.transactionRLM?.sumInCryptoBigInt.stringValue ?? "0",
             gasLimit: "21000") // "\(transactionDTO.transaction?.customGAS?.gasPrice ?? 0)")
         

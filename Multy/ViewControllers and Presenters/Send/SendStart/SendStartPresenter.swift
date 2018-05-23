@@ -96,8 +96,8 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
                 self.sendStartVC?.updateUI()
             }
         } else {
-            RealmManager.shared.getRecentAddresses(for: (transactionDTO.choosenWallet?.blockchain.blockchain.rawValue)!,
-                                                   netType: (transactionDTO.choosenWallet?.blockchain.net_type)!) { (addresses, err) in
+            RealmManager.shared.getRecentAddresses(for: (transactionDTO.choosenWallet?.blockchainType.blockchain.rawValue)!,
+                                                   netType: (transactionDTO.choosenWallet?.blockchainType.net_type)!) { (addresses, err) in
                 if addresses?.count != 0 {
                     let arr = Array(addresses!)
                     self.recentAddresses = arr

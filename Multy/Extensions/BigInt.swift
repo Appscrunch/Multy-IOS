@@ -21,13 +21,13 @@ class BigInt: NSObject {
     
     var isNonZero: Bool {
         get {
-            return self != BigInt("0")
+            return self != Int64(0)
         }
     }
     
     var isZero: Bool {
         get {
-            return self == BigInt("0")
+            return self == Int64(0)
         }
     }
     
