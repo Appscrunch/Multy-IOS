@@ -36,7 +36,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     var isInsetCorrect = false
     
-    var isInternet = true
+    var isInternetAvailable = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             }
             
             if !self.isFirstLaunch {
-                self.presenter.updateWalletsInfo(isInternet: self.isInternet)
+                self.presenter.updateWalletsInfo(isInternet: self.isInternetAvailable)
                 //            self.presenter.auth()
             }
             
@@ -94,7 +94,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             self.presenter.isJailed = false
             let hud = self.showHud(text: "Checking version")
             if !(ConnectionCheck.isConnectedToNetwork()) {
-                self.isInternet = false
+                self.isInternetAvailable = false
                 self.hideHud(view: hud as? ProgressHUD)
                 self.successLaunch()
                 completion(true)
@@ -143,8 +143,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         
-        if !self.isFirstLaunch || !self.isInternet {
-            self.presenter.updateWalletsInfo(isInternet: isInternet)
+        if !self.isFirstLaunch || !self.isInternetAvailable {
+            self.presenter.updateWalletsInfo(isInternet: isInternetAvailable)
         }
         
         self.isFirstLaunch = false
@@ -156,7 +156,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         if self.presenter.account != nil {
             tableView.frame.size.height = screenHeight - tabBarController!.tabBar.frame.height
         }
-        if isInternet == false {
+        if isInternetAvailable == false {
             self.updateUI()
         }
     }

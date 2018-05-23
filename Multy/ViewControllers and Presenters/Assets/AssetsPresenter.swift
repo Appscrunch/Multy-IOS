@@ -99,12 +99,12 @@ class AssetsPresenter: NSObject {
         }
     }
     
-    func updateWalletsInfo(isInternet: Bool) {
+    func updateWalletsInfo(isInternetAvailable: Bool) {
         DataManager.shared.getAccount { (acc, err) in
             if acc != nil {
                 self.blockUI()
                 self.account = acc
-                if isInternet == false {
+                if isInternetAvailable == false {
                     self.unlockUI()
                 }
                 self.getWalletsVerbose(completion: { (_) in

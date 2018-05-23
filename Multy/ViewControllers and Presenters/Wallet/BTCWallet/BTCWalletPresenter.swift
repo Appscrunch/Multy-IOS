@@ -83,7 +83,7 @@ class BTCWalletPresenter: NSObject {
     }
     
 
-    func blocUi() {
+    func blockUI() {
         self.mainVC?.spiner.startAnimating()
         self.mainVC?.view.isUserInteractionEnabled = false
 //        self.mainVC?.view.alpha = 0.3
@@ -96,7 +96,7 @@ class BTCWalletPresenter: NSObject {
     }
     
     func getHistoryAndWallet() {
-        blocUi()
+        blockUI()
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: wallet!.blockchainType) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
