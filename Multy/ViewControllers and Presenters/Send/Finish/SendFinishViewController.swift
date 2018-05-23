@@ -178,6 +178,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     @IBAction func nextAction(_ sender: Any) {
+        self.createRecentAddress()
         let wallet = presenter.transactionDTO.choosenWallet!
         let newAddress = wallet.shouldCreateNewAddressAfterTransaction ? presenter.transactionDTO.transaction!.newChangeAddress! : ""
         
@@ -222,6 +223,12 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         }
     }
 
+    func createRecentAddress() {
+        RealmManager.shared.writeOrUpdateRecentAddress(blockchainType: presenter.transactionDTO.blockchainType!,
+                                                       address: presenter.transactionDTO.sendAddress!,
+                                                       date: Date())
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         

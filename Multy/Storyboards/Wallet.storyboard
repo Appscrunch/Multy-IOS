@@ -1084,6 +1084,19 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <outlet property="delegate" destination="xp7-VY-w4q" id="1yX-vL-cRZ"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H37-Od-ZOG">
+                                <rect key="frame" x="328" y="24" width="47" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" id="Jfp-5T-smK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" red="0.0039215686274509803" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="addAdress:" destination="xp7-VY-w4q" eventType="touchUpInside" id="fvt-sD-XAL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97644573450088501" green="0.98039692640304565" blue="0.99984890222549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1096,10 +1109,12 @@ By donating you help us to bring blockchain technology one step closer to ordina
                             <constraint firstItem="0b1-fi-W3g" firstAttribute="top" secondItem="pPx-Xk-TEa" secondAttribute="bottom" constant="9" id="JcS-rn-5yB"/>
                             <constraint firstItem="POU-36-eGx" firstAttribute="top" secondItem="yul-RR-F2h" secondAttribute="bottom" id="Nng-AL-uZw"/>
                             <constraint firstItem="pPx-Xk-TEa" firstAttribute="centerX" secondItem="ZdL-CL-zEQ" secondAttribute="centerX" id="RWE-U6-T3f"/>
+                            <constraint firstItem="H37-Od-ZOG" firstAttribute="centerY" secondItem="pPx-Xk-TEa" secondAttribute="centerY" id="cv9-X1-BIc"/>
                             <constraint firstItem="pPx-Xk-TEa" firstAttribute="top" secondItem="8tS-Ni-ugU" secondAttribute="bottom" constant="12" id="jnw-ld-LRA"/>
                             <constraint firstItem="sBq-8E-UCv" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" constant="8" id="kvM-jh-SAO"/>
                             <constraint firstAttribute="trailing" secondItem="0b1-fi-W3g" secondAttribute="trailing" id="sUF-Aa-pRu"/>
                             <constraint firstItem="KDx-Q1-Axi" firstAttribute="top" secondItem="8tS-Ni-ugU" secondAttribute="bottom" constant="8" id="xSH-dh-c6I"/>
+                            <constraint firstAttribute="trailing" secondItem="H37-Od-ZOG" secondAttribute="trailing" id="xhY-7q-EVP"/>
                             <constraint firstItem="yul-RR-F2h" firstAttribute="leading" secondItem="ZdL-CL-zEQ" secondAttribute="leading" id="zIV-vN-H9i"/>
                         </constraints>
                     </view>
@@ -1109,7 +1124,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfQ-Lc-gr1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="715"/>
+            <point key="canvasLocation" x="165.59999999999999" y="714.69265367316348"/>
         </scene>
         <!--Wallet View Controller-->
         <scene sceneID="SRo-Va-hpA">
@@ -1185,7 +1200,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <outlet property="delegate" destination="ArP-lC-npA" id="RrL-XL-vcd"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lhA-QM-jnv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lhA-QM-jnv">
                                 <rect key="frame" x="0.0" y="332" width="375" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -1763,7 +1778,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <outlet property="delegate" destination="AaS-13-ZCZ" id="CrQ-Uw-QK7"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NmL-yQ-47h">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NmL-yQ-47h">
                                 <rect key="frame" x="0.0" y="282" width="375" height="330"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -2017,6 +2032,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bAg-Ts-2PT"/>
+        <segue reference="pNd-qC-tRx"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -82,8 +82,21 @@ class BTCWalletPresenter: NSObject {
         return count
     }
     
+
+    func blockUI() {
+        self.mainVC?.spiner.startAnimating()
+        self.mainVC?.view.isUserInteractionEnabled = false
+//        self.mainVC?.view.alpha = 0.3
+    }
+    
+    func unlockUI() {
+        self.mainVC?.spiner.stopAnimating()
+        self.mainVC?.view.isUserInteractionEnabled = true
+//        self.mainVC?.view.alpha = 1.0
+    }
+    
     func getHistoryAndWallet() {
-        mainVC?.progressHUD.blockUIandShowProgressHUD()
+        blockUI()
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: wallet!.blockchainType) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
@@ -91,8 +104,8 @@ class BTCWalletPresenter: NSObject {
         }
         
         DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { [unowned self] (histList, err) in
-            self.mainVC?.progressHUD.unblockUIandHideProgressHUD()
-            self.mainVC?.spiner.stopAnimating()
+            self.unlockUI()
+//            self.mainVC?.spiner.stopAnimating()
             if err == nil && histList != nil {
                 self.mainVC!.refreshControl.endRefreshing()
                 self.mainVC!.tableView.isUserInteractionEnabled = true
