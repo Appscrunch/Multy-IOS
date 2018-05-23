@@ -363,11 +363,11 @@ This feature will be in the next update.</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0U-60-o5z">
-                                        <rect key="frame" x="16" y="90" width="343" height="450"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x0U-60-o5z">
+                                        <rect key="frame" x="16" y="90" width="343" height="460"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zLs-gO-YLW">
-                                                <rect key="frame" x="0.0" y="11" width="343" height="439"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zLs-gO-YLW">
+                                                <rect key="frame" x="0.0" y="11" width="343" height="449"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -384,7 +384,7 @@ This feature will be in the next update.</string>
                                         <constraints>
                                             <constraint firstItem="zLs-gO-YLW" firstAttribute="leading" secondItem="x0U-60-o5z" secondAttribute="leading" id="7ej-Wl-cJb"/>
                                             <constraint firstAttribute="bottom" secondItem="zLs-gO-YLW" secondAttribute="bottom" id="IQz-Kr-h2p"/>
-                                            <constraint firstAttribute="height" constant="450" id="WEn-6w-Mcu"/>
+                                            <constraint firstAttribute="height" constant="460" id="WEn-6w-Mcu"/>
                                             <constraint firstItem="zLs-gO-YLW" firstAttribute="top" secondItem="x0U-60-o5z" secondAttribute="top" constant="11" id="fpD-z8-0zN"/>
                                             <constraint firstAttribute="trailing" secondItem="zLs-gO-YLW" secondAttribute="trailing" id="jRc-fj-z72"/>
                                         </constraints>
@@ -602,7 +602,7 @@ This feature will be in the next update.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b0-WR-NmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2409" y="535"/>
+            <point key="canvasLocation" x="2408.8000000000002" y="534.33283358320841"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Wn-fo-Rxe">

@@ -71,10 +71,11 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func done() {
-        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < 1 {
+        let defaultBTCCustomFee = Constants.CustomFee.defaultBTCCustomFeeKey
+        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < defaultBTCCustomFee {
             switch presenter.blockchainType!.blockchain {
             case BLOCKCHAIN_BITCOIN:
-                let message = "Fee rate can not be less then 1 satoshi per byte."
+                let message = "Fee rate can not be less then \(defaultBTCCustomFee) satoshi per byte."
                 let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                     self.topPriceTF.becomeFirstResponder()

@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-DemiBold</string>
-            <string>AvenirNext-Regular</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -42,25 +36,25 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Very Fast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZ5-dY-817">
-                                <rect key="frame" x="66" y="26.5" width="67" height="22"/>
+                                <rect key="frame" x="66" y="14.5" width="67" height="22"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∙ 1 hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-3v-qM9">
-                                <rect key="frame" x="138" y="26.5" width="56.5" height="22"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∙ 1 hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-3v-qM9">
+                                <rect key="frame" x="138" y="14.5" width="56.5" height="22"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0.0001 BTC / 0.77 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="QtB-Y4-D4T">
-                                <rect key="frame" x="66" y="53.5" width="168" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0.0001 BTC / 0.77 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="QtB-Y4-D4T">
+                                <rect key="frame" x="66" y="41.5" width="168" height="22"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-yg-Mza">
-                                <rect key="frame" x="313.5" y="59" width="45.5" height="16.5"/>
+                                <rect key="frame" x="313.5" y="47" width="45.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                 <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -76,13 +70,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0bA-iX-fep" firstAttribute="leading" secondItem="3fK-4k-WCC" secondAttribute="leading" constant="21" id="0Ed-nz-h5w"/>
+                            <constraint firstItem="0f8-jb-f95" firstAttribute="centerY" secondItem="0bA-iX-fep" secondAttribute="centerY" id="5ku-qm-Lqq"/>
                             <constraint firstItem="QtB-Y4-D4T" firstAttribute="top" secondItem="SZ5-dY-817" secondAttribute="bottom" constant="5" id="8uU-9J-bP1"/>
                             <constraint firstItem="f8L-yg-Mza" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QtB-Y4-D4T" secondAttribute="trailing" constant="15" id="9u2-6e-0fe"/>
-                            <constraint firstItem="SZ5-dY-817" firstAttribute="centerY" secondItem="0bA-iX-fep" secondAttribute="centerY" id="DKf-sG-uzs"/>
+                            <constraint firstItem="SZ5-dY-817" firstAttribute="centerY" secondItem="0bA-iX-fep" secondAttribute="centerY" constant="-12" id="DKf-sG-uzs"/>
                             <constraint firstItem="bqz-mq-Mvv" firstAttribute="leading" secondItem="SZ5-dY-817" secondAttribute="leading" id="FF7-aX-PRo"/>
                             <constraint firstAttribute="trailing" secondItem="bqz-mq-Mvv" secondAttribute="trailing" id="FP2-rJ-xZa"/>
                             <constraint firstItem="f8L-yg-Mza" firstAttribute="bottom" secondItem="QtB-Y4-D4T" secondAttribute="bottom" id="J7e-Ne-lw0"/>
-                            <constraint firstItem="0f8-jb-f95" firstAttribute="centerY" secondItem="V3g-3v-qM9" secondAttribute="centerY" id="L0w-e1-eDa"/>
                             <constraint firstItem="SZ5-dY-817" firstAttribute="leading" secondItem="0bA-iX-fep" secondAttribute="trailing" constant="13" id="PXW-6Y-0cL"/>
                             <constraint firstItem="0bA-iX-fep" firstAttribute="centerY" secondItem="3fK-4k-WCC" secondAttribute="centerY" id="TDm-WK-xxQ"/>
                             <constraint firstItem="V3g-3v-qM9" firstAttribute="leading" secondItem="SZ5-dY-817" secondAttribute="trailing" constant="5" id="eVK-WD-AK0"/>

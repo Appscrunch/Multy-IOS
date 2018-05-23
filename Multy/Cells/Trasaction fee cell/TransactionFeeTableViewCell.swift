@@ -31,7 +31,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
     }
     
     func constructString(from rate: Int) -> String {
-        let sumInCrypto = Double(rate) / 100000000.0
+        let sumInCrypto = (Double(rate) / 100000000.0) * 225
         let sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchainType!)
         return "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
     }
@@ -99,6 +99,10 @@ class TransactionFeeTableViewCell: UITableViewCell {
     }
     
     func setCornersForFirstCell() {
+        if backView.bounds.width != screenWidth {
+            return
+        }
+        
         let maskPath = UIBezierPath.init(roundedRect: self.backView.bounds,
                                          byRoundingCorners:[.topLeft, .topRight],
                                          cornerRadii: CGSize.init(width: 15.0, height: 15.0))
@@ -109,11 +113,10 @@ class TransactionFeeTableViewCell: UITableViewCell {
     }
     
     func setCheckmarkHiden() {
-        if self.checkMarkImage.isHidden {
-            self.checkMarkImage.isHidden = false
+        if checkMarkImage.isHidden {
+            checkMarkImage.isHidden = false
         } else {
-            self.checkMarkImage.isHidden = true
+            checkMarkImage.isHidden = true
         }
     }
-    
 }

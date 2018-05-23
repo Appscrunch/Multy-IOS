@@ -84,6 +84,10 @@ struct Constants {
         static let bitcoinKey = "bitcoin"
         static let ethereumKey = "ethereum"
     }
+    
+    struct CustomFee {
+        static let defaultBTCCustomFeeKey = 2
+    }
 }
 
 let defaultDelimeter = "," as Character
