@@ -1200,7 +1200,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <outlet property="delegate" destination="ArP-lC-npA" id="RrL-XL-vcd"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lhA-QM-jnv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lhA-QM-jnv">
                                 <rect key="frame" x="0.0" y="332" width="375" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -1778,7 +1778,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <outlet property="delegate" destination="AaS-13-ZCZ" id="CrQ-Uw-QK7"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NmL-yQ-47h">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NmL-yQ-47h">
                                 <rect key="frame" x="0.0" y="282" width="375" height="330"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -2032,6 +2032,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bAg-Ts-2PT"/>
+        <segue reference="pNd-qC-tRx"/>
     </inferredMetricsTieBreakers>
 </document>

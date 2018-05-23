@@ -56,7 +56,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             }
             
             if !self.isFirstLaunch {
-                self.presenter.updateWalletsInfo(isInternet: self.isInternetAvailable)
+                self.presenter.updateWalletsInfo(isInternetAvailable: self.isInternetAvailable)
                 //            self.presenter.auth()
             }
             
@@ -144,7 +144,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
         
         if !self.isFirstLaunch || !self.isInternetAvailable {
-            self.presenter.updateWalletsInfo(isInternet: isInternetAvailable)
+            self.presenter.updateWalletsInfo(isInternetAvailable: isInternetAvailable)
         }
         
         self.isFirstLaunch = false
