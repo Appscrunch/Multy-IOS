@@ -5,11 +5,18 @@
 import UIKit
 import ZFRippleButton
 
-class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProtocol, CancelProtocol {
+class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsProtocol, DonationProtocol, CancelProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBtn: ZFRippleButton!
     @IBOutlet weak var middleConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var addressInTfLlb: UILabel!
+    @IBOutlet weak var addressTV: UITextView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var botView: UIView!
+    @IBOutlet weak var placeholderLabel: UILabel!
+    @IBOutlet weak var noAddressLbl: UILabel!
     
     let presenter = SendStartPresenter()
     
@@ -17,11 +24,8 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         super.viewDidLoad()
         self.swipeToBack()
         self.presenter.sendStartVC = self
-        self.registerCells()
-        self.hideKeyboardWhenTappedAroundForSendStart()
-        self.nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
-        self.ipadFix()
         sendAnalyticsEvent(screenName: screenSendTo, eventName: screenSendTo)
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,9 +44,22 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         view.addGestureRecognizer(tap)
     }
     
+    func setupUI() {
+        registerCells()
+        ipadFix()
+        presenter.getAddresses()
+        hideKeyboardWhenTappedAroundForSendStart()
+        nextBtn.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 214/255, alpha: 1.0)
+        setupShadow()
+        addressTV.delegate = self
+        if presenter.transactionDTO.sendAddress != nil && !presenter.transactionDTO.sendAddress!.isEmpty {
+            addressTV.text = presenter.transactionDTO.sendAddress!
+            placeholderLabel.isHidden = !addressTV.text.isEmpty
+        }
+    }
+    
     @objc func dismissSendKeyboard(gesture: UITapGestureRecognizer) {
-        let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell        
-        presenter.transactionDTO.sendAddress = searchCell.addressTV.text
+        presenter.transactionDTO.sendAddress = addressTV.text
         
         if presenter.transactionDTO.choosenWallet != nil && presenter.isTappedDisabledNextButton(gesture: gesture) {
             let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
@@ -73,6 +90,8 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         fixUI()
     }
     
+    
+    
     func registerCells() {
         let searchAddressCell = UINib(nibName: "SearchAddressTableViewCell", bundle: nil)
         self.tableView.register(searchAddressCell, forCellReuseIdentifier: "searchAddressCell")
@@ -83,6 +102,11 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
         let recentCell = UINib(nibName: "RecentAddressTableViewCell", bundle: nil)
         self.tableView.register(recentCell, forCellReuseIdentifier: "recentCell")
     }
+    
+    @IBAction func backAction(_ sender: Any) {
+        self.presenter.cancelAction()
+    }
+    
     
     @IBAction func nextAction(_ sender: Any) {
         if self.presenter.transactionDTO.choosenWallet == nil {
@@ -100,6 +124,27 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
                                                          UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                            gradientOrientation: .horizontal)
             }
+    }
+    
+    @IBAction func scanQrAction(_ sender: Any) {
+        performSegue(withIdentifier: "qrCamera", sender: Any.self)
+        sendAnalyticsEvent(screenName: screenSendTo, eventName: scanQrTap)
+    }
+    
+    @IBAction func wirelessScanAction(_ sender: Any) {
+        self.donate()
+        sendDonationAlertScreenPresentedAnalytics(code: donationForWirelessScanFUNC)
+    }
+    
+    @IBAction func addressBookAction(_ sender: Any) {
+        self.donate()
+        sendDonationAlertScreenPresentedAnalytics(code: donationForContactSC)
+    }
+    
+    func setupShadow() {
+        let myColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3)
+        topView.setShadow(with: myColor)
+        botView.setShadow(with: myColor)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -144,6 +189,12 @@ class SendStartViewController: UIViewController, AnalyticsProtocol, DonationProt
             self.nextBtn.frame.origin = CGPoint(x: 0, y: 714)
         }
     }
+    
+    func setTextToTV(address: String) {
+        addressTV.text = address
+        addressTV.scrollRangeToVisible(NSMakeRange(addressTV.text.count - 1, 0))
+        placeholderLabel.isHidden = true
+    }
 }
 
 extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
@@ -152,55 +203,30 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return presenter.numberOfaddresses()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath == [0, 0] {
-            let searchAddressCell = self.tableView.dequeueReusableCell(withIdentifier: "searchAddressCell") as! SearchAddressTableViewCell
-            if presenter.transactionDTO.sendAddress != nil && !presenter.transactionDTO.sendAddress!.isEmpty {
-                searchAddressCell.updateWithAddress(address: presenter.transactionDTO.sendAddress!)
-            }
-            searchAddressCell.cancelDelegate = self.presenter
-            searchAddressCell.sendAddressDelegate = self.presenter
-            searchAddressCell.goToQrDelegate = self.presenter
-            searchAddressCell.donationDelegate = self
-            
-            return searchAddressCell
-        } else if indexPath == [0, 1] {
-            let oneLabelCell = self.tableView.dequeueReusableCell(withIdentifier: "oneLabelCell") as! NewWalletTableViewCell
-            oneLabelCell.setupForSendStartVC()
-            
-            return oneLabelCell
-        } else {
-            let recentCell = self.tableView.dequeueReusableCell(withIdentifier: "recentCell") as! RecentAddressTableViewCell
-            
-            return recentCell
-        }
+        let recentCell = self.tableView.dequeueReusableCell(withIdentifier: "recentCell") as! RecentAddressTableViewCell
+        recentCell.fillingCell(recentAddress: presenter.recentAddresses[indexPath.row])
+        return recentCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == [0, 0] {
-            return 305
-        } else { //if indexPath == [0, 1] {
-            return 60
-        }
+        return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row > 1 {
-//            let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
-//            let selectedCell = self.tableView.cellForRow(at: indexPath) as! RecentAddressTableViewCell
-//            searchCell.addressTV.text = selectedCell.addressLbl.text
-//            searchCell.addressInTfLlb.text = selectedCell.addressLbl.text
-//            self.presenter.transactionDTO.sendAddress = selectedCell.addressLbl.text!
-//            self.tableView.deselectRow(at: indexPath, animated: true)
-//            self.modifyNextButtonMode()
-//        }
+        self.presenter.transactionDTO.update(from: presenter.recentAddresses[indexPath.row].address)
+        self.setTextToTV(address: presenter.recentAddresses[indexPath.row].address)
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.modifyNextButtonMode()
+
     }
     
     func updateUI() {
         self.tableView.reloadData()
+        noAddressLbl.isHidden = !self.presenter.recentAddresses.isEmpty
     }
     
     func ipadFix() {
@@ -210,7 +236,25 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func checkTVisEmpty() -> Bool {
-        let searchCell = self.tableView.cellForRow(at: [0,0]) as! SearchAddressTableViewCell
-        return searchCell.addressTV.text.isEmpty
+        return addressTV.text.isEmpty
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            self.presenter.sendAddress(address: textView.text!)
+            return false
+        }
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            placeholderLabel.isHidden = !placeholderLabel.isHidden
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }

@@ -108,7 +108,16 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     func alertForGetNewPermission() {
         let alert = UIAlertController(title: "Warning", message: "Please go to the Settings -> Multy and allow camera usage", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-            self.cancel()
+            let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+            if UIApplication.shared.canOpenURL(settingsUrl!) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsUrl!, options: [:], completionHandler: { (success) in
+                        self.cancel()
+                    })
+                } else {
+                    UIApplication.shared.openURL(settingsUrl!)
+                }
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }
