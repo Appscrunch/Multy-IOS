@@ -72,12 +72,18 @@ class CreateWalletPresenter: NSObject {
             "walletName"    : createdWallet.name
             ] as [String : Any]
         
+        guard mainVC!.presentNoInternetScreen() else {
+            self.mainVC?.progressHUD.hide()
+            
+            return
+        }
+        
         DataManager.shared.addWallet(params: params) { [unowned self] (dict, error) in
+            self.mainVC?.progressHUD.hide()
             if error == nil {
                 self.mainVC!.sendAnalyticsEvent(screenName: screenCreateWallet, eventName: cancelTap)
                 self.mainVC!.openNewlyCreatedWallet()
             } else {
-                self.mainVC?.progressHUD.hide()
                 self.mainVC?.presentAlert(with: "Error while creating wallet!")
             }
         }
