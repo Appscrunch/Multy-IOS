@@ -105,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+//        self.registerPush()
         let filePathOpt = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         if let filePath = filePathOpt, let options = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: options)
@@ -305,9 +306,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         print(remoteMessage.appData)
     }
     
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        print(notification.description)
+    }
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        let token = Messaging.messaging().fcmToken
-        print("FCM token: \(token ?? "")")
+//        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(fcmToken)")
+        Messaging.messaging().subscribe(toTopic: "btcTransactionUpdate-000740972765fa93874e52ad1377941372e3a6ee2c37a37a9135fef8a096025e42")  //userID
     }
     
     func registerPush() {
@@ -320,6 +326,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
                 completionHandler: {_, _ in })
 //             For iOS 10 data message (sent via FCM
             Messaging.messaging().delegate = self
+            Messaging.messaging().isAutoInitEnabled = true
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
