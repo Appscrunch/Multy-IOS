@@ -3,9 +3,8 @@
 //See LICENSE for details
 
 import UIKit
-import AURUnlockSlider
 
-class SendFinishViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol, AURUnlockSliderDelegate {
+class SendFinishViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topView: UIView!
@@ -27,7 +26,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     @IBOutlet weak var transactionSpeedTimeLbl: UILabel!
     @IBOutlet weak var transactionFeeCostLbl: UILabel! // exp: 0.002 BTC / 1.54 USD
     
-    @IBOutlet weak var sendBtn: UIButton!
     
     @IBOutlet weak var arr1: UIImageView!
     @IBOutlet weak var arr2: UIImageView!
@@ -35,13 +33,17 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     @IBOutlet var arrCollection: [UIImageView]!
     
     @IBOutlet weak var btnTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var slideView: UIView!
+    @IBOutlet weak var slideLabel: UILabel!
+    @IBOutlet weak var slideColorView: UIView!
     
     let presenter = SendFinishPresenter()
     var imageArr = [#imageLiteral(resourceName: "slideToSend1"),#imageLiteral(resourceName: "slideToSend2"),#imageLiteral(resourceName: "slideToSend3")]
     var timer: Timer?
     
-    let label = UILabel(frame: CGRect(x: 33, y: 22, width: 50, height: 20))     //test
-    var unlockSlider: AURUnlockSlider?
+    var startSlideX: CGFloat = 0.0
+    var finishSlideX: CGFloat = screenWidth - 33
+    var isAnimateEnded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,19 +55,15 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
 
         self.noteTF.delegate = self
         
-        
         self.setupUI()
         sendAnalyticsEvent(screenName: "\(screenSendSummaryWithChain)\(presenter.transactionDTO.choosenWallet!.chain)",
                             eventName: "\(screenSendSummaryWithChain)\(presenter.transactionDTO.choosenWallet!.chain)")
     }
     
     override func viewDidLayoutSubviews() {
-        if self.scrollView.contentSize.height != 0.0 {
-            createSlideView()
-        }
-        sendBtn.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
-                                            UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
-                              gradientOrientation: .horizontal)
+        slideColorView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
+                                                   UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
+                                     gradientOrientation: .horizontal)
     }
     
     func setupUI() {
@@ -92,76 +90,77 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         }
         
         animate()
+        
+        startSlideX = slideView.frame.origin.x
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(slideToSend))
+        slideView.isUserInteractionEnabled = true
+        slideView.addGestureRecognizer(gestureRecognizer)
     }
     
-    func createSlideView() {
-        self.unlockSlider = AURUnlockSlider(frame: self.presenter.makeFrameForSlider())
-        unlockSlider!.delegate = self
-        
-        unlockSlider!.sliderText = "Slide to Send"
-        unlockSlider!.sliderTextColor = UIColor.white
-        unlockSlider!.sliderTextFont = UIFont(name: "AvenirNext-Medium", size: 18.0)!
-        unlockSlider!.sliderBackgroundColor = UIColor.clear
-        
-        
-        label.text = "ABC"  //test
-        label.textColor = UIColor.white     //test
-        
-//        unlockSlider.addSubview(label)
-        if self.view.subviews.contains(unlockSlider!) {
-            unlockSlider!.removeFromSuperview()
+    @IBAction func slideToSend(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let translation = gestureRecognizer.translation(in: self.view)
+        if isAnimateEnded {
+            return
         }
-        self.scrollView.addSubview(unlockSlider!) //view.addSubview(unlockSlider)
+        if slideView.frame.maxX + translation.x >= finishSlideX {
+            UIView.animate(withDuration: 0.3) {
+                self.isAnimateEnded = true
+                self.slideView.frame.origin.x = self.finishSlideX - self.slideView.frame.width
+//                self.view.isUserInteractionEnabled = false
+                self.nextAction(Any.self)
+            }
+            return
+        }
+        
+        gestureRecognizer.view!.center = CGPoint(x: slideView.center.x + translation.x, y: slideView.center.y)
+        gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+        
+        if gestureRecognizer.view!.frame.maxX < screenWidth / 2 {
+            UIView.animate(withDuration: 0.3) {
+                self.slideLabel.alpha = 0.5
+            }
+        } else if gestureRecognizer.view!.frame.maxX > screenWidth / 2 {
+            UIView.animate(withDuration: 0.3) {
+                self.slideLabel.alpha = 0
+            }
+        }
+        
+        if gestureRecognizer.state == .ended {
+            if gestureRecognizer.view!.frame.origin.x < screenWidth - 100 {
+                slideToStart()
+            }
+        }
     }
+    
+    func slideToStart() {
+        UIView.animate(withDuration: 0.3) {
+            self.slideView.frame.origin.x = self.startSlideX
+            self.slideLabel.alpha = 1.0
+            self.isAnimateEnded = false
+        }
+    }
+    
     
     func animate() {
-        self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.decrease), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.decrease), userInfo: nil, repeats: true)
         RunLoop.current.add(self.timer!, forMode: RunLoopMode.commonModes)
     }
     
     @objc func decrease() {
-        if label.textColor == UIColor.white {
-            UIView.transition(with: label, duration: 1.0, options: .transitionCrossDissolve, animations: {() -> Void in
-                self.label.textColor = UIColor.red
-            }, completion: {(_ finished: Bool) -> Void in
-            })
-        } else {
-            UIView.transition(with: label, duration: 1.0, options: .transitionCrossDissolve, animations: {() -> Void in
-                self.label.textColor = UIColor.white
-            }, completion: {(_ finished: Bool) -> Void in
-            })
-        }
-        
-        if self.arrCollection[0].image == imageArr[0] {
-//            self.arrCollection[0].image = imageArr[2]
-            UIView.transition(with: self.arrCollection[0], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[0].image = self.imageArr[2] }, completion: nil)
-//            self.arrCollection[1].image = imageArr[0]
-            UIView.transition(with: self.arrCollection[1], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[1].image = self.imageArr[0] }, completion: nil)
-//            self.arrCollection[2].image = imageArr[1]
-            UIView.transition(with: self.arrCollection[2], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[2].image = self.imageArr[1] }, completion: nil)
-        } else if self.arrCollection[0].image == imageArr[2] {
-//            self.arrCollection[0].image = imageArr[1]
-            UIView.transition(with: self.arrCollection[0], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[0].image = self.imageArr[1] }, completion: nil)
-//            self.arrCollection[1].image = imageArr[2]
-            UIView.transition(with: self.arrCollection[1], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[1].image = self.imageArr[2] }, completion: nil)
-//            self.arrCollection[2].image = imageArr[0]
-            UIView.transition(with: self.arrCollection[2], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[2].image = self.imageArr[0] }, completion: nil)
-        } else if self.arrCollection[0].image == imageArr[1] {
-//            self.arrCollection[0].image = imageArr[0]
-            UIView.transition(with: self.arrCollection[0], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[0].image = self.imageArr[0] }, completion: nil)
-//            self.arrCollection[1].image = imageArr[1]
-            UIView.transition(with: self.arrCollection[1], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[1].image = self.imageArr[2] }, completion: nil)
-//            self.arrCollection[2].image = imageArr[2]
-            UIView.transition(with: self.arrCollection[2], duration: 1, options: .transitionCrossDissolve, animations: { self.arrCollection[2].image = self.imageArr[2] }, completion: nil)
+        if self.arr1.image == imageArr[0]  {
+            UIView.transition(with: self.arrCollection[0], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr1.image = self.imageArr[2] }, completion: nil)
+            UIView.transition(with: self.arrCollection[1], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr2.image = self.imageArr[0] }, completion: nil)
+            UIView.transition(with: self.arrCollection[2], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr3.image = self.imageArr[1] }, completion: nil)
+        } else if self.arr1.image == imageArr[2] {
+            UIView.transition(with: self.arrCollection[0], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr1.image = self.imageArr[1] }, completion: nil)
+            UIView.transition(with: self.arrCollection[1], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr2.image = self.imageArr[2] }, completion: nil)
+            UIView.transition(with: self.arrCollection[2], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr3.image = self.imageArr[0] }, completion: nil)
+        } else if self.arr1.image == imageArr[1] {
+            UIView.transition(with: self.arrCollection[0], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr1.image = self.imageArr[0] }, completion: nil)
+            UIView.transition(with: self.arrCollection[1], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr2.image = self.imageArr[1] }, completion: nil)
+            UIView.transition(with: self.arrCollection[2], duration: 0.1, options: .transitionCrossDissolve, animations: { self.arr3.image = self.imageArr[2] }, completion: nil)
         }
     }
-    
-    func unlockSliderDidUnlock(_ slider: AURUnlockSlider) {
-//        self.presentAlert()
-        self.nextAction(Any.self)
-    }
-    
-    
     
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -200,16 +199,10 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
             print("---------\(dict)")
             
             if error != nil {
-                self.unlockSlider = nil
-                self.scrollView.subviews.last?.removeFromSuperview()
-                self.scrollView.reloadInputViews()
-                self.createSlideView()
-                self.scrollView.reloadInputViews()
-                self.view.reloadInputViews()
-                
                 self.presentAlert()
-//                self.unlockSlider.layoutSubviews()
                 print("sendHDTransaction Error: \(error)")
+                self.slideToStart()
+                self.view.isUserInteractionEnabled = true
                 self.sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(self.presenter.transactionDTO.choosenWallet!.chain)", eventName: transactionErrorFromServer)
                 return
             }
