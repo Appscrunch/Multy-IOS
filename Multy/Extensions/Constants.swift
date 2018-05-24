@@ -59,16 +59,15 @@ struct Constants {
         ]
         
         static let donationBlockchains = [
-//            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue,         netType: UInt32(ETHEREUM_CHAIN_ID_MAINNET.rawValue)),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: 0),
-            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: 0),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: 0),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: 0),
-            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: 0),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_BITSHARES.rawValue,        netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_CASH.rawValue,     netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_LITECOIN.rawValue,         netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_DASH.rawValue,             netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM_CLASSIC.rawValue, netType: 0),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: 0),
+//            BlockchainType.create(currencyID: BLOCKCHAIN_ERC20.rawValue,            netType: 0),
         ]
     }
     
@@ -147,6 +146,18 @@ func shakeView(viewForShake: UIView) {
     viewForShake.layer.add(animation, forKey: "position")
 //    self.viewWithCircles.layer.add(animation, forKey: "position")
 }
+
+let idOfInapps = ["io.multy.addingActivity5", "io.multy.addingCharts5", "io.multy.addingContacts5",
+                  "io.multy.addingDash5", "io.multy.addingEthereumClassic5", "io.multy.addingExchange5",
+                  "io.multy.exchangeStocks", "io.multy.importWallet5", "io.multy.addingLitecoin5",
+                  "io.multy.addingPortfolio5", "io.multy.addingSteemit5", "io.multy.wirelessScan5",
+                  "io.multy.addingBCH5", "io.multy.estimationCurrencies5", "io.multy.addingEthereum5"]
+
+let idOfInapps50 = ["io.multy.addingActivity50", "io.multy.addingCharts50", "io.multy.addingContacts50",
+                  "io.multy.addingDash50", "io.multy.addingEthereumClassic50", "io.multy.addingExchange50",
+                  "io.multy.exchangeStocks50", "io.multy.importWallet50", "io.multy.addingLitecoin50",
+                  "io.multy.addingPortfolio50", "io.multy.addingSteemit50", "io.multy.wirelessScan50",
+                  "io.multy.addingBCH50", "io.multy.estimationCurrencie50", "io.multy.addingEthereum50"]
 
 enum TxStatus : Int {
     case

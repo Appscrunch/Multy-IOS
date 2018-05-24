@@ -24,6 +24,7 @@ target 'Multy' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Branch'
+  pod 'SwiftyStoreKit'
   
 #  pod 'BiometricAuthentication'
 

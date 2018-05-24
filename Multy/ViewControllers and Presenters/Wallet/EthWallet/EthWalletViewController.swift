@@ -344,7 +344,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     @IBAction func exchangeAction(_ sender: Any) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.addingExchange50")
         //        sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: "\(exchangeWithChainTap)\(presenter.wallet!.chain)")
         logAnalytics()
     }
@@ -363,7 +363,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        
     }
     
     func presentNoInternet() {

@@ -46,6 +46,7 @@
 		4522905C1FBB18D30024B550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4522905B1FBB18D30024B550 /* Assets.xcassets */; };
 		4522905F1FBB18D30024B550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4522905D1FBB18D30024B550 /* LaunchScreen.storyboard */; };
 		45310D0F2063B9F500105532 /* EthereumGasInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45310D0E2063B9F500105532 /* EthereumGasInfo.swift */; };
+		4538BDCC2099E69900573426 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4538BDCB2099E69900573426 /* StoreKit.framework */; };
 		4540944A2031EEFD00603DB5 /* SecuritySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */; };
 		4540944C2031EF1600603DB5 /* SecuritySettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */; };
 		4540944E2032E92F00603DB5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4540944D2032E92F00603DB5 /* Settings.storyboard */; };
@@ -343,6 +344,7 @@
 		452290601FBB18D30024B550 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4526F8DD2015383D00D2E491 /* Multy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Multy.entitlements; sourceTree = "<group>"; };
 		45310D0E2063B9F500105532 /* EthereumGasInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumGasInfo.swift; sourceTree = "<group>"; };
+		4538BDCB2099E69900573426 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		454094492031EEFD00603DB5 /* SecuritySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsViewController.swift; sourceTree = "<group>"; };
 		4540944B2031EF1600603DB5 /* SecuritySettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsPresenter.swift; sourceTree = "<group>"; };
 		4540944D2032E92F00603DB5 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -592,6 +594,7 @@
 				FA4125DF2004C0FD00DF9AC3 /* libstdc++.tbd in Frameworks */,
 				FA4125EE2004FF1500DF9AC3 /* libkeccak-tiny.a in Frameworks */,
 				FA4125EF2004FF1500DF9AC3 /* libmulty_core.a in Frameworks */,
+				4538BDCC2099E69900573426 /* StoreKit.framework in Frameworks */,
 				FA4125F12004FF1500DF9AC3 /* liblibwally-core.a in Frameworks */,
 				FA4125F02004FF1500DF9AC3 /* libmini-gmp.a in Frameworks */,
 				FA4125F22004FF1500DF9AC3 /* libsecp256k1.a in Frameworks */,
@@ -1577,6 +1580,7 @@
 		FA7E97221FF2504100735D73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4538BDCB2099E69900573426 /* StoreKit.framework */,
 				FA4125DE2004C0FD00DF9AC3 /* libstdc++.tbd */,
 				FA4125E62004FF1300DF9AC3 /* libkeccak-tiny.a */,
 				FA4125E92004FF1400DF9AC3 /* liblibwally-core.a */,
@@ -1713,6 +1717,9 @@
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1873,7 +1880,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Multy-MultyUITests/Pods-Multy-MultyUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AURUnlockSlider/AURUnlockSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/ButtonProgressBar-iOS/ButtonProgressBar_iOS.framework",
@@ -1890,6 +1896,7 @@
 				"${BUILT_PRODUCTS_DIR}/SecurityExtensions/SecurityExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ZFRippleButton/ZFRippleButton.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
@@ -1897,7 +1904,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AURUnlockSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ButtonProgressBar_iOS.framework",
@@ -1914,6 +1920,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecurityExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFRippleButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
@@ -1949,7 +1956,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Multy/Pods-Multy-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AURUnlockSlider/AURUnlockSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/ButtonProgressBar-iOS/ButtonProgressBar_iOS.framework",
@@ -1966,12 +1972,12 @@
 				"${BUILT_PRODUCTS_DIR}/SecurityExtensions/SecurityExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ZFRippleButton/ZFRippleButton.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AURUnlockSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ButtonProgressBar_iOS.framework",
@@ -1988,6 +1994,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecurityExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZFRippleButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

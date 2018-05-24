@@ -1383,18 +1383,13 @@ Try again in:</string>
                                             <constraint firstAttribute="height" constant="1" id="WBT-Jb-eH0"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwH-0Q-jV7">
-                                        <rect key="frame" x="0.0" y="358" width="321" height="58"/>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HN9-93-SEg" userLabel="LineView1">
+                                        <rect key="frame" x="160" y="358" width="1" height="58"/>
+                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="58" id="bOV-Pl-e1d"/>
+                                            <constraint firstAttribute="width" constant="1" id="K7I-PT-Dvf"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                        <state key="normal" title="Donate"/>
-                                        <connections>
-                                            <action selector="donateAction:" destination="5ad-yB-UQM" eventType="touchUpInside" id="n5B-Nc-g4w"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lQD-5J-hkF">
                                         <rect key="frame" x="17.5" y="271.5" width="286" height="61.5"/>
                                         <string key="text">By donation for this option you help the
@@ -1413,6 +1408,30 @@ and develop new application functionality</string>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwH-0Q-jV7">
+                                        <rect key="frame" x="0.0" y="358" width="160" height="58"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="bOV-Pl-e1d"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="Donate USD 5"/>
+                                        <connections>
+                                            <action selector="donateAction5:" destination="5ad-yB-UQM" eventType="touchUpInside" id="O6h-gy-14m"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97Y-tc-SZM">
+                                        <rect key="frame" x="161" y="358" width="160" height="58"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="SYX-Xg-92X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="Donate USD 50"/>
+                                        <connections>
+                                            <action selector="donate50:" destination="5ad-yB-UQM" eventType="touchUpInside" id="Lap-SD-Yxg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0119498111307621" green="0.47699987888336182" blue="0.99941056966781616" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1425,17 +1444,23 @@ and develop new application functionality</string>
                                     <constraint firstItem="lQD-5J-hkF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="llE-Kv-zdT" secondAttribute="leading" constant="10" id="GTW-sJ-yMQ"/>
                                     <constraint firstAttribute="bottom" secondItem="ZPG-iV-jLD" secondAttribute="bottom" id="IIy-hc-RYc"/>
                                     <constraint firstAttribute="trailing" secondItem="ZPG-iV-jLD" secondAttribute="trailing" id="OCN-ff-Ycu"/>
+                                    <constraint firstItem="HN9-93-SEg" firstAttribute="centerX" secondItem="llE-Kv-zdT" secondAttribute="centerX" id="Qow-fA-ZFB"/>
                                     <constraint firstItem="2af-jb-4m3" firstAttribute="top" secondItem="HuK-Pv-zoM" secondAttribute="bottom" constant="14" id="SEb-g9-75d"/>
+                                    <constraint firstAttribute="trailing" secondItem="97Y-tc-SZM" secondAttribute="trailing" id="SHp-EF-AU6"/>
                                     <constraint firstItem="ZPG-iV-jLD" firstAttribute="top" secondItem="AUj-xL-0v1" secondAttribute="bottom" id="SLh-O7-u7s"/>
+                                    <constraint firstItem="AUj-xL-0v1" firstAttribute="top" secondItem="97Y-tc-SZM" secondAttribute="bottom" id="cqJ-Zl-Nco"/>
+                                    <constraint firstItem="AUj-xL-0v1" firstAttribute="top" secondItem="HN9-93-SEg" secondAttribute="bottom" id="esJ-so-9c1"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lQD-5J-hkF" secondAttribute="trailing" constant="10" id="g4i-LI-lwb"/>
                                     <constraint firstItem="2af-jb-4m3" firstAttribute="centerX" secondItem="llE-Kv-zdT" secondAttribute="centerX" id="htj-uJ-gZe"/>
                                     <constraint firstItem="gwH-0Q-jV7" firstAttribute="top" secondItem="lQD-5J-hkF" secondAttribute="bottom" constant="25" id="kZG-K1-2gH"/>
                                     <constraint firstItem="lQD-5J-hkF" firstAttribute="top" secondItem="2af-jb-4m3" secondAttribute="bottom" constant="14" id="nMd-3w-q1q"/>
+                                    <constraint firstItem="HN9-93-SEg" firstAttribute="top" secondItem="97Y-tc-SZM" secondAttribute="top" id="o5X-1L-dvF"/>
                                     <constraint firstItem="HuK-Pv-zoM" firstAttribute="height" secondItem="llE-Kv-zdT" secondAttribute="height" multiplier="198/475" id="pVG-vo-mtG"/>
                                     <constraint firstItem="HuK-Pv-zoM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="llE-Kv-zdT" secondAttribute="top" constant="2" id="pcT-CT-zBL"/>
                                     <constraint firstItem="AUj-xL-0v1" firstAttribute="leading" secondItem="llE-Kv-zdT" secondAttribute="leading" id="u03-BV-fiZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="gwH-0Q-jV7" secondAttribute="trailing" id="ugl-kX-eZR"/>
+                                    <constraint firstItem="97Y-tc-SZM" firstAttribute="leading" secondItem="HN9-93-SEg" secondAttribute="trailing" id="vC5-Tw-osi"/>
                                     <constraint firstAttribute="height" constant="475" id="vx3-B2-844"/>
+                                    <constraint firstItem="HN9-93-SEg" firstAttribute="leading" secondItem="gwH-0Q-jV7" secondAttribute="trailing" id="w2M-6f-VDF"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1459,7 +1484,7 @@ and develop new application functionality</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Zg-GE-rYw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2796" y="3250"/>
+            <point key="canvasLocation" x="-2796" y="3249.6251874062973"/>
         </scene>
         <!--Activity Web View View Controller-->
         <scene sceneID="mwY-zS-8iO">
