@@ -19,11 +19,12 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     @IBOutlet weak var noteTF: UITextField!
     
     @IBOutlet weak var walletNameLbl: UILabel!
-    @IBOutlet weak var walletCryptoSumAndCurrencyLbl: UILabel!
+//    @IBOutlet weak var walletCryptoSumAndCurrencyLbl: UILabel!
     @IBOutlet weak var walletFiatSumAndCurrencyLbl: UILabel!
+    @IBOutlet weak var walletsAddressesLbl: UILabel!
     
     @IBOutlet weak var transactionSpeedNameLbl: UILabel!
-    @IBOutlet weak var transactionSpeedTimeLbl: UILabel!
+//    @IBOutlet weak var transactionSpeedTimeLbl: UILabel!
     @IBOutlet weak var transactionFeeCostLbl: UILabel! // exp: 0.002 BTC / 1.54 USD
     
     
@@ -48,7 +49,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
-        self.fixUIForX()
+//        self.fixUIForX()
         self.presenter.sendFinishVC = self
         self.hideKeyboardWhenTappedAround()
         self.presenter.makeEndSum()
@@ -64,6 +65,16 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         slideColorView.applyGradient(withColours: [UIColor(ciColor: CIColor(red: 0/255, green: 178/255, blue: 255/255)),
                                                    UIColor(ciColor: CIColor(red: 0/255, green: 122/255, blue: 255/255))],
                                      gradientOrientation: .horizontal)
+        
+        if screenHeight == heightOfX {
+            if slideColorView.frame.width == screenWidth && slideColorView.frame.maxY < screenHeight - 80 {
+                btnTopConstraint.constant = btnTopConstraint.constant + (screenHeight - slideColorView.frame.maxY - 80)
+            }
+        } else {
+            if slideColorView.frame.width == screenWidth && slideColorView.frame.maxY < screenHeight - 20 {
+                btnTopConstraint.constant = btnTopConstraint.constant + (screenHeight - slideColorView.frame.maxY - 20)
+            }
+        }
     }
     
     func setupUI() {
@@ -79,15 +90,16 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         addressLbl.text = presenter.transactionDTO.sendAddress
         walletNameLbl.text = presenter.transactionDTO.choosenWallet?.name
         
-        walletCryptoSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet!.sumInCryptoString) \(presenter.transactionDTO.choosenWallet!.cryptoName)"
+        
+        walletsAddressesLbl.text = presenter.transactionDTO.choosenWallet!.stringAddressesWithSpendableOutputs()
         let fiatSum = presenter.transactionDTO.choosenWallet!.sumInFiatString
-        walletFiatSumAndCurrencyLbl.text = "\(fiatSum) \(presenter.transactionDTO.choosenWallet!.fiatName)"
+        walletFiatSumAndCurrencyLbl.text = "\(presenter.transactionDTO.choosenWallet!.sumInCryptoString) \(presenter.transactionDTO.choosenWallet!.cryptoName)" + " / " + "\(fiatSum) \(presenter.transactionDTO.choosenWallet!.fiatName)"
         transactionFeeCostLbl.text = "\(presenter.feeAmountInCryptoString) \(presenter.cryptoName)/\(presenter.feeAmountInFiatString) \(presenter.fiatName)"
         transactionSpeedNameLbl.text = "\(presenter.transactionDTO.transaction?.transactionRLM?.speedName ?? "") "
-        transactionSpeedTimeLbl.text =  "\(presenter.transactionDTO.transaction?.transactionRLM?.speedTimeString ?? "")"
-        if view.frame.height == 736 {
-            btnTopConstraint.constant = 105
-        }
+//        transactionSpeedTimeLbl.text =  "\(presenter.transactionDTO.transaction?.transactionRLM?.speedTimeString ?? "")"
+//        if view.frame.height == 736 {
+//            btnTopConstraint.constant = 105
+//        }
         
         animate()
         
@@ -239,9 +251,9 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func fixUIForX() {
-        if screenHeight == heightOfX {
-            self.btnTopConstraint.constant = 100
-        }
+//        if screenHeight == heightOfX {
+//            self.btnTopConstraint.constant = 100
+//        }
     }
     
     
