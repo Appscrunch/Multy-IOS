@@ -43,7 +43,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     
     var startSlideX: CGFloat = 0.0
     var finishSlideX: CGFloat = screenWidth - 33
-    var isAnimateEnd = false
+    var isAnimateEnded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,12 +99,12 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     
     @IBAction func slideToSend(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self.view)
-        if isAnimateEnd {
+        if isAnimateEnded {
             return
         }
         if slideView.frame.maxX + translation.x >= finishSlideX {
             UIView.animate(withDuration: 0.3) {
-                self.isAnimateEnd = true
+                self.isAnimateEnded = true
                 self.slideView.frame.origin.x = self.finishSlideX - self.slideView.frame.width
 //                self.view.isUserInteractionEnabled = false
                 self.nextAction(Any.self)
@@ -136,7 +136,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
         UIView.animate(withDuration: 0.3) {
             self.slideView.frame.origin.x = self.startSlideX
             self.slideLabel.alpha = 1.0
-            self.isAnimateEnd = false
+            self.isAnimateEnded = false
         }
     }
     
