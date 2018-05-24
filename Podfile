@@ -25,7 +25,10 @@ target 'Multy' do
   pod 'Crashlytics'
   pod 'Branch'
   pod 'AURUnlockSlider'
-  
+  pod 'NVActivityIndicatorView'
+  pod 'lottie-ios'
+  pod 'UPCarouselFlowLayout'
+
 #  pod 'BiometricAuthentication'
 
   target 'MultyTests' do
