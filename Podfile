@@ -25,6 +25,8 @@ target 'Multy' do
   pod 'Crashlytics'
   pod 'Branch'
   pod 'SwiftyStoreKit'
+  pod 'UPCarouselFlowLayout'
+  pod 'lottie-ios'
   
 #  pod 'BiometricAuthentication'
 
