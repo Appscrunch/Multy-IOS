@@ -24,7 +24,6 @@ target 'Multy' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Branch'
-  pod 'AURUnlockSlider'
   
 #  pod 'BiometricAuthentication'
 
