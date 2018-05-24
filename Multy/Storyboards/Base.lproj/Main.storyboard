@@ -571,7 +571,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Wallet name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yYM-Z4-2M4">
-                                                            <rect key="frame" x="20" y="29" width="285" height="24"/>
+                                                            <rect key="frame" x="20" y="29" width="340" height="24"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
@@ -580,7 +580,7 @@
                                                             </connections>
                                                         </textField>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i21-QL-5OE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                                             <color key="backgroundColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="0.5" id="ah3-uc-gaN"/>
@@ -617,13 +617,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitcoin ∙ BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVq-ZB-lDs">
-                                                            <rect key="frame" x="20" y="31" width="261" height="24"/>
+                                                            <rect key="frame" x="20" y="31" width="316" height="24"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="y1b-vh-UxL">
-                                                            <rect key="frame" x="289" y="24.5" width="15" height="15"/>
+                                                            <rect key="frame" x="344" y="24.5" width="15" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="6sB-KX-OBy"/>
                                                                 <constraint firstAttribute="width" constant="15" id="WZC-ku-Mxg"/>
@@ -659,13 +659,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US Dollars ∙ USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zG3-vO-HLP">
-                                                            <rect key="frame" x="20" y="33" width="259" height="24"/>
+                                                            <rect key="frame" x="20" y="33" width="314" height="24"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="3Fj-XI-WIm">
-                                                            <rect key="frame" x="289" y="24" width="15" height="15"/>
+                                                            <rect key="frame" x="344" y="24" width="15" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="15" id="7ug-E5-kjj"/>
                                                                 <constraint firstAttribute="height" constant="15" id="TbA-MB-Gks"/>
