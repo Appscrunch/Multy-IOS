@@ -404,6 +404,21 @@ class UserWalletRLM: Object {
         return arrOfOutputsAddresses[0]
     }
     
+    func stringAddressesWithSpendableOutputs() -> String {
+        switch blockchainType.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return addressesWithSpendableOutputs().joined(separator: "\n")
+        case BLOCKCHAIN_ETHEREUM:
+            return address
+        default:
+            return ""
+        }
+    }
+    
+    func addressesWithSpendableOutputs() -> [String] {
+        return addresses.filter{ addressRLM in addressRLM.spendableOutput.count != 0 }.map{ addressRLM in addressRLM.address }
+    }
+    
     override class func primaryKey() -> String? {
         return "id"
     }
