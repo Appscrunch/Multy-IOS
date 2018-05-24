@@ -1494,7 +1494,7 @@ QR</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.91339319944381714" green="0.92108803987503052" blue="0.95803099870681763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9137254901960784" green="0.92156862745098034" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Sia-Lf-ccw" firstAttribute="top" secondItem="nzU-CV-d25" secondAttribute="top" constant="8" id="0vG-ki-OVE"/>
                                     <constraint firstItem="Mk1-tu-7rf" firstAttribute="top" secondItem="nzU-CV-d25" secondAttribute="top" constant="13" id="1Db-03-ZPl"/>
@@ -1529,7 +1529,7 @@ QR</string>
                                 </userDefinedRuntimeAttributes>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058823529409" green="0.98015815019607544" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.9137254901960784" green="0.92156862745098034" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nzU-CV-d25" firstAttribute="top" secondItem="SHc-LJ-IY7" secondAttribute="top" id="JXQ-eP-R4e"/>
                             <constraint firstItem="nzU-CV-d25" firstAttribute="leading" secondItem="SHc-LJ-IY7" secondAttribute="leading" id="N9Y-US-34W"/>
@@ -2135,9 +2135,9 @@ QR</string>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bgz-R6-m6y"/>
+        <segue reference="Nqh-Rv-oVp"/>
         <segue reference="Y3u-nO-qs1"/>
-        <segue reference="kCF-Tq-Brv"/>
+        <segue reference="pfe-aE-6Gg"/>
         <segue reference="EUD-ex-a5v"/>
     </inferredMetricsTieBreakers>
 </document>
