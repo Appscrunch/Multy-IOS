@@ -48,6 +48,9 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         return refreshControl
     }()
+
+    var stringIdForInApp = ""
+    var stringIdForInAppBig = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -335,7 +338,14 @@ extension CreateWalletDelegate: CreateWalletProtocol {
 
 extension CancelDelegate: CancelProtocol {
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: self.stringIdForInApp)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: presenter.account == nil)
     }
     
     func presentNoInternet() {
@@ -358,6 +368,7 @@ extension PresentingSheetDelegate: OpenCreatingSheet {
         creatingVC.modalPresentationStyle = .custom
         creatingVC.modalTransitionStyle = .crossDissolve
         self.present(creatingVC, animated: true, completion: nil)
+        self.stringIdForInApp = "io.multy.importWallet5"
     }
 }
 
@@ -519,7 +530,6 @@ extension TableViewDataSource : UITableViewDataSource {
             } else {
                 newWalletCell.hideAll(flag: false)
             }
-            
             return newWalletCell
         case [0,2]:
             if self.presenter.account != nil {
@@ -598,10 +608,27 @@ extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout 
 extension CollectionViewDelegate : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        makeIdForInAppBigBy(indexPath: indexPath)
+        makeIdForInAppBy(indexPath: indexPath)
+        self.presentDonationAlertVC(from: weakSelf, with: stringIdForInAppBig)
         (tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
-        
         logAnalytics(indexPath: indexPath)
+    }
+    
+    func makeIdForInAppBy(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: stringIdForInApp = "io.multy.addingPortfolio5"
+        case 1: stringIdForInApp = "io.multy.addingCharts5"
+        default: break
+        }
+    }
+    
+    func makeIdForInAppBigBy(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: stringIdForInAppBig = "io.multy.addingPortfolio50"
+        case 1: stringIdForInAppBig = "io.multy.addingCharts50"
+        default: break
+        }
     }
     
     func logAnalytics(indexPath: IndexPath) {

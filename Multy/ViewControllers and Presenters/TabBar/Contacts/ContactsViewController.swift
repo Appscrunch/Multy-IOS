@@ -47,7 +47,7 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     @IBAction func donatAction(_ sender: Any) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.addingContacts50")
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         logAnalytics()
     }
@@ -62,7 +62,13 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: "io.multy.addingContacts5")
+        (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
     }
     
     func presentNoInternet() {

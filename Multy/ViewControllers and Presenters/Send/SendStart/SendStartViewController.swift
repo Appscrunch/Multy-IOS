@@ -19,6 +19,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     @IBOutlet weak var noAddressLbl: UILabel!
     
     let presenter = SendStartPresenter()
+    var stingIdForInApp = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,12 +133,12 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
-        self.donate()
+        self.donate(idOfInApp: "abc")
         sendDonationAlertScreenPresentedAnalytics(code: donationForWirelessScanFUNC)
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
-        self.donate()
+        self.donate(idOfInApp: "abc")
         sendDonationAlertScreenPresentedAnalytics(code: donationForContactSC)
     }
     
@@ -166,17 +167,29 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
         }
     }
     
-    func donate() {
+    
+    func donate(idOfInApp: String) {
         unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf)
+        self.presentDonationAlertVC(from: weakSelf, with: idOfInApp)
+        stingIdForInApp = idOfInApp
+
     }
+//    func donate() {
+//        unowned let weakSelf =  self
+//        self.presentDonationAlertVC(from: weakSelf)
+//    }
     
     func cancelDonation() {
-        
+        self.makePurchaseFor(productId: stingIdForInApp)
     }
     
     func cancelAction() {
-        presentDonationVCorAlert()
+//        presentDonationVCorAlert()
+        self.makePurchaseFor(productId: stingIdForInApp)
+    }
+    
+    func donate50(idOfProduct: String) {
+        self.makePurchaseFor(productId: idOfProduct)
     }
     
     func presentNoInternet() {
