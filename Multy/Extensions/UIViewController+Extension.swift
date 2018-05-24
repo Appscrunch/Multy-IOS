@@ -123,7 +123,7 @@ extension UIViewController {
             }
             
             for wallet in wallets! {
-                if wallet.availableAmount > 0 && wallet.availableAmount > minSatoshiInWalletForDonate {
+                if wallet.availableAmount > Int64(0) && wallet.availableAmount > Int64(minSatoshiInWalletForDonate) {
                     let message = "You have nothing to donate.\nRecharge your balance for any of your BTC wallets."  // no money no honey
                     self.donateOrAlert(isHaveNotEmptyWallet: true, message: message)
                     break

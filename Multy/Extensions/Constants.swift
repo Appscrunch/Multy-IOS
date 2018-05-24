@@ -129,7 +129,7 @@ func convertSatoshiToBTC(sum: Double) -> String {
 }
 
 func convertBTCStringToSatoshi(sum: String) -> UInt64 {
-    return UInt64(sum.convertStringWithCommaToDouble() * pow(10, 8))
+    return UInt64(sum.toStringWithZeroes(precision: 8))!
 }
 
 func convertBTCToSatoshi(sum: String) -> Double {
