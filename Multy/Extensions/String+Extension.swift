@@ -155,7 +155,8 @@ extension String {
     }
     
     func convertCryptoAmountStringToMinimalUnits(in blockchain: Blockchain) -> BigInt {
-        return blockchain.multiplyerToMinimalUnits * (Double(self.stringWithDot) ?? 0)
+//        return blockchain.multiplyerToMinimalUnits * (Double(self.stringWithDot) ?? 0)
+        return BigInt(toStringWithZeroes(precision: blockchain.maxPrecision))
     }
     
     func convertToSatoshiAmountString() -> String {
