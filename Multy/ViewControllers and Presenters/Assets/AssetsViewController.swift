@@ -38,12 +38,24 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     var isInternetAvailable = true
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = #colorLiteral(red: 0, green: 0.5694742203, blue: 1, alpha: 1)
+        refreshControl.transform  = CGAffineTransform(scaleX: 1.25, y: 1.25)
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.backUpView()
         
         tableView.accessibilityIdentifier = "AssetsTableView"
+        tableView.addSubview(self.refreshControl)
         view.isUserInteractionEnabled = false
         registerCells()
         presenter.assetsVC = self
@@ -556,6 +568,10 @@ extension TableViewDataSource : UITableViewDataSource {
             return walletCell
         }
     }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.presenter.updateWalletsInfo(isInternetAvailable: isInternetAvailable)
+    }
 }
 
 extension CollectionViewDelegateFlowLayout : UICollectionViewDelegateFlowLayout {
@@ -603,3 +619,4 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
         (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
 }
+

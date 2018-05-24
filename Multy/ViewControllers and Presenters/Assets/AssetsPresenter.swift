@@ -19,7 +19,7 @@ class AssetsPresenter: NSObject {
     var account : AccountRLM? {
         didSet {
             backupActivity()
-            
+            self.assetsVC?.tableView.alwaysBounceVertical = true
             if self.assetsVC!.isVisible() {
                 (self.assetsVC!.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: account == nil)
             }
@@ -206,5 +206,6 @@ class AssetsPresenter: NSObject {
         assetsVC!.progressHUD.unblockUIandHideProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = true
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = true
+        assetsVC?.refreshControl.endRefreshing()
     }
 }
