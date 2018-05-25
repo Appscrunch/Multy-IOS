@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class ActiveRequestCollectionViewCell: UICollectionViewCell {
 
@@ -22,7 +23,18 @@ class ActiveRequestCollectionViewCell: UICollectionViewCell {
     
     func fillInCell() {
         if request != nil {
-            requestImage.backgroundColor  = request!.color
+            if request!.satisfied {
+//                let satisfiedView = LOTAnimationView(name: "circle_grow")
+//                satisfiedView.frame = self.bounds
+//                satisfiedView.autoresizesSubviews = true
+//                satisfiedView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                
+                //self.addSubview(satisfiedView)
+                requestImage.image  = UIImage(named: "done")
+            } else {
+                requestImage.image  = UIImage(named: request!.requestImageName)
+            }
         }
     }
 }
+
