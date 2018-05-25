@@ -279,7 +279,7 @@ class UserWalletRLM: Object {
     func isThereEnoughAmount(_ amount: String) -> Bool {
         switch blockchainType.blockchain {
         case BLOCKCHAIN_BITCOIN:
-            return amount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN) < Constants.BigIntSwift.oneETHInWeiKey * sumInCrypto
+            return amount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN) < Constants.BigIntSwift.oneBTCInSatoshiKey * sumInCrypto
         case BLOCKCHAIN_ETHEREUM:
             return ethWallet!.availableBalance > (Constants.BigIntSwift.oneETHInWeiKey * amount.stringWithDot.doubleValue)
         default:

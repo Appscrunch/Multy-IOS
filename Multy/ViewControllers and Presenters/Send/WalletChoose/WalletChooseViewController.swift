@@ -32,10 +32,10 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
     }
     
     func checkAmountFromQr() {
-        if self.presenter.transactionDTO.sendAmountString != "" {
-            self.qrAmountLbl.text = "Amount from QR: \(presenter.transactionDTO.sendAmountString ?? "") \(presenter.transactionDTO.blockchain?.shortName ?? "")"
+        if presenter.transactionDTO.sendAmountString != nil && presenter.transactionDTO.sendAmountString != "" {
+            qrAmountLbl.text = "Amount from QR: \(presenter.transactionDTO.sendAmountString ?? "") \(presenter.transactionDTO.blockchain?.shortName ?? "")"
         } else {
-            self.qrAmountLbl.isHidden = true
+            qrAmountLbl.isHidden = true
         }
     }
 
