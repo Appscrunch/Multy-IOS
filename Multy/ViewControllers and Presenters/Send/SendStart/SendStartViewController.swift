@@ -133,14 +133,18 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
-        self.donate(idOfInApp: "abc")
+        unowned let weakSelf =  self
+        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.wirelessScan50")
         sendDonationAlertScreenPresentedAnalytics(code: donationForWirelessScanFUNC)
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
-        self.donate(idOfInApp: "abc")
+//        unowned let weakSelf =  self
+//        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.addingContacts50")
+        self.donate(idOfInApp: "io.multy.addingContacts50")
         sendDonationAlertScreenPresentedAnalytics(code: donationForContactSC)
     }
+    
     
     func setupShadow() {
         let myColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3)
@@ -171,13 +175,17 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     func donate(idOfInApp: String) {
         unowned let weakSelf =  self
         self.presentDonationAlertVC(from: weakSelf, with: idOfInApp)
+        if idOfInApp == "io.multy.addingContacts50" {
+            stingIdForInApp = "io.multy.addingContacts5"
+            return
+        } else if idOfInApp == "io.multy.wirelessScan50" {
+            stingIdForInApp = "io.multy.wirelessScan5"
+            return
+        }
         stingIdForInApp = idOfInApp
 
     }
-//    func donate() {
-//        unowned let weakSelf =  self
-//        self.presentDonationAlertVC(from: weakSelf)
-//    }
+
     
     func cancelDonation() {
         self.makePurchaseFor(productId: stingIdForInApp)
@@ -185,6 +193,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     
     func cancelAction() {
 //        presentDonationVCorAlert()
+        
         self.makePurchaseFor(productId: stingIdForInApp)
     }
     
