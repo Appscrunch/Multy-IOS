@@ -97,6 +97,23 @@ class SendPresenter: NSObject {
         }
     }
     
+    func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
+        DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
+            if err != nil {
+                return
+            } else {
+                let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
+                print("afterVerbose:rawdata: \(walletsArrayFromApi)")
+                DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
+                    self.account = acc
+                    print("wallets: \(acc?.wallets)")
+                    completion(true)
+                })
+            }
+        }
+    }
+    
+    
     private func createTransaction() {
         if isSendingAvailable {
             transaction = TransactionDTO()
@@ -108,6 +125,7 @@ class SendPresenter: NSObject {
             sendVC?.fillTransaction()
         }
     }
+    
     
     @objc private func didDiscoverNewAd(notification: Notification) {
         DispatchQueue.main.async {
@@ -145,9 +163,7 @@ class SendPresenter: NSObject {
             
         case .notReachable:
             self.sendVC?.updateUIForBluetoothState(false)
-            
             break
-            
         }
     }
     
@@ -160,12 +176,66 @@ class SendPresenter: NSObject {
         sendVC?.updateUI()
     }
     
+    var addressData : Dictionary<String, Any>?
+    var binaryData : BinaryData?
+    var account = DataManager.shared.realmManager.account
+    
+    func createPreliminaryData() {
+        let core = DataManager.shared.coreLibManager
+        let wallet = walletsArr[selectedWalletIndex!]
+        binaryData = account!.binaryDataString.createBinaryData()!
+        
+        
+        
+        addressData = core.createAddress(blockchain:    wallet.blockchainType,
+                                         walletID:      wallet.walletID.uint32Value,
+                                         addressID:     wallet.changeAddressIndex,
+                                         binaryData:    &binaryData!)
+    }
+    
     func send() {
-        DataManager.shared.getAccount { (account, error) in
-            let request = self.activeRequestsArr[self.selectedActiveRequestIndex!]
-            let jwt = account!.token
-            DataManager.shared.socketManager.txSend(userCode: request.userCode, currencyID: request.currencyID, networkID: request.networkID, jwt: jwt, payload: "")
-        }
+        createPreliminaryData()
+        let request = activeRequestsArr[selectedActiveRequestIndex!]
+        let wallet = walletsArr[selectedWalletIndex!]
+        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
+                                                                         sendAddress: request.sendAddress,
+                                                                         sendAmountString: request.sendAmount,
+                                                                         feePerByteAmount: "10",
+            isDonationExists: false,
+            donationAmount: "0",
+            isPayCommission: true,
+            wallet: wallet,
+            binaryData: &binaryData!,
+            inputs: wallet.addresses)
+        
+        let newAddressParams = [
+            "walletindex"   : wallet.walletID.intValue,
+            "address"       : addressData!["address"] as! String,
+            "addressindex"  : wallet.addresses.count,
+            "transaction"   : trData.0,
+            "ishd"          : NSNumber(booleanLiteral: wallet.shouldCreateNewAddressAfterTransaction)
+            ] as [String : Any]
+        
+        let params = [
+            "currencyid": wallet.chain,
+            "networkid" : wallet.chainType,
+            "payload"   : newAddressParams
+            ] as [String : Any]
+        
+        DataManager.shared.sendHDTransaction(transactionParameters: params, completion: { (dict, error) in
+            print("\(dict), \(error)")
+            
+            if error != nil {
+                self.sendVC?.updateUIWithSendResponse(success: false)
+            } else {
+                self.getWalletsVerbose(completion: { (success) in
+                    self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
+                    self.sendVC?.updateUIWithSendResponse(success: true)
+                })
+            }
+        })
+        
+
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
@@ -185,6 +255,8 @@ class SendPresenter: NSObject {
                 var isRequestOld = false
                 for oldRequest in self.activeRequestsArr {
                     if oldRequest.userCode == request.userCode {
+                        let index = self.activeRequestsArr.index(of: oldRequest)
+                        self.activeRequestsArr[index!] = request
                         isRequestOld = true
                         break
                     }

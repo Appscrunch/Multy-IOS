@@ -45,6 +45,10 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         handleBluetoothReachability()
     }
     
+    func viewControllerViewWillDisappear() {
+        stopReceivingViaWireless()
+    }
+    
     func cancelViewController() {
         if self.receiveAllDetailsVC!.option == .wireless {
             stopReceivingViaWireless()

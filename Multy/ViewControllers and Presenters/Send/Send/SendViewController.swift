@@ -86,9 +86,9 @@ class SendViewController: UIViewController {
             presenter.getWallets()
         }
         
-        if self.view.bounds.height == heightOfX {
-            fixUIForX()
-        }
+        
+        fixUIForX()
+        
 
         walletsCollectionViewFL.minimumLineSpacing = 0
         activeRequestsCollectionViewFL.spacingMode = .fixed(spacing: 0)
@@ -159,8 +159,11 @@ class SendViewController: UIViewController {
     }
     
     func fixUIForX() {
-        activeRequestsAmountTopConstraint.constant = activeRequestsAmountTopConstraint.constant + 20
-        self.view.layoutIfNeeded()
+        if screenHeight == heightOfX {
+            activeRequestsAmountTopConstraint.constant = activeRequestsAmountTopConstraint.constant + 20
+            self.view.layoutIfNeeded()
+        }
+        
 //        bluetoothEnabledContentBottomConstraint.
 //        bluetoothErrorTopConstraint
 //        transactionHolderViewBottomConstraint
@@ -325,9 +328,33 @@ class SendViewController: UIViewController {
                     }
                     doneAnimationView.removeFromSuperview()
                 }
+            } else {
+                self.transactionHolderView.isHidden = true
+                self.transactionInfoViewBottomConstraint.constant = 5
+                self.transactionInfoView.alpha = 1
+                self.transactionTokenImageView.alpha = 1
+                
+                self.sendMode = .searching
+                self.navigationButtonsHolderBottomConstraint.constant = 0
+                self.transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - self.walletsCollectionView.frame.origin.y - self.walletsCollectionView.frame.size.height
+                
+                self.showNotSelectedWallets()
+                self.showNotSelectedRequests()
+                
+                UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
+                    self.animationHolderView.layoutIfNeeded()
+                    self.transactionHolderView.alpha = 0.0
+                    self.activeRequestsCollectionView.alpha = 1
+                }) { (succeeded) in
+                    if succeeded {
+                        self.transactionHolderView.isHidden = true
+                    }
+                }
             }
         }
     }
+    
+    
     
     func hideNotSelectedWallets() {
         prepareWalletsCellsClones()

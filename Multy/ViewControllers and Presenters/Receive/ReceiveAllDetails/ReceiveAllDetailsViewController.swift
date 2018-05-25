@@ -73,6 +73,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.ipadFix()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.viewControllerViewWillDisappear()
+        super.viewWillDisappear(animated)
+    }
+    
     func presentBluetoothErrorAlert() {
         let alert = UIAlertController(title: "Bluetooth Error", message: "Please Check your Bluetooth connection", preferredStyle: .alert)
         
