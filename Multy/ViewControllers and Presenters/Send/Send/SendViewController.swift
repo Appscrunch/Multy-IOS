@@ -82,7 +82,6 @@ class SendViewController: UIViewController {
             presenter.getWallets()
         }
         
-        
         walletsCollectionViewFL.minimumLineSpacing = 0
         activeRequestsCollectionViewFL.spacingMode = .fixed(spacing: 0)
         
@@ -460,6 +459,16 @@ class SendViewController: UIViewController {
     
     @IBAction func recentAction(_ sender: Any) {
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "qrCamera"?:
+            let qrScanerVC = segue.destination as! QrScannerViewController
+            qrScanerVC.qrDelegate = presenter
+        default:
+            break
+        }
     }
 }
 

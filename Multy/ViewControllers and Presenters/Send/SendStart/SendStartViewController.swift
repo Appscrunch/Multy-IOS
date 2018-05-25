@@ -159,7 +159,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
             chooseWalletVC.presenter.transactionDTO = presenter.transactionDTO
         case "qrCamera"?:
             let qrScanerVC = segue.destination as! QrScannerViewController
-            qrScanerVC.qrDelegate = self.presenter
+            qrScanerVC.qrDelegate = presenter
         case "sendBTCDetailsVC"?:
             let sendDetailsVC = segue.destination as! SendDetailsViewController
             sendDetailsVC.presenter.transactionDTO = presenter.transactionDTO
