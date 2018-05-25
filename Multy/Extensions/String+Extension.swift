@@ -86,7 +86,8 @@ extension String {
     }
     
     func toStringWithZeroes(precision: Int) -> String {
-        let components = self.components(separatedBy: CharacterSet.init(charactersIn: "\(defaultDelimeter)"))
+        let string = self.replacingOccurrences(of: ".", with: ",")
+        let components = string.components(separatedBy: CharacterSet.init(charactersIn: "\(defaultDelimeter)"))
         
         if precision < 1 {
             if self.isEmpty {
@@ -156,7 +157,10 @@ extension String {
     
     func convertCryptoAmountStringToMinimalUnits(in blockchain: Blockchain) -> BigInt {
 //        return blockchain.multiplyerToMinimalUnits * (Double(self.stringWithDot) ?? 0)
-        return BigInt(toStringWithZeroes(precision: blockchain.maxPrecision))
+        var stringAmount = toStringWithZeroes(precision: blockchain.maxPrecision).replacingOccurrences(of: ".", with: "")
+        stringAmount = stringAmount.replacingOccurrences(of: ",", with: "")
+        
+        return BigInt(stringAmount.stringWithoutZeroesFromStart())
     }
     
     func convertToSatoshiAmountString() -> String {

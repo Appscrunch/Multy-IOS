@@ -8,6 +8,7 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataSourceLabel: UILabel!
+    @IBOutlet weak var qrAmountLbl: UILabel!
     
     let presenter = WalletChoosePresenter()
     
@@ -21,12 +22,21 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)
         self.presenter.walletChoooseVC = self
         self.presenter.getWallets()
+        self.checkAmountFromQr()
         sendAnalyticsEvent(screenName: screenSendFrom, eventName: screenSendFrom)
     }
     
     func registerCell() {
         let walletCell = UINib(nibName: "WalletTableViewCell", bundle: nil)
         self.tableView.register(walletCell, forCellReuseIdentifier: "walletCell")
+    }
+    
+    func checkAmountFromQr() {
+        if presenter.transactionDTO.sendAmountString != nil && presenter.transactionDTO.sendAmountString != "" {
+            qrAmountLbl.text = "Amount from QR: \(presenter.transactionDTO.sendAmountString ?? "") \(presenter.transactionDTO.blockchain?.shortName ?? "")"
+        } else {
+            qrAmountLbl.isHidden = true
+        }
     }
 
     @IBAction func backAction(_ sender: Any) {

@@ -68,6 +68,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     func sendWallet(wallet: UserWalletRLM) {
+        self.wallet = wallet
         self.receiveAllDetailsVC?.updateUIWithWallet()
         
         if self.receiveAllDetailsVC!.option == .wireless {

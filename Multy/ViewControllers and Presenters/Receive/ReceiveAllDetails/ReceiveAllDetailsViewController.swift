@@ -222,7 +222,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         //FIXME: BLOCKCHAIN
         let blockchain = BlockchainType.create(wallet: presenter.wallet!)
 
-        self.walletCryptoSumBtn.setTitle("\((self.presenter.wallet?.sumInCryptoString) ?? "") \(blockchain.shortName /*self.presenter.wallet?.cryptoName ?? ""*/)", for: .normal)
+//        self.walletCryptoSumBtn.setTitle("\((self.presenter.wallet?.sumInCryptoString) ?? "") \(blockchain.shortName /*self.presenter.wallet?.cryptoName ?? ""*/)", for: .normal)
         //FIXME:  Check this
         self.walletCryptoSumLbl.text = "\((self.presenter.wallet?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(blockchain.shortName /*self.presenter.wallet?.cryptoName ?? ""*/)"
 
@@ -318,10 +318,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.requestSumBtn.titleLabel?.isHidden = true
         self.requestSummImageView.isHidden = false
         self.requestSummLbl.isHidden = false
-        self.sumValueLbl.isHidden = false
-        self.cryptoNameLbl.isHidden = false
-        self.fiatSumLbl.isHidden = false
-        self.fiatNameLbl.isHidden = false
         
         sumValueLbl.isHidden = false
         cryptoNameLbl.isHidden = false
