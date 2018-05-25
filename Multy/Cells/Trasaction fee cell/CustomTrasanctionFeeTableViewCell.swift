@@ -31,7 +31,7 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
     func constructString() -> String {
         let sumInCrypto = (Double(value) / 100000000.0) * 225
         let sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchainType!)
-        return "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
+        return "~ " + "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
     }
     
     func setupUI() {

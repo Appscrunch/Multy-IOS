@@ -341,11 +341,12 @@ class ApiManager: NSObject, RequestRetrier {
             case .success(_):
                 if response.result.value != nil {
                     completion((response.result.value as! NSDictionary), nil)
-                }
+                } 
             case .failure(_):
                 completion(nil, response.result.error)
                 break
             }
+            
         }
     }
 

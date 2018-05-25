@@ -80,6 +80,17 @@ class Socket: NSObject {
         }
     }
     
+    func restart() {
+        stop()
+        start()
+    }
+    
+    func stop() {
+        if self.socket.status == .connected{
+            self.socket.disconnect()
+        }
+    }
+    
     func getExchangeReq() {
         let abc = NSDictionary(dictionary: ["From": "USD",
                                             "To": "BTC"]).socketRepresentation()
@@ -113,26 +124,84 @@ class Socket: NSObject {
         }
     }
     
-    func becomeSender(nearIDs : String) {
-        socket.emitWithAck("event:receiver:on", with: [["nearIDs" : nearIDs]]).timingOut(after: 1) { data in
+    func becomeSender(nearIDs : [String]) {
+        self.socket.on("event:new:receiver") { (data, ack) in
             print(data)
-            
-//            self.socket.on("event:payment:send") { (data, ack) in
-//                if data.first != nil {
-//                    let dataDict = data.first! as! Dictionary<String, AnyObject>
-//                    let senderID = dataDict["from_id"] as! String
-//                    let receiverID = dataDict["to_id"] as! String
-//                    let currencyID = dataDict["currency_id"] as! UInt32
-//                    let amount = dataDict["amount"] as! UInt32
-//
-//                    let payment = Payment.init(senderID: senderID, receiverID: receiverID, currencyID: currencyID, amount: amount)
-//
-//                    if self.delegate != nil {
-//                        self.delegate!.didReceivePayment(payment: payment)
-//                    }
-//                }
-//            }
+            if data.first != nil {
+                //                var requests =  [PaymentRequest]()
+                //
+//                                let dataDict = data.first! as! Dictionary<String, AnyObject>
+//                                let userID = dataDict["userid"] as! String
+//                                let userCode = dataDict["usercode"] as! String
+//                                let currencyID = dataDict["currencyid"] as! Int
+//                                let networkID = dataDict["networkid"] as! Int
+//                                let address = dataDict["address"] as! String
+//                                let amount = dataDict["amount"] as! String
+                //
+                //                let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: amount, networkID: networkID)
+                //
+                //                let userInfo = ["paymentRequests" : [paymentRequest]]
+                //                NotificationCenter.default.post(name: NSNotification.Name("newReceiver"), object: nil, userInfo: userInfo)
+            }
         }
+        
+//        let abc = NSDictionary(dictionary: ["nearIDs": nearIDs]).socketRepresentation()
+//
+//        socket.emitWithAck("event:sender:check", abc).timingOut(after: 1) { (data) in
+//            print(data)
+//        }
+        
+
+        socket.emitWithAck("event:sender:check", with: [["ids" : nearIDs]]).timingOut(after: 1) { data in
+            print(data)
+
+            if data.first != nil {
+                let requestsData = data.first! as! [Dictionary<String, AnyObject>]
+                
+                var newRequests = [PaymentRequest]()
+                for requestData in requestsData {
+                    let dataDict = requestData
+                    
+                    let userID = dataDict["userid"] as! String
+                    let userCode = dataDict["usercode"] as! String
+                    let currencyID = dataDict["currencyid"] as! Int
+                    let networkID = dataDict["networkid"] as! Int
+                    let address = dataDict["address"] as! String
+                    let amount = dataDict["amount"] as! String
+                    
+                    let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: amount, networkID: networkID, userID : userID)
+                    
+                    newRequests.append(paymentRequest)
+                }
+                
+                
+                
+                
+                let userInfo = ["paymentRequests" : newRequests]
+                NotificationCenter.default.post(name: NSNotification.Name("newReceiver"), object: nil, userInfo: userInfo)
+            }
+            
+            
+            
+//            var newRequests = [PaymentRequest]()
+//            for ID in nearIDs {
+//                let paymentRequest = PaymentRequest(sendAddress: "asdkfhkergnkqejqiroghjdifgboi", userCode : ID, currencyID: 0, sendAmount: "187.99", networkID: 0)
+//                newRequests.append(paymentRequest)
+//            }
+//
+//            let userInfo = ["paymentRequests" : newRequests]
+//            NotificationCenter.default.post(name: NSNotification.Name("newReceiver"), object: nil, userInfo: userInfo)
+        }
+    }
+    
+    func txSend(userCode : String, currencyID : Int, networkID : Int, jwt : String, payload : String) {
+        let userInfo = ["data" : true]
+        NotificationCenter.default.post(name: NSNotification.Name("sendResponse"), object: nil, userInfo: userInfo)
+//        socket.emitWithAck("event:sendraw", with: [["currencyid" : currencyID, "networkID" : networkID, "usercode" : userCode, "JWT" : jwt, "payload"  : payload]]).timingOut(after: 1) { data in
+//            print(data)
+//            let userInfo = ["data" : true]
+//            NotificationCenter.default.post(name: NSNotification.Name("sendResponse"), object: nil, userInfo: userInfo)
+//        }
     }
 }
 

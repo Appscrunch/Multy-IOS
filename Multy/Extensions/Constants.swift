@@ -54,11 +54,11 @@ struct Constants {
         static let availableBlockchains = [
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BITCOIN_NET_TYPE_MAINNET.rawValue),
             BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN.rawValue, netType: BITCOIN_NET_TYPE_TESTNET.rawValue),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: UInt32(ETHEREUM_CHAIN_ID_MAINNET.rawValue)),
-            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: UInt32(ETHEREUM_CHAIN_ID_RINKEBY.rawValue)),
         ]
         
         static let donationBlockchains = [
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: UInt32(ETHEREUM_CHAIN_ID_MAINNET.rawValue)),
+            BlockchainType.create(currencyID: BLOCKCHAIN_ETHEREUM.rawValue, netType: UInt32(ETHEREUM_CHAIN_ID_RINKEBY.rawValue)),
 //            BlockchainType.create(currencyID: BLOCKCHAIN_BITCOIN_LIGHTNING.rawValue,netType: 0),
 //            BlockchainType.create(currencyID: BLOCKCHAIN_GOLOS.rawValue,            netType: 0),
             BlockchainType.create(currencyID: BLOCKCHAIN_STEEM.rawValue,            netType: 0),
@@ -178,6 +178,9 @@ let minSatoshiToDonate: UInt64          = 5000  //5k minimum sum to donate
 let shortURL = "api.multy.io"
 let apiUrl = "https://\(shortURL)/"
 let socketUrl = "wss://\(shortURL)/"
+
+//let apiUrl = "https://api.multy.io/"
+//let socketUrl = "ws://192.168.31.147:6780"
 //let socketUrl = "http://88.198.47.112:2280"
 let apiUrlTest = "http://192.168.0.123:6778/"
 let nonLocalURL = "http://88.198.47.112:7778/"

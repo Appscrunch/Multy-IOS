@@ -421,7 +421,6 @@
                             <constraint firstAttribute="trailing" secondItem="Lfk-fx-mmY" secondAttribute="trailing" id="BVb-QG-JJH"/>
                             <constraint firstAttribute="trailing" secondItem="U4k-ix-x0I" secondAttribute="trailing" id="ITx-GA-ObV"/>
                             <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="LP6-eC-Sxy" secondAttribute="bottom" constant="76" id="Jqr-Mj-m1F"/>
-                            <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="LP6-eC-Sxy" secondAttribute="bottom" constant="76" id="QcO-2f-KAS"/>
                             <constraint firstItem="U4k-ix-x0I" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="YPr-6J-6kx"/>
                             <constraint firstItem="Lfk-fx-mmY" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="aHZ-5G-SOk"/>
                             <constraint firstAttribute="trailing" secondItem="LP6-eC-Sxy" secondAttribute="trailing" id="deM-Zd-zM6"/>
@@ -438,12 +437,15 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="activeRequestsAmountLabel" destination="6a2-EL-VA4" id="NUo-D2-lGI"/>
+                        <outlet property="activeRequestsAmountTopConstraint" destination="0B3-ue-13l" id="aHP-jy-4Wd"/>
                         <outlet property="activeRequestsClonesHolderView" destination="bCM-JP-Iz1" id="Yed-Rj-enl"/>
                         <outlet property="activeRequestsCollectionView" destination="5E5-tF-NFY" id="IyZ-vj-6qO"/>
                         <outlet property="activeRequestsCollectionViewFL" destination="YEn-kK-EPh" id="L5d-YR-2HN"/>
                         <outlet property="animationHolderView" destination="Lfk-fx-mmY" id="FZf-FC-UKu"/>
                         <outlet property="bluetoothDisabledContentView" destination="U4k-ix-x0I" id="dim-85-kBz"/>
+                        <outlet property="bluetoothEnabledContentBottomConstraint" destination="Jqr-Mj-m1F" id="jSH-Yy-pyQ"/>
                         <outlet property="bluetoothEnabledContentView" destination="LP6-eC-Sxy" id="AeB-JA-l6q"/>
+                        <outlet property="bluetoothErrorTopConstraint" destination="uoy-ES-sJy" id="chx-OJ-Ljn"/>
                         <outlet property="foundActiveRequestsHolderView" destination="oZi-At-pK8" id="dXU-aE-aTd"/>
                         <outlet property="leftActiveRequestsClonesHolderView" destination="A96-El-99J" id="Y0R-u5-rNB"/>
                         <outlet property="leftActiveRequestsClonesLeadingConstraint" destination="oTf-XB-Pcd" id="TA7-Cm-qYq"/>
@@ -749,7 +751,7 @@ QR</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H94-7K-Etr">
-                                <rect key="frame" x="0.0" y="345" width="375" height="258"/>
+                                <rect key="frame" x="0.0" y="355" width="375" height="248"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="kRf-Ct-SnX" id="0Ja-qj-D4J"/>
@@ -1840,7 +1842,7 @@ QR</string>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8x-RC-TUx">
-                                        <rect key="frame" x="36" y="329" width="303" height="234.5"/>
+                                        <rect key="frame" x="36" y="329" width="303" height="229"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1860,54 +1862,54 @@ QR</string>
                                         <color key="textColor" red="0.93755775690078735" green="0.55298328399658203" blue="0.010770578868687153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccP-jD-nTp">
-                                        <rect key="frame" x="162.5" y="390.5" width="51" height="39.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ccP-jD-nTp">
+                                        <rect key="frame" x="166" y="390.5" width="44" height="34"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">address
 address</string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.52941000000000005" green="0.63136999999999999" blue="0.77254999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="14" name="AvenirNext-DemiBold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                    <font key="NSFont" size="12" name="AvenirNext-DemiBold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="1" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1234 BTC / 1 123 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31h-f9-3fx">
-                                        <rect key="frame" x="110" y="434" width="154.5" height="19.5"/>
+                                        <rect key="frame" x="110" y="428.5" width="154.5" height="19.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuO-o0-aFN">
-                                        <rect key="frame" x="36" y="463.5" width="303" height="2"/>
+                                        <rect key="frame" x="36" y="458" width="303" height="2"/>
                                         <color key="backgroundColor" red="0.89803921568627454" green="0.8981010913848877" blue="0.89792215824127197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="nVc-iv-0QU"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ewh-6y-aEq">
-                                        <rect key="frame" x="156" y="473.5" width="63" height="22"/>
+                                        <rect key="frame" x="156" y="468" width="63" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAx-k6-U4B">
-                                        <rect key="frame" x="171" y="500.5" width="32" height="23.5"/>
+                                        <rect key="frame" x="171" y="495" width="32" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.002 BTC / 1.54 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhC-aH-HrF">
-                                        <rect key="frame" x="116" y="529" width="142" height="19.5"/>
+                                        <rect key="frame" x="116" y="523.5" width="142" height="19.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                                         <color key="textColor" red="0.52941176469999995" green="0.63137254899999995" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qPf-RB-QyF">
-                                        <rect key="frame" x="0.0" y="592.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="587" width="375" height="64"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide to Send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0G-xr-zmf">
                                                 <rect key="frame" x="132.5" y="19.5" width="110" height="25"/>
@@ -2649,5 +2651,6 @@ address</string>
         <segue reference="pfe-aE-6Gg"/>
         <segue reference="RTX-aa-bzX"/>
         <segue reference="FRo-Sp-aVY"/>
+        <segue reference="jSE-EO-qlC"/>
     </inferredMetricsTieBreakers>
 </document>
