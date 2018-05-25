@@ -421,7 +421,6 @@
                             <constraint firstAttribute="trailing" secondItem="Lfk-fx-mmY" secondAttribute="trailing" id="BVb-QG-JJH"/>
                             <constraint firstAttribute="trailing" secondItem="U4k-ix-x0I" secondAttribute="trailing" id="ITx-GA-ObV"/>
                             <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="LP6-eC-Sxy" secondAttribute="bottom" constant="76" id="Jqr-Mj-m1F"/>
-                            <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="LP6-eC-Sxy" secondAttribute="bottom" constant="76" id="QcO-2f-KAS"/>
                             <constraint firstItem="U4k-ix-x0I" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="YPr-6J-6kx"/>
                             <constraint firstItem="Lfk-fx-mmY" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="aHZ-5G-SOk"/>
                             <constraint firstAttribute="trailing" secondItem="LP6-eC-Sxy" secondAttribute="trailing" id="deM-Zd-zM6"/>
@@ -438,12 +437,15 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="activeRequestsAmountLabel" destination="6a2-EL-VA4" id="NUo-D2-lGI"/>
+                        <outlet property="activeRequestsAmountTopConstraint" destination="0B3-ue-13l" id="aHP-jy-4Wd"/>
                         <outlet property="activeRequestsClonesHolderView" destination="bCM-JP-Iz1" id="Yed-Rj-enl"/>
                         <outlet property="activeRequestsCollectionView" destination="5E5-tF-NFY" id="IyZ-vj-6qO"/>
                         <outlet property="activeRequestsCollectionViewFL" destination="YEn-kK-EPh" id="L5d-YR-2HN"/>
                         <outlet property="animationHolderView" destination="Lfk-fx-mmY" id="FZf-FC-UKu"/>
                         <outlet property="bluetoothDisabledContentView" destination="U4k-ix-x0I" id="dim-85-kBz"/>
+                        <outlet property="bluetoothEnabledContentBottomConstraint" destination="Jqr-Mj-m1F" id="jSH-Yy-pyQ"/>
                         <outlet property="bluetoothEnabledContentView" destination="LP6-eC-Sxy" id="AeB-JA-l6q"/>
+                        <outlet property="bluetoothErrorTopConstraint" destination="uoy-ES-sJy" id="chx-OJ-Ljn"/>
                         <outlet property="foundActiveRequestsHolderView" destination="oZi-At-pK8" id="dXU-aE-aTd"/>
                         <outlet property="leftActiveRequestsClonesHolderView" destination="A96-El-99J" id="Y0R-u5-rNB"/>
                         <outlet property="leftActiveRequestsClonesLeadingConstraint" destination="oTf-XB-Pcd" id="TA7-Cm-qYq"/>
@@ -2622,6 +2624,6 @@ address</string>
         <segue reference="Y3u-nO-qs1"/>
         <segue reference="pfe-aE-6Gg"/>
         <segue reference="RTX-aa-bzX"/>
-        <segue reference="FRo-Sp-aVY"/>
+        <segue reference="N56-qi-Hx5"/>
     </inferredMetricsTieBreakers>
 </document>

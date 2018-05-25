@@ -81,24 +81,19 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.present(alert, animated: true)
     }
     
-    func presentDidReceivePaymentAlert(amount: Double) {
-        let alert = UIAlertController(title: "Bluetooth Error", message: "Please Check your Bluetooth connection", preferredStyle: .alert)
+    func presentDidReceivePaymentAlert() {
+        let alert = UIAlertController(title: "Transaction updated", message: "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default) { (alert: UIAlertAction!) in
-            self.handleCancel()
+            self.presenter.cancelViewController()
         })
         
         self.present(alert, animated: true)
     }
     
-    func handleCancel() {
-        self.tabBarController?.selectedIndex = 0
-        self.navigationController?.popToRootViewController(animated: false)
-        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
-    }
-    
     @IBAction func cancelAction(_ sender: Any) {
-        handleCancel()
+        self.presenter.cancelViewController()
+        sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
     }
     
     @IBAction func backAction(_ sender: Any) {
@@ -261,6 +256,12 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             self.invoiceHolderView.layer.masksToBounds = true
             self.qrHolderView.isHidden = true
             break
+        }
+    }
+    
+    func updateWirelessTransactionImage() {
+        if presenter.wirelessRequestImageName != nil {
+            self.invoiceImage.image = UIImage(named: presenter.wirelessRequestImageName!)
         }
     }
     

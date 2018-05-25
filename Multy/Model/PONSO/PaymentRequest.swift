@@ -10,14 +10,28 @@ import UIKit
 
 class PaymentRequest: NSObject {
     let sendAddress : String
-    let sendAmount : Double
-    let currencyID : NSNumber
-    let color : UIColor // TODO: change to metamask image
+    let userCode : String
+    let sendAmount : String
+    let currencyID : Int
+    let networkID : Int
+    var satisfied = false
     
-    init(sendAddress : String, currencyID : NSNumber, sendAmount : Double, color : UIColor) {
+    var requestImageName : String {
+        get {
+            if let userCodeInt = UInt32(userCode, radix: 16) {
+                let imageNumber = Int(userCodeInt)%wirelessRequestImagesAmount
+                return "wirelessRequestImage_" + String(imageNumber)
+            } else {
+                return ""
+            }
+        }
+    }
+    
+    init(sendAddress : String, userCode : String, currencyID : Int, sendAmount : String, networkID : Int) {
         self.sendAddress = sendAddress
         self.currencyID = currencyID
         self.sendAmount = sendAmount
-        self.color = color
+        self.networkID = networkID
+        self.userCode = userCode
     }
 }

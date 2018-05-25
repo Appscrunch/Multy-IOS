@@ -4,6 +4,8 @@
 
 import UIKit
 
+let wirelessRequestImagesAmount = 10
+
 class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWalletProtocol {
 
     var receiveAllDetailsVC: ReceiveAllDetailsViewController?
@@ -12,6 +14,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     var cryptoName: String?
     var fiatSum: String?
     var fiatName: String?
+    var wirelessRequestImageName: String?
     
     var walletAddress = ""
     
@@ -30,14 +33,25 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         super.init()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didUpdateTransaction(notification:)), name: Notification.Name("transactionUpdated"), object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("transactionUpdated"), object: nil)
     }
     
     func viewControllerViewDidLoad() {
         handleBluetoothReachability()
+    }
+    
+    func cancelViewController() {
+        if self.receiveAllDetailsVC!.option == .wireless {
+            stopReceivingViaWireless()
+        }
+        
+        self.receiveAllDetailsVC?.tabBarController?.selectedIndex = 0
+        self.receiveAllDetailsVC?.navigationController?.popToRootViewController(animated: false)
     }
     
     func transferSum(cryptoAmount: String, cryptoCurrency: String, fiatAmount: String, fiatName: String) {
@@ -69,6 +83,10 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             break
             
         case .wireless:
+            if wirelessRequestImageName == nil {
+                generateWirelessRequestImage()
+            }
+            
             tryReceiveViaWireless()
             break
         }
@@ -77,6 +95,20 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     private func handleBluetoothReachability() {
         if self.receiveAllDetailsVC?.option == .wireless {
             tryReceiveViaWireless()
+        }
+    }
+    
+    private func generateWirelessRequestImage() {
+        DataManager.shared.getAccount { (account, error) in
+            if account != nil {
+                let userID = account!.userID
+                let userCode = self.userCodeForUserID(userID: userID)
+                if let value = UInt32(userCode, radix: 16) {
+                    let imageNumber = Int(value)%wirelessRequestImagesAmount
+                    self.wirelessRequestImageName = "wirelessRequestImage_" + String(imageNumber)
+                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
+                }
+            }
         }
     }
     
@@ -104,11 +136,11 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         if BLEManager.shared.isAdvertising {
             stopSharingUserCode()
         }
+        cancelBecomeReceiver()
     }
     
     private func shareUserCode(code : String) {
         if !BLEManager.shared.isAdvertising {
-            //TODO: make a decision about userID
             BLEManager.shared.advertise(userId: code)
         }
     }
@@ -137,12 +169,21 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         let amount = cryptoSum != nil ? String(cryptoSum!) : "0"
         
         DataManager.shared.socketManager.becomeReceiver(receiverID: userID, userCode: userCode, currencyID: currencyID.intValue, networkID: networkID, address: address, amount: amount)
-        //self.receiveAllDetailsVC?.presentDidReceivePaymentAlert(amount: 0)
+    }
+    
+    private func cancelBecomeReceiver() {
+        DataManager.shared.socketManager.restart()
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
         DispatchQueue.main.async {
             self.handleBluetoothReachability()
+        }
+    }
+    
+    @objc private func didUpdateTransaction(notification: Notification) {
+        DispatchQueue.main.async {
+            self.receiveAllDetailsVC?.presentDidReceivePaymentAlert()
         }
     }
 }

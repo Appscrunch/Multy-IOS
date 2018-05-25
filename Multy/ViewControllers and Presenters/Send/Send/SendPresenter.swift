@@ -38,11 +38,13 @@ class SendPresenter: NSObject {
         get {
             var result = false
             if selectedActiveRequestIndex != nil && selectedWalletIndex != nil {
-                let activeRequest = activeRequestsArr[selectedActiveRequestIndex!]
-                let wallet = walletsArr[selectedWalletIndex!]
-                if wallet.sumInCrypto >= activeRequest.sendAmount {
-                    result = true
-                }
+//                let activeRequest = activeRequestsArr[selectedActiveRequestIndex!]
+//                let wallet = walletsArr[selectedWalletIndex!]
+                //FIXME:
+                result = true
+//                if wallet.sumInCrypto >= activeRequest.sendAmount.doubleValue {
+//                    result = true
+//                }
             }
             return result
         }
@@ -59,11 +61,15 @@ class SendPresenter: NSObject {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveSendResponse(notification:)), name: Notification.Name("sendResponse"), object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
     }
     
     func viewControllerViewDidLoad() {
@@ -95,7 +101,8 @@ class SendPresenter: NSObject {
         if isSendingAvailable {
             transaction = TransactionDTO()
             let request = activeRequestsArr[selectedActiveRequestIndex!]
-            transaction!.sendAmount = request.sendAmount
+            //FIXME:
+            transaction!.sendAmount = request.sendAmount.doubleValue
             transaction!.sendAddress = request.sendAddress
             transaction!.choosenWallet = walletsArr[selectedWalletIndex!]
             sendVC?.fillTransaction()
@@ -110,6 +117,7 @@ class SendPresenter: NSObject {
                 for ad in BLEManager.shared.receivedAds! {
                     if ad.originID == newAdOriginID {
                         newAd = ad
+                        print("Discovered new usercode \(ad.userCode)")
                         break
                     }
                 }
@@ -122,7 +130,7 @@ class SendPresenter: NSObject {
     }
     
     func becomeSenderForUsersWithCodes(_ userCodes : [String]) {
-        
+        DataManager.shared.socketManager.becomeSender(nearIDs: userCodes)
     }
         
     func handleBluetoothReachability() {
@@ -143,20 +151,67 @@ class SendPresenter: NSObject {
         }
     }
     
-    func didReceivePaymentRequest(request: PaymentRequest) {
-        activeRequestsArr.append(request)
-        if numberOfActiveRequests() == 1 {
+    func addActivePaymentRequests(requests: [PaymentRequest]) {
+        activeRequestsArr.append(contentsOf: requests)
+        if numberOfActiveRequests() > 0 && selectedActiveRequestIndex == nil {
             selectedActiveRequestIndex = 0
         }
         
         sendVC?.updateUI()
     }
     
-    
+    func send() {
+        DataManager.shared.getAccount { (account, error) in
+            let request = self.activeRequestsArr[self.selectedActiveRequestIndex!]
+            let jwt = account!.token
+            DataManager.shared.socketManager.txSend(userCode: request.userCode, currencyID: request.currencyID, networkID: request.networkID, jwt: jwt, payload: "")
+        }
+    }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
         DispatchQueue.main.async {
             self.handleBluetoothReachability()
+        }
+    }
+    
+    @objc private func didReceiveNewRequests(notification: Notification) {
+        DispatchQueue.main.async {
+            var requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
+            
+            var newRequests = [PaymentRequest]()
+            while requests.count > 0 {
+                let request = requests.first!
+                
+                var isRequestOld = false
+                for oldRequest in self.activeRequestsArr {
+                    if oldRequest.userCode == request.userCode {
+                        isRequestOld = true
+                        break
+                    }
+                }
+                
+                if !isRequestOld {
+                    newRequests.append(request)
+                }
+                
+                requests.removeFirst()
+            }
+            
+            if newRequests.count > 0 {
+                self.addActivePaymentRequests(requests: newRequests)
+            }
+        }
+    }
+    
+    @objc private func didReceiveSendResponse(notification: Notification) {
+        DispatchQueue.main.async {
+            let success = notification.userInfo!["data"] as! Bool
+            
+            if success {
+                self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
+            }
+            
+            self.sendVC?.updateUIWithSendResponse(success: success)
         }
     }
     
