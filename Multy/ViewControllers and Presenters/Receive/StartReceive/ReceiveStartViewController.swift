@@ -85,6 +85,7 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
         walletCell.arrowImage.image = nil
         walletCell.wallet = self.presenter.walletsArr[indexPath.row]
         walletCell.fillInCell()
+        
         return walletCell
     }
     

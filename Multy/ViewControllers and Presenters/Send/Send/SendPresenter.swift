@@ -213,3 +213,13 @@ class SendPresenter: NSObject {
                        alpha: 1.0)
     }
 }
+
+extension SendPresenter: QrDataProtocol {
+    func qrData(string: String) {
+        let storyboard = UIStoryboard(name: "Send", bundle: nil)
+        let sendStartVC = storyboard.instantiateViewController(withIdentifier: "sendStart") as! SendStartViewController
+        sendStartVC.presenter.transactionDTO.update(from: string)
+        
+        sendVC!.navigationController?.pushViewController(sendStartVC, animated: true)
+    }
+}

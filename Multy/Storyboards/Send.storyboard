@@ -140,7 +140,7 @@
                                                 <rect key="frame" x="43" y="10" width="62" height="62"/>
                                                 <connections>
                                                     <action selector="qrCodeAction:" destination="v1w-JK-3Sa" eventType="touchUpInside" id="iFS-Tr-Bht"/>
-                                                    <segue destination="Tfc-aA-5T8" kind="show" id="N56-qi-Hx5"/>
+                                                    <segue destination="Tfc-aA-5T8" kind="show" identifier="qrCamera" id="N56-qi-Hx5"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pending" translatesAutoresizingMaskIntoConstraints="NO" id="RzQ-wk-8Ir" userLabel="Recent Img">
@@ -474,6 +474,7 @@
                         <outlet property="walletsClonesHolderView" destination="ueJ-lo-Puk" id="gx9-fS-4nc"/>
                         <outlet property="walletsCollectionView" destination="VfS-TA-JzW" id="tdO-Wu-84w"/>
                         <outlet property="walletsCollectionViewFL" destination="4uj-Pv-0eP" id="Puu-7X-arK"/>
+                        <segue destination="kRf-Ct-SnX" kind="show" identifier="sendStart" id="jSE-EO-qlC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xr-Ih-gXQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2605,7 +2606,7 @@ address</string>
     </scenes>
     <resources>
         <image name="backGrey" width="13" height="21"/>
-        <image name="bluetooth_error_img" width="52" height="52"/>
+        <image name="bluetooth_error_img" width="34" height="34"/>
         <image name="btcIconBig" width="58" height="58"/>
         <image name="closeBtn" width="62" height="62"/>
         <image name="donationIcon" width="30" height="35"/>
@@ -2620,8 +2621,9 @@ address</string>
     <inferredMetricsTieBreakers>
         <segue reference="Nqh-Rv-oVp"/>
         <segue reference="Y3u-nO-qs1"/>
-        <segue reference="pfe-aE-6Gg"/>
-        <segue reference="RTX-aa-bzX"/>
+        <segue reference="kCF-Tq-Brv"/>
+        <segue reference="EUD-ex-a5v"/>
         <segue reference="FRo-Sp-aVY"/>
+        <segue reference="jSE-EO-qlC"/>
     </inferredMetricsTieBreakers>
 </document>
