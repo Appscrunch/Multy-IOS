@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.makeKeyAndVisible()
         
         // for debug and development only
-//        Branch.getInstance().setDebug()
+        Branch.getInstance().setDebug()
         Branch.getInstance().initSession(launchOptions: launchOptions) { [weak self] (params, error) in
             if error == nil {
                 let dictFormLink = params! as NSDictionary
@@ -107,7 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-//        self.registerPush()
+        if UserDefaults.standard.value(forKey: "isTermsAccept") != nil {
+            self.registerPush()
+        }
         let filePathOpt = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         if let filePath = filePathOpt, let options = FirebaseOptions(contentsOfFile: filePath) {
             FirebaseApp.configure(options: options)
@@ -332,7 +334,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
 //        let token = Messaging.messaging().fcmToken
         print("FCM token: \(fcmToken)")
-        Messaging.messaging().subscribe(toTopic: "btcTransactionUpdate-000740972765fa93874e52ad1377941372e3a6ee2c37a37a9135fef8a096025e42")  //userID
+        DataManager.shared.getAccount { (acc, err) in
+            Messaging.messaging().subscribe(toTopic: "btcTransactionUpdate-\(acc?.userID ?? "userId is empty")")  //userID
+        }
+        
     }
     
     func registerPush() {
