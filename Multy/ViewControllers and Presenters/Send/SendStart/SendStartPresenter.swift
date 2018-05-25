@@ -13,14 +13,14 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     var recentAddresses = [RecentAddressesRLM]() 
     
     func cancelAction() {
-        if self.isFromWallet {
+//        if self.isFromWallet {
             self.sendStartVC?.navigationController?.popViewController(animated: true)
-        } else {
-            if let tbc = self.sendStartVC?.tabBarController as? CustomTabBarViewController {
-                tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
-            }
-            self.sendStartVC?.navigationController?.popToRootViewController(animated: false)
-        }
+//        } else {
+//            if let tbc = self.sendStartVC?.tabBarController as? CustomTabBarViewController {
+//                tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+//            }
+//            self.sendStartVC?.navigationController?.popToRootViewController(animated: false)
+//        }
     }
     
     func presentNoInternet() {
