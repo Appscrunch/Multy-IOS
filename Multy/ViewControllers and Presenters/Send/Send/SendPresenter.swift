@@ -32,7 +32,7 @@ class SendPresenter: NSObject {
     var selectedWalletIndex : Int? {
         didSet {
             if selectedWalletIndex != oldValue {
-                self.createTransaction()
+                self.createTransactionDTO()
                 
                 self.sendVC?.updateUI()
             }
@@ -53,7 +53,7 @@ class SendPresenter: NSObject {
             }
             
             if selectedActiveRequestIndex != oldValue {
-                self.createTransaction()
+                self.createTransactionDTO()
                 
                 self.sendVC?.updateUI()
             }
@@ -149,8 +149,8 @@ class SendPresenter: NSObject {
     }
     
     
-    private func createTransaction() {
-        if isSendingAvailable {
+    private func createTransactionDTO() {
+        if isSendingAvailable && selectedWalletIndex != nil && filteredWalletArray.count > selectedWalletIndex!  {
             transaction = TransactionDTO()
             let request = activeRequestsArr[selectedActiveRequestIndex!]
             //FIXME:
