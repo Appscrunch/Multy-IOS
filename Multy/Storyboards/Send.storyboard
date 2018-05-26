@@ -2615,10 +2615,9 @@ address</string>
         <!--Navigation Controller-->
         <scene sceneID="1sw-Hc-uqu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TxU-QL-Zi0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="fastSend" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="TxU-QL-Zi0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Z9B-ag-4Uq">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

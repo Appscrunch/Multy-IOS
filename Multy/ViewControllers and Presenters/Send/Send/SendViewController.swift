@@ -86,9 +86,7 @@ class SendViewController: UIViewController {
             presenter.getWallets()
         }
         
-        
         fixUIForX()
-        
 
         walletsCollectionViewFL.minimumLineSpacing = 0
         activeRequestsCollectionViewFL.spacingMode = .fixed(spacing: 0)
@@ -98,11 +96,14 @@ class SendViewController: UIViewController {
         recentImageView.image = recentImageView.image!.withRenderingMode(.alwaysTemplate)
         recentImageView.tintColor = .white
         
-        presenter.viewControllerViewDidLoad()
-        
         sendLongPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPress:)))
         sendLongPressGR!.delegate = self
         walletsCollectionView.addGestureRecognizer(sendLongPressGR!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewControllerViewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,8 +114,8 @@ class SendViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        presenter.viewControllerViewWillDisappear()
         super.viewWillDisappear(animated)
+        presenter.viewControllerViewWillDisappear()
     }
     
     func registerCells() {
@@ -126,7 +127,8 @@ class SendViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.navigationBar.isHidden = true
         if searchingAnimationView == nil {
             searchingAnimationView = LOTAnimationView(name: "circle_grow")
             searchingAnimationView!.frame = searchingRequestsHolderView.bounds
@@ -290,32 +292,36 @@ class SendViewController: UIViewController {
             self.animationHolderView.layoutIfNeeded()
             self.transactionInfoView.alpha = 0
             self.transactionTokenImageView.alpha = 0
-        }) { (succeeded) in
-            if succeeded {
-                UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
-                    //self.activeRequestsCollectionView.alpha = 0
-                })
-            }
-        }
+        })
     }
     
     func updateUIWithSendResponse(success : Bool) {
         if sendMode == .inSend {
             if success {
                 self.activeRequestsCollectionView.reloadData()
-                let doneAnimationView = LOTAnimationView(name: "Check Mark Success Data")
+                let doneAnimationView = LOTAnimationView(name: "success_animation")
                 doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
                 self.foundActiveRequestsHolderView.addSubview(doneAnimationView)
                 doneAnimationView.play{ (finished) in
-                    self.showHiddenContent()
+                    self.showHiddenContent(true)
                     self.updateUIForActiveRequestInfo()
                     
-                    doneAnimationView.removeFromSuperview()
+                    UIView.animate(withDuration: 0.45, animations: {
+                        doneAnimationView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+                    }) { (succeeded) in
+                        UIView.animate(withDuration: 0.35, animations: {
+                            doneAnimationView.alpha = 0.0
+                        }) { (succeeded) in
+                            if succeeded {
+                                doneAnimationView.removeFromSuperview()
+                            }
+                        }
+                    }
                 }
             } else {
-                presentSendingErrorAlert()
-                showHiddenContent()
+                showHiddenContent(false)
                 updateUIForActiveRequestInfo()
+                presentSendingErrorAlert()
             }
         }
     }
@@ -348,7 +354,7 @@ class SendViewController: UIViewController {
         }
     }
     
-    func showHiddenContent() {
+    func showHiddenContent(_ animated : Bool) {
         self.transactionHolderView.isHidden = true
         self.transactionInfoViewBottomConstraint.constant = 5
         self.transactionInfoView.alpha = 1
@@ -364,11 +370,8 @@ class SendViewController: UIViewController {
         UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
             self.animationHolderView.layoutIfNeeded()
             self.transactionHolderView.alpha = 0.0
-            self.activeRequestsCollectionView.alpha = 1
         }) { (succeeded) in
-            if succeeded {
-                self.transactionHolderView.isHidden = true
-            }
+            self.transactionHolderView.isHidden = true
         }
     }
     
@@ -530,6 +533,9 @@ class SendViewController: UIViewController {
     
     @IBAction func closeAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        if let tbc = self.tabBarController as? CustomTabBarViewController {
+            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+        }
     }
     
     @IBAction func recentAction(_ sender: Any) {

@@ -34,9 +34,9 @@
 	<key>CFBundleVersion</key>
 	<string>43</string>
 	<key>GIT_BRANCH_NAME</key>
-	<string>ETH_Beta_Test</string>
+	<string>ETH_BETA_TEST</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>a2657cd</string>
+	<string>0ab06b2</string>
 	<key>GIT_TAG_NAME</key>
 	<string>RELEASE_1.0.0-dirty</string>
 	<key>LSRequiresIPhoneOS</key>
