@@ -102,6 +102,10 @@ class SendPresenter: NSObject {
         handleBluetoothReachability()
     }
     
+    func viewControllerViewWillDisappear() {
+        DataManager.shared.socketManager.stop()
+    }
+    
     func numberOfWallets() -> Int {
         return filteredWalletArray.count
     }
@@ -207,8 +211,6 @@ class SendPresenter: NSObject {
         if numberOfActiveRequests() > 0 && selectedActiveRequestIndex == nil {
             selectedActiveRequestIndex = 0
         }
-        
-        sendVC?.updateUI()
     }
     
     var addressData : Dictionary<String, Any>?
@@ -229,6 +231,7 @@ class SendPresenter: NSObject {
     }
     
     func send() {
+        
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
@@ -242,7 +245,7 @@ class SendPresenter: NSObject {
             wallet: wallet,
             binaryData: &binaryData!,
             inputs: wallet.addresses)
-        
+
         let newAddressParams = [
             "walletindex"   : wallet.walletID.intValue,
             "address"       : addressData!["address"] as! String,
@@ -250,13 +253,13 @@ class SendPresenter: NSObject {
             "transaction"   : trData.0,
             "ishd"          : NSNumber(booleanLiteral: wallet.shouldCreateNewAddressAfterTransaction)
             ] as [String : Any]
-        
+
         let params = [
             "currencyid": wallet.chain,
             "networkid" : wallet.chainType,
             "payload"   : newAddressParams
             ] as [String : Any]
-        
+
         DataManager.shared.sendHDTransaction(transactionParameters: params, completion: { (dict, error) in
             print("\(dict), \(error)")
             
@@ -269,8 +272,6 @@ class SendPresenter: NSObject {
                 })
             }
         })
-        
-
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
@@ -291,7 +292,10 @@ class SendPresenter: NSObject {
                 for oldRequest in self.activeRequestsArr {
                     if oldRequest.userCode == request.userCode {
                         let index = self.activeRequestsArr.index(of: oldRequest)
-                        self.activeRequestsArr[index!] = request
+                        if self.activeRequestsArr[index!].sendAmount != request.sendAmount {
+                            self.activeRequestsArr[index!] = request
+                        }
+                        
                         isRequestOld = true
                         break
                     }
@@ -307,6 +311,8 @@ class SendPresenter: NSObject {
             if newRequests.count > 0 {
                 self.addActivePaymentRequests(requests: newRequests)
             }
+            
+            self.sendVC?.updateUI()
         }
     }
     
@@ -320,6 +326,15 @@ class SendPresenter: NSObject {
             
             self.sendVC?.updateUIWithSendResponse(success: success)
         }
+    }
+    
+    func indexForActiveRequst(_ request : PaymentRequest) -> Int? {
+        for req in activeRequestsArr {
+            if req.userCode == request.userCode {
+                return activeRequestsArr.index(of: req)!
+            }
+        }
+        return nil
     }
     
     //TODO: remove after searching via bluetooth will implemented

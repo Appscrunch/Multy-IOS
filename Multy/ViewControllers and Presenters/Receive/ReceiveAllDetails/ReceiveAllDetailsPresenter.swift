@@ -42,7 +42,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     func viewControllerViewDidLoad() {
-        handleBluetoothReachability()
+        let _ = BLEManager.shared
     }
     
     func viewControllerViewWillDisappear() {
