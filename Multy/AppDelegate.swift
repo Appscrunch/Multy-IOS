@@ -5,6 +5,7 @@
 import UIKit
 import RealmSwift
 import Firebase
+import FirebaseMessaging
 import Branch
 import UserNotifications
 import SwiftyStoreKit
