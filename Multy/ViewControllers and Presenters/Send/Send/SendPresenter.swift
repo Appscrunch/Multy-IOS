@@ -187,7 +187,8 @@ class SendPresenter: NSObject {
     }
     
     func becomeSenderForUsersWithCodes(_ userCodes : [String]) {
-        DataManager.shared.socketManager.becomeSender(nearIDs: userCodes)
+        let uniqueUserCodes = Array(Set(userCodes))
+        DataManager.shared.socketManager.becomeSender(nearIDs: uniqueUserCodes)
     }
         
     func handleBluetoothReachability() {

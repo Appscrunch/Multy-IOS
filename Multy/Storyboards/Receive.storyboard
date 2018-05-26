@@ -359,7 +359,7 @@
                                                 <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VTE-xV-uek">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="VTE-xV-uek">
                                                 <rect key="frame" x="262" y="439" width="21" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="21" id="a8H-bc-sSy"/>
@@ -839,12 +839,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="addressBookIcon" width="25" height="25"/>
+        <image name="addressBookIcon" width="16" height="16"/>
         <image name="backGrey" width="13" height="21"/>
         <image name="chevron" width="15" height="22"/>
         <image name="qrIconGray" width="22" height="22"/>
         <image name="recieveBig" width="66" height="66"/>
+        <image name="share" width="21" height="21"/>
         <image name="swap" width="25" height="24"/>
-        <image name="wirelessIcon" width="25" height="25"/>
+        <image name="wirelessIcon" width="16" height="16"/>
     </resources>
 </document>
