@@ -44,9 +44,9 @@ class Socket: NSObject {
                 self.getExchangeReq()
             }
             
-            self.socket.on(clientEvent: .disconnect) {data, ack in
-                print("socket disconnected")
-            }
+//            self.socket.on(clientEvent: .disconnect) {data, ack in
+//                print("socket disconnected")
+//            }
             
             self.socket.on("exchangeAll") {data, ack in
 //                print("-----exchangeAll: \(data)")
@@ -159,8 +159,9 @@ class Socket: NSObject {
                     let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: BigInt(amount).cryptoValueString(for: BLOCKCHAIN_BITCOIN), networkID: networkID, userID : userID)
 
                     newRequests.append(paymentRequest)
+                    print(dataDict)
                 }
-
+                
                 let userInfo = ["paymentRequests" : newRequests]
                 NotificationCenter.default.post(name: NSNotification.Name("newReceiver"), object: nil, userInfo: userInfo)
             }
