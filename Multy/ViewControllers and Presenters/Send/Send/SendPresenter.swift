@@ -103,7 +103,7 @@ class SendPresenter: NSObject {
     }
     
     func viewControllerViewWillDisappear() {
-        DataManager.shared.socketManager.stop()
+        DataManager.shared.socketManager.stopSend()
     }
     
     func numberOfWallets() -> Int {

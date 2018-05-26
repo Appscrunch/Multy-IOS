@@ -153,7 +153,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     func userCodeForUserID(userID : String) -> String {
         var result = String()
         result = String(userID[..<userID.index(userID.startIndex, offsetBy: 8)])
-        return result
+        return result.uppercased()
     }
     
     private func stopSharingUserCode() {
@@ -177,7 +177,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     private func cancelBecomeReceiver() {
-        DataManager.shared.socketManager.restart()
+        DataManager.shared.socketManager.stopReceive()
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
