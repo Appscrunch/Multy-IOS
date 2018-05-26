@@ -177,10 +177,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     private func cancelBecomeReceiver() {
-        
-        // Disconnect Here
-        
-//        DataManager.shared.socketManager.restart()
+        DataManager.shared.socketManager.stopReceive()
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {

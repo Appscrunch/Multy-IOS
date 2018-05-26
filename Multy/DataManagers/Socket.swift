@@ -110,12 +110,22 @@ class Socket: NSObject {
     }
     
     func becomeReceiver(receiverID : String, userCode : String, currencyID : Int, networkID : Int, address : String, amount : String) {
+        print("becomeReceiver: \(userCode)")
         socket.emitWithAck("event:receiver:on", with: [["userid" : receiverID, "usercode" : userCode, "currencyid" : currencyID, "networkid" : networkID, "address" : address,"amount" : amount ]]).timingOut(after: 1) { data in
             print(data)
         }
     }
     
+    func stopReceive() {
+        print("stopReceive")
+        
+        socket.emitWithAck("receiver:stop", with: []).timingOut(after: 1) { data in
+            print(data)
+        }
+    }
+    
     func becomeSender(nearIDs : [String]) {
+        print("becomeSender: \(nearIDs)")
         self.socket.on("event:new:receiver") { (data, ack) in
             print(data)
             if data.first != nil {
@@ -138,7 +148,7 @@ class Socket: NSObject {
                 var newRequests = [PaymentRequest]()
                 for requestData in requestsData {
                     let dataDict = requestData
-
+                    
                     let userID = dataDict["userid"] as! String
                     let userCode = dataDict["usercode"] as! String
                     let currencyID = dataDict["currencyid"] as! Int
@@ -165,6 +175,14 @@ class Socket: NSObject {
 //
 //            let userInfo = ["paymentRequests" : newRequests]
 //            NotificationCenter.default.post(name: NSNotification.Name("newReceiver"), object: nil, userInfo: userInfo)
+        }
+    }
+    
+    func stopSend() {
+        print("stopSend")
+        
+        socket.emitWithAck("sender:stop", with: []).timingOut(after: 1) { data in
+            print(data)
         }
     }
     
