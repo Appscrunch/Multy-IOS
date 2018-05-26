@@ -112,6 +112,11 @@ class SendViewController: UIViewController {
         configureCollectionViewLayoutItemSize(collectionView: walletsCollectionView)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.viewControllerViewWillDisappear()
+        super.viewWillDisappear(animated)
+    }
+    
     func registerCells() {
         let walletCollectionCell = UINib.init(nibName: "WalletCollectionViewCell", bundle: nil)
         walletsCollectionView.register(walletCollectionCell, forCellWithReuseIdentifier: "WalletCollectionViewCell")
@@ -143,14 +148,11 @@ class SendViewController: UIViewController {
                 activeRequestsCollectionView.reloadData()
             }
             
+            updateUIForActiveRequestInfo()
+            
             if presenter.numberOfActiveRequests() > 0 {
                 searchingRequestsHolderView.isHidden = true
                 foundActiveRequestsHolderView.isHidden = false
-                
-                let selectedRequest = presenter.activeRequestsArr[presenter.selectedActiveRequestIndex!]
-                let blockchainType = BlockchainType.create(currencyID: UInt32(selectedRequest.currencyID), netType: 0)
-                selectedRequestAmountLabel.text = "\(selectedRequest.sendAmount) \(blockchainType.shortName)"
-                selectedRequestAddressLabel.text = selectedRequest.sendAddress
             } else {
                 searchingRequestsHolderView.isHidden = false
                 foundActiveRequestsHolderView.isHidden = true
@@ -291,7 +293,7 @@ class SendViewController: UIViewController {
         }) { (succeeded) in
             if succeeded {
                 UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
-                    self.activeRequestsCollectionView.alpha = 0
+                    //self.activeRequestsCollectionView.alpha = 0
                 })
             }
         }
@@ -305,56 +307,61 @@ class SendViewController: UIViewController {
                 doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
                 self.foundActiveRequestsHolderView.addSubview(doneAnimationView)
                 doneAnimationView.play{ (finished) in
-                    self.transactionHolderView.isHidden = true
-                    self.transactionInfoViewBottomConstraint.constant = 5
-                    self.transactionInfoView.alpha = 1
-                    self.transactionTokenImageView.alpha = 1
+                    self.showHiddenContent()
+                    self.updateUIForActiveRequestInfo()
                     
-                    self.sendMode = .searching
-                    self.navigationButtonsHolderBottomConstraint.constant = 0
-                    self.transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - self.walletsCollectionView.frame.origin.y - self.walletsCollectionView.frame.size.height
-                    
-                    self.showNotSelectedWallets()
-                    self.showNotSelectedRequests()
-                    
-                    UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
-                        self.animationHolderView.layoutIfNeeded()
-                        self.transactionHolderView.alpha = 0.0
-                        self.activeRequestsCollectionView.alpha = 1
-                    }) { (succeeded) in
-                        if succeeded {
-                            self.transactionHolderView.isHidden = true
-                        }
-                    }
                     doneAnimationView.removeFromSuperview()
                 }
             } else {
-                self.transactionHolderView.isHidden = true
-                self.transactionInfoViewBottomConstraint.constant = 5
-                self.transactionInfoView.alpha = 1
-                self.transactionTokenImageView.alpha = 1
-                
-                self.sendMode = .searching
-                self.navigationButtonsHolderBottomConstraint.constant = 0
-                self.transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - self.walletsCollectionView.frame.origin.y - self.walletsCollectionView.frame.size.height
-                
-                self.showNotSelectedWallets()
-                self.showNotSelectedRequests()
-                
-                UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
-                    self.animationHolderView.layoutIfNeeded()
-                    self.transactionHolderView.alpha = 0.0
-                    self.activeRequestsCollectionView.alpha = 1
-                }) { (succeeded) in
-                    if succeeded {
-                        self.transactionHolderView.isHidden = true
-                    }
-                }
+                showHiddenContent()
+                updateUIForActiveRequestInfo()
             }
         }
     }
     
+    func updateUIForActiveRequestInfo() {
+        if sendMode != .inSend {
+            if presenter.numberOfActiveRequests() > 0 {
+                
+                let selectedRequest = presenter.activeRequestsArr[presenter.selectedActiveRequestIndex!]
+                if selectedRequest.satisfied == true {
+                    selectedRequestAmountLabel.isHidden = true
+                    selectedRequestAddressLabel.isHidden = true
+                } else {
+                    selectedRequestAmountLabel.isHidden = false
+                    selectedRequestAddressLabel.isHidden = false
+                    let blockchainType = BlockchainType.create(currencyID: UInt32(selectedRequest.currencyID), netType: 0)
+                    selectedRequestAmountLabel.text = "\(selectedRequest.sendAmount) \(blockchainType.shortName)"
+                    selectedRequestAddressLabel.text = selectedRequest.sendAddress
+                }
+                
+            }
+        }
+    }
     
+    func showHiddenContent() {
+        self.transactionHolderView.isHidden = true
+        self.transactionInfoViewBottomConstraint.constant = 5
+        self.transactionInfoView.alpha = 1
+        self.transactionTokenImageView.alpha = 1
+        
+        self.sendMode = .searching
+        self.navigationButtonsHolderBottomConstraint.constant = 0
+        self.transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - self.walletsCollectionView.frame.origin.y - self.walletsCollectionView.frame.size.height
+        
+        self.showNotSelectedWallets()
+        self.showNotSelectedRequests()
+        
+        UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
+            self.animationHolderView.layoutIfNeeded()
+            self.transactionHolderView.alpha = 0.0
+            self.activeRequestsCollectionView.alpha = 1
+        }) { (succeeded) in
+            if succeeded {
+                self.transactionHolderView.isHidden = true
+            }
+        }
+    }
     
     func hideNotSelectedWallets() {
         prepareWalletsCellsClones()
@@ -413,7 +420,7 @@ class SendViewController: UIViewController {
         for cell in visibleCells {
             let cellClone = cloneWalletCell(cell)
             
-            let walletIndex = presenter.walletsArr.index(of: cell.wallet!)
+            let walletIndex = presenter.filteredWalletArray.index(of: cell.wallet!)
             if walletIndex != nil {
                 let cellFrameOriginPoint = walletsCollectionView.convert(cellClone.frame.origin, to: self.view)
                 if walletIndex! < presenter.selectedWalletIndex! {
@@ -441,7 +448,7 @@ class SendViewController: UIViewController {
         for cell in visibleCells {
             let cellClone = cloneActiveRequestCell(cell)
             
-            let requestIndex = presenter.activeRequestsArr.index(of: cellClone.request!)
+            let requestIndex = presenter.indexForActiveRequst(cellClone.request!)
             if requestIndex != nil {
                 if requestIndex! < presenter.selectedActiveRequestIndex! {
                     let cellFrame = activeRequestsCollectionView.convert(cell.frame, to: leftActiveRequestsClonesHolderView!)
@@ -551,7 +558,7 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else {
             let cell = walletsCollectionView.dequeueReusableCell(withReuseIdentifier: "WalletCollectionViewCell", for: indexPath) as! WalletCollectionViewCell
             
-            let wallet = presenter.walletsArr[indexPath.item]
+            let wallet = presenter.filteredWalletArray[indexPath.item]
             cell.wallet = wallet
             
             return cell
@@ -627,6 +634,8 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
             presenter.selectedActiveRequestIndex = Int(floor((offset - width / 2) / width) + 1)
         }
     }
+    
+
 }
 
 extension SendViewController: UIGestureRecognizerDelegate {
