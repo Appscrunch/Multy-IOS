@@ -434,15 +434,14 @@ class SendViewController: UIViewController {
             
             let walletIndex = presenter.filteredWalletArray.index(of: cell.wallet!)
             if walletIndex != nil {
-                let cellFrameOriginPoint = walletsCollectionView.convert(cellClone.frame.origin, to: self.view)
                 if walletIndex! < presenter.selectedWalletIndex! {
-                    cellClone.frame = CGRect(x: cellFrameOriginPoint.x, y: cellClone.frame.origin.y, width: cellClone.frame.size.width, height: cellClone.frame.size.height)
+                    cellClone.frame = walletsCollectionView.convert(cell.frame, to: leftWalletsClonesHolderView!)
                     leftWalletsClonesHolderView.addSubview(cellClone)
                 } else if walletIndex! > presenter.selectedWalletIndex! {
-                    cellClone.frame = CGRect(x: 0, y: cellClone.frame.origin.y, width: cellClone.frame.size.width, height: cellClone.frame.size.height)
+                    cellClone.frame = walletsCollectionView.convert(cell.frame, to: rightWalletsClonesHolderView!)
                     rightWalletsClonesHolderView.addSubview(cellClone)
                 } else {
-                    cellClone.frame = CGRect(x: cellFrameOriginPoint.x, y: cellClone.frame.origin.y, width: cellClone.frame.size.width, height: cellClone.frame.size.height)
+                    cellClone.frame = walletsCollectionView.convert(cell.frame, to: walletsClonesHolderView!)
                     walletsClonesHolderView.addSubview(cellClone)
                 }
             }
@@ -509,17 +508,16 @@ class SendViewController: UIViewController {
     }
 
     func cloneWalletCell(_ cell: WalletCollectionViewCell) -> WalletCollectionViewCell {
-        let cellIndexPath = walletsCollectionView.indexPath(for: cell)
-        let cellClone = walletsCollectionView.dequeueReusableCell(withReuseIdentifier: "WalletCollectionViewCell", for: cellIndexPath!) as! WalletCollectionViewCell
+        let cellClone = UINib(nibName: "WalletCollectionViewCell", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! WalletCollectionViewCell
         cellClone.wallet = cell.wallet
         cellClone.fillInCell()
+
 
         return cellClone
     }
     
     func cloneActiveRequestCell(_ cell: ActiveRequestCollectionViewCell) -> ActiveRequestCollectionViewCell {
-        let cellIndexPath = activeRequestsCollectionView.indexPath(for: cell)
-        let cellClone = activeRequestsCollectionView.dequeueReusableCell(withReuseIdentifier: "ActiveRequestCollectionViewCell", for: cellIndexPath!) as! ActiveRequestCollectionViewCell
+        let cellClone = UINib(nibName: "ActiveRequestCollectionViewCell", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActiveRequestCollectionViewCell
         cellClone.request = cell.request
         cellClone.fillInCell()
         
