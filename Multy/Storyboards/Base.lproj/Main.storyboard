@@ -181,6 +181,16 @@
             </objects>
             <point key="canvasLocation" x="-1703.2" y="1558.4707646176912"/>
         </scene>
+        <!--fastSend-->
+        <scene sceneID="PCf-hr-RGd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Send" referencedIdentifier="fastSend" id="QPI-8z-daE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4Zx-Ci-DgN"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFq-CQ-gae" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-409" y="1127"/>
+        </scene>
         <!--Fast Operations View Controller-->
         <scene sceneID="xvQ-Gz-As9">
             <objects>
@@ -1843,7 +1853,7 @@ correctly</string>
         <!--Navigation Controller-->
         <scene sceneID="coC-Ph-Zc7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VhH-A4-ijB" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="VhH-A4-ijB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="activityTab" id="mvC-59-4dq" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
                         <connections>
                             <outlet property="animation" destination="7dA-2i-B7y" id="7Tz-4d-3ul"/>
@@ -1851,12 +1861,11 @@ correctly</string>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nEL-C1-Vti">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="McY-lO-qtl" kind="relationship" relationship="rootViewController" id="1Vd-K1-DBo"/>
+                        <segue destination="QPI-8z-daE" kind="relationship" relationship="rootViewController" id="C0M-o7-F2c"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAo-V1-r5q" userLabel="First Responder" sceneMemberID="firstResponder"/>

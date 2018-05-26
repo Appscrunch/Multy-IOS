@@ -104,6 +104,10 @@ class SendPresenter: NSObject {
     
     func viewControllerViewWillDisappear() {
         DataManager.shared.socketManager.stopSend()
+        self.stopSearching()
+        self.activeRequestsArr.removeAll()
+        self.selectedWalletIndex = nil
+        self.selectedActiveRequestIndex = nil
     }
     
     func numberOfWallets() -> Int {
@@ -341,6 +345,11 @@ class SendPresenter: NSObject {
     func startSearchingActiveRequests() {
         BLEManager.shared.startScan()
         receiveActiveRequestTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkNewUserCodes), userInfo: nil, repeats: true)
+    }
+    
+    func stopSearching() {
+        BLEManager.shared.stopScan()
+        receiveActiveRequestTimer.invalidate()
     }
     
     @objc func checkNewUserCodes() {

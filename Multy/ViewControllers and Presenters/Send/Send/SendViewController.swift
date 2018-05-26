@@ -86,9 +86,7 @@ class SendViewController: UIViewController {
             presenter.getWallets()
         }
         
-        
         fixUIForX()
-        
 
         walletsCollectionViewFL.minimumLineSpacing = 0
         activeRequestsCollectionViewFL.spacingMode = .fixed(spacing: 0)
@@ -98,11 +96,14 @@ class SendViewController: UIViewController {
         recentImageView.image = recentImageView.image!.withRenderingMode(.alwaysTemplate)
         recentImageView.tintColor = .white
         
-        presenter.viewControllerViewDidLoad()
-        
         sendLongPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPress:)))
         sendLongPressGR!.delegate = self
         walletsCollectionView.addGestureRecognizer(sendLongPressGR!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewControllerViewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,8 +114,8 @@ class SendViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        presenter.viewControllerViewWillDisappear()
         super.viewWillDisappear(animated)
+        presenter.viewControllerViewWillDisappear()
     }
     
     func registerCells() {
@@ -126,7 +127,8 @@ class SendViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.navigationBar.isHidden = true
         if searchingAnimationView == nil {
             searchingAnimationView = LOTAnimationView(name: "circle_grow")
             searchingAnimationView!.frame = searchingRequestsHolderView.bounds
@@ -530,6 +532,9 @@ class SendViewController: UIViewController {
     
     @IBAction func closeAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        if let tbc = self.tabBarController as? CustomTabBarViewController {
+            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+        }
     }
     
     @IBAction func recentAction(_ sender: Any) {
