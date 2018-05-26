@@ -4,6 +4,7 @@
 
 import UIKit
 import Branch
+import Lottie
 
 enum ReceivingOption {
     case qrCode
@@ -38,6 +39,15 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var requestSummLbl: UILabel!
     @IBOutlet weak var requestSummImageView: UIImageView!
     @IBOutlet weak var walletTokenImageView: UIImageView!
+    
+    @IBOutlet weak var wirelessButton: UIButton!
+    @IBOutlet weak var hidedWalletView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var hidedImage: UIImageView!
+    @IBOutlet weak var hidedSumLabel: UILabel!
+    @IBOutlet weak var hidedAddressLabel: UILabel!
+    
+    var searchingAnimationView : LOTAnimationView?
     
     let presenter = ReceiveAllDetailsPresenter()
     
@@ -279,7 +289,45 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     @IBAction func receiveViaWirelessScanAction(_ sender: Any) {
-        self.option = .wireless
+        if presenter.cryptoSum == nil  {
+            shakeView(viewForShake: requestSumBtn)
+        } else {
+            switch option {
+            case .wireless:
+                changeVisibility(isHidden: true)
+                wirelessButton.setTitle("Magic Receive", for: .normal)
+                option = .qrCode
+            case .qrCode:
+                changeVisibility(isHidden: false)
+                wirelessButton.setTitle("Cancel", for: .normal)
+                option = .wireless
+            }
+        }
+    }
+    
+    func changeVisibility(isHidden: Bool) {
+        if presenter.wirelessRequestImageName != nil {
+            self.hidedImage.image = UIImage(named: presenter.wirelessRequestImageName!)
+        }
+        
+        if !isHidden {
+            hidedSumLabel.text = "\(sumValueLbl.text!) \(cryptoNameLbl.text!) / \(fiatSumLbl.text!) \(fiatNameLbl.text!)"
+            hidedAddressLabel.text = presenter.walletAddress
+            
+            searchingAnimationView = LOTAnimationView(name: "circle_grow")
+            searchingAnimationView!.frame = hidedWalletView.frame
+//            searchingRequestsHolderView.autoresizesSubviews = true
+//            searchingRequestsHolderView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            hidedWalletView.insertSubview(searchingAnimationView!, at: 0)
+            searchingAnimationView!.transform = CGAffineTransform(scaleX: (screenHeight / screenWidth), y: 1)
+            
+            searchingAnimationView!.loopAnimation = true
+            searchingAnimationView!.play()
+        } else {
+            searchingAnimationView?.stop()
+        }
+        
+        hidedWalletView.isHidden = isHidden
     }
     
 // MARK: QRCode Activity

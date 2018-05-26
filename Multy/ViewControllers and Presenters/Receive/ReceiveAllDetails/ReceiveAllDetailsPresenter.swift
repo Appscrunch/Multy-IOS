@@ -14,7 +14,13 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     var cryptoName: String?
     var fiatSum: String?
     var fiatName: String?
-    var wirelessRequestImageName: String?
+    var wirelessRequestImageName: String? {
+        didSet {
+            if wirelessRequestImageName != nil {
+                receiveAllDetailsVC!.hidedImage.image = UIImage(named: wirelessRequestImageName!)
+            }
+        }
+    }
     
     var walletAddress = ""
     
