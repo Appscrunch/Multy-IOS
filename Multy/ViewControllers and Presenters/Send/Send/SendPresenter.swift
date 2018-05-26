@@ -285,9 +285,11 @@ class SendPresenter: NSObject {
         DispatchQueue.main.async {
             var requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
             
+            var filteredRequestArray = requests.filter{BigInt($0.sendAmount) > Int64(0)}
+            
             var newRequests = [PaymentRequest]()
-            while requests.count > 0 {
-                let request = requests.first!
+            while filteredRequestArray.count > 0 {
+                let request = filteredRequestArray.first!
                 
                 var isRequestOld = false
                 for oldRequest in self.activeRequestsArr {
@@ -306,7 +308,7 @@ class SendPresenter: NSObject {
                     newRequests.append(request)
                 }
                 
-                requests.removeFirst()
+                filteredRequestArray.removeFirst()
             }
             
             if newRequests.count > 0 {
