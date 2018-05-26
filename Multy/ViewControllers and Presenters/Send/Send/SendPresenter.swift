@@ -288,7 +288,7 @@ class SendPresenter: NSObject {
         DispatchQueue.main.async {
             let requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
             
-            var filteredRequestArray = requests.filter{BigInt($0.sendAmount) > Int64(0)}
+            var filteredRequestArray = requests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
             
             var newRequests = [PaymentRequest]()
             while filteredRequestArray.count > 0 {
