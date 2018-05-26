@@ -136,16 +136,16 @@ class Socket: NSObject {
                 var newRequests = [PaymentRequest]()
                 for requestData in requestsData {
                     let dataDict = requestData
-
+                    
                     let userID = dataDict["userid"] as! String
                     let userCode = dataDict["usercode"] as! String
                     let currencyID = dataDict["currencyid"] as! Int
                     let networkID = dataDict["networkid"] as! Int
                     let address = dataDict["address"] as! String
                     let amount = dataDict["amount"] as! String
-
+                    
                     let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: amount, networkID: networkID, userID : userID)
-
+                    
                     newRequests.append(paymentRequest)
                 }
 

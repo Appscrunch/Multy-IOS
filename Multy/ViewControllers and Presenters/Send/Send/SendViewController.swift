@@ -313,10 +313,19 @@ class SendViewController: UIViewController {
                     doneAnimationView.removeFromSuperview()
                 }
             } else {
+                presentSendingErrorAlert()
                 showHiddenContent()
                 updateUIForActiveRequestInfo()
             }
         }
+    }
+    
+    func presentSendingErrorAlert() {
+        let alert = UIAlertController(title: "Bluetooth Error", message: "Please Check your Bluetooth connection", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
     }
     
     func updateUIForActiveRequestInfo() {
