@@ -107,6 +107,12 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneAction(_ sender: Any) {
+        if sumInCryptoString.convertCryptoAmountStringToMinimalUnits(in: blockchainType.blockchain) == Int64(0) {
+            presentAlert(with: "Please, enter non-zero amount!")
+            
+            return
+        }
+        
         delegate?.transferSum(cryptoAmount: sumInCryptoString, cryptoCurrency: cryptoName, fiatAmount: sumInFiatString, fiatName: fiatName)
         navigationController?.popViewController(animated: true)
     }
