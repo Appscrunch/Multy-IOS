@@ -189,6 +189,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate {
                     if currentObjectIndexInList == nil {
                         receivedAds!.append(ad)
                     }
+                    print("New ad")
                     NotificationCenter.default.post(name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil, userInfo: ["originID" : ad.originID])
                 }
             }
