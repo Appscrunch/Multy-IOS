@@ -21,6 +21,9 @@ class Socket: NSObject {
     }
     
     func start() {
+        if self.manager.status == .connected {
+            return
+        }
         DataManager.shared.getAccount { (account, error) in
             guard account != nil else {
                 return
@@ -120,7 +123,6 @@ class Socket: NSObject {
             }
         }
         
-
         socket.emitWithAck("event:sender:check", with: [["ids" : nearIDs]]).timingOut(after: 1) { data in
             print(data)
 
@@ -144,7 +146,7 @@ class Socket: NSObject {
                     let address = dataDict["address"] as! String
                     let amount = dataDict["amount"] as! String
 
-                    let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: amount, networkID: networkID, userID : userID)
+                    let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: BigInt(amount).cryptoValueString(for: BLOCKCHAIN_BITCOIN), networkID: networkID, userID : userID)
 
                     newRequests.append(paymentRequest)
                 }
