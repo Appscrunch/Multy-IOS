@@ -27,7 +27,15 @@ class SendPresenter: NSObject {
             sendVC?.updateUI()
         }
     }
-    var filteredWalletArray = Array<UserWalletRLM>()
+    var filteredWalletArray = Array<UserWalletRLM>() {
+        didSet {
+            if filteredWalletArray.count == 0 {
+                selectedWalletIndex = nil
+            } else {
+                selectedWalletIndex = 0
+            }
+        }
+    }
     
     var selectedWalletIndex : Int? {
         didSet {
@@ -223,6 +231,7 @@ class SendPresenter: NSObject {
     var account = DataManager.shared.realmManager.account
     
     func createPreliminaryData() {
+        let account = DataManager.shared.realmManager.account
         let core = DataManager.shared.coreLibManager
         let wallet = filteredWalletArray[selectedWalletIndex!]
         binaryData = account!.binaryDataString.createBinaryData()!
