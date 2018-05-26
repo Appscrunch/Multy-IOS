@@ -23,18 +23,15 @@ class ActiveRequestCollectionViewCell: UICollectionViewCell {
     
     func fillInCell() {
         if request != nil {
+            
             if request!.satisfied {
-//                let satisfiedView = LOTAnimationView(name: "circle_grow")
-//                satisfiedView.frame = self.bounds
-//                satisfiedView.autoresizesSubviews = true
-//                satisfiedView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-                
-                //self.addSubview(satisfiedView)
-                requestImage.image  = UIImage(named: "done")
+                requestImage.image  = UIImage(named: "transaction_done")
             } else {
                 requestImage.image  = UIImage(named: request!.requestImageName)
             }
         }
     }
+    
+    
 }
 

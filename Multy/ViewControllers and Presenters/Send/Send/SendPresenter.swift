@@ -232,7 +232,6 @@ class SendPresenter: NSObject {
     }
     
     func send() {
-        
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
@@ -283,7 +282,7 @@ class SendPresenter: NSObject {
     
     @objc private func didReceiveNewRequests(notification: Notification) {
         DispatchQueue.main.async {
-            var requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
+            let requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
             
             var filteredRequestArray = requests.filter{BigInt($0.sendAmount) > Int64(0)}
             
@@ -347,7 +346,7 @@ class SendPresenter: NSObject {
     }
     
     @objc func checkNewUserCodes() {
-//        let request = PaymentRequest.init(sendAddress: randomRequestAddress(), currencyID: randomCurrencyID(), sendAmount: randomAmount(), color: randomColor())
+//        let request = PaymentRequest.init(sendAddress: "mrQ5gJvzeGZ7bjtXycfJGdAo9BUNtgQVL9", userCode: "41234123", currencyID: 0, sendAmount: "0,001", networkID : 1, userID : "ffwqefqewfdsf")
 //
 //        activeRequestsArr.append(request)
 //        if numberOfActiveRequests() == 1 {
