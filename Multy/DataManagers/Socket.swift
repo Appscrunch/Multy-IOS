@@ -156,6 +156,8 @@ class Socket: NSObject {
             print(data)
 
             if data.first != nil {
+                if let _ = data.first as? String { return }
+                
                 let requestsData = data.first! as! [Dictionary<String, AnyObject>]
                 
                 var newRequests = [PaymentRequest]()

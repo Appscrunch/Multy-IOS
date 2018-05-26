@@ -413,7 +413,7 @@ class SendViewController: UIViewController {
         for cell in visibleCells {
             let cellClone = cloneWalletCell(cell)
             
-            let walletIndex = presenter.walletsArr.index(of: cell.wallet!)
+            let walletIndex = presenter.filteredWalletArray.index(of: cell.wallet!)
             if walletIndex != nil {
                 let cellFrameOriginPoint = walletsCollectionView.convert(cellClone.frame.origin, to: self.view)
                 if walletIndex! < presenter.selectedWalletIndex! {
@@ -551,7 +551,7 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else {
             let cell = walletsCollectionView.dequeueReusableCell(withReuseIdentifier: "WalletCollectionViewCell", for: indexPath) as! WalletCollectionViewCell
             
-            let wallet = presenter.walletsArr[indexPath.item]
+            let wallet = presenter.filteredWalletArray[indexPath.item]
             cell.wallet = wallet
             
             return cell
@@ -627,6 +627,8 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
             presenter.selectedActiveRequestIndex = Int(floor((offset - width / 2) / width) + 1)
         }
     }
+    
+
 }
 
 extension SendViewController: UIGestureRecognizerDelegate {

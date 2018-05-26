@@ -12,7 +12,23 @@ import RealmSwift
 class SendPresenter: NSObject {
     var sendVC : SendViewController?
     
-    var walletsArr = Array<UserWalletRLM>()
+    var walletsArr = Array<UserWalletRLM>() {
+        didSet {
+            if selectedActiveRequestIndex != nil  {
+                let request = activeRequestsArr[selectedActiveRequestIndex!]
+                let sendAmount = Double(request.sendAmount.stringWithDot)!
+                let address = request.sendAddress
+                
+                filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
+            } else {
+                filteredWalletArray = walletsArr
+            }
+            
+            sendVC?.updateUI()
+        }
+    }
+    var filteredWalletArray = Array<UserWalletRLM>()
+    
     var selectedWalletIndex : Int? {
         didSet {
             if selectedWalletIndex != oldValue {
@@ -26,6 +42,16 @@ class SendPresenter: NSObject {
     var activeRequestsArr = [PaymentRequest]()
     var selectedActiveRequestIndex : Int? {
         didSet {
+            if selectedActiveRequestIndex != nil  {
+                let request = activeRequestsArr[selectedActiveRequestIndex!]
+                let sendAmount = Double(request.sendAmount.stringWithDot)!
+                let address = request.sendAddress
+                
+                filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
+            } else {
+                filteredWalletArray = walletsArr
+            }
+            
             if selectedActiveRequestIndex != oldValue {
                 self.createTransaction()
                 
@@ -77,22 +103,24 @@ class SendPresenter: NSObject {
     }
     
     func numberOfWallets() -> Int {
-        return self.walletsArr.count
+        return filteredWalletArray.count
     }
     
     func numberOfActiveRequests() -> Int {
-        return self.activeRequestsArr.count
+        return activeRequestsArr.count
     }
     
     func getWallets() {
-        DataManager.shared.getAccount { (acc, err) in
+        DataManager.shared.getAccount { [unowned self] (acc, err) in
             if err == nil {
                 // MARK: check this
-                self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
-                if self.walletsArr.count > 0 {
+                if acc != nil && acc!.wallets.count > 0 {
                     self.selectedWalletIndex = 0
+                    
+                    self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
                 }
-                self.sendVC?.updateUI()
+                
+//                self.sendVC?.updateUI()
             }
         }
     }
@@ -106,6 +134,13 @@ class SendPresenter: NSObject {
                 print("afterVerbose:rawdata: \(walletsArrayFromApi)")
                 DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
                     self.account = acc
+                    
+                    if acc != nil && acc!.wallets.count > 0 {
+                        self.selectedWalletIndex = 0
+                        
+                        self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
+                    }
+                    
                     print("wallets: \(acc?.wallets)")
                     completion(true)
                 })
@@ -121,7 +156,7 @@ class SendPresenter: NSObject {
             //FIXME:
             transaction!.sendAmount = request.sendAmount.doubleValue
             transaction!.sendAddress = request.sendAddress
-            transaction!.choosenWallet = walletsArr[selectedWalletIndex!]
+            transaction!.choosenWallet = filteredWalletArray[selectedWalletIndex!]
             sendVC?.fillTransaction()
         }
     }
@@ -182,7 +217,7 @@ class SendPresenter: NSObject {
     
     func createPreliminaryData() {
         let core = DataManager.shared.coreLibManager
-        let wallet = walletsArr[selectedWalletIndex!]
+        let wallet = filteredWalletArray[selectedWalletIndex!]
         binaryData = account!.binaryDataString.createBinaryData()!
         
         
@@ -196,7 +231,7 @@ class SendPresenter: NSObject {
     func send() {
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
-        let wallet = walletsArr[selectedWalletIndex!]
+        let wallet = filteredWalletArray[selectedWalletIndex!]
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                          sendAddress: request.sendAddress,
                                                                          sendAmountString: request.sendAmount,
