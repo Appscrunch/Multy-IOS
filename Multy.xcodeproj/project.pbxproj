@@ -205,6 +205,7 @@
 		45F8CD47208F391B00DEB495 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8CD46208F391B00DEB495 /* TermsOfServiceViewController.swift */; };
 		45F8CD49208F393C00DEB495 /* TermsOfServicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8CD48208F393C00DEB495 /* TermsOfServicePresenter.swift */; };
 		50D1AA3CFDA9BDFA53D3B9D0 /* Pods_MultyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FFD5D1BF6159BB241CBFF9 /* Pods_MultyTests.framework */; };
+		854EF13E20B9B420000C2247 /* success_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 854EF13D20B9B420000C2247 /* success_animation.json */; };
 		85741D8520B45E8B0093933B /* circle_grow.json in Resources */ = {isa = PBXBuildFile; fileRef = 85741D8420B45E8A0093933B /* circle_grow.json */; };
 		85741D8720B555DB0093933B /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85741D8620B555DB0093933B /* BLEManager.swift */; };
 		85741D8920B55A660093933B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85741D8820B55A650093933B /* CoreBluetooth.framework */; };
@@ -516,6 +517,7 @@
 		572DB9D15F9362827245CF67 /* Pods_Multy_MultyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy_MultyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		647A035491B0F1BEBEB72A55 /* Pods-MultyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultyTests/Pods-MultyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7304C17824311A19240183E0 /* Pods_Multy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		854EF13D20B9B420000C2247 /* success_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success_animation.json; sourceTree = "<group>"; };
 		85741D8420B45E8A0093933B /* circle_grow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_grow.json; sourceTree = "<group>"; };
 		85741D8620B555DB0093933B /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		85741D8820B55A650093933B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -1527,6 +1529,7 @@
 		85DE62F120AF187F00423D89 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				854EF13D20B9B420000C2247 /* success_animation.json */,
 				85741D8420B45E8A0093933B /* circle_grow.json */,
 				85DE62F220AF188B00423D89 /* Check Mark Success Data.json */,
 			);
@@ -1874,6 +1877,7 @@
 				FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */,
 				85DE62E920AC1CE100423D89 /* ActiveRequestCollectionViewCell.xib in Resources */,
 				4585BD392049AD03004542AE /* ExchangeStockTableViewCell.xib in Resources */,
+				854EF13E20B9B420000C2247 /* success_animation.json in Resources */,
 				45A949361FC5992A003C3A23 /* SearchAddressTableViewCell.xib in Resources */,
 				45B5CCAA1FDAC0B00069BD46 /* TextTableViewCell.xib in Resources */,
 				45A9493B1FC59E51003C3A23 /* RecentAddressTableViewCell.xib in Resources */,

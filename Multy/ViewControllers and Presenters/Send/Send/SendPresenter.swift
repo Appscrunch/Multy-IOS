@@ -191,7 +191,8 @@ class SendPresenter: NSObject {
     }
     
     func becomeSenderForUsersWithCodes(_ userCodes : [String]) {
-        DataManager.shared.socketManager.becomeSender(nearIDs: userCodes)
+        let uniqueUserCodes = Array(Set(userCodes))
+        DataManager.shared.socketManager.becomeSender(nearIDs: uniqueUserCodes)
     }
         
     func handleBluetoothReachability() {
@@ -235,7 +236,6 @@ class SendPresenter: NSObject {
     }
     
     func send() {
-        
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
@@ -286,11 +286,13 @@ class SendPresenter: NSObject {
     
     @objc private func didReceiveNewRequests(notification: Notification) {
         DispatchQueue.main.async {
-            var requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
+            let requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
+            
+            var filteredRequestArray = requests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
             
             var newRequests = [PaymentRequest]()
-            while requests.count > 0 {
-                let request = requests.first!
+            while filteredRequestArray.count > 0 {
+                let request = filteredRequestArray.first!
                 
                 var isRequestOld = false
                 for oldRequest in self.activeRequestsArr {
@@ -309,7 +311,7 @@ class SendPresenter: NSObject {
                     newRequests.append(request)
                 }
                 
-                requests.removeFirst()
+                filteredRequestArray.removeFirst()
             }
             
             if newRequests.count > 0 {
@@ -353,7 +355,7 @@ class SendPresenter: NSObject {
     }
     
     @objc func checkNewUserCodes() {
-//        let request = PaymentRequest.init(sendAddress: randomRequestAddress(), currencyID: randomCurrencyID(), sendAmount: randomAmount(), color: randomColor())
+//        let request = PaymentRequest.init(sendAddress: "mrQ5gJvzeGZ7bjtXycfJGdAo9BUNtgQVL9", userCode: "41234123", currencyID: 0, sendAmount: "0,001", networkID : 1, userID : "ffwqefqewfdsf")
 //
 //        activeRequestsArr.append(request)
 //        if numberOfActiveRequests() == 1 {
