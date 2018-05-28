@@ -102,9 +102,15 @@ class SendPresenter: NSObject {
         }
     }
     
+    func viewControllerViewDidLoad() {
+    }
     
-    override init() {
-        super.init()
+    func viewControllerViewWillAppear() {
+        getWallets()
+        
+        blockActivityUpdating = false
+        startSenderActivity()
+        handleBluetoothReachability()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
@@ -115,31 +121,19 @@ class SendPresenter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(notification:)), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
-    deinit {
+    func viewControllerViewWillDisappear() {
+        stopSenderActivity()
+        blockActivityUpdating = true
+        
+        self.selectedWalletIndex = nil
+        
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
-    }
-    
-    func viewControllerViewDidLoad() {
-    }
-    
-    func viewControllerViewWillAppear() {
-        getWallets()
-        
-        blockActivityUpdating = false
-        startSenderActivity()
-        handleBluetoothReachability()
-    }
-    
-    func viewControllerViewWillDisappear() {
-        stopSenderActivity()
-        blockActivityUpdating = true
-        
-        self.selectedWalletIndex = nil
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     func numberOfWallets() -> Int {
