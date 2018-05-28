@@ -358,6 +358,22 @@
 		445B12B920BC1DEE00FD0D33 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/SearchAddressTableViewCell.strings; sourceTree = "<group>"; };
 		445B12BA20BC1DEE00FD0D33 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/TransactionFeeTableViewCell.strings; sourceTree = "<group>"; };
 		445B12BB20BC1DEE00FD0D33 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/CustomTrasanctionFeeTableViewCell.strings; sourceTree = "<group>"; };
+		445B12BD20BC21A000FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		445B12BF20BC21AE00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		445B12C120BC21CC00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SeedPhrase.strings; sourceTree = "<group>"; };
+		445B12C320BC21D100FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Receive.strings; sourceTree = "<group>"; };
+		445B12C520BC21D600FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Wallet.strings; sourceTree = "<group>"; };
+		445B12C720BC21DF00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		445B12C920BC21E500FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Send.strings; sourceTree = "<group>"; };
+		445B12CB20BC21ED00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainWalletHeaderCell.strings; sourceTree = "<group>"; };
+		445B12CD20BC21F100FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainWalletCollectionViewCell.strings; sourceTree = "<group>"; };
+		445B12CF20BC21F600FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TextTableViewCell.strings; sourceTree = "<group>"; };
+		445B12D120BC21FB00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LogoTableViewCell.strings; sourceTree = "<group>"; };
+		445B12D320BC220000FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DonationCollectionViewCell.strings; sourceTree = "<group>"; };
+		445B12D520BC220800FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CreateOrRestoreBtnTableViewCell.strings; sourceTree = "<group>"; };
+		445B12D720BC220C00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SearchAddressTableViewCell.strings; sourceTree = "<group>"; };
+		445B12D920BC221100FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TransactionFeeTableViewCell.strings; sourceTree = "<group>"; };
+		445B12DB20BC221400FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CustomTrasanctionFeeTableViewCell.strings; sourceTree = "<group>"; };
 		447ECAD220330C2C0085C26D /* TransactionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDTO.swift; sourceTree = "<group>"; };
 		4491513D2049764D0028195F /* MultyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4491513F2049764D0028195F /* MultyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultyUITests.swift; sourceTree = "<group>"; };
@@ -2400,6 +2416,7 @@
 				445B127120BC1BA800FD0D33 /* Base */,
 				445B129E20BC1DCE00FD0D33 /* ru */,
 				445B12AE20BC1DED00FD0D33 /* uk */,
+				445B12C120BC21CC00FD0D33 /* en */,
 			);
 			name = SeedPhrase.storyboard;
 			sourceTree = "<group>";
@@ -2410,6 +2427,7 @@
 				445B127420BC1BB100FD0D33 /* Base */,
 				445B129F20BC1DCE00FD0D33 /* ru */,
 				445B12AF20BC1DED00FD0D33 /* uk */,
+				445B12C320BC21D100FD0D33 /* en */,
 			);
 			name = Receive.storyboard;
 			sourceTree = "<group>";
@@ -2420,6 +2438,7 @@
 				445B127720BC1BD000FD0D33 /* Base */,
 				445B12A020BC1DCE00FD0D33 /* ru */,
 				445B12B020BC1DED00FD0D33 /* uk */,
+				445B12C520BC21D600FD0D33 /* en */,
 			);
 			name = Wallet.storyboard;
 			sourceTree = "<group>";
@@ -2430,6 +2449,7 @@
 				445B127A20BC1BD900FD0D33 /* Base */,
 				445B12A120BC1DCE00FD0D33 /* ru */,
 				445B12B120BC1DED00FD0D33 /* uk */,
+				445B12C920BC21E500FD0D33 /* en */,
 			);
 			name = Send.storyboard;
 			sourceTree = "<group>";
@@ -2440,6 +2460,7 @@
 				445B127D20BC1BE000FD0D33 /* Base */,
 				445B12A220BC1DCE00FD0D33 /* ru */,
 				445B12B220BC1DED00FD0D33 /* uk */,
+				445B12C720BC21DF00FD0D33 /* en */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -2450,6 +2471,7 @@
 				445B128020BC1C6B00FD0D33 /* Base */,
 				445B12A320BC1DCE00FD0D33 /* ru */,
 				445B12B320BC1DED00FD0D33 /* uk */,
+				445B12CB20BC21ED00FD0D33 /* en */,
 			);
 			name = MainWalletHeaderCell.xib;
 			sourceTree = "<group>";
@@ -2460,6 +2482,7 @@
 				445B128320BC1C7600FD0D33 /* Base */,
 				445B12A420BC1DCE00FD0D33 /* ru */,
 				445B12B420BC1DED00FD0D33 /* uk */,
+				445B12CD20BC21F100FD0D33 /* en */,
 			);
 			name = MainWalletCollectionViewCell.xib;
 			sourceTree = "<group>";
@@ -2470,6 +2493,7 @@
 				445B128620BC1C9300FD0D33 /* Base */,
 				445B12A520BC1DCE00FD0D33 /* ru */,
 				445B12B520BC1DEE00FD0D33 /* uk */,
+				445B12CF20BC21F600FD0D33 /* en */,
 			);
 			name = TextTableViewCell.xib;
 			sourceTree = "<group>";
@@ -2480,6 +2504,7 @@
 				445B128920BC1CA600FD0D33 /* Base */,
 				445B12A620BC1DCF00FD0D33 /* ru */,
 				445B12B620BC1DEE00FD0D33 /* uk */,
+				445B12D120BC21FB00FD0D33 /* en */,
 			);
 			name = LogoTableViewCell.xib;
 			sourceTree = "<group>";
@@ -2490,6 +2515,7 @@
 				445B128C20BC1CBA00FD0D33 /* Base */,
 				445B12A720BC1DCF00FD0D33 /* ru */,
 				445B12B720BC1DEE00FD0D33 /* uk */,
+				445B12D320BC220000FD0D33 /* en */,
 			);
 			name = DonationCollectionViewCell.xib;
 			sourceTree = "<group>";
@@ -2500,6 +2526,7 @@
 				445B128F20BC1CC800FD0D33 /* Base */,
 				445B12A820BC1DCF00FD0D33 /* ru */,
 				445B12B820BC1DEE00FD0D33 /* uk */,
+				445B12D520BC220800FD0D33 /* en */,
 			);
 			name = CreateOrRestoreBtnTableViewCell.xib;
 			sourceTree = "<group>";
@@ -2510,6 +2537,7 @@
 				445B129220BC1CD100FD0D33 /* Base */,
 				445B12A920BC1DCF00FD0D33 /* ru */,
 				445B12B920BC1DEE00FD0D33 /* uk */,
+				445B12D720BC220C00FD0D33 /* en */,
 			);
 			name = SearchAddressTableViewCell.xib;
 			sourceTree = "<group>";
@@ -2520,6 +2548,7 @@
 				445B129520BC1CE700FD0D33 /* Base */,
 				445B12AA20BC1DCF00FD0D33 /* ru */,
 				445B12BA20BC1DEE00FD0D33 /* uk */,
+				445B12D920BC221100FD0D33 /* en */,
 			);
 			name = TransactionFeeTableViewCell.xib;
 			sourceTree = "<group>";
@@ -2530,6 +2559,7 @@
 				445B129820BC1CEE00FD0D33 /* Base */,
 				445B12AB20BC1DCF00FD0D33 /* ru */,
 				445B12BB20BC1DEE00FD0D33 /* uk */,
+				445B12DB20BC221400FD0D33 /* en */,
 			);
 			name = CustomTrasanctionFeeTableViewCell.xib;
 			sourceTree = "<group>";
@@ -2540,6 +2570,7 @@
 				452290591FBB18D30024B550 /* Base */,
 				445B129C20BC1DCE00FD0D33 /* ru */,
 				445B12AC20BC1DEC00FD0D33 /* uk */,
+				445B12BD20BC21A000FD0D33 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2550,6 +2581,7 @@
 				4522905E1FBB18D30024B550 /* Base */,
 				445B129D20BC1DCE00FD0D33 /* ru */,
 				445B12AD20BC1DEC00FD0D33 /* uk */,
+				445B12BF20BC21AE00FD0D33 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
