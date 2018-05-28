@@ -94,10 +94,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             break
             
         case .wireless:
-            if wirelessRequestImageName == nil {
-                generateWirelessRequestImage()
-            }
-            
+            generateWirelessRequestImage()
             tryReceiveViaWireless()
             break
         }
@@ -110,7 +107,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     private func generateWirelessRequestImage() {
-        let imageNumber = self.wallet!.address.converToImageIndex
+        let imageNumber = walletAddress.converToImageIndex
         wirelessRequestImageName = "wirelessRequestImage_" + "\(imageNumber)"
 //
 //        DataManager.shared.getAccount { (account, error) in
