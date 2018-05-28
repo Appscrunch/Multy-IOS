@@ -46,6 +46,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var hidedImage: UIImageView!
     @IBOutlet weak var hidedSumLabel: UILabel!
     @IBOutlet weak var hidedAddressLabel: UILabel!
+    @IBOutlet weak var magicView: UIView!
     
     var searchingAnimationView : LOTAnimationView?
     
@@ -57,7 +58,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     var option = ReceivingOption.qrCode {
         didSet {
             if option != oldValue {
-                self.updateUIWithReceivingOption()
                 self.presenter.didChangeReceivingOption()
             }
         }
@@ -77,7 +77,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.checkValuesAndSetupUI()
-        self.updateUIWithReceivingOption()
         self.updateUIWithWallet()
         self.makeQRCode()
         self.ipadFix()
@@ -88,6 +87,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         super.viewWillDisappear(animated)
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        magicView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+    }
     func presentBluetoothErrorAlert() {
         let alert = UIAlertController(title: "Bluetooth Error", message: "Please Check your Bluetooth connection", preferredStyle: .alert)
         
@@ -97,13 +101,9 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     func presentDidReceivePaymentAlert() {
-        let alert = UIAlertController(title: "Transaction updated", message: "", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Ok", style: .default) { (alert: UIAlertAction!) in
-            self.presenter.cancelViewController()
-        })
-        
-        self.present(alert, animated: true)
+        let storyboard = UIStoryboard(name: "Send", bundle: nil)
+        let sendOKVc = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC")
+        self.navigationController?.pushViewController(sendOKVc, animated: true)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -198,28 +198,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             self.present(activityVC, animated: true, completion: nil)
         })
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: moreOptionsTap)
-        
-//        let linkProperties: BranchLinkProperties = BranchLinkProperties()
-//        linkProperties.feature = "sharing"
-////        linkProperties.addControlParam("$desktop_url", withValue: "http://onliner.by/")
-////        linkProperties.addControlParam("$ios_url", withValue: "multy://")
-//        linkProperties.addControlParam("address", withValue: self.presenter.walletAddress)
-//
-//
-//        let branchUniversalObject: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "item/12345")
-//        branchUniversalObject.title = "My Content Title"
-//        branchUniversalObject.getShortUrl(with: linkProperties) { (url, error) in
-//            let objectsToShare = [url] as! [String]
-//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
-//            self.present(activityVC, animated: true, completion: nil)
-//        }
-        
-//        let message = "MULTY \n\nYour Address: \n\(self.presenter.walletAddress) \n\nRequested Amount: \(self.presenter.cryptoSum ?? 0.0) \(self.presenter.cryptoName ?? "")"
-//        let objectsToShare = [message] as [String]
-//        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
-//        self.present(activityVC, animated: true, completion: nil)
     }
     
     @IBAction func chooseAnotherWalletAction(_ sender: Any) {
@@ -249,34 +227,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         
         if sumValueLbl.isHidden == false {
             setupUIWithAmounts()
-        }
-    }
-    
-    func updateUIWithReceivingOption() {
-        switch self.option {
-        case .qrCode:
-            self.qrCodeTabSelectedView.isHidden = false
-            self.wirelessTabSelectedView.isHidden = true
-            self.receiveViaLbl.text = "Receive via QR-code"
-            self.invoiceHolderView.isHidden = true
-            self.qrHolderView.isHidden = false
-            break
-            
-        case .wireless:
-            self.qrCodeTabSelectedView.isHidden = true
-            self.wirelessTabSelectedView.isHidden = false
-            self.receiveViaLbl.text = "Receive via Wireless Scan"
-            self.invoiceHolderView.isHidden = false
-            self.invoiceHolderView.layer.cornerRadius = invoiceHolderView.frame.size.height/2
-            self.invoiceHolderView.layer.masksToBounds = true
-            self.qrHolderView.isHidden = true
-            break
-        }
-    }
-    
-    func updateWirelessTransactionImage() {
-        if presenter.wirelessRequestImageName != nil {
-            self.invoiceImage.image = UIImage(named: presenter.wirelessRequestImageName!)
         }
     }
     
