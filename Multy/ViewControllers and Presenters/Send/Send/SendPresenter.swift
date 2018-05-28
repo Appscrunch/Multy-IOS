@@ -14,20 +14,20 @@ class SendPresenter: NSObject {
     
     var walletsArr = Array<UserWalletRLM>() {
         didSet {
-            if selectedActiveRequestIndex != nil  {
-                let request = activeRequestsArr[selectedActiveRequestIndex!]
-                let sendAmount = Double(request.sendAmount.stringWithDot)!
-                let address = request.sendAddress
-                
-                filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
-            } else {
-                filteredWalletArray = walletsArr
-            }
+            filterArray()
             
             sendVC?.updateUI()
         }
     }
-    var filteredWalletArray = Array<UserWalletRLM>()
+    var filteredWalletArray = Array<UserWalletRLM>() {
+        didSet {
+            if filteredWalletArray.count == 0 {
+                selectedWalletIndex = nil
+            } else {
+                selectedWalletIndex = 0
+            }
+        }
+    }
     
     var selectedWalletIndex : Int? {
         didSet {
@@ -42,15 +42,7 @@ class SendPresenter: NSObject {
     var activeRequestsArr = [PaymentRequest]()
     var selectedActiveRequestIndex : Int? {
         didSet {
-            if selectedActiveRequestIndex != nil  {
-                let request = activeRequestsArr[selectedActiveRequestIndex!]
-                let sendAmount = Double(request.sendAmount.stringWithDot)!
-                let address = request.sendAddress
-                
-                filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
-            } else {
-                filteredWalletArray = walletsArr
-            }
+            filterArray()
             
             if selectedActiveRequestIndex != oldValue {
                 self.createTransactionDTO()
@@ -81,6 +73,19 @@ class SendPresenter: NSObject {
     var transaction : TransactionDTO?
     
     var receiveActiveRequestTimer = Timer()
+    
+    func filterArray() {
+        if selectedActiveRequestIndex != nil  {
+            let request = activeRequestsArr[selectedActiveRequestIndex!]
+            //FIXEME: add all blockchains
+            let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN)
+            let address = request.sendAddress
+            
+            filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
+        } else {
+            filteredWalletArray = walletsArr
+        }
+    }
     
     override init() {
         super.init()
@@ -223,6 +228,7 @@ class SendPresenter: NSObject {
     var account = DataManager.shared.realmManager.account
     
     func createPreliminaryData() {
+        let account = DataManager.shared.realmManager.account
         let core = DataManager.shared.coreLibManager
         let wallet = filteredWalletArray[selectedWalletIndex!]
         binaryData = account!.binaryDataString.createBinaryData()!
