@@ -80,6 +80,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.updateUIWithWallet()
         self.makeQRCode()
         self.ipadFix()
+        self.presenter.didChangeReceivingOption()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
