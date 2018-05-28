@@ -275,11 +275,11 @@ class SendPresenter: NSObject {
     }
     
     func send() {
-        self.getWalletsVerbose(completion: { (success) in
-            self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
-            self.sendVC?.updateUIWithSendResponse(success: true)
-        })
-        /*
+//        self.getWalletsVerbose(completion: { (success) in
+//            self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
+//            self.sendVC?.updateUIWithSendResponse(success: true)
+//        })
+        
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
@@ -320,7 +320,6 @@ class SendPresenter: NSObject {
                 })
             }
         })
- */
     }
     
     func cleanRequests() {
