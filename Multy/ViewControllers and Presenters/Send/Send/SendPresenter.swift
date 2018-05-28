@@ -15,10 +15,9 @@ class SendPresenter: NSObject {
     var walletsArr = Array<UserWalletRLM>() {
         didSet {
             filterArray()
-            
-            sendVC?.updateUI()
         }
     }
+    
     var filteredWalletArray = Array<UserWalletRLM>() {
         didSet {
             if filteredWalletArray.count == 0 {
@@ -26,6 +25,8 @@ class SendPresenter: NSObject {
             } else {
                 selectedWalletIndex = 0
             }
+            
+            sendVC?.updateUI()
         }
     }
     
@@ -39,7 +40,14 @@ class SendPresenter: NSObject {
         }
     }
     
-    var activeRequestsArr = [PaymentRequest]()
+    var activeRequestsArr = [PaymentRequest]() {
+        didSet {
+            if activeRequestsArr.count == 0 {
+                selectedActiveRequestIndex = nil
+            }
+        }
+    }
+    
     var selectedActiveRequestIndex : Int? {
         didSet {
             filterArray()
@@ -68,11 +76,14 @@ class SendPresenter: NSObject {
         }
     }
     
+    
     var newUserCodes = [String]()
     
     var transaction : TransactionDTO?
     
     var receiveActiveRequestTimer = Timer()
+    
+    var blockActivityUpdating = false
     
     func filterArray() {
         if selectedActiveRequestIndex != nil  {
@@ -81,38 +92,58 @@ class SendPresenter: NSObject {
             let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN)
             let address = request.sendAddress
             
-            filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
+            if request.satisfied {
+                filteredWalletArray = Array<UserWalletRLM>()
+            } else {
+                filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
+            }
         } else {
             filteredWalletArray = walletsArr
         }
     }
     
-    override init() {
-        super.init()
+    func viewControllerViewDidLoad() {
+    }
+    
+    func viewControllerViewWillAppear() {
+       viewWillAppear()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillTerminate(notification:)), name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(notification:)), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    func viewWillAppear() {
+        getWallets()
+        
+        blockActivityUpdating = false
+        startSenderActivity()
+        handleBluetoothReachability()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveSendResponse(notification:)), name: Notification.Name("sendResponse"), object: nil)
+        
     }
     
-    deinit {
+    func viewControllerViewWillDisappear() {
+        viewWillDisappear()
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    func viewWillDisappear() {
+        stopSenderActivity()
+        blockActivityUpdating = true
+        
+        self.selectedWalletIndex = nil
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
-    }
-    
-    func viewControllerViewDidLoad() {
-        handleBluetoothReachability()
-    }
-    
-    func viewControllerViewWillDisappear() {
-        DataManager.shared.socketManager.stopSend()
-        self.stopSearching()
-        self.activeRequestsArr.removeAll()
-        self.selectedWalletIndex = nil
-        self.selectedActiveRequestIndex = nil
     }
     
     func numberOfWallets() -> Int {
@@ -128,12 +159,9 @@ class SendPresenter: NSObject {
             if err == nil {
                 // MARK: check this
                 if acc != nil && acc!.wallets.count > 0 {
-                    self.selectedWalletIndex = 0
                     
                     self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
                 }
-                
-//                self.sendVC?.updateUI()
             }
         }
     }
@@ -199,19 +227,34 @@ class SendPresenter: NSObject {
         let uniqueUserCodes = Array(Set(userCodes))
         DataManager.shared.socketManager.becomeSender(nearIDs: uniqueUserCodes)
     }
+    
+    func startSenderActivity() {
+        startSearchingActiveRequests()
+    }
+    
+    func stopSenderActivity() {
+        DataManager.shared.socketManager.stopSend()
+        self.stopSearching()
+        cleanRequests()
+    }
         
     func handleBluetoothReachability() {
         switch BLEManager.shared.reachability {
         case .reachable, .unknown:
-            self.sendVC?.updateUIForBluetoothState(true)
             if BLEManager.shared.reachability == .reachable {
-                self.startSearchingActiveRequests()
+                self.sendVC?.updateUIForBluetoothState(true)
+                if !blockActivityUpdating {
+                    startSenderActivity()
+                }
             }
             
             break
             
         case .notReachable:
             self.sendVC?.updateUIForBluetoothState(false)
+            if !blockActivityUpdating {
+                stopSenderActivity()
+            }
             break
         }
     }
@@ -242,6 +285,11 @@ class SendPresenter: NSObject {
     }
     
     func send() {
+//        self.getWalletsVerbose(completion: { (success) in
+//            self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
+//            self.sendVC?.updateUIWithSendResponse(success: true)
+//        })
+        
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
@@ -282,6 +330,16 @@ class SendPresenter: NSObject {
                 })
             }
         })
+    }
+    
+    func cleanRequests() {
+        self.activeRequestsArr.removeAll()
+        self.selectedActiveRequestIndex = nil
+    }
+    
+    func sendAnimationComplete() {
+        filterArray()
+        sendVC?.updateUI()
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
@@ -340,6 +398,18 @@ class SendPresenter: NSObject {
         }
     }
     
+    @objc private func applicationWillResignActive(notification: Notification) {
+        viewWillDisappear()
+    }
+    
+    @objc private func applicationWillTerminate(notification: Notification) {
+        viewWillDisappear()
+    }
+    
+    @objc private func applicationDidBecomeActive(notification: Notification) {
+        viewWillAppear()
+    }
+    
     func indexForActiveRequst(_ request : PaymentRequest) -> Int? {
         for req in activeRequestsArr {
             if req.userCode == request.userCode {
@@ -349,7 +419,6 @@ class SendPresenter: NSObject {
         return nil
     }
     
-    //TODO: remove after searching via bluetooth will implemented
     func startSearchingActiveRequests() {
         BLEManager.shared.startScan()
         receiveActiveRequestTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkNewUserCodes), userInfo: nil, repeats: true)
