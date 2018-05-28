@@ -106,6 +106,14 @@ class SendPresenter: NSObject {
     }
     
     func viewControllerViewWillAppear() {
+       viewWillAppear()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillTerminate(notification:)), name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(notification:)), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    func viewWillAppear() {
         getWallets()
         
         blockActivityUpdating = false
@@ -116,24 +124,26 @@ class SendPresenter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveSendResponse(notification:)), name: Notification.Name("sendResponse"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: Notification.Name.UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillTerminate(notification:)), name: Notification.Name.UIApplicationWillTerminate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(notification:)), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        
     }
     
     func viewControllerViewWillDisappear() {
+        viewWillDisappear()
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    func viewWillDisappear() {
         stopSenderActivity()
         blockActivityUpdating = true
         
         self.selectedWalletIndex = nil
-        
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     func numberOfWallets() -> Int {
@@ -389,15 +399,15 @@ class SendPresenter: NSObject {
     }
     
     @objc private func applicationWillResignActive(notification: Notification) {
-        viewControllerViewWillDisappear()
+        viewWillDisappear()
     }
     
     @objc private func applicationWillTerminate(notification: Notification) {
-        viewControllerViewWillDisappear()
+        viewWillDisappear()
     }
     
     @objc private func applicationDidBecomeActive(notification: Notification) {
-        viewControllerViewWillAppear()
+        viewWillAppear()
     }
     
     func indexForActiveRequst(_ request : PaymentRequest) -> Int? {

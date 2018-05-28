@@ -154,6 +154,9 @@ class SendViewController: UIViewController {
         } else {
             searchingRequestsHolderView.isHidden = false
             foundActiveRequestsHolderView.isHidden = true
+            if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
+                searchingAnimationView?.play()
+            }
         }
     }
     
