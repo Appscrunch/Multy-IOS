@@ -11,7 +11,7 @@ enum ReceivingOption {
     case wireless
 }
 
-class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
+class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, CancelProtocol, AddressTransferProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var qrImage: UIImageView!
@@ -126,6 +126,12 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     }
     
     @IBAction func addressAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+        let allAddressVC = storyboard.instantiateViewController(withIdentifier: "walletAddresses") as! WalletAddresessViewController
+        allAddressVC.addressTransferDelegate = self
+        allAddressVC.presenter.wallet = self.presenter.wallet
+        allAddressVC.whereFrom = self
+        self.navigationController?.pushViewController(allAddressVC, animated: true)
         sendAnalyticsEvent(screenName: "\(screenReceiveSummaryWithChain)\(presenter.wallet!.chain)", eventName: addressTap)
     }
 
@@ -222,7 +228,9 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         let sum = presenter.wallet!.sumInFiat.fixedFraction(digits: 2)
         self.walletFiatSumLbl.text = "\(sum) \(self.presenter.wallet?.fiatSymbol ?? "")"
         self.walletTokenImageView.image = UIImage(named: blockchain.iconString)
-        self.presenter.walletAddress = (self.presenter.wallet?.address)!
+        if presenter.walletAddress == "" {
+            self.presenter.walletAddress = (self.presenter.wallet?.address)!
+        }
         self.addressLbl.text = self.presenter.walletAddress
         
         if sumValueLbl.isHidden == false {
@@ -270,13 +278,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
 //            searchingRequestsHolderView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             hidedWalletView.insertSubview(searchingAnimationView!, at: 0)
             searchingAnimationView!.transform = CGAffineTransform(scaleX: (screenHeight / screenWidth), y: 1)
-            
             searchingAnimationView!.loopAnimation = true
             searchingAnimationView!.play()
         } else {
             searchingAnimationView?.stop()
         }
-        
         hidedWalletView.isHidden = isHidden
     }
     
@@ -344,6 +350,10 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             self.requestSumBtn.setTitleColor(.white, for: .selected)
             self.requestSumBtn.setTitleColor(.white, for: .normal)
         }
+    }
+    
+    func transfer(newAddress: String) {
+        presenter.walletAddress = newAddress
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
