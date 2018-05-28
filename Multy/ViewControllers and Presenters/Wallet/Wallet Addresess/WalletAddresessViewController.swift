@@ -12,6 +12,7 @@ class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
     
     let presenter = WalletAddresessPresenter()
     var whereFrom: UIViewController?
+    var addressTransferDelegate: AddressTransferProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,10 +82,12 @@ extension WalletAddresessViewController: UITableViewDelegate, UITableViewDataSou
             //        self.mainVC.present
             self.present(adressVC, animated: true, completion: nil)
             sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(addressWithChainTap)\(presenter.wallet!.chain)")
-            
-            //FIXME: adding adresses to wallet//remove
-//            addAddress()
         } else {
+            if whereFrom?.className == ReceiveAllDetailsViewController.className {
+                self.addressTransferDelegate?.transfer(newAddress: self.presenter.wallet!.addresses[indexPath.row].address)
+                self.navigationController?.popViewController(animated: true)
+                return
+            }
             let privateKeyVC = storyboard.instantiateViewController(withIdentifier: "privateKey") as! PrivateKeyViewController
             privateKeyVC.modalPresentationStyle = .overCurrentContext
             

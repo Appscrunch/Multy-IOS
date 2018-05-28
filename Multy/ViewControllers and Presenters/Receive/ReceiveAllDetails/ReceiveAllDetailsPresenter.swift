@@ -117,7 +117,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
                 if let value = UInt32(userCode, radix: 16) {
                     let imageNumber = Int(value)%wirelessRequestImagesAmount
                     self.wirelessRequestImageName = "wirelessRequestImage_" + String(imageNumber)
-                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
+//                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
                 }
             }
         }
