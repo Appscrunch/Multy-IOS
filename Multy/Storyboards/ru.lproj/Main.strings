@@ -6,10 +6,10 @@
 "0rb-aE-nDa.text" = "Security Settings";
 
 /* Class = "UILabel"; text = "Create Wallet"; ObjectID = "1wC-lj-ECJ"; */
-"1wC-lj-ECJ.text" = "Create Wallet";
+"1wC-lj-ECJ.text" = "Создать Кошелек";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "20j-m8-EKe"; */
-"20j-m8-EKe.text" = "Cancel";
+"20j-m8-EKe.text" = "Отменить";
 
 /* Class = "UILabel"; text = "Currency to convert"; ObjectID = "2Rh-CD-yeA"; */
 "2Rh-CD-yeA.text" = "Currency to convert";
@@ -42,7 +42,7 @@
 "CFB-1G-kDZ.text" = "Vote for features";
 
 /* Class = "UILabel"; text = "Reference Currency"; ObjectID = "Cmf-Vv-6EE"; */
-"Cmf-Vv-6EE.text" = "Reference Currency";
+"Cmf-Vv-6EE.text" = "Исходная валюта";
 
 /* Class = "UILabel"; text = "Vote for contacts"; ObjectID = "Cnj-cT-4pf"; */
 "Cnj-cT-4pf.text" = "Vote for contacts";
@@ -60,7 +60,7 @@
 "GOV-kb-79y.text" = "Fee Rate";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "IEC-wG-9xS"; */
-"IEC-wG-9xS.text" = "Cancel";
+"IEC-wG-9xS.text" = "Отменить";
 
 /* Class = "UILabel"; text = "If ou already have any wallets in Multy, you’ve changed your device or lost account - you can restore your seed phrase."; ObjectID = "IaT-zq-5mw"; */
 "IaT-zq-5mw.text" = "If ou already have any wallets in Multy, you’ve changed your device or lost account - you can restore your seed phrase.";
@@ -96,7 +96,7 @@
 "SCG-Oy-IO5.text" = "Contacts";
 
 /* Class = "UILabel"; text = "Wallet Name"; ObjectID = "TIE-mG-uUa"; */
-"TIE-mG-uUa.text" = "Wallet Name";
+"TIE-mG-uUa.text" = "Название Кошелька";
 
 /* Class = "UITextField"; text = "0.00000001"; ObjectID = "TQN-Ah-3fP"; */
 "TQN-Ah-3fP.text" = "0.00000001";
@@ -105,7 +105,7 @@
 "TqZ-Hq-Mu8.text" = "NFC";
 
 /* Class = "UILabel"; text = "Reference currency"; ObjectID = "UPE-4y-AFR"; */
-"UPE-4y-AFR.text" = "Reference currency";
+"UPE-4y-AFR.text" = "Исходная валюта";
 
 /* Class = "UILabel"; text = "Donation"; ObjectID = "VE2-jw-Snq"; */
 "VE2-jw-Snq.text" = "Donation";
@@ -123,7 +123,7 @@
 "Z17-jd-0eD.title" = "Settings";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ZPG-iV-jLD"; */
-"ZPG-iV-jLD.normalTitle" = "Cancel";
+"ZPG-iV-jLD.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "aOY-Hs-fDh"; */
 "aOY-Hs-fDh.text" = "Exchange";
@@ -198,7 +198,7 @@
 "mj4-An-rNI.normalTitle" = "1.1234 BTC";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "pCz-aZ-HZS"; */
-"pCz-aZ-HZS.normalTitle" = "Cancel";
+"pCz-aZ-HZS.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Create or Import New Wallet"; ObjectID = "sRz-3m-UVg"; */
 "sRz-3m-UVg.text" = "Create or Import New Wallet";
@@ -231,7 +231,7 @@
 "xfR-da-DhP.text" = "About Multy";
 
 /* Class = "UITextField"; placeholder = "Wallet name"; ObjectID = "yYM-Z4-2M4"; */
-"yYM-Z4-2M4.placeholder" = "Wallet name";
+"yYM-Z4-2M4.placeholder" = "Название Кошелька";
 
 /* Class = "UILabel"; text = "US Dollars ∙ USD"; ObjectID = "zG3-vO-HLP"; */
 "zG3-vO-HLP.text" = "US Dollars ∙ USD";

@@ -67,9 +67,14 @@ class Socket: NSObject {
             
             self.socket.on("TransactionUpdate") { data, ack in
                 print("-----TransactionUpdate: \(data)")
-                
                 NotificationCenter.default.post(name: NSNotification.Name("transactionUpdated"), object: nil)
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+//                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
+            
+            self.socket.on("btcTransactionUpdate") { data, ack in
+                print("-----BTCTransactionUpdate: \(data)")
+                NotificationCenter.default.post(name: NSNotification.Name("transactionUpdated"), object: nil)
+//                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
             
             self.socket.on("currentAmount") {data, ack in
@@ -132,7 +137,7 @@ class Socket: NSObject {
 
             }
         }
-        
+
         socket.emitWithAck("event:sender:check", with: [["ids" : nearIDs]]).timingOut(after: 1) { data in
             print(data)
 

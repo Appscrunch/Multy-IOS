@@ -124,13 +124,17 @@ class BLEManager: NSObject, CBCentralManagerDelegate {
     
     // MARK: Scanner
     func startScan() {
-        receivedAds = []
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        if centralManager.state == .poweredOn {
+            receivedAds = []
+            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            print("scan started")
+        }
     }
     
     func stopScan() {
         centralManager.stopScan()
         receivedAds = nil
+        print("scan stopped")
     }
     
     func resetReceivedAds() {
