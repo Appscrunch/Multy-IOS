@@ -79,13 +79,7 @@ class SendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.sendVC = self
-        
         registerCells()
-        if presenter.numberOfWallets() == 0 {
-            presenter.getWallets()
-        }
-        
         fixUIForX()
 
         walletsCollectionViewFL.minimumLineSpacing = 0
@@ -99,11 +93,14 @@ class SendViewController: UIViewController {
         sendLongPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPress:)))
         sendLongPressGR!.delegate = self
         walletsCollectionView.addGestureRecognizer(sendLongPressGR!)
+        
+        presenter.sendVC = self
+        presenter.viewControllerViewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.viewControllerViewDidLoad()
+        presenter.viewControllerViewWillAppear()
     }
     
     override func viewDidLayoutSubviews() {
@@ -143,22 +140,20 @@ class SendViewController: UIViewController {
     }
     
     func updateUI() {
-        if sendMode != .inSend {
-            activeRequestsAmountLabel.text = "Active Requests \(presenter.numberOfActiveRequests())"
-            if sendMode == .searching {
-                walletsCollectionView.reloadData()
-                activeRequestsCollectionView.reloadData()
-            }
-            
-            updateUIForActiveRequestInfo()
-            
-            if presenter.numberOfActiveRequests() > 0 {
-                searchingRequestsHolderView.isHidden = true
-                foundActiveRequestsHolderView.isHidden = false
-            } else {
-                searchingRequestsHolderView.isHidden = false
-                foundActiveRequestsHolderView.isHidden = true
-            }
+        activeRequestsAmountLabel.text = "Active Requests \(presenter.numberOfActiveRequests())"
+        if sendMode == .searching {
+            walletsCollectionView.reloadData()
+            activeRequestsCollectionView.reloadData()
+        }
+        
+        updateUIForActiveRequestInfo()
+        
+        if presenter.numberOfActiveRequests() > 0 {
+            searchingRequestsHolderView.isHidden = true
+            foundActiveRequestsHolderView.isHidden = false
+        } else {
+            searchingRequestsHolderView.isHidden = false
+            foundActiveRequestsHolderView.isHidden = true
         }
     }
     
@@ -303,10 +298,10 @@ class SendViewController: UIViewController {
                 doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
                 self.foundActiveRequestsHolderView.addSubview(doneAnimationView)
                 doneAnimationView.play{ (finished) in
-                    self.showHiddenContent(true)
-                    self.updateUIForActiveRequestInfo()
+                   // self.updateUIForActiveRequestInfo()
+                    self.exitFromSending(true)
                     
-                    UIView.animate(withDuration: 0.45, animations: {
+                    UIView.animate(withDuration: 1.0, animations: {
                         doneAnimationView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
                     }) { (succeeded) in
                         UIView.animate(withDuration: 0.35, animations: {
@@ -319,8 +314,8 @@ class SendViewController: UIViewController {
                     }
                 }
             } else {
-                showHiddenContent(false)
-                updateUIForActiveRequestInfo()
+            //    updateUIForActiveRequestInfo()
+                exitFromSending(false)
                 presentSendingErrorAlert()
             }
         }
@@ -354,7 +349,7 @@ class SendViewController: UIViewController {
         }
     }
     
-    func showHiddenContent(_ animated : Bool) {
+    func exitFromSending(_ animated : Bool) {
         self.transactionHolderView.isHidden = true
         self.transactionInfoViewBottomConstraint.constant = 5
         self.transactionInfoView.alpha = 1
@@ -372,6 +367,7 @@ class SendViewController: UIViewController {
             self.transactionHolderView.alpha = 0.0
         }) { (succeeded) in
             self.transactionHolderView.isHidden = true
+            self.presenter.sendAnimationComplete()
         }
     }
     
@@ -403,6 +399,8 @@ class SendViewController: UIViewController {
         activeRequestsCollectionView.isHidden = true
         leftActiveRequestsClonesLeadingConstraint.constant = -leftActiveRequestsClonesWidthConstraint.constant
         rightActiveRequestsClonesTrailingConstraint.constant = -rightActiveRequestsClonesWidthConstraint.constant
+        
+        self.activeRequestsClonesHolderView.layoutIfNeeded()
         
         UIView.animate(withDuration: ANIMATION_DURATION) {
             self.activeRequestsClonesHolderView.layoutIfNeeded()
@@ -462,13 +460,13 @@ class SendViewController: UIViewController {
             let requestIndex = presenter.indexForActiveRequst(cellClone.request!)
             if requestIndex != nil {
                 if requestIndex! < presenter.selectedActiveRequestIndex! {
-                    let cellFrame = activeRequestsCollectionView.convert(cell.frame, to: leftActiveRequestsClonesHolderView!)
-                    cellClone.frame = cellFrame
-                    leftActiveRequestsClonesHolderView.addSubview(cellClone)
+//                    let cellFrame = activeRequestsCollectionView.convert(cell.frame, to: leftActiveRequestsClonesHolderView!)
+//                    cellClone.frame = cellFrame
+//                    leftActiveRequestsClonesHolderView.addSubview(cellClone)
                 } else if requestIndex! > presenter.selectedActiveRequestIndex! {
-                    let cellFrame = activeRequestsCollectionView.convert(cell.frame, to: rightActiveRequestsClonesHolderView!)
-                    cellClone.frame = cellFrame
-                    rightActiveRequestsClonesHolderView.addSubview(cellClone)
+//                    let cellFrame = activeRequestsCollectionView.convert(cell.frame, to: rightActiveRequestsClonesHolderView!)
+//                    cellClone.frame = cellFrame
+//                    rightActiveRequestsClonesHolderView.addSubview(cellClone)
                 } else {
                     let cellFrame = activeRequestsCollectionView.convert(cell.frame, to: activeRequestsClonesHolderView!)
                     cellClone.frame = cellFrame
@@ -520,6 +518,7 @@ class SendViewController: UIViewController {
         let cellClone = UINib(nibName: "ActiveRequestCollectionViewCell", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActiveRequestCollectionViewCell
         cellClone.request = cell.request
         cellClone.fillInCell()
+        cellClone.alpha = cell.alpha
         
         return cellClone
     }
