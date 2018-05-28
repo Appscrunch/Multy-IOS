@@ -502,8 +502,8 @@
                                     <constraint firstAttribute="trailing" secondItem="WdU-vV-Cb8" secondAttribute="trailing" constant="15.5" id="xuc-6H-12P"/>
                                 </constraints>
                             </scrollView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-y4-B5o">
-                                <rect key="frame" x="0.0" y="355" width="375" height="717"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-y4-B5o">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrf-Rl-z4g">
                                         <rect key="frame" x="75" y="246" width="225" height="225"/>
@@ -548,6 +548,85 @@
                                             <action selector="receiveViaWirelessScanAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="Z5a-Ys-61R"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G4V-tS-bMO" userLabel="View - Bluetooth Disabled Content">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAI-11-Odr" userLabel="Label - Bluetooth Error">
+                                                <rect key="frame" x="8" y="35" width="359" height="23"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="23" id="s5j-0O-zd7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJ7-0u-62J">
+                                                <rect key="frame" x="112" y="213.5" width="150" height="150"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="8Jf-w5-1Bh"/>
+                                                    <constraint firstAttribute="width" secondItem="nJ7-0u-62J" secondAttribute="height" multiplier="1:1" id="Hqg-6y-zxG"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="75"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounce" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetooth_error_img" translatesAutoresizingMaskIntoConstraints="NO" id="Wzu-Mi-hie">
+                                                <rect key="frame" x="150" y="251" width="75" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Wzu-Mi-hie" secondAttribute="height" multiplier="1:1" id="fwG-si-a13"/>
+                                                    <constraint firstAttribute="width" constant="75" id="zcv-bw-zzz"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Check your Bluetooth connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-AP-0og">
+                                                <rect key="frame" x="88" y="386" width="199" height="61"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="199" id="TFt-0i-HGV"/>
+                                                    <constraint firstAttribute="height" constant="61" id="VcI-Ht-3I0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axh-M8-4sI">
+                                                <rect key="frame" x="75" y="571" width="225" height="60"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="225" id="T94-4c-nym"/>
+                                                    <constraint firstAttribute="height" constant="60" id="g5t-Mi-Nch"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.01176470588" green="0.49019607840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="receiveViaWirelessScanAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="hu9-bz-kGh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.1137254902" green="0.13725490200000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="jAI-11-Odr" secondAttribute="trailing" constant="8" id="5hf-Wc-VcA"/>
+                                            <constraint firstItem="Wzu-Mi-hie" firstAttribute="centerY" secondItem="nJ7-0u-62J" secondAttribute="centerY" id="6xe-md-bi2"/>
+                                            <constraint firstItem="Wzu-Mi-hie" firstAttribute="centerX" secondItem="nJ7-0u-62J" secondAttribute="centerX" id="AV6-wG-1im"/>
+                                            <constraint firstItem="jAI-11-Odr" firstAttribute="top" secondItem="G4V-tS-bMO" secondAttribute="top" constant="35" id="Wfq-T2-Piu"/>
+                                            <constraint firstItem="Axh-M8-4sI" firstAttribute="centerX" secondItem="G4V-tS-bMO" secondAttribute="centerX" id="XiI-3U-C2K"/>
+                                            <constraint firstAttribute="bottom" secondItem="Axh-M8-4sI" secondAttribute="bottom" constant="86" id="a9E-nq-dW1"/>
+                                            <constraint firstItem="vkW-AP-0og" firstAttribute="top" secondItem="nJ7-0u-62J" secondAttribute="bottom" constant="22.5" id="dGO-sx-c3X"/>
+                                            <constraint firstItem="nJ7-0u-62J" firstAttribute="centerX" secondItem="G4V-tS-bMO" secondAttribute="centerX" id="gmb-eo-qiz"/>
+                                            <constraint firstItem="vkW-AP-0og" firstAttribute="centerX" secondItem="nJ7-0u-62J" secondAttribute="centerX" id="jdO-7V-d4O"/>
+                                            <constraint firstItem="jAI-11-Odr" firstAttribute="leading" secondItem="G4V-tS-bMO" secondAttribute="leading" constant="8" id="nZO-LM-6Uk"/>
+                                            <constraint firstItem="nJ7-0u-62J" firstAttribute="centerY" secondItem="G4V-tS-bMO" secondAttribute="centerY" constant="-70" id="qFE-jj-Mh9"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.01176470588" green="0.49019607840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -555,8 +634,11 @@
                                     <constraint firstItem="Qf6-To-A5V" firstAttribute="leading" secondItem="vrf-Rl-z4g" secondAttribute="leading" id="54k-1W-TDe"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="D9I-oI-khF"/>
                                     <constraint firstItem="i8P-M2-nC4" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="EOX-SC-fOY"/>
+                                    <constraint firstItem="G4V-tS-bMO" firstAttribute="leading" secondItem="ihe-y4-B5o" secondAttribute="leading" id="F1S-SB-6sY"/>
                                     <constraint firstItem="i8P-M2-nC4" firstAttribute="top" secondItem="998-1q-NGD" secondAttribute="bottom" constant="12" id="GgP-Xj-bdp"/>
+                                    <constraint firstAttribute="trailing" secondItem="G4V-tS-bMO" secondAttribute="trailing" id="HRa-GJ-Uq1"/>
                                     <constraint firstItem="Qf6-To-A5V" firstAttribute="trailing" secondItem="vrf-Rl-z4g" secondAttribute="trailing" id="JbA-4G-dpR"/>
+                                    <constraint firstItem="G4V-tS-bMO" firstAttribute="top" secondItem="ihe-y4-B5o" secondAttribute="top" id="KgH-9e-HmQ"/>
                                     <constraint firstItem="998-1q-NGD" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="M7E-05-C5N"/>
                                     <constraint firstItem="7ol-yG-FZr" firstAttribute="top" secondItem="ihe-y4-B5o" secondAttribute="top" constant="36" id="R99-kx-rj9"/>
                                     <constraint firstItem="7ol-yG-FZr" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="WXM-k7-aqc"/>
@@ -565,6 +647,7 @@
                                     <constraint firstItem="i8P-M2-nC4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ihe-y4-B5o" secondAttribute="leading" constant="20" id="jFE-PY-mAf"/>
                                     <constraint firstAttribute="bottom" secondItem="Qf6-To-A5V" secondAttribute="bottom" constant="86" id="num-W0-GPT"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="top" secondItem="i8P-M2-nC4" secondAttribute="bottom" constant="25" id="onp-2n-Tdq"/>
+                                    <constraint firstAttribute="bottom" secondItem="G4V-tS-bMO" secondAttribute="bottom" id="oxb-us-v2v"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -584,6 +667,7 @@
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="addressLbl" destination="TcM-XW-eXl" id="518-rV-EwW"/>
+                        <outlet property="bluetoothDisabledContentView" destination="G4V-tS-bMO" id="vVb-q5-1TU"/>
                         <outlet property="cancelBtn" destination="UQf-gq-ib1" id="Mwv-vl-IpK"/>
                         <outlet property="cryptoNameLbl" destination="CTc-56-hc2" id="Rw6-3b-GVs"/>
                         <outlet property="fiatNameLbl" destination="8Fl-G0-iLU" id="dfL-uW-DnA"/>
@@ -811,6 +895,7 @@
     <resources>
         <image name="addressBookIcon" width="16" height="16"/>
         <image name="backGrey" width="13" height="21"/>
+        <image name="bluetooth_error_img" width="34" height="34"/>
         <image name="chevron" width="15" height="22"/>
         <image name="recieveBig" width="66" height="66"/>
         <image name="share" width="21" height="21"/>

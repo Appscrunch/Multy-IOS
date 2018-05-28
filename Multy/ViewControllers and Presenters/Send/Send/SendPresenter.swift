@@ -103,6 +103,7 @@ class SendPresenter: NSObject {
     }
     
     func viewControllerViewDidLoad() {
+        let _ = BLEManager.shared
     }
     
     func viewControllerViewWillAppear() {

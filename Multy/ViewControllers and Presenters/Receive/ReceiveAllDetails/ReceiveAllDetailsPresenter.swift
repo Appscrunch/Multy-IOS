@@ -22,7 +22,11 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         }
     }
     
-    var walletAddress = ""
+    var walletAddress = "" {
+        didSet {
+            generateWirelessRequestImage()
+        }
+    }
     
     var wallet: UserWalletRLM? {
         didSet {
@@ -46,14 +50,15 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillTerminate(notification:)), name: Notification.Name.UIApplicationWillTerminate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(notification:)), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
     }
     
     func viewWillAppear() {
         receiveAllDetailsVC?.updateSearchingAnimation()
+        
         blockWirelessActivityUpdating = false
         startWirelessReceiverActivity()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didUpdateTransaction(notification:)), name: Notification.Name("transactionUpdated"), object: nil)
     }
     
@@ -63,13 +68,13 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
     }
     
     func viewWillDisappear() {
         stopWirelessReceiverActivity()
         blockWirelessActivityUpdating = true
         
-        NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("transactionUpdated"), object: nil)
     }
     
@@ -111,10 +116,8 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             break
             
         case .wireless:
-            if wirelessRequestImageName == nil {
-                generateWirelessRequestImage()
-            }
-            
+            let bluetoothEnabled = BLEManager.shared.reachability == .reachable
+            receiveAllDetailsVC?.updateUIForBluetoothState(bluetoothEnabled)
             startWirelessReceiverActivity()
             break
         }
@@ -125,8 +128,12 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             let reachability = BLEManager.shared.reachability
             
             if reachability == .notReachable {
-                self.receiveAllDetailsVC?.presentBluetoothErrorAlert()
+                receiveAllDetailsVC?.updateUIForBluetoothState(false)
+                if !blockWirelessActivityUpdating {
+                    stopWirelessReceiverActivity()
+                }
             } else if reachability == .reachable {
+                receiveAllDetailsVC?.updateUIForBluetoothState(true)
                 if !blockWirelessActivityUpdating {
                     startWirelessReceiverActivity()
                 }
@@ -142,7 +149,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
                 if let value = UInt32(userCode, radix: 16) {
                     let imageNumber = Int(value)%wirelessRequestImagesAmount
                     self.wirelessRequestImageName = "wirelessRequestImage_" + String(imageNumber)
-//                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
+                    //                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
                 }
             }
         }
