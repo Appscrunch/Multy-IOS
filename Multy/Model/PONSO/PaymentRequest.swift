@@ -20,12 +20,16 @@ class PaymentRequest: NSObject {
     
     var requestImageName : String {
         get {
-            if let userCodeInt = UInt32(userCode, radix: 16) {
-                let imageNumber = Int(userCodeInt)%wirelessRequestImagesAmount
-                return "wirelessRequestImage_" + String(imageNumber)
-            } else {
-                return ""
-            }
+            let imageNumber = sendAddress.converToImageIndex
+            
+            return "wirelessRequestImage_" + "\(imageNumber)"
+            
+//            if let userCodeInt = UInt32(userCode, radix: 16) {
+//                let imageNumber = Int(userCodeInt)%wirelessRequestImagesAmount
+//                return "wirelessRequestImage_" + String(imageNumber)
+//            } else {
+//                return ""
+//            }
         }
     }
     

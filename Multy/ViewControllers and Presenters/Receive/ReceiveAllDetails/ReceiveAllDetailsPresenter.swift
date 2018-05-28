@@ -142,17 +142,22 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     private func generateWirelessRequestImage() {
-        DataManager.shared.getAccount { (account, error) in
-            if account != nil {
-                let userID = account!.userID
-                let userCode = self.userCodeForUserID(userID: userID)
-                if let value = UInt32(userCode, radix: 16) {
-                    let imageNumber = Int(value)%wirelessRequestImagesAmount
-                    self.wirelessRequestImageName = "wirelessRequestImage_" + String(imageNumber)
-                    //                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
-                }
-            }
-        }
+        let imageNumber = walletAddress.converToImageIndex
+        wirelessRequestImageName = "wirelessRequestImage_" + "\(imageNumber)"
+//
+//        DataManager.shared.getAccount { (account, error) in
+//            if account != nil {
+//
+        
+//                let userID = account!.userID
+//                let userCode = self.userCodeForUserID(userID: userID)
+//                if let value = UInt32(userCode, radix: 16) {
+//                    let imageNumber = Int(value)%wirelessRequestImagesAmount
+//
+//                    self.receiveAllDetailsVC?.updateWirelessTransactionImage()
+//                }
+//            }
+//        }
     }
     
     private func startWirelessReceiverActivity() {
