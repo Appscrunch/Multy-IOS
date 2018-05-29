@@ -369,4 +369,12 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         }
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: tap)
     }
+    
+    @IBAction func clearAction(_ sender: Any) {
+        self.topSumLbl.text = "0"
+        self.amountTF.text = "0"
+        self.presenter.sumInCrypto = BigInt("0")
+        self.presenter.saveTfValue()
+        self.setSumInNextBtn()
+    }
 }
