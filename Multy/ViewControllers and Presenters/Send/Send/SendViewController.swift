@@ -374,7 +374,8 @@ class SendViewController: UIViewController {
                 }
                 
             } else {
-                exitFromSending({self.presenter.sendAnimationComplete()})
+                exitFromSending({[unowned self] in
+                    self.presenter.sendAnimationComplete()})
                 presentSendingErrorAlert()
             }
         }

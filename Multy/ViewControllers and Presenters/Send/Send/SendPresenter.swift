@@ -166,13 +166,13 @@ class SendPresenter: NSObject {
     }
     
     func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
-        DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
+        DataManager.shared.getWalletsVerbose() {[unowned self] (walletsArrayFromApi, err) in
             if err != nil {
                 return
             } else {
                 let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
                 print("afterVerbose:rawdata: \(walletsArrayFromApi)")
-                DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
+                DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { [unowned self] (acc, err) in
                     self.account = acc
                     
                     if acc != nil && acc!.wallets.count > 0 {
@@ -313,7 +313,7 @@ class SendPresenter: NSObject {
             "payload"   : newAddressParams
             ] as [String : Any]
 
-        DataManager.shared.sendHDTransaction(transactionParameters: params, completion: { (dict, error) in
+        DataManager.shared.sendHDTransaction(transactionParameters: params, completion: { [unowned self] (dict, error) in
             print("\(dict), \(error)")
             
             if error != nil {
@@ -326,7 +326,7 @@ class SendPresenter: NSObject {
     
     func sendAnimationComplete() {
         stopSearching()
-        self.getWalletsVerbose(completion: { (success) in
+        self.getWalletsVerbose(completion: { [unowned self] (success) in
             self.cleanRequests()
             self.startSearchingActiveRequests()
             self.sendVC?.updateUI()
