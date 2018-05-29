@@ -94,6 +94,14 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         magicView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+        refreshBackground()
+    }
+    
+    func refreshBackground() {
+        hidedWalletView.applyGradient(withColours: [
+            UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
+            UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
+                           gradientOrientation: .topRightBottomLeft)
     }
     
     func presentDidReceivePaymentAlert() {

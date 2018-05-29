@@ -60,7 +60,6 @@ class SendViewController: UIViewController {
     @IBOutlet weak var bluetoothErrorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothEnabledContentBottomConstraint: NSLayoutConstraint!
     
-    
     var searchingAnimationView : LOTAnimationView?
     var sendLongPressGR : UILongPressGestureRecognizer?
     var sendSwipeGR : UISwipeGestureRecognizer?
@@ -81,7 +80,7 @@ class SendViewController: UIViewController {
         
         registerCells()
         fixUIForX()
-
+        
         walletsCollectionViewFL.minimumLineSpacing = 0
         activeRequestsCollectionViewFL.spacingMode = .fixed(spacing: 0)
         
@@ -100,6 +99,7 @@ class SendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         presenter.viewControllerViewWillAppear()
     }
     
@@ -108,6 +108,8 @@ class SendViewController: UIViewController {
         
         configureCollectionViewLayoutItemSize(collectionView: activeRequestsCollectionView)
         configureCollectionViewLayoutItemSize(collectionView: walletsCollectionView)
+        
+        refreshBackground()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -137,6 +139,13 @@ class SendViewController: UIViewController {
             searchingAnimationView!.loopAnimation = true
             searchingAnimationView!.play()
         }
+    }
+    
+    func refreshBackground() {
+        view.applyGradient(withColours: [
+            UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
+            UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
+                           gradientOrientation: .topRightBottomLeft)
     }
     
     func updateUI() {

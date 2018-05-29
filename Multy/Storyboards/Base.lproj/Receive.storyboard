@@ -628,7 +628,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.01176470588" green="0.49019607840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="centerY" secondItem="ihe-y4-B5o" secondAttribute="centerY" id="0W6-WH-6jo"/>
                                     <constraint firstItem="Qf6-To-A5V" firstAttribute="leading" secondItem="vrf-Rl-z4g" secondAttribute="leading" id="54k-1W-TDe"/>
