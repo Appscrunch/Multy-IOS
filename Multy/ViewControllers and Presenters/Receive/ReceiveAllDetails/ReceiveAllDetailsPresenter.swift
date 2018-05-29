@@ -17,7 +17,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     var wirelessRequestImageName: String? {
         didSet {
             if wirelessRequestImageName != nil {
-                receiveAllDetailsVC!.hidedImage.image = UIImage(named: wirelessRequestImageName!)
+                receiveAllDetailsVC?.hidedImage.image = UIImage(named: wirelessRequestImageName!)
             }
         }
     }
@@ -32,6 +32,14 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         didSet {
             if wallet != nil {
                 qrBlockchainString = BlockchainType.create(wallet: wallet!).qrBlockchainString
+               
+                if oldValue != wallet {
+                    if wallet!.addresses.count > 0 {
+                        walletAddress = wallet!.addresses.first!.address
+                    } else {
+                        walletAddress = ""
+                    }
+                }
             }
         }
     }
@@ -209,7 +217,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         let blockchainType = BlockchainType.create(wallet: self.wallet!)
         let currencyID = self.wallet!.chain
         let networkID = blockchainType.net_type
-        let address = self.wallet!.address
+        let address = walletAddress
         let amount = cryptoSum != nil ? cryptoSum!.convertToSatoshiAmountString() : "0"
         
         DataManager.shared.socketManager.becomeReceiver(receiverID: userID, userCode: userCode, currencyID: currencyID.intValue, networkID: networkID, address: address, amount: amount)

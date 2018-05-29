@@ -192,7 +192,7 @@ class SendViewController: UIViewController {
         let blockchainType = BlockchainType.create(wallet: presenter.transaction!.choosenWallet!)
         let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
         transactionSumInCryptoLbl.text = "\(presenter.transaction!.sendAmount!.fixedFraction(digits: 8)) \(blockchainType.shortName)"
-        transactionSumInFiatLbl.text = "\((presenter.transaction!.sendAmount! * exchangeCourse).fixedFraction(digits: 0)) $" 
+        transactionSumInFiatLbl.text = "\((presenter.transaction!.sendAmount! * exchangeCourse).fixedFraction(digits: 2)) $" 
         transactionTokenImageView.image = UIImage(named: blockchainType.iconString)
     }
     

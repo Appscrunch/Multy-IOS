@@ -505,6 +505,10 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-y4-B5o">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qK9-pf-K4T" userLabel="Searching Animation View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrf-Rl-z4g">
                                         <rect key="frame" x="75" y="246" width="225" height="225"/>
                                         <constraints>
@@ -632,6 +636,7 @@
                                 <constraints>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="centerY" secondItem="ihe-y4-B5o" secondAttribute="centerY" id="0W6-WH-6jo"/>
                                     <constraint firstItem="Qf6-To-A5V" firstAttribute="leading" secondItem="vrf-Rl-z4g" secondAttribute="leading" id="54k-1W-TDe"/>
+                                    <constraint firstItem="qK9-pf-K4T" firstAttribute="top" secondItem="ihe-y4-B5o" secondAttribute="top" id="6cQ-lO-rOE"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="D9I-oI-khF"/>
                                     <constraint firstItem="i8P-M2-nC4" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="EOX-SC-fOY"/>
                                     <constraint firstItem="G4V-tS-bMO" firstAttribute="leading" secondItem="ihe-y4-B5o" secondAttribute="leading" id="F1S-SB-6sY"/>
@@ -641,13 +646,16 @@
                                     <constraint firstItem="G4V-tS-bMO" firstAttribute="top" secondItem="ihe-y4-B5o" secondAttribute="top" id="KgH-9e-HmQ"/>
                                     <constraint firstItem="998-1q-NGD" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="M7E-05-C5N"/>
                                     <constraint firstItem="7ol-yG-FZr" firstAttribute="top" secondItem="ihe-y4-B5o" secondAttribute="top" constant="36" id="R99-kx-rj9"/>
+                                    <constraint firstAttribute="bottom" secondItem="qK9-pf-K4T" secondAttribute="bottom" id="Vfa-Ef-T6P"/>
                                     <constraint firstItem="7ol-yG-FZr" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="WXM-k7-aqc"/>
+                                    <constraint firstAttribute="trailing" secondItem="qK9-pf-K4T" secondAttribute="trailing" id="XIw-ek-AZQ"/>
                                     <constraint firstItem="998-1q-NGD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ihe-y4-B5o" secondAttribute="leading" constant="20" id="aq0-gV-Kzb"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="width" secondItem="ihe-y4-B5o" secondAttribute="width" multiplier="3/5" id="hxb-wQ-JPh"/>
                                     <constraint firstItem="i8P-M2-nC4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ihe-y4-B5o" secondAttribute="leading" constant="20" id="jFE-PY-mAf"/>
                                     <constraint firstAttribute="bottom" secondItem="Qf6-To-A5V" secondAttribute="bottom" constant="86" id="num-W0-GPT"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="top" secondItem="i8P-M2-nC4" secondAttribute="bottom" constant="25" id="onp-2n-Tdq"/>
                                     <constraint firstAttribute="bottom" secondItem="G4V-tS-bMO" secondAttribute="bottom" id="oxb-us-v2v"/>
+                                    <constraint firstItem="qK9-pf-K4T" firstAttribute="leading" secondItem="ihe-y4-B5o" secondAttribute="leading" id="sCS-J4-QIa"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -682,6 +690,7 @@
                         <outlet property="requestSummImageView" destination="4kw-SE-2fd" id="rqo-b0-VTJ"/>
                         <outlet property="requestSummLbl" destination="Cyh-TI-NTq" id="7Gb-0b-IXe"/>
                         <outlet property="scrollView" destination="dWs-Iy-4aG" id="jV3-sA-w5v"/>
+                        <outlet property="searchingAnimationHolder" destination="qK9-pf-K4T" id="nrk-nq-9W0"/>
                         <outlet property="sumValueLbl" destination="fc4-7b-wBs" id="tTd-js-uIS"/>
                         <outlet property="viewForShadow" destination="WdU-vV-Cb8" id="VFs-de-txB"/>
                         <outlet property="walletCryptoSumBtn" destination="AXb-Qw-h0b" id="lcK-5n-hQZ"/>
