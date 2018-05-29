@@ -24,6 +24,7 @@ class SendPresenter: NSObject {
                 selectedWalletIndex = nil
             } else {
                 selectedWalletIndex = 0
+                sendVC?.scrollToWallet(selectedWalletIndex!)
             }
             
             sendVC?.updateUI()
@@ -92,11 +93,8 @@ class SendPresenter: NSObject {
             let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN)
             let address = request.sendAddress
             
-            if request.satisfied {
-                filteredWalletArray = Array<UserWalletRLM>()
-            } else {
-                filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
-            }
+
+            filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount }
         } else {
             filteredWalletArray = walletsArr
         }
@@ -235,7 +233,7 @@ class SendPresenter: NSObject {
     
     func stopSenderActivity() {
         DataManager.shared.socketManager.stopSend()
-        self.stopSearching()
+        stopSearching()
         cleanRequests()
     }
         
@@ -286,10 +284,6 @@ class SendPresenter: NSObject {
     }
     
     func send() {
-//        self.getWalletsVerbose(completion: { (success) in
-//            self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
-//            self.sendVC?.updateUIWithSendResponse(success: true)
-//        })
         
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
@@ -325,22 +319,24 @@ class SendPresenter: NSObject {
             if error != nil {
                 self.sendVC?.updateUIWithSendResponse(success: false)
             } else {
-                self.getWalletsVerbose(completion: { (success) in
-                    self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
-                    self.sendVC?.updateUIWithSendResponse(success: true)
-                })
+                self.sendVC?.updateUIWithSendResponse(success: true)
             }
+        })
+    }
+    
+    func sendAnimationComplete() {
+        stopSearching()
+        self.getWalletsVerbose(completion: { (success) in
+            self.cleanRequests()
+            self.startSearchingActiveRequests()
+            self.sendVC?.updateUI()
         })
     }
     
     func cleanRequests() {
         self.activeRequestsArr.removeAll()
         self.selectedActiveRequestIndex = nil
-    }
-    
-    func sendAnimationComplete() {
-        filterArray()
-        sendVC?.updateUI()
+        self.sendVC?.updateUI()
     }
     
     @objc private func didChangedBluetoothReachability(notification: Notification) {
@@ -390,10 +386,6 @@ class SendPresenter: NSObject {
     @objc private func didReceiveSendResponse(notification: Notification) {
         DispatchQueue.main.async {
             let success = notification.userInfo!["data"] as! Bool
-            
-            if success {
-                self.activeRequestsArr[self.selectedActiveRequestIndex!].satisfied = true
-            }
             
             self.sendVC?.updateUIWithSendResponse(success: success)
         }

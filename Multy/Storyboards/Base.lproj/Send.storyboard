@@ -324,7 +324,7 @@
                                             <constraint firstAttribute="width" secondItem="W1g-6P-0qz" secondAttribute="height" multiplier="1:1" id="NKy-sE-sb7"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZi-At-pK8" userLabel="Found Requests Holder View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZi-At-pK8" userLabel="Found Requests Holder View">
                                         <rect key="frame" x="0.0" y="116" width="375" height="343"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5E5-tF-NFY">
