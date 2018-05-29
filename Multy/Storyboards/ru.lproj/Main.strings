@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "0qt-Qh-fw1"; */
-"0qt-Qh-fw1.text" = "Exchange";
+"0qt-Qh-fw1.text" = "Биржа";
 
 /* Class = "UILabel"; text = "Security Settings"; ObjectID = "0rb-aE-nDa"; */
 "0rb-aE-nDa.text" = "Security Settings";
@@ -12,7 +12,7 @@
 "20j-m8-EKe.text" = "Отменить";
 
 /* Class = "UILabel"; text = "Currency to convert"; ObjectID = "2Rh-CD-yeA"; */
-"2Rh-CD-yeA.text" = "Currency to convert";
+"2Rh-CD-yeA.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "Donate for this option"; ObjectID = "2af-jb-4m3"; */
 "2af-jb-4m3.text" = "Donate for this option";
@@ -42,7 +42,7 @@
 "CFB-1G-kDZ.text" = "Vote for features";
 
 /* Class = "UILabel"; text = "Reference Currency"; ObjectID = "Cmf-Vv-6EE"; */
-"Cmf-Vv-6EE.text" = "Исходная валюта";
+"Cmf-Vv-6EE.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "Vote for contacts"; ObjectID = "Cnj-cT-4pf"; */
 "Cnj-cT-4pf.text" = "Vote for contacts";
@@ -51,7 +51,7 @@
 "E6X-rf-6eP.text" = "Push Notifications";
 
 /* Class = "UIButton"; normalTitle = "Create"; ObjectID = "EcK-ls-Eh8"; */
-"EcK-ls-Eh8.normalTitle" = "Create";
+"EcK-ls-Eh8.normalTitle" = "Создать";
 
 /* Class = "UILabel"; text = "No contacts yet"; ObjectID = "F39-3R-vjc"; */
 "F39-3R-vjc.text" = "No contacts yet";
@@ -111,7 +111,7 @@
 "VE2-jw-Snq.text" = "Donation";
 
 /* Class = "UILabel"; text = "Blockchains"; ObjectID = "Vis-uX-a9U"; */
-"Vis-uX-a9U.text" = "Blockchains";
+"Vis-uX-a9U.text" = "Блокчейны";
 
 /* Class = "UILabel"; text = "Import Wallet"; ObjectID = "XSz-h8-kEl"; */
 "XSz-h8-kEl.text" = "Import Wallet";
@@ -126,7 +126,7 @@
 "ZPG-iV-jLD.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "aOY-Hs-fDh"; */
-"aOY-Hs-fDh.text" = "Exchange";
+"aOY-Hs-fDh.text" = "Биржа";
 
 /* Class = "UILabel"; text = "Bitcoin ∙ BTC"; ObjectID = "aVq-ZB-lDs"; */
 "aVq-ZB-lDs.text" = "Bitcoin ∙ BTC";
@@ -150,7 +150,7 @@
 "db1-Nv-fng.text" = "USD";
 
 /* Class = "UILabel"; text = "US Dollars ∙ USD"; ObjectID = "df5-ol-Doo"; */
-"df5-ol-Doo.text" = "US Dollars ∙ USD";
+"df5-ol-Doo.text" = "Доллары США ∙ USD";
 
 /* Class = "UIButton"; normalTitle = "Terms of Service"; ObjectID = "dk1-AS-aPV"; */
 "dk1-AS-aPV.normalTitle" = "Terms of Service";
@@ -210,7 +210,7 @@
 "tdq-0K-Sb2.normalTitle" = "Try Again";
 
 /* Class = "UILabel"; text = "Blockchain"; ObjectID = "u64-Q0-7bi"; */
-"u64-Q0-7bi.text" = "Blockchain";
+"u64-Q0-7bi.text" = "Блокчейн";
 
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "vCc-C8-70s"; */
 "vCc-C8-70s.normalTitle" = "Send";
@@ -234,4 +234,4 @@
 "yYM-Z4-2M4.placeholder" = "Название Кошелька";
 
 /* Class = "UILabel"; text = "US Dollars ∙ USD"; ObjectID = "zG3-vO-HLP"; */
-"zG3-vO-HLP.text" = "US Dollars ∙ USD";
+"zG3-vO-HLP.text" = "Доллары США ∙ USD";

@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeProtocol = ExchangeStocksViewController
+
 class ExchangeStocksViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
     
     @IBOutlet weak var tableView: UITableView!
@@ -74,10 +76,10 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
         
         if section == 0 {
             label.textColor = #colorLiteral(red: 0.5294117647, green: 0.631372549, blue: 0.7725490196, alpha: 1)
-            label.text = "AVAILABLE"
+            label.text = localize(string: "AVAILABLE")
         } else {
             label.textColor = #colorLiteral(red: 0.9215686275, green: 0.08235294118, blue: 0.231372549, alpha: 1)
-            label.text = "WORK IN PROGRESS"
+            label.text = localize(string: "WORK IN PROGRESS")
         }
         
         header.addSubview(label)
@@ -122,5 +124,11 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
+    }
+}
+
+extension LocalizeProtocol: Localizable {
+    var tableName: String {
+        return "CurrencyChooser"
     }
 }

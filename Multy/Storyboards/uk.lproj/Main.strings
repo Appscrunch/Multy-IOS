@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "0qt-Qh-fw1"; */
-"0qt-Qh-fw1.text" = "Exchange";
+"0qt-Qh-fw1.text" = "Біржа";
 
 /* Class = "UILabel"; text = "Security Settings"; ObjectID = "0rb-aE-nDa"; */
 "0rb-aE-nDa.text" = "Security Settings";
@@ -12,7 +12,7 @@
 "20j-m8-EKe.text" = "Скасувати";
 
 /* Class = "UILabel"; text = "Currency to convert"; ObjectID = "2Rh-CD-yeA"; */
-"2Rh-CD-yeA.text" = "Currency to convert";
+"2Rh-CD-yeA.text" = "Валюта оцінки";
 
 /* Class = "UILabel"; text = "Donate for this option"; ObjectID = "2af-jb-4m3"; */
 "2af-jb-4m3.text" = "Donate for this option";
@@ -42,7 +42,7 @@
 "CFB-1G-kDZ.text" = "Vote for features";
 
 /* Class = "UILabel"; text = "Reference Currency"; ObjectID = "Cmf-Vv-6EE"; */
-"Cmf-Vv-6EE.text" = "Вихідна валюта";
+"Cmf-Vv-6EE.text" = "Валюта оцінки";
 
 /* Class = "UILabel"; text = "Vote for contacts"; ObjectID = "Cnj-cT-4pf"; */
 "Cnj-cT-4pf.text" = "Vote for contacts";
@@ -51,7 +51,7 @@
 "E6X-rf-6eP.text" = "Push Notifications";
 
 /* Class = "UIButton"; normalTitle = "Create"; ObjectID = "EcK-ls-Eh8"; */
-"EcK-ls-Eh8.normalTitle" = "Create";
+"EcK-ls-Eh8.normalTitle" = "Створити";
 
 /* Class = "UILabel"; text = "No contacts yet"; ObjectID = "F39-3R-vjc"; */
 "F39-3R-vjc.text" = "No contacts yet";
@@ -105,13 +105,13 @@
 "TqZ-Hq-Mu8.text" = "NFC";
 
 /* Class = "UILabel"; text = "Reference currency"; ObjectID = "UPE-4y-AFR"; */
-"UPE-4y-AFR.text" = "Вихідна валюта";
+"UPE-4y-AFR.text" = "Валюта оцінки";
 
 /* Class = "UILabel"; text = "Donation"; ObjectID = "VE2-jw-Snq"; */
 "VE2-jw-Snq.text" = "Donation";
 
 /* Class = "UILabel"; text = "Blockchains"; ObjectID = "Vis-uX-a9U"; */
-"Vis-uX-a9U.text" = "Blockchains";
+"Vis-uX-a9U.text" = "Блокчейни";
 
 /* Class = "UILabel"; text = "Import Wallet"; ObjectID = "XSz-h8-kEl"; */
 "XSz-h8-kEl.text" = "Import Wallet";
@@ -126,7 +126,7 @@
 "ZPG-iV-jLD.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "aOY-Hs-fDh"; */
-"aOY-Hs-fDh.text" = "Exchange";
+"aOY-Hs-fDh.text" = "Біржа";
 
 /* Class = "UILabel"; text = "Bitcoin ∙ BTC"; ObjectID = "aVq-ZB-lDs"; */
 "aVq-ZB-lDs.text" = "Bitcoin ∙ BTC";
@@ -210,7 +210,7 @@
 "tdq-0K-Sb2.normalTitle" = "Try Again";
 
 /* Class = "UILabel"; text = "Blockchain"; ObjectID = "u64-Q0-7bi"; */
-"u64-Q0-7bi.text" = "Blockchain";
+"u64-Q0-7bi.text" = "Блокчейн";
 
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "vCc-C8-70s"; */
 "vCc-C8-70s.normalTitle" = "Send";

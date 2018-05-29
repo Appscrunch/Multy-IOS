@@ -31,6 +31,8 @@
 		445B129120BC1CD100FD0D33 /* SearchAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445B129320BC1CD100FD0D33 /* SearchAddressTableViewCell.xib */; };
 		445B129420BC1CE700FD0D33 /* TransactionFeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445B129620BC1CE700FD0D33 /* TransactionFeeTableViewCell.xib */; };
 		445B129720BC1CEE00FD0D33 /* CustomTrasanctionFeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445B129920BC1CEE00FD0D33 /* CustomTrasanctionFeeTableViewCell.xib */; };
+		445B12E020BD78D000FD0D33 /* CurrencyChooser.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445B12E220BD78D000FD0D33 /* CurrencyChooser.strings */; };
+		445B12E620BD819000FD0D33 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B12E520BD819000FD0D33 /* Localizable.swift */; };
 		447ECAD320330C2C0085C26D /* TransactionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447ECAD220330C2C0085C26D /* TransactionDTO.swift */; };
 		449151402049764D0028195F /* MultyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4491513F2049764D0028195F /* MultyUITests.swift */; };
 		4491514E204976600028195F /* MultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4491514D204976600028195F /* MultyTests.swift */; };
@@ -375,6 +377,10 @@
 		445B12D720BC220C00FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SearchAddressTableViewCell.strings; sourceTree = "<group>"; };
 		445B12D920BC221100FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TransactionFeeTableViewCell.strings; sourceTree = "<group>"; };
 		445B12DB20BC221400FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CustomTrasanctionFeeTableViewCell.strings; sourceTree = "<group>"; };
+		445B12E120BD78D000FD0D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CurrencyChooser.strings; sourceTree = "<group>"; };
+		445B12E320BD78D600FD0D33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/CurrencyChooser.strings; sourceTree = "<group>"; };
+		445B12E420BD78D700FD0D33 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/CurrencyChooser.strings; sourceTree = "<group>"; };
+		445B12E520BD819000FD0D33 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		447ECAD220330C2C0085C26D /* TransactionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDTO.swift; sourceTree = "<group>"; };
 		4491513D2049764D0028195F /* MultyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4491513F2049764D0028195F /* MultyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultyUITests.swift; sourceTree = "<group>"; };
@@ -698,6 +704,14 @@
 			path = BTCWallet;
 			sourceTree = "<group>";
 		};
+		445B12DC20BD782500FD0D33 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				445B12E220BD78D000FD0D33 /* CurrencyChooser.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		4491513E2049764D0028195F /* MultyUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -787,6 +801,7 @@
 		452290531FBB18D30024B550 /* Multy */ = {
 			isa = PBXGroup;
 			children = (
+				445B12DC20BD782500FD0D33 /* Strings */,
 				4526F8DD2015383D00D2E491 /* Multy.entitlements */,
 				452290541FBB18D30024B550 /* AppDelegate.swift */,
 				FA58DF5E1FDC3FB800C45303 /* BricksView.swift */,
@@ -1182,6 +1197,7 @@
 				4585BD3C2049C0DD004542AE /* DonationProtocol.swift */,
 				44FB26BF205A6D5600F208EB /* ChooseBlockchainProtocol.swift */,
 				45F098E720BC2877004DA1F7 /* AddressTransferProtocol.swift */,
+				445B12E520BD819000FD0D33 /* Localizable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1865,6 +1881,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				uk,
 			);
 			mainGroup = 452290481FBB18D30024B550;
 			productRefGroup = 452290521FBB18D30024B550 /* Products */;
@@ -1923,6 +1941,7 @@
 				445B129720BC1CEE00FD0D33 /* CustomTrasanctionFeeTableViewCell.xib in Resources */,
 				445B127020BC1BA800FD0D33 /* SeedPhrase.storyboard in Resources */,
 				4583ACA01FBC991E001991AA /* NewWalletTableViewCell.xib in Resources */,
+				445B12E020BD78D000FD0D33 /* CurrencyChooser.strings in Resources */,
 				45EBB6A8200D312700F81322 /* GoogleService-Info.plist in Resources */,
 				45AC16292048214C00E75BD6 /* CurrencyTableViewCell.xib in Resources */,
 				FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */,
@@ -2190,6 +2209,7 @@
 				FA6226F11FE7D1C60033CCCE /* Data+Extension.swift in Sources */,
 				45310D0F2063B9F500105532 /* EthereumGasInfo.swift in Sources */,
 				454A9D7C20067E530035966F /* HistoryRLM.swift in Sources */,
+				445B12E620BD819000FD0D33 /* Localizable.swift in Sources */,
 				457569321FBDBC7600FDEE20 /* SeedPhraseAboutViewController.swift in Sources */,
 				45E148AE204553FB006BD4D1 /* DonationSendPresenter.swift in Sources */,
 				FA86A7411FC2C72B002826EC /* MasterKeyGenerator.swift in Sources */,
@@ -2566,6 +2586,16 @@
 				445B12DB20BC221400FD0D33 /* en */,
 			);
 			name = CustomTrasanctionFeeTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		445B12E220BD78D000FD0D33 /* CurrencyChooser.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				445B12E120BD78D000FD0D33 /* en */,
+				445B12E320BD78D600FD0D33 /* ru */,
+				445B12E420BD78D700FD0D33 /* uk */,
+			);
+			name = CurrencyChooser.strings;
 			sourceTree = "<group>";
 		};
 		452290581FBB18D30024B550 /* Main.storyboard */ = {

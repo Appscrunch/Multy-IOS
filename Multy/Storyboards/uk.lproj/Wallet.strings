@@ -36,7 +36,7 @@
 "Dgq-hX-nSS.text" = "To Vadim";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "EfB-Y5-mfS"; */
-"EfB-Y5-mfS.text" = "Exchange";
+"EfB-Y5-mfS.text" = "Біржа";
 
 /* Class = "UIButton"; normalTitle = "+"; ObjectID = "H37-Od-ZOG"; */
 "H37-Od-ZOG.normalTitle" = "+";
@@ -180,10 +180,10 @@
 "xI1-Qo-90r.text" = "MY PRIVATE KEY:";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "xJN-Va-bYy"; */
-"xJN-Va-bYy.text" = "Exchange";
+"xJN-Va-bYy.text" = "Біржа";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "yXt-o3-N3I"; */
-"yXt-o3-N3I.text" = "Exchange";
+"yXt-o3-N3I.text" = "Біржа";
 
 /* Class = "UITextField"; placeholder = "Personal"; ObjectID = "ygK-hr-LcL"; */
 "ygK-hr-LcL.placeholder" = "Personal";

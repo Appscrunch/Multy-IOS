@@ -16,6 +16,10 @@ extension Character {
 }
 
 extension String {
+    func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
+        return NSLocalizedString(self, tableName: tableName, value: "**\(self)**", comment: "")
+    }
+    
     var UTF8CStringPointer: UnsafeMutablePointer<Int8> {
         return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
