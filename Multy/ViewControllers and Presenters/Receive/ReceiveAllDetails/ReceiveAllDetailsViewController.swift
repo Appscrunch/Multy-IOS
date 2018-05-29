@@ -47,6 +47,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var hidedSumLabel: UILabel!
     @IBOutlet weak var hidedAddressLabel: UILabel!
     @IBOutlet weak var magicView: UIView!
+    @IBOutlet weak var bluetoothDisabledContentView: UIView!
     
     var searchingAnimationView : LOTAnimationView?
     
@@ -72,6 +73,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.viewForShadow.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
         self.requestSummImageView.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
         self.walletTokenImageView.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
+        self.presenter.viewControllerViewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +82,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.updateUIWithWallet()
         self.makeQRCode()
         self.ipadFix()
-        self.presenter.didChangeReceivingOption()
+        self.presenter.viewControllerViewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,18 +95,17 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         super.viewDidLayoutSubviews()
         magicView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
     }
-    func presentBluetoothErrorAlert() {
-        let alert = UIAlertController(title: "Bluetooth Error", message: "Please Check your Bluetooth connection", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
     
     func presentDidReceivePaymentAlert() {
         let storyboard = UIStoryboard(name: "Send", bundle: nil)
         let sendOKVc = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC")
         self.navigationController?.pushViewController(sendOKVc, animated: true)
+    }
+    
+    func updateUIForBluetoothState(_ isEnable : Bool) {
+        if option == .wireless {
+            bluetoothDisabledContentView.isHidden = isEnable
+        }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -253,13 +254,14 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         } else {
             switch option {
             case .wireless:
+                option = .qrCode
                 changeVisibility(isHidden: true)
                 wirelessButton.setTitle("Magic Receive", for: .normal)
-                option = .qrCode
+                
             case .qrCode:
+                option = .wireless
                 changeVisibility(isHidden: false)
                 wirelessButton.setTitle("Cancel", for: .normal)
-                option = .wireless
             }
         }
     }
@@ -272,19 +274,28 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         if !isHidden {
             hidedSumLabel.text = "\(sumValueLbl.text!) \(cryptoNameLbl.text!) / \(fiatSumLbl.text!) \(fiatNameLbl.text!)"
             hidedAddressLabel.text = presenter.walletAddress
-            
-            searchingAnimationView = LOTAnimationView(name: "circle_grow")
-            searchingAnimationView!.frame = hidedWalletView.frame
-//            searchingRequestsHolderView.autoresizesSubviews = true
-//            searchingRequestsHolderView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            hidedWalletView.insertSubview(searchingAnimationView!, at: 0)
-            searchingAnimationView!.transform = CGAffineTransform(scaleX: (screenHeight / screenWidth), y: 1)
-            searchingAnimationView!.loopAnimation = true
-            searchingAnimationView!.play()
+        }
+        
+        updateSearchingAnimation()
+        
+        hidedWalletView.isHidden = isHidden
+    }
+    
+    func updateSearchingAnimation() {
+        if option == .wireless {
+            if searchingAnimationView == nil {
+                searchingAnimationView = LOTAnimationView(name: "circle_grow")
+                searchingAnimationView!.frame = hidedWalletView.frame
+                hidedWalletView.insertSubview(searchingAnimationView!, at: 0)
+                searchingAnimationView!.transform = CGAffineTransform(scaleX: (screenHeight / screenWidth), y: 1)
+                searchingAnimationView!.loopAnimation = true
+                searchingAnimationView!.play()
+            } else {
+                searchingAnimationView!.play()
+            }
         } else {
             searchingAnimationView?.stop()
         }
-        hidedWalletView.isHidden = isHidden
     }
     
 // MARK: QRCode Activity

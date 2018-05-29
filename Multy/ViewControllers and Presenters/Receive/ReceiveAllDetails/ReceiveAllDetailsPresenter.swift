@@ -22,7 +22,11 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         }
     }
     
-    var walletAddress = ""
+    var walletAddress = "" {
+        didSet {
+            generateWirelessRequestImage()
+        }
+    }
     
     var wallet: UserWalletRLM? {
         didSet {
@@ -34,30 +38,49 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     
     var qrBlockchainString = String()
     
-
-    override init() {
-        super.init()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didUpdateTransaction(notification:)), name: Notification.Name("transactionUpdated"), object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("transactionUpdated"), object: nil)
-    }
+    var blockWirelessActivityUpdating = false
     
     func viewControllerViewDidLoad() {
         let _ = BLEManager.shared
     }
     
+    func viewControllerViewWillAppear() {
+        viewWillAppear()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive(notification:)), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillTerminate(notification:)), name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(notification:)), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
+    }
+    
+    func viewWillAppear() {
+        receiveAllDetailsVC?.updateSearchingAnimation()
+        
+        blockWirelessActivityUpdating = false
+        startWirelessReceiverActivity()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didUpdateTransaction(notification:)), name: Notification.Name("transactionUpdated"), object: nil)
+    }
+    
     func viewControllerViewWillDisappear() {
-        stopReceivingViaWireless()
+        viewWillDisappear()
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
+    }
+    
+    func viewWillDisappear() {
+        stopWirelessReceiverActivity()
+        blockWirelessActivityUpdating = true
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("transactionUpdated"), object: nil)
     }
     
     func cancelViewController() {
         if self.receiveAllDetailsVC!.option == .wireless {
-            stopReceivingViaWireless()
+            stopWirelessReceiverActivity()
         }
         
         self.receiveAllDetailsVC?.tabBarController?.selectedIndex = 0
@@ -73,7 +96,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         self.receiveAllDetailsVC?.setupUIWithAmounts()
         
         if self.receiveAllDetailsVC!.option == .wireless {
-            tryReceiveViaWireless()
+            startWirelessReceiverActivity()
         }
     }
     
@@ -82,27 +105,39 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         self.receiveAllDetailsVC?.updateUIWithWallet()
         
         if self.receiveAllDetailsVC!.option == .wireless {
-            tryReceiveViaWireless()
+            startWirelessReceiverActivity()
         }
     }
     
     func didChangeReceivingOption() {
         switch self.receiveAllDetailsVC!.option {
         case .qrCode:
-            stopReceivingViaWireless()
-            stopSharingUserCode()
+            stopWirelessReceiverActivity()
             break
             
         case .wireless:
-            generateWirelessRequestImage()
-            tryReceiveViaWireless()
+            let bluetoothEnabled = BLEManager.shared.reachability == .reachable
+            receiveAllDetailsVC?.updateUIForBluetoothState(bluetoothEnabled)
+            startWirelessReceiverActivity()
             break
         }
     }
     
     private func handleBluetoothReachability() {
         if self.receiveAllDetailsVC?.option == .wireless {
-            tryReceiveViaWireless()
+            let reachability = BLEManager.shared.reachability
+            
+            if reachability == .notReachable {
+                receiveAllDetailsVC?.updateUIForBluetoothState(false)
+                if !blockWirelessActivityUpdating {
+                    stopWirelessReceiverActivity()
+                }
+            } else if reachability == .reachable {
+                receiveAllDetailsVC?.updateUIForBluetoothState(true)
+                if !blockWirelessActivityUpdating {
+                    startWirelessReceiverActivity()
+                }
+            }
         }
     }
     
@@ -125,27 +160,23 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
 //        }
     }
     
-    private func tryReceiveViaWireless() {
+    private func startWirelessReceiverActivity() {
         if self.receiveAllDetailsVC!.option == .wireless {
             let reachability = BLEManager.shared.reachability
-            if reachability == .notReachable {
-                self.receiveAllDetailsVC?.presentBluetoothErrorAlert()
-            } else if reachability == .reachable {
-                if !BLEManager.shared.isAdvertising {
-                    DataManager.shared.getAccount { (account, error) in
-                        if account != nil {
-                            let userID = account!.userID
-                            let userCode = self.userCodeForUserID(userID: userID)
-                            self.becomeReceiver(userID: userID, userCode: userCode)
-                            self.shareUserCode(code: userCode)
-                        }
+            if reachability == .reachable {
+                DataManager.shared.getAccount { (account, error) in
+                    if account != nil {
+                        let userID = account!.userID
+                        let userCode = self.userCodeForUserID(userID: userID)
+                        self.becomeReceiver(userID: userID, userCode: userCode)
+                        self.shareUserCode(code: userCode)
                     }
                 }
             }
         }
     }
     
-    private func stopReceivingViaWireless() {
+    private func stopWirelessReceiverActivity() {
         if BLEManager.shared.isAdvertising {
             stopSharingUserCode()
         }
@@ -198,5 +229,17 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         DispatchQueue.main.async {
             self.receiveAllDetailsVC?.presentDidReceivePaymentAlert()
         }
+    }
+    
+    @objc private func applicationWillResignActive(notification: Notification) {
+        viewWillDisappear()
+    }
+    
+    @objc private func applicationWillTerminate(notification: Notification) {
+        viewWillDisappear()
+    }
+    
+    @objc private func applicationDidBecomeActive(notification: Notification) {
+        viewWillAppear()
     }
 }
