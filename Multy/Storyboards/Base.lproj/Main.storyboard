@@ -1425,7 +1425,7 @@ and develop new application functionality</string>
                                             <constraint firstAttribute="height" constant="58" id="bOV-Pl-e1d"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                        <state key="normal" title="Donate USD 5"/>
+                                        <state key="normal" title="Fixed"/>
                                         <connections>
                                             <action selector="donateAction5:" destination="5ad-yB-UQM" eventType="touchUpInside" id="O6h-gy-14m"/>
                                         </connections>

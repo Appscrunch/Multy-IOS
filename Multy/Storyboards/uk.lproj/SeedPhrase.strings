@@ -15,7 +15,7 @@
 "IHG-IF-sNd.text" = "For security purpose we will show seed phrase in portions. Write down this words on paper and securely store it somewhere safe!";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "IQj-ra-XgJ"; */
-"IQj-ra-XgJ.normalTitle" = "Cancel";
+"IQj-ra-XgJ.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "You have seen your Seed Phrase."; ObjectID = "Iur-Vu-aWk"; */
 "Iur-Vu-aWk.text" = "You have seen your Seed Phrase.";
@@ -36,7 +36,7 @@
 "aAL-4L-Z3p.text" = "Seed Phrase";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "c2M-Lw-dYk"; */
-"c2M-Lw-dYk.normalTitle" = "Cancel";
+"c2M-Lw-dYk.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "In order to verify that you have written it correctly type words one by one on the next screen."; ObjectID = "hhR-En-7a2"; */
 "hhR-En-7a2.text" = "In order to verify that you have written it correctly type words one by one on the next screen.";
@@ -51,19 +51,19 @@
 "rQ5-TK-TFt.normalTitle" = "Great!";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "tKd-SS-isf"; */
-"tKd-SS-isf.normalTitle" = "Cancel";
+"tKd-SS-isf.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Don't do screenshots"; ObjectID = "tNr-xh-HkC"; */
 "tNr-xh-HkC.text" = "Don't do screenshots";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ubW-0G-FDq"; */
-"ubW-0G-FDq.normalTitle" = "Cancel";
+"ubW-0G-FDq.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Move away from windows and surveillance cameras"; ObjectID = "vvN-cn-dsq"; */
 "vvN-cn-dsq.text" = "Move away from windows and surveillance cameras";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "wTi-w9-E0X"; */
-"wTi-w9-E0X.normalTitle" = "Cancel";
+"wTi-w9-E0X.normalTitle" = "Скасувати";
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "wV8-0l-POJ"; */
 "wV8-0l-POJ.normalTitle" = "Next Word";

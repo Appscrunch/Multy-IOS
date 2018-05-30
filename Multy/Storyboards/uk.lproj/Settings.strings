@@ -78,7 +78,7 @@
 "gmB-qd-u4D.text" = "Set your PIN-code";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "jvC-aj-crZ"; */
-"jvC-aj-crZ.normalTitle" = "Cancel";
+"jvC-aj-crZ.normalTitle" = "Скасувати";
 
 /* Class = "UIButton"; normalTitle = "4"; ObjectID = "kRW-Ja-Vf1"; */
 "kRW-Ja-Vf1.normalTitle" = "4";
@@ -90,7 +90,7 @@
 "ta5-0S-Je8.text" = "Biometric identification";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "tsO-57-6kh"; */
-"tsO-57-6kh.normalTitle" = "Cancel";
+"tsO-57-6kh.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Set up additional step for accessing your Multy application."; ObjectID = "vTZ-vM-ZUC"; */
 "vTZ-vM-ZUC.text" = "Set up additional step for accessing your Multy application.";

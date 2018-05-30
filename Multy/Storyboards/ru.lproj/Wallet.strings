@@ -51,7 +51,7 @@
 "IkK-EA-P5D.text" = "You don't have any transactions.";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "LNF-Bk-Flz"; */
-"LNF-Bk-Flz.text" = "Cancel";
+"LNF-Bk-Flz.text" = "Отменить";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "MEL-UQ-OuZ"; */
 "MEL-UQ-OuZ.text" = "Send";
@@ -84,7 +84,7 @@
 "Rbf-Dw-blV.text" = "From SuperHero with Best wishes!";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "RgG-Y1-olV"; */
-"RgG-Y1-olV.normalTitle" = "Cancel";
+"RgG-Y1-olV.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "SDr-Di-etU"; */
 "SDr-Di-etU.text" = "BTC";
@@ -105,7 +105,7 @@
 "YHK-vM-QZ6.text" = "Wallet Settings";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ZiB-8K-BTa"; */
-"ZiB-8K-BTa.normalTitle" = "Cancel";
+"ZiB-8K-BTa.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "a6T-5X-NVW"; */
 "a6T-5X-NVW.text" = "Address";

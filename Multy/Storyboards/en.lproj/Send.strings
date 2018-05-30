@@ -254,8 +254,8 @@
 /* Class = "UILabel"; text = "Send Amount"; ObjectID = "vsy-Hb-OWB"; */
 "vsy-Hb-OWB.text" = "Send Amount";
 
-/* Class = "UILabel"; text = "Donate to Multy "; ObjectID = "wCG-9b-EeH"; */
-"wCG-9b-EeH.text" = "Donate to Multy ";
+/* Class = "UILabel"; text = "Donate to Multy"; ObjectID = "wCG-9b-EeH"; */
+"wCG-9b-EeH.text" = "Donate to Multy";
 
 /* Class = "UILabel"; text = "BTC ∙ Personal"; ObjectID = "y3A-JK-Mp2"; */
 "y3A-JK-Mp2.text" = "BTC ∙ Personal";

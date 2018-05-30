@@ -183,7 +183,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        let alert = UIAlertController(title: "Cancel", message: "Are you really want to cancel?", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.cancelString), message: "Are you really want to cancel?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             self.sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: cancelTap)
             if self.whereFrom != nil {
@@ -251,6 +251,6 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Assets"
+        return "SeedPhrase"
     }
 }

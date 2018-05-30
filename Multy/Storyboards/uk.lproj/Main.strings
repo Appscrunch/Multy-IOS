@@ -15,7 +15,7 @@
 "2Rh-CD-yeA.text" = "Валюта оцінки";
 
 /* Class = "UILabel"; text = "Donate for this option"; ObjectID = "2af-jb-4m3"; */
-"2af-jb-4m3.text" = "Donate for this option";
+"2af-jb-4m3.text" = "Зробити внесок для цієї опції";
 
 /* Class = "UILabel"; text = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly"; ObjectID = "312-E7-Xe2"; */
 "312-E7-Xe2.text" = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly";
@@ -27,7 +27,7 @@
 "4BO-WF-MtY.normalTitle" = "Privacy Policy";
 
 /* Class = "UIButton"; normalTitle = "Donate USD 50"; ObjectID = "97Y-tc-SZM"; */
-"97Y-tc-SZM.normalTitle" = "Donate USD 50";
+"97Y-tc-SZM.normalTitle" = "Пожертвувати USD 50";
 
 /* Class = "UILabel"; text = "For Send"; ObjectID = "AUP-YX-Ckg"; */
 "AUP-YX-Ckg.text" = "For Send";
@@ -171,7 +171,7 @@
 "gAL-wV-lQc.title" = "Контакти";
 
 /* Class = "UIButton"; normalTitle = "Donate USD 5"; ObjectID = "gwH-0Q-jV7"; */
-"gwH-0Q-jV7.normalTitle" = "Donate USD 5";
+"gwH-0Q-jV7.normalTitle" = "Пожертвувати USD 5";
 
 /* Class = "UIButton"; normalTitle = "Create New"; ObjectID = "hgF-yi-Usi"; */
 "hgF-yi-Usi.normalTitle" = "Create New";
@@ -183,7 +183,7 @@
 "kbV-wl-pxp.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "By donation for this option you help the\ndevelopment team work more diligently\nand develop new application functionality"; ObjectID = "lQD-5J-hkF"; */
-"lQD-5J-hkF.text" = "By donation for this option you help the\ndevelopment team work more diligently\nand develop new application functionality";
+"lQD-5J-hkF.text" = "Своїм пожертвуванням ви допомагаєте команді розробників. Зібрані кошти підуть на розробку нового функціоналу.";
 
 /* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "m7p-Iz-hvC"; */
 "m7p-Iz-hvC.normalTitle" = "Accept";

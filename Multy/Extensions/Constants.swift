@@ -18,6 +18,8 @@ struct Constants {
     static let weHaveUpdateString = "WE HAVE AN UPDATE"
     static let updateMultyString = "UPDATE MULTY"
     static let goToUpdateString = "GO TO UPDATE"
+    static let warningString = "WARNING"
+    static let cancelString = "CANCEL"
     
     
     //Assets screen

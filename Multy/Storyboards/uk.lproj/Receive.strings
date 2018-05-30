@@ -6,7 +6,7 @@
 "6cq-qs-W93.text" = "BTC ∙ Personal";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "7Et-dH-d2P"; */
-"7Et-dH-d2P.text" = "Cancel";
+"7Et-dH-d2P.text" = "Скасувати";
 
 /* Class = "UILabel"; text = "Receiving"; ObjectID = "7ol-yG-FZr"; */
 "7ol-yG-FZr.text" = "Receiving";
@@ -45,7 +45,7 @@
 "PBS-bB-1y6.text" = " ";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Qf6-To-A5V"; */
-"Qf6-To-A5V.normalTitle" = "Cancel";
+"Qf6-To-A5V.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Select Wallet:"; ObjectID = "RHs-Mt-eGo"; */
 "RHs-Mt-eGo.text" = "Select Wallet:";

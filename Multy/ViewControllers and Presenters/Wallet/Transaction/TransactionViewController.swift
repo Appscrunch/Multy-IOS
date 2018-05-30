@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = TransactionViewController
+
 class TransactionViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var titleLbl: UILabel!
@@ -92,7 +94,7 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         }
         
         let actionSheet = UIAlertController(title: "", message: title, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: localize(string: Constants.cancelString), style: .cancel, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "Copy to clipboard", style: .default, handler: { (action) in
             UIPasteboard.general.string = title
         }))
@@ -268,5 +270,10 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             blockchainVC.presenter.txHash = presenter.histObj.txHash
         }
     }
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Wallet"
+    }
 }

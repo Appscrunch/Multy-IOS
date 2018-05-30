@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = CustomFeeViewController
+
 class CustomFeeViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var topNameLbl: UILabel!  //gas price
@@ -76,7 +78,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             switch presenter.blockchainType!.blockchain {
             case BLOCKCHAIN_BITCOIN:
                 let message = "Fee rate can not be less then \(defaultBTCCustomFee) satoshi per byte."
-                let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
+                let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                     self.topPriceTF.becomeFirstResponder()
                 }))
@@ -84,7 +86,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil)
             case BLOCKCHAIN_ETHEREUM:
                 let message = "Gas Price can not be less then 1 Gwei."
-                let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
+                let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                     self.topPriceTF.becomeFirstResponder()
                 }))
@@ -106,7 +108,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         let endString = textField.text! + string
         if UInt64(endString)! > 3000 {
             let message = "You fee is too high. Please enter normal fee amount!"
-            let alert = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                 self.topPriceTF.becomeFirstResponder()
             }))
@@ -117,5 +119,10 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Send"
+    }
 }

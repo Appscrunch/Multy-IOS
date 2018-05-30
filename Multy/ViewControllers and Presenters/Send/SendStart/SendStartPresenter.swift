@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = SendStartPresenter
+
 class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrProtocol, QrDataProtocol {
     
     var sendStartVC: SendStartViewController?
@@ -65,7 +67,7 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     }
     
     func presentAlert(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         
         sendStartVC?.present(alert, animated: true, completion: nil)
@@ -109,5 +111,11 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
     
     func numberOfaddresses() -> Int {
         return self.recentAddresses.count
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Send"
     }
 }
