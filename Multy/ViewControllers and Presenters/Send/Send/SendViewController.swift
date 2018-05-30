@@ -60,7 +60,6 @@ class SendViewController: UIViewController {
     @IBOutlet weak var bluetoothErrorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothEnabledContentBottomConstraint: NSLayoutConstraint!
     
-    
     var searchingAnimationView : LOTAnimationView?
     var sendLongPressGR : UILongPressGestureRecognizer?
     var sendSwipeGR : UISwipeGestureRecognizer?
@@ -81,7 +80,7 @@ class SendViewController: UIViewController {
         
         registerCells()
         fixUIForX()
-
+        
         walletsCollectionViewFL.minimumLineSpacing = 0
         activeRequestsCollectionViewFL.spacingMode = .fixed(spacing: 0)
         
@@ -100,6 +99,7 @@ class SendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         presenter.viewControllerViewWillAppear()
     }
     
@@ -108,6 +108,8 @@ class SendViewController: UIViewController {
         
         configureCollectionViewLayoutItemSize(collectionView: activeRequestsCollectionView)
         configureCollectionViewLayoutItemSize(collectionView: walletsCollectionView)
+        
+        refreshBackground()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -139,23 +141,33 @@ class SendViewController: UIViewController {
         }
     }
     
+    func refreshBackground() {
+        view.applyGradient(withColours: [
+            UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
+            UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
+                           gradientOrientation: .topRightBottomLeft)
+    }
+    
     func updateUI() {
-        activeRequestsAmountLabel.text = "Active Requests \(presenter.numberOfActiveRequests())"
-        if sendMode == .searching {
-            walletsCollectionView.reloadData()
-            activeRequestsCollectionView.reloadData()
-        }
-        
-        updateUIForActiveRequestInfo()
-        
-        if presenter.numberOfActiveRequests() > 0 {
-            searchingRequestsHolderView.isHidden = true
-            foundActiveRequestsHolderView.isHidden = false
-        } else {
-            searchingRequestsHolderView.isHidden = false
-            foundActiveRequestsHolderView.isHidden = true
-            if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
-                searchingAnimationView?.play()
+        if sendMode != .inSend {
+            activeRequestsAmountLabel.text = "Active Requests \(presenter.numberOfActiveRequests())"
+            if sendMode == .searching {
+                walletsCollectionView.reloadData()
+                activeRequestsCollectionView.reloadData()
+            }
+            
+            updateUIForActiveRequestInfo()
+            
+            if presenter.numberOfActiveRequests() > 0 {
+                searchingRequestsHolderView.isHidden = true
+                foundActiveRequestsHolderView.isHidden = false
+                self.foundActiveRequestsHolderView.alpha = 1.0
+            } else {
+                searchingRequestsHolderView.isHidden = false
+                foundActiveRequestsHolderView.isHidden = true
+                if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
+                    searchingAnimationView?.play()
+                }
             }
         }
     }
@@ -180,7 +192,7 @@ class SendViewController: UIViewController {
         let blockchainType = BlockchainType.create(wallet: presenter.transaction!.choosenWallet!)
         let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
         transactionSumInCryptoLbl.text = "\(presenter.transaction!.sendAmount!.fixedFraction(digits: 8)) \(blockchainType.shortName)"
-        transactionSumInFiatLbl.text = "\((presenter.transaction!.sendAmount! * exchangeCourse).fixedFraction(digits: 0)) $" 
+        transactionSumInFiatLbl.text = "\((presenter.transaction!.sendAmount! * exchangeCourse).fixedFraction(digits: 2)) $" 
         transactionTokenImageView.image = UIImage(named: blockchainType.iconString)
     }
     
@@ -293,37 +305,6 @@ class SendViewController: UIViewController {
         })
     }
     
-    func updateUIWithSendResponse(success : Bool) {
-        if sendMode == .inSend {
-            if success {
-                self.activeRequestsCollectionView.reloadData()
-                let doneAnimationView = LOTAnimationView(name: "success_animation")
-                doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
-                self.foundActiveRequestsHolderView.addSubview(doneAnimationView)
-                doneAnimationView.play{ (finished) in
-                   // self.updateUIForActiveRequestInfo()
-                    self.exitFromSending(true)
-                    
-                    UIView.animate(withDuration: 1.0, animations: {
-                        doneAnimationView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
-                    }) { (succeeded) in
-                        UIView.animate(withDuration: 0.35, animations: {
-                            doneAnimationView.alpha = 0.0
-                        }) { (succeeded) in
-                            if succeeded {
-                                doneAnimationView.removeFromSuperview()
-                            }
-                        }
-                    }
-                }
-            } else {
-            //    updateUIForActiveRequestInfo()
-                exitFromSending(false)
-                presentSendingErrorAlert()
-            }
-        }
-    }
-    
     func presentSendingErrorAlert() {
         let alert = UIAlertController(title: "Transaction Error", message: "Error while sending transaction. Please, try again!", preferredStyle: .alert)
         
@@ -337,22 +318,16 @@ class SendViewController: UIViewController {
             if presenter.numberOfActiveRequests() > 0 {
                 
                 let selectedRequest = presenter.activeRequestsArr[presenter.selectedActiveRequestIndex!]
-                if selectedRequest.satisfied == true {
-                    selectedRequestAmountLabel.isHidden = true
-                    selectedRequestAddressLabel.isHidden = true
-                } else {
-                    selectedRequestAmountLabel.isHidden = false
-                    selectedRequestAddressLabel.isHidden = false
-                    let blockchainType = BlockchainType.create(currencyID: UInt32(selectedRequest.currencyID), netType: 0)
-                    selectedRequestAmountLabel.text = "\(selectedRequest.sendAmount) \(blockchainType.shortName)"
-                    selectedRequestAddressLabel.text = selectedRequest.sendAddress
-                }
-                
+                selectedRequestAmountLabel.isHidden = false
+                selectedRequestAddressLabel.isHidden = false
+                let blockchainType = BlockchainType.create(currencyID: UInt32(selectedRequest.currencyID), netType: 0)
+                selectedRequestAmountLabel.text = "\(selectedRequest.sendAmount) \(blockchainType.shortName)"
+                selectedRequestAddressLabel.text = selectedRequest.sendAddress
             }
         }
     }
     
-    func exitFromSending(_ animated : Bool) {
+    func exitFromSending(_ completion : (() -> Swift.Void)? = nil) {
         self.transactionHolderView.isHidden = true
         self.transactionInfoViewBottomConstraint.constant = 5
         self.transactionInfoView.alpha = 1
@@ -370,7 +345,48 @@ class SendViewController: UIViewController {
             self.transactionHolderView.alpha = 0.0
         }) { (succeeded) in
             self.transactionHolderView.isHidden = true
-            self.presenter.sendAnimationComplete()
+            if completion != nil {
+                completion!()
+            }
+        }
+    }
+    
+    func updateUIWithSendResponse(success : Bool) {
+        if sendMode == .inSend {
+            if success {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.foundActiveRequestsHolderView.alpha = 0
+                    self.activeRequestsClonesHolderView.alpha = 0
+                }) { (succeeded) in
+
+                    self.exitFromSending(nil)
+                    let doneAnimationView = LOTAnimationView(name: "success_animation")
+                    doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.foundActiveRequestsHolderView.frame.origin.y + self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
+                    
+                    self.view.addSubview(doneAnimationView)
+                    doneAnimationView.play{ (finished) in
+                        UIView.animate(withDuration: 0.6, animations: {
+                            doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
+                            doneAnimationView.alpha = 0.0
+                        }) { (succeeded) in
+                            UIView.animate(withDuration: 0.35, animations: {
+                                doneAnimationView.alpha = 0.0
+                            }) { (succeeded) in
+                                if succeeded {
+                                    self.activeRequestsClonesHolderView.alpha = 1.0
+                                    doneAnimationView.removeFromSuperview()
+                                    self.presenter.sendAnimationComplete()
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            } else {
+                exitFromSending({[unowned self] in
+                    self.presenter.sendAnimationComplete()})
+                presentSendingErrorAlert()
+            }
         }
     }
     
@@ -418,6 +434,7 @@ class SendViewController: UIViewController {
         }) { (succeeded) in
             if succeeded {
                 self.activeRequestsCollectionView.isHidden = false
+                self.activeRequestsClonesHolderView.alpha = 1
                 self.removeActiveRequestsCellsClones()
             }
         }
@@ -642,6 +659,11 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
     
+    func scrollToWallet(_ index : Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        walletsCollectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == activeRequestsCollectionView {
             let width = self.requestPageSize.width
@@ -649,8 +671,6 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
             presenter.selectedActiveRequestIndex = Int(floor((offset - width / 2) / width) + 1)
         }
     }
-    
-
 }
 
 extension SendViewController: UIGestureRecognizerDelegate {

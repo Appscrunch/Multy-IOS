@@ -23,15 +23,8 @@ class ActiveRequestCollectionViewCell: UICollectionViewCell {
     
     func fillInCell() {
         if request != nil {
-            
-            if request!.satisfied {
-                requestImage.image  = UIImage(named: "transaction_done")
-            } else {
-                requestImage.image  = UIImage(named: request!.requestImageName)
-            }
+            requestImage.image  = UIImage(named: request!.requestImageName)
         }
     }
-    
-    
 }
 

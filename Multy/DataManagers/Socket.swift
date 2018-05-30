@@ -115,7 +115,7 @@ class Socket: NSObject {
     }
     
     func becomeReceiver(receiverID : String, userCode : String, currencyID : Int, networkID : Int, address : String, amount : String) {
-        print("becomeReceiver: \(userCode)")
+        print("becomeReceiver: userCode = \(userCode)\nreceiverID = \(receiverID)\ncurrencyID = \(currencyID)\nnetworkID = \(networkID)\naddress = \(address)\namount = \(amount)")
         socket.emitWithAck("event:receiver:on", with: [["userid" : receiverID, "usercode" : userCode, "currencyid" : currencyID, "networkid" : networkID, "address" : address,"amount" : amount ]]).timingOut(after: 1) { data in
             print(data)
         }
