@@ -75,7 +75,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         super.viewWillAppear(animated)
         self.wordTF.becomeFirstResponder()
         if self.isRestore {
-            self.titleLbl.text = localize(string: "RESTORE MULTY")
+            self.titleLbl.text = localize(string: Constants.restoreMultyString)
         }
         if self.isNeedToClean {
             self.currentWordNumber = 1

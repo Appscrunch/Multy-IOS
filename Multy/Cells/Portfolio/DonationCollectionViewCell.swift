@@ -21,10 +21,10 @@ class DonationCollectionViewCell: UICollectionViewCell {
         switch index {
         case 0:
             self.backgroundImg.image = #imageLiteral(resourceName: "portfolioDonationImage")
-            self.midLbl.text = localize(string: "CRYPTO PORTFOLIO")
+            self.midLbl.text = localize(string: Constants.cryptoPortfolioString)
         case 1:
             self.backgroundImg.image = #imageLiteral(resourceName: "chartsDonationImage")
-            self.midLbl.text = localize(string: "CURRENCIES CHARTS")
+            self.midLbl.text = localize(string: Constants.currenciesChartsString)
         default: break
         }
     }

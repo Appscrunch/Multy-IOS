@@ -25,7 +25,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
-    let progressHUD = ProgressHUD(text: Constants.AssetsScreen.progressString)
+    var progressHUD = ProgressHUD(text: Constants.gettingWalletString)
     
     var isSeedBackupOnScreen = false
     
@@ -57,6 +57,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         super.viewDidLoad()
         
         self.backUpView()
+        
+        progressHUD = ProgressHUD(text: localize(string: Constants.gettingWalletString))
         
         tableView.accessibilityIdentifier = "AssetsTableView"
         tableView.addSubview(self.refreshControl)
@@ -144,7 +146,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         if self.presenter.isJailed {
-            self.presentWarningAlert(message: Constants.Security.jailbrokenDeviceWarningString)
+            self.presentWarningAlert(message: localize(string: Constants.jailbrokenDeviceWarningString))
         }
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -239,7 +241,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         chevronImg.image = #imageLiteral(resourceName: "chevron__")
         let btn = UIButton()
         btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
-        btn.setTitle(localize(string: "BACKUP IS NEEDED"), for: .normal)
+        btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
         btn.contentHorizontalAlignment = .left

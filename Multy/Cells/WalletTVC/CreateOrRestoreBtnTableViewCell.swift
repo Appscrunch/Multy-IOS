@@ -33,7 +33,7 @@ class CreateOrRestoreBtnTableViewCell: UITableViewCell {
     
     func makeRestoreCell() {
         self.leftImage.image = #imageLiteral(resourceName: "restoreMulty")
-        self.mainLabel.text = localize(string: "RESTORE MULTY")
+        self.mainLabel.text = localize(string: Constants.restoreMultyString)
     }
     
     func setupShadow() {

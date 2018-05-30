@@ -77,10 +77,10 @@ extension TableViewDelegate: UITableViewDelegate {
         
         if section == 0 {
             label.textColor = #colorLiteral(red: 0.5294117647, green: 0.631372549, blue: 0.7725490196, alpha: 1)
-            label.text = localize(string: "AVAILABLE")
+            label.text = localize(string: Constants.availableString)
         } else {
             label.textColor = #colorLiteral(red: 0.9215686275, green: 0.08235294118, blue: 0.231372549, alpha: 1)
-            label.text = localize(string: "WORK IN PROGRESS")
+            label.text = localize(string: Constants.workInProgressString)
         }
         
         header.addSubview(label)

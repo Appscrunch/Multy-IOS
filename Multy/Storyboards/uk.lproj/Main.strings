@@ -21,7 +21,7 @@
 "312-E7-Xe2.text" = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly";
 
 /* Class = "UITabBarItem"; title = "Activity"; ObjectID = "3Tm-8r-aym"; */
-"3Tm-8r-aym.title" = "Activity";
+"3Tm-8r-aym.title" = "Активності";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "4BO-WF-MtY"; */
 "4BO-WF-MtY.normalTitle" = "Privacy Policy";
@@ -33,7 +33,7 @@
 "AUP-YX-Ckg.text" = "For Send";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "AX1-QS-lfe"; */
-"AX1-QS-lfe.text" = "Activity";
+"AX1-QS-lfe.text" = "Активності";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "AYV-Wk-0pe"; */
 "AYV-Wk-0pe.text" = "Send";
@@ -75,7 +75,7 @@
 "KBZ-NF-ahF.text" = "1:59";
 
 /* Class = "UITabBarItem"; title = "Main"; ObjectID = "KWB-7P-gFV"; */
-"KWB-7P-gFV.title" = "Main";
+"KWB-7P-gFV.title" = "Гаманці";
 
 /* Class = "UILabel"; text = "No activity yet"; ObjectID = "LRJ-bG-I4l"; */
 "LRJ-bG-I4l.text" = "No activity yet";
@@ -93,7 +93,7 @@
 "Rmc-c6-YoG.text" = "Touch ID for «Multy»";
 
 /* Class = "UILabel"; text = "Contacts"; ObjectID = "SCG-Oy-IO5"; */
-"SCG-Oy-IO5.text" = "Contacts";
+"SCG-Oy-IO5.text" = "Контакти";
 
 /* Class = "UILabel"; text = "Wallet Name"; ObjectID = "TIE-mG-uUa"; */
 "TIE-mG-uUa.text" = "Назва Гаманця";
@@ -120,7 +120,7 @@
 "XXC-0f-DEu.text" = "BTC";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "Z17-jd-0eD"; */
-"Z17-jd-0eD.title" = "Settings";
+"Z17-jd-0eD.title" = "Налаштування";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ZPG-iV-jLD"; */
 "ZPG-iV-jLD.normalTitle" = "Скасувати";
@@ -168,7 +168,7 @@
 "g9R-o2-GoW.text" = "Multy is temporary locked.\n";
 
 /* Class = "UITabBarItem"; title = "Contacts"; ObjectID = "gAL-wV-lQc"; */
-"gAL-wV-lQc.title" = "Contacts";
+"gAL-wV-lQc.title" = "Контакти";
 
 /* Class = "UIButton"; normalTitle = "Donate USD 5"; ObjectID = "gwH-0Q-jV7"; */
 "gwH-0Q-jV7.normalTitle" = "Donate USD 5";
@@ -216,7 +216,7 @@
 "vCc-C8-70s.normalTitle" = "Send";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wOA-Hu-U4A"; */
-"wOA-Hu-U4A.title" = "Settings";
+"wOA-Hu-U4A.title" = "Налаштування";
 
 /* Class = "UILabel"; text = "You have enterred \npin incorrectly 5 times.\n\nTry again in:"; ObjectID = "wSj-OL-MZJ"; */
 "wSj-OL-MZJ.text" = "You have enterred \npin incorrectly 5 times.\n\nTry again in:";

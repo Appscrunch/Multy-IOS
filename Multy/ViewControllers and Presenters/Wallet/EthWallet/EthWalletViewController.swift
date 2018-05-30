@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = EthWalletViewController
+
 class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
@@ -270,7 +272,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         
         let btn = UIButton()
         btn.frame = CGRect(x: 50, y: 0, width: backupView!.frame.width - 35, height: backupView!.frame.height)
-        btn.setTitle("Backup is needed!", for: .normal)
+        btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
         btn.setTitleColor(.red, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
         btn.contentHorizontalAlignment = .left
@@ -603,5 +605,10 @@ extension EthWalletViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Wallet"
+    }
 }
