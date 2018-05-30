@@ -16,6 +16,7 @@ private typealias TableViewDataSource = AssetsViewController
 private typealias PresentingSheetDelegate = AssetsViewController
 private typealias CancelDelegate = AssetsViewController
 private typealias CreateWalletDelegate = AssetsViewController
+private typealias LocalizeDelegate = AssetsViewController
 
 class AssetsViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var tableView: UITableView!
@@ -238,7 +239,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         chevronImg.image = #imageLiteral(resourceName: "chevron__")
         let btn = UIButton()
         btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
-        btn.setTitle("Backup is needed!", for: .normal)
+        btn.setTitle(localize(string: "BACKUP IS NEEDED"), for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
         btn.contentHorizontalAlignment = .left
@@ -644,6 +645,12 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
         (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Assets"
     }
 }
 

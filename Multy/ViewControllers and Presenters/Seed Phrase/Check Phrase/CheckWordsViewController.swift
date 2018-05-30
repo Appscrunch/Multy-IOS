@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = CheckWordsViewController
+
 class CheckWordsViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var wordTF: UITextField!
@@ -73,7 +75,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         super.viewWillAppear(animated)
         self.wordTF.becomeFirstResponder()
         if self.isRestore {
-            self.titleLbl.text = "Restore Multy"
+            self.titleLbl.text = localize(string: "RESTORE MULTY")
         }
         if self.isNeedToClean {
             self.currentWordNumber = 1
@@ -247,3 +249,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     }
 }
 
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Assets"
+    }
+}

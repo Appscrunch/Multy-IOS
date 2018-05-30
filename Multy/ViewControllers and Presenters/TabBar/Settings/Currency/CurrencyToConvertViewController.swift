@@ -4,7 +4,7 @@
 
 import UIKit
 
-private typealias LocalizeProtocol = CurrencyToConvertViewController
+private typealias LocalizeDelegate = CurrencyToConvertViewController
 
 class CurrencyToConvertViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
 
@@ -118,7 +118,7 @@ extension CurrencyToConvertViewController: UITableViewDelegate, UITableViewDataS
     }
 }
 
-extension LocalizeProtocol: Localizable {
+extension LocalizeDelegate: Localizable {
     var tableName: String {
         return "CurrencyChooser"
     }

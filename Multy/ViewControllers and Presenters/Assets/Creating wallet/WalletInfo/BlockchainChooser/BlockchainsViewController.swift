@@ -10,7 +10,7 @@ private typealias AnalyticsDelegate = BlockchainsViewController
 private typealias CancelDelegate = BlockchainsViewController
 private typealias TableViewDelegate = BlockchainsViewController
 private typealias TableViewDataSource = BlockchainsViewController
-private typealias LocalizeProtocol = BlockchainsViewController
+private typealias LocalizeDelegate = BlockchainsViewController
 
 class BlockchainsViewController: UIViewController {
 
@@ -164,7 +164,7 @@ extension TableViewDataSource: UITableViewDataSource {
     }
 }
 
-extension LocalizeProtocol: Localizable {    
+extension LocalizeDelegate: Localizable {    
     var tableName: String {
         return "CurrencyChooser"
     }

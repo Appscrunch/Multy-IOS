@@ -8,7 +8,7 @@ protocol Localizable {
     var tableName: String { get }
 }
 
-extension Localizable where Self: UIViewController {
+extension Localizable {
     func localize(string: String) -> String {
         return string.localized(tableName: tableName)
     }

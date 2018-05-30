@@ -4,7 +4,7 @@
 
 import UIKit
 
-private typealias LocalizeProtocol = ExchangeStocksViewController
+private typealias LocalizeDelegate = ExchangeStocksViewController
 
 class ExchangeStocksViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
     
@@ -127,7 +127,7 @@ extension ExchangeStocksViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension LocalizeProtocol: Localizable {
+extension LocalizeDelegate: Localizable {
     var tableName: String {
         return "CurrencyChooser"
     }

@@ -30,7 +30,7 @@
 "6iC-xp-ZDN.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "7g9-UJ-RsT"; */
-"7g9-UJ-RsT.text" = "(work in progress)";
+"7g9-UJ-RsT.text" = "(на стадії розробки)";
 
 /* Class = "UITextField"; placeholder = "Enter price here"; ObjectID = "84M-y9-Blm"; */
 "84M-y9-Blm.placeholder" = "Enter price here";
@@ -249,7 +249,7 @@
 "ttx-83-gVw.text" = "Send To";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "uaU-U0-1YQ"; */
-"uaU-U0-1YQ.text" = "(work in progress)";
+"uaU-U0-1YQ.text" = "(на стадії розробки)";
 
 /* Class = "UILabel"; text = "Send Amount"; ObjectID = "vsy-Hb-OWB"; */
 "vsy-Hb-OWB.text" = "Send Amount";

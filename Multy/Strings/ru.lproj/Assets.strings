@@ -1,0 +1,13 @@
+/* 
+  Assets.strings
+  Multy
+
+  Created by Alex Pro on 5/29/18.
+  Copyright © 2018 Idealnaya rabota. All rights reserved.
+*/
+
+"BACKUP IS NEEDED" = "Требуется резервное копирование!"
+"RESTORE MULTY" = "Восстановить Multy"
+"CRYPTO PORTFOLIO" = "Крипто-портфолио"
+"CURRENCIES CHARTS" = "Графики валют"
+"WORK IN PROGRESS" = "(в стадии разработки)"
