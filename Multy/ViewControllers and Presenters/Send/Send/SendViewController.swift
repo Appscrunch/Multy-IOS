@@ -365,6 +365,7 @@ class SendViewController: UIViewController {
                     
                     self.view.addSubview(doneAnimationView)
                     doneAnimationView.play{ (finished) in
+                        self.presenter.sendAnimationComplete()
                         UIView.animate(withDuration: 0.6, animations: {
                             doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
                             doneAnimationView.alpha = 0.0
@@ -375,7 +376,6 @@ class SendViewController: UIViewController {
                                 if succeeded {
                                     self.activeRequestsClonesHolderView.alpha = 1.0
                                     doneAnimationView.removeFromSuperview()
-                                    self.presenter.sendAnimationComplete()
                                 }
                             }
                         }

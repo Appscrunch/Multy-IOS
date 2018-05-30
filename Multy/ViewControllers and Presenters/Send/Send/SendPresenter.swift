@@ -284,20 +284,22 @@ class SendPresenter: NSObject {
     }
     
     func send() {
+
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
+        let jwtToken = DataManager.shared.realmManager.account!.token
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                          sendAddress: request.sendAddress,
                                                                          sendAmountString: request.sendAmount,
                                                                          feePerByteAmount: "10",
-            isDonationExists: false,
-            donationAmount: "0",
-            isPayCommission: true,
-            wallet: wallet,
-            binaryData: &binaryData!,
-            inputs: wallet.addresses)
-
+                                                                         isDonationExists: false,
+                                                                         donationAmount: "0",
+                                                                         isPayCommission: true,
+                                                                         wallet: wallet,
+                                                                         binaryData: &binaryData!,
+                                                                         inputs: wallet.addresses)
+        
         let newAddressParams = [
             "walletindex"   : wallet.walletID.intValue,
             "address"       : addressData!["address"] as! String,
@@ -305,13 +307,17 @@ class SendPresenter: NSObject {
             "transaction"   : trData.0,
             "ishd"          : NSNumber(booleanLiteral: wallet.shouldCreateNewAddressAfterTransaction)
             ] as [String : Any]
-
+        
         let params = [
             "currencyid": wallet.chain,
+            "jwt"       : jwtToken,
             "networkid" : wallet.chainType,
             "payload"   : newAddressParams
             ] as [String : Any]
-
+        
+        DataManager.shared.socketManager.txSend(params : params)
+        
+        /*
         DataManager.shared.sendHDTransaction(transactionParameters: params, completion: { [unowned self] (dict, error) in
             print("\(dict), \(error)")
             
@@ -321,15 +327,16 @@ class SendPresenter: NSObject {
                 self.sendVC?.updateUIWithSendResponse(success: true)
             }
         })
+*/
     }
     
     func sendAnimationComplete() {
         stopSearching()
         self.getWalletsVerbose(completion: { [unowned self] (success) in
             self.cleanRequests()
-            self.startSearchingActiveRequests()
-            self.sendVC?.updateUI()
         })
+        
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(startSearchingActiveRequests), userInfo: nil, repeats: false)
     }
     
     func cleanRequests() {
@@ -412,12 +419,12 @@ class SendPresenter: NSObject {
         return nil
     }
     
-    func startSearchingActiveRequests() {
+    @objc private func startSearchingActiveRequests() {
         BLEManager.shared.startScan()
         receiveActiveRequestTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkNewUserCodes), userInfo: nil, repeats: true)
     }
     
-    func stopSearching() {
+    @objc private func stopSearching() {
         BLEManager.shared.stopScan()
         receiveActiveRequestTimer.invalidate()
     }
@@ -437,37 +444,37 @@ class SendPresenter: NSObject {
             newUserCodes.removeAll()
         }
     }
-    
-    func randomRequestAddress() -> String {
-        var result = "0x"
-        result.append(randomString(length: 34))
-        return result
-    }
-    
-    func randomString(length:Int) -> String {
-        let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var c = charSet.characters.map { String($0) }
-        var s:String = ""
-        for _ in (1...length) {
-            s.append(c[Int(arc4random()) % c.count])
-        }
-        return s
-    }
-    
-    func randomAmount() -> Double {
-        return Double(arc4random())/Double(UInt32.max)
-    }
-    
-    func randomCurrencyID() -> NSNumber {
-        return NSNumber.init(value: 0)
-    }
-    
-    func randomColor() -> UIColor {
-        return UIColor(red:   CGFloat(arc4random()) / CGFloat(UInt32.max),
-                       green: CGFloat(arc4random()) / CGFloat(UInt32.max),
-                       blue:  CGFloat(arc4random()) / CGFloat(UInt32.max),
-                       alpha: 1.0)
-    }
+//
+//    func randomRequestAddress() -> String {
+//        var result = "0x"
+//        result.append(randomString(length: 34))
+//        return result
+//    }
+//
+//    func randomString(length:Int) -> String {
+//        let charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+//        var c = charSet.characters.map { String($0) }
+//        var s:String = ""
+//        for _ in (1...length) {
+//            s.append(c[Int(arc4random()) % c.count])
+//        }
+//        return s
+//    }
+//
+//    func randomAmount() -> Double {
+//        return Double(arc4random())/Double(UInt32.max)
+//    }
+//
+//    func randomCurrencyID() -> NSNumber {
+//        return NSNumber.init(value: 0)
+//    }
+//
+//    func randomColor() -> UIColor {
+//        return UIColor(red:   CGFloat(arc4random()) / CGFloat(UInt32.max),
+//                       green: CGFloat(arc4random()) / CGFloat(UInt32.max),
+//                       blue:  CGFloat(arc4random()) / CGFloat(UInt32.max),
+//                       alpha: 1.0)
+//    }
 }
 
 extension SendPresenter: QrDataProtocol {
