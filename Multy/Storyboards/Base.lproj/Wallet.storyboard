@@ -1140,6 +1140,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="H37-Od-ZOG" id="miQ-pw-qjC"/>
                         <outlet property="tableView" destination="yul-RR-F2h" id="aWp-Jy-beM"/>
                     </connections>
                 </viewController>

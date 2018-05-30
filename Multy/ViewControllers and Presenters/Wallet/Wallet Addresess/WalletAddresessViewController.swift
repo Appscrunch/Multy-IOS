@@ -9,6 +9,7 @@ class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerLbl: UILabel!
+    @IBOutlet weak var addButton: UIButton!
     
     let presenter = WalletAddresessPresenter()
     var whereFrom: UIViewController?
@@ -21,6 +22,11 @@ class WalletAddresessViewController: UIViewController,AnalyticsProtocol {
         self.registerCell()
         
         self.tableView.tableFooterView = UIView()
+        
+        if self.whereFrom?.className == WalletSettingsViewController.className {
+            self.addButton.isHidden = true
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
         sendAnalyticsEvent(screenName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)", eventName: "\(screenWalletAddressWithChain)\(presenter.wallet!.chain)")
     }

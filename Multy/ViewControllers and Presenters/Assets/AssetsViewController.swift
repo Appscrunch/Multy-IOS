@@ -18,6 +18,7 @@ private typealias CancelDelegate = AssetsViewController
 private typealias CreateWalletDelegate = AssetsViewController
 
 class AssetsViewController: UIViewController, AnalyticsProtocol {
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -56,6 +57,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         super.viewDidLoad()
         
         self.backUpView()
+        self.setupStatusBar()
         
         tableView.accessibilityIdentifier = "AssetsTableView"
         tableView.addSubview(self.refreshControl)
@@ -251,6 +253,19 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         self.view.addSubview(backupView!)
         view.isHidden = true
         view.isUserInteractionEnabled = false
+    }
+    
+    func setupStatusBar() {
+        if screenHeight == heightOfX {
+            statusView.frame.size.height = 44
+        }
+        let colorTop = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.8).cgColor
+        let colorBottom = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.0).cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.6, 1.0]
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: screenWidth, height: statusView.frame.height)
+        statusView.layer.addSublayer(gradientLayer)
     }
     
     @objc func goToSeed() {
