@@ -284,7 +284,6 @@ class SendPresenter: NSObject {
     }
     
     func send() {
-        
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
@@ -359,8 +358,9 @@ class SendPresenter: NSObject {
                 for oldRequest in self.activeRequestsArr {
                     if oldRequest.userCode == request.userCode {
                         let index = self.activeRequestsArr.index(of: oldRequest)
-                        if self.activeRequestsArr[index!].sendAmount != request.sendAmount {
+                        if self.activeRequestsArr[index!].sendAmount != request.sendAmount || self.activeRequestsArr[index!].sendAddress != request.sendAddress {
                             self.activeRequestsArr[index!] = request
+                            self.createTransactionDTO()
                         }
                         
                         isRequestOld = true

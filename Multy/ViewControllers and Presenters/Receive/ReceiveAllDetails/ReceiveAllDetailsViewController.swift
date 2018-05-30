@@ -48,6 +48,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var hidedAddressLabel: UILabel!
     @IBOutlet weak var magicView: UIView!
     @IBOutlet weak var bluetoothDisabledContentView: UIView!
+    @IBOutlet weak var searchingAnimationHolder: UIView!
     
     var searchingAnimationView : LOTAnimationView?
     
@@ -94,6 +95,14 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         magicView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+        refreshFrames()
+    }
+    
+    func refreshFrames() {        
+        hidedWalletView.applyGradient(withColours: [
+            UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
+            UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
+                           gradientOrientation: .topRightBottomLeft)
     }
     
     func presentDidReceivePaymentAlert() {
@@ -285,9 +294,9 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         if option == .wireless {
             if searchingAnimationView == nil {
                 searchingAnimationView = LOTAnimationView(name: "circle_grow")
-                searchingAnimationView!.frame = hidedWalletView.frame
-                hidedWalletView.insertSubview(searchingAnimationView!, at: 0)
-                searchingAnimationView!.transform = CGAffineTransform(scaleX: (screenHeight / screenWidth), y: 1)
+                searchingAnimationView!.frame = searchingAnimationHolder.bounds
+                searchingAnimationHolder.insertSubview(searchingAnimationView!, at: 0)
+                searchingAnimationView!.transform = CGAffineTransform(scaleX: screenHeight/screenWidth, y: 1)
                 searchingAnimationView!.loopAnimation = true
                 searchingAnimationView!.play()
             } else {
