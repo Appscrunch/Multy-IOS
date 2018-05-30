@@ -21,12 +21,9 @@ struct Constants {
     static let warningString = "WARNING"
     static let cancelString = "CANCEL"
     
-    
     //Assets screen
     struct AssetsScreen {
         static let createWalletString = "Create wallet"
-        static let createOrImportWalletString = "Create or Import New Wallet"
-        static let cancelString = "Cancel"
         static let backupButtonHeight = CGFloat(44)
         static let backupAssetsOffset = CGFloat(25)
         static let leadingAndTrailingOffset = CGFloat(16)

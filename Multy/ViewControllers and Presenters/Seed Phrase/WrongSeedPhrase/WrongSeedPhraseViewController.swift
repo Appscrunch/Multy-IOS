@@ -61,6 +61,6 @@ class WrongSeedPhraseViewController: UIViewController, AnalyticsProtocol {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "SeedPhrase"
+        return "Seed"
     }
 }

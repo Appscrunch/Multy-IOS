@@ -66,6 +66,6 @@ class CheckWordsPresenter: NSObject {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "SeedPhrase"
+        return "Seed"
     }
 }

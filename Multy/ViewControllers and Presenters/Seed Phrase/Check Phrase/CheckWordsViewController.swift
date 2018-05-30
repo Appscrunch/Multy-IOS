@@ -251,6 +251,6 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "SeedPhrase"
+        return "Seed"
     }
 }

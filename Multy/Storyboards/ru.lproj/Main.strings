@@ -69,7 +69,7 @@
 "Ibn-Hy-A0R.text" = "1 233$";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "Ij3-vx-Kh2"; */
-"Ij3-vx-Kh2.text" = "(в стадии разработки)";
+"Ij3-vx-Kh2.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "1:59"; ObjectID = "KBZ-NF-ahF"; */
 "KBZ-NF-ahF.text" = "1:59";
@@ -114,7 +114,7 @@
 "Vis-uX-a9U.text" = "Блокчейны";
 
 /* Class = "UILabel"; text = "Import Wallet"; ObjectID = "XSz-h8-kEl"; */
-"XSz-h8-kEl.text" = "Import Wallet";
+"XSz-h8-kEl.text" = "Импортировать кошелек";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "XXC-0f-DEu"; */
 "XXC-0f-DEu.text" = "BTC";
@@ -144,7 +144,7 @@
 "cGT-gp-Wpw.text" = "Leave Feedback";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "ccX-Hp-ZvL"; */
-"ccX-Hp-ZvL.text" = "(в стадии разработки)";
+"ccX-Hp-ZvL.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "db1-Nv-fng"; */
 "db1-Nv-fng.text" = "USD";
@@ -162,7 +162,7 @@
 "eXV-cf-GXL.text" = "No internet connection";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "g69-dn-xlO"; */
-"g69-dn-xlO.text" = "(в стадии разработки)";
+"g69-dn-xlO.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "Multy is temporary locked.\n"; ObjectID = "g9R-o2-GoW"; */
 "g9R-o2-GoW.text" = "Multy is temporary locked.\n";
@@ -174,7 +174,7 @@
 "gwH-0Q-jV7.normalTitle" = "Пожертвовать USD 5";
 
 /* Class = "UIButton"; normalTitle = "Create New"; ObjectID = "hgF-yi-Usi"; */
-"hgF-yi-Usi.normalTitle" = "Create New";
+"hgF-yi-Usi.normalTitle" = "Создавать Новый";
 
 /* Class = "UILabel"; text = "Select wallet and donation sum"; ObjectID = "kVh-aV-sdy"; */
 "kVh-aV-sdy.text" = "Select wallet and donation sum";
@@ -201,7 +201,7 @@
 "pCz-aZ-HZS.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Create or Import New Wallet"; ObjectID = "sRz-3m-UVg"; */
-"sRz-3m-UVg.text" = "Create or Import New Wallet";
+"sRz-3m-UVg.text" = "Создать или импортировать новый кошелек";
 
 /* Class = "UIButton"; normalTitle = "Copy"; ObjectID = "tRx-hg-wDk"; */
 "tRx-hg-wDk.normalTitle" = "Copy";
