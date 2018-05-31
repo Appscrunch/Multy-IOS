@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = DonationSendViewController
+
 class DonationSendViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -207,7 +209,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     }
     
     func presentWarning(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -238,7 +240,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         }
         
         if (self.donationTF.text! + string).convertStringWithCommaToDouble() > self.presenter.maxAvailable {
-            self.presentWarning(message: "You trying to enter sum more then you have")
+            self.presentWarning(message: localize(string: Constants.moreThenYouHaveString))
             return false
         }
         
@@ -359,5 +361,11 @@ extension DonationSendViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

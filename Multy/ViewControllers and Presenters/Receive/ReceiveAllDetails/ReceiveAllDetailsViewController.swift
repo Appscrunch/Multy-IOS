@@ -11,6 +11,8 @@ enum ReceivingOption {
     case wireless
 }
 
+private typealias LocalizeDelegate = ReceiveAllDetailsViewController
+
 class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, CancelProtocol, AddressTransferProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
@@ -265,12 +267,12 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             case .wireless:
                 option = .qrCode
                 changeVisibility(isHidden: true)
-                wirelessButton.setTitle("Magic Receive", for: .normal)
+                wirelessButton.setTitle(localize(string: Constants.magicalReceiveString), for: .normal)
                 
             case .qrCode:
                 option = .wireless
                 changeVisibility(isHidden: false)
-                wirelessButton.setTitle("Cancel", for: .normal)
+                wirelessButton.setTitle(localize(string: Constants.cancelString), for: .normal)
             }
         }
     }
@@ -398,5 +400,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             self.sumValueLbl.font = sumValueLbl.font.withSize(30)
             self.cryptoNameLbl.font = cryptoNameLbl.font.withSize(30)
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Receives"
     }
 }

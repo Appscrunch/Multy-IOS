@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = EthSendDetailsViewController
+
 class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -95,7 +97,7 @@ class EthSendDetailsViewController: UIViewController, AnalyticsProtocol {
     
     
     func presentWarning(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -199,4 +201,8 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
+    }
+}

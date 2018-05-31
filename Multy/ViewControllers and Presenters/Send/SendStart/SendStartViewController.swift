@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = SendStartViewController
+
 class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsProtocol, DonationProtocol, CancelProtocol {
 
     @IBOutlet weak var tableView: UITableView!
@@ -66,7 +68,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
             let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
             
             if !isValidDTO.isValid {
-                let message = "You entered not valid address for current blockchain."
+                let message = localize(string: Constants.notValidAddressString)
                 presenter.presentAlert(message: message)
             }
             
@@ -278,5 +280,11 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

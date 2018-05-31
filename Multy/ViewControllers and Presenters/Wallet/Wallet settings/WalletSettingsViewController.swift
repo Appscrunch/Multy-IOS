@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = WalletSettingsViewController
+
 class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     @IBOutlet weak var walletNameTF: UITextField!
@@ -11,7 +13,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     let presenter = WalletSettingsPresenter()
     
 //    let progressHUD = ProgressHUD(text: "Deleting Wallet...")
-    let loader = PreloaderView(frame: HUDFrame, text: Constants.AssetsScreen.progressString, image: #imageLiteral(resourceName: "walletHuge"))
+    let loader = PreloaderView(frame: HUDFrame, text: "Updating", image: #imageLiteral(resourceName: "walletHuge"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,22 +38,22 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     @IBAction func deleteAction(_ sender: Any) {
         if presenter.wallet!.isEmpty {
-            let message = "Are you sure?"
-            let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { (action) in
-                self.loader.show(customTitle: Constants.AssetsScreen.progressString)
+            let message = localize(string: Constants.deleteWalletAlertString)
+            let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .cancel, handler: { (action) in
+                self.loader.show(customTitle: "Deleting")
                 self.presenter.delete()
                 self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(walletDeletedWithChain)\(self.presenter.wallet!.chain)")
             }))
-            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: localize(string: Constants.noString), style: .default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
                 self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(walletDeleteCancelWithChain)\(self.presenter.wallet!.chain)")
             }))
             
             self.present(alert, animated: true, completion: nil)
         } else {
-            let message = "Cryptocurrency amount should be empty"
-            let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+            let message = localize(string: Constants.walletAmountAlertString)
+            let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -64,8 +66,8 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     @IBAction func changeWalletName(_ sender: Any) {
         if walletNameTF.text?.trimmingCharacters(in: .whitespaces).count == 0 {
-            let message = "Wallet name should be non empty"
-            let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+            let message = localize(string: Constants.walletNameAlertString)
+            let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {            
@@ -104,5 +106,10 @@ extension WalletSettingsViewController: UITextFieldDelegate {
             return false
         }
     }
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Wallets"
+    }
 }

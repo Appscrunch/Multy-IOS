@@ -7,6 +7,7 @@ import ZFRippleButton
 
 private typealias TableViewDelegate = SendDetailsViewController
 private typealias TableViewDataSource = SendDetailsViewController
+private typealias LocalizeDelegate = SendDetailsViewController
 
 class SendDetailsViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
@@ -129,7 +130,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
             self.presenter.createTransaction(index: self.presenter.selectedIndexOfSpeed!)
             self.presenter.checkMaxAvailable()
         } else {
-            let alert = UIAlertController(title: "Please choose Fee Rate.", message: "You can use predefined one or set a custom value.", preferredStyle: .alert)
+            let alert = UIAlertController(title: localize(string: Constants.pleaseChooseFeeRate), message: localize(string: Constants.predefinedValueMessageString), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -222,7 +223,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     }
     
     func presentWarning(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -230,7 +231,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (string != "," || string != ".") && ((self.donationTF.text! + string) as NSString).doubleValue > presenter.transactionDTO.choosenWallet!.sumInCrypto {
             if string != "" {
-                self.presentWarning(message: "You trying to enter sum more then you have")
+                self.presentWarning(message: localize(string: Constants.moreThenYouHaveString))
                 return false
             }
         }
@@ -364,5 +365,11 @@ extension TableViewDataSource: UITableViewDataSource {
 
             return customFeeCell
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

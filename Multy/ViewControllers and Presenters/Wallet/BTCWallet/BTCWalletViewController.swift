@@ -9,6 +9,7 @@ private typealias ScrollViewDelegate = BTCWalletViewController
 private typealias TableViewDataSource = BTCWalletViewController
 private typealias CollectionViewDelegateFlowLayout = BTCWalletViewController
 private typealias CancelDelegate = BTCWalletViewController
+private typealias LocalizeDelegate = BTCWalletViewController
 
 class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var tableView: UITableView!
@@ -280,7 +281,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         
         let btn = UIButton()
         btn.frame = CGRect(x: 50, y: 0, width: backupView!.frame.width - 35, height: backupView!.frame.height)
-        btn.setTitle("Backup is needed!", for: .normal)
+        btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
         btn.setTitleColor(.red, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
         btn.contentHorizontalAlignment = .left
@@ -637,5 +638,10 @@ extension BTCWalletViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Wallets"
+    }
 }

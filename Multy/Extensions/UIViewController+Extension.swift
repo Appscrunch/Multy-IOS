@@ -21,6 +21,47 @@ private let swizzling: (AnyClass, Selector, Selector) -> () = { forClass, origin
     }
 }
 
+extension Localizable where Self: UIViewController, Self: Localizable {
+    func presentAlert(with message: String?) {
+        let alert = UIAlertController(title: localize(string: Constants.errorString), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func makePurchaseFor(productId: String) {
+        let loader = PreloaderView(frame: HUDFrame, text: "Loading", image: #imageLiteral(resourceName: "walletHuge"))
+        view.addSubview(loader)
+        loader.show(customTitle: "Loading")
+        self.getAvailableInAppBy(stringId: productId) { (product) in
+            if product == nil {
+                self.presentAlert(with: "Something went wrong. Try it later.")
+                loader.hide()
+                return
+            }
+            SwiftyStoreKit.purchaseProduct(product!) { (result) in
+                loader.hide()
+                switch result {
+                case .success(let purchase):
+                    print("Purchase Success: \(purchase.productId)")
+                case .error(let error):
+                    switch error.code {
+                    case .unknown: print("Unknown error. Please contact support")
+                    case .clientInvalid: print("Not allowed to make the payment")
+                    case .paymentCancelled: break
+                    case .paymentInvalid: print("The purchase identifier was invalid")
+                    case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                    case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                    case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                    case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                    case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                    }
+                }
+            }
+        }
+    }
+}
+
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -106,13 +147,6 @@ extension UIViewController {
         }
         
         return false
-    }
-    
-    func presentAlert(with message: String?) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     func presentDonationVCorAlert() {
@@ -204,59 +238,5 @@ extension UIViewController {
                 completion(nil)
             }
         }
-    }
-    
-    func makePurchaseFor(productId: String) {
-        let loader = PreloaderView(frame: HUDFrame, text: "Loading", image: #imageLiteral(resourceName: "walletHuge"))
-        view.addSubview(loader)
-        loader.show(customTitle: "Loading")
-        self.getAvailableInAppBy(stringId: productId) { (product) in
-            if product == nil {
-                self.presentAlert(with: "Something went wrong. Try it later.")
-                loader.hide()
-                return
-            }
-            SwiftyStoreKit.purchaseProduct(product!) { (result) in
-                loader.hide()
-                switch result {
-                case .success(let purchase):
-                    print("Purchase Success: \(purchase.productId)")
-                case .error(let error):
-                    switch error.code {
-                    case .unknown: print("Unknown error. Please contact support")
-                    case .clientInvalid: print("Not allowed to make the payment")
-                    case .paymentCancelled: break
-                    case .paymentInvalid: print("The purchase identifier was invalid")
-                    case .paymentNotAllowed: print("The device is not allowed to make the payment")
-                    case .storeProductNotAvailable: print("The product is not available in the current storefront")
-                    case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
-                    case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
-                    case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
-                    }
-                }
-            }
-        }
-    }
-    
-    func setupPreloader(hud: HUDView, shadowView: UIView) -> (HUDView, UIView) {
-        shadowView.backgroundColor = .white
-        shadowView.layer.cornerRadius = 15.0
-        shadowView.setShadow(with: #colorLiteral(red: 0.1490196078, green: 0.2980392157, blue: 0.4156862745, alpha: 0.3))
-        shadowView.isHidden = true
-        hud.hide()
-        
-        self.view.addSubview(shadowView)
-        self.view.addSubview(hud)
-        return (hud, shadowView)
-    }
-    
-    func showPreloader(hud: HUDView, shadowView: UIView) {
-        hud.hide()
-        shadowView.isHidden = true
-    }
-    
-    func hidePreloader(hud: HUDView, shadowView: UIView) {
-        hud.show()
-        shadowView.isHidden = false
     }
 }

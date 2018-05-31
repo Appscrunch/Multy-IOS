@@ -16,6 +16,7 @@ private typealias TableViewDataSource = AssetsViewController
 private typealias PresentingSheetDelegate = AssetsViewController
 private typealias CancelDelegate = AssetsViewController
 private typealias CreateWalletDelegate = AssetsViewController
+private typealias LocalizeDelegate = AssetsViewController
 
 class AssetsViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var statusView: UIView!
@@ -25,6 +26,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
+
 //    let progressHUD = ProgressHUD(text: Constants.AssetsScreen.progressString)
     
     var isSeedBackupOnScreen = false
@@ -39,7 +41,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     var isInternetAvailable = true
     
-    let loader = PreloaderView(frame: HUDFrame, text: Constants.AssetsScreen.progressString, image: #imageLiteral(resourceName: "walletHuge"))
+    let loader = PreloaderView(frame: HUDFrame, text: Constants.gettingWalletString, image: #imageLiteral(resourceName: "walletHuge"))
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -104,8 +106,6 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.addSubview(loader)
     }
-
-    
     
     func performFirstEnterFlow(completion: @escaping(_ isUpToDate: Bool) -> ()) {
         switch isDeviceJailbroken() {
@@ -153,7 +153,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         if self.presenter.isJailed {
-            self.presentWarningAlert(message: Constants.Security.jailbrokenDeviceWarningString)
+            self.presentWarningAlert(message: localize(string: Constants.jailbrokenDeviceWarningString))
         }
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -248,7 +248,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         chevronImg.image = #imageLiteral(resourceName: "chevron__")
         let btn = UIButton()
         btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
-        btn.setTitle("Backup is needed!", for: .normal)
+        btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
         btn.contentHorizontalAlignment = .left
@@ -667,6 +667,12 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
         (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Assets"
     }
 }
 

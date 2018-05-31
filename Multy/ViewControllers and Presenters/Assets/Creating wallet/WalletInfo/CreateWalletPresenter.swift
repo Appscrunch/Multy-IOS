@@ -5,6 +5,8 @@
 import UIKit
 import Firebase
 
+private typealias LocalizeDelegate = CreateWalletPresenter
+
 class CreateWalletPresenter: NSObject {
     weak var mainVC: CreateWalletViewController?
     var account : AccountRLM?
@@ -87,5 +89,11 @@ class CreateWalletPresenter: NSObject {
                 self.mainVC?.presentAlert(with: "Error while creating wallet!")
             }
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Assets"
     }
 }

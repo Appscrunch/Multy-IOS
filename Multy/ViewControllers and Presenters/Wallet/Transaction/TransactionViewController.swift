@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = TransactionViewController
+
 class TransactionViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var titleLbl: UILabel!
@@ -92,11 +94,11 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         }
         
         let actionSheet = UIAlertController(title: "", message: title, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        actionSheet.addAction(UIAlertAction(title: "Copy to clipboard", style: .default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: localize(string: Constants.cancelString), style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: localize(string: Constants.copyToClipboardString), style: .default, handler: { (action) in
             UIPasteboard.general.string = title
         }))
-        actionSheet.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: localize(string: Constants.shareString), style: .default, handler: { (action) in
             let objectsToShare = [title]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
@@ -137,10 +139,10 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
     func checkForSendOrReceive() {
         if isIncoming {  // RECEIVE
             self.makeBackColor(color: self.presenter.receiveBackColor)
-            self.titleLbl.text = "Transaction Info"
+            self.titleLbl.text = localize(string: Constants.transactionInfoString)
         } else {                        // SEND
             self.makeBackColor(color: self.presenter.sendBackColor)
-            self.titleLbl.text = "Transaction Info"
+            self.titleLbl.text = localize(string: Constants.transactionInfoString)
             self.transactionImg.image = #imageLiteral(resourceName: "sendBigIcon")
         }
     }
@@ -251,9 +253,9 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         var textForConfirmations = ""
         switch presenter.histObj.confirmations {
         case 1:
-            textForConfirmations = "1 Confirmation"
+            textForConfirmations = "1 \(Constants.confirmationString)"
         default: // more than 6
-            textForConfirmations = "\(presenter.histObj.confirmations) Confirmations"
+            textForConfirmations = "\(presenter.histObj.confirmations) \(Constants.confirmationsString)"
         }
         
         return textForConfirmations
@@ -268,5 +270,10 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
             blockchainVC.presenter.txHash = presenter.histObj.txHash
         }
     }
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Wallets"
+    }
 }

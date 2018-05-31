@@ -9,6 +9,7 @@ private typealias TableViewDataSource = CreateWalletViewController
 private typealias TableViewDelegate = CreateWalletViewController
 private typealias TextFieldDelegate = CreateWalletViewController
 private typealias ChooseBlockchainDelegate = CreateWalletViewController
+private typealias LocalizeDelegate = CreateWalletViewController
 
 class CreateWalletViewController: UIViewController, AnalyticsProtocol {
 
@@ -212,5 +213,11 @@ extension TextFieldDelegate: UITextFieldDelegate {
         } else {
             return false
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Assets"
     }
 }

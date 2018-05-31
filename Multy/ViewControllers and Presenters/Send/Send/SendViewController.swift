@@ -16,6 +16,8 @@ enum SendMode {
     case inSend
 }
 
+private typealias LocalizeDelegate = SendViewController
+
 class SendViewController: UIViewController {
     @IBOutlet weak var walletsCollectionView: UICollectionView!
     @IBOutlet weak var walletsCollectionViewFL: UICollectionViewFlowLayout!
@@ -306,7 +308,7 @@ class SendViewController: UIViewController {
     }
     
     func presentSendingErrorAlert() {
-        let alert = UIAlertController(title: "Transaction Error", message: "Error while sending transaction. Please, try again!", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.transactionErrorString), message: localize(string: Constants.errorSendingTxString), preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         
@@ -333,7 +335,6 @@ class SendViewController: UIViewController {
         self.transactionInfoView.alpha = 1
         self.transactionTokenImageView.alpha = 1
         
-        self.sendMode = .searching
         self.navigationButtonsHolderBottomConstraint.constant = 0
         self.transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - self.walletsCollectionView.frame.origin.y - self.walletsCollectionView.frame.size.height
         
@@ -345,6 +346,7 @@ class SendViewController: UIViewController {
             self.transactionHolderView.alpha = 0.0
         }) { (succeeded) in
             self.transactionHolderView.isHidden = true
+            self.sendMode = .searching
             if completion != nil {
                 completion!()
             }
@@ -365,6 +367,8 @@ class SendViewController: UIViewController {
                     
                     self.view.addSubview(doneAnimationView)
                     doneAnimationView.play{ (finished) in
+                        
+                        self.presenter.sendAnimationComplete()
                         UIView.animate(withDuration: 0.6, animations: {
                             doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
                             doneAnimationView.alpha = 0.0
@@ -375,7 +379,6 @@ class SendViewController: UIViewController {
                                 if succeeded {
                                     self.activeRequestsClonesHolderView.alpha = 1.0
                                     doneAnimationView.removeFromSuperview()
-                                    self.presenter.sendAnimationComplete()
                                 }
                             }
                         }
@@ -664,6 +667,11 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
         walletsCollectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
+    func scrollToRequest(_ index : Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        activeRequestsCollectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == activeRequestsCollectionView {
             let width = self.requestPageSize.width
@@ -717,5 +725,11 @@ extension SendViewController: UIGestureRecognizerDelegate {
         default:
             break
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

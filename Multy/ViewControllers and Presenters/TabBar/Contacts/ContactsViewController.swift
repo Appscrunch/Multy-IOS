@@ -4,12 +4,13 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = ContactsViewController
+
 class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtocol {
 
     @IBOutlet weak var donatView: UIView!
     var presenter = ContactsPresenter()
     @IBOutlet weak var donationTopConstraint: NSLayoutConstraint!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,5 +74,11 @@ class ContactsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     
     func presentNoInternet() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Contacts"
     }
 }

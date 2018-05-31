@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = SendFinishViewController
+
 class SendFinishViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -241,8 +243,8 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func presentAlert() {
-        let message = "Error while sending transaction. Please, try again!"
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let message = localize(string: Constants.errorSendingTxString)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             
         }))
@@ -262,5 +264,11 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
             let sendAnimationVC = segue.destination as! SendingAnimationViewController
             sendAnimationVC.chainId = presenter.transactionDTO.choosenWallet!.chain as? Int
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }
