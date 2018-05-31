@@ -291,6 +291,14 @@ class SendPresenter: NSObject {
                                          binaryData:    &binaryData!)
     }
     
+    func prepareSending() {
+        stopSearching()
+    }
+    
+    @objc func cancelPrepareSending() {
+        startSearchingActiveRequests()
+    }
+    
     func send() {
 
         createPreliminaryData()
@@ -339,9 +347,8 @@ class SendPresenter: NSObject {
     }
     
     func sendAnimationComplete() {
-        stopSearching()
         
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(startSearchingActiveRequests), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(cancelPrepareSending), userInfo: nil, repeats: false)
     }
     
     func cleanRequests() {
@@ -431,10 +438,7 @@ class SendPresenter: NSObject {
     
     @objc private func didReceiveSendResponse(notification: Notification) {
         DispatchQueue.main.async {
-            self.getWalletsVerbose(completion: { [unowned self] (success) in
-                self.cleanRequests()
-            })
-            
+            self.cleanRequests()
             let success = notification.userInfo!["data"] as! Bool
             
             self.sendVC?.updateUIWithSendResponse(success: success)

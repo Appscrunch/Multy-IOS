@@ -287,6 +287,7 @@ class SendViewController: UIViewController {
             self.animationHolderView.layoutIfNeeded()
             self.transactionHolderView.alpha = 0.0
         }) { (succeeded) in
+            self.presenter.cancelPrepareSending()
             if succeeded {
                 self.transactionHolderView.isHidden = true
             }
@@ -358,27 +359,21 @@ class SendViewController: UIViewController {
                     self.foundActiveRequestsHolderView.alpha = 0
                     self.activeRequestsClonesHolderView.alpha = 0
                 }) { (succeeded) in
-
-                    self.exitFromSending(nil)
+                    
                     let doneAnimationView = LOTAnimationView(name: "success_animation")
                     doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.foundActiveRequestsHolderView.frame.origin.y + self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
                     
                     self.view.addSubview(doneAnimationView)
-                    doneAnimationView.play{ (finished) in
-                        
-                        self.presenter.sendAnimationComplete()
+                    doneAnimationView.play{[unowned self] (finished) in
+                        self.exitFromSending(nil)
                         UIView.animate(withDuration: 0.6, animations: {
                             doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
                             doneAnimationView.alpha = 0.0
                         }) { (succeeded) in
-                            UIView.animate(withDuration: 0.35, animations: {
-                                doneAnimationView.alpha = 0.0
-                            }) { (succeeded) in
-                                if succeeded {
-                                    self.activeRequestsClonesHolderView.alpha = 1.0
-                                    doneAnimationView.removeFromSuperview()
-                                }
-                            }
+                            self.activeRequestsClonesHolderView.alpha = 1.0
+                            doneAnimationView.removeFromSuperview()
+                            
+                            self.close()
                         }
                     }
                 }
@@ -543,6 +538,14 @@ class SendViewController: UIViewController {
         
         return cellClone
     }
+
+
+    func close() {
+        self.navigationController?.popViewController(animated: true)
+        if let tbc = self.tabBarController as? CustomTabBarViewController {
+            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+        }
+    }
     
     //MARK: Actions
     @IBAction func qrCodeAction(_ sender: Any) {
@@ -550,10 +553,7 @@ class SendViewController: UIViewController {
     }
     
     @IBAction func closeAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-        if let tbc = self.tabBarController as? CustomTabBarViewController {
-            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
-        }
+        close()
     }
     
     @IBAction func recentAction(_ sender: Any) {
@@ -586,7 +586,7 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
             
             let request = presenter.activeRequestsArr[indexPath.item]
             cell.request = request
-            
+                        
             return cell
         } else {
             let cell = walletsCollectionView.dequeueReusableCell(withReuseIdentifier: "WalletCollectionViewCell", for: indexPath) as! WalletCollectionViewCell

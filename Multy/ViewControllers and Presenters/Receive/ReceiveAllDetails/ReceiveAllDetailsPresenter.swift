@@ -234,7 +234,15 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     
     @objc private func didUpdateTransaction(notification: Notification) {
         DispatchQueue.main.async {
-            self.receiveAllDetailsVC?.presentDidReceivePaymentAlert()
+            let userInfo = notification.userInfo
+            if userInfo != nil {
+                let notifictionMsg = userInfo!["NotificationMsg"] as! NSDictionary
+                if let txStatus = notifictionMsg["transactionType"], let address = notifictionMsg["address"] {
+                    if txStatus as! Int == TxStatus.MempoolIncoming.rawValue && address as! String == self.walletAddress {
+                        self.receiveAllDetailsVC?.presentDidReceivePaymentAlert()
+                    }
+                }
+            }
         }
     }
     

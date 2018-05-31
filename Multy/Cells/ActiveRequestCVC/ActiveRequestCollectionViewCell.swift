@@ -12,6 +12,8 @@ import Lottie
 class ActiveRequestCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var requestImage: UIImageView!
+    @IBOutlet weak var satisfiedImage: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,12 +21,11 @@ class ActiveRequestCollectionViewCell: UICollectionViewCell {
         requestImage.layer.masksToBounds = true
     }
 
-    var request : PaymentRequest?
+    var request : PaymentRequest!
     
     func fillInCell() {
-        if request != nil {
-            requestImage.image  = UIImage(named: request!.requestImageName)
-        }
+        requestImage.image  = UIImage(named: request!.requestImageName)
+        satisfiedImage.isHidden = !self.request.satisfied 
     }
 }
 
