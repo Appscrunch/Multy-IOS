@@ -98,7 +98,7 @@ class EthWalletPresenter: NSObject {
     
     func getHistoryAndWallet() {
 //        mainVC?.progressHUD.blockUIandShowProgressHUD()
-        mainVC?.loader.show(customTitle: Constants.AssetsScreen.progressString)
+        mainVC?.loader.show(customTitle: "Updating")
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: BlockchainType.create(wallet: wallet!)) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet

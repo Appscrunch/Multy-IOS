@@ -18,7 +18,7 @@ class WalletSettingsPresenter: NSObject {
         }
         
 //        walletSettingsVC?.loader.text = "Deleting Wallet"
-        walletSettingsVC?.loader.show(customTitle: Constants.AssetsScreen.progressString)
+        walletSettingsVC?.loader.show(customTitle: "Deleting")
         
         DataManager.shared.realmManager.getAccount { (acc, err) in
             guard acc != nil else {
@@ -39,7 +39,7 @@ class WalletSettingsPresenter: NSObject {
     
     func changeWalletName() {
 //        walletSettingsVC?.progressHUD.text = "Changing name"
-        walletSettingsVC?.loader.show(customTitle: Constants.AssetsScreen.progressString)
+        walletSettingsVC?.loader.show(customTitle: "Updating")
         
         DataManager.shared.getAccount { (account, error) in
             DataManager.shared.changeWalletName(currencyID:self.wallet!.chain,

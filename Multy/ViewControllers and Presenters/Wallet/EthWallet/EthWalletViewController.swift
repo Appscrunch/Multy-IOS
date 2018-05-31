@@ -33,7 +33,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     var isBackupOnScreen = true
 //    let progressHUD = ProgressHUD(text: "Updating...")
-    let loader = PreloaderView(frame: HUDFrame, text: Constants.AssetsScreen.progressString, image: #imageLiteral(resourceName: "walletHuge"))
+    let loader = PreloaderView(frame: HUDFrame, text: "Getting Wallets", image: #imageLiteral(resourceName: "walletHuge"))
     
     let visibleCells = 5  // iphone 6  height 667
     let gradientLayer = CAGradientLayer()
