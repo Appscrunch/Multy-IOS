@@ -9,3 +9,5 @@
 "WARNING" = "Предупреждение";
 "CANCEL" = "Отменить";
 "ERROR" = "Ошибка";
+"YES STRING" = "Да";
+"NO STRING" = "Нет";

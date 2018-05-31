@@ -9,3 +9,5 @@
 "WARNING" = "Warning";
 "CANCEL" = "Cancel";
 "ERROR" = "Error";
+"YES STRING" = "Yes";
+"NO STRING" = "No";

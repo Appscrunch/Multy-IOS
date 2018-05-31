@@ -13,3 +13,7 @@
 "WALLET NAME NOT EMPTY ALERT" = "Wallet name should be non empty";
 "WALLET AMOUNT ALERT" = "Cryptocurrency amount should be empty";
 "DELETE WALLET WARNING" = "Do you really want to delete this wallet?";
+"YES STRING" = "Yes";
+"NO STRING" = "No";
+"COPY TO CLIPBOARD" = "Copy to clipboard";
+"SHARE" = "Share";

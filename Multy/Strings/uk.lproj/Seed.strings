@@ -10,3 +10,5 @@
 "WARNING" = "Попередження";
 "CANCEL" = "Скасувати";
 "ERROR" = "Помилка";
+"YES STRING" = "Так";
+"NO STRING" = "Ні";

@@ -13,3 +13,7 @@
 "WALLET NAME NOT EMPTY ALERT" = "Имя кошелька не должно быть пустым";
 "WALLET AMOUNT ALERT" = "Сумма криптовалют должна быть пустой";
 "DELETE WALLET WARNING" = "Вы действительно хотите удалить кошелек?";
+"YES STRING" = "Да";
+"NO STRING" = "Нет";
+"COPY TO CLIPBOARD" = "Скопировать в буфер обмена";
+"SHARE" = "Поделиться";

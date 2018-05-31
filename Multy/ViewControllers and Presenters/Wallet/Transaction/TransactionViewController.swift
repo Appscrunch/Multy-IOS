@@ -95,10 +95,10 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         
         let actionSheet = UIAlertController(title: "", message: title, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: localize(string: Constants.cancelString), style: .cancel, handler: nil))
-        actionSheet.addAction(UIAlertAction(title: "Copy to clipboard", style: .default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: localize(string: Constants.copyToClipboardString), style: .default, handler: { (action) in
             UIPasteboard.general.string = title
         }))
-        actionSheet.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction(title: localize(string: Constants.shareString), style: .default, handler: { (action) in
             let objectsToShare = [title]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in

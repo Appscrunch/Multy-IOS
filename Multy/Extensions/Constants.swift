@@ -7,6 +7,9 @@ import UIKit
 private typealias LocalizeDelegate = Constants
 
 struct Constants {
+    static let yesString = "YES STRING"
+    static let noString = "NO STRING"
+    
     static let cryptoPortfolioString = "CRYPTO PORTFOLIO"
     static let currenciesChartsString = "CURRENCIES CHARTS"
     static let jailbrokenDeviceWarningString = "JAILBROKEN DEVICE ALERT MESSAGE"
@@ -24,6 +27,8 @@ struct Constants {
     static let walletNameAlertString = "WALLET NAME NOT EMPTY ALERT"
     static let walletAmountAlertString = "WALLET AMOUNT ALERT"
     static let deleteWalletAlertString = "DELETE WALLET WARNING"
+    static let copyToClipboardString = "COPY TO CLIPBOARD"
+    static let shareString = "SHARE"
     
     //Assets screen
     struct AssetsScreen {
