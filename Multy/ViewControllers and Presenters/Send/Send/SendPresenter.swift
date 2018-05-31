@@ -28,6 +28,8 @@ class SendPresenter: NSObject {
                 } else {
                     if selectedWalletIndex! >= filteredWalletArray.count {
                         selectedWalletIndex = filteredWalletArray.count - 1
+                    } else {
+                        selectedWalletIndex = selectedWalletIndex!
                     }
                 }
                 
@@ -57,6 +59,8 @@ class SendPresenter: NSObject {
                     selectedActiveRequestIndex = 0
                 } else if selectedActiveRequestIndex! >= activeRequestsArr.count {
                     selectedActiveRequestIndex = activeRequestsArr.count - 1
+                } else {
+                    selectedActiveRequestIndex = selectedActiveRequestIndex!
                 }
                 
                 sendVC?.scrollToRequest(selectedActiveRequestIndex!)
@@ -374,6 +378,30 @@ class SendPresenter: NSObject {
     }
     
     func updateActiveRequests(_ newRequests : [PaymentRequest]) {
+        var filteredRequestArray = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
+        
+        if selectedActiveRequestIndex != nil {
+            // active request already exists
+            let activeRequest = activeRequestsArr[selectedActiveRequestIndex!]
+            let newActiveRequest = filteredRequestArray.filter{ $0.userCode == activeRequest.userCode}.first
+            
+            if newActiveRequest != nil {
+                // there is new request with same userCode as userCode of active request
+                let newActiveRequestIndex = filteredRequestArray.index(of: newActiveRequest!)
+                if selectedActiveRequestIndex! > filteredRequestArray.count - 1 {
+                    // replace new active request with last element in filtered requests
+                    filteredRequestArray.remove(at: newActiveRequestIndex!)
+                    filteredRequestArray.append(newActiveRequest!)
+                } else {
+                    // insert new active request at current index
+                    filteredRequestArray.remove(at: newActiveRequestIndex!)
+                    filteredRequestArray.insert(newActiveRequest!, at: selectedActiveRequestIndex!)
+                }
+            }
+        }
+        
+        activeRequestsArr = filteredRequestArray
+        
 //        var updatedActiveRequests = [PaymentRequest]()
 //        var filteredNewRequests = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
 //
@@ -396,7 +424,7 @@ class SendPresenter: NSObject {
 //            }
 //        }
         
-        let filteredRequestArray = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
+        
         activeRequestsArr = filteredRequestArray
         
 //        var newRequests = [PaymentRequest]()
