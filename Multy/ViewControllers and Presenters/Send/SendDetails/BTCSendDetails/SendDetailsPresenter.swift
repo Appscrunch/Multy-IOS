@@ -63,7 +63,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         DataManager.shared.getFeeRate(currencyID: transactionDTO.choosenWallet!.chain.uint32Value,
                                       networkID: transactionDTO.choosenWallet!.chainType.uint32Value,
                                       completion: { [unowned self] (dict, error) in
-                                        self.sendDetailsVC?.progressHUD.hide()
+                                        self.sendDetailsVC?.loader.hide()
                                         
                                         if dict != nil {
                                             self.feeRate = dict

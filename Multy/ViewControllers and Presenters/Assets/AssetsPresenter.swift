@@ -197,7 +197,7 @@ class AssetsPresenter: NSObject {
     }
     
     func blockUI() {
-        assetsVC!.loader.show()
+        assetsVC!.loader.show(customTitle: Constants.AssetsScreen.progressString)
 //        assetsVC!.progressHUD.blockUIandShowProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = false
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = false

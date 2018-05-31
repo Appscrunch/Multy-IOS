@@ -114,16 +114,19 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             completion(false)
         case false:
             self.presenter.isJailed = false
-            let hud = self.showHud(text: "Checking version")
+            loader.show(customTitle: "Checking version")
+//            let hud = PreloaderView(frame: HUDFrame, text: "Checking version", image: #imageLiteral(resourceName: "walletHuge"))
+//            hud.show()
             if !(ConnectionCheck.isConnectedToNetwork()) {
                 self.isInternetAvailable = false
-                self.hideHud(view: hud as? ProgressHUD)
+//                self.hideHud(view: hud as? ProgressHUD)
+                loader.hide()
                 self.successLaunch()
                 completion(true)
                 return
             }
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
-                self.hideHud(view: hud as? ProgressHUD)
+                self.loader.hide()
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 

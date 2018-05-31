@@ -35,7 +35,8 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     var presenter = BTCWalletPresenter()
     
     var isBackupOnScreen = true
-    let progressHUD = ProgressHUD(text: "Updating...")
+//    let progressHUD = ProgressHUD(text: "Updating...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Updating...", image: #imageLiteral(resourceName: "walletHuge"))
     
     var visibleCells = 5  // iphone 6  height 667
     let gradientLayer = CAGradientLayer()
@@ -66,8 +67,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         spiner.stopAnimating()
-        view.addSubview(progressHUD)
-        progressHUD.hide()
+        view.addSubview(loader)
         self.swipeToBack()
         presenter.mainVC = self
         presenter.fixConstraints()

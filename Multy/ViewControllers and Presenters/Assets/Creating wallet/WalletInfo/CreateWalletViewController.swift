@@ -17,15 +17,15 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var createBtn: ZFRippleButton!
     
     var presenter = CreateWalletPresenter()
-    let progressHUD = ProgressHUD(text: "Creating Wallet...")
+//    let progressHUD = ProgressHUD(text: "Creating Wallet...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Creating Wallet...", image: #imageLiteral(resourceName: "walletHuge"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
         self.hideKeyboardWhenTappedAround()
         self.tableView.tableFooterView = nil
-        self.view.addSubview(progressHUD)
-        progressHUD.hide()
+        self.view.addSubview(loader)
         
         self.presenter.mainVC = self
         
@@ -62,7 +62,7 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
             return
         }
         
-        progressHUD.show()
+        loader.show(customTitle: "Creating Wallet")
         presenter.createNewWallet { (dict) in
             print(dict!)
         }

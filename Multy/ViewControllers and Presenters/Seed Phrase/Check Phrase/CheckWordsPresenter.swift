@@ -48,14 +48,14 @@ class CheckWordsPresenter: NSObject {
         }
         
         checkWordsVC?.nextWordOrContinue.isEnabled = false
-        checkWordsVC?.progressHUD.show()
+        checkWordsVC?.loader.show(customTitle: "Restoring Wallets")
         
         DataManager.shared.auth(rootKey: seedString) { (acc, err) in
 //            print(acc ?? "")
             self.checkWordsVC?.wordTF.resignFirstResponder()
             self.checkWordsVC?.navigationController?.popToRootViewController(animated: true)
             self.checkWordsVC?.view.isUserInteractionEnabled = true
-            self.checkWordsVC?.progressHUD.hide()
+            self.checkWordsVC?.loader.hide()
             
             DataManager.shared.socketManager.start()
         }
