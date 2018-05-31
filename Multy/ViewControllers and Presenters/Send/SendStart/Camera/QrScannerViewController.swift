@@ -108,7 +108,7 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     }
     
     func alertForGetNewPermission() {
-        let alert = UIAlertController(title: localize(string: Constants.warningString), message: "Please go to the Settings -> Multy and allow camera usage", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: localize(string: Constants.goToSettingsString), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
             let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
             if UIApplication.shared.canOpenURL(settingsUrl!) {
@@ -184,6 +184,6 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }

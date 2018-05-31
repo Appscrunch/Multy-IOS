@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = WalletChooseViewController
+
 class WalletChooseViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
@@ -103,7 +105,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
         let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.filteredWalletArray[indexPath.row])
         
         if !isValidDTO.isValid {
-            presenter.presentAlert(message: "You entered not valid address for current blockchain.")
+            presenter.presentAlert(message: localize(string: Constants.notValidAddressString))
             
             return
         }
@@ -116,5 +118,11 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
     
     func updateUI() {
         self.tableView.reloadData()
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

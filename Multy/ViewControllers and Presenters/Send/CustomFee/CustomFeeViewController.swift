@@ -123,6 +123,6 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }

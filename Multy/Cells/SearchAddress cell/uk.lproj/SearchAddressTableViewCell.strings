@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Send To"; ObjectID = "2LB-ni-Z7I"; */
-"2LB-ni-Z7I.text" = "Send To";
+"2LB-ni-Z7I.text" = "Відправити";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "Fcx-Dp-aHk"; */
 "Fcx-Dp-aHk.text" = "(в розробці)";
@@ -9,7 +9,7 @@
 "H6i-ex-qnj.text" = "(в розробці)";
 
 /* Class = "UILabel"; text = "Enter Address Here"; ObjectID = "QbG-g5-8Bu"; */
-"QbG-g5-8Bu.text" = "Enter Address Here";
+"QbG-g5-8Bu.text" = "Введіть адресу одержувача";
 
 /* Class = "UILabel"; text = "Scan\nQR"; ObjectID = "TeX-eS-0iw"; */
 "TeX-eS-0iw.text" = "Scan\nQR";
@@ -18,7 +18,7 @@
 "ahY-8F-kKp.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "cr8-Jx-Rfq"; */
-"cr8-Jx-Rfq.placeholder" = "Search or Enter Address Here";
+"cr8-Jx-Rfq.placeholder" = "Введіть адресу одержувача";
 
 /* Class = "UILabel"; text = "Contacts"; ObjectID = "lYY-Pk-EAu"; */
 "lYY-Pk-EAu.text" = "Контакти";

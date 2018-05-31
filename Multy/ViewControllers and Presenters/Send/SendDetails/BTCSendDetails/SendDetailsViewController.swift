@@ -369,6 +369,6 @@ extension TableViewDataSource: UITableViewDataSource {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }

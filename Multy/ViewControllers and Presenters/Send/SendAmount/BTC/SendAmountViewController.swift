@@ -374,6 +374,6 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }

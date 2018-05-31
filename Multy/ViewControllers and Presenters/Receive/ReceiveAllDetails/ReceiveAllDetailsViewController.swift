@@ -405,6 +405,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Receive"
+        return "Receives"
     }
 }

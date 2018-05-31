@@ -62,6 +62,6 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Settings"
+        return "Setting"
     }
 }

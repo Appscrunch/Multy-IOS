@@ -54,7 +54,7 @@
 "BoO-y0-goH.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "C5d-7f-xmF"; */
-"C5d-7f-xmF.placeholder" = "Search or Enter Address Here";
+"C5d-7f-xmF.placeholder" = "Введите адрес получателя";
 
 /* Class = "UILabel"; text = "Fast"; ObjectID = "CAx-k6-U4B"; */
 "CAx-k6-U4B.text" = "Fast";
@@ -120,7 +120,7 @@
 "Sia-Lf-ccw.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "No recent addresses yet."; ObjectID = "TqU-bF-Cd8"; */
-"TqU-bF-Cd8.text" = "No recent addresses yet.";
+"TqU-bF-Cd8.text" = "Последние адреса отсутствуют.";
 
 /* Class = "UILabel"; text = "Pay for commission        "; ObjectID = "VW7-w3-CZx"; */
 "VW7-w3-CZx.text" = "Pay for commission        ";
@@ -186,7 +186,7 @@
 "h1N-oK-MNU.text" = "Next";
 
 /* Class = "UILabel"; text = "Enter Address Here"; ObjectID = "h7O-aw-YOV"; */
-"h7O-aw-YOV.text" = "Enter Address Here";
+"h7O-aw-YOV.text" = "Введите адрес получателя";
 
 /* Class = "UILabel"; text = "0 "; ObjectID = "hUT-w7-NZ6"; */
 "hUT-w7-NZ6.text" = "0 ";
@@ -246,7 +246,7 @@
 "t0h-5W-plS.text" = "Support Multy";
 
 /* Class = "UILabel"; text = "Send To"; ObjectID = "ttx-83-gVw"; */
-"ttx-83-gVw.text" = "Send To";
+"ttx-83-gVw.text" = "Отправить";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "uaU-U0-1YQ"; */
 "uaU-U0-1YQ.text" = "(в разработке)";

@@ -33,6 +33,8 @@ struct Constants {
     static let transactionInfoString = "TRANSACTION INFO"
     static let confirmationString = "CONFIRMATION"
     static let confirmationsString = "CONFIRMATIONS"
+    static let notValidAddressString = "NOT VALID ADDRESS"
+    static let goToSettingsString = "GO TO SETTINGS"
     
     //Assets screen
     struct AssetsScreen {

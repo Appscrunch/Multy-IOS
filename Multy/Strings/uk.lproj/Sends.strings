@@ -1,0 +1,13 @@
+/* 
+  Send.strings
+  Multy
+
+  Created by Alex Pro on 5/30/18.
+  Copyright © 2018 Idealnaya rabota. All rights reserved.
+*/
+
+"WARNING" = "Попередження";
+"CANCEL" = "Скасувати";
+"ERROR" = "Помилка";
+"NOT VALID ADDRESS" = "Ви ввели неправильну адресу.";
+"GO TO SETTINGS" = "Дозвольте використовувати камеру в налаштуваннях. (Налаштування -> Multy)";

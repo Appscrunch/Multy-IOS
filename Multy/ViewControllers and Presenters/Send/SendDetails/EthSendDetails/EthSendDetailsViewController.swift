@@ -203,6 +203,6 @@ extension EthSendDetailsViewController: UITableViewDelegate, UITableViewDataSour
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }
