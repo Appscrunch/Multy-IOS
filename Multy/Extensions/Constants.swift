@@ -29,6 +29,7 @@ struct Constants {
     static let deleteWalletAlertString = "DELETE WALLET WARNING"
     static let copyToClipboardString = "COPY TO CLIPBOARD"
     static let shareString = "SHARE"
+    static let magicalReceiveString = "MAGICAL RECEIVE"
     
     //Assets screen
     struct AssetsScreen {

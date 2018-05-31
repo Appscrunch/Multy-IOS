@@ -27,7 +27,7 @@
 "CTc-56-hc2.text" = "BTC";
 
 /* Class = "UILabel"; text = "Request summ"; ObjectID = "Cyh-TI-NTq"; */
-"Cyh-TI-NTq.text" = "Request summ";
+"Cyh-TI-NTq.text" = "Запросить сумму";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "F0n-7y-x9F"; */
 "F0n-7y-x9F.text" = "BTC";
@@ -39,7 +39,7 @@
 "L7R-G0-LAB.normalTitle" = "Generate New Address";
 
 /* Class = "UIButton"; normalTitle = "Magic Receive"; ObjectID = "OZc-YB-CB7"; */
-"OZc-YB-CB7.normalTitle" = "Magic Receive";
+"OZc-YB-CB7.normalTitle" = "Магическое получение";
 
 /* Class = "UILabel"; text = " "; ObjectID = "PBS-bB-1y6"; */
 "PBS-bB-1y6.text" = " ";
@@ -48,13 +48,13 @@
 "Qf6-To-A5V.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Select Wallet:"; ObjectID = "RHs-Mt-eGo"; */
-"RHs-Mt-eGo.text" = "Select Wallet:";
+"RHs-Mt-eGo.text" = "Выбрать Кошелек:";
 
 /* Class = "UILabel"; text = "Request Summ"; ObjectID = "SJp-d1-7t5"; */
-"SJp-d1-7t5.text" = "Request Summ";
+"SJp-d1-7t5.text" = "Запросить сумму";
 
 /* Class = "UIButton"; normalTitle = "Request summ"; ObjectID = "SXI-5J-BlV"; */
-"SXI-5J-BlV.normalTitle" = "Request summ";
+"SXI-5J-BlV.normalTitle" = "Запросить сумму";
 
 /* Class = "UILabel"; text = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K"; ObjectID = "TcM-XW-eXl"; */
 "TcM-XW-eXl.text" = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K";

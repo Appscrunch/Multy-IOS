@@ -102,7 +102,7 @@
 "PrT-By-RHO.text" = "Send From";
 
 /* Class = "UILabel"; text = "Select Wallet:"; ObjectID = "Rcp-zA-Ubf"; */
-"Rcp-zA-Ubf.text" = "Select Wallet:";
+"Rcp-zA-Ubf.text" = "Выбрать Кошелек:";
 
 /* Class = "UILabel"; text = "0.002 BTC / 1.54 USD"; ObjectID = "RhC-aH-HrF"; */
 "RhC-aH-HrF.text" = "0.002 BTC / 1.54 USD";
