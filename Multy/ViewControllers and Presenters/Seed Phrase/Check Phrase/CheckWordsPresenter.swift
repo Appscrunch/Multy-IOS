@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = CheckWordsPresenter
+
 class CheckWordsPresenter: NSObject {
     
     var checkWordsVC: CheckWordsViewController?
@@ -36,14 +38,14 @@ class CheckWordsPresenter: NSObject {
         }
         
         self.checkWordsVC?.view.isUserInteractionEnabled = false
-        let seedString2 = "sister chuckle rocket segment together open elder length word story chair settle goddess twelve spend"
         if let errString = DataManager.shared.getRootString(from: seedString).1 {
-//            let alert = UIAlertController(title: "Warning", message: errString, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-//                self.checkWordsVC?.navigationController?.popViewController(animated: true)
-//            }))
-//            self.checkWordsVC?.present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: localize(string: Constants.warningString), message: errString, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                self.checkWordsVC?.navigationController?.popViewController(animated: true)
+            }))
+            self.checkWordsVC?.present(alert, animated: true, completion: nil)
             self.checkWordsVC?.performSegue(withIdentifier: "wrongVC", sender: (Any).self)
+            
             return
         }
         
@@ -59,5 +61,11 @@ class CheckWordsPresenter: NSObject {
             
             DataManager.shared.socketManager.start()
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Seed"
     }
 }

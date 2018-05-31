@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = CheckWordsViewController
+
 class CheckWordsViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
 
     @IBOutlet weak var wordTF: UITextField!
@@ -73,7 +75,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         super.viewWillAppear(animated)
         self.wordTF.becomeFirstResponder()
         if self.isRestore {
-            self.titleLbl.text = "Restore Multy"
+            self.titleLbl.text = localize(string: Constants.restoreMultyString)
         }
         if self.isNeedToClean {
             self.currentWordNumber = 1
@@ -181,7 +183,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        let alert = UIAlertController(title: "Cancel", message: "Are you really want to cancel?", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.cancelString), message: "Are you really want to cancel?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             self.sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: cancelTap)
             if self.whereFrom != nil {
@@ -247,3 +249,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     }
 }
 
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Seed"
+    }
+}

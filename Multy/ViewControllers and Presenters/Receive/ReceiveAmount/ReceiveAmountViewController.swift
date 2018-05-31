@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = ReceiveAmountViewController
+
 class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var amountTF: UITextField!
@@ -125,7 +127,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func presentWarning(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -222,6 +224,12 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         if screenHeight == heightOfiPad {
             self.btnTopConstraint.constant = 10
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Receive"
     }
 }
 

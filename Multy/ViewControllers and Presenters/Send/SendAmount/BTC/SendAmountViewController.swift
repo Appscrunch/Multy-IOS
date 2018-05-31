@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = SendAmountViewController
+
 class SendAmountViewController: UIViewController, UITextFieldDelegate, AnalyticsProtocol {
     
     @IBOutlet weak var titleLbl: UILabel! // "Send \(crypyoName)"
@@ -212,7 +214,7 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func presentWarning(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString) , message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -368,6 +370,10 @@ class SendAmountViewController: UIViewController, UITextFieldDelegate, Analytics
         }
         sendAnalyticsEvent(screenName: "\(screenSendAmountWithChain)\(presenter.transactionDTO.choosenWallet!.chain)", eventName: tap)
     }
-    
-    
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Send"
+    }
 }

@@ -4,13 +4,27 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = Constants
+
 struct Constants {
+    static let cryptoPortfolioString = "CRYPTO PORTFOLIO"
+    static let currenciesChartsString = "CURRENCIES CHARTS"
+    static let jailbrokenDeviceWarningString = "JAILBROKEN DEVICE ALERT MESSAGE"
+    static let backupNeededString = "BACKUP IS NEEDED"
+    static let restoreMultyString = "RESTORE MULTY"
+    static let gettingWalletString = "GETTING WALLET"
+    static let availableString = "AVAILABLE"
+    static let workInProgressString = "WORK IN PROGRESS"
+    static let weHaveUpdateString = "WE HAVE AN UPDATE"
+    static let updateMultyString = "UPDATE MULTY"
+    static let goToUpdateString = "GO TO UPDATE"
+    static let warningString = "WARNING"
+    static let cancelString = "CANCEL"
+    static let errorString = "ERROR"
+    
     //Assets screen
     struct AssetsScreen {
-        static let progressString = "Getting Wallets..."
         static let createWalletString = "Create wallet"
-        static let createOrImportWalletString = "Create or Import New Wallet"
-        static let cancelString = "Cancel"
         static let backupButtonHeight = CGFloat(44)
         static let backupAssetsOffset = CGFloat(25)
         static let leadingAndTrailingOffset = CGFloat(16)
@@ -24,11 +38,6 @@ struct Constants {
     
     struct ChooseWalletScreen {
         static let emptyScreenPhraseKey = "You don't have any wallets with "
-    }
-    
-    //Scurity strings
-    struct Security {
-        static let jailbrokenDeviceWarningString = "Your Device is Jailbroken!\nSory, but we don`t support jailbroken devices."
     }
     
     //StoryboardStrings
@@ -86,6 +95,12 @@ struct Constants {
     
     struct CustomFee {
         static let defaultBTCCustomFeeKey = 2
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Assets"
     }
 }
 

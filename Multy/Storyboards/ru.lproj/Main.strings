@@ -1,9 +1,9 @@
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "0qt-Qh-fw1"; */
-"0qt-Qh-fw1.text" = "Exchange";
+"0qt-Qh-fw1.text" = "Биржа";
 
 /* Class = "UILabel"; text = "Security Settings"; ObjectID = "0rb-aE-nDa"; */
-"0rb-aE-nDa.text" = "Security Settings";
+"0rb-aE-nDa.text" = "Настройки Безопасности";
 
 /* Class = "UILabel"; text = "Create Wallet"; ObjectID = "1wC-lj-ECJ"; */
 "1wC-lj-ECJ.text" = "Создать Кошелек";
@@ -12,49 +12,49 @@
 "20j-m8-EKe.text" = "Отменить";
 
 /* Class = "UILabel"; text = "Currency to convert"; ObjectID = "2Rh-CD-yeA"; */
-"2Rh-CD-yeA.text" = "Currency to convert";
+"2Rh-CD-yeA.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "Donate for this option"; ObjectID = "2af-jb-4m3"; */
-"2af-jb-4m3.text" = "Donate for this option";
+"2af-jb-4m3.text" = "Пожертвовать для этой опции";
 
 /* Class = "UILabel"; text = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly"; ObjectID = "312-E7-Xe2"; */
 "312-E7-Xe2.text" = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly";
 
 /* Class = "UITabBarItem"; title = "Activity"; ObjectID = "3Tm-8r-aym"; */
-"3Tm-8r-aym.title" = "Activity";
+"3Tm-8r-aym.title" = "События";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "4BO-WF-MtY"; */
-"4BO-WF-MtY.normalTitle" = "Privacy Policy";
+"4BO-WF-MtY.normalTitle" = "Политика конфиденциальности";
 
 /* Class = "UIButton"; normalTitle = "Donate USD 50"; ObjectID = "97Y-tc-SZM"; */
-"97Y-tc-SZM.normalTitle" = "Donate USD 50";
+"97Y-tc-SZM.normalTitle" = "Пожертвовать USD 50";
 
 /* Class = "UILabel"; text = "For Send"; ObjectID = "AUP-YX-Ckg"; */
 "AUP-YX-Ckg.text" = "For Send";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "AX1-QS-lfe"; */
-"AX1-QS-lfe.text" = "Activity";
+"AX1-QS-lfe.text" = "События";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "AYV-Wk-0pe"; */
-"AYV-Wk-0pe.text" = "Send";
+"AYV-Wk-0pe.text" = "Отправить";
 
 /* Class = "UILabel"; text = "Vote for features"; ObjectID = "CFB-1G-kDZ"; */
-"CFB-1G-kDZ.text" = "Vote for features";
+"CFB-1G-kDZ.text" = "Голосуй криптой";
 
 /* Class = "UILabel"; text = "Reference Currency"; ObjectID = "Cmf-Vv-6EE"; */
-"Cmf-Vv-6EE.text" = "Исходная валюта";
+"Cmf-Vv-6EE.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "Vote for contacts"; ObjectID = "Cnj-cT-4pf"; */
-"Cnj-cT-4pf.text" = "Vote for contacts";
+"Cnj-cT-4pf.text" = "Проголосовать за контакты";
 
 /* Class = "UILabel"; text = "Push Notifications"; ObjectID = "E6X-rf-6eP"; */
-"E6X-rf-6eP.text" = "Push Notifications";
+"E6X-rf-6eP.text" = "Всплывающие Уведомления";
 
 /* Class = "UIButton"; normalTitle = "Create"; ObjectID = "EcK-ls-Eh8"; */
-"EcK-ls-Eh8.normalTitle" = "Create";
+"EcK-ls-Eh8.normalTitle" = "Создать";
 
 /* Class = "UILabel"; text = "No contacts yet"; ObjectID = "F39-3R-vjc"; */
-"F39-3R-vjc.text" = "No contacts yet";
+"F39-3R-vjc.text" = "Пока здесь пусто";
 
 /* Class = "UILabel"; text = "Fee Rate"; ObjectID = "GOV-kb-79y"; */
 "GOV-kb-79y.text" = "Fee Rate";
@@ -69,13 +69,13 @@
 "Ibn-Hy-A0R.text" = "1 233$";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "Ij3-vx-Kh2"; */
-"Ij3-vx-Kh2.text" = "(work in progress)";
+"Ij3-vx-Kh2.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "1:59"; ObjectID = "KBZ-NF-ahF"; */
 "KBZ-NF-ahF.text" = "1:59";
 
 /* Class = "UITabBarItem"; title = "Main"; ObjectID = "KWB-7P-gFV"; */
-"KWB-7P-gFV.title" = "Main";
+"KWB-7P-gFV.title" = "Кошельки";
 
 /* Class = "UILabel"; text = "No activity yet"; ObjectID = "LRJ-bG-I4l"; */
 "LRJ-bG-I4l.text" = "No activity yet";
@@ -93,7 +93,7 @@
 "Rmc-c6-YoG.text" = "Touch ID for «Multy»";
 
 /* Class = "UILabel"; text = "Contacts"; ObjectID = "SCG-Oy-IO5"; */
-"SCG-Oy-IO5.text" = "Contacts";
+"SCG-Oy-IO5.text" = "Контакты";
 
 /* Class = "UILabel"; text = "Wallet Name"; ObjectID = "TIE-mG-uUa"; */
 "TIE-mG-uUa.text" = "Название Кошелька";
@@ -111,28 +111,28 @@
 "VE2-jw-Snq.text" = "Donation";
 
 /* Class = "UILabel"; text = "Blockchains"; ObjectID = "Vis-uX-a9U"; */
-"Vis-uX-a9U.text" = "Blockchains";
+"Vis-uX-a9U.text" = "Блокчейны";
 
 /* Class = "UILabel"; text = "Import Wallet"; ObjectID = "XSz-h8-kEl"; */
-"XSz-h8-kEl.text" = "Import Wallet";
+"XSz-h8-kEl.text" = "Импортировать кошелек";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "XXC-0f-DEu"; */
 "XXC-0f-DEu.text" = "BTC";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "Z17-jd-0eD"; */
-"Z17-jd-0eD.title" = "Settings";
+"Z17-jd-0eD.title" = "Настройки";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ZPG-iV-jLD"; */
 "ZPG-iV-jLD.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "aOY-Hs-fDh"; */
-"aOY-Hs-fDh.text" = "Exchange";
+"aOY-Hs-fDh.text" = "Биржа";
 
 /* Class = "UILabel"; text = "Bitcoin ∙ BTC"; ObjectID = "aVq-ZB-lDs"; */
 "aVq-ZB-lDs.text" = "Bitcoin ∙ BTC";
 
 /* Class = "UILabel"; text = "We want you to speak up. By voting with your crypto, you can give a feedback on features you want the most and support project at the same time. Your vote will help us to choose the right path."; ObjectID = "aqW-mj-53c"; */
-"aqW-mj-53c.text" = "We want you to speak up. By voting with your crypto, you can give a feedback on features you want the most and support project at the same time. Your vote will help us to choose the right path.";
+"aqW-mj-53c.text" = "Мы хотим узнать ваше мнение. Проголосовав за функционал, вы даете нам знать что он важен и одновременно поддерживаете разработчиков проекта. Ваш голос поможет нам выбрать правильный путь.";
 
 /* Class = "UILabel"; text = "Scan"; ObjectID = "bnN-6x-pIY"; */
 "bnN-6x-pIY.text" = "Scan";
@@ -141,40 +141,40 @@
 "bxm-Wl-Ttz.text" = "Fast Operations";
 
 /* Class = "UILabel"; text = "Leave Feedback"; ObjectID = "cGT-gp-Wpw"; */
-"cGT-gp-Wpw.text" = "Leave Feedback";
+"cGT-gp-Wpw.text" = "Оставить отзыв";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "ccX-Hp-ZvL"; */
-"ccX-Hp-ZvL.text" = "(work in progress)";
+"ccX-Hp-ZvL.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "db1-Nv-fng"; */
 "db1-Nv-fng.text" = "USD";
 
 /* Class = "UILabel"; text = "US Dollars ∙ USD"; ObjectID = "df5-ol-Doo"; */
-"df5-ol-Doo.text" = "US Dollars ∙ USD";
+"df5-ol-Doo.text" = "Доллары США ∙ USD";
 
 /* Class = "UIButton"; normalTitle = "Terms of Service"; ObjectID = "dk1-AS-aPV"; */
-"dk1-AS-aPV.normalTitle" = "Terms of Service";
+"dk1-AS-aPV.normalTitle" = "Условия предоставления услуг";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "dmp-ig-v3f"; */
-"dmp-ig-v3f.text" = "Receive";
+"dmp-ig-v3f.text" = "Получить";
 
 /* Class = "UILabel"; text = "No internet connection"; ObjectID = "eXV-cf-GXL"; */
 "eXV-cf-GXL.text" = "No internet connection";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "g69-dn-xlO"; */
-"g69-dn-xlO.text" = "(work in progress)";
+"g69-dn-xlO.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "Multy is temporary locked.\n"; ObjectID = "g9R-o2-GoW"; */
 "g9R-o2-GoW.text" = "Multy is temporary locked.\n";
 
 /* Class = "UITabBarItem"; title = "Contacts"; ObjectID = "gAL-wV-lQc"; */
-"gAL-wV-lQc.title" = "Contacts";
+"gAL-wV-lQc.title" = "Контакты";
 
 /* Class = "UIButton"; normalTitle = "Donate USD 5"; ObjectID = "gwH-0Q-jV7"; */
-"gwH-0Q-jV7.normalTitle" = "Donate USD 5";
+"gwH-0Q-jV7.normalTitle" = "Пожертвовать USD 5";
 
 /* Class = "UIButton"; normalTitle = "Create New"; ObjectID = "hgF-yi-Usi"; */
-"hgF-yi-Usi.normalTitle" = "Create New";
+"hgF-yi-Usi.normalTitle" = "Создавать Новый";
 
 /* Class = "UILabel"; text = "Select wallet and donation sum"; ObjectID = "kVh-aV-sdy"; */
 "kVh-aV-sdy.text" = "Select wallet and donation sum";
@@ -183,13 +183,13 @@
 "kbV-wl-pxp.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "By donation for this option you help the\ndevelopment team work more diligently\nand develop new application functionality"; ObjectID = "lQD-5J-hkF"; */
-"lQD-5J-hkF.text" = "By donation for this option you help the\ndevelopment team work more diligently\nand develop new application functionality";
+"lQD-5J-hkF.text" = "Своим пожертвованием вы помогаете команде разработчиков. Собранные средства пойдут на разработку нового функционала.";
 
 /* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "m7p-Iz-hvC"; */
 "m7p-Iz-hvC.normalTitle" = "Accept";
 
 /* Class = "UILabel"; text = "Terms of Service"; ObjectID = "mMS-bs-LWa"; */
-"mMS-bs-LWa.text" = "Terms of Service";
+"mMS-bs-LWa.text" = "Условия предоставления услуг";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mej-Ly-E3w"; */
 "mej-Ly-E3w.normalTitle" = "Button";
@@ -201,7 +201,7 @@
 "pCz-aZ-HZS.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Create or Import New Wallet"; ObjectID = "sRz-3m-UVg"; */
-"sRz-3m-UVg.text" = "Create or Import New Wallet";
+"sRz-3m-UVg.text" = "Создать или импортировать новый кошелек";
 
 /* Class = "UIButton"; normalTitle = "Copy"; ObjectID = "tRx-hg-wDk"; */
 "tRx-hg-wDk.normalTitle" = "Copy";
@@ -210,13 +210,13 @@
 "tdq-0K-Sb2.normalTitle" = "Try Again";
 
 /* Class = "UILabel"; text = "Blockchain"; ObjectID = "u64-Q0-7bi"; */
-"u64-Q0-7bi.text" = "Blockchain";
+"u64-Q0-7bi.text" = "Блокчейн";
 
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "vCc-C8-70s"; */
-"vCc-C8-70s.normalTitle" = "Send";
+"vCc-C8-70s.normalTitle" = "Отправить";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wOA-Hu-U4A"; */
-"wOA-Hu-U4A.title" = "Settings";
+"wOA-Hu-U4A.title" = "Настройки";
 
 /* Class = "UILabel"; text = "You have enterred \npin incorrectly 5 times.\n\nTry again in:"; ObjectID = "wSj-OL-MZJ"; */
 "wSj-OL-MZJ.text" = "You have enterred \npin incorrectly 5 times.\n\nTry again in:";
@@ -225,13 +225,13 @@
 "xI3-UE-keb.text" = "BTC ∙ Personal";
 
 /* Class = "UILabel"; text = "Vote for activity"; ObjectID = "xU0-fA-viF"; */
-"xU0-fA-viF.text" = "Vote for activity";
+"xU0-fA-viF.text" = "Проголосовать за события";
 
 /* Class = "UILabel"; text = "About Multy"; ObjectID = "xfR-da-DhP"; */
-"xfR-da-DhP.text" = "About Multy";
+"xfR-da-DhP.text" = "О Multy";
 
 /* Class = "UITextField"; placeholder = "Wallet name"; ObjectID = "yYM-Z4-2M4"; */
 "yYM-Z4-2M4.placeholder" = "Название Кошелька";
 
 /* Class = "UILabel"; text = "US Dollars ∙ USD"; ObjectID = "zG3-vO-HLP"; */
-"zG3-vO-HLP.text" = "US Dollars ∙ USD";
+"zG3-vO-HLP.text" = "Доллары США ∙ USD";

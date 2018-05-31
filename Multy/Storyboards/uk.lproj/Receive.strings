@@ -6,7 +6,7 @@
 "6cq-qs-W93.text" = "BTC ∙ Personal";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "7Et-dH-d2P"; */
-"7Et-dH-d2P.text" = "Cancel";
+"7Et-dH-d2P.text" = "Скасувати";
 
 /* Class = "UILabel"; text = "Receiving"; ObjectID = "7ol-yG-FZr"; */
 "7ol-yG-FZr.text" = "Receiving";
@@ -45,7 +45,7 @@
 "PBS-bB-1y6.text" = " ";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Qf6-To-A5V"; */
-"Qf6-To-A5V.normalTitle" = "Cancel";
+"Qf6-To-A5V.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Select Wallet:"; ObjectID = "RHs-Mt-eGo"; */
 "RHs-Mt-eGo.text" = "Select Wallet:";
@@ -72,7 +72,7 @@
 "fc4-7b-wBs.text" = "0.0152";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "hSx-Am-TJ1"; */
-"hSx-Am-TJ1.text" = "Receive";
+"hSx-Am-TJ1.text" = "Отримати";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "i8P-M2-nC4"; */
 "i8P-M2-nC4.text" = "Label";
@@ -81,7 +81,7 @@
 "l1V-0X-Hje.text" = "Address Book";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "lpd-w8-Ylh"; */
-"lpd-w8-Ylh.text" = "Receive";
+"lpd-w8-Ylh.text" = "Отримати";
 
 /* Class = "UITextField"; placeholder = "0.0"; ObjectID = "qZH-gm-lpy"; */
 "qZH-gm-lpy.placeholder" = "0.0";
