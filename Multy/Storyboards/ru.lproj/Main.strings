@@ -36,7 +36,7 @@
 "AX1-QS-lfe.text" = "События";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "AYV-Wk-0pe"; */
-"AYV-Wk-0pe.text" = "Send";
+"AYV-Wk-0pe.text" = "Отправить";
 
 /* Class = "UILabel"; text = "Vote for features"; ObjectID = "CFB-1G-kDZ"; */
 "CFB-1G-kDZ.text" = "Голосуй криптой";
@@ -156,7 +156,7 @@
 "dk1-AS-aPV.normalTitle" = "Условия предоставления услуг";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "dmp-ig-v3f"; */
-"dmp-ig-v3f.text" = "Receive";
+"dmp-ig-v3f.text" = "Получить";
 
 /* Class = "UILabel"; text = "No internet connection"; ObjectID = "eXV-cf-GXL"; */
 "eXV-cf-GXL.text" = "No internet connection";
@@ -213,7 +213,7 @@
 "u64-Q0-7bi.text" = "Блокчейн";
 
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "vCc-C8-70s"; */
-"vCc-C8-70s.normalTitle" = "Send";
+"vCc-C8-70s.normalTitle" = "Отправить";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wOA-Hu-U4A"; */
 "wOA-Hu-U4A.title" = "Настройки";

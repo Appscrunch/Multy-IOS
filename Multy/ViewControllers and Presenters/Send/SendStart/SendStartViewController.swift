@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = SendStartViewController
+
 class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsProtocol, DonationProtocol, CancelProtocol {
 
     @IBOutlet weak var tableView: UITableView!
@@ -278,5 +280,11 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Send"
     }
 }

@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = ActivityViewController
+
 class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtocol {
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var donatView: UIView!
@@ -89,5 +91,11 @@ class ActivityViewController: UIViewController, CancelProtocol, AnalyticsProtoco
     
     func presentNoInternet() {
         (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: false)
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Activity"
     }
 }

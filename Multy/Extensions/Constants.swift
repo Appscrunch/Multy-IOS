@@ -20,6 +20,7 @@ struct Constants {
     static let goToUpdateString = "GO TO UPDATE"
     static let warningString = "WARNING"
     static let cancelString = "CANCEL"
+    static let errorString = "ERROR"
     
     //Assets screen
     struct AssetsScreen {

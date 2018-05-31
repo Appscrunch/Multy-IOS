@@ -72,7 +72,7 @@
 "fc4-7b-wBs.text" = "0.0152";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "hSx-Am-TJ1"; */
-"hSx-Am-TJ1.text" = "Receive";
+"hSx-Am-TJ1.text" = "Отримати";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "i8P-M2-nC4"; */
 "i8P-M2-nC4.text" = "Label";
@@ -81,7 +81,7 @@
 "l1V-0X-Hje.text" = "Address Book";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "lpd-w8-Ylh"; */
-"lpd-w8-Ylh.text" = "Receive";
+"lpd-w8-Ylh.text" = "Отримати";
 
 /* Class = "UITextField"; placeholder = "0.0"; ObjectID = "qZH-gm-lpy"; */
 "qZH-gm-lpy.placeholder" = "0.0";

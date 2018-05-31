@@ -58,7 +58,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         
         self.backUpView()
         
-        progressHUD = ProgressHUD(text: localize(string: Constants.gettingWalletString))
+        progressHUD.text = localize(string: Constants.gettingWalletString)
         
         tableView.accessibilityIdentifier = "AssetsTableView"
         tableView.addSubview(self.refreshControl)
