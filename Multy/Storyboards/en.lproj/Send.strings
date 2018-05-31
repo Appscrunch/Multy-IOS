@@ -54,7 +54,7 @@
 "BoO-y0-goH.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "C5d-7f-xmF"; */
-"C5d-7f-xmF.placeholder" = "Search or Enter Address Here";
+"C5d-7f-xmF.placeholder" = "Enter Address Here";
 
 /* Class = "UILabel"; text = "Fast"; ObjectID = "CAx-k6-U4B"; */
 "CAx-k6-U4B.text" = "Fast";

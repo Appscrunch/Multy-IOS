@@ -229,7 +229,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Receive"
+        return "Receives"
     }
 }
 

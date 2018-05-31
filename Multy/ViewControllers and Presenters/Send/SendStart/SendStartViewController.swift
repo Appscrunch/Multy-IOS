@@ -68,7 +68,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
             let isValidDTO = DataManager.shared.isAddressValid(address: presenter.transactionDTO.sendAddress!, for: presenter.transactionDTO.choosenWallet!)
             
             if !isValidDTO.isValid {
-                let message = "You entered not valid address for current blockchain."
+                let message = localize(string: Constants.notValidAddressString)
                 presenter.presentAlert(message: message)
             }
             
@@ -285,6 +285,6 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }

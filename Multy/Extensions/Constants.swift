@@ -7,6 +7,9 @@ import UIKit
 private typealias LocalizeDelegate = Constants
 
 struct Constants {
+    static let yesString = "YES STRING"
+    static let noString = "NO STRING"
+    
     static let cryptoPortfolioString = "CRYPTO PORTFOLIO"
     static let currenciesChartsString = "CURRENCIES CHARTS"
     static let jailbrokenDeviceWarningString = "JAILBROKEN DEVICE ALERT MESSAGE"
@@ -21,6 +24,37 @@ struct Constants {
     static let warningString = "WARNING"
     static let cancelString = "CANCEL"
     static let errorString = "ERROR"
+    static let walletNameAlertString = "WALLET NAME NOT EMPTY ALERT"
+    static let walletAmountAlertString = "WALLET AMOUNT ALERT"
+    static let deleteWalletAlertString = "DELETE WALLET WARNING"
+    static let copyToClipboardString = "COPY TO CLIPBOARD"
+    static let shareString = "SHARE"
+    static let magicalReceiveString = "MAGICAL RECEIVE"
+    static let transactionInfoString = "TRANSACTION INFO"
+    static let confirmationString = "CONFIRMATION"
+    static let confirmationsString = "CONFIRMATIONS"
+    static let notValidAddressString = "NOT VALID ADDRESS"
+    static let goToSettingsString = "GO TO SETTINGS"
+    static let recentAddressesString = "RECENT ADDRESSES"
+    static let veryFastString = "VERY FAST";
+    static let fastString = "FAST";
+    static let mediumString = "MEDIUM";
+    static let slowString = "SLOW";
+    static let verySlowString = "VERY SLOW";
+    static let customString = "CUSTOM";
+    static let predefinedValueMessageString = "PREDEFINED VALUE MESSAGE"
+    static let pleaseChooseFeeRate = "PLEASE CHOOSE FEE RATE"
+    static let moreThenYouHaveString = "MORE THEN YOU HAVE"
+    static let feeRateLessThenString = "FEE RATE LESS THEN"
+    static let satoshiPerByteString = "SATOSHI PER BYTE"
+    static let feeTooHighString = "FEE TOO HIGH"
+    static let gasPriceLess1String = "GAS PRICE LESS 1"
+    static let successString = "SUCCESS"
+    static let doneString = "DONE"
+    static let errorSendingTxString = "ERROR WHILE SENDING TX"
+    static let transactionErrorString = "TRANSACTION ERROR"
+    static let backupSeedPhraseNeededString = "BACKUP NEEDED"
+    static let viewSeedPhraseString = "VIEW SEED PHRASE"
     
     //Assets screen
     struct AssetsScreen {

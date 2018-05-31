@@ -267,7 +267,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
             case .wireless:
                 option = .qrCode
                 changeVisibility(isHidden: true)
-                wirelessButton.setTitle("Magic Receive", for: .normal)
+                wirelessButton.setTitle(localize(string: Constants.magicalReceiveString), for: .normal)
                 
             case .qrCode:
                 option = .wireless
@@ -405,6 +405,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Receive"
+        return "Receives"
     }
 }

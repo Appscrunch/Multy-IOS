@@ -16,6 +16,8 @@ enum SendMode {
     case inSend
 }
 
+private typealias LocalizeDelegate = SendViewController
+
 class SendViewController: UIViewController {
     @IBOutlet weak var walletsCollectionView: UICollectionView!
     @IBOutlet weak var walletsCollectionViewFL: UICollectionViewFlowLayout!
@@ -316,7 +318,7 @@ class SendViewController: UIViewController {
     }
     
     func presentSendingErrorAlert() {
-        let alert = UIAlertController(title: "Transaction Error", message: "Error while sending transaction. Please, try again!", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.transactionErrorString), message: localize(string: Constants.errorSendingTxString), preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         
@@ -734,5 +736,11 @@ extension SendViewController: UIGestureRecognizerDelegate {
         default:
             break
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

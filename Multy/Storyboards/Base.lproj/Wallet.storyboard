@@ -751,7 +751,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <constraint firstItem="6mY-Lt-Vq4" firstAttribute="centerY" secondItem="Hzz-4v-4H7" secondAttribute="centerY" id="xJ5-5X-aR0"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private key allows you or anyone of you behave to spend your crypto assets. You should keep it secret!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8U-E1-QhK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private key allows anyone to spend your crypto assets. You should keep it secret!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8U-E1-QhK">
                                         <rect key="frame" x="16" y="341" width="343" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="37W-vN-PiN"/>
@@ -787,7 +787,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                             <constraint firstAttribute="trailing" secondItem="c6M-Zm-uVc" secondAttribute="trailing" id="vce-az-dRD"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove this wallet from UI. Please note that we will be tracking wallet balance and notify you on incoming transactions." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzu-O0-HqV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove this wallet from UI. Please note that we will be tracking wallet balance and notify you on incoming transactions." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzu-O0-HqV">
                                         <rect key="frame" x="16" y="476" width="343" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="U1A-eq-Xjy"/>

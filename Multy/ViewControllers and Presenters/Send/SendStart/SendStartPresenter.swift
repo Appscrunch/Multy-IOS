@@ -116,6 +116,6 @@ class SendStartPresenter: NSObject, CancelProtocol, SendAddressProtocol, GoToQrP
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }
