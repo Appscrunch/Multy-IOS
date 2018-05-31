@@ -192,14 +192,21 @@ class Socket: NSObject {
         }
     }
     
-    func txSend(userCode : String, currencyID : Int, networkID : Int, jwt : String, payload : String) {
-        let userInfo = ["data" : true]
-        NotificationCenter.default.post(name: NSNotification.Name("sendResponse"), object: nil, userInfo: userInfo)
-//        socket.emitWithAck("event:sendraw", with: [["currencyid" : currencyID, "networkID" : networkID, "usercode" : userCode, "JWT" : jwt, "payload"  : payload]]).timingOut(after: 1) { data in
-//            print(data)
-//            let userInfo = ["data" : true]
-//            NotificationCenter.default.post(name: NSNotification.Name("sendResponse"), object: nil, userInfo: userInfo)
-//        }
+    func txSend(params : [String: Any]) {
+        print("txSend : \(params)")
+        
+        socket.emitWithAck("event:sendraw", with: [params]).timingOut(after: 1) { data in
+            print(data)
+            
+            if let response = data.first! as? String {
+                var isSuccess = false
+                if response.hasPrefix("success") {
+                    isSuccess = true
+                }
+                let userInfo = ["data" : isSuccess]
+                NotificationCenter.default.post(name: NSNotification.Name("sendResponse"), object: nil, userInfo: userInfo)
+            }
+        }
     }
 }
 

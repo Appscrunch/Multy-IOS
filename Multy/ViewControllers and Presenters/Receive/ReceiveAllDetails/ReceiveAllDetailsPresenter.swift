@@ -150,7 +150,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
     }
     
     private func generateWirelessRequestImage() {
-        let imageNumber = walletAddress.converToImageIndex
+        let imageNumber = walletAddress.convertToImageIndex
         wirelessRequestImageName = "wirelessRequestImage_" + "\(imageNumber)"
 //
 //        DataManager.shared.getAccount { (account, error) in
@@ -174,10 +174,11 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             if reachability == .reachable {
                 DataManager.shared.getAccount { (account, error) in
                     if account != nil {
-                        let userID = account!.userID
-                        let userCode = self.userCodeForUserID(userID: userID)
-                        self.becomeReceiver(userID: userID, userCode: userCode)
-                        self.shareUserCode(code: userCode)
+                        let userCode = self.userCodeForWalletID(self.walletAddress)
+                        if userCode != nil {
+                            self.becomeReceiver(userID: account!.userID, userCode: userCode!)
+                            self.shareUserCode(code: userCode!)
+                        }
                     }
                 }
             }
@@ -197,10 +198,8 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         }
     }
     
-    func userCodeForUserID(userID : String) -> String {
-        var result = String()
-        result = String(userID[..<userID.index(userID.startIndex, offsetBy: 8)])
-        return result.uppercased()
+    func userCodeForWalletID(_ walletID : String) -> String? {
+        return walletID.convertToUserCode
     }
     
     private func stopSharingUserCode() {
