@@ -642,6 +642,6 @@ extension BTCWalletViewController: UICollectionViewDataSource {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Wallet"
+        return "Wallets"
     }
 }

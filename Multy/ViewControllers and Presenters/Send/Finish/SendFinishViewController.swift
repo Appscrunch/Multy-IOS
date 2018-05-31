@@ -243,7 +243,7 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     func presentAlert() {
-        let message = "Error while sending transaction. Please, try again!"
+        let message = localize(string: Constants.errorSendingTxString)
         let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             
@@ -269,6 +269,6 @@ class SendFinishViewController: UIViewController, UITextFieldDelegate, Analytics
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Send"
+        return "Sends"
     }
 }

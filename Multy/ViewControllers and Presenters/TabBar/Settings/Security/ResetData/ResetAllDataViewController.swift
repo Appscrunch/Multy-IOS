@@ -47,13 +47,13 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func resetAction(_ sender: Any) {
         let alert = UIAlertController(title: localize(string: Constants.warningString), message: "Are you sure?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .default, handler: { (_) in
             self.dismiss(animated: true, completion: {
                 self.cancelDelegate?.cancelAction()
             })
             self.sendAnalyticsEvent(screenName: screenSecuritySettings, eventName: resetComplete)
         }))
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localize(string: Constants.noString), style: .cancel, handler: { (_) in
             alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -62,6 +62,6 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Settings"
+        return "Setting"
     }
 }

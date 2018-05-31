@@ -5,6 +5,8 @@
 import UIKit
 import RealmSwift
 
+private typealias LocalizeDelegate = SendDetailsPresenter
+
 class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var sendDetailsVC: SendDetailsViewController?
@@ -77,7 +79,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         switch index {
         case 0:
-            self.transactionObj.speedName = "Very Fast"
+            self.transactionObj.speedName = localize(string: Constants.veryFastString)
             self.transactionObj.speedTimeString = "∙ 10 minutes"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -85,7 +87,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 6
         case 1:
-            self.transactionObj.speedName = "Fast"
+            self.transactionObj.speedName = localize(string: Constants.fastString)
             self.transactionObj.speedTimeString = "∙ 6 hour"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -93,7 +95,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 10
         case 2:
-            self.transactionObj.speedName = "Medium"
+            self.transactionObj.speedName = localize(string: Constants.mediumString)
             self.transactionObj.speedTimeString = "∙ 5 days"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -101,7 +103,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 20
         case 3:
-            self.transactionObj.speedName = "Slow"
+            self.transactionObj.speedName = localize(string: Constants.slowString)
             self.transactionObj.speedTimeString = "∙ 1 week"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -109,7 +111,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 50
         case 4:
-            self.transactionObj.speedName = "Very Slow"
+            self.transactionObj.speedName = localize(string: Constants.verySlowString)
             self.transactionObj.speedTimeString = "∙ 2 weeks"
             self.transactionObj.sumInCrypto = 0.00000005
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -117,7 +119,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = fiatName
             self.transactionObj.numberOfBlocks = 70
         case 5:
-            self.transactionObj.speedName = "Custom"
+            self.transactionObj.speedName = localize(string: Constants.customString)
             self.transactionObj.speedTimeString = ""
             self.transactionObj.sumInCrypto = self.customFee.btcValue
             self.transactionObj.sumInFiat = 0.0
@@ -205,5 +207,11 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         self.sendDetailsVC?.tableView.selectRow(at: [0,index!], animated: false, scrollPosition: .none)
         self.sendDetailsVC?.tableView.delegate?.tableView!(self.sendDetailsVC!.tableView, didSelectRowAt: [0,index!])
         self.selectedIndexOfSpeed = index!
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

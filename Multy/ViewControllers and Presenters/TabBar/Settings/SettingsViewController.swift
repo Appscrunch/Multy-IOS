@@ -248,6 +248,6 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Settings"
+        return "Setting"
     }
 }

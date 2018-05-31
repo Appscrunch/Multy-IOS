@@ -467,7 +467,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="9rm-Fw-8E0"/>
                                         </constraints>
-                                        <state key="normal" title="Magic Receive">
+                                        <state key="normal" title="Magical Receive">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>

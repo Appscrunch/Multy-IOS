@@ -609,6 +609,6 @@ extension EthWalletViewController: UICollectionViewDataSource {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Wallet"
+        return "Wallets"
     }
 }
