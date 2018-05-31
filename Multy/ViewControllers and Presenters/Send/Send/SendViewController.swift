@@ -59,6 +59,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var activeRequestsAmountTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothErrorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothEnabledContentBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchingActiveRequestsLabel: UILabel!
     
     var searchingAnimationView : LOTAnimationView?
     var sendLongPressGR : UILongPressGestureRecognizer?
@@ -134,7 +135,7 @@ class SendViewController: UIViewController {
             searchingRequestsHolderView.autoresizesSubviews = true
             searchingRequestsHolderView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             self.searchingRequestsHolderView.insertSubview(searchingAnimationView!, at: 0)
-            searchingAnimationView!.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            searchingAnimationView!.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
             
             searchingAnimationView!.loopAnimation = true
             searchingAnimationView!.play()
@@ -157,17 +158,22 @@ class SendViewController: UIViewController {
             }
             
             updateUIForActiveRequestInfo()
+            self.foundActiveRequestsHolderView.alpha = 1.0
             
             if presenter.numberOfActiveRequests() > 0 {
-                searchingRequestsHolderView.isHidden = true
-                foundActiveRequestsHolderView.isHidden = false
-                self.foundActiveRequestsHolderView.alpha = 1.0
+                selectedRequestAmountLabel.isHidden = false
+                selectedRequestAddressLabel.isHidden = false
+                searchingActiveRequestsLabel.isHidden =  true
+
+                
             } else {
-                searchingRequestsHolderView.isHidden = false
-                foundActiveRequestsHolderView.isHidden = true
-                if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
-                    searchingAnimationView?.play()
-                }
+                selectedRequestAmountLabel.isHidden = true
+                selectedRequestAddressLabel.isHidden = true
+                searchingActiveRequestsLabel.isHidden =  false
+            }
+            
+            if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
+                searchingAnimationView?.play()
             }
         }
     }
@@ -266,6 +272,7 @@ class SendViewController: UIViewController {
             }
             transactionHolderView.alpha = 0.0
             transactionHolderView.isHidden = false
+            self.searchingRequestsHolderView.alpha = 0
             
             hideNotSelectedWallets()
             hideNotSelectedRequests()
@@ -281,6 +288,7 @@ class SendViewController: UIViewController {
         navigationButtonsHolderBottomConstraint.constant = 0
         transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - walletsCollectionView.frame.origin.y - walletsCollectionView.frame.size.height
         
+        
         showNotSelectedWallets()
         showNotSelectedRequests()
         UIView.animate(withDuration: ANIMATION_DURATION, animations: {
@@ -289,6 +297,7 @@ class SendViewController: UIViewController {
         }) { (succeeded) in
             self.presenter.cancelPrepareSending()
             if succeeded {
+                self.searchingRequestsHolderView.alpha = 1.0
                 self.transactionHolderView.isHidden = true
             }
         }
@@ -360,8 +369,9 @@ class SendViewController: UIViewController {
                     self.activeRequestsClonesHolderView.alpha = 0
                 }) { (succeeded) in
                     
-                    let doneAnimationView = LOTAnimationView(name: "success_animation")
+                    let doneAnimationView = LOTAnimationView(name: "tx_success_animation")
                     doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.foundActiveRequestsHolderView.frame.origin.y + self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
+                    doneAnimationView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
                     
                     self.view.addSubview(doneAnimationView)
                     doneAnimationView.play{[unowned self] (finished) in
@@ -371,6 +381,7 @@ class SendViewController: UIViewController {
                             doneAnimationView.alpha = 0.0
                         }) { (succeeded) in
                             self.activeRequestsClonesHolderView.alpha = 1.0
+                            self.searchingRequestsHolderView.alpha = 1.0
                             doneAnimationView.removeFromSuperview()
                             
                             self.close()

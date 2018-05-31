@@ -220,8 +220,8 @@
 		45F8CD47208F391B00DEB495 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8CD46208F391B00DEB495 /* TermsOfServiceViewController.swift */; };
 		45F8CD49208F393C00DEB495 /* TermsOfServicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8CD48208F393C00DEB495 /* TermsOfServicePresenter.swift */; };
 		50D1AA3CFDA9BDFA53D3B9D0 /* Pods_MultyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FFD5D1BF6159BB241CBFF9 /* Pods_MultyTests.framework */; };
-		854EF13E20B9B420000C2247 /* success_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 854EF13D20B9B420000C2247 /* success_animation.json */; };
 		854EF14020BFF007000C2247 /* Wireless+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854EF13F20BFF006000C2247 /* Wireless+Extension.swift */; };
+		854EF14A20C06DA4000C2247 /* tx_success_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 854EF14920C06DA4000C2247 /* tx_success_animation.json */; };
 		85741D8520B45E8B0093933B /* circle_grow.json in Resources */ = {isa = PBXBuildFile; fileRef = 85741D8420B45E8A0093933B /* circle_grow.json */; };
 		85741D8720B555DB0093933B /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85741D8620B555DB0093933B /* BLEManager.swift */; };
 		85741D8920B55A660093933B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85741D8820B55A650093933B /* CoreBluetooth.framework */; };
@@ -619,8 +619,8 @@
 		572DB9D15F9362827245CF67 /* Pods_Multy_MultyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy_MultyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		647A035491B0F1BEBEB72A55 /* Pods-MultyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultyTests/Pods-MultyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7304C17824311A19240183E0 /* Pods_Multy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		854EF13D20B9B420000C2247 /* success_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success_animation.json; sourceTree = "<group>"; };
 		854EF13F20BFF006000C2247 /* Wireless+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Wireless+Extension.swift"; sourceTree = "<group>"; };
+		854EF14920C06DA4000C2247 /* tx_success_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tx_success_animation.json; sourceTree = "<group>"; };
 		85741D8420B45E8A0093933B /* circle_grow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_grow.json; sourceTree = "<group>"; };
 		85741D8620B555DB0093933B /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		85741D8820B55A650093933B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -1648,7 +1648,7 @@
 		85DE62F120AF187F00423D89 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				854EF13D20B9B420000C2247 /* success_animation.json */,
+				854EF14920C06DA4000C2247 /* tx_success_animation.json */,
 				85741D8420B45E8A0093933B /* circle_grow.json */,
 				85DE62F220AF188B00423D89 /* Check Mark Success Data.json */,
 			);
@@ -1971,6 +1971,7 @@
 				85DE62E420AB077B00423D89 /* WalletCollectionViewCell.xib in Resources */,
 				85DE62F320AF188B00423D89 /* Check Mark Success Data.json in Resources */,
 				4477263420BEAF86006BF4A7 /* Wallet.strings in Resources */,
+				854EF14A20C06DA4000C2247 /* tx_success_animation.json in Resources */,
 				45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */,
 				445B127F20BC1C6B00FD0D33 /* MainWalletHeaderCell.xib in Resources */,
 				445B127620BC1BD000FD0D33 /* Wallet.storyboard in Resources */,
@@ -2004,7 +2005,6 @@
 				FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */,
 				85DE62E920AC1CE100423D89 /* ActiveRequestCollectionViewCell.xib in Resources */,
 				4585BD392049AD03004542AE /* ExchangeStockTableViewCell.xib in Resources */,
-				854EF13E20B9B420000C2247 /* success_animation.json in Resources */,
 				445B129120BC1CD100FD0D33 /* SearchAddressTableViewCell.xib in Resources */,
 				445B128520BC1C9300FD0D33 /* TextTableViewCell.xib in Resources */,
 				4477261720BDA1F2006BF4A7 /* Assets.strings in Resources */,

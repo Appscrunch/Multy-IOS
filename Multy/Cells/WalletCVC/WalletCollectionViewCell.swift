@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class WalletCollectionViewCell: UICollectionViewCell {
     
@@ -22,9 +23,10 @@ class WalletCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         setupShadow()
     }
-
+    
     func setupShadow() {
         viewForShadow.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.6))
     }
@@ -38,10 +40,4 @@ class WalletCollectionViewCell: UICollectionViewCell {
         self.cryptoNameLbl.text = blockchainType.shortName
         self.fiatSumLbl.text = "\(sumInFiat) \(self.wallet!.fiatSymbol)"
     }
-    
-//    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-//        UIView.animate(withDuration: 1) {
-//            self.layoutIfNeeded()
-//        }
-//    }
 }
