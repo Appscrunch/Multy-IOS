@@ -11,3 +11,5 @@
 "ERROR" = "Error";
 "YES STRING" = "Yes";
 "NO STRING" = "No";
+"BACKUP NEEDED" = "Backup Seed";
+"VIEW SEED PHRASE" = "View Seed Phrase";

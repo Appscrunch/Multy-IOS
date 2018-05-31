@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Transaction Fee"; ObjectID = "0ZI-tj-Idl"; */
-"0ZI-tj-Idl.text" = "Transaction Fee";
+"0ZI-tj-Idl.text" = "Комиссия за перевод";
 
 /* Class = "UILabel"; text = "You don't have any wallets with BTC"; ObjectID = "28l-xW-5E4"; */
 "28l-xW-5E4.text" = "You don't have any wallets with BTC";
@@ -9,19 +9,19 @@
 "31h-f9-3fx.text" = "1.1234 BTC / 1 123 USD";
 
 /* Class = "UILabel"; text = "Send All"; ObjectID = "3Fn-W0-b7o"; */
-"3Fn-W0-b7o.text" = "Send All";
+"3Fn-W0-b7o.text" = "ВСЕ";
 
 /* Class = "UILabel"; text = "Fee Rate"; ObjectID = "3mW-J9-IU9"; */
-"3mW-J9-IU9.text" = "Fee Rate";
+"3mW-J9-IU9.text" = "Размер комиссии";
 
 /* Class = "UILabel"; text = "Pay for commission        "; ObjectID = "5Ie-5f-uXv"; */
-"5Ie-5f-uXv.text" = "Pay for commission        ";
+"5Ie-5f-uXv.text" = "Платить комиссию        ";
 
 /* Class = "UITextField"; text = "0.0001"; ObjectID = "5NH-ZP-Pzn"; */
 "5NH-ZP-Pzn.text" = "0.0001";
 
 /* Class = "UILabel"; text = "Recent Addresses"; ObjectID = "66b-bM-oOH"; */
-"66b-bM-oOH.text" = "Recent Addresses";
+"66b-bM-oOH.text" = "Последние адреса";
 
 /* Class = "UILabel"; text = "Active Requests: 0 "; ObjectID = "6a2-EL-VA4"; */
 "6a2-EL-VA4.text" = "Active Requests: 0 ";
@@ -39,7 +39,7 @@
 "9Jg-ab-E9W.text" = "Sending...";
 
 /* Class = "UILabel"; text = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain."; ObjectID = "9nM-mt-kya"; */
-"9nM-mt-kya.text" = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain.";
+"9nM-mt-kya.text" = "Ставка комиссии влияет на то, как быстро ваша транзакция будет принята блокчейн-сетью.";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Ab6-cO-MZd"; */
 "Ab6-cO-MZd.text" = "Label";
@@ -57,25 +57,25 @@
 "C5d-7f-xmF.placeholder" = "Введите адрес получателя";
 
 /* Class = "UILabel"; text = "Fast"; ObjectID = "CAx-k6-U4B"; */
-"CAx-k6-U4B.text" = "Fast";
+"CAx-k6-U4B.text" = "Быстро";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "CEc-LJ-btu"; */
 "CEc-LJ-btu.text" = "BTC";
 
 /* Class = "UILabel"; text = "Next"; ObjectID = "Cg1-VD-fBS"; */
-"Cg1-VD-fBS.text" = "Next";
+"Cg1-VD-fBS.text" = "Далее";
 
 /* Class = "UILabel"; text = "Transaction Fee"; ObjectID = "CmP-mh-W1O"; */
-"CmP-mh-W1O.text" = "Transaction Fee";
+"CmP-mh-W1O.text" = "Комиссия за перевод";
 
 /* Class = "UILabel"; text = "Scan\nQR"; ObjectID = "Cmu-SL-LS1"; */
 "Cmu-SL-LS1.text" = "Scan\nQR";
 
 /* Class = "UILabel"; text = "To:"; ObjectID = "Ed2-gG-ZRs"; */
-"Ed2-gG-ZRs.text" = "To:";
+"Ed2-gG-ZRs.text" = "Кому:";
 
 /* Class = "UILabel"; text = "Fee Rate"; ObjectID = "Ewh-6y-aEq"; */
-"Ewh-6y-aEq.text" = "Fee Rate";
+"Ewh-6y-aEq.text" = "Размер комиссии";
 
 /* Class = "UILabel"; text = "Please Check your Bluetooth connection"; ObjectID = "GPJ-dz-boD"; */
 "GPJ-dz-boD.text" = "Please Check your Bluetooth connection";
@@ -96,7 +96,7 @@
 "Lfo-SJ-k1k.normalTitle" = "Отменить";
 
 /* Class = "UILabel"; text = "Confirm Sending\n"; ObjectID = "Mk1-tu-7rf"; */
-"Mk1-tu-7rf.text" = "Confirm Sending\n";
+"Mk1-tu-7rf.text" = "Подтвердить отправку\n";
 
 /* Class = "UILabel"; text = "Send From"; ObjectID = "PrT-By-RHO"; */
 "PrT-By-RHO.text" = "Send From";
@@ -111,10 +111,10 @@
 "Ro9-45-B2B.text" = " Custom Fee Rate ";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "S0T-Fm-OmK"; */
-"S0T-Fm-OmK.normalTitle" = "Next";
+"S0T-Fm-OmK.normalTitle" = "Далее";
 
 /* Class = "UILabel"; text = "Sending From"; ObjectID = "Seu-LQ-0oR"; */
-"Seu-LQ-0oR.text" = "Sending From";
+"Seu-LQ-0oR.text" = "Отправление от:";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Sia-Lf-ccw"; */
 "Sia-Lf-ccw.normalTitle" = "Отменить";
@@ -123,10 +123,10 @@
 "TqU-bF-Cd8.text" = "Последние адреса отсутствуют.";
 
 /* Class = "UILabel"; text = "Pay for commission        "; ObjectID = "VW7-w3-CZx"; */
-"VW7-w3-CZx.text" = "Pay for commission        ";
+"VW7-w3-CZx.text" = "Платить комиссию        ";
 
 /* Class = "UILabel"; text = "Send Amount"; ObjectID = "VhT-01-bTB"; */
-"VhT-01-bTB.text" = "Send Amount";
+"VhT-01-bTB.text" = "Отправить сумму";
 
 /* Class = "UILabel"; text = "MAX"; ObjectID = "Xhi-Qs-0Ca"; */
 "Xhi-Qs-0Ca.text" = "MAX";
@@ -159,13 +159,13 @@
 "cLW-Qu-SGI.normalTitle" = "Отменить";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "dSj-73-kB0"; */
-"dSj-73-kB0.normalTitle" = "Done";
+"dSj-73-kB0.normalTitle" = "Готово";
 
 /* Class = "UILabel"; text = "GAS Limit"; ObjectID = "enn-zm-3do"; */
 "enn-zm-3do.text" = "GAS Limit";
 
 /* Class = "UILabel"; text = "Available: "; ObjectID = "fDn-cT-aUG"; */
-"fDn-cT-aUG.text" = "Available: ";
+"fDn-cT-aUG.text" = "Доступно: ";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "fOo-l7-Vq8"; */
 "fOo-l7-Vq8.text" = "BTC";
@@ -183,7 +183,7 @@
 "git-q0-VGX.text" = "1.1234 BTC";
 
 /* Class = "UILabel"; text = "Next"; ObjectID = "h1N-oK-MNU"; */
-"h1N-oK-MNU.text" = "Next";
+"h1N-oK-MNU.text" = "Далее";
 
 /* Class = "UILabel"; text = "Enter Address Here"; ObjectID = "h7O-aw-YOV"; */
 "h7O-aw-YOV.text" = "Введите адрес получателя";
@@ -201,22 +201,22 @@
 "j2L-wX-UIu.text" = "3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "jNT-j7-dlk"; */
-"jNT-j7-dlk.normalTitle" = "Next";
+"jNT-j7-dlk.normalTitle" = "Далее";
 
 /* Class = "UILabel"; text = "Available: "; ObjectID = "k7z-h6-tBd"; */
-"k7z-h6-tBd.text" = "Available: ";
+"k7z-h6-tBd.text" = "Доступно: ";
 
 /* Class = "UILabel"; text = "By donating to Multy you show your support and appreciation of a product. We are open-source project and your donation is the only source of profit for us. "; ObjectID = "lXZ-a8-UvA"; */
-"lXZ-a8-UvA.text" = "By donating to Multy you show your support and appreciation of a product. We are open-source project and your donation is the only source of profit for us. ";
+"lXZ-a8-UvA.text" = "Совершая пожертвование Multy, Вы оказываете поддержку и уважение продукту. Мы являемся проектом с открытым исходным кодом и ваше пожертвование является для нас единственным источником прибыли.";
 
 /* Class = "UILabel"; text = "Slide to Send"; ObjectID = "m0G-xr-zmf"; */
-"m0G-xr-zmf.text" = "Slide to Send";
+"m0G-xr-zmf.text" = "Слайд для отправки";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "mEs-GB-5Is"; */
 "mEs-GB-5Is.text" = "USD";
 
 /* Class = "UILabel"; text = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain."; ObjectID = "n95-In-KXo"; */
-"n95-In-KXo.text" = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain.";
+"n95-In-KXo.text" = "Ставка комиссии влияет на то, как быстро ваша транзакция будет принята блокчейн-сетью.";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "njG-Gh-LWY"; */
 "njG-Gh-LWY.text" = "USD";
@@ -228,7 +228,7 @@
 "otH-zU-Rpe.text" = "0 BTC";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "r6j-44-IV8"; */
-"r6j-44-IV8.normalTitle" = "Next";
+"r6j-44-IV8.normalTitle" = "Далее";
 
 /* Class = "UITextField"; placeholder = "0.0"; ObjectID = "riz-ND-96h"; */
 "riz-ND-96h.placeholder" = "0.0";
@@ -243,7 +243,7 @@
 "sEm-BU-U5Q.text" = "USD";
 
 /* Class = "UILabel"; text = "Support Multy"; ObjectID = "t0h-5W-plS"; */
-"t0h-5W-plS.text" = "Support Multy";
+"t0h-5W-plS.text" = "Поддержка Multy";
 
 /* Class = "UILabel"; text = "Send To"; ObjectID = "ttx-83-gVw"; */
 "ttx-83-gVw.text" = "Отправить";
@@ -252,7 +252,7 @@
 "uaU-U0-1YQ.text" = "(в разработке)";
 
 /* Class = "UILabel"; text = "Send Amount"; ObjectID = "vsy-Hb-OWB"; */
-"vsy-Hb-OWB.text" = "Send Amount";
+"vsy-Hb-OWB.text" = "Отправить сумму";
 
 /* Class = "UILabel"; text = "Donate to Multy"; ObjectID = "wCG-9b-EeH"; */
 "wCG-9b-EeH.text" = "Пожертвовать Multy";
@@ -264,7 +264,7 @@
 "zJa-f3-tWD.text" = "Контакты";
 
 /* Class = "UILabel"; text = "Fee Rate"; ObjectID = "zcW-Zo-Z1f"; */
-"zcW-Zo-Z1f.text" = "Fee Rate";
+"zcW-Zo-Z1f.text" = "Размер комиссии";
 
 /* Class = "UILabel"; text = "Donation Sum"; ObjectID = "zg1-x3-6WV"; */
-"zg1-x3-6WV.text" = "Donation Sum";
+"zg1-x3-6WV.text" = "Сумма пожертвования";

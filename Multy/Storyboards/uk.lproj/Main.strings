@@ -57,7 +57,7 @@
 "F39-3R-vjc.text" = "Поки тут порожньо";
 
 /* Class = "UILabel"; text = "Fee Rate"; ObjectID = "GOV-kb-79y"; */
-"GOV-kb-79y.text" = "Fee Rate";
+"GOV-kb-79y.text" = "Розмір комісії";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "IEC-wG-9xS"; */
 "IEC-wG-9xS.text" = "Скасувати";

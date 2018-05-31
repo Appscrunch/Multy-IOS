@@ -11,3 +11,5 @@
 "ERROR" = "Помилка";
 "YES STRING" = "Так";
 "NO STRING" = "Ні";
+"BACKUP NEEDED" = "Backup Seed";
+"VIEW SEED PHRASE" = "View Seed Phrase";

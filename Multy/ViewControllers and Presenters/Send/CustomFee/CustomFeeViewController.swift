@@ -35,8 +35,8 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     }
 
     func setupUI() {
-        
-        self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)))
+        unowned let weakSelf =  self
+        self.topPriceTF.addDoneCancelToolbar(onDone: (target: self, action: #selector(done)), viewController: weakSelf)
         
         //FIXME: check chainID nullability
         switch self.presenter.blockchainType?.blockchain {
@@ -77,7 +77,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < defaultBTCCustomFee {
             switch presenter.blockchainType!.blockchain {
             case BLOCKCHAIN_BITCOIN:
-                let message = "Fee rate can not be less then \(defaultBTCCustomFee) satoshi per byte."
+                let message = "\(localize(string: Constants.feeRateLessThenString)) \(defaultBTCCustomFee) \(localize(string: Constants.satoshiPerByteString))"
                 let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                     self.topPriceTF.becomeFirstResponder()
@@ -85,7 +85,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
                 
                 self.present(alert, animated: true, completion: nil)
             case BLOCKCHAIN_ETHEREUM:
-                let message = "Gas Price can not be less then 1 Gwei."
+                let message = localize(string: Constants.gasPriceLess1String)
                 let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                     self.topPriceTF.becomeFirstResponder()
@@ -107,7 +107,7 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         
         let endString = textField.text! + string
         if UInt64(endString)! > 3000 {
-            let message = "You fee is too high. Please enter normal fee amount!"
+            let message = localize(string: Constants.feeRateLessThenString)
             let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                 self.topPriceTF.becomeFirstResponder()

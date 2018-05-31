@@ -57,7 +57,7 @@
 "F39-3R-vjc.text" = "Пока здесь пусто";
 
 /* Class = "UILabel"; text = "Fee Rate"; ObjectID = "GOV-kb-79y"; */
-"GOV-kb-79y.text" = "Fee Rate";
+"GOV-kb-79y.text" = "Размер комиссии";
 
 /* Class = "UILabel"; text = "Cancel"; ObjectID = "IEC-wG-9xS"; */
 "IEC-wG-9xS.text" = "Отменить";
@@ -84,7 +84,7 @@
 "MBi-5j-Fq1.normalTitle" = "Discard";
 
 /* Class = "UILabel"; text = "Donation Sum"; ObjectID = "Mp9-2D-EV6"; */
-"Mp9-2D-EV6.text" = "Donation Sum";
+"Mp9-2D-EV6.text" = "Сумма пожертвования";
 
 /* Class = "UILabel"; text = "Multy Crypto Wallet v.1.0.1"; ObjectID = "NNf-lj-6Vc"; */
 "NNf-lj-6Vc.text" = "Multy Crypto Wallet v.1.0.1";

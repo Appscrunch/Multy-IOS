@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = TransactionFeeTableViewCell
+
 class TransactionFeeTableViewCell: UITableViewCell {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var speedImage: UIImageView!
@@ -45,7 +47,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
         case [0,0]:
             self.setCornersForFirstCell()
             self.speedImage.image = #imageLiteral(resourceName: "veryFast")
-            self.speedLbl.text = "Very Fast"
+            self.speedLbl.text = localize(string: Constants.veryFastString)
             self.timeLbl.text = "∙ 10 minutes"
             
             if let rate = feeRate?["VeryFast"] as? Int {
@@ -55,7 +57,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
             self.numberOfBlocksLbl.text = "6 blocks"
         case [0,1]:
             self.speedImage.image = #imageLiteral(resourceName: "fast")
-            self.speedLbl.text = "Fast"
+            self.speedLbl.text = localize(string: Constants.fastString)
             self.timeLbl.text = "∙ 6 hour"
             
             if let rate = feeRate?["Fast"] as? Int {
@@ -65,7 +67,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
             self.numberOfBlocksLbl.text = "10 blocks"
         case [0,2]:
             self.speedImage.image = #imageLiteral(resourceName: "mEdium")
-            self.speedLbl.text = "Medium"
+            self.speedLbl.text = localize(string: Constants.mediumString)
             self.timeLbl.text = "∙ 5 days"
             
             if let rate = feeRate?["Medium"] as? Int {
@@ -75,7 +77,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
             self.numberOfBlocksLbl.text = "20 blocks"
         case [0,3]:
             self.speedImage.image = #imageLiteral(resourceName: "slow")
-            self.speedLbl.text = "Slow"
+            self.speedLbl.text = localize(string: Constants.slowString)
             self.timeLbl.text = "∙ 1 week"
             
             if let rate = feeRate?["Slow"] as? Int {
@@ -85,7 +87,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
             self.numberOfBlocksLbl.text = "50 blocks"
         case [0,4]:
             self.speedImage.image = #imageLiteral(resourceName: "verySlow")
-            self.speedLbl.text = "Very Slow"
+            self.speedLbl.text = localize(string: Constants.verySlowString)
             self.timeLbl.text = "∙ 2 weeks"
             
             if let rate = feeRate?["VerySlow"] as? Int {
@@ -118,5 +120,11 @@ class TransactionFeeTableViewCell: UITableViewCell {
         } else {
             checkMarkImage.isHidden = true
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

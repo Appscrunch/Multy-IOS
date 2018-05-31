@@ -5,6 +5,8 @@
 import UIKit
 import RealmSwift
 
+private typealias LocalizeDelegate = EthSendDetailsPresenter
+
 class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     var sendDetailsVC: EthSendDetailsViewController?
@@ -78,7 +80,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         let exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
         switch index {
         case 0:
-            self.transactionObj.speedName = "Very Fast"
+            self.transactionObj.speedName = localize(string: Constants.veryFastString)
             self.transactionObj.speedTimeString = "∙ 10 minutes"
             self.transactionObj.sumInCryptoBigInt = BigInt("\(feeRate?.object(forKey: "VeryFast") as? UInt64 ?? UInt64(5000000000))")
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -86,7 +88,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 6
         case 1:
-            self.transactionObj.speedName = "Fast"
+            self.transactionObj.speedName = localize(string: Constants.fastString)
             self.transactionObj.speedTimeString = "∙ 6 hour"
             self.transactionObj.sumInCryptoBigInt = BigInt("\(feeRate?.object(forKey: "Fast") as? UInt64 ?? UInt64(4000000000))")
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -94,7 +96,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 10
         case 2:
-            self.transactionObj.speedName = "Normal"
+            self.transactionObj.speedName = localize(string: Constants.mediumString)
             self.transactionObj.speedTimeString = "∙ 5 days"
             self.transactionObj.sumInCryptoBigInt = BigInt("\(feeRate?.object(forKey: "Medium") as? UInt64 ?? UInt64(3000000000))")
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -102,7 +104,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 20
         case 3:
-            self.transactionObj.speedName = "Slow"
+            self.transactionObj.speedName = localize(string: Constants.slowString)
             self.transactionObj.speedTimeString = "∙ 1 week"
             self.transactionObj.sumInCryptoBigInt = BigInt("\(feeRate?.object(forKey: "Slow") as? UInt64 ?? UInt64(2000000000))")
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -110,7 +112,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 50
         case 4:
-            self.transactionObj.speedName = "Very Slow"
+            self.transactionObj.speedName = localize(string: Constants.verySlowString)
             self.transactionObj.speedTimeString = "∙ 2 weeks"
             self.transactionObj.sumInCryptoBigInt = BigInt("\(feeRate?.object(forKey: "VerySlow") as? UInt64 ?? UInt64(1000000000))")
             self.transactionObj.sumInFiat = Double(round(100*self.transactionObj.sumInCrypto * exchangeCourse)/100)
@@ -118,7 +120,7 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
             self.transactionObj.fiatName = "USD"
             self.transactionObj.numberOfBlocks = 70
         case 5:
-            self.transactionObj.speedName = "Custom"
+            self.transactionObj.speedName = localize(string: Constants.customString)
             self.transactionObj.speedTimeString = ""
             self.transactionObj.sumInCryptoBigInt = customGas.gasPrice
             self.transactionObj.sumInFiat = 0.0
@@ -220,4 +222,10 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         
         return sum
     } 
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
+    }
 }

@@ -244,7 +244,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         
         if (string != "," && string != ".") && self.presenter.maxAllowedToSpend < (self.topSumLbl.text! + string).convertCryptoAmountStringToMinimalUnits(in: presenter.blockchain)  {
             if string != "" {
-                self.presentWarning(message: "You trying to enter sum more then you have")
+                self.presentWarning(message: localize(string: Constants.moreThenYouHaveString))
                 
                 return false
             }

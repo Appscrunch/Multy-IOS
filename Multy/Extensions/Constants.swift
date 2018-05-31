@@ -35,6 +35,26 @@ struct Constants {
     static let confirmationsString = "CONFIRMATIONS"
     static let notValidAddressString = "NOT VALID ADDRESS"
     static let goToSettingsString = "GO TO SETTINGS"
+    static let recentAddressesString = "RECENT ADDRESSES"
+    static let veryFastString = "VERY FAST";
+    static let fastString = "FAST";
+    static let mediumString = "MEDIUM";
+    static let slowString = "SLOW";
+    static let verySlowString = "VERY SLOW";
+    static let customString = "CUSTOM";
+    static let predefinedValueMessageString = "PREDEFINED VALUE MESSAGE"
+    static let pleaseChooseFeeRate = "PLEASE CHOOSE FEE RATE"
+    static let moreThenYouHaveString = "MORE THEN YOU HAVE"
+    static let feeRateLessThenString = "FEE RATE LESS THEN"
+    static let satoshiPerByteString = "SATOSHI PER BYTE"
+    static let feeTooHighString = "FEE TOO HIGH"
+    static let gasPriceLess1String = "GAS PRICE LESS 1"
+    static let successString = "SUCCESS"
+    static let doneString = "DONE"
+    static let errorSendingTxString = "ERROR WHILE SENDING TX"
+    static let transactionErrorString = "TRANSACTION ERROR"
+    static let backupSeedPhraseNeededString = "BACKUP NEEDED"
+    static let viewSeedPhraseString = "VIEW SEED PHRASE"
     
     //Assets screen
     struct AssetsScreen {

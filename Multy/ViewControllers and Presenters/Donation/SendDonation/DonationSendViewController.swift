@@ -240,7 +240,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
         }
         
         if (self.donationTF.text! + string).convertStringWithCommaToDouble() > self.presenter.maxAvailable {
-            self.presentWarning(message: "You trying to enter sum more then you have")
+            self.presentWarning(message: localize(string: Constants.moreThenYouHaveString))
             return false
         }
         

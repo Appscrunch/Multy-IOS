@@ -11,3 +11,5 @@
 "ERROR" = "Ошибка";
 "YES STRING" = "Да";
 "NO STRING" = "Нет";
+"BACKUP NEEDED" = "Восстановить Seed-фразу";
+"VIEW SEED PHRASE" = "Просмотреть Seed-фразу";
