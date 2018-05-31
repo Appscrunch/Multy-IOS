@@ -18,7 +18,7 @@ class PaymentRequest: NSObject {
         
     var requestImageName : String {
         get {
-            let imageNumber = sendAddress.converToImageIndex
+            let imageNumber = sendAddress.convertToImageIndex
             
             return "wirelessRequestImage_" + "\(imageNumber)"
             

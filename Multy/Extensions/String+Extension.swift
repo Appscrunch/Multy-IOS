@@ -26,12 +26,6 @@ extension String {
         }
     }
     
-    var converToImageIndex: UInt32 {
-        let sum = map{ char in char.asciiCode }.reduce(0, +)
-        
-        return sum % 20
-    }
-    
     var doubleValue: Double {
         get {
             return Double(self.stringWithDot)!
