@@ -73,6 +73,8 @@
 		454A9D7C20067E530035966F /* HistoryRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A9D7B20067E530035966F /* HistoryRLM.swift */; };
 		455126BC1FE04AAD0026A892 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455126BB1FE04AAD0026A892 /* AddressViewController.swift */; };
 		45539BD1205ABBA5008AD36E /* WrongPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45539BD0205ABBA5008AD36E /* WrongPinViewController.swift */; };
+		4558F41720BFE8AF003D7C7A /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558F41620BFE8AF003D7C7A /* HUDView.swift */; };
+		4558F41920C03F87003D7C7A /* PreloaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4558F41820C03F87003D7C7A /* PreloaderView.swift */; };
 		455CDCEF1FC833A500EA5ACE /* SendingAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */; };
 		455CDCF11FC833C700EA5ACE /* SendingAnimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCF01FC833C700EA5ACE /* SendingAnimationPresenter.swift */; };
 		455CDCF91FC8535C00EA5ACE /* CreateWalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CDCF81FC8535C00EA5ACE /* CreateWalletPresenter.swift */; };
@@ -432,6 +434,8 @@
 		454A9D7B20067E530035966F /* HistoryRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRLM.swift; sourceTree = "<group>"; };
 		455126BB1FE04AAD0026A892 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		45539BD0205ABBA5008AD36E /* WrongPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPinViewController.swift; sourceTree = "<group>"; };
+		4558F41620BFE8AF003D7C7A /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
+		4558F41820C03F87003D7C7A /* PreloaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloaderView.swift; sourceTree = "<group>"; };
 		455CDCEE1FC833A500EA5ACE /* SendingAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingAnimationViewController.swift; sourceTree = "<group>"; };
 		455CDCF01FC833C700EA5ACE /* SendingAnimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingAnimationPresenter.swift; sourceTree = "<group>"; };
 		455CDCF81FC8535C00EA5ACE /* CreateWalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletPresenter.swift; sourceTree = "<group>"; };
@@ -739,6 +743,8 @@
 			isa = PBXGroup;
 			children = (
 				45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */,
+				4558F41620BFE8AF003D7C7A /* HUDView.swift */,
+				4558F41820C03F87003D7C7A /* PreloaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2332,6 +2338,7 @@
 				45F6340C202388DF00C17A7C /* ViewInBlockchainViewController.swift in Sources */,
 				451ED793207CD88D00542F00 /* UITextField+Extensions.swift in Sources */,
 				FA4D43E11FC5895D003C7117 /* String+Extension.swift in Sources */,
+				4558F41920C03F87003D7C7A /* PreloaderView.swift in Sources */,
 				45A949271FC2EE68003C3A23 /* ReceiveAmountViewController.swift in Sources */,
 				454094502033236B00603DB5 /* ResetAllDataViewController.swift in Sources */,
 				444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */,
@@ -2354,6 +2361,7 @@
 				4506F1761FD9A30700D575BA /* WalletSettingsViewController.swift in Sources */,
 				45A9493E1FC5A557003C3A23 /* SendStartViewController.swift in Sources */,
 				45DCF9D11FE16859005A9896 /* WalletAddresessViewController.swift in Sources */,
+				4558F41720BFE8AF003D7C7A /* HUDView.swift in Sources */,
 				45539BD1205ABBA5008AD36E /* WrongPinViewController.swift in Sources */,
 				FADC004E1FC323C300182E45 /* CoreLibManager.swift in Sources */,
 				457569411FBDD6E000FDEE20 /* BackupSeedPhrasePresenter.swift in Sources */,

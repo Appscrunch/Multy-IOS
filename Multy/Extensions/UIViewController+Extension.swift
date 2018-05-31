@@ -237,4 +237,26 @@ extension UIViewController {
             }
         }
     }
+    
+    func setupPreloader(hud: HUDView, shadowView: UIView) -> (HUDView, UIView) {
+        shadowView.backgroundColor = .white
+        shadowView.layer.cornerRadius = 15.0
+        shadowView.setShadow(with: #colorLiteral(red: 0.1490196078, green: 0.2980392157, blue: 0.4156862745, alpha: 0.3))
+        shadowView.isHidden = true
+        hud.hide()
+        
+        self.view.addSubview(shadowView)
+        self.view.addSubview(hud)
+        return (hud, shadowView)
+    }
+    
+    func showPreloader(hud: HUDView, shadowView: UIView) {
+        hud.hide()
+        shadowView.isHidden = true
+    }
+    
+    func hidePreloader(hud: HUDView, shadowView: UIView) {
+        hud.show()
+        shadowView.isHidden = false
+    }
 }

@@ -25,7 +25,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
-    let progressHUD = ProgressHUD(text: Constants.AssetsScreen.progressString)
+//    let progressHUD = ProgressHUD(text: Constants.AssetsScreen.progressString)
     
     var isSeedBackupOnScreen = false
     
@@ -38,6 +38,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     var isInsetCorrect = false
     
     var isInternetAvailable = true
+    
+    let loader = PreloaderView(frame: HUDFrame, text: Constants.AssetsScreen.progressString, image: #imageLiteral(resourceName: "walletHuge"))
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -55,17 +57,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.backUpView()
-        self.setupStatusBar()
-        
-        tableView.accessibilityIdentifier = "AssetsTableView"
-        tableView.addSubview(self.refreshControl)
-        view.isUserInteractionEnabled = false
-        registerCells()
-        presenter.assetsVC = self
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        self.setpuUI()
         self.performFirstEnterFlow { (isUpToDate) in
             guard self.isFlowPassed else {
                 self.view.isUserInteractionEnabled = true
@@ -92,14 +84,27 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             
             self.checkOSForConstraints()
             
-            self.view.addSubview(self.progressHUD)
-            self.progressHUD.hide()
+//            self.view.addSubview(self.progressHUD)
+//            self.progressHUD.hide()
             if self.presenter.account != nil {
                 self.tableView.frame.size.height = screenHeight - self.tabBarController!.tabBar.frame.height
             }
             DataManager.shared.socketManager.start()
         }
     }
+    
+    func setpuUI() {
+        presenter.assetsVC = self
+        backUpView()
+        setupStatusBar()
+        registerCells()
+        tableView.accessibilityIdentifier = "AssetsTableView"
+        tableView.addSubview(self.refreshControl)
+        view.isUserInteractionEnabled = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.addSubview(loader)
+    }
+
     
     
     func performFirstEnterFlow(completion: @escaping(_ isUpToDate: Bool) -> ()) {

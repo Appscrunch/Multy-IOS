@@ -147,6 +147,11 @@ func shakeView(viewForShake: UIView) {
 //    self.viewWithCircles.layer.add(animation, forKey: "position")
 }
 
+let HUDFrame = CGRect(x: screenWidth / 2 - 70,   // width / 2
+                      y: screenHeight / 2 - 60,  // height / 2
+                      width: 145,
+                      height: 120)
+
 let idOfInapps = ["io.multy.addingActivity5", "io.multy.addingCharts5", "io.multy.addingContacts5",
                   "io.multy.addingDash5", "io.multy.addingEthereumClassic5", "io.multy.addingExchange5",
                   "io.multy.exchangeStocks", "io.multy.importWallet5", "io.multy.addingLitecoin5",
