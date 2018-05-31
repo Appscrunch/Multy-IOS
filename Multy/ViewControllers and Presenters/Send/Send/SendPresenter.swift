@@ -23,7 +23,14 @@ class SendPresenter: NSObject {
             if filteredWalletArray.count == 0 {
                 selectedWalletIndex = nil
             } else {
-                selectedWalletIndex = 0
+                if selectedWalletIndex == nil {
+                    selectedWalletIndex = 0
+                } else {
+                    if selectedWalletIndex! >= filteredWalletArray.count {
+                        selectedWalletIndex = filteredWalletArray.count - 1
+                    }
+                }
+                
                 sendVC?.scrollToWallet(selectedWalletIndex!)
             }
             
@@ -45,6 +52,14 @@ class SendPresenter: NSObject {
         didSet {
             if activeRequestsArr.count == 0 {
                 selectedActiveRequestIndex = nil
+            } else {
+                if selectedActiveRequestIndex == nil {
+                    selectedActiveRequestIndex = 0
+                } else if selectedActiveRequestIndex! >= activeRequestsArr.count {
+                    selectedActiveRequestIndex = activeRequestsArr.count - 1
+                }
+                
+                sendVC?.scrollToRequest(selectedActiveRequestIndex!)
             }
         }
     }
@@ -82,7 +97,7 @@ class SendPresenter: NSObject {
     
     var transaction : TransactionDTO?
     
-    var receiveActiveRequestTimer = Timer()
+    var receiveActiveRequestTimer : Timer?
     
     var blockActivityUpdating = false
     
@@ -258,13 +273,6 @@ class SendPresenter: NSObject {
         }
     }
     
-    func addActivePaymentRequests(requests: [PaymentRequest]) {
-        activeRequestsArr.append(contentsOf: requests)
-        if numberOfActiveRequests() > 0 && selectedActiveRequestIndex == nil {
-            selectedActiveRequestIndex = 0
-        }
-    }
-    
     var addressData : Dictionary<String, Any>?
     var binaryData : BinaryData?
     var account = DataManager.shared.realmManager.account
@@ -332,9 +340,6 @@ class SendPresenter: NSObject {
     
     func sendAnimationComplete() {
         stopSearching()
-        self.getWalletsVerbose(completion: { [unowned self] (success) in
-            self.cleanRequests()
-        })
         
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(startSearchingActiveRequests), userInfo: nil, repeats: false)
     }
@@ -355,43 +360,81 @@ class SendPresenter: NSObject {
         DispatchQueue.main.async {
             let requests = notification.userInfo!["paymentRequests"] as! [PaymentRequest]
             
-            var filteredRequestArray = requests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
-            
-            var newRequests = [PaymentRequest]()
-            while filteredRequestArray.count > 0 {
-                let request = filteredRequestArray.first!
-                
-                var isRequestOld = false
-                for oldRequest in self.activeRequestsArr {
-                    if oldRequest.userCode == request.userCode {
-                        let index = self.activeRequestsArr.index(of: oldRequest)
-                        if self.activeRequestsArr[index!].sendAmount != request.sendAmount || self.activeRequestsArr[index!].sendAddress != request.sendAddress {
-                            self.activeRequestsArr[index!] = request
-                            self.createTransactionDTO()
-                        }
-                        
-                        isRequestOld = true
-                        break
-                    }
-                }
-                
-                if !isRequestOld {
-                    newRequests.append(request)
-                }
-                
-                filteredRequestArray.removeFirst()
-            }
-            
-            if newRequests.count > 0 {
-                self.addActivePaymentRequests(requests: newRequests)
-            }
+            self.updateActiveRequests(requests)
             
             self.sendVC?.updateUI()
         }
     }
     
+    func updateActiveRequests(_ newRequests : [PaymentRequest]) {
+//        var updatedActiveRequests = [PaymentRequest]()
+//        var filteredNewRequests = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
+//
+//        for i in 0..<activeRequestsArr.count {
+//            let oldRequest = activeRequestsArr[i]
+//
+//            for k in 0..<filteredNewRequests.count {
+//                let newRequest = filteredNewRequests[k]
+//
+//                if newRequest.userCode == oldRequest.userCode {
+//
+//                    if BigInt(newRequest.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0) {
+//                        updatedActiveRequests.append(newRequest)
+//                    }
+//
+//                    mutableNewRequests.remove(at: k)
+//
+//                    break
+//                }
+//            }
+//        }
+        
+        let filteredRequestArray = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
+        activeRequestsArr = filteredRequestArray
+        
+//        var newRequests = [PaymentRequest]()
+//        while filteredRequestArray.count > 0 {
+//            let request = filteredRequestArray.first!
+//
+//            var isRequestOld = false
+//            for oldRequest in self.activeRequestsArr {
+//                if oldRequest.userCode == request.userCode {
+//                    let index = self.activeRequestsArr.index(of: oldRequest)
+//                    if self.activeRequestsArr[index!].sendAmount != request.sendAmount || self.activeRequestsArr[index!].sendAddress != request.sendAddress {
+//                        self.activeRequestsArr[index!] = request
+//                        self.createTransactionDTO()
+//                    }
+//
+//                    isRequestOld = true
+//                    break
+//                }
+//            }
+//
+//            if !isRequestOld {
+//                newRequests.append(request)
+//            }
+//
+//            filteredRequestArray.removeFirst()
+//        }
+//
+//        if newRequests.count > 0 {
+//            self.addActivePaymentRequests(requests: newRequests)
+//        }
+    }
+    
+    func addActivePaymentRequests(requests: [PaymentRequest]) {
+        activeRequestsArr.append(contentsOf: requests)
+        if numberOfActiveRequests() > 0 && selectedActiveRequestIndex == nil {
+            selectedActiveRequestIndex = 0
+        }
+    }
+    
     @objc private func didReceiveSendResponse(notification: Notification) {
         DispatchQueue.main.async {
+            self.getWalletsVerbose(completion: { [unowned self] (success) in
+                self.cleanRequests()
+            })
+            
             let success = notification.userInfo!["data"] as! Bool
             
             self.sendVC?.updateUIWithSendResponse(success: success)
@@ -419,28 +462,45 @@ class SendPresenter: NSObject {
         return nil
     }
     
+    var checkNewUserCodesCounter = 0
     @objc private func startSearchingActiveRequests() {
         BLEManager.shared.startScan()
-        receiveActiveRequestTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkNewUserCodes), userInfo: nil, repeats: true)
+        if receiveActiveRequestTimer == nil {
+            receiveActiveRequestTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(checkNewUserCodes), userInfo: nil, repeats: true)
+            checkNewUserCodesCounter = 0
+        }
     }
     
     @objc private func stopSearching() {
         BLEManager.shared.stopScan()
-        receiveActiveRequestTimer.invalidate()
+        receiveActiveRequestTimer!.invalidate()
+        receiveActiveRequestTimer = nil
     }
     
     @objc func checkNewUserCodes() {
-//        let request = PaymentRequest.init(sendAddress: "mrQ5gJvzeGZ7bjtXycfJGdAo9BUNtgQVL9", userCode: "41234123", currencyID: 0, sendAmount: "0,001", networkID : 1, userID : "ffwqefqewfdsf")
-//
-//        activeRequestsArr.append(request)
-//        if numberOfActiveRequests() == 1 {
-//            selectedActiveRequestIndex = 0
-//        }
-//
-//        sendVC?.updateUI()
+        checkNewUserCodesCounter += 1
         
-        if newUserCodes.count > 0 {
-            becomeSenderForUsersWithCodes(newUserCodes)
+        var userCodes = newUserCodes
+        if activeRequestsArr.count > 0 {
+            for request in activeRequestsArr {
+                if !userCodes.contains(request.userCode) {
+                    userCodes.append(request.userCode)
+                }
+            }
+        }
+        
+        var isNeedToBecomeSender = false
+        if checkNewUserCodesCounter == 5 {
+            checkNewUserCodesCounter = 0
+            if userCodes.count > 0 {
+                isNeedToBecomeSender = true
+            }
+        } else if newUserCodes.count > 0 {
+            isNeedToBecomeSender = true
+        }
+        
+        if isNeedToBecomeSender {
+            becomeSenderForUsersWithCodes(userCodes)
             newUserCodes.removeAll()
         }
     }
