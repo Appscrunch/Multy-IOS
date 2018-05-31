@@ -17,3 +17,6 @@
 "NO STRING" = "Нет";
 "COPY TO CLIPBOARD" = "Скопировать в буфер обмена";
 "SHARE" = "Поделиться";
+"TRANSACTION INFO" = "Информация о транзакции";
+"CONFIRMATION" = "Подтверждение";
+"CONFIRMATIONS" "Подтверждения";

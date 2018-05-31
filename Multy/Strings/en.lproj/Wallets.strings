@@ -17,3 +17,6 @@
 "NO STRING" = "No";
 "COPY TO CLIPBOARD" = "Copy to clipboard";
 "SHARE" = "Share";
+"TRANSACTION INFO" = "Transaction Info";
+"CONFIRMATION" = "Confirmation";
+"CONFIRMATIONS" "Confirmations";

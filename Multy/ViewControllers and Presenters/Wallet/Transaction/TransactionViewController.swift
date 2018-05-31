@@ -139,10 +139,10 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
     func checkForSendOrReceive() {
         if isIncoming {  // RECEIVE
             self.makeBackColor(color: self.presenter.receiveBackColor)
-            self.titleLbl.text = "Transaction Info"
+            self.titleLbl.text = localize(string: Constants.transactionInfoString)
         } else {                        // SEND
             self.makeBackColor(color: self.presenter.sendBackColor)
-            self.titleLbl.text = "Transaction Info"
+            self.titleLbl.text = localize(string: Constants.transactionInfoString)
             self.transactionImg.image = #imageLiteral(resourceName: "sendBigIcon")
         }
     }
@@ -253,9 +253,9 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         var textForConfirmations = ""
         switch presenter.histObj.confirmations {
         case 1:
-            textForConfirmations = "1 Confirmation"
+            textForConfirmations = "1 \(Constants.confirmationString)"
         default: // more than 6
-            textForConfirmations = "\(presenter.histObj.confirmations) Confirmations"
+            textForConfirmations = "\(presenter.histObj.confirmations) \(Constants.confirmationsString)"
         }
         
         return textForConfirmations

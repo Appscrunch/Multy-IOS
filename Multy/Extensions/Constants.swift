@@ -30,6 +30,9 @@ struct Constants {
     static let copyToClipboardString = "COPY TO CLIPBOARD"
     static let shareString = "SHARE"
     static let magicalReceiveString = "MAGICAL RECEIVE"
+    static let transactionInfoString = "TRANSACTION INFO"
+    static let confirmationString = "CONFIRMATION"
+    static let confirmationsString = "CONFIRMATIONS"
     
     //Assets screen
     struct AssetsScreen {

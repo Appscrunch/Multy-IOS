@@ -45,7 +45,7 @@
 "Hot-OY-JJw.text" = "Send";
 
 /* Class = "UILabel"; text = "Transaction Info "; ObjectID = "I4U-wc-DLI"; */
-"I4U-wc-DLI.text" = "Transaction Info ";
+"I4U-wc-DLI.text" = "Transaction Info";
 
 /* Class = "UILabel"; text = "You don't have any transactions."; ObjectID = "IkK-EA-P5D"; */
 "IkK-EA-P5D.text" = "You don't have any transactions.";
