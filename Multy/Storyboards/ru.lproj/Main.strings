@@ -105,7 +105,7 @@
 "TqZ-Hq-Mu8.text" = "NFC";
 
 /* Class = "UILabel"; text = "Reference currency"; ObjectID = "UPE-4y-AFR"; */
-"UPE-4y-AFR.text" = "Исходная валюта";
+"UPE-4y-AFR.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "Donation"; ObjectID = "VE2-jw-Snq"; */
 "VE2-jw-Snq.text" = "Donation";

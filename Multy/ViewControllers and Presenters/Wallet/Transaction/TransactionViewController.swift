@@ -274,6 +274,6 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Wallet"
+        return "Wallets"
     }
 }

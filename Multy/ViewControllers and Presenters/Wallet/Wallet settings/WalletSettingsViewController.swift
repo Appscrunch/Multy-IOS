@@ -39,7 +39,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     @IBAction func deleteAction(_ sender: Any) {
         if presenter.wallet!.isEmpty {
-            let message = "Are you sure?"
+            let message = localize(string: Constants.deleteWalletAlertString)
             let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { (action) in
                 self.progressHUD.show()
@@ -53,7 +53,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
             
             self.present(alert, animated: true, completion: nil)
         } else {
-            let message = "Cryptocurrency amount should be empty"
+            let message = localize(string: Constants.walletAmountAlertString)
             let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -67,7 +67,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     @IBAction func changeWalletName(_ sender: Any) {
         if walletNameTF.text?.trimmingCharacters(in: .whitespaces).count == 0 {
-            let message = "Wallet name should be non empty"
+            let message = localize(string: Constants.walletNameAlertString)
             let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -111,6 +111,6 @@ extension WalletSettingsViewController: UITextFieldDelegate {
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
-        return "Wallet"
+        return "Wallets"
     }
 }

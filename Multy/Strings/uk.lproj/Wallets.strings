@@ -1,0 +1,15 @@
+/* 
+  Wallet.strings
+  Multy
+
+  Created by Alex Pro on 5/30/18.
+  Copyright © 2018 Idealnaya rabota. All rights reserved.
+*/
+
+"BACKUP IS NEEDED" = "Потрібно резервне копіювання!";
+"WARNING" = "Попередження";
+"CANCEL" = "Скасувати";
+"ERROR" = "Помилка";
+"WALLET NAME NOT EMPTY ALERT" = "Ім'я гаманця не повинно бути порожнім";
+"WALLET AMOUNT ALERT" = "Сума криптовалют повинна бути порожньою";
+"DELETE WALLET WARNING" = "Ви впевнені, що хочете видалити гаманець?";

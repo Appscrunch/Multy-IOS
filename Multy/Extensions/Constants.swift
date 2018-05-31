@@ -21,6 +21,9 @@ struct Constants {
     static let warningString = "WARNING"
     static let cancelString = "CANCEL"
     static let errorString = "ERROR"
+    static let walletNameAlertString = "WALLET NAME NOT EMPTY ALERT"
+    static let walletAmountAlertString = "WALLET AMOUNT ALERT"
+    static let deleteWalletAlertString = "DELETE WALLET WARNING"
     
     //Assets screen
     struct AssetsScreen {

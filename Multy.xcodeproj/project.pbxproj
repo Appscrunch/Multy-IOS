@@ -38,7 +38,7 @@
 		4474C5B720BFE76800EA8B01 /* Activty.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4474C5B920BFE76800EA8B01 /* Activty.strings */; };
 		4477261720BDA1F2006BF4A7 /* Assets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4477261920BDA1F2006BF4A7 /* Assets.strings */; };
 		4477262420BE9F53006BF4A7 /* NewWalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4477262620BE9F53006BF4A7 /* NewWalletTableViewCell.xib */; };
-		4477263420BEAF86006BF4A7 /* Wallet.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4477263620BEAF86006BF4A7 /* Wallet.strings */; };
+		4477263420BEAF86006BF4A7 /* Wallets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4477263620BEAF86006BF4A7 /* Wallets.strings */; };
 		4477263B20BEC565006BF4A7 /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4477263D20BEC565006BF4A7 /* Settings.strings */; };
 		4477264220BEC818006BF4A7 /* Receive.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4477264420BEC818006BF4A7 /* Receive.strings */; };
 		4477264920BECAA5006BF4A7 /* Seed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4477264B20BECAA5006BF4A7 /* Seed.strings */; };
@@ -407,9 +407,9 @@
 		4477262820BE9F5C006BF4A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewWalletTableViewCell.strings; sourceTree = "<group>"; };
 		4477262920BE9F61006BF4A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NewWalletTableViewCell.strings; sourceTree = "<group>"; };
 		4477262A20BE9F64006BF4A7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/NewWalletTableViewCell.strings; sourceTree = "<group>"; };
-		4477263520BEAF86006BF4A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Wallet.strings; sourceTree = "<group>"; };
-		4477263720BEAF88006BF4A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Wallet.strings; sourceTree = "<group>"; };
-		4477263820BEAF8A006BF4A7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Wallet.strings; sourceTree = "<group>"; };
+		4477263520BEAF86006BF4A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Wallets.strings; sourceTree = "<group>"; };
+		4477263720BEAF88006BF4A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Wallets.strings; sourceTree = "<group>"; };
+		4477263820BEAF8A006BF4A7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Wallets.strings; sourceTree = "<group>"; };
 		4477263C20BEC565006BF4A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
 		4477263E20BEC567006BF4A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Settings.strings; sourceTree = "<group>"; };
 		4477263F20BEC568006BF4A7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Settings.strings; sourceTree = "<group>"; };
@@ -752,7 +752,7 @@
 			children = (
 				445B12E220BD78D000FD0D33 /* CurrencyChooser.strings */,
 				4477261920BDA1F2006BF4A7 /* Assets.strings */,
-				4477263620BEAF86006BF4A7 /* Wallet.strings */,
+				4477263620BEAF86006BF4A7 /* Wallets.strings */,
 				4477263D20BEC565006BF4A7 /* Settings.strings */,
 				4477264420BEC818006BF4A7 /* Receive.strings */,
 				4477264B20BECAA5006BF4A7 /* Seed.strings */,
@@ -1970,7 +1970,7 @@
 				45DA45A220299E49004A34FB /* Multy.entitlements in Resources */,
 				85DE62E420AB077B00423D89 /* WalletCollectionViewCell.xib in Resources */,
 				85DE62F320AF188B00423D89 /* Check Mark Success Data.json in Resources */,
-				4477263420BEAF86006BF4A7 /* Wallet.strings in Resources */,
+				4477263420BEAF86006BF4A7 /* Wallets.strings in Resources */,
 				45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */,
 				445B127F20BC1C6B00FD0D33 /* MainWalletHeaderCell.xib in Resources */,
 				445B127620BC1BD000FD0D33 /* Wallet.storyboard in Resources */,
@@ -2711,14 +2711,14 @@
 			name = NewWalletTableViewCell.xib;
 			sourceTree = "<group>";
 		};
-		4477263620BEAF86006BF4A7 /* Wallet.strings */ = {
+		4477263620BEAF86006BF4A7 /* Wallets.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4477263520BEAF86006BF4A7 /* en */,
 				4477263720BEAF88006BF4A7 /* ru */,
 				4477263820BEAF8A006BF4A7 /* uk */,
 			);
-			name = Wallet.strings;
+			name = Wallets.strings;
 			sourceTree = "<group>";
 		};
 		4477263D20BEC565006BF4A7 /* Settings.strings */ = {
