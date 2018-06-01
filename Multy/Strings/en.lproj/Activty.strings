@@ -7,3 +7,5 @@
 */
 
 "ERROR" = "Error";
+"SOMETHING WENT WRONG" = "Something went wrong";
+"LOADING" = "Loading";

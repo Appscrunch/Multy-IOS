@@ -30,12 +30,12 @@ extension Localizable where Self: UIViewController, Self: Localizable {
     }
     
     func makePurchaseFor(productId: String) {
-        let loader = PreloaderView(frame: HUDFrame, text: "Loading", image: #imageLiteral(resourceName: "walletHuge"))
+        let loader = PreloaderView(frame: HUDFrame, text: localize(string: Constants.loadingString), image: #imageLiteral(resourceName: "walletHuge"))
         view.addSubview(loader)
-        loader.show(customTitle: "Loading")
-        self.getAvailableInAppBy(stringId: productId) { (product) in
+        loader.show(customTitle: localize(string: Constants.loadingString))
+        self.getAvailableInAppBy(stringId: productId) { [unowned self] (product) in
             if product == nil {
-                self.presentAlert(with: "Something went wrong. Try it later.")
+                self.presentAlert(with: self.localize(string: Constants.somethingWentWrongString))
                 loader.hide()
                 return
             }
@@ -172,6 +172,7 @@ extension UIViewController {
         }
     }
     
+    //not used any more
     func donateOrAlert(isHaveNotEmptyWallet: Bool, message: String) {
         if isHaveNotEmptyWallet {
             (self.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: true)

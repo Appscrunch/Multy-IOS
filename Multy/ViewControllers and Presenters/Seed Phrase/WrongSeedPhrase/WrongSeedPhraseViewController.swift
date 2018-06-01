@@ -26,7 +26,7 @@ class WrongSeedPhraseViewController: UIViewController, AnalyticsProtocol {
     @IBAction func cancelAction(_ sender : UIButton) {
         let allVCs = self.navigationController!.viewControllers
         
-        let alert = UIAlertController(title: localize(string: Constants.cancelString), message: "Are you really want to cancel?", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.cancelString), message: localize(string: Constants.wantToCancelString), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .default, handler: { (action) in
             if allVCs.count > 5 {
                 let destinationVC = allVCs[allVCs.count - 6]

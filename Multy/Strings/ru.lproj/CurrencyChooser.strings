@@ -9,3 +9,5 @@
 "AVAILABLE" = "ДОСТУПНО";
 "WORK IN PROGRESS" = "В РАЗРАБОТКЕ";
 "ERROR" = "Ошибка";
+"SOMETHING WENT WRONG" = "Что-то пошло не так";
+"LOADING" = "Загрузка";

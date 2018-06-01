@@ -9,3 +9,5 @@
 "AVAILABLE" = "AVAILABLE";
 "WORK IN PROGRESS" = "WORK IN PROGRESS";
 "ERROR" = "Error";
+"SOMETHING WENT WRONG" = "Something went wrong";
+"LOADING" = "Loading";

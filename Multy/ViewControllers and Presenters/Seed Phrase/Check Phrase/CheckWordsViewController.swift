@@ -80,7 +80,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         }
         if self.isNeedToClean {
             self.currentWordNumber = 1
-            self.wordCounterLbl.text = "\(self.currentWordNumber) from 15"
+            self.wordCounterLbl.text = "\(self.currentWordNumber) \(localize(string: Constants.from15String))"
             self.view.isUserInteractionEnabled = true
             self.presenter.phraseArr.removeAll()
             bricksView.subviews.forEach({ $0.removeFromSuperview() })
@@ -125,7 +125,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         
         if !self.wordTF.text!.isEmpty {
             self.presenter.phraseArr.append(wordArray.first!)
-            self.nextWordOrContinue.setTitle("Next Word", for: .normal)
+            self.nextWordOrContinue.setTitle(localize(string: Constants.nextWordString), for: .normal)
             
             wordTF.text = wordArray.first!
             nextWordOrContinue.isUserInteractionEnabled = false
@@ -147,7 +147,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         
         if self.currentWordNumber < 15 {
             self.currentWordNumber += 1
-            self.wordCounterLbl.text = "\(self.currentWordNumber) from 15"
+            self.wordCounterLbl.text = "\(self.currentWordNumber) \(localize(string: Constants.from15String))"
         } else {
             if self.isRestore {
                 self.presenter.auth(seedString: self.presenter.phraseArr.joined(separator: " "))
@@ -184,7 +184,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        let alert = UIAlertController(title: localize(string: Constants.cancelString), message: "Are you really want to cancel?", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.cancelString), message: localize(string: Constants.wantToCancelString), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .default, handler: { (action) in
             self.sendAnalyticsEvent(screenName: screenRestoreSeed, eventName: cancelTap)
             if self.whereFrom != nil {
@@ -230,7 +230,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
             self.nextWordOrContinue.setTitle(wordArray.first!, for: .normal)
         } else {
             if isWordFinded {
-                self.nextWordOrContinue.setTitle(textAfterUpdate + " or " + textAfterUpdate + "..." , for: .normal)
+                self.nextWordOrContinue.setTitle(textAfterUpdate + " \(localize(string: Constants.orString)) " + textAfterUpdate + "..." , for: .normal)
             } else {
                 self.nextWordOrContinue.setTitle(textAfterUpdate + "..." , for: .normal)
             }

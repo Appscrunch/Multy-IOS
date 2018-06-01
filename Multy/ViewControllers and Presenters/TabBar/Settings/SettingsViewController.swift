@@ -100,7 +100,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
             } else {
                 pinSwitch.isOn = false
                 let message = "Biometric authentication is not configured on your device"
-                let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+                let alert = UIAlertController(title: localize(string: Constants.sorryString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: localize(string: Constants.cancelString), style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }

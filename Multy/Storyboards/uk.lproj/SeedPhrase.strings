@@ -9,7 +9,7 @@
 "827-G2-PrD.text" = "ABC";
 
 /* Class = "UIButton"; normalTitle = "Try Again!"; ObjectID = "EcG-0i-Nr0"; */
-"EcG-0i-Nr0.normalTitle" = "Try Again!";
+"EcG-0i-Nr0.normalTitle" = "Спробувати знову";
 
 /* Class = "UILabel"; text = "For security purpose we will show seed phrase in portions. Write down this words on paper and securely store it somewhere safe!"; ObjectID = "IHG-IF-sNd"; */
 "IHG-IF-sNd.text" = "З метою безпеки ми покажемо Seed-фразу по частинах. Запишіть ці слова на папері і надійно зберігайте їх де-небудь у безпеці!";
@@ -18,19 +18,19 @@
 "IQj-ra-XgJ.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "You have seen your Seed Phrase."; ObjectID = "Iur-Vu-aWk"; */
-"Iur-Vu-aWk.text" = "You have seen your Seed Phrase.";
+"Iur-Vu-aWk.text" = "Ви бачили свою Seed-фразу.";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "J88-uo-8qz"; */
 "J88-uo-8qz.normalTitle" = "Далі";
 
 /* Class = "UILabel"; text = "1 from 15"; ObjectID = "K1E-dc-1Bn"; */
-"K1E-dc-1Bn.text" = "1 from 15";
+"K1E-dc-1Bn.text" = "1 з 15";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "Wey-AO-45o"; */
 "Wey-AO-45o.normalTitle" = "Далі";
 
 /* Class = "UILabel"; text = "Phrase Validation"; ObjectID = "YXe-ZO-gQe"; */
-"YXe-ZO-gQe.text" = "Phrase Validation";
+"YXe-ZO-gQe.text" = "Перевірка Фрази";
 
 /* Class = "UILabel"; text = "Seed Phrase"; ObjectID = "aAL-4L-Z3p"; */
 "aAL-4L-Z3p.text" = "Seed-фраза";
@@ -39,13 +39,13 @@
 "c2M-Lw-dYk.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "In order to verify that you have written it correctly type words one by one on the next screen."; ObjectID = "hhR-En-7a2"; */
-"hhR-En-7a2.text" = "In order to verify that you have written it correctly type words one by one on the next screen.";
+"hhR-En-7a2.text" = "Щоб переконатися, що ви записали її правильно, введіть слова по черзі на наступному екрані.";
 
 /* Class = "UILabel"; text = "Seed Phrase"; ObjectID = "pf7-VK-HCy"; */
 "pf7-VK-HCy.text" = "Seed-фраза";
 
 /* Class = "UILabel"; text = "Show Seed Phrase again."; ObjectID = "piY-bH-vcx"; */
-"piY-bH-vcx.text" = "Show Seed Phrase again.";
+"piY-bH-vcx.text" = "Показати Seed-фразу знову.";
 
 /* Class = "UIButton"; normalTitle = "Great!"; ObjectID = "rQ5-TK-TFt"; */
 "rQ5-TK-TFt.normalTitle" = "Great!";
@@ -66,7 +66,7 @@
 "wTi-w9-E0X.normalTitle" = "Скасувати";
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "wV8-0l-POJ"; */
-"wV8-0l-POJ.normalTitle" = "Next Word";
+"wV8-0l-POJ.normalTitle" = "Наступне слово";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "wpE-FL-wp8"; */
 "wpE-FL-wp8.normalTitle" = "Далі";

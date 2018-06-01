@@ -10,6 +10,7 @@
 		2903DBF32668295CED1C9139 /* Pods_Multy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7304C17824311A19240183E0 /* Pods_Multy.framework */; };
 		44089D15205FD12000E2534C /* CreateWalletBlockchainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44089D14205FD12000E2534C /* CreateWalletBlockchainTableViewCell.swift */; };
 		440AD8D22020D1220015AEF1 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */; };
+		4430569B20C1627600E5415A /* TransactionPendingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4430569D20C1627600E5415A /* TransactionPendingCell.xib */; };
 		4436123020B56F000095F3C6 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436122F20B56F000095F3C6 /* UITableView+Extension.swift */; };
 		444066D0205926D400342046 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066CF205926D400342046 /* UIApplication+Extension.swift */; };
 		444066D22059277F00342046 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D12059277F00342046 /* UIAlertController+Extension.swift */; };
@@ -275,7 +276,6 @@
 		FA8C87872010E59200F8D5D9 /* OpenCreatingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C87862010E59200F8D5D9 /* OpenCreatingSheet.swift */; };
 		FAB0E6AA20189AE300EB53E2 /* StockExchangeRateRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0E6A920189AE300EB53E2 /* StockExchangeRateRLM.swift */; };
 		FACEB5A1200A46F600055788 /* TransactionPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEB59F200A46F600055788 /* TransactionPendingCell.swift */; };
-		FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEB5A0200A46F600055788 /* TransactionPendingCell.xib */; };
 		FADC00461FC3231A00182E45 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00451FC3231A00182E45 /* DataManager.swift */; };
 		FADC00481FC3236F00182E45 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00471FC3236F00182E45 /* ApiManager.swift */; };
 		FADC004A1FC3238D00182E45 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC00491FC3238D00182E45 /* RealmManager.swift */; };
@@ -319,6 +319,10 @@
 		3140FCDE88E15AA96180AE29 /* Pods-Multy-MultyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Multy-MultyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Multy-MultyUITests/Pods-Multy-MultyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		44089D14205FD12000E2534C /* CreateWalletBlockchainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletBlockchainTableViewCell.swift; sourceTree = "<group>"; };
 		440AD8D12020D1220015AEF1 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		4430569C20C1627600E5415A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TransactionPendingCell.xib; sourceTree = "<group>"; };
+		4430569F20C1627C00E5415A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TransactionPendingCell.strings; sourceTree = "<group>"; };
+		443056A120C1627E00E5415A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/TransactionPendingCell.strings; sourceTree = "<group>"; };
+		443056A320C1628000E5415A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/TransactionPendingCell.strings; sourceTree = "<group>"; };
 		4436122F20B56F000095F3C6 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		444066CF205926D400342046 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		444066D12059277F00342046 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
@@ -687,7 +691,6 @@
 		FA8C87862010E59200F8D5D9 /* OpenCreatingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCreatingSheet.swift; sourceTree = "<group>"; };
 		FAB0E6A920189AE300EB53E2 /* StockExchangeRateRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockExchangeRateRLM.swift; sourceTree = "<group>"; };
 		FACEB59F200A46F600055788 /* TransactionPendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPendingCell.swift; sourceTree = "<group>"; };
-		FACEB5A0200A46F600055788 /* TransactionPendingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionPendingCell.xib; sourceTree = "<group>"; };
 		FADC00451FC3231A00182E45 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FADC00471FC3236F00182E45 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FADC00491FC3238D00182E45 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -1739,7 +1742,7 @@
 				FA4D43FC1FC6D058003C7117 /* TransactionWalletCell.swift */,
 				FA4D43FD1FC6D058003C7117 /* TransactionWalletCell.xib */,
 				FACEB59F200A46F600055788 /* TransactionPendingCell.swift */,
-				FACEB5A0200A46F600055788 /* TransactionPendingCell.xib */,
+				4430569D20C1627600E5415A /* TransactionPendingCell.xib */,
 			);
 			path = MainWallet;
 			sourceTree = "<group>";
@@ -1976,7 +1979,7 @@
 				45DA45A220299E49004A34FB /* Multy.entitlements in Resources */,
 				85DE62E420AB077B00423D89 /* WalletCollectionViewCell.xib in Resources */,
 				85DE62F320AF188B00423D89 /* Check Mark Success Data.json in Resources */,
-				4477263420BEAF86006BF4A7 /* Wallet.strings in Resources */,
+				4477263420BEAF86006BF4A7 /* Wallets.strings in Resources */,
 				854EF14A20C06DA4000C2247 /* tx_success_animation.json in Resources */,
 				45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */,
 				445B127F20BC1C6B00FD0D33 /* MainWalletHeaderCell.xib in Resources */,
@@ -2008,7 +2011,7 @@
 				445B12E020BD78D000FD0D33 /* CurrencyChooser.strings in Resources */,
 				45EBB6A8200D312700F81322 /* GoogleService-Info.plist in Resources */,
 				45AC16292048214C00E75BD6 /* CurrencyTableViewCell.xib in Resources */,
-				FACEB5A2200A46F600055788 /* TransactionPendingCell.xib in Resources */,
+				4430569B20C1627600E5415A /* TransactionPendingCell.xib in Resources */,
 				85DE62E920AC1CE100423D89 /* ActiveRequestCollectionViewCell.xib in Resources */,
 				4585BD392049AD03004542AE /* ExchangeStockTableViewCell.xib in Resources */,
 				445B129120BC1CD100FD0D33 /* SearchAddressTableViewCell.xib in Resources */,
@@ -2503,6 +2506,17 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4430569D20C1627600E5415A /* TransactionPendingCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4430569C20C1627600E5415A /* Base */,
+				4430569F20C1627C00E5415A /* en */,
+				443056A120C1627E00E5415A /* ru */,
+				443056A320C1628000E5415A /* uk */,
+			);
+			name = TransactionPendingCell.xib;
+			sourceTree = "<group>";
+		};
 		445B127220BC1BA800FD0D33 /* SeedPhrase.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

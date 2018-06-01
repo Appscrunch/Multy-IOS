@@ -9,8 +9,12 @@
 "WARNING" = "Warning";
 "CANCEL" = "Cancel";
 "ERROR" = "Error";
+"SOMETHING WENT WRONG" = "Something went wrong";
 "YES STRING" = "Yes";
 "NO STRING" = "No";
 "BACKUP NEEDED" = "Backup Seed";
 "VIEW SEED PHRASE" = "View Seed Phrase";
 "ARE YOU SURE" = "Are you sure?";
+"REPEAT PIN-CODE" = "Repeat your PIN-code";
+"SORRY" = "Sorry";
+"LOADING" = "Loading";

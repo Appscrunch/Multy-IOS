@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = TransactionWalletCell
+
 class TransactionWalletCell: UITableViewCell {
     @IBOutlet weak var transactionImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -68,7 +70,7 @@ class TransactionWalletCell: UITableViewCell {
 //        }
         
         if histObj.txStatus.intValue < 0 /* rejected tx*/ {
-            self.timeLabel.text = "Unable to send transaction"
+            self.timeLabel.text = localize(string: Constants.unableToSend)
         } else {
             self.timeLabel.text = dateFormatter.string(from: histObj.blockTime)
         }
@@ -143,5 +145,11 @@ class TransactionWalletCell: UITableViewCell {
     
     func changeTopConstraint() {
         self.topConstraint.constant = 15
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Wallets"
     }
 }

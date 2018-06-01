@@ -9,4 +9,7 @@
 "WARNING" = "Попередження";
 "CANCEL" = "Скасувати";
 "ERROR" = "Помилка";
-"MAGICAL RECEIVE" = "Магічний прийом";
+"SOMETHING WENT WRONG" = "Щось пішло не так";
+"MAGICAL RECEIVE" = "Магічне отримання";
+"SORRY" = "Вибачте";
+"LOADING" = "Завантаження";

@@ -99,7 +99,7 @@
 "Mk1-tu-7rf.text" = "Подтвердить отправку\n";
 
 /* Class = "UILabel"; text = "Send From"; ObjectID = "PrT-By-RHO"; */
-"PrT-By-RHO.text" = "Send From";
+"PrT-By-RHO.text" = "Отправить";
 
 /* Class = "UILabel"; text = "Select Wallet:"; ObjectID = "Rcp-zA-Ubf"; */
 "Rcp-zA-Ubf.text" = "Выбрать Кошелек:";
