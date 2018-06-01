@@ -9,4 +9,7 @@
 "WARNING" = "Предупреждение";
 "CANCEL" = "Отменить";
 "ERROR" = "Ошибка";
+"SOMETHING WENT WRONG" = "Что-то пошло не так";
 "MAGICAL RECEIVE" = "Магическое получение";
+"SORRY" = "Извините";
+"LOADING" = "Загрузка";

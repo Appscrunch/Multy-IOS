@@ -55,6 +55,19 @@ struct Constants {
     static let transactionErrorString = "TRANSACTION ERROR"
     static let backupSeedPhraseNeededString = "BACKUP NEEDED"
     static let viewSeedPhraseString = "VIEW SEED PHRASE"
+    static let areYouSureString = "ARE YOU SURE"
+    static let continueString = "CONTINUE"
+    static let nextWordString = "NEXT WORD"
+    static let from15String = "FROM 15"
+    static let orString = "OR"
+    static let wantToCancelString = "WANT TO CANCEL"
+    static let repeatPINCodeString = "REPEAT PIN-CODE"
+    static let sorryString = "SORRY"
+    static let noInternetString = "NO INTERNET"
+    static let connectDeviceString = "CONNECT DEVICE"
+    static let somethingWentWrongString = "SOMETHING WENT WRONG"
+    static let loadingString = "LOADING"
+    static let unableToSend = "UNABLE SEND"
     
     //Assets screen
     struct AssetsScreen {

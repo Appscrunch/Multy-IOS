@@ -18,7 +18,7 @@
 "2af-jb-4m3.text" = "Пожертвовать для этой опции";
 
 /* Class = "UILabel"; text = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly"; ObjectID = "312-E7-Xe2"; */
-"312-E7-Xe2.text" = "Unfortunately you are not conencted to \nthe network now. Multy needs constant \nconenction to provide it’s work\ncorrectly";
+"312-E7-Xe2.text" = "К сожалению, вы не подключены \nк интернету сейчас. Multy необходимо постоянное \nсоединение для обеспечения корректной работы";
 
 /* Class = "UITabBarItem"; title = "Activity"; ObjectID = "3Tm-8r-aym"; */
 "3Tm-8r-aym.title" = "События";
@@ -108,7 +108,7 @@
 "UPE-4y-AFR.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "Donation"; ObjectID = "VE2-jw-Snq"; */
-"VE2-jw-Snq.text" = "Donation";
+"VE2-jw-Snq.text" = "Пожервование";
 
 /* Class = "UILabel"; text = "Blockchains"; ObjectID = "Vis-uX-a9U"; */
 "Vis-uX-a9U.text" = "Блокчейны";
@@ -159,7 +159,7 @@
 "dmp-ig-v3f.text" = "Получить";
 
 /* Class = "UILabel"; text = "No internet connection"; ObjectID = "eXV-cf-GXL"; */
-"eXV-cf-GXL.text" = "No internet connection";
+"eXV-cf-GXL.text" = "Нет соединения с интернетом";
 
 /* Class = "UILabel"; text = "(work in progress)"; ObjectID = "g69-dn-xlO"; */
 "g69-dn-xlO.text" = "(в разработке)";
@@ -177,7 +177,7 @@
 "hgF-yi-Usi.normalTitle" = "Создавать Новый";
 
 /* Class = "UILabel"; text = "Select wallet and donation sum"; ObjectID = "kVh-aV-sdy"; */
-"kVh-aV-sdy.text" = "Select wallet and donation sum";
+"kVh-aV-sdy.text" = "Выберите кошелек и сумму пожертвования";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kbV-wl-pxp"; */
 "kbV-wl-pxp.normalTitle" = "Button";
@@ -207,7 +207,7 @@
 "tRx-hg-wDk.normalTitle" = "Copy";
 
 /* Class = "UIButton"; normalTitle = "Try Again"; ObjectID = "tdq-0K-Sb2"; */
-"tdq-0K-Sb2.normalTitle" = "Try Again";
+"tdq-0K-Sb2.normalTitle" = "Попробовать снова";
 
 /* Class = "UILabel"; text = "Blockchain"; ObjectID = "u64-Q0-7bi"; */
 "u64-Q0-7bi.text" = "Блокчейн";

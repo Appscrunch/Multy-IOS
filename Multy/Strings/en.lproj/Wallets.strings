@@ -10,6 +10,7 @@
 "WARNING" = "Warning";
 "CANCEL" = "Cancel";
 "ERROR" = "Error";
+"SOMETHING WENT WRONG" = "Something went wrong";
 "WALLET NAME NOT EMPTY ALERT" = "Wallet name should be non empty";
 "WALLET AMOUNT ALERT" = "Cryptocurrency amount should be empty";
 "DELETE WALLET WARNING" = "Do you really want to delete this wallet?";
@@ -21,3 +22,5 @@
 "CONFIRMATION" = "Confirmation";
 "CONFIRMATIONS" = "Confirmations";
 "RECENT ADDRESSES" = "Recent Addresses";
+"LOADING" = "Loading";
+"UNABLE SEND" = "Не вдається відправити транзакцію";

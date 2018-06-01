@@ -9,6 +9,7 @@
 "WARNING" = "Warning";
 "CANCEL" = "Отменить";
 "ERROR" = "Error";
+"SOMETHING WENT WRONG" = "Something went wrong";
 "NOT VALID ADDRESS" = "You entered not valid address for current blockchain.";
 "GO TO SETTINGS" = "Please go to the Settings -> Multy and allow camera usage";
 "VERY FAST" = "Very Fast";
@@ -28,3 +29,4 @@
 "DONE" = "Done!";
 "ERROR WHILE SENDING TX" = "Error while sending transaction. Please, try again!";
 "TRANSACTION ERROR" = "Transaction Error";
+"LOADING" = "Loading";

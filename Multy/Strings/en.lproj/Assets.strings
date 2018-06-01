@@ -19,3 +19,8 @@
 "WARNING" = "Warning";
 "CANCEL" = "Cancel";
 "ERROR" = "Error";
+"SOMETHING WENT WRONG" = "Something went wrong";
+"SORRY" = "Sorry";
+"NO INTERNET" = "No Internet Connection";
+"CONNECT DEVICE" = "Please connect your device to the internet";
+"LOADING" = "Loading";

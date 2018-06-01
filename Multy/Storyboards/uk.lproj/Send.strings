@@ -99,7 +99,7 @@
 "Mk1-tu-7rf.text" = "Підтвердити відправку\n";
 
 /* Class = "UILabel"; text = "Send From"; ObjectID = "PrT-By-RHO"; */
-"PrT-By-RHO.text" = "Send From";
+"PrT-By-RHO.text" = "Відправити";
 
 /* Class = "UILabel"; text = "Select Wallet:"; ObjectID = "Rcp-zA-Ubf"; */
 "Rcp-zA-Ubf.text" = "Вибрати Гаманець:";
@@ -207,7 +207,7 @@
 "k7z-h6-tBd.text" = "Доступно: ";
 
 /* Class = "UILabel"; text = "By donating to Multy you show your support and appreciation of a product. We are open-source project and your donation is the only source of profit for us. "; ObjectID = "lXZ-a8-UvA"; */
-"lXZ-a8-UvA.text" = "By donating to Multy you show your support and appreciation of a product. We are open-source project and your donation is the only source of profit for us. ";
+"lXZ-a8-UvA.text" = "Совершая пожертвование Multy, Вы оказываете поддержку и уважение продукту. Мы являемся проектом с открытым исходным кодом и ваше пожертвование является для нас единственным источником прибыли.";
 
 /* Class = "UILabel"; text = "Slide to Send"; ObjectID = "m0G-xr-zmf"; */
 "m0G-xr-zmf.text" = "Слайд для відправки";
@@ -267,4 +267,4 @@
 "zcW-Zo-Z1f.text" = "Розмір комісії";
 
 /* Class = "UILabel"; text = "Donation Sum"; ObjectID = "zg1-x3-6WV"; */
-"zg1-x3-6WV.text" = "Donation Sum";
+"zg1-x3-6WV.text" = "Сума пожертви";
