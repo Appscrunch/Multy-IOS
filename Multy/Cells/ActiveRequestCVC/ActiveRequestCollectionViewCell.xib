@@ -25,17 +25,28 @@
                             <constraint firstAttribute="width" secondItem="dlj-jN-pPo" secondAttribute="height" multiplier="1:1" id="zl7-Gm-LjD"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transaction_done" translatesAutoresizingMaskIntoConstraints="NO" id="KA7-C7-lqM" userLabel="Satisfied Image">
+                        <rect key="frame" x="10" y="6" width="150" height="150"/>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="KA7-C7-lqM" firstAttribute="bottom" secondItem="dlj-jN-pPo" secondAttribute="bottom" id="9dO-cN-UtZ"/>
+                <constraint firstItem="KA7-C7-lqM" firstAttribute="trailing" secondItem="dlj-jN-pPo" secondAttribute="trailing" id="Dyz-Jg-thx"/>
+                <constraint firstItem="KA7-C7-lqM" firstAttribute="leading" secondItem="dlj-jN-pPo" secondAttribute="leading" id="Fbh-tu-2sw"/>
                 <constraint firstAttribute="bottom" secondItem="dlj-jN-pPo" secondAttribute="bottom" constant="6" id="M2y-O6-7bs"/>
                 <constraint firstItem="dlj-jN-pPo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="luK-25-7pU"/>
+                <constraint firstItem="KA7-C7-lqM" firstAttribute="top" secondItem="dlj-jN-pPo" secondAttribute="top" id="p7T-Ew-uQu"/>
                 <constraint firstItem="dlj-jN-pPo" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="wHF-78-E1H"/>
             </constraints>
             <connections>
                 <outlet property="requestImage" destination="dlj-jN-pPo" id="Dm2-AV-L9h"/>
+                <outlet property="satisfiedImage" destination="KA7-C7-lqM" id="8uH-jz-s3W"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="transaction_done" width="117" height="117"/>
+    </resources>
 </document>

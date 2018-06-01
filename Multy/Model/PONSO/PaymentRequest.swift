@@ -15,7 +15,8 @@ class PaymentRequest: NSObject {
     let sendAmount : String
     let currencyID : Int
     let networkID : Int
-        
+    var satisfied = false
+    
     var requestImageName : String {
         get {
             let imageNumber = sendAddress.convertToImageIndex

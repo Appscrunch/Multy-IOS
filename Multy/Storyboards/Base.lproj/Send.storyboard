@@ -304,30 +304,30 @@
                                             <outlet property="delegate" destination="v1w-JK-3Sa" id="njP-SV-R09"/>
                                         </connections>
                                     </collectionView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1g-6P-0qz" userLabel="Searching Holder View">
-                                        <rect key="frame" x="8" y="92" width="367" height="367"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching active requests" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzI-Rv-HuM">
-                                                <rect key="frame" x="140" y="148" width="87" height="70"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="87" id="Sfi-s3-128"/>
-                                                    <constraint firstAttribute="height" constant="70" id="jtH-0P-iwh"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="GzI-Rv-HuM" firstAttribute="centerY" secondItem="W1g-6P-0qz" secondAttribute="centerY" id="7fw-mC-YNO"/>
-                                            <constraint firstItem="GzI-Rv-HuM" firstAttribute="centerX" secondItem="W1g-6P-0qz" secondAttribute="centerX" id="CQG-kP-FwI"/>
-                                            <constraint firstAttribute="width" secondItem="W1g-6P-0qz" secondAttribute="height" multiplier="1:1" id="NKy-sE-sb7"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZi-At-pK8" userLabel="Found Requests Holder View">
                                         <rect key="frame" x="0.0" y="116" width="375" height="343"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqn-9Z-2ql" userLabel="Searching Holder View">
+                                                <rect key="frame" x="106.5" y="90" width="162" height="162"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching active requests" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzI-Rv-HuM">
+                                                        <rect key="frame" x="37.5" y="46" width="87" height="70"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="87" id="Sfi-s3-128"/>
+                                                            <constraint firstAttribute="height" constant="70" id="jtH-0P-iwh"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="GzI-Rv-HuM" firstAttribute="centerX" secondItem="aqn-9Z-2ql" secondAttribute="centerX" id="0Vq-uK-C0T"/>
+                                                    <constraint firstItem="GzI-Rv-HuM" firstAttribute="centerY" secondItem="aqn-9Z-2ql" secondAttribute="centerY" id="X1G-rE-CbB"/>
+                                                    <constraint firstAttribute="width" secondItem="aqn-9Z-2ql" secondAttribute="height" multiplier="1:1" id="lsa-l5-ssq"/>
+                                                </constraints>
+                                            </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5E5-tF-NFY">
                                                 <rect key="frame" x="0.0" y="90" width="375" height="162"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -368,7 +368,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="23.5" id="GkB-gr-luw"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -376,13 +376,17 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="5E5-tF-NFY" firstAttribute="top" secondItem="Jpx-D9-l5y" secondAttribute="bottom" priority="750" constant="26" id="0od-y7-O7x"/>
+                                            <constraint firstItem="aqn-9Z-2ql" firstAttribute="centerX" secondItem="5E5-tF-NFY" secondAttribute="centerX" id="7I3-tN-r6u"/>
                                             <constraint firstAttribute="trailing" secondItem="5E5-tF-NFY" secondAttribute="trailing" id="BWE-Fo-Gs1"/>
                                             <constraint firstAttribute="trailing" secondItem="otH-zU-Rpe" secondAttribute="trailing" constant="8" id="Fjs-un-16I"/>
                                             <constraint firstItem="otH-zU-Rpe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oZi-At-pK8" secondAttribute="top" constant="12" id="Qta-CY-Z9S"/>
                                             <constraint firstItem="otH-zU-Rpe" firstAttribute="leading" secondItem="oZi-At-pK8" secondAttribute="leading" constant="8" id="S1q-gr-GCg"/>
                                             <constraint firstItem="Jpx-D9-l5y" firstAttribute="leading" secondItem="oZi-At-pK8" secondAttribute="leading" constant="20" id="TnF-Aa-meF"/>
+                                            <constraint firstItem="aqn-9Z-2ql" firstAttribute="centerY" secondItem="5E5-tF-NFY" secondAttribute="centerY" id="U3M-bO-Cvs"/>
                                             <constraint firstItem="Jpx-D9-l5y" firstAttribute="top" secondItem="otH-zU-Rpe" secondAttribute="bottom" constant="8.5" id="UW2-ie-orY"/>
+                                            <constraint firstItem="aqn-9Z-2ql" firstAttribute="top" secondItem="5E5-tF-NFY" secondAttribute="top" id="c2M-KG-fxu"/>
                                             <constraint firstItem="5E5-tF-NFY" firstAttribute="leading" secondItem="oZi-At-pK8" secondAttribute="leading" id="dns-L3-7zc"/>
+                                            <constraint firstItem="aqn-9Z-2ql" firstAttribute="bottom" secondItem="5E5-tF-NFY" secondAttribute="bottom" id="my9-42-bof"/>
                                             <constraint firstAttribute="width" secondItem="oZi-At-pK8" secondAttribute="height" multiplier="375:343" id="ncf-gz-kG8"/>
                                             <constraint firstItem="5E5-tF-NFY" firstAttribute="centerY" secondItem="oZi-At-pK8" secondAttribute="centerY" id="tWX-jg-U12"/>
                                             <constraint firstAttribute="trailing" secondItem="Jpx-D9-l5y" secondAttribute="trailing" constant="20" id="umK-xz-yJM"/>
@@ -401,12 +405,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="6a2-EL-VA4" firstAttribute="top" secondItem="LP6-eC-Sxy" secondAttribute="top" constant="35" id="0B3-ue-13l"/>
-                                    <constraint firstItem="W1g-6P-0qz" firstAttribute="trailing" secondItem="LP6-eC-Sxy" secondAttribute="trailing" id="CeC-3O-Dbe"/>
                                     <constraint firstItem="oZi-At-pK8" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leading" id="DC6-nh-oL4"/>
                                     <constraint firstAttribute="trailing" secondItem="VfS-TA-JzW" secondAttribute="trailing" id="F3E-65-S2g"/>
-                                    <constraint firstItem="VfS-TA-JzW" firstAttribute="top" secondItem="W1g-6P-0qz" secondAttribute="bottom" constant="30" id="IAF-oJ-MQT"/>
                                     <constraint firstItem="6a2-EL-VA4" firstAttribute="trailing" secondItem="LP6-eC-Sxy" secondAttribute="trailingMargin" constant="-8" id="Qdr-M2-9uf"/>
-                                    <constraint firstItem="W1g-6P-0qz" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leading" constant="8" id="TOC-7J-vvM"/>
                                     <constraint firstItem="VfS-TA-JzW" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leading" id="Uzt-Fq-mTF"/>
                                     <constraint firstItem="6a2-EL-VA4" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leadingMargin" constant="8" id="dxe-uZ-EBb"/>
                                     <constraint firstItem="VfS-TA-JzW" firstAttribute="top" secondItem="oZi-At-pK8" secondAttribute="bottom" constant="30" id="kaO-DI-Nh5"/>
@@ -464,7 +465,8 @@
                         <outlet property="rightWalletsClonesHolderView" destination="ypq-n7-15W" id="dlf-Qo-Drj"/>
                         <outlet property="rightWalletsClonesTrailingConstraint" destination="W8b-BY-yK5" id="LfI-ue-gcI"/>
                         <outlet property="rightWalletsClonesWidthConstraint" destination="e3N-Vk-NSn" id="njW-Eb-q6L"/>
-                        <outlet property="searchingRequestsHolderView" destination="W1g-6P-0qz" id="Cwm-9y-vcl"/>
+                        <outlet property="searchingActiveRequestsLabel" destination="GzI-Rv-HuM" id="kwl-rC-0X0"/>
+                        <outlet property="searchingRequestsHolderView" destination="aqn-9Z-2ql" id="n77-3A-dEB"/>
                         <outlet property="selectedRequestAddressLabel" destination="Jpx-D9-l5y" id="QlJ-ng-hNA"/>
                         <outlet property="selectedRequestAmountLabel" destination="otH-zU-Rpe" id="Mav-cB-tmJ"/>
                         <outlet property="transactionHolderView" destination="u1z-VO-fcW" id="ymX-Am-lrz"/>

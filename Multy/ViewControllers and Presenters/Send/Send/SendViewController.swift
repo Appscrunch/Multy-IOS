@@ -61,6 +61,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var activeRequestsAmountTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothErrorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothEnabledContentBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchingActiveRequestsLabel: UILabel!
     
     var searchingAnimationView : LOTAnimationView?
     var sendLongPressGR : UILongPressGestureRecognizer?
@@ -136,7 +137,7 @@ class SendViewController: UIViewController {
             searchingRequestsHolderView.autoresizesSubviews = true
             searchingRequestsHolderView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             self.searchingRequestsHolderView.insertSubview(searchingAnimationView!, at: 0)
-            searchingAnimationView!.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            searchingAnimationView!.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
             
             searchingAnimationView!.loopAnimation = true
             searchingAnimationView!.play()
@@ -159,17 +160,22 @@ class SendViewController: UIViewController {
             }
             
             updateUIForActiveRequestInfo()
+            self.foundActiveRequestsHolderView.alpha = 1.0
             
             if presenter.numberOfActiveRequests() > 0 {
-                searchingRequestsHolderView.isHidden = true
-                foundActiveRequestsHolderView.isHidden = false
-                self.foundActiveRequestsHolderView.alpha = 1.0
+                selectedRequestAmountLabel.isHidden = false
+                selectedRequestAddressLabel.isHidden = false
+                searchingActiveRequestsLabel.isHidden =  true
+
+                
             } else {
-                searchingRequestsHolderView.isHidden = false
-                foundActiveRequestsHolderView.isHidden = true
-                if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
-                    searchingAnimationView?.play()
-                }
+                selectedRequestAmountLabel.isHidden = true
+                selectedRequestAddressLabel.isHidden = true
+                searchingActiveRequestsLabel.isHidden =  false
+            }
+            
+            if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
+                searchingAnimationView?.play()
             }
         }
     }
@@ -268,6 +274,7 @@ class SendViewController: UIViewController {
             }
             transactionHolderView.alpha = 0.0
             transactionHolderView.isHidden = false
+            self.searchingRequestsHolderView.alpha = 0
             
             hideNotSelectedWallets()
             hideNotSelectedRequests()
@@ -283,13 +290,16 @@ class SendViewController: UIViewController {
         navigationButtonsHolderBottomConstraint.constant = 0
         transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - walletsCollectionView.frame.origin.y - walletsCollectionView.frame.size.height
         
+        
         showNotSelectedWallets()
         showNotSelectedRequests()
         UIView.animate(withDuration: ANIMATION_DURATION, animations: {
             self.animationHolderView.layoutIfNeeded()
             self.transactionHolderView.alpha = 0.0
         }) { (succeeded) in
+            self.presenter.cancelPrepareSending()
             if succeeded {
+                self.searchingRequestsHolderView.alpha = 1.0
                 self.transactionHolderView.isHidden = true
             }
         }
@@ -360,27 +370,23 @@ class SendViewController: UIViewController {
                     self.foundActiveRequestsHolderView.alpha = 0
                     self.activeRequestsClonesHolderView.alpha = 0
                 }) { (succeeded) in
-
-                    self.exitFromSending(nil)
-                    let doneAnimationView = LOTAnimationView(name: "success_animation")
+                    
+                    let doneAnimationView = LOTAnimationView(name: "tx_success_animation")
                     doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.foundActiveRequestsHolderView.frame.origin.y + self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
+                    doneAnimationView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
                     
                     self.view.addSubview(doneAnimationView)
-                    doneAnimationView.play{ (finished) in
-                        
-                        self.presenter.sendAnimationComplete()
+                    doneAnimationView.play{[unowned self] (finished) in
+                        self.exitFromSending(nil)
                         UIView.animate(withDuration: 0.6, animations: {
                             doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
                             doneAnimationView.alpha = 0.0
                         }) { (succeeded) in
-                            UIView.animate(withDuration: 0.35, animations: {
-                                doneAnimationView.alpha = 0.0
-                            }) { (succeeded) in
-                                if succeeded {
-                                    self.activeRequestsClonesHolderView.alpha = 1.0
-                                    doneAnimationView.removeFromSuperview()
-                                }
-                            }
+                            self.activeRequestsClonesHolderView.alpha = 1.0
+                            self.searchingRequestsHolderView.alpha = 1.0
+                            doneAnimationView.removeFromSuperview()
+                            
+                            self.close()
                         }
                     }
                 }
@@ -545,6 +551,14 @@ class SendViewController: UIViewController {
         
         return cellClone
     }
+
+
+    func close() {
+        self.navigationController?.popViewController(animated: true)
+        if let tbc = self.tabBarController as? CustomTabBarViewController {
+            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
+        }
+    }
     
     //MARK: Actions
     @IBAction func qrCodeAction(_ sender: Any) {
@@ -552,10 +566,7 @@ class SendViewController: UIViewController {
     }
     
     @IBAction func closeAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-        if let tbc = self.tabBarController as? CustomTabBarViewController {
-            tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)
-        }
+        close()
     }
     
     @IBAction func recentAction(_ sender: Any) {
@@ -588,7 +599,7 @@ extension SendViewController: UICollectionViewDataSource, UICollectionViewDelega
             
             let request = presenter.activeRequestsArr[indexPath.item]
             cell.request = request
-            
+                        
             return cell
         } else {
             let cell = walletsCollectionView.dequeueReusableCell(withReuseIdentifier: "WalletCollectionViewCell", for: indexPath) as! WalletCollectionViewCell
