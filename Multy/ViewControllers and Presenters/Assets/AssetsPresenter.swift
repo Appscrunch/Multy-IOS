@@ -197,7 +197,7 @@ class AssetsPresenter: NSObject {
     }
     
     func blockUI() {
-        assetsVC!.loader.show(customTitle: "Getting Wallets")
+        assetsVC!.loader.show(customTitle: assetsVC?.localize(string: Constants.gettingWalletString))
 //        assetsVC!.progressHUD.blockUIandShowProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = false
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = false

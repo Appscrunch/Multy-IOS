@@ -1500,6 +1500,8 @@ and develop new application functionality</string>
                     </view>
                     <connections>
                         <outlet property="cancelBtn" destination="ZPG-iV-jLD" id="qXq-1v-3u2"/>
+                        <outlet property="donate50Btn" destination="97Y-tc-SZM" id="3K3-Nz-z3d"/>
+                        <outlet property="donate5Btn" destination="gwH-0Q-jV7" id="OH4-4h-ags"/>
                         <outlet property="heightConstraint" destination="vx3-B2-844" id="uDd-Aw-QM6"/>
                     </connections>
                 </viewController>

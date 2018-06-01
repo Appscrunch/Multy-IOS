@@ -167,8 +167,9 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         btn.titleLabel?.textAlignment = .left
         btn.setTitle(localize(string: Constants.cancelString), for: .normal)
         btn.setTitleColor(.white, for: .normal)
+        btn.contentHorizontalAlignment = .left
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 16)
-        btn.frame = CGRect(x: 20, y: 40, width: 70, height: 25)
+        btn.frame = CGRect(x: 20, y: 40, width: 140, height: 25)
         btn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         self.view.addSubview(btn)
     }

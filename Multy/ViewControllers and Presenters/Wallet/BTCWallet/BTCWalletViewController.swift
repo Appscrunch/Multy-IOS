@@ -279,17 +279,18 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         image.image = #imageLiteral(resourceName: "warninngBig")
         image.frame = CGRect(x: 13, y: 11, width: 22, height: 22)
         
-        let btn = UIButton()
-        btn.frame = CGRect(x: 50, y: 0, width: backupView!.frame.width - 35, height: backupView!.frame.height)
-        btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
-        btn.setTitleColor(.red, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
-        btn.contentHorizontalAlignment = .left
-        btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
-        
         let chevron = UIImageView()
         chevron.image = #imageLiteral(resourceName: "chevronRed")
         chevron.frame = CGRect(x: backupView!.frame.width - 35, y: 15, width: 11, height: 11)
+        
+        let btn = UIButton()
+        btn.frame = CGRect(x: 50, y: 0, width: chevron.frame.origin.x - 50, height: backupView!.frame.height)
+        btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
+        btn.setTitleColor(.red, for: .normal)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.titleLabel?.minimumScaleFactor = 0.5
+        btn.contentHorizontalAlignment = .left
+        btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
         
         backupView!.addSubview(chevron)
         backupView!.addSubview(btn)

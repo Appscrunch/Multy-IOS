@@ -64,8 +64,10 @@ class HUDView: UIVisualEffectView {
             
             label.text = text
             label.textAlignment = .center
-            label.frame = CGRect(x: 0, y: 80, width: 145, height: 20)
+            label.frame = CGRect(x: 10, y: 80, width: 125, height: 20)
             label.font = UIFont(name: "AvenirNext-Medium", size: 16)
+            label.adjustsFontSizeToFitWidth = true
+            label.minimumScaleFactor = 0.5
         }
     }
     
