@@ -114,7 +114,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             completion(false)
         case false:
             self.presenter.isJailed = false
-            loader.show(customTitle: Constants.checkingVersionString)
+            loader.show(customTitle: localize(string: Constants.checkingVersionString))
 //            let hud = PreloaderView(frame: HUDFrame, text: "Checking version", image: #imageLiteral(resourceName: "walletHuge"))
 //            hud.show()
             if !(ConnectionCheck.isConnectedToNetwork()) {
