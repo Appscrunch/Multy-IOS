@@ -55,6 +55,8 @@ struct Constants {
     static let transactionErrorString = "TRANSACTION ERROR"
     static let backupSeedPhraseNeededString = "BACKUP NEEDED"
     static let viewSeedPhraseString = "VIEW SEED PHRASE"
+    static let areYouSureString = "ARE YOU SURE"
+    static let continueString = "CONTINUE"
     
     //Assets screen
     struct AssetsScreen {

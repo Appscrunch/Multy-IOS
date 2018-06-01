@@ -141,7 +141,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         bricksView.addSubview(BricksView(with: bricksView.bounds, and: currentWordNumber))
         
         if self.currentWordNumber == 15 {
-            self.nextWordOrContinue.setTitle("Continue", for: .normal)
+            self.nextWordOrContinue.setTitle(localize(string: Constants.continueString), for: .normal)
         }
         
         if self.currentWordNumber < 15 {

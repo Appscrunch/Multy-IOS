@@ -33,7 +33,7 @@
 "ECp-Kf-TNx.normalTitle" = "7";
 
 /* Class = "UILabel"; text = "Are you sure?"; ObjectID = "Eh0-L1-ceI"; */
-"Eh0-L1-ceI.text" = "Are you sure?";
+"Eh0-L1-ceI.text" = "Вы уверены?";
 
 /* Class = "UILabel"; text = "Security Settings"; ObjectID = "FXE-eY-RwS"; */
 "FXE-eY-RwS.text" = "Настройки Безопасности";
@@ -84,7 +84,7 @@
 "kRW-Ja-Vf1.normalTitle" = "4";
 
 /* Class = "UILabel"; text = "By reseting all your data you will lose all your wallets and accounts on this device"; ObjectID = "pNa-A7-eEe"; */
-"pNa-A7-eEe.text" = "By reseting all your data you will lose all your wallets and accounts on this device";
+"pNa-A7-eEe.text" = "Сбросив все ваши данные, вы потеряете все свои кошельки и учетные записи на этом устройстве";
 
 /* Class = "UILabel"; text = "Biometric identification"; ObjectID = "ta5-0S-Je8"; */
 "ta5-0S-Je8.text" = "Biometric identification";
