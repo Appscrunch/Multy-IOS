@@ -41,7 +41,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     var isInternetAvailable = true
     
-    let loader = PreloaderView(frame: HUDFrame, text: Constants.gettingWalletString, image: #imageLiteral(resourceName: "walletHuge"))
+    let loader = PreloaderView(frame: HUDFrame, text: "", image: #imageLiteral(resourceName: "walletHuge"))
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -114,7 +114,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             completion(false)
         case false:
             self.presenter.isJailed = false
-            loader.show(customTitle: "Checking version")
+            loader.show(customTitle: Constants.checkingVersionString)
 //            let hud = PreloaderView(frame: HUDFrame, text: "Checking version", image: #imageLiteral(resourceName: "walletHuge"))
 //            hud.show()
             if !(ConnectionCheck.isConnectedToNetwork()) {
@@ -247,10 +247,11 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         let chevronImg = UIImageView(frame: CGRect(x: view.frame.width - 24, y: 15, width: 13, height: 13))
         chevronImg.image = #imageLiteral(resourceName: "chevron__")
         let btn = UIButton()
-        btn.frame = CGRect(x: 50, y: 0, width: view.frame.width - 35, height: view.frame.height)
+        btn.frame = CGRect(x: 50, y: 0, width: chevronImg.frame.origin.x - 50, height: view.frame.height)
         btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.titleLabel?.minimumScaleFactor = 0.5
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
         

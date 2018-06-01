@@ -16,6 +16,7 @@ struct Constants {
     static let backupNeededString = "BACKUP IS NEEDED"
     static let restoreMultyString = "RESTORE MULTY"
     static let gettingWalletString = "GETTING WALLET"
+    static let checkingVersionString = "CHECKING VERSION"
     static let availableString = "AVAILABLE"
     static let workInProgressString = "WORK IN PROGRESS"
     static let weHaveUpdateString = "WE HAVE AN UPDATE"
