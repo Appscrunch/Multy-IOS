@@ -153,7 +153,7 @@ class SendViewController: UIViewController {
     
     func updateUI() {
         if sendMode != .inSend {
-            activeRequestsAmountLabel.text = "Active Requests \(presenter.numberOfActiveRequests())"
+            activeRequestsAmountLabel.text = "\(localize(string: Constants.activeRequestsString)) \(presenter.numberOfActiveRequests())"
             if sendMode == .searching {
                 walletsCollectionView.reloadData()
                 activeRequestsCollectionView.reloadData()

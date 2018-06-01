@@ -505,8 +505,10 @@ class SendPresenter: NSObject {
     
     @objc private func stopSearching() {
         BLEManager.shared.stopScan()
-        receiveActiveRequestTimer!.invalidate()
-        receiveActiveRequestTimer = nil
+        if receiveActiveRequestTimer != nil {
+            receiveActiveRequestTimer!.invalidate()
+            receiveActiveRequestTimer = nil
+        }
     }
     
     @objc func checkNewUserCodes() {

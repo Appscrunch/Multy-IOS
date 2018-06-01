@@ -30,3 +30,4 @@
 "ERROR WHILE SENDING TX" = "Error while sending transaction. Please, try again!";
 "TRANSACTION ERROR" = "Transaction Error";
 "LOADING" = "Loading";
+"ACTIVE REQUESTS" = "Active Requests";

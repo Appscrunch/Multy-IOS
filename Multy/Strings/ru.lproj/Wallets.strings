@@ -20,7 +20,7 @@
 "SHARE" = "Поделиться";
 "TRANSACTION INFO" = "Информация о транзакции";
 "CONFIRMATION" = "Подтверждение";
-"CONFIRMATIONS" = "Подтверждения";
+"CONFIRMATIONS" = "Подтверждений";
 "RECENT ADDRESSES" = "Последние адреса";
 "LOADING" = "Загрузка";
 "UNABLE SEND" = "Невозможно отправить транзакцию";

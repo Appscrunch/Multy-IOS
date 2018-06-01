@@ -67,7 +67,9 @@ struct Constants {
     static let connectDeviceString = "CONNECT DEVICE"
     static let somethingWentWrongString = "SOMETHING WENT WRONG"
     static let loadingString = "LOADING"
-    static let unableToSend = "UNABLE SEND"
+    static let unableToSendString = "UNABLE SEND"
+    static let receiveString = "RECEIVE"
+    static let activeRequestsString = "ACTIVE REQUESTS"
     
     //Assets screen
     struct AssetsScreen {

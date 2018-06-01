@@ -24,7 +24,7 @@
 "66b-bM-oOH.text" = "Последние адреса";
 
 /* Class = "UILabel"; text = "Active Requests: 0 "; ObjectID = "6a2-EL-VA4"; */
-"6a2-EL-VA4.text" = "Active Requests: 0 ";
+"6a2-EL-VA4.text" = "Текущие запросы: 0 ";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "6iC-xp-ZDN"; */
 "6iC-xp-ZDN.normalTitle" = "Отменить";
@@ -87,7 +87,7 @@
 "GuO-y4-IZM.text" = "Bluetooth Error";
 
 /* Class = "UILabel"; text = "Searching active requests"; ObjectID = "GzI-Rv-HuM"; */
-"GzI-Rv-HuM.text" = "Searching active requests";
+"GzI-Rv-HuM.text" = "Поиск запросов";
 
 /* Class = "UILabel"; text = "0x1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"; ObjectID = "Jpx-D9-l5y"; */
 "Jpx-D9-l5y.text" = "0x1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX";
