@@ -50,7 +50,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate {
     
     private var centralManager : CBCentralManager
     private var peripheralManager : CBPeripheralManager
-    private let serviceUUIDString = "00000000-0000-0000-0000-0000"
+    private let serviceUUIDString = "8c0d3334-7711-44e3-b5c4-28b2"
     
     var isScanning : Bool {
         get {
