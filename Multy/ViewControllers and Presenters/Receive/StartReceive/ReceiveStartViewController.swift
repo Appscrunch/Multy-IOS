@@ -16,7 +16,7 @@ class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
     
     weak var sendWalletDelegate: SendWalletProtocol?
     
-    var titleText = "Receive"
+    var titleTextKey = Constants.receiveString
     
     var whereFrom: UIViewController?
     
@@ -26,7 +26,7 @@ class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        self.titleLbl.text = self.titleText
+        self.titleLbl.text = localize(string: titleTextKey)
         
         self.presenter.receiveStartVC = self
         self.registerCells()

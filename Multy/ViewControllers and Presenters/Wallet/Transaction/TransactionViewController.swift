@@ -253,9 +253,9 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         var textForConfirmations = ""
         switch presenter.histObj.confirmations {
         case 1:
-            textForConfirmations = "1 \(Constants.confirmationString)"
-        default: // more than 6
-            textForConfirmations = "\(presenter.histObj.confirmations) \(Constants.confirmationsString)"
+            textForConfirmations = "1 \(localize(string: Constants.confirmationString))"
+        default: // not 1
+            textForConfirmations = "\(presenter.histObj.confirmations) \(localize(string: Constants.confirmationsString))"
         }
         
         return textForConfirmations
