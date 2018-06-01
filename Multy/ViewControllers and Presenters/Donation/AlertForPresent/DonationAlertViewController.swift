@@ -8,6 +8,8 @@ class DonationAlertViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var donate5Btn: UIButton!
+    @IBOutlet weak var donate50Btn: UIButton!
     
     weak var cancelDelegate: CancelProtocol?
     
@@ -20,12 +22,25 @@ class DonationAlertViewController: UIViewController, AnalyticsProtocol {
         self.view.addGestureRecognizer(tap)
         
         view.setShadow(with: UIColor.gray)
-        ipadFix()
+        
+        setupUI()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cancelBtn.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
+    }
+    
+    func setupUI() {
+        ipadFix()
+        setupBtns(button: donate5Btn)
+        setupBtns(button: donate50Btn)
+    }
+    
+    func setupBtns(button: UIButton) {
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.5
+        button.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 10, bottom: 0, right: 10)
     }
     
     func ipadFix() {
