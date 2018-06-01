@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1600,6 +1601,13 @@ QR</string>
                                             <action selector="botBtn:" destination="LFO-Fg-H8V" eventType="touchUpInside" id="Zox-GS-9w4"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="if_gtk-close_30632" translatesAutoresizingMaskIntoConstraints="NO" id="0pS-8g-1Ay">
+                                        <rect key="frame" x="341" y="186" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="qX0-ps-Z2s"/>
+                                            <constraint firstAttribute="width" constant="18" id="zr1-bo-Pdl"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="70x-BQ-w30" firstAttribute="centerX" secondItem="uDq-Td-EBb" secondAttribute="centerX" id="1QK-ib-Lcm"/>
@@ -1610,6 +1618,7 @@ QR</string>
                                     <constraint firstItem="gfE-Vc-rTR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uDq-Td-EBb" secondAttribute="leading" priority="990" constant="20" id="AcU-fU-Vdt"/>
                                     <constraint firstItem="WHc-k4-50p" firstAttribute="centerY" secondItem="70x-BQ-w30" secondAttribute="centerY" id="E3K-iO-99U"/>
                                     <constraint firstItem="A45-fp-vZe" firstAttribute="leading" secondItem="uDq-Td-EBb" secondAttribute="leading" constant="16" id="HQu-rY-ylf"/>
+                                    <constraint firstItem="0pS-8g-1Ay" firstAttribute="centerY" secondItem="gfE-Vc-rTR" secondAttribute="centerY" id="JZX-ZR-8ub"/>
                                     <constraint firstItem="VhT-01-bTB" firstAttribute="top" secondItem="uDq-Td-EBb" secondAttribute="top" constant="33" id="M0o-zY-FNM"/>
                                     <constraint firstItem="1r8-E7-NF8" firstAttribute="top" secondItem="bZE-Cd-gDu" secondAttribute="bottom" constant="10" id="P3b-Gc-rJn"/>
                                     <constraint firstItem="Lm1-SW-8dk" firstAttribute="leading" secondItem="uDq-Td-EBb" secondAttribute="leading" constant="16" id="Qlq-ys-HTl"/>
@@ -1635,6 +1644,7 @@ QR</string>
                                     <constraint firstItem="DDj-lp-BeH" firstAttribute="top" secondItem="iP4-gf-E0A" secondAttribute="top" id="o19-zc-HNX"/>
                                     <constraint firstItem="cLW-Qu-SGI" firstAttribute="centerY" secondItem="VhT-01-bTB" secondAttribute="centerY" id="pZx-21-J9n"/>
                                     <constraint firstAttribute="trailing" secondItem="cLW-Qu-SGI" secondAttribute="trailing" constant="16" id="pge-lL-wGL"/>
+                                    <constraint firstItem="0pS-8g-1Ay" firstAttribute="trailing" secondItem="WHc-k4-50p" secondAttribute="trailing" id="rF9-Up-uLX"/>
                                     <constraint firstItem="D9i-dd-7eI" firstAttribute="top" secondItem="Lm1-SW-8dk" secondAttribute="top" id="sjW-UI-ksN"/>
                                     <constraint firstItem="fOo-l7-Vq8" firstAttribute="leading" secondItem="gfE-Vc-rTR" secondAttribute="trailing" id="szT-6r-cTL"/>
                                     <constraint firstItem="VhT-01-bTB" firstAttribute="centerX" secondItem="uDq-Td-EBb" secondAttribute="centerX" id="ttK-o3-4ti"/>
@@ -1686,7 +1696,7 @@ QR</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbg-JX-sJz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3334" y="363"/>
+            <point key="canvasLocation" x="3333.5999999999999" y="362.96851574212894"/>
         </scene>
         <!--Send Finish View Controller-->
         <scene sceneID="2Jx-1f-JIK">
@@ -2524,6 +2534,19 @@ address</string>
                                             <action selector="botBtn:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="4OU-rx-c6g"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remove_cross_alt" translatesAutoresizingMaskIntoConstraints="NO" id="irz-Cq-EEe">
+                                        <rect key="frame" x="341" y="186" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="9" id="8oN-BG-KtV"/>
+                                            <constraint firstAttribute="height" constant="9" id="d9Y-N1-jQ4"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udu-1w-Gl1">
+                                        <rect key="frame" x="320" y="138" width="30" height="30"/>
+                                        <connections>
+                                            <action selector="clearAction:" destination="jJt-Ap-KXa" eventType="touchUpInside" id="QZ2-fT-fsZ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zVG-Cl-wtT" firstAttribute="centerY" secondItem="qm4-Yi-bbz" secondAttribute="centerY" id="01F-9C-Jii"/>
@@ -2531,6 +2554,7 @@ address</string>
                                     <constraint firstItem="qm4-Yi-bbz" firstAttribute="leading" secondItem="hRH-fT-dny" secondAttribute="trailing" constant="4" id="2cf-rB-4u0"/>
                                     <constraint firstItem="fwY-HZ-OWp" firstAttribute="centerX" secondItem="UIp-TN-sUx" secondAttribute="centerX" id="4HD-iV-VgT"/>
                                     <constraint firstItem="ADe-ts-6QS" firstAttribute="leading" secondItem="s8N-my-GN0" secondAttribute="leading" id="5xz-r8-ZWX"/>
+                                    <constraint firstItem="irz-Cq-EEe" firstAttribute="centerY" secondItem="s8N-my-GN0" secondAttribute="centerY" id="7gE-vC-YSb"/>
                                     <constraint firstItem="exI-PR-9JN" firstAttribute="top" secondItem="FfC-r5-A7J" secondAttribute="top" id="9HO-zW-NOO"/>
                                     <constraint firstAttribute="trailing" secondItem="puy-aI-Koq" secondAttribute="trailing" id="F5i-Pz-lqn"/>
                                     <constraint firstItem="zVG-Cl-wtT" firstAttribute="leading" secondItem="qm4-Yi-bbz" secondAttribute="trailing" constant="2" id="Gec-e2-jfk"/>
@@ -2544,22 +2568,27 @@ address</string>
                                     <constraint firstItem="GcC-ye-4hC" firstAttribute="leading" secondItem="s8N-my-GN0" secondAttribute="trailing" id="Qx7-z6-5Sj"/>
                                     <constraint firstItem="hRH-fT-dny" firstAttribute="centerY" secondItem="qm4-Yi-bbz" secondAttribute="centerY" id="RUY-dM-BD3"/>
                                     <constraint firstItem="qm4-Yi-bbz" firstAttribute="centerX" secondItem="UIp-TN-sUx" secondAttribute="centerX" id="Rrv-T2-UHs"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GcC-ye-4hC" secondAttribute="trailing" constant="20" id="Te6-0H-zjK"/>
+                                    <constraint firstItem="irz-Cq-EEe" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GcC-ye-4hC" secondAttribute="trailing" constant="20" id="Te6-0H-zjK"/>
                                     <constraint firstItem="s8N-my-GN0" firstAttribute="top" secondItem="vsy-Hb-OWB" secondAttribute="bottom" constant="105" id="TyO-UT-7Fd"/>
                                     <constraint firstItem="puy-aI-Koq" firstAttribute="top" secondItem="fwY-HZ-OWp" secondAttribute="bottom" constant="10" id="bwq-3t-PMn"/>
                                     <constraint firstItem="puy-aI-Koq" firstAttribute="centerX" secondItem="UIp-TN-sUx" secondAttribute="centerX" id="cQU-P5-Ais"/>
                                     <constraint firstItem="ADe-ts-6QS" firstAttribute="bottom" secondItem="s8N-my-GN0" secondAttribute="bottom" constant="-15" id="cgl-hN-eNI"/>
                                     <constraint firstItem="exI-PR-9JN" firstAttribute="leading" secondItem="UIp-TN-sUx" secondAttribute="leading" id="cjV-nA-4KG"/>
+                                    <constraint firstItem="irz-Cq-EEe" firstAttribute="trailing" secondItem="zVG-Cl-wtT" secondAttribute="trailing" id="eCh-Ll-nxj"/>
                                     <constraint firstItem="fsi-QF-gdr" firstAttribute="leading" secondItem="hUT-w7-NZ6" secondAttribute="leading" id="euD-Ib-DKX"/>
                                     <constraint firstItem="s8N-my-GN0" firstAttribute="centerX" secondItem="UIp-TN-sUx" secondAttribute="centerX" id="fW0-qQ-JNi"/>
                                     <constraint firstItem="qm4-Yi-bbz" firstAttribute="top" secondItem="s8N-my-GN0" secondAttribute="bottom" constant="-0.5" id="gc7-Wa-L7F"/>
+                                    <constraint firstItem="Udu-1w-Gl1" firstAttribute="height" secondItem="irz-Cq-EEe" secondAttribute="height" multiplier="3" id="gs7-xz-Xdf"/>
                                     <constraint firstItem="hRH-fT-dny" firstAttribute="leading" secondItem="UIp-TN-sUx" secondAttribute="leading" constant="16" id="it3-VG-NHb"/>
+                                    <constraint firstItem="Udu-1w-Gl1" firstAttribute="trailing" secondItem="irz-Cq-EEe" secondAttribute="trailing" constant="20" id="k6m-XR-5Df"/>
                                     <constraint firstItem="s8N-my-GN0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UIp-TN-sUx" secondAttribute="leading" priority="990" constant="20" id="m8Q-uW-MAQ"/>
                                     <constraint firstItem="mlM-FX-Xm4" firstAttribute="top" secondItem="s8N-my-GN0" secondAttribute="bottom" constant="-13.5" id="n9Q-ts-kv8"/>
                                     <constraint firstItem="fsi-QF-gdr" firstAttribute="trailing" secondItem="mEs-GB-5Is" secondAttribute="trailing" id="oMW-Ng-QWM"/>
+                                    <constraint firstItem="Udu-1w-Gl1" firstAttribute="top" secondItem="irz-Cq-EEe" secondAttribute="top" constant="-20" id="p0l-zB-3S7"/>
                                     <constraint firstItem="GcC-ye-4hC" firstAttribute="bottom" secondItem="s8N-my-GN0" secondAttribute="bottom" constant="-15" id="qA8-a8-wal"/>
                                     <constraint firstItem="vsy-Hb-OWB" firstAttribute="top" secondItem="UIp-TN-sUx" secondAttribute="top" constant="33" id="uwp-mL-E5E"/>
                                     <constraint firstItem="puy-aI-Koq" firstAttribute="leading" secondItem="UIp-TN-sUx" secondAttribute="leading" id="vqa-3w-fW6"/>
+                                    <constraint firstItem="Udu-1w-Gl1" firstAttribute="leading" secondItem="irz-Cq-EEe" secondAttribute="leading" id="wEI-lh-hag"/>
                                     <constraint firstItem="vsy-Hb-OWB" firstAttribute="centerX" secondItem="UIp-TN-sUx" secondAttribute="centerX" id="wFj-z5-PqK"/>
                                     <constraint firstItem="FfC-r5-A7J" firstAttribute="centerY" secondItem="vsy-Hb-OWB" secondAttribute="centerY" id="xBL-8C-Ay8"/>
                                     <constraint firstItem="mlM-FX-Xm4" firstAttribute="centerX" secondItem="UIp-TN-sUx" secondAttribute="centerX" id="yPa-Ct-Snw"/>
@@ -2610,7 +2639,7 @@ address</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFv-kP-ezB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3334" y="-458"/>
+            <point key="canvasLocation" x="3333.5999999999999" y="-458.32083958020991"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1sw-Hc-uqu">
@@ -2636,16 +2665,18 @@ address</string>
         <image name="btcIconBig" width="58" height="58"/>
         <image name="closeBtn" width="62" height="62"/>
         <image name="donationIcon" width="30" height="35"/>
+        <image name="if_gtk-close_30632" width="18" height="18"/>
         <image name="loading" width="117" height="117"/>
         <image name="pending" width="22" height="22"/>
         <image name="qrIconGray" width="22" height="22"/>
+        <image name="remove_cross_alt" width="14" height="14"/>
         <image name="slideToSend1" width="13" height="22"/>
         <image name="slideToSend2" width="13" height="22"/>
         <image name="slideToSend3" width="13" height="22"/>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nqh-Rv-oVp"/>
+        <segue reference="Bgz-R6-m6y"/>
         <segue reference="TSe-kF-31L"/>
         <segue reference="pfe-aE-6Gg"/>
         <segue reference="RTX-aa-bzX"/>

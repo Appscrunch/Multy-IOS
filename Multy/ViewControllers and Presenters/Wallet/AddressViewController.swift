@@ -11,6 +11,7 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var qrImg: UIImageView!
     @IBOutlet weak var addressLbl: UILabel!
     @IBOutlet weak var whiteView: UIView!
+    @IBOutlet weak var copiedView: UIView!
     
     @IBOutlet weak var firstConstraint: NSLayoutConstraint!
     @IBOutlet weak var seondConstraint: NSLayoutConstraint!
@@ -65,6 +66,18 @@ class AddressViewController: UIViewController, AnalyticsProtocol {
     
     @IBAction func copyToClipboardAction(_ sender: Any) {
         UIPasteboard.general.string = makeStringWithAddress()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.copiedView.frame.origin.y = screenHeight - 40
+        }) { (isEnd) in
+            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.hideView), userInfo: nil, repeats: false)
+        }
+        
+    }
+    
+    @objc func hideView() {
+        UIView.animate(withDuration: 1, animations: {
+            self.copiedView.frame.origin.y = screenHeight + 40
+        })
     }
     
     @IBAction func shareAction(_ sender: Any) {

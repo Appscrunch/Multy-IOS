@@ -32,7 +32,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     var presenter = EthWalletPresenter()
     
     var isBackupOnScreen = true
-    let progressHUD = ProgressHUD(text: "Updating...")
+//    let progressHUD = ProgressHUD(text: "Updating...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Getting Wallets", image: #imageLiteral(resourceName: "walletHuge"))
     
     let visibleCells = 5  // iphone 6  height 667
     let gradientLayer = CAGradientLayer()
@@ -62,8 +63,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         spiner.stopAnimating()
-        self.view.addSubview(progressHUD)
-        self.progressHUD.hide()
+        self.view.addSubview(loader)
         self.swipeToBack()
         presenter.mainVC = self
         presenter.fixConstraints()

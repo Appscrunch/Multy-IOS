@@ -30,17 +30,17 @@ extension Localizable where Self: UIViewController, Self: Localizable {
     }
     
     func makePurchaseFor(productId: String) {
-        let progressHUD = ProgressHUD(text: "Loading")
-        view.addSubview(progressHUD)
-        progressHUD.blockUIandShowProgressHUD()
+        let loader = PreloaderView(frame: HUDFrame, text: "Loading", image: #imageLiteral(resourceName: "walletHuge"))
+        view.addSubview(loader)
+        loader.show(customTitle: "Loading")
         self.getAvailableInAppBy(stringId: productId) { (product) in
             if product == nil {
                 self.presentAlert(with: "Something went wrong. Try it later.")
-                progressHUD.unblockUIandHideProgressHUD()
+                loader.hide()
                 return
             }
             SwiftyStoreKit.purchaseProduct(product!) { (result) in
-                progressHUD.unblockUIandHideProgressHUD()
+                loader.hide()
                 switch result {
                 case .success(let purchase):
                     print("Purchase Success: \(purchase.productId)")
