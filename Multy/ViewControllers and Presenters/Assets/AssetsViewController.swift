@@ -19,13 +19,15 @@ private typealias CreateWalletDelegate = AssetsViewController
 private typealias LocalizeDelegate = AssetsViewController
 
 class AssetsViewController: UIViewController, AnalyticsProtocol {
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     weak var backupView: UIView?
     
     let presenter = AssetsPresenter()
-    var progressHUD = ProgressHUD(text: Constants.gettingWalletString)
+
+//    let progressHUD = ProgressHUD(text: Constants.AssetsScreen.progressString)
     
     var isSeedBackupOnScreen = false
     
@@ -38,6 +40,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     var isInsetCorrect = false
     
     var isInternetAvailable = true
+    
+    let loader = PreloaderView(frame: HUDFrame, text: Constants.gettingWalletString, image: #imageLiteral(resourceName: "walletHuge"))
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -55,18 +59,7 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.backUpView()
-        
-        progressHUD.text = localize(string: Constants.gettingWalletString)
-        
-        tableView.accessibilityIdentifier = "AssetsTableView"
-        tableView.addSubview(self.refreshControl)
-        view.isUserInteractionEnabled = false
-        registerCells()
-        presenter.assetsVC = self
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        self.setpuUI()
         self.performFirstEnterFlow { (isUpToDate) in
             guard self.isFlowPassed else {
                 self.view.isUserInteractionEnabled = true
@@ -93,8 +86,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             
             self.checkOSForConstraints()
             
-            self.view.addSubview(self.progressHUD)
-            self.progressHUD.hide()
+//            self.view.addSubview(self.progressHUD)
+//            self.progressHUD.hide()
             if self.presenter.account != nil {
                 self.tableView.frame.size.height = screenHeight - self.tabBarController!.tabBar.frame.height
             }
@@ -102,6 +95,17 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         }
     }
     
+    func setpuUI() {
+        presenter.assetsVC = self
+        backUpView()
+        setupStatusBar()
+        registerCells()
+        tableView.accessibilityIdentifier = "AssetsTableView"
+        tableView.addSubview(self.refreshControl)
+        view.isUserInteractionEnabled = false
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.addSubview(loader)
+    }
     
     func performFirstEnterFlow(completion: @escaping(_ isUpToDate: Bool) -> ()) {
         switch isDeviceJailbroken() {
@@ -110,16 +114,19 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             completion(false)
         case false:
             self.presenter.isJailed = false
-            let hud = self.showHud(text: "Checking version")
+            loader.show(customTitle: "Checking version")
+//            let hud = PreloaderView(frame: HUDFrame, text: "Checking version", image: #imageLiteral(resourceName: "walletHuge"))
+//            hud.show()
             if !(ConnectionCheck.isConnectedToNetwork()) {
                 self.isInternetAvailable = false
-                self.hideHud(view: hud as? ProgressHUD)
+//                self.hideHud(view: hud as? ProgressHUD)
+                loader.hide()
                 self.successLaunch()
                 completion(true)
                 return
             }
             DataManager.shared.getServerConfig { (hardVersion, softVersion, err) in
-                self.hideHud(view: hud as? ProgressHUD)
+                self.loader.hide()
                 let dictionary = Bundle.main.infoDictionary!
                 let buildVersion = (dictionary["CFBundleVersion"] as! NSString).integerValue
                 
@@ -254,6 +261,19 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         self.view.addSubview(backupView!)
         view.isHidden = true
         view.isUserInteractionEnabled = false
+    }
+    
+    func setupStatusBar() {
+        if screenHeight == heightOfX {
+            statusView.frame.size.height = 44
+        }
+        let colorTop = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.8).cgColor
+        let colorBottom = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.0).cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.6, 1.0]
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: screenWidth, height: statusView.frame.height)
+        statusView.layer.addSublayer(gradientLayer)
     }
     
     @objc func goToSeed() {

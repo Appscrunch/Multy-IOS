@@ -493,6 +493,13 @@
                                     <outlet property="delegate" destination="alz-wi-MXP" id="m0m-rO-rAD"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSm-iW-wso">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="OGi-dw-FBc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <accessibility key="accessibilityConfiguration">
@@ -501,13 +508,17 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gnZ-8i-54O" secondAttribute="trailing" id="4x3-Vu-xkO"/>
                             <constraint firstItem="gnZ-8i-54O" firstAttribute="bottom" secondItem="TCg-eh-Ffb" secondAttribute="top" id="B0q-2T-Uiy"/>
+                            <constraint firstItem="oSm-iW-wso" firstAttribute="leading" secondItem="4SF-8o-5uQ" secondAttribute="leading" id="Z6Y-02-vU1"/>
                             <constraint firstItem="gnZ-8i-54O" firstAttribute="leading" secondItem="4SF-8o-5uQ" secondAttribute="leading" id="bTb-3D-Fba"/>
+                            <constraint firstItem="oSm-iW-wso" firstAttribute="top" secondItem="4SF-8o-5uQ" secondAttribute="top" id="cPD-XX-Zpd"/>
+                            <constraint firstAttribute="trailing" secondItem="oSm-iW-wso" secondAttribute="trailing" id="dcj-Qv-aKl"/>
                             <constraint firstItem="gnZ-8i-54O" firstAttribute="top" secondItem="4SF-8o-5uQ" secondAttribute="top" id="rOM-lX-n5b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kix-Tq-nzo"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="statusView" destination="oSm-iW-wso" id="NGc-rO-nK3"/>
                         <outlet property="tableView" destination="gnZ-8i-54O" id="PgN-7a-soH"/>
                         <outlet property="tableViewBottomConstraint" destination="B0q-2T-Uiy" id="Zmo-kc-23h"/>
                         <outlet property="tableViewTopConstraint" destination="rOM-lX-n5b" id="Rdw-dn-3we"/>
@@ -516,7 +527,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dr-dB-Viy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2796" y="1557.5712143928038"/>
+            <point key="canvasLocation" x="-2815.1999999999998" y="1586.3568215892055"/>
         </scene>
         <!--Create Wallet View Controller-->
         <scene sceneID="FNV-5c-hqY">

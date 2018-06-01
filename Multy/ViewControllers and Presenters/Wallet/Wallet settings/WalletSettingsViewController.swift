@@ -12,15 +12,14 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     
     let presenter = WalletSettingsPresenter()
     
-    let progressHUD = ProgressHUD(text: "Deleting Wallet...")
+//    let progressHUD = ProgressHUD(text: "Deleting Wallet...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Updating", image: #imageLiteral(resourceName: "walletHuge"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
         walletNameTF.accessibilityIdentifier = "nameField"
-//        progressHUD.backgroundColor = .gray
-        view.addSubview(progressHUD)
-        progressHUD.hide()
+        view.addSubview(loader)
         
         self.presenter.walletSettingsVC = self
         self.hideKeyboardWhenTappedAround()
@@ -42,7 +41,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
             let message = localize(string: Constants.deleteWalletAlertString)
             let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .cancel, handler: { (action) in
-                self.progressHUD.show()
+                self.loader.show(customTitle: "Deleting")
                 self.presenter.delete()
                 self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(walletDeletedWithChain)\(self.presenter.wallet!.chain)")
             }))

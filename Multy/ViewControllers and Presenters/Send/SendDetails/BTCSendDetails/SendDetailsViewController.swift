@@ -34,12 +34,13 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     var maxLengthForSum = 12
     
     var isCustom = false
-    let progressHUD = ProgressHUD(text: "Updating fee rates...")
+//    let progressHUD = ProgressHUD(text: "Updating fee rates...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Updating rates", image: #imageLiteral(resourceName: "walletHuge"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(progressHUD)
-        
+        view.addSubview(loader)
+        loader.show(customTitle: "Updating rates")
         self.swipeToBack()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.hideKeyboardWhenTappedAround()

@@ -21,7 +21,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     @IBOutlet weak var constraintAfterTopLabel: NSLayoutConstraint!
     @IBOutlet weak var constraintAfterBricks: NSLayoutConstraint!
     
-    let progressHUD = ProgressHUD(text: "Restoring Wallets...")
+//    let progressHUD = ProgressHUD(text: "Restoring Wallets...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Restoring Wallets", image: #imageLiteral(resourceName: "walletHuge"))
     
     var currentWordNumber = 1
     var isRestore = false
@@ -38,8 +39,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
-        self.view.addSubview(progressHUD)
-        progressHUD.hide()
+        self.view.addSubview(loader)
+        loader.hide()
         
         if screenWidth < 325 {
             constraintTop.constant = 10

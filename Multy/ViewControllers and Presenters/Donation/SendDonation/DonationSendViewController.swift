@@ -36,7 +36,8 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     var countSymbolsAfterComma = 0
     
-    let progressHud = ProgressHUD(text: "Sending...")
+//    let progressHud = ProgressHUD(text: "Sending...")
+    let loader = PreloaderView(frame: HUDFrame, text: "Sending", image: #imageLiteral(resourceName: "walletHuge"))
     
     var isTransactionSelected = false
     var isDefaultValueSet = false
@@ -46,8 +47,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
-        self.view.addSubview(progressHud)
-        self.progressHud.hide()
+        self.view.addSubview(loader)
         self.hideKeyboardWhenTappedAround()
         self.presenter.mainVC = self
         self.registerCells()
@@ -111,7 +111,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     @IBAction func sendAction(_ sender: Any) {
         self.view.isUserInteractionEnabled = false
-        self.progressHud.blockUIandShowProgressHUD()
+        self.loader.show(customTitle: "Sending")
         self.presenter.createAndSendTransaction()
         sendDonationScreenPressSendAnalytics()
     }

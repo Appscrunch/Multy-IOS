@@ -54,7 +54,7 @@ class AssetsPresenter: NSObject {
         DataManager.shared.getAccount { (acc, err) in
             self.unlockUI()
             if acc == nil {
-                self.assetsVC?.progressHUD.show()
+//                self.assetsVC?.progressHUD.show()
                 DataManager.shared.auth(rootKey: nil) { (account, error) in
                     self.unlockUI()
                     guard account != nil else {
@@ -78,7 +78,7 @@ class AssetsPresenter: NSObject {
                 })
             }
             DataManager.shared.socketManager.start()
-            self.assetsVC?.progressHUD.hide()
+//            self.assetsVC?.progressHUD.hide()
         }
     }
     
@@ -86,7 +86,7 @@ class AssetsPresenter: NSObject {
         self.assetsVC?.view.isUserInteractionEnabled = false
         DataManager.shared.auth(rootKey: nil) { (account, error) in
             self.assetsVC?.view.isUserInteractionEnabled = true
-            self.assetsVC?.progressHUD.hide()
+//            self.assetsVC?.progressHUD.hide()
             guard account != nil else {
                 return
             }
@@ -197,13 +197,15 @@ class AssetsPresenter: NSObject {
     }
     
     func blockUI() {
-        assetsVC!.progressHUD.blockUIandShowProgressHUD()
+        assetsVC!.loader.show(customTitle: "Getting Wallets")
+//        assetsVC!.progressHUD.blockUIandShowProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = false
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = false
     }
     
     func unlockUI() {
-        assetsVC!.progressHUD.unblockUIandHideProgressHUD()
+        assetsVC!.loader.hide()
+//        assetsVC!.progressHUD.unblockUIandHideProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = true
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = true
         assetsVC?.refreshControl.endRefreshing()
