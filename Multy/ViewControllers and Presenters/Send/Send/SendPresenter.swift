@@ -325,12 +325,12 @@ class SendPresenter: NSObject {
             "address"       : addressData!["address"] as! String,
             "addressindex"  : wallet.addresses.count,
             "transaction"   : trData.0,
-            "ishd"          : NSNumber(booleanLiteral: wallet.shouldCreateNewAddressAfterTransaction)
+            "ishd"          : wallet.shouldCreateNewAddressAfterTransaction
             ] as [String : Any]
         
         let params = [
             "currencyid": wallet.chain,
-            "jwt"       : jwtToken,
+            "JWT"       : jwtToken,
             "networkid" : wallet.chainType,
             "payload"   : newAddressParams
             ] as [String : Any]

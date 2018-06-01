@@ -5,6 +5,8 @@
 import UIKit
 import ZFRippleButton
 
+private typealias LocalizeDelegate = ReceiveStartViewController
+
 class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
 
     @IBOutlet weak var tableView: UITableView!
@@ -94,7 +96,7 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
         if self.presenter.isNeedToPop == true {
             if self.whereFrom != nil && self.presenter.walletsArr[indexPath.row].availableAmount.isZero {
                 let message = "You can not choose empty wallet. Please select wallet with some amount"
-                let alert = UIAlertController(title: "Sorry", message: message, preferredStyle: .alert)
+                let alert = UIAlertController(title: localize(string: Constants.sorryString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 shakeView(viewForShake: self.tableView.cellForRow(at: indexPath)!)
@@ -126,5 +128,11 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
             let receiveDetails = segue.destination as! ReceiveAllDetailsViewController
             receiveDetails.presenter.wallet = self.presenter.walletsArr[self.presenter.selectedIndex!]
         }
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Receives"
     }
 }

@@ -6,7 +6,7 @@
 "12v-85-n0R.text" = "Валюта оценки";
 
 /* Class = "UILabel"; text = "We really appreciate your support of Multy. \nBy donating you help us to bring blockchain technology one step closer to ordinary life."; ObjectID = "4wW-01-khe"; */
-"4wW-01-khe.text" = "We really appreciate your support of Multy. \nBy donating you help us to bring blockchain technology one step closer to ordinary life.";
+"4wW-01-khe.text" = "Мы очень ценим вашу поддержку Multy. \nСовершая пожертвования, вы помогаете нам привнести технологию блокчейн на шаг ближе в повседневную жизнь.";
 
 /* Class = "UIButton"; normalTitle = "Copy to clipboard"; ObjectID = "5Ai-kQ-3aX"; */
 "5Ai-kQ-3aX.normalTitle" = "Скопировать в буфер обмена";
@@ -30,7 +30,7 @@
 "Bop-ir-HSr.normalTitle" = "Скопировать в буфер обмена";
 
 /* Class = "UILabel"; text = "Thank you for donation!"; ObjectID = "Cpj-NZ-FYw"; */
-"Cpj-NZ-FYw.text" = "Thank you for donation!";
+"Cpj-NZ-FYw.text" = "Спасибо за пожертвование!";
 
 /* Class = "UILabel"; text = "To Vadim"; ObjectID = "Dgq-hX-nSS"; */
 "Dgq-hX-nSS.text" = "To Vadim";

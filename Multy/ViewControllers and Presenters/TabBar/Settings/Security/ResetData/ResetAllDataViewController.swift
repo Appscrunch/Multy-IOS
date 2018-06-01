@@ -46,7 +46,7 @@ class ResetAllDataViewController: UIViewController, AnalyticsProtocol {
     }
     
     @IBAction func resetAction(_ sender: Any) {
-        let alert = UIAlertController(title: localize(string: Constants.warningString), message: "Are you sure?", preferredStyle: .alert)
+        let alert = UIAlertController(title: localize(string: Constants.warningString), message: localize(string: Constants.areYouSureString), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .default, handler: { (_) in
             self.dismiss(animated: true, completion: {
                 self.cancelDelegate?.cancelAction()

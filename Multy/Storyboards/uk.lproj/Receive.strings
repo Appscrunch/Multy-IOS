@@ -36,7 +36,7 @@
 "Gny-Pb-20j.text" = "1 233$";
 
 /* Class = "UIButton"; normalTitle = "Generate New Address"; ObjectID = "L7R-G0-LAB"; */
-"L7R-G0-LAB.normalTitle" = "Generate New Address";
+"L7R-G0-LAB.normalTitle" = "Згенерувати Нову адресу";
 
 /* Class = "UIButton"; normalTitle = "Magic Receive"; ObjectID = "OZc-YB-CB7"; */
 "OZc-YB-CB7.normalTitle" = "Магічний прийом";

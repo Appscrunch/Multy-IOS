@@ -10,6 +10,7 @@
 "WARNING" = "Попередження";
 "CANCEL" = "Скасувати";
 "ERROR" = "Помилка";
+"SOMETHING WENT WRONG" = "Щось пішло не так";
 "WALLET NAME NOT EMPTY ALERT" = "Ім'я гаманця не повинно бути порожнім";
 "WALLET AMOUNT ALERT" = "Сума криптовалют повинна бути порожньою";
 "DELETE WALLET WARNING" = "Ви впевнені, що хочете видалити гаманець?";
@@ -21,3 +22,5 @@
 "CONFIRMATION" = "Підтвердження";
 "CONFIRMATIONS" = "Підтвердження";
 "RECENT ADDRESSES" = "Останні адреси";
+"LOADING" = "Завантаження";
+"UNABLE SEND" = "Невозможно отправить транзакцию";
