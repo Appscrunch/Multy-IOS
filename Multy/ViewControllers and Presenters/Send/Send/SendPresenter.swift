@@ -115,7 +115,7 @@ class SendPresenter: NSObject {
 
             filteredWalletArray = walletsArr.filter{ DataManager.shared.isAddressValid(address: address, for: $0).isValid && $0.availableAmount > sendAmount}
         } else {
-            filteredWalletArray = walletsArr.filter{ $0.availableAmount > BigInt("0")}
+            filteredWalletArray = walletsArr.filter{ $0.availableAmount > BigInt.zero()}
         }
     }
     
