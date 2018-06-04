@@ -78,7 +78,7 @@
 "i8P-M2-nC4.text" = "Label";
 
 /* Class = "UILabel"; text = "Address Book"; ObjectID = "l1V-0X-Hje"; */
-"l1V-0X-Hje.text" = "Address Book";
+"l1V-0X-Hje.text" = "Адресна книга";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "lpd-w8-Ylh"; */
 "lpd-w8-Ylh.text" = "Отримати";

@@ -87,7 +87,7 @@
 "pNa-A7-eEe.text" = "Сбросив все ваши данные, вы потеряете все свои кошельки и учетные записи на этом устройстве";
 
 /* Class = "UILabel"; text = "Biometric identification"; ObjectID = "ta5-0S-Je8"; */
-"ta5-0S-Je8.text" = "Биометрическая идентификация";
+"ta5-0S-Je8.text" = "Идентификация";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "tsO-57-6kh"; */
 "tsO-57-6kh.normalTitle" = "Отменить";

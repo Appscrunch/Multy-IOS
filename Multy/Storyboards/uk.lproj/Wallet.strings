@@ -102,13 +102,13 @@
 "WKN-uW-JbA.text" = "Натисніть кнопку, щоб створити запит на отримання коштів.";
 
 /* Class = "UILabel"; text = "Wallet Settings"; ObjectID = "YHK-vM-QZ6"; */
-"YHK-vM-QZ6.text" = "Налаштування гаманця";
+"YHK-vM-QZ6.text" = "Налаштування";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ZiB-8K-BTa"; */
 "ZiB-8K-BTa.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "a6T-5X-NVW"; */
-"a6T-5X-NVW.text" = "Address";
+"a6T-5X-NVW.text" = "Адреса";
 
 /* Class = "UILabel"; text = "83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L"; ObjectID = "a6o-9x-tsS"; */
 "a6o-9x-tsS.text" = "83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L83T28WCp4Cu5LQiddJnDJJmKWvmmXJSP9L";

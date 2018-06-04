@@ -87,7 +87,7 @@
 "pNa-A7-eEe.text" = "Скинувши всі ваші дані, ви втратите всі свої гаманці і облікові записи на цьому пристрої";
 
 /* Class = "UILabel"; text = "Biometric identification"; ObjectID = "ta5-0S-Je8"; */
-"ta5-0S-Je8.text" = "Біометрична ідентифікація";
+"ta5-0S-Je8.text" = "ідентифікація";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "tsO-57-6kh"; */
 "tsO-57-6kh.normalTitle" = "Скасувати";

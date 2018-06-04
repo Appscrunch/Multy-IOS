@@ -96,7 +96,7 @@
 "Lfo-SJ-k1k.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Confirm Sending\n"; ObjectID = "Mk1-tu-7rf"; */
-"Mk1-tu-7rf.text" = "Підтвердити відправку\n";
+"Mk1-tu-7rf.text" = "Відправка\n";
 
 /* Class = "UILabel"; text = "Send From"; ObjectID = "PrT-By-RHO"; */
 "PrT-By-RHO.text" = "Відправити";
