@@ -48,6 +48,7 @@ struct Constants {
     static let moreThenYouHaveString = "MORE THEN YOU HAVE"
     static let feeRateLessThenString = "FEE RATE LESS THEN"
     static let satoshiPerByteString = "SATOSHI PER BYTE"
+    static let satoshiPerByteShortString = "SAT/B"
     static let feeTooHighString = "FEE TOO HIGH"
     static let gasPriceLess1String = "GAS PRICE LESS 1"
     static let successString = "SUCCESS"

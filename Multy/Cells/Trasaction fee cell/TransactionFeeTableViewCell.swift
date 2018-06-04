@@ -37,7 +37,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
 //        let sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchainType!)
 //        return "~ " + "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
 //        return "~ " + "\(sumInCrypto.fixedFraction(digits: 8)) BTC"
-        return "\(rate) Satoshi"
+        return "\(rate) " + localize(string: Constants.satoshiPerByteShortString)
     }
     
     func makeCellBy(indexPath: IndexPath) {
