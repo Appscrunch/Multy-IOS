@@ -505,6 +505,10 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-y4-B5o">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cc4-Q3-pOG" userLabel="Hided Wallet Background View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qK9-pf-K4T" userLabel="Searching Animation View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -585,6 +589,12 @@
                                                     <constraint firstAttribute="width" constant="75" id="zcv-bw-zzz"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hz0-aA-EDQ" userLabel="Enable Bluetooth Button">
+                                                <rect key="frame" x="112" y="213.5" width="150" height="150"/>
+                                                <connections>
+                                                    <action selector="enableBluetoothAction:" destination="Ci5-VC-rpK" eventType="touchUpInside" id="UgX-B4-Ehj"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Check your Bluetooth connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-AP-0og">
                                                 <rect key="frame" x="88" y="386" width="199" height="61"/>
                                                 <constraints>
@@ -621,14 +631,18 @@
                                             <constraint firstAttribute="trailing" secondItem="jAI-11-Odr" secondAttribute="trailing" constant="8" id="5hf-Wc-VcA"/>
                                             <constraint firstItem="Wzu-Mi-hie" firstAttribute="centerY" secondItem="nJ7-0u-62J" secondAttribute="centerY" id="6xe-md-bi2"/>
                                             <constraint firstItem="Wzu-Mi-hie" firstAttribute="centerX" secondItem="nJ7-0u-62J" secondAttribute="centerX" id="AV6-wG-1im"/>
+                                            <constraint firstItem="Hz0-aA-EDQ" firstAttribute="leading" secondItem="nJ7-0u-62J" secondAttribute="leading" id="D8U-T9-6aw"/>
                                             <constraint firstItem="jAI-11-Odr" firstAttribute="top" secondItem="G4V-tS-bMO" secondAttribute="top" constant="35" id="Wfq-T2-Piu"/>
                                             <constraint firstItem="Axh-M8-4sI" firstAttribute="centerX" secondItem="G4V-tS-bMO" secondAttribute="centerX" id="XiI-3U-C2K"/>
                                             <constraint firstAttribute="bottom" secondItem="Axh-M8-4sI" secondAttribute="bottom" constant="86" id="a9E-nq-dW1"/>
                                             <constraint firstItem="vkW-AP-0og" firstAttribute="top" secondItem="nJ7-0u-62J" secondAttribute="bottom" constant="22.5" id="dGO-sx-c3X"/>
                                             <constraint firstItem="nJ7-0u-62J" firstAttribute="centerX" secondItem="G4V-tS-bMO" secondAttribute="centerX" id="gmb-eo-qiz"/>
                                             <constraint firstItem="vkW-AP-0og" firstAttribute="centerX" secondItem="nJ7-0u-62J" secondAttribute="centerX" id="jdO-7V-d4O"/>
+                                            <constraint firstItem="Hz0-aA-EDQ" firstAttribute="top" secondItem="nJ7-0u-62J" secondAttribute="top" id="ka6-kT-WFN"/>
                                             <constraint firstItem="jAI-11-Odr" firstAttribute="leading" secondItem="G4V-tS-bMO" secondAttribute="leading" constant="8" id="nZO-LM-6Uk"/>
                                             <constraint firstItem="nJ7-0u-62J" firstAttribute="centerY" secondItem="G4V-tS-bMO" secondAttribute="centerY" constant="-70" id="qFE-jj-Mh9"/>
+                                            <constraint firstItem="Hz0-aA-EDQ" firstAttribute="bottom" secondItem="nJ7-0u-62J" secondAttribute="bottom" id="x46-es-44I"/>
+                                            <constraint firstItem="Hz0-aA-EDQ" firstAttribute="trailing" secondItem="nJ7-0u-62J" secondAttribute="trailing" id="zK0-b7-WSJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -650,12 +664,16 @@
                                     <constraint firstItem="7ol-yG-FZr" firstAttribute="centerX" secondItem="ihe-y4-B5o" secondAttribute="centerX" id="WXM-k7-aqc"/>
                                     <constraint firstAttribute="trailing" secondItem="qK9-pf-K4T" secondAttribute="trailing" id="XIw-ek-AZQ"/>
                                     <constraint firstItem="998-1q-NGD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ihe-y4-B5o" secondAttribute="leading" constant="20" id="aq0-gV-Kzb"/>
+                                    <constraint firstAttribute="bottom" secondItem="Cc4-Q3-pOG" secondAttribute="bottom" id="cWu-H5-jTU"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="width" secondItem="ihe-y4-B5o" secondAttribute="width" multiplier="3/5" id="hxb-wQ-JPh"/>
                                     <constraint firstItem="i8P-M2-nC4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ihe-y4-B5o" secondAttribute="leading" constant="20" id="jFE-PY-mAf"/>
                                     <constraint firstAttribute="bottom" secondItem="Qf6-To-A5V" secondAttribute="bottom" constant="86" id="num-W0-GPT"/>
                                     <constraint firstItem="vrf-Rl-z4g" firstAttribute="top" secondItem="i8P-M2-nC4" secondAttribute="bottom" constant="25" id="onp-2n-Tdq"/>
                                     <constraint firstAttribute="bottom" secondItem="G4V-tS-bMO" secondAttribute="bottom" id="oxb-us-v2v"/>
+                                    <constraint firstItem="Cc4-Q3-pOG" firstAttribute="top" secondItem="ihe-y4-B5o" secondAttribute="top" id="qM4-JL-il3"/>
                                     <constraint firstItem="qK9-pf-K4T" firstAttribute="leading" secondItem="ihe-y4-B5o" secondAttribute="leading" id="sCS-J4-QIa"/>
+                                    <constraint firstAttribute="trailing" secondItem="Cc4-Q3-pOG" secondAttribute="trailing" id="tcK-yF-Osb"/>
+                                    <constraint firstItem="Cc4-Q3-pOG" firstAttribute="leading" secondItem="ihe-y4-B5o" secondAttribute="leading" id="yDb-ix-7rB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -683,6 +701,7 @@
                         <outlet property="hidedAddressLabel" destination="i8P-M2-nC4" id="efk-C9-jlb"/>
                         <outlet property="hidedImage" destination="vrf-Rl-z4g" id="zvk-4R-HnK"/>
                         <outlet property="hidedSumLabel" destination="998-1q-NGD" id="ex6-W0-jsV"/>
+                        <outlet property="hidedWalletBackgroundView" destination="Cc4-Q3-pOG" id="J2M-d4-BWc"/>
                         <outlet property="hidedWalletView" destination="ihe-y4-B5o" id="ZD7-fW-5Hg"/>
                         <outlet property="magicView" destination="NC6-9u-49Q" id="ufv-60-M5l"/>
                         <outlet property="qrImage" destination="yfh-1j-Y6Q" id="QHG-Oi-hBk"/>

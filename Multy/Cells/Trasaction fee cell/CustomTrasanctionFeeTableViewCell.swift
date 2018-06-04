@@ -4,6 +4,8 @@
 
 import UIKit
 
+private typealias LocalizeDelegate = CustomTrasanctionFeeTableViewCell
+
 class CustomTrasanctionFeeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var customFeeImage: UIImageView!
@@ -29,9 +31,10 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
     }
     
     func constructString() -> String {
-        let sumInCrypto = (Double(value) / 100000000.0) * 225
-        let sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchainType!)
-        return "~ " + "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
+//        let sumInCrypto = (Double(value) / 100000000.0) * 225
+//        let sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchainType!)
+//        return "~ " + "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
+        return "\(value) " + localize(string: Constants.satoshiPerByteShortString)
     }
     
     func setupUI() {
@@ -67,5 +70,11 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
         self.checkImg.isHidden = true
         self.toplbl.isHidden = true
         self.valuelbl.isHidden = true
+    }
+}
+
+extension LocalizeDelegate: Localizable {
+    var tableName: String {
+        return "Sends"
     }
 }

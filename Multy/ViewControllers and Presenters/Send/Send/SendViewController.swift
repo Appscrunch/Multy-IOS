@@ -62,6 +62,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var bluetoothErrorTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bluetoothEnabledContentBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchingActiveRequestsLabel: UILabel!
+    @IBOutlet weak var backgroundView: UIView!
     
     var searchingAnimationView : LOTAnimationView?
     var sendLongPressGR : UILongPressGestureRecognizer?
@@ -145,10 +146,17 @@ class SendViewController: UIViewController {
     }
     
     func refreshBackground() {
-        view.applyGradient(withColours: [
-            UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
-            UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
-                           gradientOrientation: .topRightBottomLeft)
+        if bluetoothDisabledContentView.isHidden {
+            backgroundView.applyOrUpdateGradient(withColours: [
+                UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
+                UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
+                               gradientOrientation: .topRightBottomLeft)
+        } else {
+            backgroundView.applyOrUpdateGradient(withColours: [
+                UIColor(ciColor: CIColor(red: 23.0 / 255.0, green: 30.0 / 255.0, blue: 38.0 / 255.0)),
+                UIColor(ciColor: CIColor(red: 67.0 / 255.0, green: 74.0 / 255.0, blue: 78.0 / 255.0))],
+                               gradientOrientation: .vertical)
+        }
     }
     
     func updateUI() {
@@ -194,6 +202,8 @@ class SendViewController: UIViewController {
     func updateUIForBluetoothState(_ isEnable : Bool) {
         bluetoothDisabledContentView.isHidden = isEnable
         bluetoothEnabledContentView.isHidden = !isEnable
+        
+        refreshBackground()
     }
     
     func fillTransaction() {
@@ -571,6 +581,10 @@ class SendViewController: UIViewController {
     
     @IBAction func recentAction(_ sender: Any) {
         
+    }
+    
+    @IBAction func enableBluetoothAction(_ sender: Any) {
+        presentGoToBluetoothSettingsAlert()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

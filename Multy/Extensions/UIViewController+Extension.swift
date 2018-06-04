@@ -22,6 +22,40 @@ private let swizzling: (AnyClass, Selector, Selector) -> () = { forClass, origin
 }
 
 extension Localizable where Self: UIViewController, Self: Localizable {
+    func presentGoToBluetoothSettingsAlert() {
+        var bluetoothURLString : String?
+        if isIOS10OrHigher() == true {
+            bluetoothURLString = BluetoothSettingsURL_iOS10
+        } else if isIOS9OrHigher() {
+            bluetoothURLString = BluetoothSettingsURL_iOS9
+        }
+        
+        if bluetoothURLString != nil {
+            guard let bluetoothURL = URL(string: bluetoothURLString!) else {
+                return
+            }
+            
+            let alert = UIAlertController(title: localize(string: Constants.enableBluetoothAlertTitle), message: nil, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) {
+                UIAlertAction in
+            }
+            
+            let settingsAction = UIAlertAction(title: localize(string: Constants.settingsActionTitle), style: .default) { (action) in
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(bluetoothURL, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(bluetoothURL)
+                }
+            }
+            
+            alert.addAction(okAction)
+            alert.addAction(settingsAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        } 
+    }
+    
     func presentAlert(with message: String?) {
         let alert = UIAlertController(title: localize(string: Constants.errorString), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

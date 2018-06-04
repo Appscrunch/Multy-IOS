@@ -7,7 +7,7 @@
 */
 
 "WARNING" = "Warning";
-"CANCEL" = "Отменить";
+"CANCEL" = "Cancel";
 "ERROR" = "Error";
 "SOMETHING WENT WRONG" = "Something went wrong";
 "NOT VALID ADDRESS" = "You entered not valid address for current blockchain.";
@@ -33,3 +33,8 @@
 "ACTIVE REQUESTS" = "Active Requests";
 "YOU DONT HAVE WALLETS" = "You don't have any wallets with ";
 "ENTER SATOSHI PER BYTE" = "Enter Satohi per byte here";
+"ENABLE BLUETOOTH ALERT TITLE" = "To enable Bluetooth, go to Settings";
+"SETTINGS ACTION TITLE" = "Settings";
+"COPY TO CLIPBOARD" = "Copy to clipboard";
+"SHARE" = "Share";
+"SAT/B" = "Sat/B";

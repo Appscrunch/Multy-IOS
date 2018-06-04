@@ -33,3 +33,8 @@
 "ACTIVE REQUESTS" = "Поточні запити";
 "YOU DONT HAVE WALLETS" = "У Вас немає гаманців з ";
 "ENTER SATOSHI PER BYTE" = "Введіть Сатоши за байт";
+"ENABLE BLUETOOTH ALERT TITLE" = "";
+"SETTINGS ACTION TITLE" = "";
+"COPY TO CLIPBOARD" = "Скопіювати в буфер обміну";
+"SHARE" = "Поділитися";
+"SAT/B" = "Сат/Б";
