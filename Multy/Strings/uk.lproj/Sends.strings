@@ -31,3 +31,5 @@
 "TRANSACTION ERROR" = "Помилка транзакції";
 "LOADING" = "Завантаження";
 "ACTIVE REQUESTS" = "Поточні запити";
+"ENABLE BLUETOOTH ALERT TITLE" = "";
+"SETTINGS ACTION TITLE" = "";
