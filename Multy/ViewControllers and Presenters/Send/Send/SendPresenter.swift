@@ -138,6 +138,8 @@ class SendPresenter: NSObject {
         startSenderActivity()
         handleBluetoothReachability()
         
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
@@ -147,6 +149,8 @@ class SendPresenter: NSObject {
     
     func viewControllerViewWillDisappear() {
         viewWillDisappear()
+        
+        UIApplication.shared.isIdleTimerDisabled = false
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillTerminate, object: nil)
