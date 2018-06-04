@@ -17,7 +17,7 @@ class WalletChooseViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emptyDataSourceLabel.text = Constants.ChooseWalletScreen.emptyScreenPhraseKey + presenter.transactionDTO.sendAddress!.addressBlockchainValue.shortName
+        emptyDataSourceLabel.text = localize(string: Constants.youDontHaveWalletString) + presenter.transactionDTO.sendAddress!.addressBlockchainValue.shortName
         
         self.swipeToBack()
         self.registerCell()

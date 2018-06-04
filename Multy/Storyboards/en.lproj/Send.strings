@@ -2,9 +2,6 @@
 /* Class = "UILabel"; text = "Transaction Fee"; ObjectID = "0ZI-tj-Idl"; */
 "0ZI-tj-Idl.text" = "Transaction Fee";
 
-/* Class = "UILabel"; text = "You don't have any wallets with BTC"; ObjectID = "28l-xW-5E4"; */
-"28l-xW-5E4.text" = "You don't have any wallets with BTC";
-
 /* Class = "UILabel"; text = "1.1234 BTC / 1 123 USD"; ObjectID = "31h-f9-3fx"; */
 "31h-f9-3fx.text" = "1.1234 BTC / 1 123 USD";
 
@@ -41,17 +38,11 @@
 /* Class = "UILabel"; text = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain."; ObjectID = "9nM-mt-kya"; */
 "9nM-mt-kya.text" = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain.";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "Ab6-cO-MZd"; */
-"Ab6-cO-MZd.text" = "Label";
-
 /* Class = "UILabel"; text = "1 174.23 USD"; ObjectID = "AkA-WX-ZNe"; */
 "AkA-WX-ZNe.text" = "1 174.23 USD";
 
 /* Class = "UILabel"; text = "Amount from QR: 1 BTC"; ObjectID = "B2E-Qe-eWd"; */
 "B2E-Qe-eWd.text" = "Amount from QR: 1 BTC";
-
-/* Class = "UILabel"; text = "Wireless \nScan"; ObjectID = "BoO-y0-goH"; */
-"BoO-y0-goH.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "C5d-7f-xmF"; */
 "C5d-7f-xmF.placeholder" = "Enter Address Here";
@@ -108,7 +99,7 @@
 "RhC-aH-HrF.text" = "0.002 BTC / 1.54 USD";
 
 /* Class = "UILabel"; text = " Custom Fee Rate "; ObjectID = "Ro9-45-B2B"; */
-"Ro9-45-B2B.text" = " Custom Fee Rate ";
+"Ro9-45-B2B.text" = " Custom Fee Rate";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "S0T-Fm-OmK"; */
 "S0T-Fm-OmK.normalTitle" = "Next";

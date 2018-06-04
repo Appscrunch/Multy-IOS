@@ -5,9 +5,6 @@
 /* Class = "UILabel"; text = "Check that no one is behind you"; ObjectID = "7Mk-vY-wxw"; */
 "7Mk-vY-wxw.text" = "Переконайтеся, що за вами ніхто не стоїть";
 
-/* Class = "UITextField"; text = "ABC"; ObjectID = "827-G2-PrD"; */
-"827-G2-PrD.text" = "ABC";
-
 /* Class = "UIButton"; normalTitle = "Try Again!"; ObjectID = "EcG-0i-Nr0"; */
 "EcG-0i-Nr0.normalTitle" = "Спробувати знову";
 
@@ -48,7 +45,7 @@
 "piY-bH-vcx.text" = "Показати Seed-фразу знову.";
 
 /* Class = "UIButton"; normalTitle = "Great!"; ObjectID = "rQ5-TK-TFt"; */
-"rQ5-TK-TFt.normalTitle" = "Great!";
+"rQ5-TK-TFt.normalTitle" = "Супер!";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "tKd-SS-isf"; */
 "tKd-SS-isf.normalTitle" = "Скасувати";

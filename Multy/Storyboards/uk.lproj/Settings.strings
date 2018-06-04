@@ -57,7 +57,7 @@
 "Q5P-Ni-MVF.normalTitle" = "8";
 
 /* Class = "UILabel"; text = "Enter Password"; ObjectID = "S7o-SM-GjY"; */
-"S7o-SM-GjY.text" = "Enter Password";
+"S7o-SM-GjY.text" = "Введіть пароль";
 
 /* Class = "UILabel"; text = "PIN-code"; ObjectID = "VdQ-St-UVy"; */
 "VdQ-St-UVy.text" = "PIN-код";

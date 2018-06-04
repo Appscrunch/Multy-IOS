@@ -2,9 +2,6 @@
 /* Class = "UILabel"; text = "Transaction Fee"; ObjectID = "0ZI-tj-Idl"; */
 "0ZI-tj-Idl.text" = "Комиссия за перевод";
 
-/* Class = "UILabel"; text = "You don't have any wallets with BTC"; ObjectID = "28l-xW-5E4"; */
-"28l-xW-5E4.text" = "You don't have any wallets with BTC";
-
 /* Class = "UILabel"; text = "1.1234 BTC / 1 123 USD"; ObjectID = "31h-f9-3fx"; */
 "31h-f9-3fx.text" = "1.1234 BTC / 1 123 USD";
 
@@ -33,25 +30,19 @@
 "7g9-UJ-RsT.text" = "(в разработке)";
 
 /* Class = "UITextField"; placeholder = "Enter price here"; ObjectID = "84M-y9-Blm"; */
-"84M-y9-Blm.placeholder" = "Enter price here";
+"84M-y9-Blm.placeholder" = "Введите цену";
 
 /* Class = "UILabel"; text = "Sending..."; ObjectID = "9Jg-ab-E9W"; */
-"9Jg-ab-E9W.text" = "Sending...";
+"9Jg-ab-E9W.text" = "Отправка...";
 
 /* Class = "UILabel"; text = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain."; ObjectID = "9nM-mt-kya"; */
 "9nM-mt-kya.text" = "Ставка комиссии влияет на то, как быстро ваша транзакция будет принята блокчейн-сетью.";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "Ab6-cO-MZd"; */
-"Ab6-cO-MZd.text" = "Label";
 
 /* Class = "UILabel"; text = "1 174.23 USD"; ObjectID = "AkA-WX-ZNe"; */
 "AkA-WX-ZNe.text" = "1 174.23 USD";
 
 /* Class = "UILabel"; text = "Amount from QR: 1 BTC"; ObjectID = "B2E-Qe-eWd"; */
 "B2E-Qe-eWd.text" = "Amount from QR: 1 BTC";
-
-/* Class = "UILabel"; text = "Wireless \nScan"; ObjectID = "BoO-y0-goH"; */
-"BoO-y0-goH.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "C5d-7f-xmF"; */
 "C5d-7f-xmF.placeholder" = "Введите адрес получателя";
@@ -69,7 +60,7 @@
 "CmP-mh-W1O.text" = "Комиссия за перевод";
 
 /* Class = "UILabel"; text = "Scan\nQR"; ObjectID = "Cmu-SL-LS1"; */
-"Cmu-SL-LS1.text" = "Scan\nQR";
+"Cmu-SL-LS1.text" = "Скан\nQR";
 
 /* Class = "UILabel"; text = "To:"; ObjectID = "Ed2-gG-ZRs"; */
 "Ed2-gG-ZRs.text" = "Кому:";
@@ -78,13 +69,13 @@
 "Ewh-6y-aEq.text" = "Размер комиссии";
 
 /* Class = "UILabel"; text = "Please Check your Bluetooth connection"; ObjectID = "GPJ-dz-boD"; */
-"GPJ-dz-boD.text" = "Please Check your Bluetooth connection";
+"GPJ-dz-boD.text" = "Проверьте Bluetooth-подключение";
 
 /* Class = "UILabel"; text = "ETH"; ObjectID = "GcC-ye-4hC"; */
 "GcC-ye-4hC.text" = "ETH";
 
 /* Class = "UILabel"; text = "Bluetooth Error"; ObjectID = "GuO-y4-IZM"; */
-"GuO-y4-IZM.text" = "Bluetooth Error";
+"GuO-y4-IZM.text" = "Ошибка Bluetooth";
 
 /* Class = "UILabel"; text = "Searching active requests"; ObjectID = "GzI-Rv-HuM"; */
 "GzI-Rv-HuM.text" = "Поиск запросов";
@@ -107,8 +98,8 @@
 /* Class = "UILabel"; text = "0.002 BTC / 1.54 USD"; ObjectID = "RhC-aH-HrF"; */
 "RhC-aH-HrF.text" = "0.002 BTC / 1.54 USD";
 
-/* Class = "UILabel"; text = " Custom Fee Rate "; ObjectID = "Ro9-45-B2B"; */
-"Ro9-45-B2B.text" = " Custom Fee Rate ";
+/* Class = "UILabel"; text = " Custom Fee Rate"; ObjectID = "Ro9-45-B2B"; */
+"Ro9-45-B2B.text" = "Пользовательская";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "S0T-Fm-OmK"; */
 "S0T-Fm-OmK.normalTitle" = "Далее";

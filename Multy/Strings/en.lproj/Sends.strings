@@ -31,3 +31,5 @@
 "TRANSACTION ERROR" = "Transaction Error";
 "LOADING" = "Loading";
 "ACTIVE REQUESTS" = "Active Requests";
+"YOU DONT HAVE WALLETS" = "You don't have any wallets with ";
+"ENTER SATOSHI PER BYTE" = "Enter Satohi per byte here";

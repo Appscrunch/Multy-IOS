@@ -46,8 +46,8 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
             self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
             
             
-            self.topNameLbl.text = "Satoshi per byte"
-            self.topPriceTF.placeholder = "Enter Satohi per byte here"
+            self.topNameLbl.text = localize(string: Constants.satoshiPerByteString)
+            self.topPriceTF.placeholder = localize(string: Constants.enterSatoshiPerByte)
             self.topPriceTF.placeholder = "0"
             if self.rate != 0 {
                 self.topPriceTF.text = "\(rate)"
