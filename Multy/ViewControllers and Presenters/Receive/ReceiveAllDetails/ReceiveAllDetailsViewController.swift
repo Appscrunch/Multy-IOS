@@ -51,6 +51,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var magicView: UIView!
     @IBOutlet weak var bluetoothDisabledContentView: UIView!
     @IBOutlet weak var searchingAnimationHolder: UIView!
+    @IBOutlet weak var hidedWalletBackgroundView: UIView!
     
     var searchingAnimationView : LOTAnimationView?
     
@@ -97,14 +98,21 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         magicView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
-        refreshFrames()
+        refreshBackground()
     }
     
-    func refreshFrames() {        
-        hidedWalletView.applyGradient(withColours: [
-            UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
-            UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
-                           gradientOrientation: .topRightBottomLeft)
+    func refreshBackground() {
+        if bluetoothDisabledContentView.isHidden {
+            hidedWalletBackgroundView.applyOrUpdateGradient(withColours: [
+                UIColor(ciColor: CIColor(red: 29.0 / 255.0, green: 176.0 / 255.0, blue: 252.0 / 255.0)),
+                UIColor(ciColor: CIColor(red: 21.0 / 255.0, green: 126.0 / 255.0, blue: 252.0 / 255.0))],
+                                                    gradientOrientation: .topRightBottomLeft)
+        } else {
+            hidedWalletBackgroundView.applyOrUpdateGradient(withColours: [
+                UIColor(ciColor: CIColor(red: 23.0 / 255.0, green: 30.0 / 255.0, blue: 38.0 / 255.0)),
+                UIColor(ciColor: CIColor(red: 67.0 / 255.0, green: 74.0 / 255.0, blue: 78.0 / 255.0))],
+                                                            gradientOrientation: .vertical)
+        }
     }
     
     func presentDidReceivePaymentAlert() {
@@ -116,6 +124,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     func updateUIForBluetoothState(_ isEnable : Bool) {
         if option == .wireless {
             bluetoothDisabledContentView.isHidden = isEnable
+            refreshBackground()
         }
     }
     
@@ -178,6 +187,10 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     func cancelAction() {
 //        presentDonationVCorAlert()
         self.makePurchaseFor(productId: stringIdOfProduct!)
+    }
+    
+    @IBAction func enableBluetoothAction(_ sender: Any) {
+        presentGoToBluetoothSettingsAlert()
     }
     
     func donate50(idOfProduct: String) {

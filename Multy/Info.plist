@@ -30,13 +30,29 @@
 				<string>multy</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>App-prefs</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>prefs</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>43</string>
 	<key>GIT_BRANCH_NAME</key>
-	<string>ETH_BETA_TEST</string>
+	<string>MUL-1578</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>c502adc</string>
+	<string>cfafeb6</string>
 	<key>GIT_TAG_NAME</key>
 	<string>RELEASE_1.0.0-dirty</string>
 	<key>LSRequiresIPhoneOS</key>

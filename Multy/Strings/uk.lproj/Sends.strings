@@ -31,6 +31,8 @@
 "TRANSACTION ERROR" = "Помилка транзакції";
 "LOADING" = "Завантаження";
 "ACTIVE REQUESTS" = "Поточні запити";
+"ENABLE BLUETOOTH ALERT TITLE" = "";
+"SETTINGS ACTION TITLE" = "";
 "COPY TO CLIPBOARD" = "Скопіювати в буфер обміну";
 "SHARE" = "Поділитися";
 "SAT/B" = "Сат/Б";

@@ -14,3 +14,5 @@
 "SORRY" = "Извините";
 "LOADING" = "Загрузка";
 "RECEIVE" = "Получить";
+"ENABLE BLUETOOTH ALERT TITLE" = "Чтобы включить Bluetooth, перейдите в Настройки";
+"SETTINGS ACTION TITLE" = "Настройки";
