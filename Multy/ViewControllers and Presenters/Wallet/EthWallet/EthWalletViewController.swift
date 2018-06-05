@@ -153,6 +153,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
             self.tableView.frame.size.height = self.view.frame.height - self.headerTopY - self.bottomView.frame.height - 30
             self.tableView.frame.origin.y = self.tableTopY
             self.tableView.isScrollEnabled = true
+            self.tableView.removeGestureRecognizer(self.recog!)
         }
     }
     
@@ -177,6 +178,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
                 self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
                 self.changeBackupY()
             }
+        } else {
+            setTableToBot(duration: 0.2)
         }
         self.fixForX()
         self.startY = self.backImage.frame.height - 50
@@ -241,9 +244,9 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     func backUpView(height: CGFloat) {
         if self.isBackupOnScreen == false {
-            if backupView != nil && backupView!.frame.origin.y + 20 != height {
-                backupView!.frame = CGRect(x: 16, y: startY - 50, width: screenWidth - 32, height: 40)
-            }
+//            if backupView != nil && backupView!.frame.origin.y + 20 != height {
+//                backupView!.frame = CGRect(x: 16, y: startY - 50, width: screenWidth - 32, height: 40)
+//            }
             return
         }
         backupView = UIView()
@@ -251,10 +254,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         backupView!.layer.cornerRadius = 20
         backupView!.backgroundColor = .white
         
-        backupView!.layer.shadowColor = UIColor.gray.cgColor
-        backupView!.layer.shadowOpacity = 1
-        backupView!.layer.shadowOffset = .zero
-        backupView!.layer.shadowRadius = 10
+        backupView!.setShadow(with: #colorLiteral(red: 0.1490196078, green: 0.2980392157, blue: 0.4156862745, alpha: 0.3))
         
         if self.presenter.account?.seedPhrase != nil && self.presenter.account?.seedPhrase != "" {
             backupView!.isHidden = false
@@ -298,7 +298,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     @IBAction func closeAction() {
         sendAnalyticsEvent(screenName: "\(screenWalletWithChain)\(presenter.wallet!.chain)", eventName: closeTap)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func settingssAction(_ sender: Any) {
@@ -489,6 +489,12 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
             return 135
         } else {
             return 70
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.tableView.addGestureRecognizer(recog!)
         }
     }
     

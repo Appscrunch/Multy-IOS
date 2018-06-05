@@ -603,7 +603,7 @@
                                             <constraint firstAttribute="width" constant="1" id="dOm-SD-06i"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6N6-Ao-NpB">
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6N6-Ao-NpB">
                                         <rect key="frame" x="101" y="31" width="100" height="85"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle"/>
@@ -612,7 +612,7 @@
                                             <action selector="wirelessScanAction:" destination="kRf-Ct-SnX" eventType="touchUpInside" id="oU2-aO-iB6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoO-y0-goH">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoO-y0-goH">
                                         <rect key="frame" x="126.5" y="80" width="50" height="33"/>
                                         <string key="text">Wireless 
 Scan</string>
@@ -627,7 +627,7 @@ Scan</string>
                                             <constraint firstAttribute="height" constant="24" id="qbv-x4-qlF"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="fxU-aM-6ch">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donationIcon" translatesAutoresizingMaskIntoConstraints="NO" id="fxU-aM-6ch">
                                         <rect key="frame" x="139" y="49" width="25" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="6Fr-6t-vaU"/>
@@ -640,7 +640,7 @@ Scan</string>
                                         <color key="textColor" red="0.92299705740000004" green="0.08180250973" blue="0.2317947149" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(work in progress)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g9-UJ-RsT">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(work in progress)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g9-UJ-RsT">
                                         <rect key="frame" x="110" y="109" width="82" height="14"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
                                         <color key="textColor" red="0.92299705740000004" green="0.08180250973" blue="0.2317947149" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1060,7 +1060,7 @@ QR</string>
                                     <action selector="cancelAction:" destination="3gL-lZ-1hN" eventType="touchUpInside" id="2E7-tX-vKv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount from QR: 1 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2E-Qe-eWd">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount from QR: 1 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2E-Qe-eWd">
                                 <rect key="frame" x="226.5" y="77.5" width="132.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                 <color key="textColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
@@ -2750,10 +2750,10 @@ address</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Bgz-R6-m6y"/>
-        <segue reference="TSe-kF-31L"/>
+        <segue reference="Y3u-nO-qs1"/>
         <segue reference="pfe-aE-6Gg"/>
-        <segue reference="RTX-aa-bzX"/>
-        <segue reference="N56-qi-Hx5"/>
+        <segue reference="EUD-ex-a5v"/>
+        <segue reference="FRo-Sp-aVY"/>
         <segue reference="jSE-EO-qlC"/>
     </inferredMetricsTieBreakers>
 </document>

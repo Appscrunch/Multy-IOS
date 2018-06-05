@@ -88,9 +88,9 @@ class TransactionViewController: UIViewController, AnalyticsProtocol {
         lineNumber.round(.towardZero)
         var title = ""
         if labelFor == walletFromAddressLbl {
-            title = presenter.histObj.txInputs.map{ $0.address }[Int(lineNumber)]
+            title = presenter.histObj.txInputs[Int(lineNumber)].address
         } else { // if walletToAddressLbl
-            title = presenter.histObj.txOutputs.map{ $0.address }[Int(lineNumber)]
+            title = presenter.histObj.txOutputs[Int(lineNumber)].address
         }
         
         let actionSheet = UIAlertController(title: "", message: title, preferredStyle: .actionSheet)

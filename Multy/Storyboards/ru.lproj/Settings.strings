@@ -24,7 +24,7 @@
 "B4h-nl-CRV.text" = "Посмотреть Seed-фразу";
 
 /* Class = "UILabel"; text = "Make a backup copy of the wallet before using this feature"; ObjectID = "Byc-KO-XkA"; */
-"Byc-KO-XkA.text" = "Make a backup copy of the wallet before using this feature";
+"Byc-KO-XkA.text" = "Установите дополнительную настройку доступа в приложение Multy";
 
 /* Class = "UIButton"; normalTitle = "3"; ObjectID = "DZA-nt-dij"; */
 "DZA-nt-dij.normalTitle" = "3";
@@ -57,7 +57,7 @@
 "Q5P-Ni-MVF.normalTitle" = "8";
 
 /* Class = "UILabel"; text = "Enter Password"; ObjectID = "S7o-SM-GjY"; */
-"S7o-SM-GjY.text" = "Enter Password";
+"S7o-SM-GjY.text" = "Введите пароль";
 
 /* Class = "UILabel"; text = "PIN-code"; ObjectID = "VdQ-St-UVy"; */
 "VdQ-St-UVy.text" = "PIN-код";
@@ -87,7 +87,7 @@
 "pNa-A7-eEe.text" = "Сбросив все ваши данные, вы потеряете все свои кошельки и учетные записи на этом устройстве";
 
 /* Class = "UILabel"; text = "Biometric identification"; ObjectID = "ta5-0S-Je8"; */
-"ta5-0S-Je8.text" = "Биометрическая идентификация";
+"ta5-0S-Je8.text" = "Идентификация";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "tsO-57-6kh"; */
 "tsO-57-6kh.normalTitle" = "Отменить";

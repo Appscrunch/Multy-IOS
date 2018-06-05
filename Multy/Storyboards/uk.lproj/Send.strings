@@ -2,9 +2,6 @@
 /* Class = "UILabel"; text = "Transaction Fee"; ObjectID = "0ZI-tj-Idl"; */
 "0ZI-tj-Idl.text" = "Комісія за переказ";
 
-/* Class = "UILabel"; text = "You don't have any wallets with BTC"; ObjectID = "28l-xW-5E4"; */
-"28l-xW-5E4.text" = "You don't have any wallets with BTC";
-
 /* Class = "UILabel"; text = "1.1234 BTC / 1 123 USD"; ObjectID = "31h-f9-3fx"; */
 "31h-f9-3fx.text" = "1.1234 BTC / 1 123 USD";
 
@@ -33,25 +30,19 @@
 "7g9-UJ-RsT.text" = "(в розробці)";
 
 /* Class = "UITextField"; placeholder = "Enter price here"; ObjectID = "84M-y9-Blm"; */
-"84M-y9-Blm.placeholder" = "Enter price here";
+"84M-y9-Blm.placeholder" = "Введіть ціну";
 
 /* Class = "UILabel"; text = "Sending..."; ObjectID = "9Jg-ab-E9W"; */
-"9Jg-ab-E9W.text" = "Sending...";
+"9Jg-ab-E9W.text" = "Відправка...";
 
 /* Class = "UILabel"; text = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain."; ObjectID = "9nM-mt-kya"; */
 "9nM-mt-kya.text" = "Ставка комісії впливає на те, як швидко ваша транзакція буде прийнята блокчейн-мережею.";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "Ab6-cO-MZd"; */
-"Ab6-cO-MZd.text" = "Label";
 
 /* Class = "UILabel"; text = "1 174.23 USD"; ObjectID = "AkA-WX-ZNe"; */
 "AkA-WX-ZNe.text" = "1 174.23 USD";
 
 /* Class = "UILabel"; text = "Amount from QR: 1 BTC"; ObjectID = "B2E-Qe-eWd"; */
 "B2E-Qe-eWd.text" = "Amount from QR: 1 BTC";
-
-/* Class = "UILabel"; text = "Wireless \nScan"; ObjectID = "BoO-y0-goH"; */
-"BoO-y0-goH.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "C5d-7f-xmF"; */
 "C5d-7f-xmF.placeholder" = "Введіть адресу одержувача";
@@ -69,7 +60,7 @@
 "CmP-mh-W1O.text" = "Комісія за переказ";
 
 /* Class = "UILabel"; text = "Scan\nQR"; ObjectID = "Cmu-SL-LS1"; */
-"Cmu-SL-LS1.text" = "Scan\nQR";
+"Cmu-SL-LS1.text" = "Скан\nQR";
 
 /* Class = "UILabel"; text = "To:"; ObjectID = "Ed2-gG-ZRs"; */
 "Ed2-gG-ZRs.text" = "Кому:";
@@ -78,13 +69,13 @@
 "Ewh-6y-aEq.text" = "Розмір комісії";
 
 /* Class = "UILabel"; text = "Please Check your Bluetooth connection"; ObjectID = "GPJ-dz-boD"; */
-"GPJ-dz-boD.text" = "Please Check your Bluetooth connection";
+"GPJ-dz-boD.text" = "Перевірте Bluetooth-підключення";
 
 /* Class = "UILabel"; text = "ETH"; ObjectID = "GcC-ye-4hC"; */
 "GcC-ye-4hC.text" = "ETH";
 
 /* Class = "UILabel"; text = "Bluetooth Error"; ObjectID = "GuO-y4-IZM"; */
-"GuO-y4-IZM.text" = "Bluetooth Error";
+"GuO-y4-IZM.text" = "Bluetooth не включений";
 
 /* Class = "UILabel"; text = "Searching active requests"; ObjectID = "GzI-Rv-HuM"; */
 "GzI-Rv-HuM.text" = "Пошук запитів";
@@ -96,7 +87,7 @@
 "Lfo-SJ-k1k.normalTitle" = "Скасувати";
 
 /* Class = "UILabel"; text = "Confirm Sending\n"; ObjectID = "Mk1-tu-7rf"; */
-"Mk1-tu-7rf.text" = "Підтвердити відправку\n";
+"Mk1-tu-7rf.text" = "Відправка\n";
 
 /* Class = "UILabel"; text = "Send From"; ObjectID = "PrT-By-RHO"; */
 "PrT-By-RHO.text" = "Відправити";
@@ -107,8 +98,8 @@
 /* Class = "UILabel"; text = "0.002 BTC / 1.54 USD"; ObjectID = "RhC-aH-HrF"; */
 "RhC-aH-HrF.text" = "0.002 BTC / 1.54 USD";
 
-/* Class = "UILabel"; text = " Custom Fee Rate "; ObjectID = "Ro9-45-B2B"; */
-"Ro9-45-B2B.text" = " Custom Fee Rate ";
+/* Class = "UILabel"; text = " Custom Fee Rate"; ObjectID = "Ro9-45-B2B"; */
+"Ro9-45-B2B.text" = "Користувача";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "S0T-Fm-OmK"; */
 "S0T-Fm-OmK.normalTitle" = "Далі";
@@ -129,7 +120,7 @@
 "VhT-01-bTB.text" = "Відправити суму";
 
 /* Class = "UILabel"; text = "MAX"; ObjectID = "Xhi-Qs-0Ca"; */
-"Xhi-Qs-0Ca.text" = "MAX";
+"Xhi-Qs-0Ca.text" = "ВСЕ";
 
 /* Class = "UILabel"; text = "1.5"; ObjectID = "YTg-nf-xCh"; */
 "YTg-nf-xCh.text" = "1.5";
@@ -144,13 +135,10 @@
 "aO6-lQ-C4K.text" = "0";
 
 /* Class = "UILabel"; text = "GAS Price (in Gwei)"; ObjectID = "axx-5t-akg"; */
-"axx-5t-akg.text" = "GAS Price (in Gwei)";
+"axx-5t-akg.text" = "Ціна газу (Гвей)";
 
 /* Class = "UITextField"; placeholder = "+ Add Note"; ObjectID = "b5c-CM-iki"; */
-"b5c-CM-iki.placeholder" = "+ Add Note";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "bYi-Iw-7xR"; */
-"bYi-Iw-7xR.text" = "Label";
+"b5c-CM-iki.placeholder" = "+ Додати примітку";
 
 /* Class = "UILabel"; text = "1.1234 ETH"; ObjectID = "bha-Kb-4Pk"; */
 "bha-Kb-4Pk.text" = "1.1234 ETH";
@@ -162,10 +150,10 @@
 "dSj-73-kB0.normalTitle" = "Готово";
 
 /* Class = "UILabel"; text = "GAS Limit"; ObjectID = "enn-zm-3do"; */
-"enn-zm-3do.text" = "GAS Limit";
+"enn-zm-3do.text" = "Ліміт газу";
 
-/* Class = "UILabel"; text = "Available: "; ObjectID = "fDn-cT-aUG"; */
-"fDn-cT-aUG.text" = "Доступно: ";
+/* Class = "UILabel"; text = "Available:"; ObjectID = "fDn-cT-aUG"; */
+"fDn-cT-aUG.text" = "Доступно:";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "fOo-l7-Vq8"; */
 "fOo-l7-Vq8.text" = "BTC";
@@ -237,7 +225,7 @@
 "s8N-my-GN0.text" = "0";
 
 /* Class = "UITextField"; placeholder = "Enter limit here"; ObjectID = "sAV-0f-SxV"; */
-"sAV-0f-SxV.placeholder" = "Enter limit here";
+"sAV-0f-SxV.placeholder" = "Введіть ліміт газу";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "sEm-BU-U5Q"; */
 "sEm-BU-U5Q.text" = "USD";
@@ -256,9 +244,6 @@
 
 /* Class = "UILabel"; text = "Donate to Multy "; ObjectID = "wCG-9b-EeH"; */
 "wCG-9b-EeH.text" = "Пожертвувати Multy ";
-
-/* Class = "UILabel"; text = "BTC ∙ Personal"; ObjectID = "y3A-JK-Mp2"; */
-"y3A-JK-Mp2.text" = "BTC ∙ Personal";
 
 /* Class = "UILabel"; text = "Contacts"; ObjectID = "zJa-f3-tWD"; */
 "zJa-f3-tWD.text" = "Контакти";

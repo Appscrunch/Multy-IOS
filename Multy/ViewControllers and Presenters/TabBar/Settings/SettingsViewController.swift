@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     let presenter = SettingsPresenter()
-    let authVC = SecureViewController()
+//    let authVC = SecureViewController()
     
     var pinStr: String?
     
@@ -88,24 +88,24 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
         }
     }
     
-    @IBAction func onSwitch(_ sender: Any) {
-        if !pinSwitch.isOn {
-                NotificationCenter.default.addObserver(self, selector: #selector(self.disablePin), name: Notification.Name("canDisablePin"), object: nil)
-                pinSwitch.isOn = true
-                authVC.modalPresentationStyle = .overCurrentContext
-                self.present(authVC, animated: true, completion: nil)
-        } else {
-            if self.presenter.canEvaluatePolicy() {
-                UserPreferences.shared.writeCipheredPinMode(mode: 1)
-            } else {
-                pinSwitch.isOn = false
-                let message = "Biometric authentication is not configured on your device"
-                let alert = UIAlertController(title: localize(string: Constants.sorryString), message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: localize(string: Constants.cancelString), style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
-    }
+//    @IBAction func onSwitch(_ sender: Any) {
+//        if !pinSwitch.isOn {
+//                NotificationCenter.default.addObserver(self, selector: #selector(self.disablePin), name: Notification.Name("canDisablePin"), object: nil)
+//                pinSwitch.isOn = true
+//                authVC.modalPresentationStyle = .overCurrentContext
+//                self.present(authVC, animated: true, completion: nil)
+//        } else {
+//            if self.presenter.canEvaluatePolicy() {
+//                UserPreferences.shared.writeCipheredPinMode(mode: 1)
+//            } else {
+//                pinSwitch.isOn = false
+//                let message = "Biometric authentication is not configured on your device"
+//                let alert = UIAlertController(title: localize(string: Constants.sorryString), message: message, preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: localize(string: Constants.cancelString), style: .cancel, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//    }
     
     @IBAction func showOrHideCopy(_ sender: UIButton, event: UIEvent) {
         if self.copyBtn.alpha == 0.0 {
