@@ -187,11 +187,13 @@ class SendViewController: UIViewController {
                 searchingAnimationView?.play()
             }
             
-            if presenter.selectedWalletIndex != nil && presenter.selectedActiveRequestIndex != nil {
-                sendTipLabel.isHidden = false
-                sendTipLabel.text = localize(string: Constants.sendTipString)
-            } else {
-                sendTipLabel.isHidden = true
+            if sendMode != .prepareSending {
+                if presenter.selectedWalletIndex != nil && presenter.selectedActiveRequestIndex != nil {
+                    sendTipLabel.isHidden = false
+                    sendTipLabel.text = localize(string: Constants.sendTipString)
+                } else {
+                    sendTipLabel.isHidden = true
+                }
             }
         }
     }
@@ -312,7 +314,6 @@ class SendViewController: UIViewController {
         
         showNotSelectedWallets()
         showNotSelectedRequests()
-        sendTipLabel.isHidden = false
         
         UIView.animate(withDuration: ANIMATION_DURATION, animations: {
             self.animationHolderView.layoutIfNeeded()
@@ -322,6 +323,7 @@ class SendViewController: UIViewController {
             if succeeded {
                 self.searchingRequestsHolderView.alpha = 1.0
                 self.transactionHolderView.isHidden = true
+                self.sendTipLabel.isHidden = false
             }
         }
     }
