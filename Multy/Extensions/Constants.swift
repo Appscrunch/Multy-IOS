@@ -147,6 +147,7 @@ struct Constants {
     
     struct CustomFee {
         static let defaultBTCCustomFeeKey = 2
+        static let defaultETHCustomFeeKey = 1 // in GWei
     }
 }
 
