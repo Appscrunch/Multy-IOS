@@ -19,6 +19,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     @IBOutlet weak var botView: UIView!
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var noAddressLbl: UILabel!
+    @IBOutlet weak var recentAddresses: UILabel!
     
     let presenter = SendStartPresenter()
     var stingIdForInApp = ""
@@ -251,6 +252,7 @@ extension SendStartViewController:  UITableViewDelegate, UITableViewDataSource {
     func updateUI() {
         self.tableView.reloadData()
         noAddressLbl.isHidden = !self.presenter.recentAddresses.isEmpty
+        recentAddresses.isHidden = self.presenter.recentAddresses.isEmpty
     }
     
     func ipadFix() {
