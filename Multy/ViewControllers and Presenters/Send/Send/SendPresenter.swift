@@ -486,7 +486,6 @@ class SendPresenter: NSObject {
         return nil
     }
     
-    var checkNewUserCodesCounter = 0
     @objc private func startSearchingActiveRequests() {
         BLEManager.shared.startScan()
         if receiveActiveRequestTimer == nil {
@@ -503,6 +502,12 @@ class SendPresenter: NSObject {
         }
     }
     
+    private func restartSearching() {
+        stopSearching()
+        startSearchingActiveRequests()
+    }
+    
+    var checkNewUserCodesCounter = 0
     @objc func checkNewUserCodes() {
         checkNewUserCodesCounter += 1
         
@@ -521,6 +526,8 @@ class SendPresenter: NSObject {
             if userCodes.count > 0 {
                 isNeedToBecomeSender = true
             }
+            
+            restartSearching()
         } else if newUserCodes.count > 0 {
             isNeedToBecomeSender = true
         }
