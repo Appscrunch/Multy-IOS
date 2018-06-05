@@ -65,6 +65,13 @@ class CreateWalletPresenter: NSObject {
         createdWallet.addressID = NSNumber(value: dict!["addressID"] as! UInt32)
         createdWallet.address = dict!["address"] as! String
         
+        if createdWallet.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
+            createdWallet.ethWallet = ETHWallet()
+            createdWallet.ethWallet?.balance = "0"
+            createdWallet.ethWallet?.nonce = NSNumber(value: 0)
+            createdWallet.ethWallet?.pendingWeiAmountString = "0"
+        }
+        
         let params = [
             "currencyID"    : currencyID,
             "networkID"     : networkID,

@@ -109,7 +109,8 @@ class SendPresenter: NSObject {
         if selectedActiveRequestIndex != nil  {
             let request = activeRequestsArr[selectedActiveRequestIndex!]
             //FIXEME: add all blockchains
-            let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN)
+            let blockchainType = BlockchainType.create(currencyID: UInt32(request.currencyID), netType: UInt32(request.networkID))
+            let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: blockchainType.blockchain)
             let address = request.sendAddress
             
 
@@ -388,7 +389,7 @@ class SendPresenter: NSObject {
     }
     
     func updateActiveRequests(_ newRequests : [PaymentRequest]) {
-        var filteredRequestArray = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
+        var filteredRequestArray = newRequests.filter{ _ in true } //BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0) }
         
         if selectedActiveRequestIndex != nil {
             // active request already exists
