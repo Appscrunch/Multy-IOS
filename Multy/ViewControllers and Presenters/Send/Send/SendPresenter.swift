@@ -143,7 +143,7 @@ class SendPresenter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveSendResponse(notification:)), name: Notification.Name("sendResponse"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveSendResponse(notification:)), name: Notification.Name("sendResponse"), object: nil)
         
     }
     
@@ -165,7 +165,7 @@ class SendPresenter: NSObject {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
     }
     
     func numberOfWallets() -> Int {
@@ -312,7 +312,7 @@ class SendPresenter: NSObject {
         createPreliminaryData()
         let request = activeRequestsArr[selectedActiveRequestIndex!]
         let wallet = filteredWalletArray[selectedWalletIndex!]
-        let jwtToken = DataManager.shared.realmManager.account!.token
+  //      let jwtToken = DataManager.shared.realmManager.account!.token
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                          sendAddress: request.sendAddress,
                                                                          sendAmountString: request.sendAmount,
@@ -334,12 +334,30 @@ class SendPresenter: NSObject {
         
         let params = [
             "currencyid": wallet.chain,
-            "JWT"       : jwtToken,
+            /*"JWT"       : jwtToken,*/
             "networkid" : wallet.chainType,
             "payload"   : newAddressParams
             ] as [String : Any]
         
-        DataManager.shared.socketManager.txSend(params : params)
+        DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
+            print("---------\(dict)")
+            self.cleanRequests()
+            
+            if error != nil {
+                self.sendVC?.updateUIWithSendResponse(success: false)
+                print("sendHDTransaction Error: \(error)")
+                
+                return
+            }
+            
+            if dict!["code"] as! Int == 200 {
+                self.sendVC?.updateUIWithSendResponse(success: true)
+            } else {
+                self.sendVC?.updateUIWithSendResponse(success: false)
+            }
+        }
+        
+       // DataManager.shared.socketManager.txSend(params : params)
     }
     
     func sendAnimationComplete() {
@@ -393,60 +411,6 @@ class SendPresenter: NSObject {
         }
         
         activeRequestsArr = filteredRequestArray
-        
-//        var updatedActiveRequests = [PaymentRequest]()
-//        var filteredNewRequests = newRequests.filter{BigInt($0.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0)}
-//
-//        for i in 0..<activeRequestsArr.count {
-//            let oldRequest = activeRequestsArr[i]
-//
-//            for k in 0..<filteredNewRequests.count {
-//                let newRequest = filteredNewRequests[k]
-//
-//                if newRequest.userCode == oldRequest.userCode {
-//
-//                    if BigInt(newRequest.sendAmount.convertCryptoAmountStringToMinimalUnits(in: BLOCKCHAIN_BITCOIN).stringValue) > Int64(0) {
-//                        updatedActiveRequests.append(newRequest)
-//                    }
-//
-//                    mutableNewRequests.remove(at: k)
-//
-//                    break
-//                }
-//            }
-//        }
-        
-        
-        activeRequestsArr = filteredRequestArray
-        
-//        var newRequests = [PaymentRequest]()
-//        while filteredRequestArray.count > 0 {
-//            let request = filteredRequestArray.first!
-//
-//            var isRequestOld = false
-//            for oldRequest in self.activeRequestsArr {
-//                if oldRequest.userCode == request.userCode {
-//                    let index = self.activeRequestsArr.index(of: oldRequest)
-//                    if self.activeRequestsArr[index!].sendAmount != request.sendAmount || self.activeRequestsArr[index!].sendAddress != request.sendAddress {
-//                        self.activeRequestsArr[index!] = request
-//                        self.createTransactionDTO()
-//                    }
-//
-//                    isRequestOld = true
-//                    break
-//                }
-//            }
-//
-//            if !isRequestOld {
-//                newRequests.append(request)
-//            }
-//
-//            filteredRequestArray.removeFirst()
-//        }
-//
-//        if newRequests.count > 0 {
-//            self.addActivePaymentRequests(requests: newRequests)
-//        }
     }
     
     func addActivePaymentRequests(requests: [PaymentRequest]) {
@@ -456,14 +420,14 @@ class SendPresenter: NSObject {
         }
     }
     
-    @objc private func didReceiveSendResponse(notification: Notification) {
-        DispatchQueue.main.async {
-            self.cleanRequests()
-            let success = notification.userInfo!["data"] as! Bool
-            
-            self.sendVC?.updateUIWithSendResponse(success: success)
-        }
-    }
+//    @objc private func didReceiveSendResponse(notification: Notification) {
+//        DispatchQueue.main.async {
+//
+//            let success = notification.userInfo!["data"] as! Bool
+//
+//            self.sendVC?.updateUIWithSendResponse(success: success)
+//        }
+//    }
     
     @objc private func applicationWillResignActive(notification: Notification) {
         viewWillDisappear()
