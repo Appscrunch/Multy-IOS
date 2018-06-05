@@ -20,8 +20,12 @@ class ReceiveStartViewController: UIViewController, AnalyticsProtocol {
     
     var whereFrom: UIViewController?
     
+    let loader = PreloaderView(frame: HUDFrame, text: "", image: #imageLiteral(resourceName: "walletHuge"))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(loader)
         self.swipeToBack()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
