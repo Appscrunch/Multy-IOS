@@ -9,8 +9,14 @@
 import UIKit
 import RealmSwift
 
+private typealias CreateTransactionDelegate = SendPresenter
+
 class SendPresenter: NSObject {
     var sendVC : SendViewController?
+    
+    var rawTransaction = String()
+    var rawTransactionEstimation = 0.0
+    var rawTransactionBigIntEstimation = BigInt.zero()
     
     var walletsArr = Array<UserWalletRLM>() {
         didSet {
@@ -309,27 +315,44 @@ class SendPresenter: NSObject {
     }
     
     func send() {
-
+        guard let index = selectedWalletIndex else {
+            self.cleanRequests()
+            self.sendVC?.updateUIWithSendResponse(success: false)
+            
+            return
+        }
+        
         createPreliminaryData()
-        let request = activeRequestsArr[selectedActiveRequestIndex!]
-        let wallet = filteredWalletArray[selectedWalletIndex!]
-  //      let jwtToken = DataManager.shared.realmManager.account!.token
-        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
-                                                                         sendAddress: request.sendAddress,
-                                                                         sendAmountString: request.sendAmount,
-                                                                         feePerByteAmount: "10",
-                                                                         isDonationExists: false,
-                                                                         donationAmount: "0",
-                                                                         isPayCommission: true,
-                                                                         wallet: wallet,
-                                                                         binaryData: &binaryData!,
-                                                                         inputs: wallet.addresses)
+        
+        let isCreated = createTransaction()
+        
+        let wallet = filteredWalletArray[index]
+        
+        if isCreated == false {
+            var message = rawTransaction
+            
+            if message.hasPrefix("BigInt value is not representable as") {
+                message = "You entered too small amount!"
+            } else if message.hasPrefix("Transaction is trying to spend more than available in inputs") {
+                message = "You are trying to spend more then you have."
+            }
+            
+//            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in }))
+//            sendVC!.present(alert, animated: true, completion: nil)
+            
+            //FIXME: show error message
+            self.cleanRequests()
+            self.sendVC?.updateUIWithSendResponse(success: false)
+            
+            return
+        }
         
         let newAddressParams = [
             "walletindex"   : wallet.walletID.intValue,
             "address"       : addressData!["address"] as! String,
             "addressindex"  : wallet.addresses.count,
-            "transaction"   : trData.0,
+            "transaction"   : rawTransaction,
             "ishd"          : wallet.shouldCreateNewAddressAfterTransaction
             ] as [String : Any]
         
@@ -339,6 +362,8 @@ class SendPresenter: NSObject {
             "networkid" : wallet.chainType,
             "payload"   : newAddressParams
             ] as [String : Any]
+        
+        
         
         DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
             print("---------\(dict)")
@@ -359,6 +384,19 @@ class SendPresenter: NSObject {
         }
         
        // DataManager.shared.socketManager.txSend(params : params)
+    }
+    
+    func createTransaction() -> Bool {
+        let wallet = filteredWalletArray[selectedWalletIndex!]
+        
+        switch wallet.blockchainType.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return createBTCTransaction()
+        case BLOCKCHAIN_ETHEREUM:
+            return createETHTransaction()
+        default:
+            return false
+        }
     }
     
     func sendAnimationComplete() {
@@ -533,6 +571,52 @@ class SendPresenter: NSObject {
 //                       blue:  CGFloat(arc4random()) / CGFloat(UInt32.max),
 //                       alpha: 1.0)
 //    }
+}
+
+extension CreateTransactionDelegate {
+    func createBTCTransaction() -> Bool {
+        createPreliminaryData()
+        let request = activeRequestsArr[selectedActiveRequestIndex!]
+        let wallet = filteredWalletArray[selectedWalletIndex!]
+        //      let jwtToken = DataManager.shared.realmManager.account!.token
+        let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
+                                                                         sendAddress: request.sendAddress,
+                                                                         sendAmountString: request.sendAmount,
+                                                                         feePerByteAmount: "10",
+                                                                         isDonationExists: false,
+                                                                         donationAmount: "0",
+                                                                         isPayCommission: true,
+                                                                         wallet: wallet,
+                                                                         binaryData: &binaryData!,
+                                                                         inputs: wallet.addresses)
+        
+        rawTransaction = trData.0
+        rawTransactionEstimation = trData.1
+        rawTransactionBigIntEstimation = BigInt(trData.2)
+        
+        return trData.1 >= 0
+    }
+    
+    func createETHTransaction() -> Bool {
+        createPreliminaryData()
+        let request = activeRequestsArr[selectedActiveRequestIndex!]
+        let wallet = filteredWalletArray[selectedWalletIndex!]
+        
+        let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: wallet.blockchainType.blockchain).stringValue
+        
+        let trData = DataManager.shared.coreLibManager.createEtherTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
+                                                                              sendAddress: request.sendAddress,
+                                                                              sendAmountString: sendAmount,
+                                                                              nonce: wallet.ethWallet!.nonce.intValue,
+                                                                              balanceAmount: wallet.ethWallet!.balance,
+                                                                              ethereumChainID: UInt32(wallet.blockchainType.net_type),
+                                                                              gasPrice: "1000000000",
+                                                                              gasLimit: "21000")
+        
+        rawTransaction = trData.message
+        
+        return trData.isTransactionCorrect
+    }
 }
 
 extension SendPresenter: QrDataProtocol {

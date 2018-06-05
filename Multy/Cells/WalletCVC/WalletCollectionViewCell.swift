@@ -36,7 +36,7 @@ class WalletCollectionViewCell: UICollectionViewCell {
         self.tokenImage.image = UIImage(named: blockchainType.iconString)
         let sumInFiat = wallet!.sumInFiat.fixedFraction(digits: 2)
         self.walletNameLbl.text = self.wallet!.name
-        self.cryptoSumLbl.text  = self.wallet!.sumInCrypto.fixedFraction(digits: 8)
+        self.cryptoSumLbl.text  = self.wallet!.availableAmount.cryptoValueString(for: blockchainType.blockchain)
         self.cryptoNameLbl.text = blockchainType.shortName
         self.fiatSumLbl.text = "\(sumInFiat) \(self.wallet!.fiatSymbol)"
     }

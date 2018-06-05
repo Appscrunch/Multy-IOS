@@ -72,12 +72,24 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func minimalUnit() -> Int {
+        switch presenter.blockchainType?.blockchain {
+        case BLOCKCHAIN_BITCOIN:
+            return Constants.CustomFee.defaultBTCCustomFeeKey
+        case BLOCKCHAIN_ETHEREUM:
+            return Constants.CustomFee.defaultETHCustomFeeKey
+        default:
+            return 1
+        }
+    }
+    
     @objc func done() {
-        let defaultBTCCustomFee = Constants.CustomFee.defaultBTCCustomFeeKey
-        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < defaultBTCCustomFee {
+        let defaultCustomFee = minimalUnit()
+        
+        if topPriceTF.text == nil || (topPriceTF.text! as NSString).intValue < defaultCustomFee {
             switch presenter.blockchainType!.blockchain {
             case BLOCKCHAIN_BITCOIN:
-                let message = "\(localize(string: Constants.feeRateLessThenString)) \(defaultBTCCustomFee) \(localize(string: Constants.satoshiPerByteString))"
+                let message = "\(localize(string: Constants.feeRateLessThenString)) \(defaultCustomFee) \(localize(string: Constants.satoshiPerByteString))"
                 let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
                     self.topPriceTF.becomeFirstResponder()
