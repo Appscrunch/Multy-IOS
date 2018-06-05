@@ -24,7 +24,7 @@
 "B4h-nl-CRV.text" = "View Seed Phrase";
 
 /* Class = "UILabel"; text = "Make a backup copy of the wallet before using this feature"; ObjectID = "Byc-KO-XkA"; */
-"Byc-KO-XkA.text" = "Make a backup copy of the wallet before using this feature";
+"Byc-KO-XkA.text" = "Set up additional step for accessing your Multy application";
 
 /* Class = "UIButton"; normalTitle = "3"; ObjectID = "DZA-nt-dij"; */
 "DZA-nt-dij.normalTitle" = "3";

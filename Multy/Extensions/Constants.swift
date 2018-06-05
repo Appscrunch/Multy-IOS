@@ -76,6 +76,7 @@ struct Constants {
     static let enterSatoshiPerByte = "ENTER SATOSHI PER BYTE"
     static let enableBluetoothAlertTitle = "ENABLE BLUETOOTH ALERT TITLE"
     static let settingsActionTitle = "SETTINGS ACTION TITLE"
+    static let useTermsOfService = "USE TERMS OF SERVICE"
     
     //Assets screen
     struct AssetsScreen {

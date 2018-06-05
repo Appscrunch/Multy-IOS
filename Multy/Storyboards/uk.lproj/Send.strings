@@ -75,7 +75,7 @@
 "GcC-ye-4hC.text" = "ETH";
 
 /* Class = "UILabel"; text = "Bluetooth Error"; ObjectID = "GuO-y4-IZM"; */
-"GuO-y4-IZM.text" = "Помилка Bluetooth";
+"GuO-y4-IZM.text" = "Bluetooth не включений";
 
 /* Class = "UILabel"; text = "Searching active requests"; ObjectID = "GzI-Rv-HuM"; */
 "GzI-Rv-HuM.text" = "Пошук запитів";
@@ -120,7 +120,7 @@
 "VhT-01-bTB.text" = "Відправити суму";
 
 /* Class = "UILabel"; text = "MAX"; ObjectID = "Xhi-Qs-0Ca"; */
-"Xhi-Qs-0Ca.text" = "MAX";
+"Xhi-Qs-0Ca.text" = "ВСЕ";
 
 /* Class = "UILabel"; text = "1.5"; ObjectID = "YTg-nf-xCh"; */
 "YTg-nf-xCh.text" = "1.5";
@@ -135,13 +135,10 @@
 "aO6-lQ-C4K.text" = "0";
 
 /* Class = "UILabel"; text = "GAS Price (in Gwei)"; ObjectID = "axx-5t-akg"; */
-"axx-5t-akg.text" = "GAS Price (in Gwei)";
+"axx-5t-akg.text" = "Ціна газу (Гвей)";
 
 /* Class = "UITextField"; placeholder = "+ Add Note"; ObjectID = "b5c-CM-iki"; */
-"b5c-CM-iki.placeholder" = "+ Add Note";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "bYi-Iw-7xR"; */
-"bYi-Iw-7xR.text" = "Label";
+"b5c-CM-iki.placeholder" = "+ Додати примітку";
 
 /* Class = "UILabel"; text = "1.1234 ETH"; ObjectID = "bha-Kb-4Pk"; */
 "bha-Kb-4Pk.text" = "1.1234 ETH";
@@ -153,10 +150,10 @@
 "dSj-73-kB0.normalTitle" = "Готово";
 
 /* Class = "UILabel"; text = "GAS Limit"; ObjectID = "enn-zm-3do"; */
-"enn-zm-3do.text" = "GAS Limit";
+"enn-zm-3do.text" = "Ліміт газу";
 
-/* Class = "UILabel"; text = "Available: "; ObjectID = "fDn-cT-aUG"; */
-"fDn-cT-aUG.text" = "Доступно: ";
+/* Class = "UILabel"; text = "Available:"; ObjectID = "fDn-cT-aUG"; */
+"fDn-cT-aUG.text" = "Доступно:";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "fOo-l7-Vq8"; */
 "fOo-l7-Vq8.text" = "BTC";
@@ -228,7 +225,7 @@
 "s8N-my-GN0.text" = "0";
 
 /* Class = "UITextField"; placeholder = "Enter limit here"; ObjectID = "sAV-0f-SxV"; */
-"sAV-0f-SxV.placeholder" = "Enter limit here";
+"sAV-0f-SxV.placeholder" = "Введіть ліміт газу";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "sEm-BU-U5Q"; */
 "sEm-BU-U5Q.text" = "USD";
@@ -247,9 +244,6 @@
 
 /* Class = "UILabel"; text = "Donate to Multy "; ObjectID = "wCG-9b-EeH"; */
 "wCG-9b-EeH.text" = "Пожертвувати Multy ";
-
-/* Class = "UILabel"; text = "BTC ∙ Personal"; ObjectID = "y3A-JK-Mp2"; */
-"y3A-JK-Mp2.text" = "BTC ∙ Personal";
 
 /* Class = "UILabel"; text = "Contacts"; ObjectID = "zJa-f3-tWD"; */
 "zJa-f3-tWD.text" = "Контакти";
