@@ -78,6 +78,7 @@ struct Constants {
     static let settingsActionTitle = "SETTINGS ACTION TITLE"
     static let sendTipString = "SEND TIP"
     static let useTermsOfService = "USE TERMS OF SERVICE"
+    static let restoringWalletsString = "RESTORING WALLETS"
     
     //Assets screen
     struct AssetsScreen {
