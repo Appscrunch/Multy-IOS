@@ -210,4 +210,77 @@ class AssetsPresenter: NSObject {
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = true
         assetsVC?.refreshControl.endRefreshing()
     }
+    
+    func makeAuth(completion: @escaping (_ answer: String) -> ()) {
+        if self.account != nil {
+            return
+        }
+        
+        DataManager.shared.auth(rootKey: nil) { (account, error) in
+            //            self.assetsVC?.view.isUserInteractionEnabled = true
+            //            self.assetsVC?.progressHUD.hide()
+            guard account != nil else {
+                return
+            }
+            self.account = account
+            DataManager.shared.socketManager.start()
+            completion("ok")
+        }
+    }
+    
+    func createFirstWallets(blockchianType: BlockchainType, completion: @escaping (_ answer: String?,_ error: Error?) -> ()) {
+        var binData : BinaryData = account!.binaryDataString.createBinaryData()!
+        let createdWallet = UserWalletRLM()
+        //MARK: topIndex
+        let currencyID = blockchianType.blockchain.rawValue
+        let networkID = blockchianType.net_type
+        var currentTopIndex = account!.topIndexes.filter("currencyID = \(currencyID) AND networkID == \(networkID)").first
+        
+        if currentTopIndex == nil {
+            //            mainVC?.presentAlert(with: "TopIndex error data!")
+            currentTopIndex = TopIndexRLM.createDefaultIndex(currencyID: NSNumber(value: currencyID), networkID: NSNumber(value: networkID), topIndex: NSNumber(value: 0))
+        }
+        
+        let dict = DataManager.shared.createNewWallet(for: &binData, blockchain: blockchianType, walletID: currentTopIndex!.topIndex.uint32Value)
+        
+        createdWallet.chain = NSNumber(value: currencyID)
+        createdWallet.chainType = NSNumber(value: networkID)
+        createdWallet.name = "My First \(blockchianType.shortName) Wallet"
+        createdWallet.walletID = NSNumber(value: dict!["walletID"] as! UInt32)
+        createdWallet.addressID = NSNumber(value: dict!["addressID"] as! UInt32)
+        createdWallet.address = dict!["address"] as! String
+        
+        if createdWallet.blockchainType.blockchain == BLOCKCHAIN_ETHEREUM {
+            createdWallet.ethWallet = ETHWallet()
+            createdWallet.ethWallet?.balance = "0"
+            createdWallet.ethWallet?.nonce = NSNumber(value: 0)
+            createdWallet.ethWallet?.pendingWeiAmountString = "0"
+        }
+        
+        let params = [
+            "currencyID"    : currencyID,
+            "networkID"     : networkID,
+            "address"       : createdWallet.address,
+            "addressIndex"  : createdWallet.addressID,
+            "walletIndex"   : createdWallet.walletID,
+            "walletName"    : createdWallet.name
+            ] as [String : Any]
+        
+        guard assetsVC!.presentNoInternetScreen() else {
+            self.assetsVC?.loader.hide()
+            
+            return
+        }
+        
+        DataManager.shared.addWallet(params: params) { [unowned self] (dict, error) in
+            self.assetsVC?.loader.hide()
+            if error == nil {
+                self.assetsVC!.sendAnalyticsEvent(screenName: screenCreateWallet, eventName: cancelTap)
+                completion("ok", nil)
+            } else {
+                self.assetsVC?.presentAlert(with: "Error while creating wallet!")
+                completion(nil, nil)
+            }
+        }
+    }
 }
