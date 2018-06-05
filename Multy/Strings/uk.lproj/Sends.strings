@@ -31,15 +31,10 @@
 "TRANSACTION ERROR" = "Помилка транзакції";
 "LOADING" = "Завантаження";
 "ACTIVE REQUESTS" = "Поточні запити";
-<<<<<<< HEAD
 "ENABLE BLUETOOTH ALERT TITLE" = "Щоб включити Bluetooth, перейдіть в Настроювання";
 "SETTINGS ACTION TITLE" = "Настроювання";
-=======
 "YOU DONT HAVE WALLETS" = "У Вас немає гаманців з ";
 "ENTER SATOSHI PER BYTE" = "Введіть Сатоши за байт";
-"ENABLE BLUETOOTH ALERT TITLE" = "";
-"SETTINGS ACTION TITLE" = "";
->>>>>>> 67a09b6a646ca93b875106d92b8be4adaa40b001
 "COPY TO CLIPBOARD" = "Скопіювати в буфер обміну";
 "SHARE" = "Поділитися";
 "SAT/B" = "Сат/Б";
