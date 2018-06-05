@@ -31,6 +31,8 @@
 "TRANSACTION ERROR" = "Transaction Error";
 "LOADING" = "Loading";
 "ACTIVE REQUESTS" = "Active Requests";
+"YOU DONT HAVE WALLETS" = "You don't have any wallets with ";
+"ENTER SATOSHI PER BYTE" = "Enter Satohi per byte here";
 "ENABLE BLUETOOTH ALERT TITLE" = "To enable Bluetooth, go to Settings";
 "SETTINGS ACTION TITLE" = "Settings";
 "COPY TO CLIPBOARD" = "Copy to clipboard";

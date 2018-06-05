@@ -72,8 +72,11 @@ struct Constants {
     static let unableToSendString = "UNABLE SEND"
     static let receiveString = "RECEIVE"
     static let activeRequestsString = "ACTIVE REQUESTS"
+    static let youDontHaveWalletString = "YOU DONT HAVE WALLETS"
+    static let enterSatoshiPerByte = "ENTER SATOSHI PER BYTE"
     static let enableBluetoothAlertTitle = "ENABLE BLUETOOTH ALERT TITLE"
     static let settingsActionTitle = "SETTINGS ACTION TITLE"
+    static let useTermsOfService = "USE TERMS OF SERVICE"
     
     //Assets screen
     struct AssetsScreen {
@@ -87,10 +90,6 @@ struct Constants {
         static let topCellHeight = CGFloat(331)
         static let blockedCellDifference = CGFloat(60) // difference in table cell sizes in case existing/non existing blocked amount on wallet
         static let collectionCellDifference = CGFloat(137) // difference in sizes btw table cell and collection cell
-    }
-    
-    struct ChooseWalletScreen {
-        static let emptyScreenPhraseKey = "You don't have any wallets with "
     }
     
     //StoryboardStrings

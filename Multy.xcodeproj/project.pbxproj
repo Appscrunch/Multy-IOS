@@ -133,7 +133,6 @@
 		458C8B082072518000B8D71B /* SendAmountEthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C8B072072518000B8D71B /* SendAmountEthPresenter.swift */; };
 		458FD4C71FE3C2CB001C25BA /* SpendableOutputRLM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458FD4C61FE3C2CB001C25BA /* SpendableOutputRLM.swift */; };
 		459D482E1FE280ED0044740F /* CustomFeeRateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */; };
-		45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6D62A1FE01CAA00491446 /* SecureViewController.swift */; };
 		45A87832205FC73C0071D6F1 /* EthSendDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A87831205FC73C0071D6F1 /* EthSendDetailsViewController.swift */; };
 		45A87834205FC9E80071D6F1 /* EthSendDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A87833205FC9E80071D6F1 /* EthSendDetailsPresenter.swift */; };
 		45A9491F1FC2DFC7003C3A23 /* ReceiveStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */; };
@@ -535,7 +534,6 @@
 		458C8B072072518000B8D71B /* SendAmountEthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAmountEthPresenter.swift; sourceTree = "<group>"; };
 		458FD4C61FE3C2CB001C25BA /* SpendableOutputRLM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendableOutputRLM.swift; sourceTree = "<group>"; };
 		459D482D1FE280ED0044740F /* CustomFeeRateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeeRateProtocol.swift; sourceTree = "<group>"; };
-		45A6D62A1FE01CAA00491446 /* SecureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureViewController.swift; sourceTree = "<group>"; };
 		45A87831205FC73C0071D6F1 /* EthSendDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthSendDetailsViewController.swift; sourceTree = "<group>"; };
 		45A87833205FC9E80071D6F1 /* EthSendDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthSendDetailsPresenter.swift; sourceTree = "<group>"; };
 		45A9491E1FC2DFC7003C3A23 /* ReceiveStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveStartViewController.swift; sourceTree = "<group>"; };
@@ -1467,7 +1465,6 @@
 				45A9493C1FC5A4FB003C3A23 /* Send */,
 				45E148A420455341006BD4D1 /* Donation */,
 				45B5CCA01FDA90BA0069BD46 /* No InternetConnection */,
-				45A6D62A1FE01CAA00491446 /* SecureViewController.swift */,
 			);
 			path = "ViewControllers and Presenters";
 			sourceTree = "<group>";
@@ -2358,7 +2355,6 @@
 				45F098E820BC2877004DA1F7 /* AddressTransferProtocol.swift in Sources */,
 				FAB0E6AA20189AE300EB53E2 /* StockExchangeRateRLM.swift in Sources */,
 				4583ACA31FBCAC60001991AA /* UIView+Extension.swift in Sources */,
-				45A6D62B1FE01CAA00491446 /* SecureViewController.swift in Sources */,
 				44DFEF9F206A51AF0068769C /* UInt64+Extension.swift in Sources */,
 				455CDCFB1FC8537200EA5ACE /* CreateWalletViewController.swift in Sources */,
 				455CDCFD1FC85BB700EA5ACE /* CreateWalletNameTableViewCell.swift in Sources */,

@@ -17,7 +17,7 @@
 "MEDIUM" = "Помірно";
 "SLOW" = "Повільно";
 "VERY SLOW" = "Дуже повільно";
-"CUSTOM" = "Виставити вручну";
+"CUSTOM" = "Користувача"; // FIX
 "PREDEFINED VALUE MESSAGE" = "Ви можете використовувати значення за замовчуванням або встановити своє значення.";
 "PLEASE CHOOSE FEE RATE" = "Будь ласка, виберіть вартість комісії за байт.";
 "MORE THEN YOU HAVE" = "Ви намагаєтеся ввести суму більшу, ніж у вас є на рахунку";
@@ -31,6 +31,8 @@
 "TRANSACTION ERROR" = "Помилка транзакції";
 "LOADING" = "Завантаження";
 "ACTIVE REQUESTS" = "Поточні запити";
+"YOU DONT HAVE WALLETS" = "У Вас немає гаманців з ";
+"ENTER SATOSHI PER BYTE" = "Введіть Сатоши за байт";
 "ENABLE BLUETOOTH ALERT TITLE" = "";
 "SETTINGS ACTION TITLE" = "";
 "COPY TO CLIPBOARD" = "Скопіювати в буфер обміну";

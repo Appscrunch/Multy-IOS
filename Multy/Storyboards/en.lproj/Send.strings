@@ -2,9 +2,6 @@
 /* Class = "UILabel"; text = "Transaction Fee"; ObjectID = "0ZI-tj-Idl"; */
 "0ZI-tj-Idl.text" = "Transaction Fee";
 
-/* Class = "UILabel"; text = "You don't have any wallets with BTC"; ObjectID = "28l-xW-5E4"; */
-"28l-xW-5E4.text" = "You don't have any wallets with BTC";
-
 /* Class = "UILabel"; text = "1.1234 BTC / 1 123 USD"; ObjectID = "31h-f9-3fx"; */
 "31h-f9-3fx.text" = "1.1234 BTC / 1 123 USD";
 
@@ -41,17 +38,11 @@
 /* Class = "UILabel"; text = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain."; ObjectID = "9nM-mt-kya"; */
 "9nM-mt-kya.text" = "Fee Rate affects how fast your transaction is going to be accepted in the blockchain.";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "Ab6-cO-MZd"; */
-"Ab6-cO-MZd.text" = "Label";
-
 /* Class = "UILabel"; text = "1 174.23 USD"; ObjectID = "AkA-WX-ZNe"; */
 "AkA-WX-ZNe.text" = "1 174.23 USD";
 
 /* Class = "UILabel"; text = "Amount from QR: 1 BTC"; ObjectID = "B2E-Qe-eWd"; */
 "B2E-Qe-eWd.text" = "Amount from QR: 1 BTC";
-
-/* Class = "UILabel"; text = "Wireless \nScan"; ObjectID = "BoO-y0-goH"; */
-"BoO-y0-goH.text" = "Wireless \nScan";
 
 /* Class = "UITextField"; placeholder = "Search or Enter Address Here"; ObjectID = "C5d-7f-xmF"; */
 "C5d-7f-xmF.placeholder" = "Enter Address Here";
@@ -84,7 +75,7 @@
 "GcC-ye-4hC.text" = "ETH";
 
 /* Class = "UILabel"; text = "Bluetooth Error"; ObjectID = "GuO-y4-IZM"; */
-"GuO-y4-IZM.text" = "Bluetooth Error";
+"GuO-y4-IZM.text" = "Bluetooth is not enabled";
 
 /* Class = "UILabel"; text = "Searching active requests"; ObjectID = "GzI-Rv-HuM"; */
 "GzI-Rv-HuM.text" = "Searching active requests";
@@ -108,7 +99,7 @@
 "RhC-aH-HrF.text" = "0.002 BTC / 1.54 USD";
 
 /* Class = "UILabel"; text = " Custom Fee Rate "; ObjectID = "Ro9-45-B2B"; */
-"Ro9-45-B2B.text" = " Custom Fee Rate ";
+"Ro9-45-B2B.text" = " Custom Fee Rate";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "S0T-Fm-OmK"; */
 "S0T-Fm-OmK.normalTitle" = "Next";
@@ -149,9 +140,6 @@
 /* Class = "UITextField"; placeholder = "+ Add Note"; ObjectID = "b5c-CM-iki"; */
 "b5c-CM-iki.placeholder" = "+ Add Note";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "bYi-Iw-7xR"; */
-"bYi-Iw-7xR.text" = "Label";
-
 /* Class = "UILabel"; text = "1.1234 ETH"; ObjectID = "bha-Kb-4Pk"; */
 "bha-Kb-4Pk.text" = "1.1234 ETH";
 
@@ -164,8 +152,8 @@
 /* Class = "UILabel"; text = "GAS Limit"; ObjectID = "enn-zm-3do"; */
 "enn-zm-3do.text" = "GAS Limit";
 
-/* Class = "UILabel"; text = "Available: "; ObjectID = "fDn-cT-aUG"; */
-"fDn-cT-aUG.text" = "Available: ";
+/* Class = "UILabel"; text = "Available:"; ObjectID = "fDn-cT-aUG"; */
+"fDn-cT-aUG.text" = "Available:";
 
 /* Class = "UILabel"; text = "BTC"; ObjectID = "fOo-l7-Vq8"; */
 "fOo-l7-Vq8.text" = "BTC";
@@ -256,9 +244,6 @@
 
 /* Class = "UILabel"; text = "Donate to Multy"; ObjectID = "wCG-9b-EeH"; */
 "wCG-9b-EeH.text" = "Donate to Multy";
-
-/* Class = "UILabel"; text = "BTC ∙ Personal"; ObjectID = "y3A-JK-Mp2"; */
-"y3A-JK-Mp2.text" = "BTC ∙ Personal";
 
 /* Class = "UILabel"; text = "Contacts"; ObjectID = "zJa-f3-tWD"; */
 "zJa-f3-tWD.text" = "Contacts";

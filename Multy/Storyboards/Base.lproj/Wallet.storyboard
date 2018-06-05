@@ -1374,9 +1374,9 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to create funds request." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-uW-JbA">
-                                <rect key="frame" x="123" y="466" width="129" height="80"/>
+                                <rect key="frame" x="87.5" y="466" width="200" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="129" id="wBV-TN-naE"/>
+                                    <constraint firstAttribute="width" constant="200" id="wBV-TN-naE"/>
                                     <constraint firstAttribute="height" constant="80" id="x02-R6-zet"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
@@ -2054,6 +2054,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pNd-qC-tRx"/>
+        <segue reference="Wmz-Ze-lTe"/>
     </inferredMetricsTieBreakers>
 </document>
