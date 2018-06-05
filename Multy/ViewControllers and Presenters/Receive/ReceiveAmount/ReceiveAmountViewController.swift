@@ -115,7 +115,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        delegate?.transferSum(cryptoAmount: sumInCryptoString, cryptoCurrency: cryptoName, fiatAmount: sumInFiatString, fiatName: fiatName)
+        delegate?.transferSum!(cryptoAmount: sumInCryptoString, cryptoCurrency: cryptoName, fiatAmount: sumInFiatString, fiatName: fiatName)
         navigationController?.popViewController(animated: true)
     }
    

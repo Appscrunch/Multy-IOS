@@ -241,13 +241,27 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             let userInfo = notification.userInfo
             if userInfo != nil {
                 let notifictionMsg = userInfo!["NotificationMsg"] as! NSDictionary
-                if let txStatus = notifictionMsg["transactionType"], let address = notifictionMsg["address"] {
-                    if txStatus as! Int == TxStatus.MempoolIncoming.rawValue && address as! String == self.walletAddress {
-                        self.receiveAllDetailsVC?.presentDidReceivePaymentAlert()
-                    }
+                guard let txStatus = notifictionMsg["transactionType"] as? Int, let address = notifictionMsg["address"] as? String else {
+                    return
+                }
+                
+                guard let amount = notifictionMsg["amount"] as? String, let currencyID = notifictionMsg["currencyid"] as? UInt32, let networkID = notifictionMsg["networkid"] as? UInt32 else {
+                    return
+                }
+                
+                let amountString = self.convertAddressDataToString(amount, currencyID, networkID)
+                if txStatus == TxStatus.MempoolIncoming.rawValue && address == self.walletAddress {
+                        self.receiveAllDetailsVC?.presentDidReceivePaymentAlert(address: address, amount: amountString)
                 }
             }
         }
+    }
+    
+    func convertAddressDataToString(_ amountString: String,_ currencyID: UInt32,_ networkID: UInt32) -> String {
+        let blockchainType = BlockchainType.create(currencyID: currencyID, netType: networkID)
+        let cryptoValueString = BigInt(amountString).cryptoValueString(for: blockchainType.blockchain)
+        
+        return cryptoValueString + " " + blockchainType.shortName
     }
     
     @objc private func applicationWillResignActive(notification: Notification) {

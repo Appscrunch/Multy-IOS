@@ -13,6 +13,11 @@ class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
     @IBOutlet weak var sendingImage: UIImageView!
     @IBOutlet weak var sendingLbl: UILabel!
     @IBOutlet weak var closeBtn: ZFRippleButton!
+    @IBOutlet weak var transactionInfoView: UIView!
+    @IBOutlet weak var transactionAddressLabel: UILabel!
+    @IBOutlet weak var transactionAmountLabel: UILabel!
+    
+    let presenter = SendingAnimationPresenter()
     
     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
 
@@ -22,6 +27,7 @@ class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.sendingAnimationVC = self
         
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.sendOK()
@@ -30,6 +36,22 @@ class SendingAnimationViewController: UIViewController, AnalyticsProtocol {
             return
         }
         sendAnalyticsEvent(screenName: "\(screenSendSuccessWithChain)\(chainId!)", eventName: "\(screenSendSuccessWithChain)\(chainId!)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presenter.viewControllerViewWillAppear()
+    }
+    
+    func updateUI() {
+        if presenter.transactionAddress != nil && presenter.transactionAmount != nil {
+            transactionInfoView.isHidden = false
+            transactionAmountLabel.text = presenter.transactionAmount
+            transactionAddressLabel.text = presenter.transactionAddress
+        } else {
+            transactionInfoView.isHidden = true
+        }
     }
     
     override func viewDidLayoutSubviews() {
