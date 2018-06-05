@@ -63,6 +63,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var bluetoothEnabledContentBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchingActiveRequestsLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var sendTipLabel: UILabel!
     
     var searchingAnimationView : LOTAnimationView?
     var sendLongPressGR : UILongPressGestureRecognizer?
@@ -185,6 +186,15 @@ class SendViewController: UIViewController {
             if searchingAnimationView != nil && !searchingAnimationView!.isAnimationPlaying {
                 searchingAnimationView?.play()
             }
+            
+            if sendMode != .prepareSending {
+                if presenter.selectedWalletIndex != nil && presenter.selectedActiveRequestIndex != nil {
+                    sendTipLabel.isHidden = false
+                    sendTipLabel.text = localize(string: Constants.sendTipString)
+                } else {
+                    sendTipLabel.isHidden = true
+                }
+            }
         }
     }
     
@@ -285,6 +295,7 @@ class SendViewController: UIViewController {
             transactionHolderView.alpha = 0.0
             transactionHolderView.isHidden = false
             self.searchingRequestsHolderView.alpha = 0
+            sendTipLabel.isHidden = true
             
             hideNotSelectedWallets()
             hideNotSelectedRequests()
@@ -303,6 +314,7 @@ class SendViewController: UIViewController {
         
         showNotSelectedWallets()
         showNotSelectedRequests()
+        
         UIView.animate(withDuration: ANIMATION_DURATION, animations: {
             self.animationHolderView.layoutIfNeeded()
             self.transactionHolderView.alpha = 0.0
@@ -311,6 +323,7 @@ class SendViewController: UIViewController {
             if succeeded {
                 self.searchingRequestsHolderView.alpha = 1.0
                 self.transactionHolderView.isHidden = true
+                self.sendTipLabel.isHidden = false
             }
         }
     }
@@ -360,6 +373,7 @@ class SendViewController: UIViewController {
         
         self.showNotSelectedWallets()
         self.showNotSelectedRequests()
+        sendTipLabel.isHidden = false
         
         UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
             self.animationHolderView.layoutIfNeeded()
@@ -403,6 +417,8 @@ class SendViewController: UIViewController {
                 
             } else {
                 exitFromSending({[unowned self] in
+                    self.activeRequestsClonesHolderView.alpha = 1.0
+                    self.searchingRequestsHolderView.alpha = 1.0
                     self.presenter.sendAnimationComplete()})
                 presentSendingErrorAlert()
             }

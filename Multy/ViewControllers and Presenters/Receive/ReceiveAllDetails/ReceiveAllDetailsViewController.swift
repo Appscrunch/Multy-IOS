@@ -115,9 +115,11 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         }
     }
     
-    func presentDidReceivePaymentAlert() {
+    func presentDidReceivePaymentAlert(address : String, amount : String) {
         let storyboard = UIStoryboard(name: "Send", bundle: nil)
-        let sendOKVc = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC")
+        let sendOKVc = storyboard.instantiateViewController(withIdentifier: "SuccessSendVC") as! SendingAnimationViewController
+        sendOKVc.presenter.fundsReceived(amount, address)
+        
         self.navigationController?.pushViewController(sendOKVc, animated: true)
     }
     

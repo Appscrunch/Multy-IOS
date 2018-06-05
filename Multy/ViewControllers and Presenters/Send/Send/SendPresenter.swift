@@ -400,7 +400,7 @@ class SendPresenter: NSObject {
     }
     
     func sendAnimationComplete() {
-        
+        self.sendVC?.updateUI()
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(cancelPrepareSending), userInfo: nil, repeats: false)
     }
     
