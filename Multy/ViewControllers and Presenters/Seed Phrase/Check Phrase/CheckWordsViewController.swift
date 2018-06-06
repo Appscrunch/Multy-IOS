@@ -39,6 +39,8 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
+        
+        loader.setupUI(text: localize(string: Constants.restoringWalletsString), image: #imageLiteral(resourceName: "walletHuge"))
         self.view.addSubview(loader)
         loader.hide()
         

@@ -376,7 +376,7 @@ extension CreateTransactionDelegate {
                 sumInNextBtn = availableSumInFiat
             }
             
-            return self.sumInNextBtn
+            return sumInNextBtn
         }
     }
     
