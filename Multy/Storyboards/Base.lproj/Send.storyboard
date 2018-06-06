@@ -1793,7 +1793,7 @@ QR</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3DA28WCp4Cu5LQiddJnDJJmKWvmmZAKP5K" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="j2L-wX-UIu">
-                                                <rect key="frame" x="38" y="152" width="267.5" height="16.5"/>
+                                                <rect key="frame" x="38" y="152" width="298" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1802,13 +1802,12 @@ QR</string>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="RI9-ER-ncF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iHg-A2-nCQ" secondAttribute="leading" constant="16" id="8a8-cv-soI"/>
-                                            <constraint firstItem="j2L-wX-UIu" firstAttribute="centerX" secondItem="iHg-A2-nCQ" secondAttribute="centerX" id="CEr-xG-mSZ"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RI9-ER-ncF" secondAttribute="trailing" constant="16" id="Etm-oa-pW9"/>
                                             <constraint firstItem="Ed2-gG-ZRs" firstAttribute="top" secondItem="Cba-NB-csm" secondAttribute="bottom" constant="12" id="Ku1-DL-ECB"/>
                                             <constraint firstItem="AkA-WX-ZNe" firstAttribute="top" secondItem="Ycp-p1-sYK" secondAttribute="bottom" constant="10" id="PXE-Gl-2zx"/>
                                             <constraint firstItem="RI9-ER-ncF" firstAttribute="centerX" secondItem="iHg-A2-nCQ" secondAttribute="centerX" id="T1K-Cb-URs"/>
                                             <constraint firstItem="Ed2-gG-ZRs" firstAttribute="leading" secondItem="iHg-A2-nCQ" secondAttribute="leading" constant="16" id="X96-WL-Gru"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j2L-wX-UIu" secondAttribute="trailing" constant="16" id="ZX1-KZ-3dE"/>
+                                            <constraint firstAttribute="trailing" secondItem="j2L-wX-UIu" secondAttribute="trailing" constant="7" id="ZX1-KZ-3dE"/>
                                             <constraint firstItem="j2L-wX-UIu" firstAttribute="top" secondItem="Cba-NB-csm" secondAttribute="bottom" constant="11" id="aL7-4U-yqm"/>
                                             <constraint firstAttribute="bottom" secondItem="j2L-wX-UIu" secondAttribute="bottom" constant="13.5" id="brv-XA-5XI"/>
                                             <constraint firstItem="j2L-wX-UIu" firstAttribute="leading" secondItem="Ed2-gG-ZRs" secondAttribute="trailing" constant="5" id="mqu-O7-CGE"/>
@@ -2698,7 +2697,7 @@ address</string>
         <image name="swap" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bgz-R6-m6y"/>
+        <segue reference="Nqh-Rv-oVp"/>
         <segue reference="Y3u-nO-qs1"/>
         <segue reference="pfe-aE-6Gg"/>
         <segue reference="EUD-ex-a5v"/>

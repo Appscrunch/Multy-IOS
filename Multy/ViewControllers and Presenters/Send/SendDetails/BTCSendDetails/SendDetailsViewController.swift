@@ -360,7 +360,7 @@ extension TableViewDataSource: UITableViewDataSource {
         } else {
             let customFeeCell = tableView.dequeueReusableCell(withIdentifier: "customFeeCell") as! CustomTrasanctionFeeTableViewCell
             customFeeCell.blockchainType = presenter.transactionDTO.blockchainType
-            customFeeCell.value = Int(presenter.customFee)
+            customFeeCell.value = UInt64(presenter.customFee)
             customFeeCell.setupUI()
 
             return customFeeCell

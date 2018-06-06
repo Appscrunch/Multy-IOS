@@ -406,7 +406,7 @@ extension CreateTransactionDelegate {
             }
         }
         
-        return self.sumInNextBtn
+        return sumInNextBtn
     }
     
     func setBTCMaxAllowed() {
