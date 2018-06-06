@@ -113,15 +113,15 @@ class SendAmountEthPresenter: NSObject {
     }
     
     func cryptoToUsd() {
-        self.sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString(for: blockchain)
+        self.sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString(for: blockchain) + " "
     }
     
     func usdToCrypto() {
         sumInCrypto = sumInFiat / exchangeCourse
         if sumInCrypto > availableSumInCrypto {
-            sendAmountVC?.bottomSumLbl.text = availableSumInCrypto.cryptoValueString(for: blockchain)
+            sendAmountVC?.bottomSumLbl.text = availableSumInCrypto.cryptoValueString(for: blockchain) + " "
         } else {
-            sendAmountVC?.bottomSumLbl.text = sumInCrypto.cryptoValueString(for: blockchain)
+            sendAmountVC?.bottomSumLbl.text = sumInCrypto.cryptoValueString(for: blockchain) + " "
         }
     }
     
@@ -183,9 +183,9 @@ class SendAmountEthPresenter: NSObject {
             sumInFiat = sumInCrypto * exchangeCourse
             
             if sumInFiat > availableSumInFiat {
-                sendAmountVC?.bottomSumLbl.text = availableSumInFiat.cryptoValueString(for: blockchain)
+                sendAmountVC?.bottomSumLbl.text = availableSumInFiat.cryptoValueString(for: blockchain) + " "
             } else {
-                sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString(for: blockchain)
+                sendAmountVC?.bottomSumLbl.text = sumInFiat.fiatValueString(for: blockchain) + " "
             }
             
             sendAmountVC?.bottomCurrencyLbl.text = fiatName
