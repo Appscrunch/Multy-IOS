@@ -32,6 +32,8 @@ class ApiManager: NSObject, RequestRetrier {
         }
     }
     var userID = String()
+    var pushToken = String()
+    
     
     override init() {
         super.init()
@@ -85,7 +87,7 @@ class ApiManager: NSObject, RequestRetrier {
             params["userID"] = userID
             params["deviceID"] = "iOS \(UIDevice.current.name)"
             params["deviceType"] = 1
-            params["pushToken"] = UUID().uuidString
+            params["pushToken"] = pushToken
             params["appVersion"] = ((infoPlist["CFBundleShortVersionString"] as! String) + " " + (infoPlist["CFBundleVersion"] as! String))
             
             self.auth(with: params, completion: { (dict, error) in

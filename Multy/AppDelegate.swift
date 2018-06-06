@@ -335,10 +335,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
 //        let token = Messaging.messaging().fcmToken
         print("FCM token: \(fcmToken)")
+        ApiManager.shared.pushToken = fcmToken
         DataManager.shared.getAccount { (acc, err) in
             Messaging.messaging().subscribe(toTopic: "btcTransactionUpdate-\(acc?.userID ?? "userId is empty")")  //userID
         }
-        
     }
     
     func registerPush() {
@@ -358,6 +358,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             self.application!.registerUserNotificationSettings(settings)
         }
         self.application!.registerForRemoteNotifications()
+        if Messaging.messaging().fcmToken != nil {
+            ApiManager.shared.pushToken = Messaging.messaging().fcmToken as! String
+        }
     }
 }
 
