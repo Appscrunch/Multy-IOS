@@ -57,6 +57,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var searchingActiveRequestsLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var sendTipLabel: UILabel!
+    @IBOutlet weak var sendTipView: UIView!
     
     var txInfoView: TxInfoView?
     var txTokenImageView: UIImageView?
@@ -188,10 +189,10 @@ class SendViewController: UIViewController {
             
             if sendMode != .prepareSending {
                 if presenter.selectedWalletIndex != nil && presenter.selectedActiveRequestIndex != nil {
-                    sendTipLabel.isHidden = false
+                    sendTipView.isHidden = false
                     sendTipLabel.text = localize(string: Constants.sendTipString)
                 } else {
-                    sendTipLabel.isHidden = true
+                    sendTipView.isHidden = true
                 }
             }
         }
@@ -202,10 +203,7 @@ class SendViewController: UIViewController {
             activeRequestsAmountTopConstraint.constant = activeRequestsAmountTopConstraint.constant + 20
             self.view.layoutIfNeeded()
         }
-        
-//        bluetoothEnabledContentBottomConstraint.
-//        bluetoothErrorTopConstraint
-//        transactionHolderViewBottomConstraint
+
     }
     
     func updateUIForBluetoothState(_ isEnable : Bool) {
@@ -290,20 +288,9 @@ class SendViewController: UIViewController {
             rightActiveRequestsClonesTrailingConstraint.constant = -rightActiveRequestsClonesWidthConstraint.constant
             self.activeRequestsClonesHolderView.layoutIfNeeded()
             
-//            if #available(iOS 11.0, *) {
-//                transactionHolderViewBottomConstraint.constant = (transactionHolderViewBottomConstraint.constant - view.safeAreaInsets.bottom)
-//            }
-            
-            
-//            self.searchingRequestsHolderView.alpha = 0
-//            sendTipLabel.isHidden = true
-            
             prepareTxInfo()
             prepareClonesViews()
             bluetoothEnabledContentView.isHidden = true
-            
-//            hideNotSelectedWallets()
-//            hideNotSelectedRequests()
             
             UIView.animate(withDuration: ANIMATION_DURATION) {
                 self.showTxInfo()
@@ -325,12 +312,12 @@ class SendViewController: UIViewController {
         if isNeedToSend {
             send()
         } else {
-            backUIToSearching()
+            backUIToSearching(nil)
         }
     }
     
     
-    func backUIToSearching() {
+    func backUIToSearching(_ completion : (() -> Swift.Void)? = nil) {
         navigationButtonsHolderBottomConstraint.constant = 0
         
         // Set constraints for presenting requests
@@ -340,8 +327,7 @@ class SendViewController: UIViewController {
         // Set constraints for presenting wallets
         leftWalletsClonesLeadingConstraint.constant = 0
         rightWalletsClonesTrailingConstraint.constant = 0
-        //        showNotSelectedWallets()
-        //        showNotSelectedRequests()
+
         
         UIView.animate(withDuration: ANIMATION_DURATION, animations: {
             self.hideTxInfo()
@@ -352,6 +338,9 @@ class SendViewController: UIViewController {
             self.dismissTxInfo()
             self.sendMode = .searching
             
+            if completion != nil {
+                completion!()
+            }
             self.presenter.cancelPrepareSending()
         }
     }
@@ -360,17 +349,6 @@ class SendViewController: UIViewController {
         sendMode = .inSend
         absorbTxInfo()
         presenter.send()
-        /*
-        transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - walletsCollectionView.frame.origin.y - walletsCollectionView.frame.size.height
-        transactionInfoViewBottomConstraint.constant = animationHolderView.frame.size.height - activeRequestsCollectionView.frame.origin.y - activeRequestsCollectionView.center.y - transactionInfoView.frame.size.height/2 - transactionTokenImageView.frame.size.height - transactionHolderViewBottomConstraint.constant
- */
-//        UIView.animate(withDuration: 0.4, animations: {
-//            self.animationHolderView.layoutIfNeeded()
-            /*
-            self.transactionInfoView.alpha = 0
-            self.transactionTokenImageView.alpha = 0
- */
- //       })
     }
     
     func presentSendingErrorAlert() {
@@ -395,35 +373,6 @@ class SendViewController: UIViewController {
         }
     }
     
-    func exitFromSending(_ completion : (() -> Swift.Void)? = nil) {
-        /*
-        self.transactionHolderView.isHidden = true
-        self.transactionInfoViewBottomConstraint.constant = 5
-        self.transactionInfoView.alpha = 1
-        self.transactionTokenImageView.alpha = 1
-        self.transactionHolderViewBottomConstraint.constant = self.view.bounds.size.height - self.walletsCollectionView.frame.origin.y - self.walletsCollectionView.frame.size.height
-        */
-        
-        
-        
-        self.navigationButtonsHolderBottomConstraint.constant = 0
-        
-        self.showNotSelectedWallets()
-        self.showNotSelectedRequests()
-        sendTipLabel.isHidden = false
-        
-        UIView.animate(withDuration: self.ANIMATION_DURATION, animations: {
-            self.animationHolderView.layoutIfNeeded()
-/*            self.transactionHolderView.alpha = 0.0*/
-        }) { (succeeded) in
-/*            self.transactionHolderView.isHidden = true*/
-            self.sendMode = .searching
-            if completion != nil {
-                completion!()
-            }
-        }
-    }
-    
     func updateUIWithSendResponse(success : Bool) {
         if sendMode == .inSend {
             if success {
@@ -433,64 +382,23 @@ class SendViewController: UIViewController {
                 
                 self.view.addSubview(doneAnimationView)
                 doneAnimationView.play{[unowned self] (finished) in
-                    self.exitFromSending(nil)
                     UIView.animate(withDuration: 0.6, animations: {
                         doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
                         doneAnimationView.alpha = 0.0
                     }) { (succeeded) in
-                        self.backUIToSearching()
-//                        self.activeRequestsClonesHolderView.alpha = 1.0
-//                        self.searchingRequestsHolderView.alpha = 1.0
+
                         doneAnimationView.removeFromSuperview()
-                        
                         self.close()
+                        self.backUIToSearching(nil)
                     }
                 }
             } else {
-                backUIToSearching()
-//                exitFromSending({[unowned self] in
-//                    self.activeRequestsClonesHolderView.alpha = 1.0
-//                    self.searchingRequestsHolderView.alpha = 1.0
-//                    self.presenter.sendAnimationComplete()})
+                backUIToSearching({[unowned self] in
+                    self.presenter.sendAnimationComplete()})
+
                 presentSendingErrorAlert()
             }
         }
-        
-//        if sendMode == .inSend {
-//            if success {
-//                UIView.animate(withDuration: 0.2, animations: {
-//                    self.foundActiveRequestsHolderView.alpha = 0
-//                    self.activeRequestsClonesHolderView.alpha = 0
-//                }) { (succeeded) in
-//
-//                    let doneAnimationView = LOTAnimationView(name: "tx_success_animation")
-//                    doneAnimationView.frame = CGRect(x: (self.activeRequestsCollectionView.center.x - 101), y: self.foundActiveRequestsHolderView.frame.origin.y + self.activeRequestsCollectionView.frame.origin.y - 20, width: 202, height: 202)
-//                    doneAnimationView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
-//
-//                    self.view.addSubview(doneAnimationView)
-//                    doneAnimationView.play{[unowned self] (finished) in
-//                        self.exitFromSending(nil)
-//                        UIView.animate(withDuration: 0.6, animations: {
-//                            doneAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
-//                            doneAnimationView.alpha = 0.0
-//                        }) { (succeeded) in
-//                            self.activeRequestsClonesHolderView.alpha = 1.0
-//                            self.searchingRequestsHolderView.alpha = 1.0
-//                            doneAnimationView.removeFromSuperview()
-//
-//                            self.close()
-//                        }
-//                    }
-//                }
-//
-//            } else {
-//                exitFromSending({[unowned self] in
-//                    self.activeRequestsClonesHolderView.alpha = 1.0
-//                    self.searchingRequestsHolderView.alpha = 1.0
-//                    self.presenter.sendAnimationComplete()})
-//                presentSendingErrorAlert()
-//            }
-//        }
     }
     
     func prepareTxInfo() {
@@ -529,6 +437,8 @@ class SendViewController: UIViewController {
                 self.selectedRequestAddressCloneLabel!.alpha = 0
                 self.txInfoView!.frame = CGRect(x: centerActiveRequestView.x, y: centerActiveRequestView.y, width: 0, height: 0)
                 self.txInfoView!.alpha = 0
+                self.txTokenImageView!.frame = CGRect(x: (self.walletsClonesHolderView.center.x - self.txInfoView!.frame.size.width/2), y: (self.txTokenImageView!.frame.origin.y - 5 - self.txInfoView!.frame.size.height), width: self.txInfoView!.frame.size.width, height: self.txInfoView!.frame.size.height)
+                self.txTokenImageView!.alpha = 0
             }) { succeeded in
                 UIView.animate(withDuration: 0.15, animations: {
                     activeRequestView?.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -551,56 +461,6 @@ class SendViewController: UIViewController {
         
         txTokenImageView!.removeFromSuperview()
         txTokenImageView = nil
-    }
-    
-    func hideNotSelectedWallets() {
-        //prepareWalletsCellsClones()
-       // walletsCollectionView.isHidden = true
-        leftWalletsClonesLeadingConstraint.constant = -leftWalletsClonesWidthConstraint.constant
-        rightWalletsClonesTrailingConstraint.constant = -rightWalletsClonesWidthConstraint.constant
-        UIView.animate(withDuration: ANIMATION_DURATION) {
-            self.walletsClonesHolderView.layoutIfNeeded()
-        }
-    }
-    
-    func showNotSelectedWallets() {
-        leftWalletsClonesLeadingConstraint.constant = 0
-        rightWalletsClonesTrailingConstraint.constant = 0
-        UIView.animate(withDuration: ANIMATION_DURATION, animations: {
-            self.walletsClonesHolderView.layoutIfNeeded()
-        }) { (succeeded) in
-            if succeeded {
-                self.walletsCollectionView.isHidden = false
-                self.removeWalletsCellsClones()
-            }
-        }
-    }
-    
-    func hideNotSelectedRequests() {
-        //prepareActiveRequestsCellsClones()
-      //  activeRequestsCollectionView.isHidden = true
-        leftActiveRequestsClonesLeadingConstraint.constant = -leftActiveRequestsClonesWidthConstraint.constant
-        rightActiveRequestsClonesTrailingConstraint.constant = -rightActiveRequestsClonesWidthConstraint.constant
-        
-        self.activeRequestsClonesHolderView.layoutIfNeeded()
-        
-        UIView.animate(withDuration: ANIMATION_DURATION) {
-            self.activeRequestsClonesHolderView.layoutIfNeeded()
-        }
-    }
-    
-    func showNotSelectedRequests() {
-        leftActiveRequestsClonesLeadingConstraint.constant = 0
-        rightActiveRequestsClonesTrailingConstraint.constant = 0
-        UIView.animate(withDuration: ANIMATION_DURATION, animations: {
-            self.activeRequestsClonesHolderView.layoutIfNeeded()
-        }) { (succeeded) in
-            if succeeded {
-                self.activeRequestsCollectionView.isHidden = false
-                self.activeRequestsClonesHolderView.alpha = 1
-                self.removeActiveRequestsCellsClones()
-            }
-        }
     }
 
     func prepareClonesViews() {
@@ -742,7 +602,7 @@ class SendViewController: UIViewController {
     }
 
 
-    func close() {
+    @objc func close() {
         self.navigationController?.popViewController(animated: true)
         if let tbc = self.tabBarController as? CustomTabBarViewController {
             tbc.setSelectIndex(from: 2, to: tbc.previousSelectedIndex)

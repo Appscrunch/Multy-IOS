@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBN-zo-zqI" userLabel="View - Background">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="717"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfk-fx-mmY" userLabel="Animation Holder View">
@@ -192,12 +192,6 @@
                                             <outlet property="delegate" destination="v1w-JK-3Sa" id="njP-SV-R09"/>
                                         </connections>
                                     </collectionView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold and Swipe to send" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EzS-01-1Qs">
-                                        <rect key="frame" x="122" y="470.5" width="131" height="16.5"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZi-At-pK8" userLabel="Found Requests Holder View">
                                         <rect key="frame" x="0.0" y="116" width="375" height="343"/>
                                         <subviews>
@@ -295,18 +289,46 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8p-3K-xEs" userLabel="Send Tip View">
+                                        <rect key="frame" x="0.0" y="434" width="375" height="47"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold and Drag to send" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EzS-01-1Qs">
+                                                <rect key="frame" x="83" y="3" width="209" height="27.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendTipArrow" translatesAutoresizingMaskIntoConstraints="NO" id="pjx-a7-XQU" userLabel="Image View - Arrow">
+                                                <rect key="frame" x="178" y="39" width="18" height="5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="5" id="MCZ-Q5-pGd"/>
+                                                    <constraint firstAttribute="width" constant="18" id="Udp-gF-WSX"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="pjx-a7-XQU" firstAttribute="centerX" secondItem="e8p-3K-xEs" secondAttribute="centerX" id="3UE-Tg-kxq"/>
+                                            <constraint firstAttribute="bottom" secondItem="pjx-a7-XQU" secondAttribute="bottom" constant="3" id="3iL-5A-RS4"/>
+                                            <constraint firstItem="pjx-a7-XQU" firstAttribute="top" secondItem="EzS-01-1Qs" secondAttribute="bottom" constant="8.5" id="Khz-88-Ykd"/>
+                                            <constraint firstItem="EzS-01-1Qs" firstAttribute="top" secondItem="e8p-3K-xEs" secondAttribute="top" constant="3" id="LTp-hA-em1"/>
+                                            <constraint firstItem="EzS-01-1Qs" firstAttribute="centerX" secondItem="e8p-3K-xEs" secondAttribute="centerX" id="TBk-U0-gqS"/>
+                                            <constraint firstAttribute="height" constant="47" id="s0i-oB-wKB"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="6a2-EL-VA4" firstAttribute="top" secondItem="LP6-eC-Sxy" secondAttribute="top" constant="35" id="0B3-ue-13l"/>
+                                    <constraint firstAttribute="trailing" secondItem="e8p-3K-xEs" secondAttribute="trailing" id="9P4-xK-4KT"/>
                                     <constraint firstItem="oZi-At-pK8" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leading" id="DC6-nh-oL4"/>
                                     <constraint firstAttribute="trailing" secondItem="VfS-TA-JzW" secondAttribute="trailing" id="F3E-65-S2g"/>
                                     <constraint firstItem="6a2-EL-VA4" firstAttribute="trailing" secondItem="LP6-eC-Sxy" secondAttribute="trailingMargin" constant="-8" id="Qdr-M2-9uf"/>
-                                    <constraint firstItem="EzS-01-1Qs" firstAttribute="centerX" secondItem="VfS-TA-JzW" secondAttribute="centerX" id="TNY-Qs-vd5"/>
                                     <constraint firstItem="VfS-TA-JzW" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leading" id="Uzt-Fq-mTF"/>
+                                    <constraint firstItem="VfS-TA-JzW" firstAttribute="top" secondItem="e8p-3K-xEs" secondAttribute="bottom" constant="8" id="bFS-v3-tMG"/>
                                     <constraint firstItem="6a2-EL-VA4" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leadingMargin" constant="8" id="dxe-uZ-EBb"/>
+                                    <constraint firstItem="e8p-3K-xEs" firstAttribute="leading" secondItem="LP6-eC-Sxy" secondAttribute="leading" id="kIz-hm-4jK"/>
                                     <constraint firstItem="VfS-TA-JzW" firstAttribute="top" secondItem="oZi-At-pK8" secondAttribute="bottom" constant="30" id="kaO-DI-Nh5"/>
-                                    <constraint firstItem="VfS-TA-JzW" firstAttribute="top" secondItem="EzS-01-1Qs" secondAttribute="bottom" constant="2" id="que-EN-iIm"/>
                                     <constraint firstAttribute="trailing" secondItem="oZi-At-pK8" secondAttribute="trailing" id="rky-w8-Qua"/>
                                     <constraint firstAttribute="bottom" secondItem="VfS-TA-JzW" secondAttribute="bottom" id="weA-iL-9bh"/>
                                 </constraints>
@@ -391,7 +413,7 @@
                             <constraint firstItem="Lfk-fx-mmY" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="aHZ-5G-SOk"/>
                             <constraint firstAttribute="trailing" secondItem="IBN-zo-zqI" secondAttribute="trailing" id="aNs-ja-Q8A"/>
                             <constraint firstAttribute="trailing" secondItem="LP6-eC-Sxy" secondAttribute="trailing" id="deM-Zd-zM6"/>
-                            <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="IBN-zo-zqI" secondAttribute="bottom" id="gp3-MZ-42S"/>
+                            <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="IBN-zo-zqI" secondAttribute="bottom" constant="-50" id="gp3-MZ-42S"/>
                             <constraint firstItem="IBN-zo-zqI" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="kwm-L0-T8e"/>
                             <constraint firstItem="LP6-eC-Sxy" firstAttribute="top" secondItem="G2a-2w-Hla" secondAttribute="top" id="o6m-D4-WFa"/>
                             <constraint firstItem="2Y7-Y9-4X9" firstAttribute="top" secondItem="U4k-ix-x0I" secondAttribute="bottom" constant="76" id="qk6-iv-3A6"/>
@@ -438,6 +460,7 @@
                         <outlet property="selectedRequestAddressLabel" destination="Jpx-D9-l5y" id="QlJ-ng-hNA"/>
                         <outlet property="selectedRequestAmountLabel" destination="otH-zU-Rpe" id="Mav-cB-tmJ"/>
                         <outlet property="sendTipLabel" destination="EzS-01-1Qs" id="pHT-eG-GQH"/>
+                        <outlet property="sendTipView" destination="e8p-3K-xEs" id="KRJ-nJ-Mo3"/>
                         <outlet property="walletsClonesHolderView" destination="ueJ-lo-Puk" id="gx9-fS-4nc"/>
                         <outlet property="walletsCollectionView" destination="VfS-TA-JzW" id="tdO-Wu-84w"/>
                         <outlet property="walletsCollectionViewFL" destination="4uj-Pv-0eP" id="Puu-7X-arK"/>
@@ -2626,6 +2649,7 @@ address</string>
         <image name="pending" width="22" height="22"/>
         <image name="qrIconGray" width="22" height="22"/>
         <image name="remove_cross_alt" width="14" height="14"/>
+        <image name="sendTipArrow" width="20" height="8"/>
         <image name="slideToSend1" width="13" height="22"/>
         <image name="slideToSend2" width="13" height="22"/>
         <image name="slideToSend3" width="13" height="22"/>
