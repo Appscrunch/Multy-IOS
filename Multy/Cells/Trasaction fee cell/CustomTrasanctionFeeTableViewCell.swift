@@ -58,7 +58,9 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
         if gasLimit != nil && gasPrice != nil {
             gasLimitValueLbl.text = "\(gasLimit!)"
             gasPriceValueLbl.text = "\(gasPrice!)"
-            customTopConstraint.constant = 12
+            if customTopConstraint != nil {
+                customTopConstraint.constant = 12
+            }
         }
         
         //        self.valuelbl.text = "\(Int(self.value))"

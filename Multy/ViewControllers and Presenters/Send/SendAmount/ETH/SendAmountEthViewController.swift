@@ -307,7 +307,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         if presenter.isCrypto {
             btnSumLbl.text = sumForBtn.cryptoValueString(for: presenter.blockchain) + " " + presenter.cryptoName
         } else {
-            btnSumLbl.text = sumForBtn.fiatValueString(for: BLOCKCHAIN_ETHEREUM) + " " + presenter.fiatName
+            btnSumLbl.text = sumForBtn.fiatValueString(for: presenter.blockchain) + " " + presenter.fiatName
         }
     }
     
