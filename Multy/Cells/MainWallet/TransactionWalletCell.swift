@@ -87,9 +87,9 @@ class TransactionWalletCell: UITableViewCell {
     
     func fillEthereumCell() {
         if histObj.isIncoming() {
-            self.addressLabel.text = histObj.addressesArray.last
-        } else {
             self.addressLabel.text = histObj.addressesArray.first
+        } else {
+            self.addressLabel.text = histObj.addressesArray.last
         }
         
         let ethAmountString = BigInt(histObj.txOutAmountString).cryptoValueString(for: BLOCKCHAIN_ETHEREUM)

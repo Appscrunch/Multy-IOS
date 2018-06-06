@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wmS-tA-24k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1189,9 +1189,9 @@ Try again in:</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7p-Iz-hvC">
-                                <rect key="frame" x="288" y="619" width="87" height="48"/>
+                                <rect key="frame" x="265" y="619" width="110" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="87" id="g5I-Mi-KzX"/>
+                                    <constraint firstAttribute="width" constant="110" id="g5I-Mi-KzX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Accept">
@@ -1202,9 +1202,9 @@ Try again in:</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBi-5j-Fq1">
-                                <rect key="frame" x="0.0" y="619" width="87" height="48"/>
+                                <rect key="frame" x="0.0" y="619" width="110" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="87" id="vrP-8y-av4"/>
+                                    <constraint firstAttribute="width" constant="110" id="vrP-8y-av4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Discard">

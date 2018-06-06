@@ -168,8 +168,9 @@ class Socket: NSObject {
                     let networkID = dataDict["networkid"] as! Int
                     let address = dataDict["address"] as! String
                     let amount = dataDict["amount"] as! String
+                    let blockchain = Blockchain.init(rawValue: UInt32(currencyID))
 
-                    let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: BigInt(amount).cryptoValueString(for: BLOCKCHAIN_BITCOIN), networkID: networkID, userID : userID)
+                    let paymentRequest = PaymentRequest(sendAddress: address, userCode : userCode, currencyID: currencyID, sendAmount: BigInt(amount).cryptoValueString(for: blockchain), networkID: networkID, userID : userID)
 
                     newRequests.append(paymentRequest)
                     print(dataDict)

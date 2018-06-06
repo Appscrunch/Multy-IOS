@@ -221,7 +221,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
         let currencyID = self.wallet!.chain
         let networkID = blockchainType.net_type
         let address = walletAddress
-        let amount = cryptoSum != nil ? cryptoSum!.convertToSatoshiAmountString() : "0"
+        let amount = cryptoSum != nil ? cryptoSum!.convertCryptoAmountStringToMinimalUnits(in: Blockchain.init(rawValue: currencyID.uint32Value)).stringValue : "0"
         
         DataManager.shared.socketManager.becomeReceiver(receiverID: userID, userCode: userCode, currencyID: currencyID.intValue, networkID: networkID, address: address, amount: amount)
     }
