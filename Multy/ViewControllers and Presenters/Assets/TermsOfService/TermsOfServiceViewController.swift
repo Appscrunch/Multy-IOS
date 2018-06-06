@@ -20,10 +20,10 @@ class TermsOfServiceViewController: UIViewController, UIWebViewDelegate {
     }
     
     func loadPage() {
-        let url = "https://raw.githubusercontent.com/wiki/Appscrunch/Multy/Legal:-Terms-of-service.md"
+        let url = LocalLanguage.shared.getTOSLink()
         self.webView.scalesPageToFit = true
         self.webView.contentMode = .scaleAspectFit
-        self.webView.loadRequest(URLRequest(url: URL(string: url)!))
+        self.webView.loadRequest(URLRequest(url: url))
     }
     
     
@@ -47,9 +47,7 @@ class TermsOfServiceViewController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func openPrivacyPolicy(_ sender: Any) {
-        guard let url = URL(string: "https://raw.githubusercontent.com/wiki/Appscrunch/Multy/Legal:-Privacy-Policy.md") else {
-            return //be safe
-        }
+        let url = LocalLanguage.shared.getPPLink()
         
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
