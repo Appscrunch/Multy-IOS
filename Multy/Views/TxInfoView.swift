@@ -38,8 +38,9 @@ class TxInfoView: UIView {
         let sumLabelsVerticalSpacingConstraint = NSLayoutConstraint(item: sumInCryptoLabel, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: sumInFiatLabel, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 2)
         let sumInFiatLabelCenterXConstraint = NSLayoutConstraint(item: sumInFiatLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         let sumInFiatLabelLeadingConstraint = NSLayoutConstraint(item: sumInFiatLabel, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: self, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 20)
-        let sumInFiatLabelBottomConstraint = NSLayoutConstraint(item: sumInFiatLabel, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 10)
+        let sumInFiatLabelBottomConstraint = NSLayoutConstraint(item: sumInFiatLabel, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -10)
         self.addConstraints([sumInCryptoLabelCenterXConstraint, sumInCryptoLabelLeadingConstraint, sumInCryptoLabelTopConstraint, sumLabelsVerticalSpacingConstraint, sumInFiatLabelCenterXConstraint, sumInFiatLabelLeadingConstraint, sumInFiatLabelBottomConstraint])
+        self.layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {

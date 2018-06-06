@@ -227,7 +227,6 @@ class SendPresenter: NSObject {
             transaction!.sendAmount = request.sendAmount.doubleValue
             transaction!.sendAddress = request.sendAddress
             transaction!.choosenWallet = filteredWalletArray[selectedWalletIndex!]
-            sendVC?.fillTransaction()
         }
     }
     
