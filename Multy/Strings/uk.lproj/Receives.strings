@@ -17,3 +17,6 @@
 "ENABLE BLUETOOTH ALERT TITLE" = "";
 "SETTINGS ACTION TITLE" = "";
 "GETTING WALLET" = "Отримання гаманців...";
+"CANNOT CHOOSE EMPTY WALLET" = "Ви не можете вибрати порожній гаманець. Виберіть гаманець з деякою сумою";
+"ENTER NON-ZERO AMOUNT" = "Будь ласка, введіть ненульову кількість!";
+"YOU CANT ENTER SUM" = "Ви не можете ввести суму більше, ніж має наявність в мережі";

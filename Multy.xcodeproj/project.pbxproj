@@ -17,6 +17,7 @@
 		444066D4205927B900342046 /* UIActivityViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D3205927B900342046 /* UIActivityViewController+Extension.swift */; };
 		444066D62059281200342046 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D52059281200342046 /* NSObject+Extension.swift */; };
 		444066D82059342E00342046 /* Bool+Extantion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D72059342E00342046 /* Bool+Extantion.swift */; };
+		4448DCC720C8333100CE80CB /* LocalLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4448DCC620C8333100CE80CB /* LocalLanguage.swift */; };
 		444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B642045723C008129B8 /* BigInt+Extension.swift */; };
 		445B127020BC1BA800FD0D33 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445B127220BC1BA800FD0D33 /* SeedPhrase.storyboard */; };
 		445B127320BC1BB100FD0D33 /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445B127520BC1BB100FD0D33 /* Receive.storyboard */; };
@@ -329,6 +330,7 @@
 		444066D3205927B900342046 /* UIActivityViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityViewController+Extension.swift"; sourceTree = "<group>"; };
 		444066D52059281200342046 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		444066D72059342E00342046 /* Bool+Extantion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extantion.swift"; sourceTree = "<group>"; };
+		4448DCC620C8333100CE80CB /* LocalLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLanguage.swift; sourceTree = "<group>"; };
 		444B3B642045723C008129B8 /* BigInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		445B127120BC1BA800FD0D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SeedPhrase.storyboard; sourceTree = "<group>"; };
 		445B127420BC1BB100FD0D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receive.storyboard; sourceTree = "<group>"; };
@@ -1139,6 +1141,7 @@
 				44C3F389207E5FAB00AC1BD4 /* ProgressHUD+Extension.swift */,
 				44CD6B8E208B5018009C07F6 /* BigInt.swift */,
 				854C748A20C56C6900CBAFE9 /* Utilities.swift */,
+				4448DCC620C8333100CE80CB /* LocalLanguage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2312,6 +2315,7 @@
 				4585BD382049AD03004542AE /* ExchangeStockTableViewCell.swift in Sources */,
 				45AC1624204820CB00E75BD6 /* CurrencyToConvertPresenter.swift in Sources */,
 				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
+				4448DCC720C8333100CE80CB /* LocalLanguage.swift in Sources */,
 				45AC162B2048380700E75BD6 /* CurrencyObj.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
 				45F8CD49208F393C00DEB495 /* TermsOfServicePresenter.swift in Sources */,

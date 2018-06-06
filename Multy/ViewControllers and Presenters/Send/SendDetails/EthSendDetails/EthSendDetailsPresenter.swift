@@ -37,12 +37,19 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
     
     let customGas = EthereumGasInfo()
     
-    var cusomtGasPrice: Int?
-    var cusomtGasLimit: Int?
+    var cusomtGasPrice: UInt64?
+    var cusomtGasLimit: UInt64?
     
     var feeRate: NSDictionary? {
         didSet {
-            sendDetailsVC?.tableView.reloadData()
+            if let verySlowFeeRate = feeRate?["VerySlow"] as? UInt64 {
+                if cusomtGasPrice == nil {
+                    cusomtGasPrice = UInt64(verySlowFeeRate)
+                }
+                
+                sendDetailsVC?.tableView.reloadData()
+                updateCellsVisibility()
+            }
         }
     }
     
@@ -151,9 +158,13 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
 //        cell.value = firstValue
         self.customGas.gasPrice = BigInt("\(firstValue!)") * Int64(1000000000)
         self.customGas.gasLimit = BigInt("\(firstValue ?? 0)")
-        cell.setupUIFor(gasPrice: firstValue!, gasLimit: secValue!)
+        cusomtGasPrice = UInt64(firstValue!) * 1000000000
+        cell.value = cusomtGasPrice!
+        cell.setupUI()
+//        cell.setupUIFor(gasPrice: firstValue!, gasLimit: secValue!)
 //        self.customFee = UInt64(firstValue)
-        self.sendDetailsVC?.tableView.reloadData()
+//        self.sendDetailsVC?.tableView.reloadData()
+        updateCellsVisibility()
         sendDetailsVC?.sendAnalyticsEvent(screenName: "\(screenTransactionFeeWithChain)\(transactionDTO.choosenWallet!.chain)", eventName: customFeeSetuped)
         
         
@@ -166,6 +177,19 @@ class EthSendDetailsPresenter: NSObject, CustomFeeRateProtocol {
         if trueCells.count > 5 {
             trueCells[5].checkMarkImage.isHidden = false
             selectedIndexOfSpeed = 5
+        }
+    }
+    
+    func updateCellsVisibility () {
+        var cells = sendDetailsVC?.tableView.visibleCells
+        let selectedCell = selectedIndexOfSpeed == nil ? nil : cells![selectedIndexOfSpeed!]
+        
+        for cell in cells! {
+            cell.alpha = (cell === selectedCell) ? 1.0 : 0.3
+            
+            if !cell.isKind(of: CustomTrasanctionFeeTableViewCell.self) {
+                (cell as! TransactionFeeTableViewCell).checkMarkImage.isHidden = (cell !== selectedCell)
+            }
         }
     }
     

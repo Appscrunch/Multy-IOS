@@ -47,6 +47,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
+        loader.setupUI(text: localize(string: Constants.sendingString), image: #imageLiteral(resourceName: "walletHuge"))
         self.view.addSubview(loader)
         self.hideKeyboardWhenTappedAround()
         self.presenter.mainVC = self
