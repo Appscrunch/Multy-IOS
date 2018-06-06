@@ -20,6 +20,7 @@ class TxInfoView: UIView {
         let sumInCryptoLabel = UILabel(frame: CGRect.zero)
         sumInCryptoLabel.translatesAutoresizingMaskIntoConstraints = false
         sumInCryptoLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 16.0)
+        sumInCryptoLabel.adjustsFontSizeToFitWidth = true
         sumInCryptoLabel.minimumScaleFactor = 0.5
         sumInCryptoLabel.text = sumInCryptoString
         self.addSubview(sumInCryptoLabel)
@@ -28,6 +29,7 @@ class TxInfoView: UIView {
         sumInFiatLabel.translatesAutoresizingMaskIntoConstraints = false
         sumInFiatLabel.font = UIFont(name: "AvenirNext-Regular", size: 13.0)
         sumInFiatLabel.textColor = #colorLiteral(red: 0.5294117647, green: 0.631372549, blue: 0.7725490196, alpha: 1)
+        sumInFiatLabel.adjustsFontSizeToFitWidth = true
         sumInFiatLabel.minimumScaleFactor = 0.5
         sumInFiatLabel.text = sumInFiatString
         self.addSubview(sumInFiatLabel)

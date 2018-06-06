@@ -73,7 +73,6 @@ class SendViewController: UIViewController {
     private var indexOfWalletsCellBeforeDragging = 0
     private var indexOfActiveRequestsCellBeforeDragging = 0
     
-    var swipePrevLocationTimeInterval : TimeInterval?
     var swipePrevLocation : CGPoint?
     
     var sendMode = SendMode.searching
@@ -201,9 +200,9 @@ class SendViewController: UIViewController {
     func fixUIForX() {
         if screenHeight == heightOfX {
             activeRequestsAmountTopConstraint.constant = activeRequestsAmountTopConstraint.constant + 20
-            self.view.layoutIfNeeded()
         }
-
+        
+        self.view.layoutIfNeeded()
     }
     
     func updateUIForBluetoothState(_ isEnable : Bool) {
@@ -276,6 +275,13 @@ class SendViewController: UIViewController {
                 navigationButtonsBottomConstant -= bottomPadding
             }
             
+            prepareTxInfo()
+            prepareClonesViews()
+            bluetoothEnabledContentView.isHidden = true
+            
+            // Set constraints for hiding active requests amount
+            activeRequestsAmountTopConstraint.constant = -60
+            
             // Set constraints for hiding navigation buttons
             navigationButtonsHolderBottomConstraint.constant = navigationButtonsBottomConstant
             
@@ -288,10 +294,6 @@ class SendViewController: UIViewController {
             rightActiveRequestsClonesTrailingConstraint.constant = -rightActiveRequestsClonesWidthConstraint.constant
             self.activeRequestsClonesHolderView.layoutIfNeeded()
             
-            prepareTxInfo()
-            prepareClonesViews()
-            bluetoothEnabledContentView.isHidden = true
-            
             UIView.animate(withDuration: ANIMATION_DURATION) {
                 self.showTxInfo()
                 self.animationHolderView.layoutIfNeeded()
@@ -300,24 +302,19 @@ class SendViewController: UIViewController {
     }
     
     func cancelSending() {
-        var isNeedToSend = false
-        let activeRequestView = activeRequestsClonesHolderView.subviews.filter{ $0.tag == activeRequestCloneViewTag}.first
-        if activeRequestView != nil {
-            let frame = activeRequestsClonesHolderView.convert(activeRequestView!.frame, to: animationHolderView)
-            if frame.contains(txInfoView!.center) {
-                isNeedToSend = true
-            }
-        }
         
-        if isNeedToSend {
-            send()
-        } else {
-            backUIToSearching(nil)
-        }
     }
     
     
     func backUIToSearching(_ completion : (() -> Swift.Void)? = nil) {
+        // Set constraints for presenting active requests amount
+        if screenHeight == heightOfX {
+            activeRequestsAmountTopConstraint.constant = 55
+        } else {
+            activeRequestsAmountTopConstraint.constant = 35
+        }
+        
+        // Set constraints for presenting navigation buttons
         navigationButtonsHolderBottomConstraint.constant = 0
         
         // Set constraints for presenting requests
@@ -412,13 +409,14 @@ class SendViewController: UIViewController {
         txTokenImageView = UIImageView(frame: CGRect(x: (walletsClonesHolderView.center.x - txTokenImageSide/2), y: (walletsClonesHolderView.frame.origin.y + walletsClonesHolderView.frame.size.height - txTokenImageSide), width: txTokenImageSide, height: txTokenImageSide))
         txTokenImageView!.image = UIImage(named: blockchainType.iconString)
         txTokenImageView!.alpha = 0
-        animationHolderView.insertSubview(txTokenImageView!, at: 0)
+        let walletsClonesHolderViewIndex = animationHolderView.subviews.index(of: walletsClonesHolderView)
+        animationHolderView.insertSubview(txTokenImageView!, at: walletsClonesHolderViewIndex! - 1)
         
         let txInfoViewWidth : CGFloat = 150
         let txInfoViewHeight : CGFloat = 62
         txInfoView = TxInfoView(frame: CGRect(x: (walletsClonesHolderView.center.x - txInfoViewWidth/2), y: (txTokenImageView!.frame.origin.y - 5 - txInfoViewHeight), width: txInfoViewWidth, height: txInfoViewHeight), sumInCryptoString: sumInCrypto, sumInFiatString: sumInFiat)
         txInfoView!.alpha = 0
-        animationHolderView.addSubview(txInfoView!)
+        animationHolderView.insertSubview(txInfoView!, at: walletsClonesHolderViewIndex! + 1)
     }
     
     func showTxInfo() {
@@ -435,10 +433,11 @@ class SendViewController: UIViewController {
             UIView.animate(withDuration: 0.15, animations: {
                 self.selectedRequestAmountCloneLabel!.alpha = 0
                 self.selectedRequestAddressCloneLabel!.alpha = 0
-                self.txInfoView!.frame = CGRect(x: centerActiveRequestView.x, y: centerActiveRequestView.y, width: 0, height: 0)
+                self.txTokenImageView!.frame = CGRect(x: centerActiveRequestView.x, y: centerActiveRequestView.y, width: 0, height: 0)
+                self.txInfoView!.frame = CGRect(x: self.txTokenImageView!.center.x, y: (self.txTokenImageView!.frame.origin.y - 5 - self.txInfoView!.frame.size.height), width: 0, height: 0)
+                 self.txTokenImageView!.alpha = 0
                 self.txInfoView!.alpha = 0
-                self.txTokenImageView!.frame = CGRect(x: (self.walletsClonesHolderView.center.x - self.txInfoView!.frame.size.width/2), y: (self.txTokenImageView!.frame.origin.y - 5 - self.txInfoView!.frame.size.height), width: self.txInfoView!.frame.size.width, height: self.txInfoView!.frame.size.height)
-                self.txTokenImageView!.alpha = 0
+                
             }) { succeeded in
                 UIView.animate(withDuration: 0.15, animations: {
                     activeRequestView?.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -758,12 +757,10 @@ extension SendViewController: UIGestureRecognizerDelegate {
     
     @objc func handleLongPress(longPress: UILongPressGestureRecognizer) {
         let location = longPress.location(in: walletsCollectionView)
-        let timeInterval = Date().timeIntervalSince1970
         switch longPress.state {
         case .began:
             if let indexPath = walletsCollectionView.indexPathForItem(at: location) {
                 if indexPath.item == presenter.selectedWalletIndex! {
-                    swipePrevLocationTimeInterval = timeInterval
                     swipePrevLocation = location
                     prepareForSending()
                 }
@@ -774,7 +771,21 @@ extension SendViewController: UIGestureRecognizerDelegate {
                 let deltaY = location.y - swipePrevLocation!.y
                 swipePrevLocation = location
                 let newTxInfoViewCenter = CGPoint(x: txInfoView!.center.x + deltaX, y: txInfoView!.center.y + deltaY)
+                let newTxTokenImageViewCenter = CGPoint(x: txTokenImageView!.center.x + deltaX, y: txTokenImageView!.center.y + deltaY)
                 txInfoView!.center = newTxInfoViewCenter
+                txTokenImageView!.center = newTxTokenImageViewCenter
+                
+                let activeRequestView = activeRequestsClonesHolderView.subviews.filter{ $0.tag == activeRequestCloneViewTag}.first as? ActiveRequestCollectionViewCell
+                if activeRequestView != nil  {
+                    if isReadyForSend() {
+                        activeRequestView!.requestImage.layer.borderWidth = activeRequestView!.requestImage.frame.size.height/2
+                        let borderColor = #colorLiteral(red: 0.3725490196, green: 0.8, blue: 0.4901960784, alpha: 1).withAlphaComponent(0.5)
+                        activeRequestView!.requestImage.layer.borderColor = borderColor.cgColor
+                    } else {
+                        activeRequestView!.requestImage.layer.borderWidth = 0
+                    }
+                }
+                
 //                if swipePrevLocation!.y - location.y > 5 && timeInterval - swipePrevLocationTimeInterval! < 0.05 {
 //                    send()
 //                    swipePrevLocation = nil
@@ -787,15 +798,37 @@ extension SendViewController: UIGestureRecognizerDelegate {
         case .ended, .failed, .cancelled:
             if sendMode == .prepareSending {
                 swipePrevLocation = nil
-                swipePrevLocationTimeInterval = nil
-                cancelSending()
+                
+                if longPress.state == .ended {
+                    if isReadyForSend() {
+                        send()
+                    } else {
+                        backUIToSearching(nil)
+                    }
+                } else {
+                    backUIToSearching(nil)
+                }
             }
             
         default:
             break
         }
     }
+    
+    func isReadyForSend() -> Bool {
+        var result = false
+        let activeRequestView = activeRequestsClonesHolderView.subviews.filter{ $0.tag == activeRequestCloneViewTag}.first
+        if activeRequestView != nil {
+            let frame = activeRequestsClonesHolderView.convert(activeRequestView!.frame, to: animationHolderView)
+            if frame.contains(txTokenImageView!.center) {
+                result = true
+            }
+        }
+        
+        return result
+    }
 }
+
 
 extension LocalizeDelegate: Localizable {
     var tableName: String {
