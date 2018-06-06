@@ -39,3 +39,7 @@
 "SHARE" = "Share";
 "SAT/B" = "Sat/B";
 "SEND TIP" = "Hold and Swipe to send";
+"YOU ENTERED TOO SMALL AMOUNT" = "You entered too small amount!";
+"YOU ARE TRYING SPEND MORE THEN HAVE" = "You are trying to spend more then you have.";
+"UPDATING" = "Updating...";
+"SENDING" = "Sending...";

@@ -63,6 +63,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         spiner.stopAnimating()
+        loader.setupUI(text: localize(string: Constants.gettingWalletString), image: #imageLiteral(resourceName: "walletHuge"))
         self.view.addSubview(loader)
         self.swipeToBack()
         presenter.mainVC = self

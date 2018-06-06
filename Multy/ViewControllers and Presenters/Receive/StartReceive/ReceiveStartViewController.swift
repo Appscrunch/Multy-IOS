@@ -99,7 +99,7 @@ extension ReceiveStartViewController: UITableViewDelegate, UITableViewDataSource
         self.presenter.selectedIndex = indexPath.row
         if self.presenter.isNeedToPop == true {
             if self.whereFrom != nil && self.presenter.walletsArr[indexPath.row].availableAmount.isZero {
-                let message = "You can not choose empty wallet. Please select wallet with some amount"
+                let message = localize(string: Constants.cannotChooseEmptyWalletString)
                 let alert = UIAlertController(title: localize(string: Constants.sorryString), message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)

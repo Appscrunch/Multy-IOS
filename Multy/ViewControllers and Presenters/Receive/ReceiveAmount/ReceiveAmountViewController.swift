@@ -110,7 +110,7 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func doneAction(_ sender: Any) {
         if sumInCryptoString.convertCryptoAmountStringToMinimalUnits(in: blockchainType.blockchain) == Int64(0) {
-            presentAlert(with: "Please, enter non-zero amount!")
+            presentAlert(with: localize(string: Constants.enterNonZeroAmountString))
             
             return
         }
@@ -136,14 +136,14 @@ class ReceiveAmountViewController: UIViewController, UITextFieldDelegate {
         switch isCrypto{
         case true:
             if ((amountTF.text! + string) as NSString).doubleValue > presenter.getMaxValueOfChain(curency: blockchainType.blockchain) {
-                presentWarning(message: "You can`t enter sum more than chain have")
+                presentWarning(message: localize(string: Constants.youCantEnterSumString))
                 
                 return false
             }
         case false:
             let exchangeCourse = DataManager.shared.makeExchangeFor(blockchainType: blockchainType)
             if ((amountTF.text! + string) as NSString).doubleValue/exchangeCourse > presenter.getMaxValueOfChain(curency: blockchainType.blockchain) {
-                presentWarning(message: "You can`t enter sum more than chain have")
+                presentWarning(message: localize(string: Constants.youCantEnterSumString))
                 
                 return false
             }

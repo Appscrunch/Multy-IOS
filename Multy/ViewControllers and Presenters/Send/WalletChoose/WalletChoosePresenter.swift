@@ -53,7 +53,7 @@ class WalletChoosePresenter: NSObject {
             alertMessage = message!
         }
         
-        let alert = UIAlertController(title: "Error", message: alertMessage, preferredStyle: .alert)
+        let alert = UIAlertController(title: walletChoooseVC!.localize(string: Constants.errorString), message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             
         }))

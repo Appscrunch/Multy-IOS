@@ -40,7 +40,7 @@ class SendDetailsViewController: UIViewController, UITextFieldDelegate, Analytic
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(loader)
-        loader.show(customTitle: "Updating rates")
+        loader.show(customTitle: localize(string: Constants.updatingString)) // "Updating rates"
         self.swipeToBack()
         self.tabBarController?.tabBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         self.hideKeyboardWhenTappedAround()

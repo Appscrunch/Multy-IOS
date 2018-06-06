@@ -17,4 +17,6 @@
 "ENABLE BLUETOOTH ALERT TITLE" = "Чтобы включить Bluetooth, перейдите в Настройки";
 "SETTINGS ACTION TITLE" = "Настройки";
 "GETTING WALLET" = "Получение кошельков...";
-
+"CANNOT CHOOSE EMPTY WALLET" = "Вы не можете выбрать пустой кошелек. Выберите кошелек с некоторой суммой";
+"ENTER NON-ZERO AMOUNT" = "Пожалуйста, введите ненулевое количество!";
+"YOU CANT ENTER SUM" = "Вы не можете ввести сумму больше, чем имеется в сети";

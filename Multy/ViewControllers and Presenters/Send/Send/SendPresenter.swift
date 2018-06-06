@@ -332,9 +332,9 @@ class SendPresenter: NSObject {
             var message = rawTransaction
             
             if message.hasPrefix("BigInt value is not representable as") {
-                message = "You entered too small amount!"
+                message = sendVC!.localize(string: Constants.youEnteredTooSmallAmountString)
             } else if message.hasPrefix("Transaction is trying to spend more than available in inputs") {
-                message = "You are trying to spend more then you have."
+                message = sendVC!.localize(string: Constants.youTryingSpendMoreThenHaveString)
             }
             
 //            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

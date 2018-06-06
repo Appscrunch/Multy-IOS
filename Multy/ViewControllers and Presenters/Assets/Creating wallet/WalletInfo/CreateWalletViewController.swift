@@ -26,6 +26,7 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
         self.swipeToBack()
         self.hideKeyboardWhenTappedAround()
         self.tableView.tableFooterView = nil
+        loader.setupUI(text: localize(string: Constants.creatingWalletString), image: #imageLiteral(resourceName: "walletHuge"))
         self.view.addSubview(loader)
         
         self.presenter.mainVC = self
