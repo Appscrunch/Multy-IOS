@@ -182,7 +182,7 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
            selectedIndexOfSpeed = 5
         }
         let cell = self.sendDetailsVC?.tableView.cellForRow(at: [0, selectedIndexOfSpeed!]) as! CustomTrasanctionFeeTableViewCell
-        cell.value = (firstValue)!
+        cell.value = UInt64(firstValue!)
         cell.setupUI()
         customFee = UInt64(firstValue!)
 //        self.sendDetailsVC?.tableView.reloadData()

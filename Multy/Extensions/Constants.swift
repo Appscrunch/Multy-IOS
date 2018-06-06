@@ -16,6 +16,7 @@ struct Constants {
     static let backupNeededString = "BACKUP IS NEEDED"
     static let restoreMultyString = "RESTORE MULTY"
     static let gettingWalletString = "GETTING WALLET"
+    static let creatingWalletString = "CREATING WALLET"
     static let checkingVersionString = "CHECKING VERSION"
     static let availableString = "AVAILABLE"
     static let workInProgressString = "WORK IN PROGRESS"
@@ -79,6 +80,13 @@ struct Constants {
     static let sendTipString = "SEND TIP"
     static let useTermsOfService = "USE TERMS OF SERVICE"
     static let restoringWalletsString = "RESTORING WALLETS"
+    static let cannotChooseEmptyWalletString = "CANNOT CHOOSE EMPTY WALLET"
+    static let enterNonZeroAmountString = "ENTER NON-ZERO AMOUNT"
+    static let youCantEnterSumString = "YOU CANT ENTER SUM"
+    static let youEnteredTooSmallAmountString = "YOU ENTERED TOO SMALL AMOUNT"
+    static let youTryingSpendMoreThenHaveString = "YOU ARE TRYING SPEND MORE THEM HAVE"
+    static let updatingString = "UPDATING"
+    static let sendingString = "SENDING"
     
     //Assets screen
     struct AssetsScreen {

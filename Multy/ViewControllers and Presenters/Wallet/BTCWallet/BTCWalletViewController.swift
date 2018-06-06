@@ -68,6 +68,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         spiner.stopAnimating()
+        loader.setupUI(text: localize(string: Constants.updatingString), image: #imageLiteral(resourceName: "walletHuge"))
         view.addSubview(loader)
         self.swipeToBack()
         presenter.mainVC = self

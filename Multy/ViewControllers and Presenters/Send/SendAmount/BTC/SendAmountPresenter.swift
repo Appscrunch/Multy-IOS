@@ -133,8 +133,9 @@ class SendAmountPresenter: NSObject {
         let estimate = estimateTransaction()
         
         if estimate == false {
+            //FIXME: localize errors from core lib
             let message = rawTransaction
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: sendAmountVC!.localize(string: Constants.errorString), message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in }))
             sendAmountVC!.present(alert, animated: true, completion: nil)
             

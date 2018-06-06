@@ -19,6 +19,7 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
         super.viewDidLoad()
         self.swipeToBack()
         walletNameTF.accessibilityIdentifier = "nameField"
+        loader.setupUI(text: localize(string: Constants.updatingString), image: #imageLiteral(resourceName: "walletHuge"))
         view.addSubview(loader)
         
         self.presenter.walletSettingsVC = self

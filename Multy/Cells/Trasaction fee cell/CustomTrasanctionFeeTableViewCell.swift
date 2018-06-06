@@ -19,7 +19,7 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
     @IBOutlet weak var customTopConstraint: NSLayoutConstraint!
     
     var blockchainType: BlockchainType?
-    var value = 0
+    var value = UInt64(0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +34,14 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
 //        let sumInCrypto = (Double(value) / 100000000.0) * 225
 //        let sumInFiat = sumInCrypto * DataManager.shared.makeExchangeFor(blockchainType: blockchainType!)
 //        return "~ " + "\(sumInCrypto.fixedFraction(digits: 8)) BTC / \(sumInFiat.fixedFraction(digits: 2)) USD"
-        return "\(value) " + localize(string: Constants.satoshiPerByteShortString)
+        
+        if blockchainType?.blockchain == BLOCKCHAIN_BITCOIN {
+            return "\(value) " + localize(string: Constants.satoshiPerByteShortString)
+        } else if blockchainType?.blockchain == BLOCKCHAIN_ETHEREUM {
+            return "\(value / 1000000000)" + " GWei/gas"
+        } else {
+            return ""
+        }
     }
     
     func setupUI() {
@@ -67,7 +74,10 @@ class CustomTrasanctionFeeTableViewCell: UITableViewCell {
     }
     
     func reloadUI() {
-        self.customTopConstraint.constant = 20
+        if customTopConstraint != nil {
+            self.customTopConstraint.constant = 20
+        }
+        
         self.middleLbl.isHidden = false
         self.checkImg.isHidden = true
         self.toplbl.isHidden = true

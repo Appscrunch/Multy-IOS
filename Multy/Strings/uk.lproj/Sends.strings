@@ -38,4 +38,9 @@
 "COPY TO CLIPBOARD" = "Скопіювати в буфер обміну";
 "SHARE" = "Поділитися";
 "SAT/B" = "Сат/Б";
+"SEND TIP" = "Hold and Swipe щоб відправити";
+"YOU ENTERED TOO SMALL AMOUNT" = "Ви ввели занадто малу суму!";
+"YOU ARE TRYING SPEND MORE THEN HAVE" = "Ви намагаєтеся витратити більше ніж маєте.";
+"UPDATING" = "Оновлення...";
+"SENDING" = "Відправка...";
 "SEND TIP" = "Hold and Swipe";

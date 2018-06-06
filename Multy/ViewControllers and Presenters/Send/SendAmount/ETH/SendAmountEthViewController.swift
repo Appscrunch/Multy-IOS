@@ -222,7 +222,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.text == "" || (textField.text == "0" && string != "," && string != "." && !string.isEmpty) {
             if presenter.maxAllowedToSpend < string.convertStringWithCommaToDouble()  {
-                presentWarning(message: "You are trying to spend more then you have.")
+                presentWarning(message: localize(string: Constants.youTryingSpendMoreThenHaveString))
                 
                 return false
             }
