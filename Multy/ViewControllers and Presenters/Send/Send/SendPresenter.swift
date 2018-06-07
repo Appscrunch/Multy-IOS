@@ -346,7 +346,6 @@ class SendPresenter: NSObject {
     
     func send() {
         guard let index = selectedWalletIndex else {
-            self.cleanRequests()
             self.sendVC?.updateUIWithSendResponse(success: false)
             
             return
@@ -372,7 +371,6 @@ class SendPresenter: NSObject {
 //            sendVC!.present(alert, animated: true, completion: nil)
             
             //FIXME: show error message
-            self.cleanRequests()
             self.sendVC?.updateUIWithSendResponse(success: false)
             
             return
@@ -397,7 +395,6 @@ class SendPresenter: NSObject {
         
         DataManager.shared.sendHDTransaction(transactionParameters: params) { (dict, error) in
             print("---------\(dict)")
-            self.cleanRequests()
             
             if error != nil {
                 self.sendVC?.updateUIWithSendResponse(success: false)

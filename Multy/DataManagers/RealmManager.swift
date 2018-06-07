@@ -788,9 +788,9 @@ extension RealmMigrationManager {
     }
     
     func migrateFrom15To16(with migration: Migration) {
-        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
-            newWallet?["networkID"] = NSNumber(value: 0)
-        }
+//        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+//            newWallet?["networkID"] = NSNumber(value: 0)
+//        }
     }
     
     func migrateFrom16To17(with migration: Migration) {
