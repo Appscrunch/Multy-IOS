@@ -529,7 +529,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            if translation.y > 0 && self.tableView.frame.origin.y > self.startY + 10 {
+            if translation.y > 0 && self.tableView.frame.origin.y > self.startY {
                 UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: .curveEaseIn, animations: {
                     if self.spiner.isAnimating == false {
                         self.spiner.isHidden = false
@@ -543,9 +543,8 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
                     self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
                     self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
                     self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - 10
-                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - 9
                     if self.tableView.frame.origin.y > (self.startY + self.tableTopY) / 2 {
-                        if self.tableView.frame.origin.y > screenHeight/2 + 40 {
+                        if self.tableView.frame.origin.y > screenHeight/2 - 20 {
                             self.updateByPull()
                             self.isCanUpdate = false
                         }
@@ -560,7 +559,7 @@ extension EthWalletViewController: UITableViewDelegate, UITableViewDataSource {
                 self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
                 self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
                 if self.tableView.frame.origin.y > startY + 10 {
-                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - 9
+                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - 10
                 }
             }
         }
