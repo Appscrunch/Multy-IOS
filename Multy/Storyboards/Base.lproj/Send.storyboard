@@ -1672,12 +1672,11 @@ scan</string>
                         <outlet property="titleLbl" destination="VhT-01-bTB" id="KgT-hI-6Mc"/>
                         <outlet property="topCurrencyNameLbl" destination="fOo-l7-Vq8" id="dEs-xG-7K4"/>
                         <outlet property="topSumLbl" destination="gfE-Vc-rTR" id="9cz-gU-dPu"/>
-                        <segue destination="0GY-ag-sLU" kind="show" identifier="sendFinishVC" id="kCF-Tq-Brv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbg-JX-sJz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3333.5999999999999" y="362.96851574212894"/>
+            <point key="canvasLocation" x="5156" y="770"/>
         </scene>
         <!--Send Finish View Controller-->
         <scene sceneID="2Jx-1f-JIK">
@@ -1852,7 +1851,7 @@ scan</string>
                                         <color key="textColor" red="0.93755775690078735" green="0.55298328399658203" blue="0.010770578868687153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ccP-jD-nTp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="ccP-jD-nTp">
                                         <rect key="frame" x="166" y="390.5" width="44" height="34"/>
                                         <attributedString key="attributedText">
                                             <fragment>
@@ -2049,7 +2048,7 @@ address</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmy-Xf-KB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4303" y="-36"/>
+            <point key="canvasLocation" x="4311" y="-36"/>
         </scene>
         <!--Sending Animation View Controller-->
         <scene sceneID="pQ1-vc-SFR">
@@ -2413,6 +2412,15 @@ address</string>
                                         <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="s8N-my-GN0">
+                                        <rect key="frame" x="173" y="161" width="30" height="68.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="68.5" id="1A3-Sz-2HQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-ye-4hC">
                                         <rect key="frame" x="203" y="192.5" width="31" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
@@ -2519,15 +2527,6 @@ address</string>
                                             <constraint firstItem="fDn-cT-aUG" firstAttribute="centerY" secondItem="puy-aI-Koq" secondAttribute="centerY" id="gzy-AI-OMM"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="s8N-my-GN0">
-                                        <rect key="frame" x="173" y="161" width="30" height="68.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="68.5" id="1A3-Sz-2HQ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="50"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlM-FX-Xm4">
                                         <rect key="frame" x="145" y="215.5" width="84" height="76"/>
                                         <constraints>
@@ -2661,7 +2660,7 @@ address</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFv-kP-ezB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3333.5999999999999" y="-458.32083958020991"/>
+            <point key="canvasLocation" x="3396" y="-36"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1sw-Hc-uqu">
@@ -2702,7 +2701,6 @@ address</string>
     <inferredMetricsTieBreakers>
         <segue reference="Nqh-Rv-oVp"/>
         <segue reference="Y3u-nO-qs1"/>
-        <segue reference="pfe-aE-6Gg"/>
         <segue reference="EUD-ex-a5v"/>
         <segue reference="FRo-Sp-aVY"/>
         <segue reference="nMw-po-XF8"/>

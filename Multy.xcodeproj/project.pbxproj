@@ -51,6 +51,7 @@
 		44A3DF93205AA1F300FE9955 /* BlockchainType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3DF92205AA1F300FE9955 /* BlockchainType+Extension.swift */; };
 		44BCBDB520601AD0001611A5 /* BTCWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BCBDB420601AD0001611A5 /* BTCWallet.swift */; };
 		44BCBDB720601AE3001611A5 /* ETHWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BCBDB620601AE3001611A5 /* ETHWallet.swift */; };
+		44BF10E020C971C4009E3E22 /* magicSend.json in Resources */ = {isa = PBXBuildFile; fileRef = 44BF10DF20C971C4009E3E22 /* magicSend.json */; };
 		44C06FC9203D832B008CBA9D /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FC8203D832B008CBA9D /* Array+Extension.swift */; };
 		44C06FCB203D9021008CBA9D /* LoggingPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C06FCA203D9020008CBA9D /* LoggingPrint.swift */; };
 		44C3F38A207E5FAB00AC1BD4 /* ProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C3F389207E5FAB00AC1BD4 /* ProgressHUD+Extension.swift */; };
@@ -229,9 +230,6 @@
 		85741D8520B45E8B0093933B /* circle_grow.json in Resources */ = {isa = PBXBuildFile; fileRef = 85741D8420B45E8A0093933B /* circle_grow.json */; };
 		85741D8720B555DB0093933B /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85741D8620B555DB0093933B /* BLEManager.swift */; };
 		85741D8920B55A660093933B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85741D8820B55A650093933B /* CoreBluetooth.framework */; };
-		8584937120C9442D007AC636 /* magicSend.json in Resources */ = {isa = PBXBuildFile; fileRef = 8584937020C9442D007AC636 /* magicSend.json */; };
-		8584937520C946A9007AC636 /* magic_send.json in Resources */ = {isa = PBXBuildFile; fileRef = 8584937420C946A9007AC636 /* magic_send.json */; };
-		8584937720C94E6A007AC636 /* magicSend.json in Resources */ = {isa = PBXBuildFile; fileRef = 8584937620C94E6A007AC636 /* magicSend.json */; };
 		85DE62DD20AB002000423D89 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE62DC20AB002000423D89 /* SendViewController.swift */; };
 		85DE62DF20AB003A00423D89 /* SendPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE62DE20AB003A00423D89 /* SendPresenter.swift */; };
 		85DE62E320AB077B00423D89 /* WalletCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE62E120AB077B00423D89 /* WalletCollectionViewCell.swift */; };
@@ -443,6 +441,7 @@
 		44A3DF92205AA1F300FE9955 /* BlockchainType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockchainType+Extension.swift"; sourceTree = "<group>"; };
 		44BCBDB420601AD0001611A5 /* BTCWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCWallet.swift; sourceTree = "<group>"; };
 		44BCBDB620601AE3001611A5 /* ETHWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHWallet.swift; sourceTree = "<group>"; };
+		44BF10DF20C971C4009E3E22 /* magicSend.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = magicSend.json; sourceTree = "<group>"; };
 		44C06FC8203D832B008CBA9D /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		44C06FCA203D9020008CBA9D /* LoggingPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingPrint.swift; sourceTree = "<group>"; };
 		44C3F389207E5FAB00AC1BD4 /* ProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Extension.swift"; sourceTree = "<group>"; };
@@ -637,9 +636,6 @@
 		85741D8420B45E8A0093933B /* circle_grow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_grow.json; sourceTree = "<group>"; };
 		85741D8620B555DB0093933B /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		85741D8820B55A650093933B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		8584937020C9442D007AC636 /* magicSend.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = magicSend.json; sourceTree = "<group>"; };
-		8584937420C946A9007AC636 /* magic_send.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = magic_send.json; sourceTree = "<group>"; };
-		8584937620C94E6A007AC636 /* magicSend.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = magicSend.json; path = ../../../../../../Downloads/magicSend.json; sourceTree = "<group>"; };
 		85DE62DC20AB002000423D89 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		85DE62DE20AB003A00423D89 /* SendPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPresenter.swift; sourceTree = "<group>"; };
 		85DE62E120AB077B00423D89 /* WalletCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1666,9 +1662,7 @@
 		85DE62F120AF187F00423D89 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				8584937620C94E6A007AC636 /* magicSend.json */,
-				8584937420C946A9007AC636 /* magic_send.json */,
-				8584937020C9442D007AC636 /* magicSend.json */,
+				44BF10DF20C971C4009E3E22 /* magicSend.json */,
 				854EF14920C06DA4000C2247 /* tx_success_animation.json */,
 				85741D8420B45E8A0093933B /* circle_grow.json */,
 				85DE62F220AF188B00423D89 /* Check Mark Success Data.json */,
@@ -1991,7 +1985,6 @@
 				45DA45A220299E49004A34FB /* Multy.entitlements in Resources */,
 				85DE62E420AB077B00423D89 /* WalletCollectionViewCell.xib in Resources */,
 				85DE62F320AF188B00423D89 /* Check Mark Success Data.json in Resources */,
-				8584937120C9442D007AC636 /* magicSend.json in Resources */,
 				4477263420BEAF86006BF4A7 /* Wallets.strings in Resources */,
 				854EF14A20C06DA4000C2247 /* tx_success_animation.json in Resources */,
 				45AC1635204850AC00E75BD6 /* BlockchainCellTableViewCell.xib in Resources */,
@@ -2018,7 +2011,6 @@
 				4477264220BEC818006BF4A7 /* Receives.strings in Resources */,
 				4522905A1FBB18D30024B550 /* Main.storyboard in Resources */,
 				445B127C20BC1BE000FD0D33 /* Settings.storyboard in Resources */,
-				8584937520C946A9007AC636 /* magic_send.json in Resources */,
 				445B129720BC1CEE00FD0D33 /* CustomTrasanctionFeeTableViewCell.xib in Resources */,
 				445B127020BC1BA800FD0D33 /* SeedPhrase.storyboard in Resources */,
 				4477262420BE9F53006BF4A7 /* NewWalletTableViewCell.xib in Resources */,
@@ -2027,8 +2019,8 @@
 				45AC16292048214C00E75BD6 /* CurrencyTableViewCell.xib in Resources */,
 				4430569B20C1627600E5415A /* TransactionPendingCell.xib in Resources */,
 				85DE62E920AC1CE100423D89 /* ActiveRequestCollectionViewCell.xib in Resources */,
+				44BF10E020C971C4009E3E22 /* magicSend.json in Resources */,
 				4585BD392049AD03004542AE /* ExchangeStockTableViewCell.xib in Resources */,
-				8584937720C94E6A007AC636 /* magicSend.json in Resources */,
 				445B129120BC1CD100FD0D33 /* SearchAddressTableViewCell.xib in Resources */,
 				445B128520BC1C9300FD0D33 /* TextTableViewCell.xib in Resources */,
 				4477261720BDA1F2006BF4A7 /* Assets.strings in Resources */,

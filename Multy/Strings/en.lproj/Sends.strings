@@ -44,3 +44,6 @@
 "UPDATING" = "Updating...";
 "SENDING" = "Sending...";
 "SEND TIP" = "Hold and Drag";
+"SCANNING NOT SUPPORTED" = "Scanning not supported";
+"DEVICE NOT SUPPORT" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
+"NOT ENOUGH AMOUNT" = "Not enough amount on choosen wallet!\nYou can`t spend sum more than you have on the wallet!\nYour payment sum equals";

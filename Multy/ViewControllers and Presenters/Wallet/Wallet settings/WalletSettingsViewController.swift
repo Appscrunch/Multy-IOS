@@ -41,8 +41,8 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
         if presenter.wallet!.isEmpty {
             let message = localize(string: Constants.deleteWalletAlertString)
             let alert = UIAlertController(title: localize(string: Constants.warningString), message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .cancel, handler: { (action) in
-                self.loader.show(customTitle: "Deleting")
+            alert.addAction(UIAlertAction(title: localize(string: Constants.yesString), style: .cancel, handler: { [unowned self] (action) in
+                self.loader.show(customTitle: self.localize(string: Constants.deletingString))
                 self.presenter.delete()
                 self.sendAnalyticsEvent(screenName: "\(screenWalletSettingsWithChain)\(self.presenter.wallet!.chain)", eventName: "\(walletDeletedWithChain)\(self.presenter.wallet!.chain)")
             }))

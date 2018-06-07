@@ -109,7 +109,7 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     
     func alertForGetNewPermission() {
         let alert = UIAlertController(title: localize(string: Constants.warningString), message: localize(string: Constants.goToSettingsString), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
             let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
             if UIApplication.shared.canOpenURL(settingsUrl!) {
                 if #available(iOS 10.0, *) {
@@ -125,7 +125,7 @@ class QrScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     }
     
     func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        let ac = UIAlertController(title: localize(string: Constants.scanningNotSupportedString), message: localize(string: Constants.deviceNotSupportingString), preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }

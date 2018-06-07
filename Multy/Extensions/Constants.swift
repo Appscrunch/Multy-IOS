@@ -84,9 +84,14 @@ struct Constants {
     static let enterNonZeroAmountString = "ENTER NON-ZERO AMOUNT"
     static let youCantEnterSumString = "YOU CANT ENTER SUM"
     static let youEnteredTooSmallAmountString = "YOU ENTERED TOO SMALL AMOUNT"
-    static let youTryingSpendMoreThenHaveString = "YOU ARE TRYING SPEND MORE THEM HAVE"
+    static let youTryingSpendMoreThenHaveString = "YOU ARE TRYING SPEND MORE THEN HAVE"
     static let updatingString = "UPDATING"
     static let sendingString = "SENDING"
+    static let deletingString = "SENDING"
+    static let agreeWithTermsString = "AGREE WITH TERMS"
+    static let scanningNotSupportedString = "SCANNING NOT SUPPORTED"
+    static let deviceNotSupportingString = "DEVICE NOT SUPPORT"
+    static let notEnoughAmountString = "NOT ENOUGH AMOUNT"
     
     //Assets screen
     struct AssetsScreen {

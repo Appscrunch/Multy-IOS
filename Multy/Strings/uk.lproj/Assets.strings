@@ -26,4 +26,5 @@
 "CONNECT DEVICE" = "Будь ласка, підключіть ваш пристрій до Інтернету";
 "LOADING" = "Завантаження";
 "CHECKING VERSION" = "Перевірка версії";
-"USE TERMS OF SERVICE" = "In order to use Multy you have to accept Terms of Service. By pressing \"Прийняти\" you confirm that you have read, understood and agree to the following Terms of Service and that you have the right, power and authority to do so.";
+"USE TERMS OF SERVICE" = "Для того щоб користуватися Multy, вам необхідно спочатку висловити свою згоду з Умовами надання послуг. Натискаючи \"Прийняти\", ви підтверджуєте, що прочитали, зрозуміли і згодні з наступними умовами надання послуг, а також що ви маєте право укладати юридично обов'язковий договір.";
+"AGREE WITH TERMS" = "Я погоджуюся з Умовами надання послуг та обробкою своїх персональних даних відповідно до Політики конфідеційності Multy.";

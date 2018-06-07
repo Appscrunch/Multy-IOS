@@ -40,7 +40,7 @@ class TransactionFeeTableViewCell: UITableViewCell {
         if blockchainType?.blockchain == BLOCKCHAIN_BITCOIN {
             return "\(rate) " + localize(string: Constants.satoshiPerByteShortString)
         } else if blockchainType?.blockchain == BLOCKCHAIN_ETHEREUM {
-            return "\(rate / 1000000000)" + " GWei/gas"
+            return "\(rate / 1000000000)" + " GWei/Gas"
         } else {
             return ""
         }

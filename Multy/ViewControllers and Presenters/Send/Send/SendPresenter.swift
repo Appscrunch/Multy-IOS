@@ -18,6 +18,8 @@ class SendPresenter: NSObject {
     var rawTransactionEstimation = 0.0
     var rawTransactionBigIntEstimation = BigInt.zero()
     
+    var isSocketInitiateUpdating = false
+    
     var walletsArr = Array<UserWalletRLM>() {
         didSet {
             filterArray()
@@ -150,7 +152,7 @@ class SendPresenter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
     }
     
     func viewControllerViewWillDisappear() {
@@ -171,6 +173,7 @@ class SendPresenter: NSObject {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("transactionUpdated"), object: nil)
     }
     
     func numberOfWallets() -> Int {
@@ -186,11 +189,41 @@ class SendPresenter: NSObject {
             if err == nil {
                 // MARK: check this
                 if acc != nil && acc!.wallets.count > 0 {
-                    
+                    self.account = acc
                     self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
                 }
             }
         }
+    }
+    
+    func getWalletsVerbose() {
+        DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
+            if err != nil {
+                return
+            } else {
+                let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
+                print("afterVerbose:rawdata: \(walletsArrayFromApi)")
+                DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
+                    self.account = acc
+                    self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
+                    self.isSocketInitiateUpdating = false
+                })
+            }
+        }
+    }
+
+    
+    @objc func updateWalletAfterSockets() {
+        if isSocketInitiateUpdating {
+            return
+        }
+        
+        if sendVC!.isVisible() == false {
+            return
+        }
+        
+        isSocketInitiateUpdating = true
+        getWalletsVerbose()
     }
     
 //    func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
@@ -526,6 +559,7 @@ class SendPresenter: NSObject {
             newUserCodes.removeAll()
         }
     }
+    
 //
 //    func randomRequestAddress() -> String {
 //        var result = "0x"

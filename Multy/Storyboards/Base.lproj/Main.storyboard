@@ -1157,7 +1157,7 @@ Try again in:</string>
                                     <constraint firstAttribute="height" constant="1" id="8PT-au-Bgn"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxs-hz-PYJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Bxs-hz-PYJ">
                                 <rect key="frame" x="16" y="574" width="343" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="uGr-qZ-njI"/>
@@ -1167,14 +1167,14 @@ Try again in:</string>
                                         <attributes>
                                             <color key="NSColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="AvenirNext-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Multy Privacy Policy.">
                                         <attributes>
                                             <color key="NSColor" red="0.52941176470588236" green="0.63137254901960782" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="AvenirNext-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
                                     </fragment>
@@ -1260,6 +1260,7 @@ Try again in:</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="agreeTextLabel" destination="Bxs-hz-PYJ" id="VCu-iB-f0g"/>
                         <outlet property="spiner" destination="kQp-hH-W85" id="4ur-Cv-OQ6"/>
                         <outlet property="webView" destination="LYR-04-jHF" id="jKC-Ar-588"/>
                     </connections>
