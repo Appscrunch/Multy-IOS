@@ -4,6 +4,7 @@
 
 import UIKit
 import ZFRippleButton
+import Lottie
 
 private typealias LocalizeDelegate = SendStartViewController
 
@@ -20,6 +21,9 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var noAddressLbl: UILabel!
     @IBOutlet weak var recentAddresses: UILabel!
+    @IBOutlet weak var magicalSendImageView: UIImageView!
+    var magicSendAnimationView : LOTAnimationView?
+    @IBOutlet weak var magicalSendButton: UIButton!
     
     let presenter = SendStartPresenter()
     var stingIdForInApp = ""
@@ -60,6 +64,14 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
             addressTV.text = presenter.transactionDTO.sendAddress!
             placeholderLabel.isHidden = !addressTV.text.isEmpty
         }
+        magicalSendButton.layer.cornerRadius = 10
+        magicalSendButton.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.4901960784, blue: 1, alpha: 1)
+        magicalSendButton.layer.shadowColor = #colorLiteral(red: 0.01176470588, green: 0.4901960784, blue: 1, alpha: 1).cgColor
+        magicalSendButton.layer.shadowOpacity = 0.6
+        magicalSendButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        magicalSendButton.layer.shadowRadius = 8
+//        magicalSendButton.layer.borderWidth = 2
+//        magicalSendButton.layer.borderColor = #colorLiteral(red: 0, green: 0.5529411765, blue: 1, alpha: 1)
     }
     
     @objc func dismissSendKeyboard(gesture: UITapGestureRecognizer) {
@@ -91,6 +103,21 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
         if presenter.transactionDTO.sendAddress != nil && !presenter.transactionDTO.sendAddress!.isEmpty {
             self.modifyNextButtonMode()
         }
+        
+        if magicSendAnimationView == nil {
+            magicSendAnimationView = LOTAnimationView(name: "magicSend")
+            magicSendAnimationView!.frame = magicalSendImageView.bounds
+            magicalSendImageView.insertSubview(magicSendAnimationView!, at: 0)
+            magicalSendImageView.transform = CGAffineTransform(scaleX: 2, y: 2)
+            magicSendAnimationView!.animationSpeed = 1.3
+            magicSendAnimationView!.loopAnimation = true
+            magicSendAnimationView!.play()
+        } else {
+            if !magicSendAnimationView!.isAnimationPlaying {
+                magicSendAnimationView!.play()
+            }
+        }
+        
         fixUI()
     }
     
@@ -136,9 +163,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
-        unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.wirelessScan50")
-        sendDonationAlertScreenPresentedAnalytics(code: donationForWirelessScanFUNC)
+        
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
