@@ -41,7 +41,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
         presenter.sendAmountVC = self
         numberFormatter.numberStyle = .decimal
         
-        topCurrencyNameLbl.text = presenter.cryptoName
+        topCurrencyNameLbl.text = " " + presenter.cryptoName
         presenter.setAmountFromQr()
         presenter.cryptoToUsd()
         presenter.setSpendableAmountText()
@@ -124,7 +124,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
                 bottomSumLbl.text = presenter.sumInCrypto.cryptoValueString(for: presenter.blockchain) + " "
             }
             bottomCurrencyLbl.text = presenter.cryptoName
-            topCurrencyNameLbl.text = presenter.fiatName
+            topCurrencyNameLbl.text = " " + presenter.fiatName
         } else {
             presenter.isCrypto = !presenter.isCrypto
             presenter.makeMaxSumWithFeeAndDonate()
@@ -135,7 +135,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
                     topSumLbl.text = presenter.cryptoMaxSumWithFeeAndDonate.cryptoValueString(for: presenter.blockchain)
                 case false:
                     amountTF.text = presenter.availableSumInCrypto.cryptoValueString(for: presenter.blockchain) + " "
-                    topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: presenter.blockchain) + " "
+                    topSumLbl.text = presenter.availableSumInCrypto.cryptoValueString(for: presenter.blockchain)
                 }
             } else {
                 amountTF.text = presenter.sumInCrypto.cryptoValueString(for: presenter.blockchain)
@@ -147,7 +147,7 @@ class SendAmountEthViewController: UIViewController, UITextFieldDelegate, Analyt
             } else {
                 bottomSumLbl.text = presenter.sumInFiat.fiatValueString(for: presenter.blockchain) + " "
             }
-            topCurrencyNameLbl.text = presenter.cryptoName
+            topCurrencyNameLbl.text = " " + presenter.cryptoName
             bottomCurrencyLbl.text = presenter.fiatName
         }
         

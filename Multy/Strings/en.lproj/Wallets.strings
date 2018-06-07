@@ -25,4 +25,5 @@
 "LOADING" = "Loading";
 "UNABLE SEND" = "Не вдається відправити транзакцію";
 "UPDATING" = "Updating...";
+"DELETING" = "Deleting...";
 "GETTING WALLET" = "Getting Wallets...";

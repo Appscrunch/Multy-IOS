@@ -18,6 +18,8 @@ class SendPresenter: NSObject {
     var rawTransactionEstimation = 0.0
     var rawTransactionBigIntEstimation = BigInt.zero()
     
+    var isSocketInitiateUpdating = false
+    
     var walletsArr = Array<UserWalletRLM>() {
         didSet {
             filterArray()
@@ -150,7 +152,7 @@ class SendPresenter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
     }
     
     func viewControllerViewWillDisappear() {
@@ -171,6 +173,7 @@ class SendPresenter: NSObject {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("transactionUpdated"), object: nil)
     }
     
     func numberOfWallets() -> Int {
@@ -191,6 +194,19 @@ class SendPresenter: NSObject {
                 }
             }
         }
+    }
+    
+    @objc func updateWalletAfterSockets() {
+        if isSocketInitiateUpdating {
+            return
+        }
+        
+        if sendVC!.isVisible() == false {
+            return
+        }
+        
+        isSocketInitiateUpdating = true
+        getWallets()
     }
     
 //    func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
@@ -526,6 +542,7 @@ class SendPresenter: NSObject {
             newUserCodes.removeAll()
         }
     }
+    
 //
 //    func randomRequestAddress() -> String {
 //        var result = "0x"
