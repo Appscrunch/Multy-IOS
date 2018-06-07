@@ -200,9 +200,8 @@ class SendViewController: UIViewController {
     func fixUIForX() {
         if screenHeight == heightOfX {
             activeRequestsAmountTopConstraint.constant = activeRequestsAmountTopConstraint.constant + 20
+            self.view.layoutIfNeeded()
         }
-        
-        self.view.layoutIfNeeded()
     }
     
     func updateUIForBluetoothState(_ isEnable : Bool) {
@@ -299,10 +298,6 @@ class SendViewController: UIViewController {
                 self.animationHolderView.layoutIfNeeded()
             }
         }
-    }
-    
-    func cancelSending() {
-        
     }
     
     
@@ -447,7 +442,7 @@ class SendViewController: UIViewController {
     }
     
     func hideTxInfo() {
-        txTokenImageView!.frame.origin.y = walletsClonesHolderView.frame.origin.y + walletsClonesHolderView.frame.size.height - txTokenImageView!.frame.size.height
+        txTokenImageView!.center = CGPoint(x: walletsClonesHolderView.center.x, y: (walletsClonesHolderView.frame.origin.y + walletsClonesHolderView.frame.size.height - txTokenImageView!.frame.size.height/2))
         txTokenImageView!.alpha = 0
         
         txInfoView!.frame = CGRect(x: (walletsClonesHolderView.center.x - txInfoView!.frame.size.width/2), y: (txTokenImageView!.frame.origin.y - 5 - txInfoView!.frame.size.height), width: txInfoView!.frame.size.width, height: txInfoView!.frame.size.height)
@@ -778,11 +773,13 @@ extension SendViewController: UIGestureRecognizerDelegate {
                 let activeRequestView = activeRequestsClonesHolderView.subviews.filter{ $0.tag == activeRequestCloneViewTag}.first as? ActiveRequestCollectionViewCell
                 if activeRequestView != nil  {
                     if isReadyForSend() {
-                        activeRequestView!.requestImage.layer.borderWidth = activeRequestView!.requestImage.frame.size.height/2
-                        let borderColor = #colorLiteral(red: 0.3725490196, green: 0.8, blue: 0.4901960784, alpha: 1).withAlphaComponent(0.5)
+                        activeRequestView!.satisfiedImage.isHidden = false
+                        activeRequestView!.requestImage.layer.borderWidth = 10
+                        let borderColor = #colorLiteral(red: 0.4666666667, green: 0.7647058824, blue: 0.2666666667, alpha: 1).withAlphaComponent(0.8)
                         activeRequestView!.requestImage.layer.borderColor = borderColor.cgColor
                     } else {
                         activeRequestView!.requestImage.layer.borderWidth = 0
+                        activeRequestView!.satisfiedImage.isHidden = true
                     }
                 }
                 
