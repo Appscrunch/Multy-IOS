@@ -189,12 +189,29 @@ class SendPresenter: NSObject {
             if err == nil {
                 // MARK: check this
                 if acc != nil && acc!.wallets.count > 0 {
-                    
+                    self.account = acc
                     self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
                 }
             }
         }
     }
+    
+    func getWalletsVerbose() {
+        DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
+            if err != nil {
+                return
+            } else {
+                let walletsArr = UserWalletRLM.initWithArray(walletsInfo: walletsArrayFromApi!)
+                print("afterVerbose:rawdata: \(walletsArrayFromApi)")
+                DataManager.shared.realmManager.updateWalletsInAcc(arrOfWallets: walletsArr, completion: { (acc, err) in
+                    self.account = acc
+                    self.walletsArr = acc!.wallets.sorted(by: { $0.availableSumInCrypto > $1.availableSumInCrypto })
+                    self.isSocketInitiateUpdating = false
+                })
+            }
+        }
+    }
+
     
     @objc func updateWalletAfterSockets() {
         if isSocketInitiateUpdating {
@@ -206,7 +223,7 @@ class SendPresenter: NSObject {
         }
         
         isSocketInitiateUpdating = true
-        getWallets()
+        getWalletsVerbose()
     }
     
 //    func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
