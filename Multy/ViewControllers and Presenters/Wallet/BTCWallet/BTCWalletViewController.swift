@@ -72,6 +72,7 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spiner.isHidden = true
         spiner.stopAnimating()
         loader.setupUI(text: localize(string: Constants.updatingString), image: #imageLiteral(resourceName: "walletHuge"))
         view.addSubview(loader)
@@ -187,11 +188,11 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
         }
         if self.presenter.blockedAmount != 0 {
             UIView.animate(withDuration: 0.2) {
-                self.backImage.frame.size.height = 392
+                self.backImage.frame.size.height = 382
                 self.collectionView.frame.size.height = 260
                 self.collectionView.frame.origin.y = self.collectionStartY
-                self.customHeader.frame.origin.y = 372
-                self.tableView.frame.origin.y = 402
+                self.customHeader.frame.origin.y = 352
+                self.tableView.frame.origin.y = 382
                 self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
                 self.changeBackupY()
             }
@@ -495,6 +496,7 @@ extension TableViewDelegate: UITableViewDelegate {
         }
         
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            let coef: CGFloat = self.presenter.wallet!.isTherePendingAmount() ? 20 : 9
             if translation.y > 0 && self.tableView.frame.origin.y > self.startY + 10 {
                 UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: .curveEaseIn, animations: {
                     if self.spiner.isAnimating == false {
@@ -508,7 +510,8 @@ extension TableViewDelegate: UITableViewDelegate {
                     gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                     self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
                     self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
-                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - 9
+                    let coef: CGFloat = self.presenter.wallet!.isTherePendingAmount() ? 20 : 9
+                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - coef
                     if self.tableView.frame.origin.y > (self.startY + self.tableTopY) / 2 {
                         if self.tableView.frame.origin.y > screenHeight/2 + 40 {
                             self.updateByPull()
@@ -525,7 +528,7 @@ extension TableViewDelegate: UITableViewDelegate {
                 self.backupView?.frame.origin.y = self.tableView.frame.origin.y - 50
                 self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
                 if self.tableView.frame.origin.y > startY + 10 {
-                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - 9
+                    self.collectionView.frame.origin.y = self.customHeader.frame.origin.y - self.collectionView.frame.height - coef
                 }
             }
         }

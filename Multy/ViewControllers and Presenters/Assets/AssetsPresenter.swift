@@ -108,7 +108,7 @@ class AssetsPresenter: NSObject {
 //                    self.unlockUI()
                 }
                 self.getWalletsVerbose(completion: { (_) in
-//                    self.unlockUI()
+                    self.unlockUI()
                 })
             }
         }
