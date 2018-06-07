@@ -157,3 +157,6 @@
 
 /* Class = "UILabel"; text = "Exchange"; ObjectID = "yXt-o3-N3I"; */
 "yXt-o3-N3I.text" = "Биржа";
+
+/* Class = "UILabel"; text = "Address has been copied to clipboard"; ObjectID = "ztv-dw-RMV"; */
+"ztv-dw-RMV.text" = "Адрес скопирован в буфер обмена";

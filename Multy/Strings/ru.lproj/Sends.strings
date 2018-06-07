@@ -39,3 +39,8 @@
 "SHARE" = "Поделиться";
 "SAT/B" = "Сат/Б";
 "SEND TIP" = "Hold and Swipe для отправки";
+"YOU ENTERED TOO SMALL AMOUNT" = "Вы ввели слишком малое количество!";
+"YOU ARE TRYING SPEND MORE THEN HAVE" = "Вы пытаетесь потратить больше чем имеете.";
+"UPDATING" = "Обновление...";
+"SENDING" = "Отправка...";
+"SEND TIP" = "Hold and Drag";

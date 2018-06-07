@@ -150,7 +150,6 @@ class SendPresenter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDiscoverNewAd(notification:)), name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didChangedBluetoothReachability(notification:)), name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveNewRequests(notification:)), name: Notification.Name("newReceiver"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveSendResponse(notification:)), name: Notification.Name("sendResponse"), object: nil)
         
     }
     
@@ -172,7 +171,6 @@ class SendPresenter: NSObject {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(didDiscoverNewAdvertisementNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(bluetoothReachabilityChangedNotificationName), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("newReceiver"), object: nil)
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name("sendResponse"), object: nil)
     }
     
     func numberOfWallets() -> Int {
@@ -227,7 +225,6 @@ class SendPresenter: NSObject {
             transaction!.sendAmount = request.sendAmount.doubleValue
             transaction!.sendAddress = request.sendAddress
             transaction!.choosenWallet = filteredWalletArray[selectedWalletIndex!]
-            sendVC?.fillTransaction()
         }
     }
     
@@ -332,9 +329,9 @@ class SendPresenter: NSObject {
             var message = rawTransaction
             
             if message.hasPrefix("BigInt value is not representable as") {
-                message = "You entered too small amount!"
+                message = sendVC!.localize(string: Constants.youEnteredTooSmallAmountString)
             } else if message.hasPrefix("Transaction is trying to spend more than available in inputs") {
-                message = "You are trying to spend more then you have."
+                message = sendVC!.localize(string: Constants.youTryingSpendMoreThenHaveString)
             }
             
 //            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -382,8 +379,6 @@ class SendPresenter: NSObject {
                 self.sendVC?.updateUIWithSendResponse(success: false)
             }
         }
-        
-       // DataManager.shared.socketManager.txSend(params : params)
     }
     
     func createTransaction() -> Bool {
@@ -458,15 +453,6 @@ class SendPresenter: NSObject {
             selectedActiveRequestIndex = 0
         }
     }
-    
-//    @objc private func didReceiveSendResponse(notification: Notification) {
-//        DispatchQueue.main.async {
-//
-//            let success = notification.userInfo!["data"] as! Bool
-//
-//            self.sendVC?.updateUIWithSendResponse(success: success)
-//        }
-//    }
     
     @objc private func applicationWillResignActive(notification: Notification) {
         viewWillDisappear()
@@ -575,9 +561,13 @@ class SendPresenter: NSObject {
 
 extension CreateTransactionDelegate {
     func createBTCTransaction() -> Bool {
+        guard let requestIndex = selectedActiveRequestIndex, let walletIndex = selectedWalletIndex else {
+            return false
+        }
+        
         createPreliminaryData()
-        let request = activeRequestsArr[selectedActiveRequestIndex!]
-        let wallet = filteredWalletArray[selectedWalletIndex!]
+        let request = activeRequestsArr[requestIndex]
+        let wallet = filteredWalletArray[walletIndex]
         //      let jwtToken = DataManager.shared.realmManager.account!.token
         let trData = DataManager.shared.coreLibManager.createTransaction(addressPointer: addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>,
                                                                          sendAddress: request.sendAddress,
@@ -598,9 +588,13 @@ extension CreateTransactionDelegate {
     }
     
     func createETHTransaction() -> Bool {
+        guard let requestIndex = selectedActiveRequestIndex, let walletIndex = selectedWalletIndex else {
+            return false
+        }
+        
         createPreliminaryData()
-        let request = activeRequestsArr[selectedActiveRequestIndex!]
-        let wallet = filteredWalletArray[selectedWalletIndex!]
+        let request = activeRequestsArr[requestIndex]
+        let wallet = filteredWalletArray[walletIndex]
         
         let sendAmount = request.sendAmount.stringWithDot.convertCryptoAmountStringToMinimalUnits(in: wallet.blockchainType.blockchain).stringValue
         

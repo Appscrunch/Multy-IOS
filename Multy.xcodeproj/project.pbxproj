@@ -17,6 +17,7 @@
 		444066D4205927B900342046 /* UIActivityViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D3205927B900342046 /* UIActivityViewController+Extension.swift */; };
 		444066D62059281200342046 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D52059281200342046 /* NSObject+Extension.swift */; };
 		444066D82059342E00342046 /* Bool+Extantion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444066D72059342E00342046 /* Bool+Extantion.swift */; };
+		4448DCC720C8333100CE80CB /* LocalLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4448DCC620C8333100CE80CB /* LocalLanguage.swift */; };
 		444B3B652045723C008129B8 /* BigInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B3B642045723C008129B8 /* BigInt+Extension.swift */; };
 		445B127020BC1BA800FD0D33 /* SeedPhrase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445B127220BC1BA800FD0D33 /* SeedPhrase.storyboard */; };
 		445B127320BC1BB100FD0D33 /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 445B127520BC1BB100FD0D33 /* Receive.storyboard */; };
@@ -224,6 +225,7 @@
 		50D1AA3CFDA9BDFA53D3B9D0 /* Pods_MultyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FFD5D1BF6159BB241CBFF9 /* Pods_MultyTests.framework */; };
 		854C748B20C56C6900CBAFE9 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854C748A20C56C6900CBAFE9 /* Utilities.swift */; };
 		854EF14A20C06DA4000C2247 /* tx_success_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 854EF14920C06DA4000C2247 /* tx_success_animation.json */; };
+		8555721020C7E5C500108FCD /* TxInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8555720F20C7E5C500108FCD /* TxInfoView.swift */; };
 		85741D8520B45E8B0093933B /* circle_grow.json in Resources */ = {isa = PBXBuildFile; fileRef = 85741D8420B45E8A0093933B /* circle_grow.json */; };
 		85741D8720B555DB0093933B /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85741D8620B555DB0093933B /* BLEManager.swift */; };
 		85741D8920B55A660093933B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85741D8820B55A650093933B /* CoreBluetooth.framework */; };
@@ -328,6 +330,7 @@
 		444066D3205927B900342046 /* UIActivityViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityViewController+Extension.swift"; sourceTree = "<group>"; };
 		444066D52059281200342046 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		444066D72059342E00342046 /* Bool+Extantion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extantion.swift"; sourceTree = "<group>"; };
+		4448DCC620C8333100CE80CB /* LocalLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLanguage.swift; sourceTree = "<group>"; };
 		444B3B642045723C008129B8 /* BigInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+Extension.swift"; sourceTree = "<group>"; };
 		445B127120BC1BA800FD0D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SeedPhrase.storyboard; sourceTree = "<group>"; };
 		445B127420BC1BB100FD0D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receive.storyboard; sourceTree = "<group>"; };
@@ -627,6 +630,7 @@
 		7304C17824311A19240183E0 /* Pods_Multy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Multy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		854C748A20C56C6900CBAFE9 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		854EF14920C06DA4000C2247 /* tx_success_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tx_success_animation.json; sourceTree = "<group>"; };
+		8555720F20C7E5C500108FCD /* TxInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxInfoView.swift; sourceTree = "<group>"; };
 		85741D8420B45E8A0093933B /* circle_grow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = circle_grow.json; sourceTree = "<group>"; };
 		85741D8620B555DB0093933B /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		85741D8820B55A650093933B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -811,6 +815,7 @@
 				45090ADF1FE95E7700019D00 /* BackupSeedPhraseView.swift */,
 				4558F41620BFE8AF003D7C7A /* HUDView.swift */,
 				4558F41820C03F87003D7C7A /* PreloaderView.swift */,
+				8555720F20C7E5C500108FCD /* TxInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1136,6 +1141,7 @@
 				44C3F389207E5FAB00AC1BD4 /* ProgressHUD+Extension.swift */,
 				44CD6B8E208B5018009C07F6 /* BigInt.swift */,
 				854C748A20C56C6900CBAFE9 /* Utilities.swift */,
+				4448DCC620C8333100CE80CB /* LocalLanguage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2309,6 +2315,7 @@
 				4585BD382049AD03004542AE /* ExchangeStockTableViewCell.swift in Sources */,
 				45AC1624204820CB00E75BD6 /* CurrencyToConvertPresenter.swift in Sources */,
 				45B0B0F21FEBF326005BB1C0 /* SettingsPresenter.swift in Sources */,
+				4448DCC720C8333100CE80CB /* LocalLanguage.swift in Sources */,
 				45AC162B2048380700E75BD6 /* CurrencyObj.swift in Sources */,
 				FADC00461FC3231A00182E45 /* DataManager.swift in Sources */,
 				45F8CD49208F393C00DEB495 /* TermsOfServicePresenter.swift in Sources */,
@@ -2384,6 +2391,7 @@
 				FA58DF651FDC403E00C45303 /* WrongSeedPhrasePresenter.swift in Sources */,
 				45E215E01FD164F80078945A /* QrScannerPresenter.swift in Sources */,
 				44CD6B8F208B5018009C07F6 /* BigInt.swift in Sources */,
+				8555721020C7E5C500108FCD /* TxInfoView.swift in Sources */,
 				45D4D167205C12DC008B1F0B /* EthWalletHeaderCollectionViewCell.swift in Sources */,
 				44EFBE5B20923EAC0081EE3A /* Blockchain+Extension.swift in Sources */,
 				FA74062B1FCC5D6A003C538C /* Constants.swift in Sources */,

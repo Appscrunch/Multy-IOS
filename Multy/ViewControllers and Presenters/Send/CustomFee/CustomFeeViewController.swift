@@ -62,7 +62,9 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancelAction(_ sender: Any) {
         if presenter.blockchainType!.blockchain == BLOCKCHAIN_ETHEREUM {
-            self.delegate?.setPreviousSelected(index: self.previousSelected)
+            if self.previousSelected != 5 {
+                self.delegate?.setPreviousSelected(index: self.previousSelected)
+            }
         } else {
             if self.previousSelected != 5 {
                 self.delegate?.setPreviousSelected(index: self.previousSelected)
