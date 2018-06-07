@@ -24,6 +24,8 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     @IBOutlet weak var magicalSendImageView: UIImageView!
     var magicSendAnimationView : LOTAnimationView?
     @IBOutlet weak var magicalSendButton: UIButton!
+    @IBOutlet weak var contactsButton: UIButton!
+    @IBOutlet weak var qrScanButton: UIButton!
     
     let presenter = SendStartPresenter()
     var stingIdForInApp = ""
@@ -64,14 +66,25 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
             addressTV.text = presenter.transactionDTO.sendAddress!
             placeholderLabel.isHidden = !addressTV.text.isEmpty
         }
-        magicalSendButton.layer.cornerRadius = 10
+        magicalSendButton.layer.cornerRadius = 12
         magicalSendButton.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.4901960784, blue: 1, alpha: 1)
         magicalSendButton.layer.shadowColor = #colorLiteral(red: 0.01176470588, green: 0.4901960784, blue: 1, alpha: 1).cgColor
         magicalSendButton.layer.shadowOpacity = 0.6
         magicalSendButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         magicalSendButton.layer.shadowRadius = 8
-//        magicalSendButton.layer.borderWidth = 2
-//        magicalSendButton.layer.borderColor = #colorLiteral(red: 0, green: 0.5529411765, blue: 1, alpha: 1)
+        
+        qrScanButton.layer.cornerRadius = 12
+        qrScanButton.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3).cgColor
+        qrScanButton.layer.shadowOpacity = 1
+        qrScanButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        qrScanButton.layer.shadowRadius = 8
+        
+        contactsButton.layer.cornerRadius = 12
+        contactsButton.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3).cgColor
+        contactsButton.layer.shadowOpacity = 1
+        contactsButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        contactsButton.layer.shadowRadius = 8
+        
     }
     
     @objc func dismissSendKeyboard(gesture: UITapGestureRecognizer) {
