@@ -14,7 +14,7 @@ class BTCWalletPresenter: NSObject {
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.collectionView.reloadData()
             blockedAmount = wallet!.calculateBlockedAmount()
-            mainVC?.makeConstantsForAnimation()
+//            mainVC?.makeConstantsForAnimation()
         }
     }
     var account : AccountRLM?
@@ -28,13 +28,10 @@ class BTCWalletPresenter: NSObject {
         if historyArray.count > 0 {
             mainVC?.hideEmptyLbls()
         }
-        
         let contentOffset = mainVC!.tableView.contentOffset
         mainVC!.tableView.reloadData()
         mainVC!.tableView.layoutIfNeeded()
         mainVC!.tableView.setContentOffset(contentOffset, animated: false)
-        
-        self.mainVC!.refreshControl.endRefreshing()
     }
     
     func registerCells() {
@@ -85,35 +82,37 @@ class BTCWalletPresenter: NSObject {
 
     func blockUI() {
         self.mainVC?.spiner.startAnimating()
-        self.mainVC?.view.isUserInteractionEnabled = false
+//        self.mainVC?.view.isUserInteractionEnabled = false
 //        self.mainVC?.view.alpha = 0.3
     }
     
     func unlockUI() {
         self.mainVC?.spiner.stopAnimating()
-        self.mainVC?.view.isUserInteractionEnabled = true
+        self.mainVC?.spiner.isHidden = true
+//        self.mainVC?.view.isUserInteractionEnabled = true
 //        self.mainVC?.view.alpha = 1.0
     }
     
     func getHistoryAndWallet() {
-        blockUI()
+//        blockUI()
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: wallet!.blockchainType) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
             }
-        }
+        
         
         DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { [unowned self] (histList, err) in
-            self.unlockUI()
+//            self.unlockUI()
 //            self.mainVC?.spiner.stopAnimating()
             if err == nil && histList != nil {
-                self.mainVC!.refreshControl.endRefreshing()
-                self.mainVC!.tableView.isUserInteractionEnabled = true
-                self.mainVC!.tableView.contentOffset.y = 0
+//                self.mainVC!.refreshControl.endRefreshing()
+//                self.mainVC!.tableView.isUserInteractionEnabled = true
+//                self.mainVC!.tableView.contentOffset.y = 0
                 self.historyArray = histList!.sorted(by: { $0.blockTime > $1.blockTime })
-                print("transaction history:\n\(histList)")
+//                print("transaction history:\n\(histList)")
                 self.mainVC!.isSocketInitiateUpdating = false
             }
+        }
         }
     }
 }
