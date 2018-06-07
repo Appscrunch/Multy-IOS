@@ -99,20 +99,20 @@ class BTCWalletPresenter: NSObject {
             if wallet != nil {
                 self.wallet = wallet
             }
-        
-        
-        DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { [unowned self] (histList, err) in
-//            self.unlockUI()
-//            self.mainVC?.spiner.stopAnimating()
-            if err == nil && histList != nil {
-//                self.mainVC!.refreshControl.endRefreshing()
-//                self.mainVC!.tableView.isUserInteractionEnabled = true
-//                self.mainVC!.tableView.contentOffset.y = 0
-                self.historyArray = histList!.sorted(by: { $0.blockTime > $1.blockTime })
-//                print("transaction history:\n\(histList)")
-                self.mainVC!.isSocketInitiateUpdating = false
+            
+            
+            DataManager.shared.getTransactionHistory(currencyID: self.wallet!.chain, networkID: self.wallet!.chainType, walletID: self.wallet!.walletID) { [unowned self] (histList, err) in
+                //            self.unlockUI()
+                //            self.mainVC?.spiner.stopAnimating()
+                if err == nil && histList != nil {
+                    //                self.mainVC!.refreshControl.endRefreshing()
+                    //                self.mainVC!.tableView.isUserInteractionEnabled = true
+                    //                self.mainVC!.tableView.contentOffset.y = 0
+                    self.historyArray = histList!.sorted(by: { $0.blockTime > $1.blockTime })
+                    //                print("transaction history:\n\(histList)")
+                    self.mainVC!.isSocketInitiateUpdating = false
+                }
             }
-        }
         }
     }
 }
