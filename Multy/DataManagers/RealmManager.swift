@@ -11,7 +11,7 @@ class RealmManager: NSObject {
     static let shared = RealmManager()
     
     private var realm : Realm? = nil
-    let schemaVersion : UInt64 = 19
+    let schemaVersion : UInt64 = 20
     
     var account: AccountRLM?
     
@@ -81,6 +81,9 @@ class RealmManager: NSObject {
                                                     }
                                                     if oldSchemaVersion < 20 {
                                                         self!.migrateFrom19To20(with: migration)
+                                                    }
+                                                    if oldSchemaVersion < 21 {
+                                                        self!.migrateFrom20To21(with: migration)
                                                     }
             })
             
@@ -788,9 +791,9 @@ extension RealmMigrationManager {
     }
     
     func migrateFrom15To16(with migration: Migration) {
-        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
-            newWallet?["networkID"] = NSNumber(value: 0)
-        }
+//        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newWallet) in
+//            newWallet?["networkID"] = NSNumber(value: 0)
+//        }
     }
     
     func migrateFrom16To17(with migration: Migration) {
@@ -825,5 +828,11 @@ extension RealmMigrationManager {
             newRecentAddress?["blockchain"] = NSNumber(value: 0)
             newRecentAddress?["blockchainNetType"] = NSNumber(value: 0)
         }
+    }
+    
+    func migrateFrom20To21(with migration: Migration) {
+//        migration.enumerateObjects(ofType: UserWalletRLM.className()) { (_, newUserWalletRLM) in
+//            newUserWalletRLM?["networkID"] = newUserWalletRLM?["chain"]
+//        }
     }
 }
