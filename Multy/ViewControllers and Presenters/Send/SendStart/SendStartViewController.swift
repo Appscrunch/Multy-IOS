@@ -4,6 +4,7 @@
 
 import UIKit
 import ZFRippleButton
+import Lottie
 
 private typealias LocalizeDelegate = SendStartViewController
 
@@ -20,6 +21,11 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var noAddressLbl: UILabel!
     @IBOutlet weak var recentAddresses: UILabel!
+    @IBOutlet weak var magicalSendImageView: UIImageView!
+    var magicSendAnimationView : LOTAnimationView?
+    @IBOutlet weak var magicalSendButton: UIButton!
+    @IBOutlet weak var contactsButton: UIButton!
+    @IBOutlet weak var qrScanButton: UIButton!
     
     let presenter = SendStartPresenter()
     var stingIdForInApp = ""
@@ -60,6 +66,25 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
             addressTV.text = presenter.transactionDTO.sendAddress!
             placeholderLabel.isHidden = !addressTV.text.isEmpty
         }
+        magicalSendButton.layer.cornerRadius = 12
+        magicalSendButton.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.4901960784, blue: 1, alpha: 1)
+        magicalSendButton.layer.shadowColor = #colorLiteral(red: 0.01176470588, green: 0.4901960784, blue: 1, alpha: 1).cgColor
+        magicalSendButton.layer.shadowOpacity = 0.6
+        magicalSendButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        magicalSendButton.layer.shadowRadius = 8
+        
+        qrScanButton.layer.cornerRadius = 12
+        qrScanButton.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3).cgColor
+        qrScanButton.layer.shadowOpacity = 1
+        qrScanButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        qrScanButton.layer.shadowRadius = 8
+        
+        contactsButton.layer.cornerRadius = 12
+        contactsButton.layer.shadowColor = #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.3).cgColor
+        contactsButton.layer.shadowOpacity = 1
+        contactsButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        contactsButton.layer.shadowRadius = 8
+        
     }
     
     @objc func dismissSendKeyboard(gesture: UITapGestureRecognizer) {
@@ -91,6 +116,21 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
         if presenter.transactionDTO.sendAddress != nil && !presenter.transactionDTO.sendAddress!.isEmpty {
             self.modifyNextButtonMode()
         }
+        
+        if magicSendAnimationView == nil {
+            magicSendAnimationView = LOTAnimationView(name: "magicSend")
+            magicSendAnimationView!.frame = magicalSendImageView.bounds
+            magicalSendImageView.insertSubview(magicSendAnimationView!, at: 0)
+            magicalSendImageView.transform = CGAffineTransform(scaleX: 2, y: 2)
+            magicSendAnimationView!.animationSpeed = 1.3
+            magicSendAnimationView!.loopAnimation = true
+            magicSendAnimationView!.play()
+        } else {
+            if !magicSendAnimationView!.isAnimationPlaying {
+                magicSendAnimationView!.play()
+            }
+        }
+        
         fixUI()
     }
     
@@ -136,9 +176,7 @@ class SendStartViewController: UIViewController, UITextViewDelegate, AnalyticsPr
     }
     
     @IBAction func wirelessScanAction(_ sender: Any) {
-        unowned let weakSelf =  self
-        self.presentDonationAlertVC(from: weakSelf, with: "io.multy.wirelessScan50")
-        sendDonationAlertScreenPresentedAnalytics(code: donationForWirelessScanFUNC)
+        
     }
     
     @IBAction func addressBookAction(_ sender: Any) {
