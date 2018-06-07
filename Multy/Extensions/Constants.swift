@@ -87,6 +87,7 @@ struct Constants {
     static let youTryingSpendMoreThenHaveString = "YOU ARE TRYING SPEND MORE THEM HAVE"
     static let updatingString = "UPDATING"
     static let sendingString = "SENDING"
+    static let agreeWithTermsString = "AGREE WITH TERMS"
     
     //Assets screen
     struct AssetsScreen {

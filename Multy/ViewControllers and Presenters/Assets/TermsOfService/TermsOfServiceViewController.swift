@@ -10,6 +10,7 @@ class TermsOfServiceViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var spiner: UIActivityIndicatorView!
+    @IBOutlet weak var agreeTextLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,7 @@ class TermsOfServiceViewController: UIViewController, UIWebViewDelegate {
         self.loadPage()
         self.webView.delegate = self
         self.spiner.hidesWhenStopped = true
+        agreeTextLabel.text = localize(string: Constants.agreeWithTermsString)
     }
     
     func loadPage() {
