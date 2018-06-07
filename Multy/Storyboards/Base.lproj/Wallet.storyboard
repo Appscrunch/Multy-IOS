@@ -1390,7 +1390,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <constraint firstAttribute="width" constant="14" id="MGd-dK-hi7"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Lve-c4-v7z">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Lve-c4-v7z">
                                 <rect key="frame" x="169" y="57" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
@@ -1968,7 +1968,7 @@ By donating you help us to bring blockchain technology one step closer to ordina
                                     <constraint firstAttribute="width" constant="14" id="YKQ-xt-Wen"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VNx-R4-5av">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VNx-R4-5av">
                                 <rect key="frame" x="169" y="57" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
@@ -2054,6 +2054,6 @@ By donating you help us to bring blockchain technology one step closer to ordina
         <image name="settings" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wmz-Ze-lTe"/>
+        <segue reference="pNd-qC-tRx"/>
     </inferredMetricsTieBreakers>
 </document>
