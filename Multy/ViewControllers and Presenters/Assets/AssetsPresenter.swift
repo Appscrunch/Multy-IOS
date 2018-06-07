@@ -102,13 +102,13 @@ class AssetsPresenter: NSObject {
     func updateWalletsInfo(isInternetAvailable: Bool) {
         DataManager.shared.getAccount { (acc, err) in
             if acc != nil {
-                self.blockUI()
+//                self.blockUI()
                 self.account = acc
                 if isInternetAvailable == false {
-                    self.unlockUI()
+//                    self.unlockUI()
                 }
                 self.getWalletsVerbose(completion: { (_) in
-                    self.unlockUI()
+//                    self.unlockUI()
                 })
             }
         }
@@ -130,9 +130,9 @@ class AssetsPresenter: NSObject {
     }
 
     func getWalletsVerbose(completion: @escaping (_ flag: Bool) -> ()) {
-        blockUI()
+//        blockUI()
         DataManager.shared.getWalletsVerbose() { (walletsArrayFromApi, err) in
-            self.unlockUI()
+//            self.unlockUI()
             if err != nil {
                 return
             } else {
@@ -197,14 +197,14 @@ class AssetsPresenter: NSObject {
     }
     
     func blockUI() {
-        assetsVC!.loader.show(customTitle: assetsVC?.localize(string: Constants.gettingWalletString))
+//        assetsVC!.loader.show(customTitle: assetsVC?.localize(string: Constants.gettingWalletString))
 //        assetsVC!.progressHUD.blockUIandShowProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = false
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = false
     }
     
     func unlockUI() {
-        assetsVC!.loader.hide()
+//        assetsVC!.loader.hide()
 //        assetsVC!.progressHUD.unblockUIandHideProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = true
         assetsVC?.tabBarController?.view.isUserInteractionEnabled = true

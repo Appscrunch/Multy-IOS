@@ -15,7 +15,7 @@ class EthWalletPresenter: NSObject {
             isTherePendingAmount = wallet!.ethWallet?.pendingWeiAmountString != "0"
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.collectionView.reloadData()
-            mainVC?.makeConstantsForAnimation()
+//            mainVC?.makeConstantsForAnimation()
         }
     }
     var account : AccountRLM?
@@ -98,36 +98,36 @@ class EthWalletPresenter: NSObject {
     
     func blockUI() {
         self.mainVC?.spiner.startAnimating()
-        self.mainVC?.view.isUserInteractionEnabled = false
+        
+//        self.mainVC?.view.isUserInteractionEnabled = false
 //        mainVC?.loader.show(customTitle: "Updating")
 
     }
     
     func unlockUI() {
         self.mainVC?.spiner.stopAnimating()
-        self.mainVC?.view.isUserInteractionEnabled = true
+        self.mainVC?.spiner.isHidden = true
+//        self.mainVC?.view.isUserInteractionEnabled = true
 //        self.mainVC?.loader.hide()
     }
     
     func getHistoryAndWallet() {
-        blockUI()
+//        blockUI()
         DataManager.shared.getOneWalletVerbose(walletID: wallet!.walletID, blockchain: BlockchainType.create(wallet: wallet!)) { (wallet, error) in
             if wallet != nil {
                 self.wallet = wallet
             }
-        }
-        
-        DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
-            self.unlockUI()
-            self.mainVC?.spiner.stopAnimating()
-            if err == nil && histList != nil {
-                self.mainVC!.refreshControl.endRefreshing()
-                self.mainVC!.tableView.isUserInteractionEnabled = true
-                self.mainVC!.tableView.contentOffset.y = 0
-                //                self.mainVC!.tableView.contentOffset =
-                self.historyArray = histList!.sorted(by: { $0.blockTime > $1.blockTime })
-                print("transaction history:\n\(histList)")
-                self.mainVC!.isSocketInitiateUpdating = false
+            DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
+                //            self.unlockUI()
+                self.mainVC?.spiner.stopAnimating()
+                if err == nil && histList != nil {
+                    //                self.mainVC!.refreshControl.endRefreshing()
+                    //                self.mainVC!.tableView.isUserInteractionEnabled = true
+                    //                self.mainVC!.tableView.contentOffset.y = 0
+                    //                self.mainVC!.tableView.contentOffset =
+                    self.historyArray = histList!.sorted(by: { $0.blockTime > $1.blockTime })
+                    self.mainVC!.isSocketInitiateUpdating = false
+                }
             }
         }
     }
