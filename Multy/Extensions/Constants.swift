@@ -92,6 +92,10 @@ struct Constants {
     static let scanningNotSupportedString = "SCANNING NOT SUPPORTED"
     static let deviceNotSupportingString = "DEVICE NOT SUPPORT"
     static let notEnoughAmountString = "NOT ENOUGH AMOUNT"
+    static let pleaseChooseGasPriceString = "PLEASE CHOOSE GAS PRICE"
+    static let youCanUsePredefinedValueString = "YOU CAN USE PREDEFINED VALUE"
+    static let trySendZeroString = "TRY TO SEND ZERO"
+    static let enterCorrectValueString = "ENTER CORRECT VALUE"
     
     //Assets screen
     struct AssetsScreen {
