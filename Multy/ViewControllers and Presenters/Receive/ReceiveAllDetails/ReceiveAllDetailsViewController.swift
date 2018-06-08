@@ -48,7 +48,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     @IBOutlet weak var hidedImage: UIImageView!
     @IBOutlet weak var hidedSumLabel: UILabel!
     @IBOutlet weak var hidedAddressLabel: UILabel!
-    @IBOutlet weak var magicView: UIView!
     @IBOutlet weak var bluetoothDisabledContentView: UIView!
     @IBOutlet weak var searchingAnimationHolder: UIView!
     @IBOutlet weak var hidedWalletBackgroundView: UIView!
@@ -77,6 +76,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         self.viewForShadow.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
         self.requestSummImageView.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
         self.walletTokenImageView.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
+        self.wirelessButton.setShadow(with: #colorLiteral(red: 0.6509803922, green: 0.6941176471, blue: 0.7764705882, alpha: 0.5))
         self.presenter.viewControllerViewDidLoad()
     }
     
@@ -97,7 +97,6 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        magicView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
         refreshBackground()
     }
     
@@ -304,6 +303,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         
         updateSearchingAnimation()
         
+        scrollView.isHidden = !isHidden
         hidedWalletView.isHidden = isHidden
     }
     

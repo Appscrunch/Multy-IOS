@@ -3,7 +3,7 @@
 "0qt-Qh-fw1.text" = "Биржа";
 
 /* Class = "UILabel"; text = "Security Settings"; ObjectID = "0rb-aE-nDa"; */
-"0rb-aE-nDa.text" = "Настройки Безопасности";
+"0rb-aE-nDa.text" = "Безопасность";
 
 /* Class = "UILabel"; text = "Create Wallet"; ObjectID = "1wC-lj-ECJ"; */
 "1wC-lj-ECJ.text" = "Создать Кошелек";
@@ -45,7 +45,7 @@
 "Cnj-cT-4pf.text" = "Проголосовать за контакты";
 
 /* Class = "UILabel"; text = "Push Notifications"; ObjectID = "E6X-rf-6eP"; */
-"E6X-rf-6eP.text" = "Всплывающие Уведомления";
+"E6X-rf-6eP.text" = "Уведомления";
 
 /* Class = "UIButton"; normalTitle = "Create"; ObjectID = "EcK-ls-Eh8"; */
 "EcK-ls-Eh8.normalTitle" = "Создать";
@@ -199,3 +199,5 @@
 
 /* Class = "UILabel"; text = "US Dollars ∙ USD"; ObjectID = "zG3-vO-HLP"; */
 "zG3-vO-HLP.text" = "Доллары США ∙ USD";
+
+"tRx-hg-wDk.normalTitle" = " Скопировать ";

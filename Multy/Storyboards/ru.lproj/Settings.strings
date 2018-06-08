@@ -35,8 +35,8 @@
 /* Class = "UILabel"; text = "Are you sure?"; ObjectID = "Eh0-L1-ceI"; */
 "Eh0-L1-ceI.text" = "Вы уверены?";
 
-/* Class = "UILabel"; text = "Security Settings"; ObjectID = "FXE-eY-RwS"; */
-"FXE-eY-RwS.text" = "Настройки Безопасности";
+/* Class = "UILabel"; text = "Security"; ObjectID = "FXE-eY-RwS"; */
+"FXE-eY-RwS.text" = "Безопасность";
 
 /* Class = "UIButton"; normalTitle = "2"; ObjectID = "HXZ-mX-QWr"; */
 "HXZ-mX-QWr.normalTitle" = "2";

@@ -70,6 +70,13 @@ class SendDetailsPresenter: NSObject, CustomFeeRateProtocol {
                                         if dict != nil {
                                             self.feeRate = dict
                                         } else {
+                                            //Default values
+                                            self.feeRate = ["VeryFast" : 32,
+                                                            "Fast" : 16,
+                                                            "Medium" : 8,
+                                                            "Slow" : 4,
+                                                            "VerySlow" : 2,
+                                            ]
                                             print("Did failed getting feeRate")
                                         }
         })

@@ -84,7 +84,7 @@ class DonationSendPresenter: NSObject, CustomFeeRateProtocol, SendWalletProtocol
         transaction.transaction?.customFee = self.customFee
         
         DataManager.shared.createAndSendDonationTransaction(transactionDTO: transaction) { [unowned self] (answer, err) in
-            self.mainVC?.loader.show(customTitle: "Sending")
+            self.mainVC?.loader.show(customTitle: self.localize(string: Constants.sendingString))
             let errMessage = "Can't send a donation. Please check that donation sum is not too small(> 5000 Satoshi) and wallet`s balance is sufficient."
             if err != nil {
                 if answer != nil {

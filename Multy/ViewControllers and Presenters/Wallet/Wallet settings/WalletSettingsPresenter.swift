@@ -39,7 +39,7 @@ class WalletSettingsPresenter: NSObject {
     
     func changeWalletName() {
 //        walletSettingsVC?.progressHUD.text = "Changing name"
-        walletSettingsVC?.loader.show(customTitle: walletSettingsVC!.localize(string: Constants.deletingString))
+        walletSettingsVC?.loader.show(customTitle: walletSettingsVC!.localize(string: Constants.updatingString))
         
         DataManager.shared.getAccount { (account, error) in
             DataManager.shared.changeWalletName(currencyID:self.wallet!.chain,
