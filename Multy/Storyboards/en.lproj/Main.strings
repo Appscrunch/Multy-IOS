@@ -3,7 +3,7 @@
 "0qt-Qh-fw1.text" = "Exchange";
 
 /* Class = "UILabel"; text = "Security Settings"; ObjectID = "0rb-aE-nDa"; */
-"0rb-aE-nDa.text" = "Security Settings";
+"0rb-aE-nDa.text" = "Settings";
 
 /* Class = "UILabel"; text = "Create Wallet"; ObjectID = "1wC-lj-ECJ"; */
 "1wC-lj-ECJ.text" = "Create Wallet";
