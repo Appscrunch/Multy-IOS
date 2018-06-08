@@ -47,17 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             isNeedToAutorise = acc != nil
-            
             DataManager.shared.apiManager.userID = acc == nil ? "" : acc!.userID
             //MAKR: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptPin(completion: { [weak self] (code, err) in
+            UserPreferences.shared.getAndDecryptPin(completion: { (code, err) in
                 if code != nil && code != "" {
                     isNeedToAutorise = true
-                    self!.authorization(isNeedToPresentBiometric: true)
+                    let appDel = UIApplication.shared.delegate as! AppDelegate
+                    appDel.authorization(isNeedToPresentBiometric: true)
                 }
             })
         }
-        
 //        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
         
         //FOR TEST NOT MAIN STRORYBOARD

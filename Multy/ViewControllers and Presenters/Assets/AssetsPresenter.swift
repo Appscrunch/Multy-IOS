@@ -21,7 +21,9 @@ class AssetsPresenter: NSObject {
             backupActivity()
             self.assetsVC?.tableView.alwaysBounceVertical = true
             if self.assetsVC!.isVisible() {
-                (self.assetsVC!.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: account == nil)
+                if self.assetsVC!.isOnWindow() {
+                    (self.assetsVC!.tabBarController as! CustomTabBarViewController).changeViewVisibility(isHidden: account == nil)
+                }
             }
             
             wallets = account?.wallets.sorted(byKeyPath: "lastActivityTimestamp", ascending: false)
@@ -200,14 +202,14 @@ class AssetsPresenter: NSObject {
 //        assetsVC!.loader.show(customTitle: assetsVC?.localize(string: Constants.gettingWalletString))
 //        assetsVC!.progressHUD.blockUIandShowProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = false
-        assetsVC?.tabBarController?.view.isUserInteractionEnabled = false
+//        assetsVC?.tabBarController?.view.isUserInteractionEnabled = false
     }
     
     func unlockUI() {
 //        assetsVC!.loader.hide()
 //        assetsVC!.progressHUD.unblockUIandHideProgressHUD()
         assetsVC?.tableView.isUserInteractionEnabled = true
-        assetsVC?.tabBarController?.view.isUserInteractionEnabled = true
+//        assetsVC?.tabBarController?.view.isUserInteractionEnabled = true
         assetsVC?.refreshControl.endRefreshing()
     }
     

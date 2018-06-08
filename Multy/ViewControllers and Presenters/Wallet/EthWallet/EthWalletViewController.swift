@@ -288,6 +288,8 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         btn.setTitle(localize(string: Constants.backupNeededString), for: .normal)
         btn.setTitleColor(.red, for: .normal)
         btn.titleLabel?.font = UIFont(name: "Avenir-Next", size: 6)
+        btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        btn.titleLabel?.minimumScaleFactor = 0.5
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(goToSeed), for: .touchUpInside)
         

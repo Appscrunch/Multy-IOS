@@ -112,7 +112,7 @@ class DonationSendViewController: UIViewController, UITextFieldDelegate, Analyti
     
     @IBAction func sendAction(_ sender: Any) {
         self.view.isUserInteractionEnabled = false
-        self.loader.show(customTitle: "Sending")
+        self.loader.show(customTitle: localize(string: Constants.sendingString))
         self.presenter.createAndSendTransaction()
         sendDonationScreenPressSendAnalytics()
     }

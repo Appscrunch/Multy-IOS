@@ -87,11 +87,15 @@ struct Constants {
     static let youTryingSpendMoreThenHaveString = "YOU ARE TRYING SPEND MORE THEN HAVE"
     static let updatingString = "UPDATING"
     static let sendingString = "SENDING"
-    static let deletingString = "SENDING"
+    static let deletingString = "DELETING"
     static let agreeWithTermsString = "AGREE WITH TERMS"
     static let scanningNotSupportedString = "SCANNING NOT SUPPORTED"
     static let deviceNotSupportingString = "DEVICE NOT SUPPORT"
     static let notEnoughAmountString = "NOT ENOUGH AMOUNT"
+    static let pleaseChooseGasPriceString = "PLEASE CHOOSE GAS PRICE"
+    static let youCanUsePredefinedValueString = "YOU CAN USE PREDEFINED VALUE"
+    static let trySendZeroString = "TRY TO SEND ZERO"
+    static let enterCorrectValueString = "ENTER CORRECT VALUE"
     
     //Assets screen
     struct AssetsScreen {
