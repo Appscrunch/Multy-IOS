@@ -280,7 +280,7 @@ class AssetsPresenter: NSObject {
                 self.assetsVC!.sendAnalyticsEvent(screenName: screenCreateWallet, eventName: cancelTap)
                 completion("ok", nil)
             } else {
-                self.assetsVC?.presentAlert(with: assetsVC!.localize(string: Constants.errorWhileCreatingWalletString))
+                self.assetsVC?.presentAlert(with: self.assetsVC!.localize(string: Constants.errorWhileCreatingWalletString))
                 completion(nil, nil)
             }
         }

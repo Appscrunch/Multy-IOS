@@ -26,9 +26,9 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
         self.swipeToBack()
         self.hideKeyboardWhenTappedAround()
         self.tableView.tableFooterView = nil
-        loader.setupUI(text: localize(string: Constants.creatingWalletString), image: #imageLiteral(resourceName: "walletHuge"))
+        loader.show(customTitle: Constants.creatingWalletString)
         self.view.addSubview(loader)
-        
+        loader.hide()
         self.presenter.mainVC = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)),
