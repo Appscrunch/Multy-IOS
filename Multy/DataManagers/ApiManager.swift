@@ -126,6 +126,7 @@ class ApiManager: NSObject, RequestRetrier {
             case .success(_):
                 if response.result.value != nil {
                     if let token = (response.result.value as! NSDictionary)["token"] as? String {
+                        DataManager.shared.updateToken(token)
                         self!.token = token
                     }
                     completion((response.result.value as! NSDictionary), nil)
