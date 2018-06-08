@@ -128,7 +128,7 @@ class ReceiveAllDetailsPresenter: NSObject, ReceiveSumTransferProtocol, SendWall
             break
             
         case .wireless:
-            let bluetoothEnabled = BLEManager.shared.reachability == .reachable
+            let bluetoothEnabled = BLEManager.shared.reachability == .reachable || BLEManager.shared.reachability == .unknown
             receiveAllDetailsVC?.updateUIForBluetoothState(bluetoothEnabled)
             startWirelessReceiverActivity()
             break

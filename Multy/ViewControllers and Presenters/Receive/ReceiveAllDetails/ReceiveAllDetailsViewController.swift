@@ -303,6 +303,7 @@ class ReceiveAllDetailsViewController: UIViewController, AnalyticsProtocol, Canc
         
         updateSearchingAnimation()
         
+        scrollView.isHidden = !isHidden
         hidedWalletView.isHidden = isHidden
     }
     
