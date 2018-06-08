@@ -48,7 +48,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>43</string>
+	<string>45</string>
 	<key>GIT_BRANCH_NAME</key>
 	<string>ETH_Beta_Test</string>
 	<key>GIT_COMMIT_HASH</key>
@@ -80,6 +80,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Multy needs to scan payment request QR code.</string>
 	<key>NSFaceIDUsageDescription</key>
