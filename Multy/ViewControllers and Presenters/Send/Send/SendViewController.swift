@@ -207,6 +207,7 @@ class SendViewController: UIViewController {
     func updateUIForBluetoothState(_ isEnable : Bool) {
         bluetoothDisabledContentView.isHidden = isEnable
         bluetoothEnabledContentView.isHidden = !isEnable
+        activeRequestsAmountLabel.isHidden = !isEnable
         
         refreshBackground()
     }
