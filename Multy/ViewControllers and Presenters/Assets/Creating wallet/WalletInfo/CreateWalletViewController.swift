@@ -64,7 +64,7 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
             return
         }
         
-        loader.show(customTitle: "Creating Wallet")
+        loader.show(customTitle: localize(string: Constants.creatingWalletString))
         presenter.createNewWallet { (dict) in
             print(dict!)
         }

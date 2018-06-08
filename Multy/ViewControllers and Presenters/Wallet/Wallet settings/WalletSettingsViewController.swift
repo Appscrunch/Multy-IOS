@@ -13,13 +13,14 @@ class WalletSettingsViewController: UIViewController,AnalyticsProtocol {
     let presenter = WalletSettingsPresenter()
     
 //    let progressHUD = ProgressHUD(text: "Deleting Wallet...")
-    let loader = PreloaderView(frame: HUDFrame, text: "Updating", image: #imageLiteral(resourceName: "walletHuge"))
+    var loader = PreloaderView(frame: HUDFrame, text: "Updating", image: #imageLiteral(resourceName: "walletHuge"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.swipeToBack()
         walletNameTF.accessibilityIdentifier = "nameField"
-        loader.setupUI(text: localize(string: Constants.updatingString), image: #imageLiteral(resourceName: "walletHuge"))
+        loader = PreloaderView(frame: HUDFrame, text: Constants.updatingString, image: #imageLiteral(resourceName: "walletHuge"))
+//        loader.setupUI(text: localize(string: Constants.updatingString), image: #imageLiteral(resourceName: "walletHuge"))
         view.addSubview(loader)
         
         self.presenter.walletSettingsVC = self

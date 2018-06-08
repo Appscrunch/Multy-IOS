@@ -87,7 +87,7 @@ struct Constants {
     static let youTryingSpendMoreThenHaveString = "YOU ARE TRYING SPEND MORE THEN HAVE"
     static let updatingString = "UPDATING"
     static let sendingString = "SENDING"
-    static let deletingString = "SENDING"
+    static let deletingString = "DELETING"
     static let agreeWithTermsString = "AGREE WITH TERMS"
     static let scanningNotSupportedString = "SCANNING NOT SUPPORTED"
     static let deviceNotSupportingString = "DEVICE NOT SUPPORT"

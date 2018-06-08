@@ -50,7 +50,7 @@ class CheckWordsPresenter: NSObject {
         }
         
         checkWordsVC?.nextWordOrContinue.isEnabled = false
-        checkWordsVC?.loader.show(customTitle: "Restoring Wallets")
+        checkWordsVC?.loader.show(customTitle: Constants.restoreMultyString)
         
         DataManager.shared.auth(rootKey: seedString) { (acc, err) in
 //            print(acc ?? "")
