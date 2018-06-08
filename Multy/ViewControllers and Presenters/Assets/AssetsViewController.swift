@@ -373,6 +373,10 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
             self.present(termsVC, animated: true, completion: nil)
         }
     }
+    
+    func isOnWindow() -> Bool {
+        return self.navigationController!.topViewController!.isKind(of: AssetsViewController.self)
+    }
 }
 
 extension CreateWalletDelegate: CreateWalletProtocol {
