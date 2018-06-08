@@ -40,7 +40,7 @@ class CheckWordsViewController: UIViewController, UITextFieldDelegate, Analytics
         super.viewDidLoad()
         self.swipeToBack()
         
-        loader.setupUI(text: localize(string: Constants.restoringWalletsString), image: #imageLiteral(resourceName: "walletHuge"))
+        loader.show(customTitle: Constants.restoringWalletsString)
         self.view.addSubview(loader)
         loader.hide()
         

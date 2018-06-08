@@ -93,7 +93,7 @@ class CreateWalletPresenter: NSObject {
                 self.mainVC!.sendAnalyticsEvent(screenName: screenCreateWallet, eventName: cancelTap)
                 self.mainVC!.openNewlyCreatedWallet()
             } else {
-                self.mainVC?.presentAlert(with: "Error while creating wallet!")
+                self.mainVC?.presentAlert(with: self.localize(string: Constants.errorWhileCreatingWalletString))
             }
         }
     }

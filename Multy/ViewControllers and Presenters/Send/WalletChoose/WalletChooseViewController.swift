@@ -89,7 +89,7 @@ extension WalletChooseViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if presenter.filteredWalletArray[indexPath.row].isThereAvailableAmount() == false {
-            presenter.presentAlert(message: "You have no available funds")
+            presenter.presentAlert(message: localize(string: Constants.noFundsString))
             
             return
         }

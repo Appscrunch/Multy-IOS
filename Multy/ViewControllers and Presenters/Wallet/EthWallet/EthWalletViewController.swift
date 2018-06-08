@@ -65,8 +65,9 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         spiner.stopAnimating()
-        loader.setupUI(text: localize(string: Constants.gettingWalletString), image: #imageLiteral(resourceName: "walletHuge"))
+        loader.show(customTitle: Constants.gettingWalletString)
         self.view.addSubview(loader)
+        loader.hide()
         self.swipeToBack()
         presenter.mainVC = self
         presenter.fixConstraints()
@@ -339,7 +340,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     
     @IBAction func sendAction(_ sender: Any) {
         if presenter.isThereAvailableAmount == false {
-            self.presentAlert(with: "You have no available funds")
+            self.presentAlert(with: localize(string: Constants.noFundsString))
             
             return
         }

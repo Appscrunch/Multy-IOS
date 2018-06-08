@@ -26,9 +26,9 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
         self.swipeToBack()
         self.hideKeyboardWhenTappedAround()
         self.tableView.tableFooterView = nil
-        loader.setupUI(text: localize(string: Constants.creatingWalletString), image: #imageLiteral(resourceName: "walletHuge"))
+        loader.show(customTitle: Constants.creatingWalletString)
         self.view.addSubview(loader)
-        
+        loader.hide()
         self.presenter.mainVC = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)),
@@ -54,12 +54,12 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! CreateWalletNameTableViewCell
         if let text = cell.walletNameTF.text {
             if text.trimmingCharacters(in: .whitespaces).count == 0 {
-                presentAlert(with: "Wallet name should not be empty!")
+                presentAlert(with: localize(string: Constants.walletNameAlertString))
                 
                 return
             }
         } else {
-            presentAlert(with: "Wallet name should not be empty!")
+            presentAlert(with: localize(string: Constants.walletNameAlertString))
             
             return
         }

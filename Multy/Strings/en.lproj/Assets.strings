@@ -28,3 +28,5 @@
 "CHECKING VERSION" = "Checking version";
 "USE TERMS OF SERVICE" = "In order to use Multy you have to accept Terms of Service. By pressing \"Accept\" you confirm that you have read, understood and agree to the following Terms of Service and that you have the right, power and authority to do so.";
 "AGREE WITH TERMS" = "I agree with Terms of Service and processing of my personal data according to the Multy Privacy Policy.";
+"ERROR WHILE CREATING WALLET" = "Error while creating wallet!";
+"WALLET NAME NOT EMPTY ALERT" = "Wallet name should be non empty";

@@ -179,7 +179,7 @@ class EnterPinViewController: UIViewController, UITextFieldDelegate {
     
     func biometricAuth() {
         self.touchMe.authenticateUser { (message) in
-            if let message = message {
+            if let _ = message {
                 self.tabBarController?.tabBar.isUserInteractionEnabled = false
             } else {
                 self.cancelDelegate?.presentNoInternet()
