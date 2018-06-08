@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController, AnalyticsProtocol, CancelProtoco
     @IBOutlet weak var pushSwitch: UISwitch!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var copyBtnWidthConstraint: NSLayoutConstraint!
     
     let presenter = SettingsPresenter()
 //    let authVC = SecureViewController()
