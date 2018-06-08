@@ -55,6 +55,9 @@ class CustomFeeViewController: UIViewController, UITextFieldDelegate {
         case BLOCKCHAIN_ETHEREUM:
             self.botNameLbl.isHidden = true
             self.botLimitTf.isHidden = true
+            if self.rate != 0 {
+                self.topPriceTF.text = "\(rate / 1000000000)"
+            }
             self.viewHeightConstraint.constant = viewHeightConstraint.constant / 2
         default: return
         }
