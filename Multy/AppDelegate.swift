@@ -40,24 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         self.storeKit()
-        DataManager.shared.realmManager.getAccount { (acc, err) in
-            DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
-                if currencyExchange != nil {
-                    DataManager.shared.currencyExchange.update(currencyExchangeRLM: currencyExchange!)
-                }
-            }
-            isNeedToAutorise = acc != nil
-            
-            DataManager.shared.apiManager.userID = acc == nil ? "" : acc!.userID
-            //MAKR: Check here isPin option from NSUserDefaults
-            UserPreferences.shared.getAndDecryptPin(completion: { [weak self] (code, err) in
-                if code != nil && code != "" {
-                    isNeedToAutorise = true
-                    self!.authorization(isNeedToPresentBiometric: true)
-                }
-            })
-        }
-        
 //        exchangeCourse = UserDefaults.standard.double(forKey: "exchangeCourse")
         
         //FOR TEST NOT MAIN STRORYBOARD
