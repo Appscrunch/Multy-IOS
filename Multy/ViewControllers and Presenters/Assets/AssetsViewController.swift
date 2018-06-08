@@ -78,6 +78,8 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
                 return
             }
             
+            self.autorizeFromAppdelegate()
+            
             self.sendAnalyticsEvent(screenName: screenMain, eventName: screenMain)
             NotificationCenter.default.addObserver(self, selector: #selector(self.updateExchange), name: NSNotification.Name("exchageUpdated"), object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(self.updateWalletAfterSockets), name: NSNotification.Name("transactionUpdated"), object: nil)
@@ -150,6 +152,26 @@ class AssetsViewController: UIViewController, AnalyticsProtocol {
         AppDelegate().saveMkVersion()
     }
     
+    
+    func autorizeFromAppdelegate() {
+        DataManager.shared.realmManager.getAccount { (acc, err) in
+            DataManager.shared.realmManager.fetchCurrencyExchange { (currencyExchange) in
+                if currencyExchange != nil {
+                    DataManager.shared.currencyExchange.update(currencyExchangeRLM: currencyExchange!)
+                }
+            }
+            isNeedToAutorise = acc != nil
+            DataManager.shared.apiManager.userID = acc == nil ? "" : acc!.userID
+            //MAKR: Check here isPin option from NSUserDefaults
+            UserPreferences.shared.getAndDecryptPin(completion: { [weak self] (code, err) in
+                if code != nil && code != "" {
+                    isNeedToAutorise = true
+                    let appDel = UIApplication.shared.delegate as! AppDelegate
+                    appDel.authorization(isNeedToPresentBiometric: true)
+                }
+            })
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         if self.presenter.isJailed {
