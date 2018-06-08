@@ -183,14 +183,15 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         }
         if presenter.isTherePendingAmount && self.customHeader.frame.origin.y != self.headerTopY  {
             UIView.animate(withDuration: 0.2) {
-                self.backImage.frame.size.height = 392
-                self.collectionView.frame.size.height = 305
+                self.backImage.frame.size.height = 402
+                self.collectionView.frame.size.height = 240
                 self.collectionView.frame.origin.y = self.collectionStartY
-                self.customHeader.frame.origin.y = 372
-                self.tableView.frame.origin.y = 402
-                self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y - self.bottomView.frame.height
+                self.tableView.frame.origin.y = self.backImage.frame.size.height + 10
+                self.customHeader.frame.origin.y = self.tableView.frame.origin.y - 30
+                self.tableView.frame.size.height = screenHeight - self.tableView.frame.origin.y //- self.bottomView.frame.height
                 self.changeBackupY()
             }
+            self.setTableToBot(duration: 0.2)
         } else {
             setTableToBot(duration: 0.2)
         }
@@ -221,7 +222,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
         }
         
         isSocketInitiateUpdating = true
-        
+        presenter.isUpdateBySocket = presenter.isUpdateBySocket != nil ? false : true
         presenter.getHistoryAndWallet()
     }
     
@@ -599,7 +600,7 @@ extension EthWalletViewController : UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return CGSize(width: screenWidth, height: presenter.topCellHeight - Constants.ETHWalletScreen.collectionCellDifference)
         
-        return CGSize(width: screenWidth, height: presenter.isTherePendingAmount == false ? 140 : 190)
+        return CGSize(width: screenWidth, height: presenter.isTherePendingAmount == false ? 140 : 200)
     }
     
     func collectionView(_ collectionView: UICollectionView,

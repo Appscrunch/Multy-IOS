@@ -15,10 +15,13 @@ class EthWalletPresenter: NSObject {
             isTherePendingAmount = wallet!.ethWallet?.pendingWeiAmountString != "0"
             mainVC?.titleLbl.text = self.wallet?.name
             mainVC?.collectionView.reloadData()
-//            mainVC?.makeConstantsForAnimation()
+            if isUpdateBySocket != nil && isUpdateBySocket == true {
+                mainVC?.makeConstantsForAnimation()
+            }
         }
     }
     var account : AccountRLM?
+    var isUpdateBySocket: Bool?
     
     var transactionsArray = [TransactionRLM]()
     var isThereAvailableAmount: Bool {
@@ -117,7 +120,7 @@ class EthWalletPresenter: NSObject {
             if wallet != nil {
                 self.wallet = wallet
             }
-            DataManager.shared.getTransactionHistory(currencyID: wallet!.chain, networkID: wallet!.chainType, walletID: wallet!.walletID) { (histList, err) in
+            DataManager.shared.getTransactionHistory(currencyID: self.wallet!.chain, networkID: self.wallet!.chainType, walletID: self.wallet!.walletID) { (histList, err) in
                 //            self.unlockUI()
                 self.mainVC?.spiner.stopAnimating()
                 if err == nil && histList != nil {
