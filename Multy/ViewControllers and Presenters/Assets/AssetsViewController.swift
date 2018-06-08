@@ -670,13 +670,15 @@ extension CollectionViewDelegate : UICollectionViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
-        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        guard let firstCell = self.tableView.cellForRow(at: [0,0]) as? PortfolioTableViewCell else { return }
+        let firstCellCollectionView = firstCell.collectionView!
+        firstCell.pageControl.currentPage = Int(firstCellCollectionView.contentOffset.x) / Int(firstCellCollectionView.frame.width)
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        guard let firstCell = self.tableView.cellForRow(at: [0,0]) else { return }
-        (firstCell as! PortfolioTableViewCell).pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        guard let firstCell = self.tableView.cellForRow(at: [0,0]) as? PortfolioTableViewCell else { return }
+        let firstCellCollectionView = firstCell.collectionView!
+        firstCell.pageControl.currentPage = Int(firstCellCollectionView.contentOffset.x) / Int(firstCellCollectionView.frame.width)
     }
 }
 
