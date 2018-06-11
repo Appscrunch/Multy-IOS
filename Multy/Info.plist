@@ -48,13 +48,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>43</string>
+	<string>46</string>
 	<key>GIT_BRANCH_NAME</key>
-	<string>ETH_Beta_Test</string>
+	<string>ETH_Bet_test</string>
 	<key>GIT_COMMIT_HASH</key>
-	<string>455200f</string>
+	<string>a714309</string>
 	<key>GIT_TAG_NAME</key>
-	<string>RELEASE_1.0.0-dirty</string>
+	<string>iTunesConnect-BUILD-dirty</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -80,6 +80,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>We use that to find other Multy</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Multy needs to scan payment request QR code.</string>
 	<key>NSFaceIDUsageDescription</key>

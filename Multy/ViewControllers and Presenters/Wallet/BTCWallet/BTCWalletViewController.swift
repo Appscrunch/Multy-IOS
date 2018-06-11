@@ -183,9 +183,9 @@ class BTCWalletViewController: UIViewController, AnalyticsProtocol {
             backupTopY = 80
             tableTopY = 130
         default:
-            headerTopY = 80
-            backupTopY = 70
-            tableTopY = 110
+            headerTopY = 70
+            backupTopY = 60
+            tableTopY = 100
         }
         if self.presenter.blockedAmount != 0 {
             UIView.animate(withDuration: 0.2) {
