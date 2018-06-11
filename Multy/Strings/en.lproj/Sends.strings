@@ -52,3 +52,6 @@
 "TRY TO SEND ZERO" = "You try to send 0.0.";
 "ENTER CORRECT VALUE" = "Please enter the correct value";
 "NO FUNDS" = "You have no available funds";
+"YOU CANT SPEND MORE THEN FEE AND DONATION" = "You can`t spend sum more than you have!\nDon`t forget about Fee and donation.\n\nYour fee is ";
+"YOU CANT SPEND MORE THEN FEE" = "You can`t spend sum more than you have!\nDon`t forget about Fee.\nYour fee is ";
+"AND DONATION " = "\nand donation is ";
