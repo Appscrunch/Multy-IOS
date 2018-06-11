@@ -26,7 +26,7 @@ class CreateWalletViewController: UIViewController, AnalyticsProtocol {
         self.swipeToBack()
         self.hideKeyboardWhenTappedAround()
         self.tableView.tableFooterView = nil
-        loader.show(customTitle: Constants.creatingWalletString)
+        loader.show(customTitle: localize(string: Constants.creatingWalletString))
         self.view.addSubview(loader)
         loader.hide()
         self.presenter.mainVC = self

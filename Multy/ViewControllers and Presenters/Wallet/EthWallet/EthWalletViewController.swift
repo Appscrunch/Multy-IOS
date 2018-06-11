@@ -65,7 +65,7 @@ class EthWalletViewController: UIViewController, AnalyticsProtocol, CancelProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         spiner.stopAnimating()
-        loader.show(customTitle: Constants.gettingWalletString)
+        loader.show(customTitle: localize(string: Constants.gettingWalletString))
         self.view.addSubview(loader)
         loader.hide()
         self.swipeToBack()
