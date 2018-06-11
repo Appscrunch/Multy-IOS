@@ -75,15 +75,15 @@ class Socket: NSObject {
 //                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
             
-            self.socket.on("btcTransactionUpdate") { data, ack in
-                print("-----BTCTransactionUpdate: \(data)")
+//            self.socket.on("btcTransactionUpdate") { data, ack in
+//                print("-----BTCTransactionUpdate: \(data)")
 //                if data.first != nil {
 //                    let msg = data.first! as! [AnyHashable : Any]
 //                    NotificationCenter.default.post(name: NSNotification.Name("transactionUpdated"), object: nil, userInfo: msg)
 //                }
-                
+//
 //                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            }
+//            }
             
             self.socket.on("currentAmount") {data, ack in
                 guard let cur = data[0] as? Double else { return }

@@ -13,15 +13,17 @@ class SendAmountEthPresenter: NSObject {
         didSet {
             blockedAmount = transactionDTO.choosenWallet!.blockedAmount
             availableSumInCrypto = transactionDTO.choosenWallet!.availableAmount
+            exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
             
             blockchain = BlockchainType.create(wallet: transactionDTO.choosenWallet!).blockchain
             
             if transactionDTO.sendAmountString != nil {
                 sumInCrypto = transactionDTO.sendAmountString!.convertCryptoAmountStringToMinimalUnits(in: blockchain)
+                sumInFiat = sumInCrypto * exchangeCourse
             }
             transactionObj = transactionDTO.transaction!.transactionRLM
             cryptoName = transactionDTO.blockchainType!.shortName
-            exchangeCourse = transactionDTO.choosenWallet!.exchangeCourse
+            
             
             if transactionDTO.transaction?.transactionRLM?.sumInCryptoBigInt != nil {
                 feeAmount = BigInt("21000") * transactionDTO.transaction!.transactionRLM?.sumInCryptoBigInt
