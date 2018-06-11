@@ -299,7 +299,7 @@ class SendAmountPresenter: NSObject {
                 cryptoMaxSumWithFeeAndDonate = availableSumInCrypto - rawTransactionBigIntEstimation
             }
         } else {
-            let fiatEstimation = rawTransactionBigIntEstimation ?? BigInt.zero() * exchangeCourse
+            let fiatEstimation = rawTransactionBigIntEstimation * exchangeCourse
             
             if transactionDTO.transaction!.donationDTO != nil {
                 let donationCryptoValue = Constants.BigIntSwift.oneBTCInSatoshiKey * transactionDTO.transaction!.donationDTO!.sumInCrypto!
@@ -317,23 +317,30 @@ class SendAmountPresenter: NSObject {
         switch isCrypto {
         case true:
             if transactionDTO.transaction!.donationDTO != nil {
-                message = "You can`t spend sum more than you have!\nDon`t forget about Fee and donation.\n\nYour fee is \((self.transactionObj?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName) \nand donation is \((transactionDTO.transaction!.donationDTO?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName)"
+                message = sendAmountVC!.localize(string: Constants.youCantSpendMoreThanFeeAndDonationString) +
+                    "\((self.transactionObj?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName)" +
+                    sendAmountVC!.localize(string: Constants.andDonationString) +
+                "\((transactionDTO.transaction!.donationDTO?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName)"
             } else {
-                message = "You can`t spend sum more than you have!\nDon`t forget about Fee.\nYour is fee \((self.transactionObj?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName)"
+                message = sendAmountVC!.localize(string: Constants.youCantSpendMoreThanFeeString) + "\((self.transactionObj?.sumInCrypto ?? 0.0).fixedFraction(digits: 8)) \(self.cryptoName)"
             }
         case false:
             if transactionDTO.transaction!.donationDTO != nil {
-                message = "You can`t spend sum more than you have!\nDon`t forget about Fee and donation.\n\nYour fee is \((self.transactionObj?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(self.fiatName) \nand donation is \((transactionDTO.transaction!.donationDTO?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(self.fiatName)"
+                message = sendAmountVC!.localize(string: Constants.youCantSpendMoreThanFeeAndDonationString) +
+                "\((self.transactionObj?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(self.fiatName)" +
+                sendAmountVC!.localize(string: Constants.andDonationString) +
+                "\((transactionDTO.transaction!.donationDTO?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(self.fiatName)"
             } else {
-                message = "You can`t spend sum more than you have!\nDon`t forget about Fee.\nYour is fee \((self.transactionObj?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(self.fiatName)"
+                message = sendAmountVC!.localize(string: Constants.youCantSpendMoreThanFeeString) + "\((self.transactionObj?.sumInFiat ?? 0.0).fixedFraction(digits: 2)) \(self.fiatName)"
             }
         }
+        
         return message
     }
     
     deinit {
         let accountPointer = addressData!["addressPointer"] as! UnsafeMutablePointer<OpaquePointer?>
         free_account(accountPointer.pointee)
-        accountPointer.deallocate(capacity: 1)
+        accountPointer.deallocate()
     }
 }

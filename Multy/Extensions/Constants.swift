@@ -98,6 +98,9 @@ struct Constants {
     static let enterCorrectValueString = "ENTER CORRECT VALUE"
     static let noFundsString = "NO FUNDS"
     static let errorWhileCreatingWalletString = "ERROR WHILE CREATING WALLET"
+    static let youCantSpendMoreThanFeeAndDonationString = "YOU CANT SPEND MORE THEN FEE AND DONATION"
+    static let youCantSpendMoreThanFeeString = "YOU CANT SPEND MORE THEN FEE"
+    static let andDonationString = "AND DONATION "
     
     //Assets screen
     struct AssetsScreen {
