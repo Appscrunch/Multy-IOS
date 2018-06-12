@@ -1,4 +1,4 @@
-# Multy-IOS
+# Multy-IOS (Moved to https://github.com/Multy-io/Multy-IOS)
 
 Multi cryptocurrency and assets open-source wallet
 
